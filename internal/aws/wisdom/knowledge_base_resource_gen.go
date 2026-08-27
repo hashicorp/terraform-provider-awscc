@@ -28,645 +28,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute0da748298a81c50be34dd0ce() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SeedUrls
-			"seed_urls": schemaAttributed5ab3cc6826e6ea1e6ac6613(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1099f883f90778dc1a8699e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12c7077a932f1548b3fc736b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BreakpointPercentileThreshold
-			"breakpoint_percentile_threshold": schemaAttribute26419bac595e5d76cf16e150(),
-			// Property: BufferSize
-			"buffer_size": schemaAttribute54c7541b22f0b56cf926c60e(),
-			// Property: MaxTokens
-			"max_tokens": schemaAttributefd355ba9c5464d2241a0db01(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a967ffd0692f76d6c49576c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20371ddb8bfec4af2e056a7a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxTokens
-				"max_tokens": schemaAttributec2357392c905b1f4cc23d2b3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(2, 2),
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26419bac595e5d76cf16e150() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(50.000000, 99.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26bb2c8286cacfe5033c7f64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"HOST_ONLY",
-				"SUBDOMAINS",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33b230ae7561e5e1aeed7a44() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ModelArn
-			"model_arn": schemaAttribute535aec01f17bbf51bae737a5(),
-			// Property: ParsingPrompt
-			"parsing_prompt": schemaAttribute9b56b730358a93a4ce480538(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35df536c548d3e18da4769da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"FIXED_SIZE",
-				"NONE",
-				"HIERARCHICAL",
-				"SEMANTIC",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute399cd83a749e35f6765b2803() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppIntegrationArn
-			"app_integration_arn": schemaAttribute9eb1dc8197bf589da14c2e9f(),
-			// Property: ObjectFields
-			"object_fields": schemaAttributedec7b8a228ed092e99a3165b(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3eea2997a7f348c2b984f957() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4aab291b5a34d04a68cde7cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"EXTERNAL",
-				"CUSTOM",
-				"MESSAGE_TEMPLATES",
-				"MANAGED",
-				"QUICK_RESPONSES",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f6b4f36e29bd408d9dc4ff5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BedrockFoundationModelConfiguration
-			"bedrock_foundation_model_configuration": schemaAttribute33b230ae7561e5e1aeed7a44(),
-			// Property: ParsingStrategy
-			"parsing_strategy": schemaAttribute882fa025cc09609ae4729ac9(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute535aec01f17bbf51bae737a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/anthropic.claude-3-haiku-20240307-v1:0$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54c7541b22f0b56cf926c60e() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(0.000000, 1.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c85c55d7b15bdd4af200160() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7682b6590d9d7f33f43d824f() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(1.000000, 3000.000000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76862cdbf4647933d4cddd08() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 25),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 1000),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76b6c17bd5972f868687d0b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8384d787c7b4f2b3692061a0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CrawlerLimits
-			"crawler_limits": schemaAttributeba252509a8c26414991930f9(),
-			// Property: ExclusionFilters
-			"exclusion_filters": schemaAttribute76862cdbf4647933d4cddd08(),
-			// Property: InclusionFilters
-			"inclusion_filters": schemaAttribute76862cdbf4647933d4cddd08(),
-			// Property: Scope
-			"scope": schemaAttribute26bb2c8286cacfe5033c7f64(),
-			// Property: UrlConfiguration
-			"url_configuration": schemaAttribute0da748298a81c50be34dd0ce(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute882fa025cc09609ae4729ac9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"BEDROCK_FOUNDATION_MODEL",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute935f3a6d742da2c0e015ebd0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LevelConfigurations
-			"level_configurations": schemaAttribute20371ddb8bfec4af2e056a7a(),
-			// Property: OverlapTokens
-			"overlap_tokens": schemaAttributefd355ba9c5464d2241a0db01(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97a3c7dbd05009d00eaa8cdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 4096),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b56b730358a93a4ce480538() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ParsingPromptText
-			"parsing_prompt_text": schemaAttributef9c37a78588c3aaf194304f8(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9eb1dc8197bf589da14c2e9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb622ed494e297b7773993051() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute76b6c17bd5972f868687d0b9(),
-				// Property: Value
-				"value": schemaAttribute1a967ffd0692f76d6c49576c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-			setplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba252509a8c26414991930f9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RateLimit
-			"rate_limit": schemaAttribute7682b6590d9d7f33f43d824f(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2357392c905b1f4cc23d2b3() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(1.000000, 8192.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9b54f215b1b720d6a0fea54() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxTokens
-			"max_tokens": schemaAttributefd355ba9c5464d2241a0db01(),
-			// Property: OverlapPercentage
-			"overlap_percentage": schemaAttributeffeeec3fe195dd42060aa432(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed04781d1b44fabf60b4771f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: WebCrawlerConfiguration
-			"web_crawler_configuration": schemaAttribute8384d787c7b4f2b3692061a0(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed18c5f9c131f0d23756b8abe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TemplateUri
-			"template_uri": schemaAttribute97a3c7dbd05009d00eaa8cdf(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5ab3cc6826e6ea1e6ac6613() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Url
-				"url": schemaAttributef30ddd4581f9f30a204f3524(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 100),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8f6c1917b944a25297da7f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppIntegrations
-			"app_integrations": schemaAttribute399cd83a749e35f6765b2803(),
-			// Property: ManagedSourceConfiguration
-			"managed_source_configuration": schemaAttributed04781d1b44fabf60b4771f2(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbd28484cf4cac58c7a239b2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChunkingConfiguration
-			"chunking_configuration": schemaAttributee46e437506c8e41347ff66b5(),
-			// Property: ParsingConfiguration
-			"parsing_configuration": schemaAttribute4f6b4f36e29bd408d9dc4ff5(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedec7b8a228ed092e99a3165b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 100),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 4096),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee285f7a685bffe7b77d4b217() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute97a3c7dbd05009d00eaa8cdf(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee46e437506c8e41347ff66b5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChunkingStrategy
-			"chunking_strategy": schemaAttribute35df536c548d3e18da4769da(),
-			// Property: FixedSizeChunkingConfiguration
-			"fixed_size_chunking_configuration": schemaAttributec9b54f215b1b720d6a0fea54(),
-			// Property: HierarchicalChunkingConfiguration
-			"hierarchical_chunking_configuration": schemaAttribute935f3a6d742da2c0e015ebd0(),
-			// Property: SemanticChunkingConfiguration
-			"semantic_chunking_configuration": schemaAttribute12c7077a932f1548b3fc736b(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef30ddd4581f9f30a204f3524() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^https?://[A-Za-z0-9][^\\s]*$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9c37a78588c3aaf194304f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 10000),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd355ba9c5464d2241a0db01() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.AtLeast(1.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffeeec3fe195dd42060aa432() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(1.000000, 99.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_wisdom_knowledge_base", knowledgeBaseResource)
 	registry.AddListResourceFactory("awscc_wisdom_knowledge_base", generic.NewListResource(knowledgeBaseResource))
@@ -684,7 +45,17 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1099f883f90778dc1a8699e7(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseArn
 		// CloudFormation resource type schema:
 		//
@@ -692,7 +63,12 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_arn": schemaAttribute3eea2997a7f348c2b984f957(),
+		"knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseId
 		// CloudFormation resource type schema:
 		//
@@ -700,7 +76,12 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_id": schemaAttribute3eea2997a7f348c2b984f957(),
+		"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseType
 		// CloudFormation resource type schema:
 		//
@@ -714,7 +95,21 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"knowledge_base_type": schemaAttribute4aab291b5a34d04a68cde7cd(),
+		"knowledge_base_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"EXTERNAL",
+					"CUSTOM",
+					"MESSAGE_TEMPLATES",
+					"MANAGED",
+					"QUICK_RESPONSES",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -723,7 +118,15 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute5c85c55d7b15bdd4af200160(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RenderingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -738,7 +141,26 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rendering_configuration": schemaAttributed18c5f9c131f0d23756b8abe(),
+		"rendering_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TemplateUri
+				"template_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 4096),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ServerSideEncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -753,7 +175,27 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"server_side_encryption_configuration": schemaAttributee285f7a685bffe7b77d4b217(),
+		"server_side_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 4096),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -861,7 +303,179 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source_configuration": schemaAttributed8f6c1917b944a25297da7f2(),
+		"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppIntegrations
+				"app_integrations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppIntegrationArn
+						"app_integration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ObjectFields
+						"object_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 100),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 4096),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedSourceConfiguration
+				"managed_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: WebCrawlerConfiguration
+						"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CrawlerLimits
+								"crawler_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: RateLimit
+										"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Float64{ /*START VALIDATORS*/
+												float64validator.Between(1.000000, 3000.000000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExclusionFilters
+								"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 25),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 1000),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InclusionFilters
+								"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 25),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 1000),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Scope
+								"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"HOST_ONLY",
+											"SUBDOMAINS",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: UrlConfiguration
+								"url_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SeedUrls
+										"seed_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Url
+													"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^https?://[A-Za-z0-9][^\\s]*$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 100),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -891,7 +505,42 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb622ed494e297b7773993051(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VectorIngestionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1040,7 +689,241 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vector_ingestion_configuration": schemaAttributedbd28484cf4cac58c7a239b2(),
+		"vector_ingestion_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChunkingConfiguration
+				"chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChunkingStrategy
+						"chunking_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"FIXED_SIZE",
+									"NONE",
+									"HIERARCHICAL",
+									"SEMANTIC",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: FixedSizeChunkingConfiguration
+						"fixed_size_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MaxTokens
+								"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.AtLeast(1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OverlapPercentage
+								"overlap_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(1.000000, 99.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchicalChunkingConfiguration
+						"hierarchical_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LevelConfigurations
+								"level_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxTokens
+											"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 8192.000000),
+													fwvalidators.NotNullFloat64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(2, 2),
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OverlapTokens
+								"overlap_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.AtLeast(1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SemanticChunkingConfiguration
+						"semantic_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BreakpointPercentileThreshold
+								"breakpoint_percentile_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(50.000000, 99.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BufferSize
+								"buffer_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(0.000000, 1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MaxTokens
+								"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.AtLeast(1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ParsingConfiguration
+				"parsing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BedrockFoundationModelConfiguration
+						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ModelArn
+								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/anthropic.claude-3-haiku-20240307-v1:0$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ParsingPrompt
+								"parsing_prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ParsingPromptText
+										"parsing_prompt_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 10000),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ParsingStrategy
+						"parsing_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"BEDROCK_FOUNDATION_MODEL",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

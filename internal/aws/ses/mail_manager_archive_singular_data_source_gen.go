@@ -14,36 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01d4c1d5ccba57cdf114a32b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4fa05dbf221e996f7effa418(),
-				// Property: Value
-				"value": schemaAttribute4fa05dbf221e996f7effa418(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fa05dbf221e996f7effa418() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute739f94cbae525401942555f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RetentionPeriod
-			"retention_period": schemaAttribute4fa05dbf221e996f7effa418(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_mail_manager_archive", mailManagerArchiveDataSource)
 }
@@ -58,7 +28,9 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"archive_arn": schemaAttribute4fa05dbf221e996f7effa418(),
+		"archive_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArchiveId
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +39,9 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"archive_id": schemaAttribute4fa05dbf221e996f7effa418(),
+		"archive_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArchiveName
 		// CloudFormation resource type schema:
 		//
@@ -77,7 +51,9 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"archive_name": schemaAttribute4fa05dbf221e996f7effa418(),
+		"archive_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArchiveState
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +64,9 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"archive_state": schemaAttribute4fa05dbf221e996f7effa418(),
+		"archive_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +74,9 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws(|-cn|-us-gov|-eusc):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schemaAttribute4fa05dbf221e996f7effa418(),
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Retention
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +106,15 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"retention": schemaAttribute739f94cbae525401942555f6(),
+		"retention": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RetentionPeriod
+				"retention_period": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +145,21 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute01d4c1d5ccba57cdf114a32b(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

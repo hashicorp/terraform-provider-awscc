@@ -15,276 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f5d43787beade12774b1a66() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Architecture
-				"architecture": schemaAttributebaf9e856ecd16c5e94893f62(),
-				// Property: Epoch
-				"epoch": schemaAttribute172e8b1fb50d4cbfbe8b12c8(),
-				// Property: FilePath
-				"file_path": schemaAttributebaf9e856ecd16c5e94893f62(),
-				// Property: Name
-				"name": schemaAttributebaf9e856ecd16c5e94893f62(),
-				// Property: Release
-				"release": schemaAttributebaf9e856ecd16c5e94893f62(),
-				// Property: SourceLambdaLayerArn
-				"source_lambda_layer_arn": schemaAttributebaf9e856ecd16c5e94893f62(),
-				// Property: SourceLayerHash
-				"source_layer_hash": schemaAttributebaf9e856ecd16c5e94893f62(),
-				// Property: Version
-				"version": schemaAttributebaf9e856ecd16c5e94893f62(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute155e0a13eaa34fdc22ef3845() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndInclusive
-				"end_inclusive": schemaAttribute50f3d6799baa6798142f7858(),
-				// Property: StartInclusive
-				"start_inclusive": schemaAttribute50f3d6799baa6798142f7858(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute172e8b1fb50d4cbfbe8b12c8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LowerInclusive
-			"lower_inclusive": schemaAttributef9864b21922551b87c023c3a(),
-			// Property: UpperInclusive
-			"upper_inclusive": schemaAttributef9864b21922551b87c023c3a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute235714031a401c7ea8ab8b87() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comparison
-				"comparison": schemaAttribute66a01f5283fb7f67f9673c4e(),
-				// Property: Key
-				"key": schemaAttribute66a01f5283fb7f67f9673c4e(),
-				// Property: Value
-				"value": schemaAttribute66a01f5283fb7f67f9673c4e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41c6a6b35bba490f28ec798c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Findings filter ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50f3d6799baa6798142f7858() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66a01f5283fb7f67f9673c4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83c2beb73f476631571ae855() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Findings filter description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute882307f9f5183f87d795dfc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Findings filter action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1045b014a633775dba549e1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comparison
-				"comparison": schemaAttribute66a01f5283fb7f67f9673c4e(),
-				// Property: Value
-				"value": schemaAttribute66a01f5283fb7f67f9673c4e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba583f8cb4f89da919015832() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaf9e856ecd16c5e94893f62() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Comparison
-			"comparison": schemaAttribute66a01f5283fb7f67f9673c4e(),
-			// Property: Value
-			"value": schemaAttribute66a01f5283fb7f67f9673c4e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfcd2d9cd1f5498d18975e32() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BeginInclusive
-				"begin_inclusive": schemaAttribute50f3d6799baa6798142f7858(),
-				// Property: EndInclusive
-				"end_inclusive": schemaAttribute50f3d6799baa6798142f7858(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec917c9de000f49039db8bd57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Findings filter name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecde041814e93e2369deb8cc8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LowerInclusive
-				"lower_inclusive": schemaAttributef9864b21922551b87c023c3a(),
-				// Property: UpperInclusive
-				"upper_inclusive": schemaAttributef9864b21922551b87c023c3a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed00d12f6417efb01ac5186b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsAccountId
-			"aws_account_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: CodeVulnerabilityDetectorName
-			"code_vulnerability_detector_name": schemaAttributea1045b014a633775dba549e1(),
-			// Property: CodeVulnerabilityDetectorTags
-			"code_vulnerability_detector_tags": schemaAttributea1045b014a633775dba549e1(),
-			// Property: CodeVulnerabilityFilePath
-			"code_vulnerability_file_path": schemaAttributea1045b014a633775dba549e1(),
-			// Property: ComponentId
-			"component_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: ComponentType
-			"component_type": schemaAttributea1045b014a633775dba549e1(),
-			// Property: Ec2InstanceImageId
-			"ec_2_instance_image_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: Ec2InstanceSubnetId
-			"ec_2_instance_subnet_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: Ec2InstanceVpcId
-			"ec_2_instance_vpc_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: EcrImageArchitecture
-			"ecr_image_architecture": schemaAttributea1045b014a633775dba549e1(),
-			// Property: EcrImageHash
-			"ecr_image_hash": schemaAttributea1045b014a633775dba549e1(),
-			// Property: EcrImagePushedAt
-			"ecr_image_pushed_at": schemaAttribute155e0a13eaa34fdc22ef3845(),
-			// Property: EcrImageRegistry
-			"ecr_image_registry": schemaAttributea1045b014a633775dba549e1(),
-			// Property: EcrImageRepositoryName
-			"ecr_image_repository_name": schemaAttributea1045b014a633775dba549e1(),
-			// Property: EcrImageTags
-			"ecr_image_tags": schemaAttributea1045b014a633775dba549e1(),
-			// Property: EpssScore
-			"epss_score": schemaAttributecde041814e93e2369deb8cc8(),
-			// Property: ExploitAvailable
-			"exploit_available": schemaAttributea1045b014a633775dba549e1(),
-			// Property: FindingArn
-			"finding_arn": schemaAttributea1045b014a633775dba549e1(),
-			// Property: FindingStatus
-			"finding_status": schemaAttributea1045b014a633775dba549e1(),
-			// Property: FindingType
-			"finding_type": schemaAttributea1045b014a633775dba549e1(),
-			// Property: FirstObservedAt
-			"first_observed_at": schemaAttribute155e0a13eaa34fdc22ef3845(),
-			// Property: FixAvailable
-			"fix_available": schemaAttributea1045b014a633775dba549e1(),
-			// Property: InspectorScore
-			"inspector_score": schemaAttributecde041814e93e2369deb8cc8(),
-			// Property: LambdaFunctionExecutionRoleArn
-			"lambda_function_execution_role_arn": schemaAttributea1045b014a633775dba549e1(),
-			// Property: LambdaFunctionLastModifiedAt
-			"lambda_function_last_modified_at": schemaAttribute155e0a13eaa34fdc22ef3845(),
-			// Property: LambdaFunctionLayers
-			"lambda_function_layers": schemaAttributea1045b014a633775dba549e1(),
-			// Property: LambdaFunctionName
-			"lambda_function_name": schemaAttributea1045b014a633775dba549e1(),
-			// Property: LambdaFunctionRuntime
-			"lambda_function_runtime": schemaAttributea1045b014a633775dba549e1(),
-			// Property: LastObservedAt
-			"last_observed_at": schemaAttribute155e0a13eaa34fdc22ef3845(),
-			// Property: NetworkProtocol
-			"network_protocol": schemaAttributea1045b014a633775dba549e1(),
-			// Property: PortRange
-			"port_range": schemaAttributebfcd2d9cd1f5498d18975e32(),
-			// Property: RelatedVulnerabilities
-			"related_vulnerabilities": schemaAttributea1045b014a633775dba549e1(),
-			// Property: ResourceId
-			"resource_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: ResourceTags
-			"resource_tags": schemaAttribute235714031a401c7ea8ab8b87(),
-			// Property: ResourceType
-			"resource_type": schemaAttributea1045b014a633775dba549e1(),
-			// Property: Severity
-			"severity": schemaAttributea1045b014a633775dba549e1(),
-			// Property: Title
-			"title": schemaAttributea1045b014a633775dba549e1(),
-			// Property: UpdatedAt
-			"updated_at": schemaAttribute155e0a13eaa34fdc22ef3845(),
-			// Property: VendorSeverity
-			"vendor_severity": schemaAttributea1045b014a633775dba549e1(),
-			// Property: VulnerabilityId
-			"vulnerability_id": schemaAttributea1045b014a633775dba549e1(),
-			// Property: VulnerabilitySource
-			"vulnerability_source": schemaAttributea1045b014a633775dba549e1(),
-			// Property: VulnerablePackages
-			"vulnerable_packages": schemaAttribute0f5d43787beade12774b1a66(),
-		}, /*END SCHEMA*/
-		Description: "Findings filter criteria.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9864b21922551b87c023c3a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_inspectorv2_filter", filterDataSource)
 }
@@ -302,7 +32,10 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute41c6a6b35bba490f28ec798c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Findings filter ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +45,10 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute83c2beb73f476631571ae855(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Findings filter description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterAction
 		// CloudFormation resource type schema:
 		//
@@ -324,7 +60,10 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"filter_action": schemaAttribute882307f9f5183f87d795dfc8(),
+		"filter_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Findings filter action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterCriteria
 		// CloudFormation resource type schema:
 		//
@@ -1637,7 +1376,792 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"filter_criteria": schemaAttributed00d12f6417efb01ac5186b4(),
+		"filter_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsAccountId
+				"aws_account_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeVulnerabilityDetectorName
+				"code_vulnerability_detector_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeVulnerabilityDetectorTags
+				"code_vulnerability_detector_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeVulnerabilityFilePath
+				"code_vulnerability_file_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentId
+				"component_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentType
+				"component_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2InstanceImageId
+				"ec_2_instance_image_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2InstanceSubnetId
+				"ec_2_instance_subnet_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2InstanceVpcId
+				"ec_2_instance_vpc_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageArchitecture
+				"ecr_image_architecture": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageHash
+				"ecr_image_hash": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImagePushedAt
+				"ecr_image_pushed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageRegistry
+				"ecr_image_registry": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageRepositoryName
+				"ecr_image_repository_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageTags
+				"ecr_image_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EpssScore
+				"epss_score": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LowerInclusive
+							"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpperInclusive
+							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExploitAvailable
+				"exploit_available": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FindingArn
+				"finding_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FindingStatus
+				"finding_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FindingType
+				"finding_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FirstObservedAt
+				"first_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FixAvailable
+				"fix_available": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InspectorScore
+				"inspector_score": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LowerInclusive
+							"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpperInclusive
+							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionExecutionRoleArn
+				"lambda_function_execution_role_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionLastModifiedAt
+				"lambda_function_last_modified_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionLayers
+				"lambda_function_layers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionName
+				"lambda_function_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionRuntime
+				"lambda_function_runtime": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LastObservedAt
+				"last_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkProtocol
+				"network_protocol": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PortRange
+				"port_range": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BeginInclusive
+							"begin_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RelatedVulnerabilities
+				"related_vulnerabilities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceId
+				"resource_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceTags
+				"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceType
+				"resource_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Severity
+				"severity": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Title
+				"title": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdatedAt
+				"updated_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VendorSeverity
+				"vendor_severity": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VulnerabilityId
+				"vulnerability_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VulnerabilitySource
+				"vulnerability_source": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VulnerablePackages
+				"vulnerable_packages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Architecture
+							"architecture": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Epoch
+							"epoch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LowerInclusive
+									"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: UpperInclusive
+									"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FilePath
+							"file_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Release
+							"release": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceLambdaLayerArn
+							"source_lambda_layer_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceLayerHash
+							"source_layer_hash": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Version
+							"version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Findings filter criteria.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1647,7 +2171,10 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec917c9de000f49039db8bd57(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Findings filter name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1661,7 +2188,11 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributeba583f8cb4f89da919015832(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -17,23 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute036d3e78e334943dabd2da69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM. For more information, see the AWS::IAM::Policy [PolicyDocument](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-policydocument) resource description in this guide and [Access Policy Language Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the *Amazon S3 User Guide*.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23d5a7c4dbc636e429ba962e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket to which the policy applies.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_s3_bucket_policy", bucketPolicyResource)
 	registry.AddListResourceFactory("awscc_s3_bucket_policy", generic.NewListResource(bucketPolicyResource))
@@ -50,7 +33,13 @@ func bucketPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the Amazon S3 bucket to which the policy applies.",
 		//	  "type": "string"
 		//	}
-		"bucket": schemaAttribute23d5a7c4dbc636e429ba962e(),
+		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Amazon S3 bucket to which the policy applies.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +47,10 @@ func bucketPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM. For more information, see the AWS::IAM::Policy [PolicyDocument](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-policydocument) resource description in this guide and [Access Policy Language Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the *Amazon S3 User Guide*.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schemaAttribute036d3e78e334943dabd2da69(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM. For more information, see the AWS::IAM::Policy [PolicyDocument](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-policydocument) resource description in this guide and [Access Policy Language Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the *Amazon S3 User Guide*.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

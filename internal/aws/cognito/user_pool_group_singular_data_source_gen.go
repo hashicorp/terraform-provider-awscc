@@ -14,18 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2dda30b1ec467314814f639b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccbf6147c9f4bbe9d882236c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_group", userPoolGroupDataSource)
 }
@@ -41,14 +29,18 @@ func userPoolGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2dda30b1ec467314814f639b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"group_name": schemaAttribute2dda30b1ec467314814f639b(),
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Precedence
 		// CloudFormation resource type schema:
 		//
@@ -56,21 +48,27 @@ func userPoolGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"precedence": schemaAttributeccbf6147c9f4bbe9d882236c(),
+		"precedence": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute2dda30b1ec467314814f639b(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttribute2dda30b1ec467314814f639b(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

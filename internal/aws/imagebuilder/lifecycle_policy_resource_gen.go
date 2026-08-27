@@ -26,485 +26,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute0963bf60fef537e2d11c0b12() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags associated with the lifecycle policy.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18e8492df3f9d54f9c25e0b7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Recipes
-			"recipes": schemaAttributea5f7dc404b08449b6f5d8819(),
-			// Property: TagMap
-			"tag_map": schemaAttribute31ff90a9951887f3eefa0700(),
-		}, /*END SCHEMA*/
-		Description: "The resource selection of the lifecycle policy.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26a664d4a93078f7c2bb8deb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the lifecycle policy.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2db6f82c8e7c641289d7d283() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value's time unit.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"DAYS",
-				"WEEKS",
-				"MONTHS",
-				"YEARS",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e9446810a68a7d75b6e7d61() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsPublic
-			"is_public": schemaAttributed3a548d57fee8be45cc5ca2d(),
-			// Property: LastLaunched
-			"last_launched": schemaAttributec41e3fa169b950e4483d6ea1(),
-			// Property: Regions
-			"regions": schemaAttribute78dd09f25ab899bb9705447c(),
-			// Property: SharedAccounts
-			"shared_accounts": schemaAttributeeadb9a2ebfecb25f35481368(),
-			// Property: TagMap
-			"tag_map": schemaAttributee6ae759e4df9e9e4d041e463(),
-		}, /*END SCHEMA*/
-		Description: "The AMI exclusion rules for the policy detail.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31ff90a9951887f3eefa0700() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Image Builder resources to select by tag.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3eedfe86bc2dbdfad55976b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The recipe name.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d035136f2df8ab304dac353() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter type.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"AGE",
-				"COUNT",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ee760294a98e42708cfb529() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The last launched value.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute579459094d096774df594e1c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The filter value.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bad86f1f56946d7b1ea3296() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The execution role of the lifecycle policy.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d319d9eceff6ff0b5b23628() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncludeResources
-			"include_resources": schemaAttributed9b708d583619282ed88d2c6(),
-			// Property: Type
-			"type": schemaAttribute6c84c74137904acc26e7365d(),
-		}, /*END SCHEMA*/
-		Description: "The action of the policy detail.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c84c74137904acc26e7365d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action type of the policy detail.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"DELETE",
-				"DEPRECATE",
-				"DISABLE",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute708c1693379130bbcfc26ffa() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure lifecycle actions on containers.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78dd09f25ab899bb9705447c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute973e305e3ac81cc290470483() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource type of the lifecycle policy.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"AMI_IMAGE",
-				"CONTAINER_IMAGE",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute994ce820487b01b617394ee8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure lifecycle actions on snapshots.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cea15af4d0374e5a1d5fa65() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Amis
-			"amis": schemaAttribute2e9446810a68a7d75b6e7d61(),
-			// Property: TagMap
-			"tag_map": schemaAttributeabe1cc765bf868f16737c878(),
-		}, /*END SCHEMA*/
-		Description: "The exclusion rules to apply of the policy detail.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5f7dc404b08449b6f5d8819() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute3eedfe86bc2dbdfad55976b0(),
-				// Property: SemanticVersion
-				"semantic_version": schemaAttributeb422477bad0f6a5db6c74bb2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The recipes to select.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabe1cc765bf868f16737c878() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Image Builder tags to filter on.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb422477bad0f6a5db6c74bb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The recipe version.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb74ece3c84f0956421982935() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of Image Builder resources to retain.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec41e3fa169b950e4483d6ea1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Unit
-			"unit": schemaAttributed3a6745a9ff5f50ef4440a28(),
-			// Property: Value
-			"value": schemaAttribute4ee760294a98e42708cfb529(),
-		}, /*END SCHEMA*/
-		Description: "Use to apply lifecycle policy actions on AMIs launched before a certain time.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4f4a0be0ad8ed7929e21f9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the lifecycle policy.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf5f757c3749e06b3e6ddb03() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute5d319d9eceff6ff0b5b23628(),
-				// Property: ExclusionRules
-				"exclusion_rules": schemaAttribute9cea15af4d0374e5a1d5fa65(),
-				// Property: Filter
-				"filter": schemaAttributed390be3de3d5c78cff7daecc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The policy details of the lifecycle policy.",
-		Required:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed390be3de3d5c78cff7daecc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RetainAtLeast
-			"retain_at_least": schemaAttributeb74ece3c84f0956421982935(),
-			// Property: Type
-			"type": schemaAttribute4d035136f2df8ab304dac353(),
-			// Property: Unit
-			"unit": schemaAttribute2db6f82c8e7c641289d7d283(),
-			// Property: Value
-			"value": schemaAttribute579459094d096774df594e1c(),
-		}, /*END SCHEMA*/
-		Description: "The filters to apply of the policy detail.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3a548d57fee8be45cc5ca2d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to apply lifecycle policy actions on whether the AMI is public.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3a6745a9ff5f50ef4440a28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value's time unit.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"DAYS",
-				"WEEKS",
-				"MONTHS",
-				"YEARS",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9b708d583619282ed88d2c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Amis
-			"amis": schemaAttributeea281708219a95eb934dfa58(),
-			// Property: Containers
-			"containers": schemaAttribute708c1693379130bbcfc26ffa(),
-			// Property: Snapshots
-			"snapshots": schemaAttribute994ce820487b01b617394ee8(),
-		}, /*END SCHEMA*/
-		Description: "The included resources of the policy detail.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6ae759e4df9e9e4d041e463() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The AMIs to select by tag.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6cd3360e63987a47ad6ff3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the lifecycle policy.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9457929da282b941f532a46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the lifecycle policy.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"DISABLED",
-				"ENABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea281708219a95eb934dfa58() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure lifecycle actions on AMIs.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeadb9a2ebfecb25f35481368() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_lifecycle_policy", lifecyclePolicyResource)
 	registry.AddListResourceFactory("awscc_imagebuilder_lifecycle_policy", generic.NewListResource(lifecyclePolicyResource))
@@ -522,7 +43,13 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:lifecycle-policy/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec4f4a0be0ad8ed7929e21f9b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the lifecycle policy.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -530,7 +57,14 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the lifecycle policy.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee6cd3360e63987a47ad6ff3b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the lifecycle policy.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -538,7 +72,10 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The execution role of the lifecycle policy.",
 		//	  "type": "string"
 		//	}
-		"execution_role": schemaAttribute5bad86f1f56946d7b1ea3296(),
+		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role of the lifecycle policy.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -546,7 +83,13 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the lifecycle policy.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute26a664d4a93078f7c2bb8deb(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the lifecycle policy.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDetails
 		// CloudFormation resource type schema:
 		//
@@ -720,7 +263,239 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"policy_details": schemaAttributecf5f757c3749e06b3e6ddb03(),
+		"policy_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IncludeResources
+							"include_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Amis
+									"amis": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to configure lifecycle actions on AMIs.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Containers
+									"containers": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to configure lifecycle actions on containers.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Snapshots
+									"snapshots": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to configure lifecycle actions on snapshots.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The included resources of the policy detail.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The action type of the policy detail.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"DELETE",
+										"DEPRECATE",
+										"DISABLE",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The action of the policy detail.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExclusionRules
+					"exclusion_rules": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Amis
+							"amis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsPublic
+									"is_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to apply lifecycle policy actions on whether the AMI is public.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: LastLaunched
+									"last_launched": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The value's time unit.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"DAYS",
+														"WEEKS",
+														"MONTHS",
+														"YEARS",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The last launched value.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Use to apply lifecycle policy actions on AMIs launched before a certain time.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Regions
+									"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SharedAccounts
+									"shared_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TagMap
+									"tag_map":           // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The AMIs to select by tag.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+											mapplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The AMI exclusion rules for the policy detail.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TagMap
+							"tag_map":           // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The Image Builder tags to filter on.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+									mapplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The exclusion rules to apply of the policy detail.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Filter
+					"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RetainAtLeast
+							"retain_at_least": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The minimum number of Image Builder resources to retain.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The filter type.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"AGE",
+										"COUNT",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value's time unit.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"DAYS",
+										"WEEKS",
+										"MONTHS",
+										"YEARS",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The filter value.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The filters to apply of the policy detail.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The policy details of the lifecycle policy.",
+			Required:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceSelection
 		// CloudFormation resource type schema:
 		//
@@ -765,7 +540,61 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_selection": schemaAttribute18e8492df3f9d54f9c25e0b7(),
+		"resource_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Recipes
+				"recipes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The recipe name.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SemanticVersion
+							"semantic_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The recipe version.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The recipes to select.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TagMap
+				"tag_map":           // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The Image Builder resources to select by tag.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+						mapplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The resource selection of the lifecycle policy.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -777,7 +606,16 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute973e305e3ac81cc290470483(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource type of the lifecycle policy.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"AMI_IMAGE",
+					"CONTAINER_IMAGE",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -789,7 +627,20 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee9457929da282b941f532a46(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the lifecycle policy.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DISABLED",
+					"ENABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -803,7 +654,16 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute0963bf60fef537e2d11c0b12(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags associated with the lifecycle policy.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute31ff9868f6bcec05392a3f64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of transit gateway attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7eeaf6d649ad46045f4276a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of transit gateway policy table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee617750f6c95bd8394e1cc18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the transit gateway policy table association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_policy_table_association", transitGatewayPolicyTableAssociationDataSource)
 }
@@ -50,7 +29,10 @@ func transitGatewayPolicyTableAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The state of the transit gateway policy table association.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributee617750f6c95bd8394e1cc18(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the transit gateway policy table association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +40,10 @@ func transitGatewayPolicyTableAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schemaAttribute31ff9868f6bcec05392a3f64(),
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of transit gateway attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayPolicyTableId
 		// CloudFormation resource type schema:
 		//
@@ -66,7 +51,10 @@ func transitGatewayPolicyTableAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of transit gateway policy table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_policy_table_id": schemaAttributec7eeaf6d649ad46045f4276a(),
+		"transit_gateway_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of transit gateway policy table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

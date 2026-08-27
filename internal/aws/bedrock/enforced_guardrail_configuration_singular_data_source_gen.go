@@ -16,134 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute039bc28f4c0838ea4a4a38f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN representation for the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute069ab7efdb24e012ce77964e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Models to exclude from enforcement. If a model is in both lists, it is excluded",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0868e32ee1993954e92eb8a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Selective guarding mode for system prompts",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1815cb1a29447cfaf84a213d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID for the account enforced configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute248e35f5ef8641582ea4070b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier for the guardrail, could be the ID or the ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b4bfd3590f6e481a6791ffb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role used to create the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45601df3147698729d8c76da() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Messages
-			"messages": schemaAttributef3ee559b23305560059fa732(),
-			// Property: System
-			"system": schemaAttribute0868e32ee1993954e92eb8a0(),
-		}, /*END SCHEMA*/
-		Description: "Selective content guarding controls for enforced guardrails",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bf69cd01bbbf5b6436c0498() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Numerical guardrail version (not DRAFT)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89a6fd2e0f9a56ed23e0e7a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role used to update the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f8960bf4eed6f4f1ae6c2ec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExcludedModels
-			"excluded_models": schemaAttribute069ab7efdb24e012ce77964e(),
-			// Property: IncludedModels
-			"included_models": schemaAttributeee76759f828bacb47a929c26(),
-		}, /*END SCHEMA*/
-		Description: "Model-specific information for the enforced guardrail configuration. If not present, the configuration is enforced on all models",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7685a896375e89a19c784cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the configuration was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece6d2f7bd26af52024762983() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configuration owner type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7bbd9d9f3fc456ae73fe8f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID for the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee76759f828bacb47a929c26() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Models to enforce the guardrail on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef00d768249ac292d764cf0ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the configuration was last updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3ee559b23305560059fa732() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Selective guarding mode for user messages",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_enforced_guardrail_configuration", enforcedGuardrailConfigurationDataSource)
 }
@@ -160,7 +32,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"config_id": schemaAttribute1815cb1a29447cfaf84a213d(),
+		"config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID for the account enforced configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +44,11 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributec7685a896375e89a19c784cd(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the configuration was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +56,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ARN of the role used to create the configuration",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute3b4bfd3590f6e481a6791ffb(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role used to create the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailArn
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +70,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_arn": schemaAttribute039bc28f4c0838ea4a4a38f5(),
+		"guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN representation for the guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailId
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +84,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_id": schemaAttributed7bbd9d9f3fc456ae73fe8f8(),
+		"guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID for the guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +98,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
 		//	  "type": "string"
 		//	}
-		"guardrail_identifier": schemaAttribute248e35f5ef8641582ea4070b(),
+		"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier for the guardrail, could be the ID or the ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailVersion
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +110,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^[1-9][0-9]{0,7}$",
 		//	  "type": "string"
 		//	}
-		"guardrail_version": schemaAttribute7bf69cd01bbbf5b6436c0498(),
+		"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Numerical guardrail version (not DRAFT)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelEnforcement
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +148,24 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"model_enforcement": schemaAttribute9f8960bf4eed6f4f1ae6c2ec(),
+		"model_enforcement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExcludedModels
+				"excluded_models": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Models to exclude from enforcement. If a model is in both lists, it is excluded",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludedModels
+				"included_models": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Models to enforce the guardrail on",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Model-specific information for the enforced guardrail configuration. If not present, the configuration is enforced on all models",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +177,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttributece6d2f7bd26af52024762983(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Configuration owner type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SelectiveContentGuarding
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +207,22 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  },
 		//	  "type": "object"
 		//	}
-		"selective_content_guarding": schemaAttribute45601df3147698729d8c76da(),
+		"selective_content_guarding": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Messages
+				"messages": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Selective guarding mode for user messages",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: System
+				"system": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Selective guarding mode for system prompts",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Selective content guarding controls for enforced guardrails",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +231,11 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributef00d768249ac292d764cf0ca(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the configuration was last updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedBy
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +243,10 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ARN of the role used to update the configuration",
 		//	  "type": "string"
 		//	}
-		"updated_by": schemaAttribute89a6fd2e0f9a56ed23e0e7a6(),
+		"updated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role used to update the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

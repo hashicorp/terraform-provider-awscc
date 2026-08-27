@@ -19,64 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1efebcbb4e229bb5471bb52d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the workflow",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute505967605fff952547a69599() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A collection of properties to be used as part of each execution of the workflow",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7554f7f2828fd9671cc17e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the workflow representing the flow",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1b64a12e015b1a710fcdead() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The tags to use with this workflow.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefea38563c8684af31003b4dc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_glue_workflow", workflowResource)
 	registry.AddListResourceFactory("awscc_glue_workflow", generic.NewListResource(workflowResource))
@@ -93,7 +35,15 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A collection of properties to be used as part of each execution of the workflow",
 		//	  "type": "object"
 		//	}
-		"default_run_properties": schemaAttribute505967605fff952547a69599(),
+		"default_run_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "A collection of properties to be used as part of each execution of the workflow",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +51,14 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description of the workflow",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1efebcbb4e229bb5471bb52d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the workflow",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaxConcurrentRuns
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +66,14 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.",
 		//	  "type": "integer"
 		//	}
-		"max_concurrent_runs": schemaAttributefea38563c8684af31003b4dc(),
+		"max_concurrent_runs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +81,15 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the workflow representing the flow",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb7554f7f2828fd9671cc17e6(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workflow representing the flow",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +97,15 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The tags to use with this workflow.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributed1b64a12e015b1a710fcdead(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The tags to use with this workflow.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -15,144 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a0a18ceb0f3dad0895742ac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute66c12e26362421b699460dbd(),
-			// Property: Key
-			"key": schemaAttributea9d391362a6e5b196b5b195c(),
-			// Property: Version
-			"version": schemaAttributeb56e9680a1c6d8e00be2a088(),
-		}, /*END SCHEMA*/
-		Description: "The location of the file in S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute241e2e3fe6557648f073a61b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An IAM role that allows the IoT service principal to access your S3 files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2715d3284a1ab9b419fac3e5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FileId
-				"file_id": schemaAttribute544096d799cdeef3afb34387(),
-				// Property: S3Location
-				"s3_location": schemaAttribute0a0a18ceb0f3dad0895742ac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The files to stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2dee019e877993175ce7dac1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The stream version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute338e7f99dad400d05863fbe7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute544096d799cdeef3afb34387() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The file ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62d3869bf4c21d1d0cf16d3a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute856bc4f70af193ee45c39146(),
-				// Property: Value
-				"value": schemaAttribute338e7f99dad400d05863fbe7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Metadata which can be used to manage streams.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66c12e26362421b699460dbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67f8a873901514f3803ee70e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69a05fb1e82282253cdf8fda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The stream ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute856bc4f70af193ee45c39146() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9d391362a6e5b196b5b195c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac5b0110b1869254b8d76796() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date when the stream was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb56e9680a1c6d8e00be2a088() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 bucket version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedba0481d50950d1225a5a596() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef08edb011bb243129017ab66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date when the stream was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_stream", streamDataSource)
 }
@@ -168,7 +30,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the stream.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributedba0481d50950d1225a5a596(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +42,11 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributef08edb011bb243129017ab66(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date when the stream was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +56,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[^\\p{C}]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute67f8a873901514f3803ee70e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Files
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +103,41 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"files": schemaAttribute2715d3284a1ab9b419fac3e5(),
+		"files": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FileId
+					"file_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The file ID.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Location
+					"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Bucket
+							"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The S3 bucket.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The S3 key.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Version
+							"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The S3 bucket version.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The location of the file in S3.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The files to stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +146,11 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttributeac5b0110b1869254b8d76796(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date when the stream was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +160,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute241e2e3fe6557648f073a61b(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An IAM role that allows the IoT service principal to access your S3 files.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamId
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +174,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"stream_id": schemaAttribute69a05fb1e82282253cdf8fda(),
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The stream ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamVersion
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +187,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"stream_version": schemaAttribute2dee019e877993175ce7dac1(),
+		"stream_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The stream version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +222,24 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute62d3869bf4c21d1d0cf16d3a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Metadata which can be used to manage streams.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

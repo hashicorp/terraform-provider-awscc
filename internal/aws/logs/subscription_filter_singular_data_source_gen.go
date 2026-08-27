@@ -15,70 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08e08e2d863c93f94c29b9b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f57795744b97981e8c0b514() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the subscription filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute278008b0a76d384d4d6c8235() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the subscription filter was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60c3535fd5e107473593a320() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The log group to associate with the subscription filter. All log events that are uploaded to this log group are filtered and delivered to the specified AWS resource if the filter pattern matches the log events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71de19f1145a512ffbdd6f29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76141df1e70d01089ea0d095() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filtering expressions that restrict what gets delivered to the destination AWS resource. For more information about the filter pattern syntax, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77aabb50ccaebce25a56e475() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the subscription filter is applied on the transformed version of the log events instead of the original ingested log events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97990da56bc8265b0e7b9283() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of system fields that are included in the log events sent to the subscription destination. Returns the ``emitSystemFields`` value if it was specified when the subscription filter was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec3dfbdefdaa42bcd1303e0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The method used to distribute log data to the destination, which can be either random or grouped by log stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_subscription_filter", subscriptionFilterDataSource)
 }
@@ -94,7 +30,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the subscription filter is applied on the transformed version of the log events instead of the original ingested log events.",
 		//	  "type": "boolean"
 		//	}
-		"apply_on_transformed_logs": schemaAttribute77aabb50ccaebce25a56e475(),
+		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the subscription filter is applied on the transformed version of the log events instead of the original ingested log events.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationArn
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +41,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The Amazon Resource Name (ARN) of the destination.",
 		//	  "type": "string"
 		//	}
-		"destination_arn": schemaAttribute08e08e2d863c93f94c29b9b5(),
+		"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Distribution
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +56,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"distribution": schemaAttributeec3dfbdefdaa42bcd1303e0a(),
+		"distribution": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The method used to distribute log data to the destination, which can be either random or grouped by log stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EmitSystemFields
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +71,11 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"emit_system_fields": schemaAttribute97990da56bc8265b0e7b9283(),
+		"emit_system_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of system fields that are included in the log events sent to the subscription destination. Returns the ``emitSystemFields`` value if it was specified when the subscription filter was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FieldSelectionCriteria
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +85,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"field_selection_criteria": schemaAttribute278008b0a76d384d4d6c8235(),
+		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the subscription filter was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterName
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +96,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The name of the subscription filter.",
 		//	  "type": "string"
 		//	}
-		"filter_name": schemaAttribute0f57795744b97981e8c0b514(),
+		"filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the subscription filter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPattern
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +107,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The filtering expressions that restrict what gets delivered to the destination AWS resource. For more information about the filter pattern syntax, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
 		//	  "type": "string"
 		//	}
-		"filter_pattern": schemaAttribute76141df1e70d01089ea0d095(),
+		"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The filtering expressions that restrict what gets delivered to the destination AWS resource. For more information about the filter pattern syntax, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +118,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The log group to associate with the subscription filter. All log events that are uploaded to this log group are filtered and delivered to the specified AWS resource if the filter pattern matches the log events.",
 		//	  "type": "string"
 		//	}
-		"log_group_name": schemaAttribute60c3535fd5e107473593a320(),
+		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The log group to associate with the subscription filter. All log events that are uploaded to this log group are filtered and delivered to the specified AWS resource if the filter pattern matches the log events.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +129,10 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute71de19f1145a512ffbdd6f29(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of an IAM role that grants CWL permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

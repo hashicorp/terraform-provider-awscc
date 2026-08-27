@@ -23,82 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute048723557140190322ccd92d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the VPC Endpoint",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f6d56bb20126dd32f1f046e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the VPC Endpoint",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 32),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9-]{2,31}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4350b18ae02c4d09ee264518() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of one or more subnets in which to create an endpoint network interface",
-		Required:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 6),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 32),
-				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bd3b40764e6396349fdbfb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC in which the endpoint will be used.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-			stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[0-9a-z]*$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4bd72983382ac4bdfe53211() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of one or more security groups to associate with the endpoint network interface",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 5),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w+\\-]+$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_opensearchserverless_vpc_endpoint", vpcEndpointResource)
 	registry.AddListResourceFactory("awscc_opensearchserverless_vpc_endpoint", generic.NewListResource(vpcEndpointResource))
@@ -118,7 +42,13 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^vpce-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_id": schemaAttribute048723557140190322ccd92d(),
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the VPC Endpoint",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +59,17 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3f6d56bb20126dd32f1f046e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the VPC Endpoint",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 32),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9-]{2,31}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +86,23 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schemaAttributec4bd72983382ac4bdfe53211(),
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ID of one or more security groups to associate with the endpoint network interface",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 5),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 128),
+					stringvalidator.RegexMatches(regexp.MustCompile("^[\\w+\\-]+$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +119,21 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schemaAttribute4350b18ae02c4d09ee264518(),
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ID of one or more subnets in which to create an endpoint network interface",
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 6),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 32),
+					stringvalidator.RegexMatches(regexp.MustCompile("^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +144,17 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^vpc-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute4bd3b40764e6396349fdbfb0(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC in which the endpoint will be used.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[0-9a-z]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -14,82 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05b5793c341863642a38466e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InsightsEnabled
-			"insights_enabled": schemaAttribute357efa853147320d33b0ff17(),
-			// Property: NotificationsEnabled
-			"notifications_enabled": schemaAttribute69ef43aa4ad3bc048071bcde(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b54a01c3ead5a56758764a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The case-sensitive name of the new group. Names must be unique.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30480d1ecec830081ae51343() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter expression defining criteria by which to group traces.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute357efa853147320d33b0ff17() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69ef43aa4ad3bc048071bcde() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d8fe03dcd4a1b7c7c624347() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcc5e8115ea9b7731f7f7fb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec762e6a1d5396dd75cd11c2b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8d8fe03dcd4a1b7c7c624347(),
-				// Property: Value
-				"value": schemaAttributebcc5e8115ea9b7731f7f7fb7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef83fc9ec1513147cda703390() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the group that was generated on creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_xray_group", groupDataSource)
 }
@@ -105,7 +29,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The filter expression defining criteria by which to group traces.",
 		//	  "type": "string"
 		//	}
-		"filter_expression": schemaAttribute30480d1ecec830081ae51343(),
+		"filter_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The filter expression defining criteria by which to group traces.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupARN
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +42,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"group_arn": schemaAttributef83fc9ec1513147cda703390(),
+		"group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the group that was generated on creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +55,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"group_name": schemaAttribute1b54a01c3ead5a56758764a6(),
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The case-sensitive name of the new group. Names must be unique.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InsightsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +76,21 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"insights_configuration": schemaAttribute05b5793c341863642a38466e(),
+		"insights_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InsightsEnabled
+				"insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NotificationsEnabled
+				"notifications_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +117,24 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributec762e6a1d5396dd75cd11c2b(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

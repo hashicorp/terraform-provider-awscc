@@ -15,115 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0d456ab0680de355225a017a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute140157f747c18bea7d0eb273() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0d456ab0680de355225a017a(),
-				// Property: Value
-				"value": schemaAttribute43a5464d2058eb5cd01f90d3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a79c122027d97ddd41a0fe5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ModelArn
-				"model_arn": schemaAttribute89b588cf1adf6ff8465aad2c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of model configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43a5464d2058eb5cd01f90d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4721454d1c401c6f91087a0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time Stamp",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a82413aeca586883dec3498() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Inference profile identifier. Supports both system-defined inference profile ids, and inference profile ARNs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89b588cf1adf6ff8465aad2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN for Foundation Models in Bedrock. These models can be used as base models for model customization jobs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d2e55d7eedb7c35088f7807() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the inference profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea22d598edfaa0a0b527282b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of the Inference Profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5ee3bcc1d0aacdbace6d629() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CopyFrom
-			"copy_from": schemaAttributef86d4c3e2756798975d5ef7d(),
-		}, /*END SCHEMA*/
-		Description: "Various ways to encode a list of models in a CreateInferenceProfile request",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9f76d392968f4210fa7260e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef45aba824c776d9a509502c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of the Inference Profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef86d4c3e2756798975d5ef7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Source arns for a custom inference profile to copy its regional load balancing config from. This\ncan either be a foundation model or predefined inference profile ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_application_inference_profile", applicationInferenceProfileDataSource)
 }
@@ -140,7 +31,11 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute4721454d1c401c6f91087a0a(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +46,10 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^([0-9a-zA-Z:.][ _-]?)+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9d2e55d7eedb7c35088f7807(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the inference profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +59,9 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$",
 		//	  "type": "string"
 		//	}
-		"inference_profile_arn": schemaAttributea9f76d392968f4210fa7260e(),
+		"inference_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceProfileId
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +71,9 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^[a-zA-Z0-9-:.]+$",
 		//	  "type": "string"
 		//	}
-		"inference_profile_id": schemaAttributea9f76d392968f4210fa7260e(),
+		"inference_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceProfileIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +84,10 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{0,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/)?[a-zA-Z0-9-:.]+$",
 		//	  "type": "string"
 		//	}
-		"inference_profile_identifier": schemaAttribute5a82413aeca586883dec3498(),
+		"inference_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Inference profile identifier. Supports both system-defined inference profile ids, and inference profile ARNs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceProfileName
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +97,9 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^([0-9a-zA-Z][ _-]?)+$",
 		//	  "type": "string"
 		//	}
-		"inference_profile_name": schemaAttributea9f76d392968f4210fa7260e(),
+		"inference_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelSource
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +116,17 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"model_source": schemaAttributea5ee3bcc1d0aacdbace6d629(),
+		"model_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CopyFrom
+				"copy_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Source arns for a custom inference profile to copy its regional load balancing config from. This\ncan either be a foundation model or predefined inference profile ARN.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Various ways to encode a list of models in a CreateInferenceProfile request",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Models
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +148,19 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"models": schemaAttribute2a79c122027d97ddd41a0fe5(),
+		"models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ModelArn
+					"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ARN for Foundation Models in Bedrock. These models can be used as base models for model customization jobs",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of model configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +171,10 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributea22d598edfaa0a0b527282b2(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of the Inference Profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +209,24 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute140157f747c18bea7d0eb273(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +238,10 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributeef45aba824c776d9a509502c(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of the Inference Profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +250,11 @@ func applicationInferenceProfileDataSource(ctx context.Context) (datasource.Data
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute4721454d1c401c6f91087a0a(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

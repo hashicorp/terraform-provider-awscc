@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute16f1f514a06613a7c662f0cd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b7ebf80e181844ac66cc7f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv4 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1efa7482b5d9a67c5d5291bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute331c02b159c29335cb1c3154() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv6 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39e72d64d56951ec047e78d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b20d940c1ae0f3d2b24f6a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP protocol name (``tcp``, ``udp``, ``icmp``, ``icmpv6``) or number (see [Protocol Numbers](https://docs.aws.amazon.com/http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).\n Use ``-1`` to specify all protocols. When authorizing security group rules, specifying ``-1`` or a protocol number other than ``tcp``, ``udp``, ``icmp``, or ``icmpv6`` allows traffic on all ports, regardless of any port range you specify. For ``tcp``, ``udp``, and ``icmp``, you must specify a port range. For ``icmpv6``, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71655c5f2cbb72d64bbbb0d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix list IDs for an AWS service. This is the AWS service to access through a VPC endpoint from instances associated with the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75d70790fa403122a6e53ae7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9660ac7202b46d4022fcca1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of an egress (outbound) security group rule.\n Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea664fd3d473d5868cfad382b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_security_group_egress", securityGroupEgressDataSource)
 }
@@ -99,7 +29,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The IPv4 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
 		//	  "type": "string"
 		//	}
-		"cidr_ip": schemaAttribute1b7ebf80e181844ac66cc7f3(),
+		"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv4 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CidrIpv6
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +40,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The IPv6 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
 		//	  "type": "string"
 		//	}
-		"cidr_ipv_6": schemaAttribute331c02b159c29335cb1c3154(),
+		"cidr_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv6 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +51,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The description of an egress (outbound) security group rule.\n Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9660ac7202b46d4022fcca1a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of an egress (outbound) security group rule.\n Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationPrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +62,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The prefix list IDs for an AWS service. This is the AWS service to access through a VPC endpoint from instances associated with the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
 		//	  "type": "string"
 		//	}
-		"destination_prefix_list_id": schemaAttribute71655c5f2cbb72d64bbbb0d6(),
+		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The prefix list IDs for an AWS service. This is the AWS service to access through a VPC endpoint from instances associated with the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +73,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
 		//	  "type": "string"
 		//	}
-		"destination_security_group_id": schemaAttribute75d70790fa403122a6e53ae7(),
+		"destination_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromPort
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +84,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).",
 		//	  "type": "integer"
 		//	}
-		"from_port": schemaAttributea664fd3d473d5868cfad382b(),
+		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +95,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttribute1efa7482b5d9a67c5d5291bb(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +106,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"security_group_egress_id": schemaAttribute39e72d64d56951ec047e78d5(),
+		"security_group_egress_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpProtocol
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +117,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The IP protocol name (``tcp``, ``udp``, ``icmp``, ``icmpv6``) or number (see [Protocol Numbers](https://docs.aws.amazon.com/http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).\n Use ``-1`` to specify all protocols. When authorizing security group rules, specifying ``-1`` or a protocol number other than ``tcp``, ``udp``, ``icmp``, or ``icmpv6`` allows traffic on all ports, regardless of any port range you specify. For ``tcp``, ``udp``, and ``icmp``, you must specify a port range. For ``icmpv6``, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
 		//	  "type": "string"
 		//	}
-		"ip_protocol": schemaAttribute4b20d940c1ae0f3d2b24f6a2(),
+		"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP protocol name (``tcp``, ``udp``, ``icmp``, ``icmpv6``) or number (see [Protocol Numbers](https://docs.aws.amazon.com/http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).\n Use ``-1`` to specify all protocols. When authorizing security group rules, specifying ``-1`` or a protocol number other than ``tcp``, ``udp``, ``icmp``, or ``icmpv6`` allows traffic on all ports, regardless of any port range you specify. For ``tcp``, ``udp``, and ``icmp``, you must specify a port range. For ``icmpv6``, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ToPort
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +128,10 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).",
 		//	  "type": "integer"
 		//	}
-		"to_port": schemaAttribute16f1f514a06613a7c662f0cd(),
+		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

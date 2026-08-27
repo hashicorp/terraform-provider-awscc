@@ -14,77 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute074ba3c4b82a0b18fd9f83f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14c5ceabc5d738635bdc5b6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Route Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute355636bb9371b22ce154e7b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Route Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e35f7d85ca1c5a0b63a3737() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The duration of persistent routes in minutes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a5a57bceb17085f76d12e39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to enable persistent routes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute810f53eeb6c988c7ce1d8487() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebd0de65a052c34b71afc47c1(),
-				// Property: Value
-				"value": schemaAttribute074ba3c4b82a0b18fd9f83f3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb722e6b433dd522a6bd8391a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to enable SNS notifications",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd0de65a052c34b71afc47c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed52de51c43cc6ee066a72d91() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon-side ASN of the Route Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_route_server", routeServerDataSource)
 }
@@ -103,7 +32,10 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"amazon_side_asn": schemaAttributed52de51c43cc6ee066a72d91(),
+		"amazon_side_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon-side ASN of the Route Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +43,10 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Route Server.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute14c5ceabc5d738635bdc5b6f(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Route Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +54,10 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the Route Server.",
 		//	  "type": "string"
 		//	}
-		"route_server_id": schemaAttribute355636bb9371b22ce154e7b8(),
+		"route_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Route Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PersistRoutes
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +69,10 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"persist_routes": schemaAttribute5a5a57bceb17085f76d12e39(),
+		"persist_routes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to enable persistent routes",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PersistRoutesDuration
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +83,10 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"persist_routes_duration": schemaAttribute3e35f7d85ca1c5a0b63a3737(),
+		"persist_routes_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The duration of persistent routes in minutes",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsNotificationsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +94,10 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to enable SNS notifications",
 		//	  "type": "boolean"
 		//	}
-		"sns_notifications_enabled": schemaAttributeb722e6b433dd522a6bd8391a(),
+		"sns_notifications_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to enable SNS notifications",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +130,24 @@ func routeServerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute810f53eeb6c988c7ce1d8487(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

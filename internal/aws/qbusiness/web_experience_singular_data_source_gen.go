@@ -16,107 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute11195a49fece846ad592b4ba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnabledBrowserExtensions
-			"enabled_browser_extensions": schemaAttribute89d318af3f51ae2cb0b23ac0(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e426abdc103b3d6bbc13fea() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec4433b315bd0496041b10f89(),
-				// Property: Value
-				"value": schemaAttributec4433b315bd0496041b10f89(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3219bff44cce185469376cf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5782555fe28fec7acbe6a14d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89d318af3f51ae2cb0b23ac0() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4433b315bd0496041b10f89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc3ae362cc846f2c55b5cecd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationUrl
-			"authentication_url": schemaAttributec4433b315bd0496041b10f89(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc720323eb0e6dae48e9c57c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomCSSUrl
-			"custom_css_url": schemaAttributec4433b315bd0496041b10f89(),
-			// Property: FaviconUrl
-			"favicon_url": schemaAttributec4433b315bd0496041b10f89(),
-			// Property: FontUrl
-			"font_url": schemaAttributec4433b315bd0496041b10f89(),
-			// Property: LogoUrl
-			"logo_url": schemaAttributec4433b315bd0496041b10f89(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeece12125e4b7ac7bcabd1308() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretsArn
-			"secrets_arn": schemaAttributec4433b315bd0496041b10f89(),
-			// Property: SecretsRole
-			"secrets_role": schemaAttributec4433b315bd0496041b10f89(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8bc4f7b210efa5926cc5576() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OpenIDConnectConfiguration
-			"open_id_connect_configuration": schemaAttributeece12125e4b7ac7bcabd1308(),
-			// Property: SamlConfiguration
-			"saml_configuration": schemaAttributedc3ae362cc846f2c55b5cecd(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_qbusiness_web_experience", webExperienceDataSource)
 }
@@ -134,7 +33,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttributec4433b315bd0496041b10f89(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BrowserExtensionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +62,16 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"browser_extension_configuration": schemaAttribute11195a49fece846ad592b4ba(),
+		"browser_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledBrowserExtensions
+				"enabled_browser_extensions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +79,10 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute3219bff44cce185469376cf9(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomizationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +116,27 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"customization_configuration": schemaAttributedc720323eb0e6dae48e9c57c(),
+		"customization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomCSSUrl
+				"custom_css_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FaviconUrl
+				"favicon_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FontUrl
+				"font_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogoUrl
+				"logo_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +146,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(https?|ftp|file)://([^\\s]*)$",
 		//	  "type": "string"
 		//	}
-		"default_endpoint": schemaAttributec4433b315bd0496041b10f89(),
+		"default_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityProviderConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +194,35 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"identity_provider_configuration": schemaAttributef8bc4f7b210efa5926cc5576(),
+		"identity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OpenIDConnectConfiguration
+				"open_id_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecretsArn
+						"secrets_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsRole
+						"secrets_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamlConfiguration
+				"saml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationUrl
+						"authentication_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Origins
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +238,10 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"origins": schemaAttribute5782555fe28fec7acbe6a14d(),
+		"origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +251,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributec4433b315bd0496041b10f89(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SamplePromptsControlMode
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +264,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"sample_prompts_control_mode": schemaAttributec4433b315bd0496041b10f89(),
+		"sample_prompts_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +280,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributec4433b315bd0496041b10f89(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subtitle
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +292,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[\\s\\S]*$",
 		//	  "type": "string"
 		//	}
-		"subtitle": schemaAttributec4433b315bd0496041b10f89(),
+		"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +324,21 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute1e426abdc103b3d6bbc13fea(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +348,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[\\s\\S]*$",
 		//	  "type": "string"
 		//	}
-		"title": schemaAttributec4433b315bd0496041b10f89(),
+		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +358,10 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute3219bff44cce185469376cf9(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebExperienceArn
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +371,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"web_experience_arn": schemaAttributec4433b315bd0496041b10f89(),
+		"web_experience_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebExperienceId
 		// CloudFormation resource type schema:
 		//
@@ -388,7 +383,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"web_experience_id": schemaAttributec4433b315bd0496041b10f89(),
+		"web_experience_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WelcomeMessage
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +394,9 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"welcome_message": schemaAttributec4433b315bd0496041b10f89(),
+		"welcome_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

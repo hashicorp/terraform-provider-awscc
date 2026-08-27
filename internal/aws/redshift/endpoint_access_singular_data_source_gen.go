@@ -15,175 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07144c94507d2e5f92ed4399() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NetworkInterfaces
-			"network_interfaces": schemaAttributeb671eb357675e653c2e9b874(),
-			// Property: VpcEndpointId
-			"vpc_endpoint_id": schemaAttribute5da56ed77da601b583436165(),
-			// Property: VpcId
-			"vpc_id": schemaAttributef6e660a5b5a31bfb513ab743(),
-		}, /*END SCHEMA*/
-		Description: "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1666a94b987073646e2544f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network interface identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute209188222ca0f3ea11118752() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3622324d9cd341400ad05628() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37098a389814ba9fcc168e8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the VPC security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ddbfd23421ba402bee1012d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the cluster accepts incoming connections.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bfe1f2e7252067bdecdbf1a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Status
-				"status": schemaAttribute9ef4518de3934f9313c9c0d6(),
-				// Property: VpcSecurityGroupId
-				"vpc_security_group_id": schemaAttribute37098a389814ba9fcc168e8d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d1323c740a7581a919167a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DNS address of the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5da56ed77da601b583436165() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68f560f71857a56a46ac1fe9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute813d57db0a380e9fe3d5c514() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the owner of the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90a3ebd3cb4bb32cdddaf611() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cca0ae08898166e97505e25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time (UTC) that the endpoint was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ef4518de3934f9313c9c0d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the VPC security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb671eb357675e653c2e9b874() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schemaAttribute209188222ca0f3ea11118752(),
-				// Property: NetworkInterfaceId
-				"network_interface_id": schemaAttribute1666a94b987073646e2544f2(),
-				// Property: PrivateIpAddress
-				"private_ip_address": schemaAttributed4c45a2d674465af99e12b84(),
-				// Property: SubnetId
-				"subnet_id": schemaAttributee0f162e2c6bfccd086ac6699(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4c45a2d674465af99e12b84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv4 address of the network interface within the subnet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee061dafbe23871853a422eba() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of vpc security group ids to apply to the created endpoint access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0f162e2c6bfccd086ac6699() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subnet identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0b0bc32075672d45b1230fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6e660a5b5a31bfb513ab743() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC identifier that the endpoint is associated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_endpoint_access", endpointAccessDataSource)
 }
@@ -199,7 +30,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The DNS address of the endpoint.",
 		//	  "type": "string"
 		//	}
-		"address": schemaAttribute5d1323c740a7581a919167a7(),
+		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DNS address of the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +41,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
 		//	  "type": "string"
 		//	}
-		"cluster_identifier": schemaAttributef0b0bc32075672d45b1230fc(),
+		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +52,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The time (UTC) that the endpoint was created.",
 		//	  "type": "string"
 		//	}
-		"endpoint_create_time": schemaAttribute9cca0ae08898166e97505e25(),
+		"endpoint_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time (UTC) that the endpoint was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +64,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schemaAttribute3622324d9cd341400ad05628(),
+		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointStatus
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +75,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The status of the endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint_status": schemaAttribute90a3ebd3cb4bb32cdddaf611(),
+		"endpoint_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +86,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The port number on which the cluster accepts incoming connections.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute3ddbfd23421ba402bee1012d(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the cluster accepts incoming connections.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceOwner
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +98,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"resource_owner": schemaAttribute813d57db0a380e9fe3d5c514(),
+		"resource_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID of the owner of the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +110,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"subnet_group_name": schemaAttribute68f560f71857a56a46ac1fe9(),
+		"subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +168,51 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vpc_endpoint": schemaAttribute07144c94507d2e5f92ed4399(),
+		"vpc_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NetworkInterfaces
+				"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AvailabilityZone
+							"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Availability Zone.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NetworkInterfaceId
+							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The network interface identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PrivateIpAddress
+							"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The IPv4 address of the network interface within the subnet.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SubnetId
+							"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The subnet identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcEndpointId
+				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The VPC identifier that the endpoint is associated.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +224,11 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_security_group_ids": schemaAttributee061dafbe23871853a422eba(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of vpc security group ids to apply to the created endpoint access.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +252,24 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_security_groups": schemaAttribute4bfe1f2e7252067bdecdbf1a(),
+		"vpc_security_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the VPC security group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VpcSecurityGroupId
+					"vpc_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the VPC security group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

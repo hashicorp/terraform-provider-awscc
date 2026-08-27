@@ -22,135 +22,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute0905a008d8fd5a2f0e31fef4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key id used for encryption on the S3 bucket",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d81dbf557cc54130b8f0197() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Simple Storage (S3) bucket URI",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(1024),
-			stringvalidator.RegexMatches(regexp.MustCompile("^s3://([^/]+)/?(.*)$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32b5d73d0039a57fd60da04f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the edge device fleet",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 63),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e8370cb9e19a6dfef755249() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9f1705e1ab5b5eb71006cfd6(),
-				// Property: Value
-				"value": schemaAttributed52891dd5bc4a08410480834(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Associate tags with the resource",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67791da170cdf4bb1f68b739() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description for the edge device fleet",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 800),
-			stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f1705e1ab5b5eb71006cfd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebceb62ba1aea6e4da7d7821c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Role associated with the device fleet",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf2e6fbf78b0d4447e5f2eb3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute0905a008d8fd5a2f0e31fef4(),
-			// Property: S3OutputLocation
-			"s3_output_location": schemaAttribute1d81dbf557cc54130b8f0197(),
-		}, /*END SCHEMA*/
-		Description: "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed52891dd5bc4a08410480834() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_device_fleet", deviceFleetResource)
 }
@@ -169,7 +40,18 @@ func deviceFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[\\S\\s]+",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute67791da170cdf4bb1f68b739(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description for the edge device fleet",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 800),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceFleetName
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +62,17 @@ func deviceFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"device_fleet_name": schemaAttribute32b5d73d0039a57fd60da04f(),
+		"device_fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the edge device fleet",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +99,34 @@ func deviceFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"output_config": schemaAttributecf2e6fbf78b0d4447e5f2eb3(),
+		"output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS key id used for encryption on the S3 bucket",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3OutputLocation
+				"s3_output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Simple Storage (S3) bucket URI",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(1024),
+						stringvalidator.RegexMatches(regexp.MustCompile("^s3://([^/]+)/?(.*)$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +137,14 @@ func deviceFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributebceb62ba1aea6e4da7d7821c(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Role associated with the device fleet",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +177,45 @@ func deviceFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute5e8370cb9e19a6dfef755249(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Associate tags with the resource",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

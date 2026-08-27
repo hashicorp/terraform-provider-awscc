@@ -16,116 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1e77ae66d886c4e28f8dbea7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The profile ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41500ce1a7e9c149d0ee83e8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec58f5c517b1de11e7f6d8fff(),
-				// Property: Value
-				"value": schemaAttribute9d99d27f292fea0cb733fc64(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41685a6fcd990eb034a6fa77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66cf39340f48f7e63304fa01() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The selected choices.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b2da5a5c9be6c8eaf1756b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The profile description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute923aaca9d077a240b99bfcf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the profile was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a7aa462b92fd906739c2a78() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: QuestionId
-				"question_id": schemaAttributec6c96dc47c5607fcf12cc547(),
-				// Property: SelectedChoiceIds
-				"selected_choice_ids": schemaAttribute66cf39340f48f7e63304fa01(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The profile questions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d99d27f292fea0cb733fc64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebacf668425c15916d7d3528b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the profile was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec58f5c517b1de11e7f6d8fff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6c96dc47c5607fcf12cc547() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the question.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7afebdf63a659af39b683a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The profile version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece8ac788e2d11aef7b4e4baa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wellarchitected_profile", profileDataSource)
 }
@@ -142,7 +32,11 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute923aaca9d077a240b99bfcf7(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the profile was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +44,10 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The owner of the profile.",
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttributece8ac788e2d11aef7b4e4baa(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +57,10 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:profile/[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"profile_arn": schemaAttribute1e77ae66d886c4e28f8dbea7(),
+		"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The profile ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileDescription
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +70,10 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"profile_description": schemaAttribute7b2da5a5c9be6c8eaf1756b4(),
+		"profile_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The profile description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileName
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +83,10 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"profile_name": schemaAttribute41685a6fcd990eb034a6fa77(),
+		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileQuestions
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +116,25 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"profile_questions": schemaAttribute9a7aa462b92fd906739c2a78(),
+		"profile_questions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: QuestionId
+					"question_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the question.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SelectedChoiceIds
+					"selected_choice_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The selected choices.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The profile questions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileVersion
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +145,10 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9.\\-]+$",
 		//	  "type": "string"
 		//	}
-		"profile_version": schemaAttributec7afebdf63a659af39b683a7(),
+		"profile_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The profile version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +181,24 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute41500ce1a7e9c149d0ee83e8(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +207,11 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributebacf668425c15916d7d3528b(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the profile was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,78 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute069234ff59fa59681da6e634() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique name, chosen by you, for your custom vocabulary filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute244a58c45b969f9343a130c8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed3d7e011de541282861a9921(),
-				// Property: Value
-				"value": schemaAttribute68c9fdfa16d294fb844668cb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with the vocabulary filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32da41689811d50a2641b3df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 location of the text file that contains your custom vocabulary filter terms.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68c9fdfa16d294fb844668cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute887c5c4e7e90f3d102d1e695() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98468c35b81cb7407c343e51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the vocabulary filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3d7e011de541282861a9921() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee33a9ab6d87deb649b0e8041() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code that represents the language of the entries in your vocabulary filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee483e8912981815d9acd1c8f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Use this parameter if you want to create your custom vocabulary filter by including all desired terms, as comma-separated values, within your request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_transcribe_vocabulary_filter", vocabularyFilterDataSource)
 }
@@ -102,7 +30,10 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the vocabulary filter.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute98468c35b81cb7407c343e51(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the vocabulary filter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +44,10 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"data_access_role_arn": schemaAttribute887c5c4e7e90f3d102d1e695(),
+		"data_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LanguageCode
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +55,10 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The language code that represents the language of the entries in your vocabulary filter.",
 		//	  "type": "string"
 		//	}
-		"language_code": schemaAttributee33a9ab6d87deb649b0e8041(),
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code that represents the language of the entries in your vocabulary filter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +90,24 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute244a58c45b969f9343a130c8(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with the vocabulary filter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VocabularyFilterFileUri
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +118,10 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(s3://|http(s*)://).+$",
 		//	  "type": "string"
 		//	}
-		"vocabulary_filter_file_uri": schemaAttribute32da41689811d50a2641b3df(),
+		"vocabulary_filter_file_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon S3 location of the text file that contains your custom vocabulary filter terms.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VocabularyFilterName
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +132,10 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[0-9a-zA-Z._-]+$",
 		//	  "type": "string"
 		//	}
-		"vocabulary_filter_name": schemaAttribute069234ff59fa59681da6e634(),
+		"vocabulary_filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique name, chosen by you, for your custom vocabulary filter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Words
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +150,11 @@ func vocabularyFilterDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"words": schemaAttributee483e8912981815d9acd1c8f(),
+		"words": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Use this parameter if you want to create your custom vocabulary filter by including all desired terms, as comma-separated values, within your request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

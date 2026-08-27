@@ -28,490 +28,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute09544a9ce12ebfb56c21991f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"CAN_QUERY",
-					"CAN_RUN_JOB",
-					"CAN_RECEIVE_RESULTS",
-				),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1569117ad50890f224db2817() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17896a315b2dcc8b252b71f0() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"us-west-1",
-					"us-west-2",
-					"us-east-1",
-					"us-east-2",
-					"af-south-1",
-					"ap-east-1",
-					"ap-east-2",
-					"ap-south-2",
-					"ap-southeast-1",
-					"ap-southeast-2",
-					"ap-southeast-3",
-					"ap-southeast-5",
-					"ap-southeast-4",
-					"ap-southeast-7",
-					"ap-south-1",
-					"ap-northeast-3",
-					"ap-northeast-1",
-					"ap-northeast-2",
-					"ca-central-1",
-					"ca-west-1",
-					"eu-south-1",
-					"eu-west-3",
-					"eu-south-2",
-					"eu-central-2",
-					"eu-central-1",
-					"eu-north-1",
-					"eu-west-1",
-					"eu-west-2",
-					"me-south-1",
-					"me-central-1",
-					"il-central-1",
-					"sa-east-1",
-					"mx-central-1",
-				),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-			setplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a821b665335c4a850784caa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1add91663e13a701f305892f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: JobCompute
-			"job_compute": schemaAttribute91f4c80029f5510463923e9c(),
-			// Property: MachineLearning
-			"machine_learning": schemaAttributec583387763a7df977372ad0d(),
-			// Property: QueryCompute
-			"query_compute": schemaAttribute6b71b437407b6dbf3fb07715(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b3ef9f289b468251717cf1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"CLEAN_ROOMS_SQL",
-				"SPARK",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute278f047ca0212a83204279a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(12, 12),
-			stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2911ec1fce7b6197d0caf710() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3aba3f71b0bacafbbdc92cbe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: JobCompute
-			"job_compute": schemaAttribute91f4c80029f5510463923e9c(),
-			// Property: MachineLearning
-			"machine_learning": schemaAttributec583387763a7df977372ad0d(),
-			// Property: QueryCompute
-			"query_compute": schemaAttribute6b71b437407b6dbf3fb07715(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute411a6cd66f9eea3c24fd2640() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"CAN_RECEIVE_MODEL_OUTPUT",
-					"CAN_RECEIVE_INFERENCE_OUTPUT",
-				),
-			),
-			fwvalidators.NotNullSet(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43d92c26ff67095de6308e14() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowCleartext
-			"allow_cleartext": schemaAttributed5a3425542dccb45c510c01c(),
-			// Property: AllowDuplicates
-			"allow_duplicates": schemaAttributed5a3425542dccb45c510c01c(),
-			// Property: AllowJoinsOnColumnsWithDifferentNames
-			"allow_joins_on_columns_with_different_names": schemaAttributed5a3425542dccb45c510c01c(),
-			// Property: PreserveNulls
-			"preserve_nulls": schemaAttributed5a3425542dccb45c510c01c(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b7755b2e72e2dedba63d337() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttribute278f047ca0212a83204279a4(),
-				// Property: DisplayName
-				"display_name": schemaAttribute2911ec1fce7b6197d0caf710(),
-				// Property: MLMemberAbilities
-				"ml_member_abilities": schemaAttribute8a43ff16f91f76d86166d4da(),
-				// Property: MemberAbilities
-				"member_abilities": schemaAttribute09544a9ce12ebfb56c21991f(),
-				// Property: PaymentConfiguration
-				"payment_configuration": schemaAttribute1add91663e13a701f305892f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(0, 9),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-			listplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e0d419f0af68548c319849a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b71b437407b6dbf3fb07715() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsResponsible
-			"is_responsible": schemaAttributed5a3425542dccb45c510c01c(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a43ff16f91f76d86166d4da() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomMLMemberAbilities
-			"custom_ml_member_abilities": schemaAttribute411a6cd66f9eea3c24fd2640(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bb5fae49b1ad5b912c3e42e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91f4c80029f5510463923e9c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsResponsible
-			"is_responsible": schemaAttributed5a3425542dccb45c510c01c(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d72ed5c5c1bc0826cfd0b7f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"CAN_QUERY",
-					"CAN_RUN_JOB",
-					"CAN_RECEIVE_RESULTS",
-				),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-			setplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9da57656f15f0fb46242ba98() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1569117ad50890f224db2817(),
-				// Property: Value
-				"value": schemaAttributed2a16d1c2ae9cdfc7a1461df(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec583387763a7df977372ad0d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ModelInference
-			"model_inference": schemaAttribute91f4c80029f5510463923e9c(),
-			// Property: ModelTraining
-			"model_training": schemaAttribute91f4c80029f5510463923e9c(),
-			// Property: SyntheticDataGeneration
-			"synthetic_data_generation": schemaAttribute91f4c80029f5510463923e9c(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2a16d1c2ae9cdfc7a1461df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed454318c5fd96a99f1c65daa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomMLMemberAbilities
-			"custom_ml_member_abilities": schemaAttribute411a6cd66f9eea3c24fd2640(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5a3425542dccb45c510c01c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda33a2817b8efb2302385d69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7418825ba7f0a2f2e3c59cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb3af96ed105b114e09fb761() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"ADD_MEMBER",
-					"GRANT_RECEIVE_RESULTS_ABILITY",
-					"REVOKE_RECEIVE_RESULTS_ABILITY",
-				),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-			setplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe368e0ea91e0115c253055f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff4466effb92b153ef5a56da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_cleanrooms_collaboration", collaborationResource)
 	registry.AddListResourceFactory("awscc_cleanrooms_collaboration", generic.NewListResource(collaborationResource))
@@ -567,7 +83,54 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allowed_result_regions": schemaAttribute17896a315b2dcc8b252b71f0(),
+		"allowed_result_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"us-west-1",
+						"us-west-2",
+						"us-east-1",
+						"us-east-2",
+						"af-south-1",
+						"ap-east-1",
+						"ap-east-2",
+						"ap-south-2",
+						"ap-southeast-1",
+						"ap-southeast-2",
+						"ap-southeast-3",
+						"ap-southeast-5",
+						"ap-southeast-4",
+						"ap-southeast-7",
+						"ap-south-1",
+						"ap-northeast-3",
+						"ap-northeast-1",
+						"ap-northeast-2",
+						"ca-central-1",
+						"ca-west-1",
+						"eu-south-1",
+						"eu-west-3",
+						"eu-south-2",
+						"eu-central-2",
+						"eu-central-1",
+						"eu-north-1",
+						"eu-west-1",
+						"eu-west-2",
+						"me-south-1",
+						"me-central-1",
+						"il-central-1",
+						"sa-east-1",
+						"mx-central-1",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AnalyticsEngine
 		// CloudFormation resource type schema:
 		//
@@ -578,7 +141,19 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"analytics_engine": schemaAttribute1b3ef9f289b468251717cf1a(),
+		"analytics_engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CLEAN_ROOMS_SQL",
+					"SPARK",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -586,7 +161,12 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8bb5fae49b1ad5b912c3e42e(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AutoApprovedChangeTypes
 		// CloudFormation resource type schema:
 		//
@@ -603,7 +183,24 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"auto_approved_change_types": schemaAttributefb3af96ed105b114e09fb761(),
+		"auto_approved_change_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"ADD_MEMBER",
+						"GRANT_RECEIVE_RESULTS_ABILITY",
+						"REVOKE_RECEIVE_RESULTS_ABILITY",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CollaborationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -613,7 +210,12 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"collaboration_identifier": schemaAttribute8bb5fae49b1ad5b912c3e42e(),
+		"collaboration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorDisplayName
 		// CloudFormation resource type schema:
 		//
@@ -623,7 +225,15 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"creator_display_name": schemaAttribute1a821b665335c4a850784caa(),
+		"creator_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorMLMemberAbilities
 		// CloudFormation resource type schema:
 		//
@@ -648,7 +258,34 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"creator_ml_member_abilities": schemaAttributed454318c5fd96a99f1c65daa(),
+		"creator_ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomMLMemberAbilities
+				"custom_ml_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"CAN_RECEIVE_MODEL_OUTPUT",
+								"CAN_RECEIVE_INFERENCE_OUTPUT",
+							),
+						),
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorMemberAbilities
 		// CloudFormation resource type schema:
 		//
@@ -665,7 +302,24 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"creator_member_abilities": schemaAttribute9d72ed5c5c1bc0826cfd0b7f(),
+		"creator_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"CAN_QUERY",
+						"CAN_RUN_JOB",
+						"CAN_RECEIVE_RESULTS",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorPaymentConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -744,7 +398,134 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"creator_payment_configuration": schemaAttribute3aba3f71b0bacafbbdc92cbe(),
+		"creator_payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JobCompute
+				"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MachineLearning
+				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModelInference
+						"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ModelTraining
+						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SyntheticDataGeneration
+						"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: QueryCompute
+				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataEncryptionMetadata
 		// CloudFormation resource type schema:
 		//
@@ -772,7 +553,60 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_encryption_metadata": schemaAttribute43d92c26ff67095de6308e14(),
+		"data_encryption_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowCleartext
+				"allow_cleartext": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowDuplicates
+				"allow_duplicates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowJoinsOnColumnsWithDifferentNames
+				"allow_joins_on_columns_with_different_names": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveNulls
+				"preserve_nulls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -782,14 +616,25 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee7418825ba7f0a2f2e3c59cd(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IsMetricsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"is_metrics_enabled": schemaAttribute4e0d419f0af68548c319849a(),
+		"is_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: JobLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -800,7 +645,20 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"job_log_status": schemaAttributeda33a2817b8efb2302385d69(),
+		"job_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Members
 		// CloudFormation resource type schema:
 		//
@@ -941,7 +799,221 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"members": schemaAttribute4b7755b2e72e2dedba63d337(),
+		"members": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccountId
+					"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(12, 12),
+							stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DisplayName
+					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 100),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MLMemberAbilities
+					"ml_member_abilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomMLMemberAbilities
+							"custom_ml_member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"CAN_RECEIVE_MODEL_OUTPUT",
+											"CAN_RECEIVE_INFERENCE_OUTPUT",
+										),
+									),
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MemberAbilities
+					"member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.ValueStringsAre(
+								stringvalidator.OneOf(
+									"CAN_QUERY",
+									"CAN_RUN_JOB",
+									"CAN_RECEIVE_RESULTS",
+								),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PaymentConfiguration
+					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: JobCompute
+							"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsResponsible
+									"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MachineLearning
+							"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ModelInference
+									"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ModelTraining
+									"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SyntheticDataGeneration
+									"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: QueryCompute
+							"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsResponsible
+									"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 9),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -951,7 +1023,12 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributefe368e0ea91e0115c253055f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: QueryLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -962,7 +1039,18 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"query_log_status": schemaAttributeff4466effb92b153ef5a56da(),
+		"query_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -992,7 +1080,42 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute9da57656f15f0fb46242ba98(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

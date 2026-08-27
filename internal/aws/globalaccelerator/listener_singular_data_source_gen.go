@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e3afc7f995755408a10ff04() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A network port number",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1374e3464d416ea55b1b34ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the listener.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute142bfb5c9e18e97a2c1bcf79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol for the listener.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd9c6f2d9a710b35a1f558d0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FromPort
-				"from_port": schemaAttribute0e3afc7f995755408a10ff04(),
-				// Property: ToPort
-				"to_port": schemaAttribute0e3afc7f995755408a10ff04(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca345633b27b73de91782220() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the accelerator.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda8ee8bea562f30eaef8cdb3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_globalaccelerator_listener", listenerDataSource)
 }
@@ -78,7 +29,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the accelerator.",
 		//	  "type": "string"
 		//	}
-		"accelerator_arn": schemaAttributeca345633b27b73de91782220(),
+		"accelerator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the accelerator.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientAffinity
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +45,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"client_affinity": schemaAttributeda8ee8bea562f30eaef8cdb3(),
+		"client_affinity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ListenerArn
 		// CloudFormation resource type schema:
 		//
@@ -99,7 +56,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the listener.",
 		//	  "type": "string"
 		//	}
-		"listener_arn": schemaAttribute1374e3464d416ea55b1b34ff(),
+		"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the listener.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortRanges
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +89,23 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"port_ranges": schemaAttributebd9c6f2d9a710b35a1f558d0(),
+		"port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FromPort
+					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "A network port number",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ToPort
+					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "A network port number",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +118,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttribute142bfb5c9e18e97a2c1bcf79(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The protocol for the listener.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

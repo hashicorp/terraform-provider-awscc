@@ -15,113 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02581bd17973d269711969f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the creator request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute220e48da81b8044ad94de903() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute5e94acabe5de329b419e7ea6(),
-				// Property: Value
-				"value": schemaAttribute5c317db6e114a4c49575081c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2494b0b01f97743a1d5be0e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 URL to import domains from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2758a1f63b3a99f6c29609c8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute317db081cb18bbfd073520e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35d51cc5ffef67554ec43820() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverFirewallDomainList, possible values are COMPLETE, DELETING, UPDATING, COMPLETE_IMPORT_FAILED, IMPORTING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c317db6e114a4c49575081c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e94acabe5de329b419e7ea6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75a28049c763d52b8a2a360d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallDomainListAssociationStatus",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f8d273e6d085ca6fd387ede() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResourceId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute926f10120d128eb46ee6ca7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallDomainListName",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3b2b79faf3fc5a3c533e3f6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An inline list of domains to use for this domain list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb85f285b2b681a7d84b62b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rfc3339TimeString",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc91d80794d45402cfa501c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ServicePrincipal",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListDataSource)
 }
@@ -139,7 +32,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute317db081cb18bbfd073520e4(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +45,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributefb85f285b2b681a7d84b62b8(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorRequestId
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +58,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"creator_request_id": schemaAttribute02581bd17973d269711969f0(),
+		"creator_request_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the creator request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainCount
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +70,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"domain_count": schemaAttribute2758a1f63b3a99f6c29609c8(),
+		"domain_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainFileUrl
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +83,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_file_url": schemaAttribute2494b0b01f97743a1d5be0e4(),
+		"domain_file_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "S3 URL to import domains from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domains
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +101,11 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"domains": schemaAttributef3b2b79faf3fc5a3c533e3f6(),
+		"domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "An inline list of domains to use for this domain list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +115,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firewall_domain_list_id": schemaAttribute8f8d273e6d085ca6fd387ede(),
+		"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedOwnerName
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +128,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"managed_owner_name": schemaAttributefc91d80794d45402cfa501c6(),
+		"managed_owner_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ServicePrincipal",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +141,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"modification_time": schemaAttributefb85f285b2b681a7d84b62b8(),
+		"modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +155,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute926f10120d128eb46ee6ca7f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallDomainListName",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +174,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute35d51cc5ffef67554ec43820(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverFirewallDomainList, possible values are COMPLETE, DELETING, UPDATING, COMPLETE_IMPORT_FAILED, IMPORTING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +185,10 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "FirewallDomainListAssociationStatus",
 		//	  "type": "string"
 		//	}
-		"status_message": schemaAttribute75a28049c763d52b8a2a360d(),
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallDomainListAssociationStatus",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +221,24 @@ func firewallDomainListDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute220e48da81b8044ad94de903(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -19,18 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5d63e13eb5ca05b853d0d9a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_service_action_association", serviceActionAssociationResource)
 }
@@ -48,7 +36,15 @@ func serviceActionAssociationResource(ctx context.Context) (resource.Resource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"product_id": schemaAttribute5d63e13eb5ca05b853d0d9a6(),
+		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningArtifactId
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +54,15 @@ func serviceActionAssociationResource(ctx context.Context) (resource.Resource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"provisioning_artifact_id": schemaAttribute5d63e13eb5ca05b853d0d9a6(),
+		"provisioning_artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceActionId
 		// CloudFormation resource type schema:
 		//
@@ -68,7 +72,15 @@ func serviceActionAssociationResource(ctx context.Context) (resource.Resource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_action_id": schemaAttribute5d63e13eb5ca05b853d0d9a6(),
+		"service_action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

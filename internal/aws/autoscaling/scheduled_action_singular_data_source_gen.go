@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0014050b19587c4c9c6f85de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f53b42f0e158edaacb56ef0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Auto-generated unique identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1002853edbf82cf66811580f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum size of the Auto Scaling group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15a51572765129ba749949c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone for the cron expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56ddeea2b7c6a7b0b268b479() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute597e8585096e6c2558a42016() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Auto Scaling group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0208185efedb8bb7b542ef8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed30a5572c1dcb45b32d95c69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_autoscaling_scheduled_action", scheduledActionDataSource)
 }
@@ -85,7 +29,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the Auto Scaling group.",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_group_name": schemaAttribute597e8585096e6c2558a42016(),
+		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Auto Scaling group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DesiredCapacity
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +40,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
 		//	  "type": "integer"
 		//	}
-		"desired_capacity": schemaAttribute56ddeea2b7c6a7b0b268b479(),
+		"desired_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndTime
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +51,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
 		//	  "type": "string"
 		//	}
-		"end_time": schemaAttributec0208185efedb8bb7b542ef8(),
+		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +62,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The minimum size of the Auto Scaling group.",
 		//	  "type": "integer"
 		//	}
-		"max_size": schemaAttribute1002853edbf82cf66811580f(),
+		"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum size of the Auto Scaling group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +73,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The minimum size of the Auto Scaling group.",
 		//	  "type": "integer"
 		//	}
-		"min_size": schemaAttribute1002853edbf82cf66811580f(),
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum size of the Auto Scaling group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Recurrence
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +84,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
 		//	  "type": "string"
 		//	}
-		"recurrence": schemaAttribute0014050b19587c4c9c6f85de(),
+		"recurrence": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledActionName
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +95,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Auto-generated unique identifier",
 		//	  "type": "string"
 		//	}
-		"scheduled_action_name": schemaAttribute0f53b42f0e158edaacb56ef0(),
+		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Auto-generated unique identifier",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartTime
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +106,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
 		//	  "type": "string"
 		//	}
-		"start_time": schemaAttributed30a5572c1dcb45b32d95c69(),
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +117,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The time zone for the cron expression.",
 		//	  "type": "string"
 		//	}
-		"time_zone": schemaAttribute15a51572765129ba749949c9(),
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone for the cron expression.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

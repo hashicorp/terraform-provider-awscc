@@ -15,217 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute012539682296c400bd4b6d71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute014789640bca058d32e4d4c6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute5d3a617187554ab9ab5e6c55(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of primary key fields for the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15c585443258bf9e854f7df2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec08899df7ad5c3119160e616(),
-				// Property: Value
-				"value": schemaAttribute012539682296c400bd4b6d71(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24e7f18834a311b3c72f2c0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The dataset field name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute427b49e6ebbabc8fec75aa1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute584268198ebfa29321735ef4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Web Services Supply Chain instance identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58fef99a6799f04e31b25562() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cb23c42c599679b255be225() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicate if the field is required or not.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d3a617187554ab9ab5e6c55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the primary key field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6280d079d3d5db6a94a47626() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of partitioning transformation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c74207dd2eef9cdbf7ceb19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute898b31b8e5544c0e6b53110b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The dataset field type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea128c42aa910a6324c1a4e69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the partition field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7eacf4a55d605f98652d994() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the dataset schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba79a61806366df4974168a2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute6280d079d3d5db6a94a47626(),
-		}, /*END SCHEMA*/
-		Description: "The transformation of the partition field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd26e2edad335c2005bb3688() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Fields
-			"fields": schemaAttributee13dffc9d894e9765dd97c33(),
-			// Property: Name
-			"name": schemaAttributea7eacf4a55d605f98652d994(),
-			// Property: PrimaryKeys
-			"primary_keys": schemaAttribute014789640bca058d32e4d4c6(),
-		}, /*END SCHEMA*/
-		Description: "The schema of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec08899df7ad5c3119160e616() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9cd0b76b2dd95e644986544() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Fields
-			"fields": schemaAttributefed4d17ded7dd6e487449cb4(),
-		}, /*END SCHEMA*/
-		Description: "The partition specification of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed99b211a07865459d137b916() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The last modified time of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee13dffc9d894e9765dd97c33() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsRequired
-				"is_required": schemaAttribute5cb23c42c599679b255be225(),
-				// Property: Name
-				"name": schemaAttribute24e7f18834a311b3c72f2c0c(),
-				// Property: Type
-				"type": schemaAttribute898b31b8e5544c0e6b53110b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of field details of the dataset schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4c8c5d6bb20a8ca66299369() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2fb5b4722e08483318e8f3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The creation time of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefed4d17ded7dd6e487449cb4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributea128c42aa910a6324c1a4e69(),
-				// Property: Transform
-				"transform": schemaAttributeba79a61806366df4974168a2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The partition fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_scn_dataset", datasetDataSource)
 }
@@ -244,7 +33,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee4c8c5d6bb20a8ca66299369(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +45,11 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributef2fb5b4722e08483318e8f3c(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The creation time of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +59,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute427b49e6ebbabc8fec75aa1c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +73,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute584268198ebfa29321735ef4(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Web Services Supply Chain instance identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +85,11 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttributed99b211a07865459d137b916(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The last modified time of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +100,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute58fef99a6799f04e31b25562(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +114,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"namespace": schemaAttribute6c74207dd2eef9cdbf7ceb19(),
+		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The namespace of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PartitionSpec
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +176,38 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"partition_spec": schemaAttributec9cd0b76b2dd95e644986544(),
+		"partition_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Fields
+				"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the partition field.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Transform
+							"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The type of partitioning transformation.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The transformation of the partition field.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The partition fields.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The partition specification of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -449,7 +292,55 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schema": schemaAttributebd26e2edad335c2005bb3688(),
+		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Fields
+				"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IsRequired
+							"is_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicate if the field is required or not.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The dataset field name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The dataset field type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of field details of the dataset schema.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the dataset schema.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrimaryKeys
+				"primary_keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the primary key field.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of primary key fields for the dataset.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The schema of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -483,7 +374,24 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute15c585443258bf9e854f7df2(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,40 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e44e2435aeb0a6d259814fc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KeyArn
-			"key_arn": schemaAttributecd386a03f7758c94ef5c8829(),
-			// Property: KeyType
-			"key_type": schemaAttributecd386a03f7758c94ef5c8829(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ce1cff44efe8f31cacdec77() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd386a03f7758c94ef5c8829() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf5577292128d1bf974058d5() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_nimblestudio_streaming_image", streamingImageDataSource)
 }
@@ -63,14 +29,18 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributecd386a03f7758c94ef5c8829(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ec2ImageId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"ec_2_image_id": schemaAttributecd386a03f7758c94ef5c8829(),
+		"ec_2_image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -89,21 +59,37 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schemaAttribute0e44e2435aeb0a6d259814fc(),
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyArn
+				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyType
+				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfigurationKeyArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"encryption_configuration_key_arn": schemaAttributecd386a03f7758c94ef5c8829(),
+		"encryption_configuration_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfigurationKeyType
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"encryption_configuration_key_type": schemaAttributecd386a03f7758c94ef5c8829(),
+		"encryption_configuration_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EulaIds
 		// CloudFormation resource type schema:
 		//
@@ -114,42 +100,55 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"eula_ids": schemaAttribute2ce1cff44efe8f31cacdec77(),
+		"eula_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecd386a03f7758c94ef5c8829(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttributecd386a03f7758c94ef5c8829(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Platform
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"platform": schemaAttributecd386a03f7758c94ef5c8829(),
+		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamingImageId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"streaming_image_id": schemaAttributecd386a03f7758c94ef5c8829(),
+		"streaming_image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StudioId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"studio_id": schemaAttributecd386a03f7758c94ef5c8829(),
+		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +160,11 @@ func streamingImageDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributedf5577292128d1bf974058d5(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

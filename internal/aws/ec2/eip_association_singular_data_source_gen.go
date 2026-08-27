@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute17470e4bab05bad175785b2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The allocation ID. This is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35d68418de53a70551b0793b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ee4a482e372470584a77df9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0c583595536cc7bf6feb47f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeecc2a5402341ace17f2044b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_eip_association", eIPAssociationDataSource)
 }
@@ -64,7 +29,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The allocation ID. This is required.",
 		//	  "type": "string"
 		//	}
-		"allocation_id": schemaAttribute17470e4bab05bad175785b2e(),
+		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The allocation ID. This is required.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EIP
 		// CloudFormation resource type schema:
 		//
@@ -76,7 +44,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"eip": schemaAttribute5ee4a482e372470584a77df9(),
+		"eip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -84,7 +55,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"eip_association_id": schemaAttribute5ee4a482e372470584a77df9(),
+		"eip_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +66,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttributee0c583595536cc7bf6feb47f(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +77,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttribute35d68418de53a70551b0793b(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +88,10 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
 		//	  "type": "string"
 		//	}
-		"private_ip_address": schemaAttributeeecc2a5402341ace17f2044b(),
+		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

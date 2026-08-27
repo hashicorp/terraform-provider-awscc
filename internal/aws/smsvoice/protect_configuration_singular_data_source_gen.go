@@ -14,99 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4b647cbe580f116f014872ed() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute87bc1850ceb5851ee80ae1f3(),
-				// Property: Value
-				"value": schemaAttribute5452951d4e77436c4cd0f39f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5452951d4e77436c4cd0f39f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7091ed8e4c306a9133b348d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MMS
-			"mms": schemaAttribute7729d48b061ce725427ac04f(),
-			// Property: SMS
-			"sms": schemaAttribute7729d48b061ce725427ac04f(),
-			// Property: VOICE
-			"voice": schemaAttribute7729d48b061ce725427ac04f(),
-		}, /*END SCHEMA*/
-		Description: "An array of CountryRule containing the rules for the NumberCapability.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7729d48b061ce725427ac04f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CountryCode
-				"country_code": schemaAttributeeecd8e908156c8b58affda51(),
-				// Property: ProtectStatus
-				"protect_status": schemaAttributea177bde0082e6c162b25e1d3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87bc1850ceb5851ee80ae1f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c5dfdd37e7c4371d4277c2c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true deletion protection is enabled and protect configuration cannot be deleted. By default this is set to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea177bde0082e6c162b25e1d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The types of protection that can be used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab782dc207fb2efb6f6793dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the protect configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6b1cb416225ea5fd4bdd5e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the protect configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeecd8e908156c8b58affda51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The two-letter ISO country code",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_smsvoice_protect_configuration", protectConfigurationDataSource)
 }
@@ -122,7 +29,10 @@ func protectConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the protect configuration.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeab782dc207fb2efb6f6793dd(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the protect configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CountryRuleSet
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +150,66 @@ func protectConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"country_rule_set": schemaAttribute7091ed8e4c306a9133b348d5(),
+		"country_rule_set": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MMS
+				"mms": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CountryCode
+							"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The two-letter ISO country code",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProtectStatus
+							"protect_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The types of protection that can be used.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SMS
+				"sms": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CountryCode
+							"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The two-letter ISO country code",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProtectStatus
+							"protect_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The types of protection that can be used.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VOICE
+				"voice": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CountryCode
+							"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The two-letter ISO country code",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProtectStatus
+							"protect_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The types of protection that can be used.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An array of CountryRule containing the rules for the NumberCapability.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +217,10 @@ func protectConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "When set to true deletion protection is enabled and protect configuration cannot be deleted. By default this is set to false.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection_enabled": schemaAttribute9c5dfdd37e7c4371d4277c2c(),
+		"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When set to true deletion protection is enabled and protect configuration cannot be deleted. By default this is set to false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProtectConfigurationId
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +228,10 @@ func protectConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The unique identifier for the protect configuration.",
 		//	  "type": "string"
 		//	}
-		"protect_configuration_id": schemaAttributec6b1cb416225ea5fd4bdd5e1(),
+		"protect_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the protect configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +264,24 @@ func protectConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute4b647cbe580f116f014872ed(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

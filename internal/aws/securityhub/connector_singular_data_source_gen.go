@@ -15,156 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1643fe1cd23b654f58c69c34() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31516f8445071ac10fb6c963() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of scope. Valid values are ``tenant`` and ``subscription``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36e1a9f05cfd53ff02736f38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A human-readable message that describes the health issue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5335a4f1135e2a06c6d03a37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The error code that identifies the type of health issue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5355cdbd0eae76f34ab9a0b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d706e6cb509c2f5a8029d06() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d9efd84846fe61c6191e079() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dad27c5a69aa4a71440b29e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ScopeType
-			"scope_type": schemaAttribute31516f8445071ac10fb6c963(),
-			// Property: ScopeValues
-			"scope_values": schemaAttribute1643fe1cd23b654f58c69c34(),
-		}, /*END SCHEMA*/
-		Description: "The scope configuration that defines which Azure resources are monitored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94b30bb6ce176c90f4f68f9e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AWSConfigConnectorArn
-			"aws_config_connector_arn": schemaAttributefe36fe58dbca81413f749e70(),
-			// Property: AzureRegions
-			"azure_regions": schemaAttributec4fc6056a385ce1d4ff38d8a(),
-			// Property: ScopeConfiguration
-			"scope_configuration": schemaAttribute7dad27c5a69aa4a71440b29e(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for connecting to an Azure environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4fc6056a385ce1d4ff38d8a() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Azure regions to monitor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec94228035748d5e462d5012a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf3a770d1a933c9c2d462c34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp formatted in ISO8601",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed05f379729b821d1bea52fd5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Code
-				"code": schemaAttribute5335a4f1135e2a06c6d03a37(),
-				// Property: Message
-				"message": schemaAttribute36e1a9f05cfd53ff02736f38(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedab84b559899cabb2a212268() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The enablement status of the connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee888a1931fba0d2be73da74b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Azure
-			"azure": schemaAttribute94b30bb6ce176c90f4f68f9e(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed8265685beb1644411024d9() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe36fe58dbca81413f749e70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_connector", connectorDataSource)
 }
@@ -181,7 +31,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schemaAttributec94228035748d5e462d5012a(),
+		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorId
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +43,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_id": schemaAttributec94228035748d5e462d5012a(),
+		"connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorStatus
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +54,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the connector",
 		//	  "type": "string"
 		//	}
-		"connector_status": schemaAttribute7d9efd84846fe61c6191e079(),
+		"connector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +66,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributecf3a770d1a933c9c2d462c34(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp formatted in ISO8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +77,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttributec94228035748d5e462d5012a(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +88,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the connector.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5355cdbd0eae76f34ab9a0b9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnablementStatus
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +99,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The enablement status of the connector",
 		//	  "type": "string"
 		//	}
-		"enablement_status": schemaAttributedab84b559899cabb2a212268(),
+		"enablement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The enablement status of the connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Issues
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +130,24 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"issues": schemaAttributed05f379729b821d1bea52fd5(),
+		"issues": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Code
+					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The error code that identifies the type of health issue.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Message
+					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A human-readable message that describes the health issue.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastCheckedAt
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +156,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"last_checked_at": schemaAttributecf3a770d1a933c9c2d462c34(),
+		"last_checked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp formatted in ISO8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +168,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttributecf3a770d1a933c9c2d462c34(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp formatted in ISO8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +179,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"message": schemaAttributec94228035748d5e462d5012a(),
+		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +190,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the connector.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7d706e6cb509c2f5a8029d06(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -363,7 +263,48 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"provider_name": schemaAttributee888a1931fba0d2be73da74b(),
+		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Azure
+				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AWSConfigConnectorArn
+						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AzureRegions
+						"azure_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of Azure regions to monitor.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScopeConfiguration
+						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScopeType
+								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of scope. Valid values are ``tenant`` and ``subscription``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ScopeValues
+								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The scope configuration that defines which Azure resources are monitored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for connecting to an Azure environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +321,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributeed8265685beb1644411024d9(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

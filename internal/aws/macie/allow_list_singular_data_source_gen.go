@@ -14,109 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04cff506601631f07c259fa1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AllowList status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14601b0659e70b661fea5e86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute232efaa9a37c493648badab1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AllowList ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5008670a3ae0102b92f725bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cb11a280a280db059220272() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of AllowList.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f4164a482012cdaea0baa16() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefd76f688a62bf5390a6e5e00(),
-				// Property: Value
-				"value": schemaAttribute5008670a3ae0102b92f725bd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of tags associated with a resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae3e7159478cbe5113391faa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttribute14601b0659e70b661fea5e86(),
-			// Property: ObjectKey
-			"object_key": schemaAttribute14601b0659e70b661fea5e86(),
-		}, /*END SCHEMA*/
-		Description: "The S3 location for the AllowList.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec69b2752766200e399ba02fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of AllowList.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec82868d4e9ada0ff6018fe0f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Regex
-			"regex": schemaAttributeea98d4820c4ae5ae6866f218(),
-			// Property: S3WordsList
-			"s3_words_list": schemaAttributeae3e7159478cbe5113391faa(),
-		}, /*END SCHEMA*/
-		Description: "AllowList criteria.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed16acdfabde1331b7f0f1c47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AllowList ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea98d4820c4ae5ae6866f218() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 object key for the AllowList.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd76f688a62bf5390a6e5e00() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_macie_allow_list", allowListDataSource)
 }
@@ -132,7 +29,10 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AllowList ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributed16acdfabde1331b7f0f1c47(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AllowList ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Criteria
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +63,32 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"criteria": schemaAttributec82868d4e9ada0ff6018fe0f(),
+		"criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Regex
+				"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 object key for the AllowList.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3WordsList
+				"s3_words_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ObjectKey
+						"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The S3 location for the AllowList.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AllowList criteria.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +96,10 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Description of AllowList.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5cb11a280a280db059220272(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of AllowList.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +107,10 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AllowList ID.",
 		//	  "type": "string"
 		//	}
-		"allow_list_id": schemaAttribute232efaa9a37c493648badab1(),
+		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AllowList ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +118,10 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of AllowList.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec69b2752766200e399ba02fb(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of AllowList.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +139,10 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute04cff506601631f07c259fa1(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AllowList status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +170,24 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute9f4164a482012cdaea0baa16(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

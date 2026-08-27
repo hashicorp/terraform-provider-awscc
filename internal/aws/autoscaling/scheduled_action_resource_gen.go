@@ -18,92 +18,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute23ac9c6ad104f9fdc50f45b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute540edc89989badc32f7a754f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Auto-generated unique identifier",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5739e0f2a1f6bacfe35d0c47() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c56c6cfceeba85e15ea5b8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone for the cron expression.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb754e6c0c1ca324898887d72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb821dc77c8fb957fa06e18b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece0b9a2db666a33f49f27b78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Auto Scaling group.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec196cc26d13923e8347ff7f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum size of the Auto Scaling group.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_autoscaling_scheduled_action", scheduledActionResource)
 	registry.AddListResourceFactory("awscc_autoscaling_scheduled_action", generic.NewListResource(scheduledActionResource))
@@ -120,7 +34,13 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the Auto Scaling group.",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_group_name": schemaAttributece0b9a2db666a33f49f27b78(),
+		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Auto Scaling group.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DesiredCapacity
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +48,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
 		//	  "type": "integer"
 		//	}
-		"desired_capacity": schemaAttribute5739e0f2a1f6bacfe35d0c47(),
+		"desired_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EndTime
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +63,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
 		//	  "type": "string"
 		//	}
-		"end_time": schemaAttribute23ac9c6ad104f9fdc50f45b7(),
+		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +78,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The minimum size of the Auto Scaling group.",
 		//	  "type": "integer"
 		//	}
-		"max_size": schemaAttributeec196cc26d13923e8347ff7f(),
+		"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum size of the Auto Scaling group.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +93,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The minimum size of the Auto Scaling group.",
 		//	  "type": "integer"
 		//	}
-		"min_size": schemaAttributeec196cc26d13923e8347ff7f(),
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum size of the Auto Scaling group.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Recurrence
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +108,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
 		//	  "type": "string"
 		//	}
-		"recurrence": schemaAttributeb754e6c0c1ca324898887d72(),
+		"recurrence": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledActionName
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +123,13 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Auto-generated unique identifier",
 		//	  "type": "string"
 		//	}
-		"scheduled_action_name": schemaAttribute540edc89989badc32f7a754f(),
+		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Auto-generated unique identifier",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StartTime
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +137,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
 		//	  "type": "string"
 		//	}
-		"start_time": schemaAttributecb821dc77c8fb957fa06e18b(),
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +152,14 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The time zone for the cron expression.",
 		//	  "type": "string"
 		//	}
-		"time_zone": schemaAttribute9c56c6cfceeba85e15ea5b8a(),
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone for the cron expression.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

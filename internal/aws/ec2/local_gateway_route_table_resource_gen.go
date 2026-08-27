@@ -20,123 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute212fb7809793e7cd07a230f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the local gateway route table.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e44d02b45830174e9668e30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the local gateway route table.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43ff39a2bb92fbd00be4dd17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway route table.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute477bb109868f8ce24e54704e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the local gateway route table.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6569439112f9eed9e412d85f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69375261dadd829c34d63aee() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee31e2aa793e2dd5f919acb08(),
-				// Property: Value
-				"value": schemaAttribute6569439112f9eed9e412d85f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the local gateway route table.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8265813c2dca60110419fa3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97efcac76dd344f1e5081fd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mode of the local gateway route table.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1c909711b704081a618d24b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the outpost.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee31e2aa793e2dd5f919acb08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 127),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_local_gateway_route_table", localGatewayRouteTableResource)
 	registry.AddListResourceFactory("awscc_ec2_local_gateway_route_table", generic.NewListResource(localGatewayRouteTableResource))
@@ -153,7 +36,13 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ID of the local gateway.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttribute8265813c2dca60110419fa3e(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableArn
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +50,13 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ARN of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_arn": schemaAttribute212fb7809793e7cd07a230f9(),
+		"local_gateway_route_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the local gateway route table.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +64,13 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ID of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_id": schemaAttribute43ff39a2bb92fbd00be4dd17(),
+		"local_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway route table.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +78,15 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The mode of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttribute97efcac76dd344f1e5081fd4(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode of the local gateway route table.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +94,13 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ARN of the outpost.",
 		//	  "type": "string"
 		//	}
-		"outpost_arn": schemaAttributed1c909711b704081a618d24b(),
+		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the outpost.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +108,13 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The owner of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute3e44d02b45830174e9668e30(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the local gateway route table.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +122,13 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The state of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute477bb109868f8ce24e54704e(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the local gateway route table.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +156,40 @@ func localGatewayRouteTableResource(ctx context.Context) (resource.Resource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute69375261dadd829c34d63aee(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the local gateway route table.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

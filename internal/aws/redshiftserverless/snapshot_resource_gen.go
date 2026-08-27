@@ -24,151 +24,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute01652b70d14f1937111abc03() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The retention period of the snapshot.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0214fab3c15687f01e89ce2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23144482bdb661d7b64c9355() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b2076c7c86fc713cfd77e1e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48a3ade02fbc61ff28d33024() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace the snapshot is associated with.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51846332174c0a6d6c745d82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute547ee872e8e025fa70304153() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute579ab9cc99fbd70a5a8a7188() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner account of the snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62c74c9ffda56d5ab1cd3c75() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdminUsername
-			"admin_username": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: NamespaceArn
-			"namespace_arn": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: NamespaceName
-			"namespace_name": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: OwnerAccount
-			"owner_account": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: RetentionPeriod
-			"retention_period": schemaAttribute3b2076c7c86fc713cfd77e1e(),
-			// Property: SnapshotArn
-			"snapshot_arn": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: SnapshotCreateTime
-			"snapshot_create_time": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: SnapshotName
-			"snapshot_name": schemaAttribute51846332174c0a6d6c745d82(),
-			// Property: Status
-			"status": schemaAttribute51846332174c0a6d6c745d82(),
-		}, /*END SCHEMA*/
-		Description: "Definition for snapshot resource",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f6596f7c14b0b301ad5908a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute23144482bdb661d7b64c9355(),
-				// Property: Value
-				"value": schemaAttribute547ee872e8e025fa70304153(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(0, 200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-			listplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_redshiftserverless_snapshot", snapshotResource)
 	registry.AddListResourceFactory("awscc_redshiftserverless_snapshot", generic.NewListResource(snapshotResource))
@@ -188,7 +43,18 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"namespace_name": schemaAttribute48a3ade02fbc61ff28d33024(),
+		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The namespace the snapshot is associated with.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +62,13 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The owner account of the snapshot.",
 		//	  "type": "string"
 		//	}
-		"owner_account": schemaAttribute579ab9cc99fbd70a5a8a7188(),
+		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner account of the snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +76,14 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The retention period of the snapshot.",
 		//	  "type": "integer"
 		//	}
-		"retention_period": schemaAttribute01652b70d14f1937111abc03(),
+		"retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The retention period of the snapshot.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Snapshot
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +138,55 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"snapshot": schemaAttribute62c74c9ffda56d5ab1cd3c75(),
+		"snapshot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdminUsername
+				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceArn
+				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceName
+				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OwnerAccount
+				"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetentionPeriod
+				"retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotArn
+				"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotCreateTime
+				"snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotName
+				"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Definition for snapshot resource",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +197,16 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schemaAttribute0214fab3c15687f01e89ce2f(),
+		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +237,47 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute8f6596f7c14b0b301ad5908a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

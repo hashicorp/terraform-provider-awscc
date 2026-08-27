@@ -14,60 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0841de8644a7e6263f87e159() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttribute283f3eeba8da528f7b92427d(),
-			// Property: ObjectKey
-			"object_key": schemaAttributedc359b36f32cc9c8a9c9737d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute283f3eeba8da528f7b92427d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Schema S3 bucket name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68ffd882b15cdc50e4b6c557() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the simulation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dce73c10fbdd2cff45034f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Json object with all simulation details",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94d84d9d0aff5bcd9cbdb258() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Role ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb60c209f12e609e42975225e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum running time of the simulation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc359b36f32cc9c8a9c9737d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_simspaceweaver_simulation", simulationDataSource)
 }
@@ -83,7 +29,10 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Json object with all simulation details",
 		//	  "type": "string"
 		//	}
-		"describe_payload": schemaAttribute7dce73c10fbdd2cff45034f6(),
+		"describe_payload": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Json object with all simulation details",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumDuration
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +42,10 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"maximum_duration": schemaAttributeb60c209f12e609e42975225e(),
+		"maximum_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maximum running time of the simulation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +56,10 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute68ffd882b15cdc50e4b6c557(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the simulation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +67,10 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Role ARN.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute94d84d9d0aff5bcd9cbdb258(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Role ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaS3Location
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +97,21 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schema_s3_location": schemaAttribute0841de8644a7e6263f87e159(),
+		"schema_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Schema S3 bucket name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectKey
+				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotS3Location
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +138,21 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"snapshot_s3_location": schemaAttribute0841de8644a7e6263f87e159(),
+		"snapshot_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Schema S3 bucket name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectKey
+				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

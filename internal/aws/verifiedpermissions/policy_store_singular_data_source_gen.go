@@ -16,99 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b447f54ca3fecef233f7091() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14370edc40fef5ef008129ce() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionContext
-			"encryption_context": schemaAttribute256deede23ac963d040cc32e(),
-			// Property: Key
-			"key": schemaAttribute99389aa91758b9704abf9133(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute172e8197fe8873ed3501f707() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Default
-			"default": schemaAttribute0b447f54ca3fecef233f7091(),
-			// Property: KmsEncryptionState
-			"kms_encryption_state": schemaAttribute14370edc40fef5ef008129ce(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1931f4abb4bc0b67d5a34cee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Default
-			"default": schemaAttribute0b447f54ca3fecef233f7091(),
-			// Property: KmsEncryptionSettings
-			"kms_encryption_settings": schemaAttribute14370edc40fef5ef008129ce(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a04fd05c3db01404a2779a9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute99389aa91758b9704abf9133(),
-				// Property: Value
-				"value": schemaAttribute99389aa91758b9704abf9133(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to add to the policy store",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a472dd404fddc85bc32b9bb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CedarJson
-			"cedar_json": schemaAttribute99389aa91758b9704abf9133(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute218b37b807f0e212ae3be495() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Mode
-			"mode": schemaAttribute99389aa91758b9704abf9133(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute256deede23ac963d040cc32e() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99389aa91758b9704abf9133() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_verifiedpermissions_policy_store", policyStoreDataSource)
 }
@@ -126,7 +33,9 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute99389aa91758b9704abf9133(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +56,15 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"deletion_protection": schemaAttribute218b37b807f0e212ae3be495(),
+		"deletion_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +73,9 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute99389aa91758b9704abf9133(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionSettings
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +111,32 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_settings": schemaAttribute1931f4abb4bc0b67d5a34cee(),
+		"encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsEncryptionSettings
+				"kms_encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionContext
+						"encryption_context": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionState
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +173,32 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_state": schemaAttribute172e8197fe8873ed3501f707(),
+		"encryption_state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsEncryptionState
+				"kms_encryption_state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionContext
+						"encryption_context": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyStoreId
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +208,9 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"policy_store_id": schemaAttribute99389aa91758b9704abf9133(),
+		"policy_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +223,15 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schema": schemaAttribute1a472dd404fddc85bc32b9bb(),
+		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CedarJson
+				"cedar_json": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +257,22 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute1a04fd05c3db01404a2779a9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to add to the policy store",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ValidationSettings
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +292,15 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"validation_settings": schemaAttribute218b37b807f0e212ae3be495(),
+		"validation_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

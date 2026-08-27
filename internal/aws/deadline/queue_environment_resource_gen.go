@@ -21,69 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute30e7727133d63c94f3b602c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute454293e3e38b7c75a391e7d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^farm-[0-9a-f]{32}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61c1f57114add4ea485bb134() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^queue-[0-9a-f]{32}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7160647086630c0f12fb0929() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(0, 10000),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ba3b728acc9da31eed7b7d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 15000),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec539dafcc42edf4968658ab5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"JSON",
-				"YAML",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_deadline_queue_environment", queueEnvironmentResource)
 }
@@ -99,14 +36,27 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schemaAttribute454293e3e38b7c75a391e7d8(),
+		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^farm-[0-9a-f]{32}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute30e7727133d63c94f3b602c5(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +65,12 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"priority": schemaAttribute7160647086630c0f12fb0929(),
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(0, 10000),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: QueueEnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +78,12 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^queueenv-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"queue_environment_id": schemaAttribute30e7727133d63c94f3b602c5(),
+		"queue_environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: QueueId
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +91,15 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^queue-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"queue_id": schemaAttribute61c1f57114add4ea485bb134(),
+		"queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^queue-[0-9a-f]{32}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Template
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +108,12 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template": schemaAttribute7ba3b728acc9da31eed7b7d4(),
+		"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 15000),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateType
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +124,15 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"template_type": schemaAttributec539dafcc42edf4968658ab5(),
+		"template_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"JSON",
+					"YAML",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -30,704 +30,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute07789983884627620cd3bd2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[!-~]{1,64}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// ClientToken is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute087dada3d8d3ee3d80485d0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09ed2ba675a825ddf9ac3f43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id that uniquely identifies a Grafana workspace.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1669f5f0bd7fd37318440aad() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeBetween(2, 6),
-			setvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 255),
-			),
-			fwvalidators.NotNullSet(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c936e6b80d9b58c99801df0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"CUSTOMER_MANAGED",
-				"SERVICE_MANAGED",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bd3c0daff039637615fa029() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40066c7e524ca7c4a9750e50() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"SNS",
-				),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute454e645701c0ea9edf5e93e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attribute within the SAML assert to use as the users login handle in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47076a12319c43f85eb88b2a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributed45c62636f5b073e7bdcb6e6(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute1669f5f0bd7fd37318440aad(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ad61d6513b015e034ed8b1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the workspace was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute530bb1ee7ff626f5bbd39746() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of SAML organizations allowed to access Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 256),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54cbd3843e61ded24ac2843d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Valid SAML configuration statuses.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cfe5119b47fcfecb62d2db3() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeBetween(0, 5),
-			setvalidator.ValueStringsAre(
-				stringvalidator.LengthAtLeast(1),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d58a9d620095761bfa83906() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute716a3c7e2aa35800ca7f852a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client ID of the AWS SSO Managed Application.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7322d39c3ce2bb9cd9ac023b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "These enums represent valid account access types. Specifically these enums determine whether the workspace can access AWS resources in the AWS account only, or whether it can also access resources in other accounts in the same organization. If the value CURRENT_ACCOUNT is used, a workspace role ARN must be provided. If the value is ORGANIZATION, a list of organizational units must be provided.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"CURRENT_ACCOUNT",
-				"ORGANIZATION",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77370ca0120c22078679e064() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of data sources on the service managed IAM role.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"AMAZON_OPENSEARCH_SERVICE",
-					"CLOUDWATCH",
-					"PROMETHEUS",
-					"XRAY",
-					"TIMESTREAM",
-					"SITEWISE",
-					"ATHENA",
-					"REDSHIFT",
-				),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78674c31aa0f8d39bb05769f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ef63fa8edee9cd45ac3c55d() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum lifetime an authenticated user can be logged in (in minutes) before being required to re-authenticate.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88a71108519f143b9f328885() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Admin
-			"admin": schemaAttribute8b9028789555e6773a640580(),
-			// Property: Editor
-			"editor": schemaAttributec448bc2afe47b9d002646dac(),
-		}, /*END SCHEMA*/
-		Description: "Maps SAML roles to the Grafana Editor and Admin roles.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8956530b312b5fe71ae8d485() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the workspace was last modified",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8984faa660281992ea0f8e19() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PrefixListIds
-			"prefix_list_ids": schemaAttributee7529c674eb65d93e8e47af7(),
-			// Property: VpceIds
-			"vpce_ids": schemaAttribute5cfe5119b47fcfecb62d2db3(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for Network Access Control.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b9028789555e6773a640580() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 256),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8be7fd2001f68a41af2a2293() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Email
-			"email": schemaAttributec9aa3865ad0a4e3d033f8690(),
-			// Property: Groups
-			"groups": schemaAttributeaf7ca96370d969311340eda5(),
-			// Property: Login
-			"login": schemaAttribute454e645701c0ea9edf5e93e1(),
-			// Property: Name
-			"name": schemaAttributedd371e87327d622f07445f93(),
-			// Property: Org
-			"org": schemaAttributeb0ab3bee3e0ee88cc8fb879f(),
-			// Property: Role
-			"role": schemaAttributee032c9fb2e794551665d82de(),
-		}, /*END SCHEMA*/
-		Description: "Maps Grafana friendly names to the IdPs SAML attributes.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c53e35279063084512f59b0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedOrganizations
-			"allowed_organizations": schemaAttribute530bb1ee7ff626f5bbd39746(),
-			// Property: AssertionAttributes
-			"assertion_attributes": schemaAttribute8be7fd2001f68a41af2a2293(),
-			// Property: IdpMetadata
-			"idp_metadata": schemaAttributef01c152e8ecc6d0106912d6f(),
-			// Property: LoginValidityDuration
-			"login_validity_duration": schemaAttribute7ef63fa8edee9cd45ac3c55d(),
-			// Property: RoleValues
-			"role_values": schemaAttribute88a71108519f143b9f328885(),
-		}, /*END SCHEMA*/
-		Description: "SAML configuration data associated with an AMG workspace.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea748c52b814b1cd3f42edb6a() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of authentication providers to enable.",
-		Required:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtLeast(1),
-			setvalidator.ValueStringsAre(
-				stringvalidator.OneOf(
-					"AWS_SSO",
-					"SAML",
-				),
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf7ca96370d969311340eda5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attribute within the SAML assert to use as the users groups in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0ab3bee3e0ee88cc8fb879f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attribute within the SAML assert to use as the users organizations in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb75a45c8f52f6fb9422d7cd2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "These enums represent the status of a workspace.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec448bc2afe47b9d002646dac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 256),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec90c1c7fcde71cf8c4201abc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of a workspace.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9aa3865ad0a4e3d033f8690() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attribute within the SAML assert to use as the users email in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca46a11b0b982959e2d90c58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Endpoint for the Grafana workspace.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed35bf6eee4c0bafca512a612() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL that vends the IdPs metadata.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed45c62636f5b073e7bdcb6e6() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeBetween(1, 5),
-			setvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 255),
-			),
-			fwvalidators.NotNullSet(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b4961aaf0581be5e9369d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of Grafana to support in your workspace.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd371e87327d622f07445f93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attribute within the SAML assert to use as the users name in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee032c9fb2e794551665d82de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attribute within the SAML assert to use as the users roles in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee05452ce4e4e41dbf7e142b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "XML blob of the IdPs metadata.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0613711f73b091608fba162() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user friendly name of a workspace.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-._~]{1,255}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1ca688cc78e8dc9d5cd9ea9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7529c674eb65d93e8e47af7() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeBetween(0, 5),
-			setvalidator.ValueStringsAre(
-				stringvalidator.LengthAtLeast(1),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeef4e13cde0c142b3ebb3ee5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef8a6f319d63c465172d6232() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Allow workspace admins to install plugins",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef01c152e8ecc6d0106912d6f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Url
-			"url": schemaAttributed35bf6eee4c0bafca512a612(),
-			// Property: Xml
-			"xml": schemaAttributee05452ce4e4e41dbf7e142b7(),
-		}, /*END SCHEMA*/
-		Description: "IdP Metadata used to configure SAML authentication in Grafana.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefed39ab54663cec1e7589582() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3bd3c0daff039637615fa029(),
-				// Property: Value
-				"value": schemaAttributee1ca688cc78e8dc9d5cd9ea9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of tags associated with the workspace.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_grafana_workspace", workspaceResource)
 	registry.AddListResourceFactory("awscc_grafana_workspace", generic.NewListResource(workspaceResource))
@@ -748,7 +50,16 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"account_access_type": schemaAttribute7322d39c3ce2bb9cd9ac023b(),
+		"account_access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "These enums represent valid account access types. Specifically these enums determine whether the workspace can access AWS resources in the AWS account only, or whether it can also access resources in other accounts in the same organization. If the value CURRENT_ACCOUNT is used, a workspace role ARN must be provided. If the value is ORGANIZATION, a list of organizational units must be provided.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CURRENT_ACCOUNT",
+					"ORGANIZATION",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationProviders
 		// CloudFormation resource type schema:
 		//
@@ -767,7 +78,20 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"authentication_providers": schemaAttributea748c52b814b1cd3f42edb6a(),
+		"authentication_providers": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of authentication providers to enable.",
+			Required:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtLeast(1),
+				setvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"AWS_SSO",
+						"SAML",
+					),
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -776,7 +100,19 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[!-~]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"client_token": schemaAttribute07789983884627620cd3bd2b(),
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[!-~]{1,64}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ClientToken is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -785,7 +121,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_timestamp": schemaAttribute4ad61d6513b015e034ed8b1a(),
+		"creation_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the workspace was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataSources
 		// CloudFormation resource type schema:
 		//
@@ -808,7 +151,30 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"data_sources": schemaAttribute77370ca0120c22078679e064(),
+		"data_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of data sources on the service managed IAM role.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"AMAZON_OPENSEARCH_SERVICE",
+						"CLOUDWATCH",
+						"PROMETHEUS",
+						"XRAY",
+						"TIMESTREAM",
+						"SITEWISE",
+						"ATHENA",
+						"REDSHIFT",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -818,7 +184,17 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec90c1c7fcde71cf8c4201abc(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of a workspace.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -828,7 +204,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttributeca46a11b0b982959e2d90c58(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Endpoint for the Grafana workspace.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GrafanaVersion
 		// CloudFormation resource type schema:
 		//
@@ -838,7 +220,17 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"grafana_version": schemaAttributed5b4961aaf0581be5e9369d7(),
+		"grafana_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of Grafana to support in your workspace.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -847,7 +239,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schemaAttribute09ed2ba675a825ddf9ac3f43(),
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id that uniquely identifies a Grafana workspace.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ModificationTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -856,7 +254,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modification_timestamp": schemaAttribute8956530b312b5fe71ae8d485(),
+		"modification_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the workspace was last modified",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -865,7 +270,17 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-._~]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee0613711f73b091608fba162(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user friendly name of a workspace.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-._~]{1,255}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkAccessControl
 		// CloudFormation resource type schema:
 		//
@@ -902,7 +317,48 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_access_control": schemaAttribute8984faa660281992ea0f8e19(),
+		"network_access_control": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrefixListIds
+				"prefix_list_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(0, 5),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthAtLeast(1),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpceIds
+				"vpce_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(0, 5),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthAtLeast(1),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for Network Access Control.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationDestinations
 		// CloudFormation resource type schema:
 		//
@@ -918,7 +374,23 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"notification_destinations": schemaAttribute40066c7e524ca7c4a9750e50(),
+		"notification_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"SNS",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationRoleName
 		// CloudFormation resource type schema:
 		//
@@ -928,7 +400,17 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"organization_role_name": schemaAttribute78674c31aa0f8d39bb05769f(),
+		"organization_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationalUnits
 		// CloudFormation resource type schema:
 		//
@@ -941,7 +423,16 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"organizational_units": schemaAttributeeef4e13cde0c142b3ebb3ee5(),
+		"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionType
 		// CloudFormation resource type schema:
 		//
@@ -953,7 +444,16 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"permission_type": schemaAttribute1c936e6b80d9b58c99801df0(),
+		"permission_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CUSTOMER_MANAGED",
+					"SERVICE_MANAGED",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PluginAdminEnabled
 		// CloudFormation resource type schema:
 		//
@@ -961,7 +461,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Allow workspace admins to install plugins",
 		//	  "type": "boolean"
 		//	}
-		"plugin_admin_enabled": schemaAttributeef8a6f319d63c465172d6232(),
+		"plugin_admin_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Allow workspace admins to install plugins",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -971,7 +478,17 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute6d58a9d620095761bfa83906(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SamlConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1089,7 +606,202 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"saml_configuration": schemaAttribute8c53e35279063084512f59b0(),
+		"saml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowedOrganizations
+				"allowed_organizations": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of SAML organizations allowed to access Grafana.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 256),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AssertionAttributes
+				"assertion_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Email
+						"email": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the attribute within the SAML assert to use as the users email in Grafana.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Groups
+						"groups": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the attribute within the SAML assert to use as the users groups in Grafana.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Login
+						"login": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the attribute within the SAML assert to use as the users login handle in Grafana.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the attribute within the SAML assert to use as the users name in Grafana.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Org
+						"org": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the attribute within the SAML assert to use as the users organizations in Grafana.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Role
+						"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the attribute within the SAML assert to use as the users roles in Grafana.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Maps Grafana friendly names to the IdPs SAML attributes.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IdpMetadata
+				"idp_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Url
+						"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "URL that vends the IdPs metadata.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Xml
+						"xml": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "XML blob of the IdPs metadata.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "IdP Metadata used to configure SAML authentication in Grafana.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LoginValidityDuration
+				"login_validity_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum lifetime an authenticated user can be logged in (in minutes) before being required to re-authenticate.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleValues
+				"role_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Admin
+						"admin": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 256),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Editor
+						"editor": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 256),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Maps SAML roles to the Grafana Editor and Admin roles.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "SAML configuration data associated with an AMG workspace.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SamlConfigurationStatus
 		// CloudFormation resource type schema:
 		//
@@ -1101,7 +813,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"saml_configuration_status": schemaAttribute54cbd3843e61ded24ac2843d(),
+		"saml_configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Valid SAML configuration statuses.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SsoClientId
 		// CloudFormation resource type schema:
 		//
@@ -1109,7 +827,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The client ID of the AWS SSO Managed Application.",
 		//	  "type": "string"
 		//	}
-		"sso_client_id": schemaAttribute716a3c7e2aa35800ca7f852a(),
+		"sso_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The client ID of the AWS SSO Managed Application.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StackSetName
 		// CloudFormation resource type schema:
 		//
@@ -1117,7 +841,14 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.",
 		//	  "type": "string"
 		//	}
-		"stack_set_name": schemaAttribute087dada3d8d3ee3d80485d0d(),
+		"stack_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1140,7 +871,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeb75a45c8f52f6fb9422d7cd2(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "These enums represent the status of a workspace.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1170,7 +907,43 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributefed39ab54663cec1e7589582(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of tags associated with the workspace.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1213,7 +986,50 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_configuration": schemaAttribute47076a12319c43f85eb88b2a(),
+		"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(1, 5),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 255),
+						),
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(2, 6),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 255),
+						),
+						fwvalidators.NotNullSet(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

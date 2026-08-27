@@ -15,92 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0609a1cf02d5dba779d4f2a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute111a161ca89a14a6a96e4471() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22f0045b2a0c752faa56c739() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description inherited from the policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62a866fab35e5b45dd397480() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time this policy was last updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83646c8bed1115836e1e1374() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the associated policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c1bf752a3d5222002eefe74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time this policy version was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9539270cdfab9be57430c2f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6684c46094aa02ba4393bcb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The hash for this version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9468d22d25676ecace73add() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name inherited from the policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea250befae40f5a4fe2ca955() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9539270cdfab9be57430c2f9(),
-				// Property: Value
-				"value": schemaAttribute111a161ca89a14a6a96e4471(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef78257a37c43809a254ee77d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the policy ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_automated_reasoning_policy_version", automatedReasoningPolicyVersionDataSource)
 }
@@ -117,7 +31,11 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute8c1bf752a3d5222002eefe74(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time this policy version was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefinitionHash
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +46,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[0-9a-z]{128}$",
 		//	  "type": "string"
 		//	}
-		"definition_hash": schemaAttributeb6684c46094aa02ba4393bcb(),
+		"definition_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The hash for this version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +59,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[\\s\\S]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute22f0045b2a0c752faa56c739(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description inherited from the policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedDefinitionHash
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +73,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[0-9a-z]{128}$",
 		//	  "type": "string"
 		//	}
-		"last_updated_definition_hash": schemaAttributeb6684c46094aa02ba4393bcb(),
+		"last_updated_definition_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The hash for this version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +87,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[0-9a-zA-Z-_ ]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec9468d22d25676ecace73add(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name inherited from the policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +101,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schemaAttributef78257a37c43809a254ee77d(),
+		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the policy ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyId
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +115,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"policy_id": schemaAttribute83646c8bed1115836e1e1374(),
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the associated policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +151,23 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeea250befae40f5a4fe2ca955(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +176,11 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute62a866fab35e5b45dd397480(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time this policy was last updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +190,10 @@ func automatedReasoningPolicyVersionDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^([1-9][0-9]{0,11})$",
 		//	  "type": "string"
 		//	}
-		"version": schemaAttribute0609a1cf02d5dba779d4f2a5(),
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

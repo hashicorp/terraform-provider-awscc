@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute263e578e4666fbaa4c042b2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91d385e5ebbf1690235b1074() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8b29de03aeccd1eee43debb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the contact resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6049cd26f03a51a5b27ceb9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec44c7a5f1469c636ac175c5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8a5c653098dbf9fd5923173() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The details that SSM Incident Manager uses when trying to engage the contact channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmcontacts_contact_channel", contactChannelDataSource)
 }
@@ -71,7 +29,10 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute91d385e5ebbf1690235b1074(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelAddress
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +40,10 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The details that SSM Incident Manager uses when trying to engage the contact channel.",
 		//	  "type": "string"
 		//	}
-		"channel_address": schemaAttributee8a5c653098dbf9fd5923173(),
+		"channel_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The details that SSM Incident Manager uses when trying to engage the contact channel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -90,7 +54,10 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"channel_name": schemaAttribute263e578e4666fbaa4c042b2e(),
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelType
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +70,10 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"channel_type": schemaAttributec44c7a5f1469c636ac175c5a(),
+		"channel_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactId
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +84,10 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
 		//	  "type": "string"
 		//	}
-		"contact_id": schemaAttributea8b29de03aeccd1eee43debb(),
+		"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the contact resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeferActivation
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +95,10 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
 		//	  "type": "boolean"
 		//	}
-		"defer_activation": schemaAttributeb6049cd26f03a51a5b27ceb9(),
+		"defer_activation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

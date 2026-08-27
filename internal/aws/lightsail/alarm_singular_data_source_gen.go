@@ -15,98 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08f9478405116c27bcf03dfb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14794633ec22e551bc687fe1() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The alarm states that trigger a notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute149a9f4cda43c75459bd22bf() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute202ff5ba0e09fc822144c0a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ab6e35cb8490dc9a3049b4e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e584d64e3a4e4735c876523() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute679adadb36c07cdf5c765136() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fc9af7d65d5408290fe31b2() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value against which the specified statistic is compared.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97e0b59eee58f8bd89cc0326() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric to associate with the alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9b979317bb9a574e77c3852() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets how this alarm will handle missing data points.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb8b2ec9abff6eabe66e46c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf93fb56442caf9fc548b5f5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2c934c226f353049a01598b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Lightsail resource that the alarm monitors.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_alarm", alarmDataSource)
 }
@@ -121,7 +29,9 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"alarm_arn": schemaAttribute3e584d64e3a4e4735c876523(),
+		"alarm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlarmName
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +40,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"alarm_name": schemaAttribute202ff5ba0e09fc822144c0a2(),
+		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComparisonOperator
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +51,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
 		//	  "type": "string"
 		//	}
-		"comparison_operator": schemaAttribute679adadb36c07cdf5c765136(),
+		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactProtocols
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +67,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"contact_protocols": schemaAttribute2ab6e35cb8490dc9a3049b4e(),
+		"contact_protocols": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatapointsToAlarm
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +79,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
 		//	  "type": "integer"
 		//	}
-		"datapoints_to_alarm": schemaAttributecf93fb56442caf9fc548b5f5(),
+		"datapoints_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationPeriods
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +90,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
 		//	  "type": "integer"
 		//	}
-		"evaluation_periods": schemaAttribute149a9f4cda43c75459bd22bf(),
+		"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricName
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +101,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the metric to associate with the alarm.",
 		//	  "type": "string"
 		//	}
-		"metric_name": schemaAttribute97e0b59eee58f8bd89cc0326(),
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the metric to associate with the alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitoredResourceName
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +112,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the Lightsail resource that the alarm monitors.",
 		//	  "type": "string"
 		//	}
-		"monitored_resource_name": schemaAttributef2c934c226f353049a01598b(),
+		"monitored_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Lightsail resource that the alarm monitors.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +123,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
 		//	  "type": "boolean"
 		//	}
-		"notification_enabled": schemaAttribute08f9478405116c27bcf03dfb(),
+		"notification_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationTriggers
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +139,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"notification_triggers": schemaAttribute14794633ec22e551bc687fe1(),
+		"notification_triggers": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The alarm states that trigger a notification.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +151,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The current state of the alarm.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributecb8b2ec9abff6eabe66e46c1(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +162,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The value against which the specified statistic is compared.",
 		//	  "type": "number"
 		//	}
-		"threshold": schemaAttribute8fc9af7d65d5408290fe31b2(),
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The value against which the specified statistic is compared.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TreatMissingData
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +173,10 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Sets how this alarm will handle missing data points.",
 		//	  "type": "string"
 		//	}
-		"treat_missing_data": schemaAttributec9b979317bb9a574e77c3852(),
+		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Sets how this alarm will handle missing data points.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

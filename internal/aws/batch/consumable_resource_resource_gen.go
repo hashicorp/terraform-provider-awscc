@@ -22,94 +22,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute19b2037be7b2259e14309817() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of ConsumableResource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute313fb4827f0bcef5687f9738() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute315414a53f6925452bc1e566() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37f13d8040bb77e8c7c7d585() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Available Quantity of ConsumableResource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38440ef63298e61e8a905953() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Total Quantity of ConsumableResource.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4431778f0527ffd41d5e427c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "In-use Quantity of ConsumableResource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99ef8957eba812f6f67b94b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of Consumable Resource.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"REPLENISHABLE",
-				"NON_REPLENISHABLE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3c1427e6cec59306c607094() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the Consumable Resource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_batch_consumable_resource", consumableResourceResource)
 	registry.AddListResourceFactory("awscc_batch_consumable_resource", generic.NewListResource(consumableResourceResource))
@@ -127,7 +39,13 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"available_quantity": schemaAttribute37f13d8040bb77e8c7c7d585(),
+		"available_quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Available Quantity of ConsumableResource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConsumableResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +53,13 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "ARN of the Consumable Resource.",
 		//	  "type": "string"
 		//	}
-		"consumable_resource_arn": schemaAttributef3c1427e6cec59306c607094(),
+		"consumable_resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the Consumable Resource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConsumableResourceName
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +68,15 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"consumable_resource_name": schemaAttribute19b2037be7b2259e14309817(),
+		"consumable_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of ConsumableResource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +84,12 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"created_at": schemaAttribute315414a53f6925452bc1e566(),
+		"created_at": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InUseQuantity
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +98,13 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"in_use_quantity": schemaAttribute4431778f0527ffd41d5e427c(),
+		"in_use_quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "In-use Quantity of ConsumableResource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +116,19 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute99ef8957eba812f6f67b94b7(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of Consumable Resource.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"REPLENISHABLE",
+					"NON_REPLENISHABLE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +142,16 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute313fb4827f0bcef5687f9738(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TotalQuantity
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +160,10 @@ func consumableResourceResource(ctx context.Context) (resource.Resource, error) 
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"total_quantity": schemaAttribute38440ef63298e61e8a905953(),
+		"total_quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Total Quantity of ConsumableResource.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

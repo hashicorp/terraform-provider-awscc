@@ -15,75 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1187fb59cf8f94382e133345() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute624b93f41fe110751b344dba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationArn
-			"application_arn": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: ApplicationId
-			"application_id": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: ExternalId
-			"external_id": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: UserDataShared
-			"user_data_shared": schemaAttributefffcff192fdcf30e1b3632be(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute783f20e69a3161ae60bc0ad8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92f875ac71752acad4dbd205() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc3b2f5c6152b61b0fc1a97a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Feature
-			"feature": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: RetryGracePeriodSeconds
-			"retry_grace_period_seconds": schemaAttribute1187fb59cf8f94382e133345(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfc4612639f44c38729700eb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: IdToken
-			"id_token": schemaAttribute783f20e69a3161ae60bc0ad8(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute783f20e69a3161ae60bc0ad8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefffcff192fdcf30e1b3632be() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_client", userPoolClientDataSource)
 }
@@ -100,7 +31,9 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"access_token_validity": schemaAttribute1187fb59cf8f94382e133345(),
+		"access_token_validity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllowedOAuthFlows
 		// CloudFormation resource type schema:
 		//
@@ -110,14 +43,19 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"allowed_o_auth_flows": schemaAttribute92f875ac71752acad4dbd205(),
+		"allowed_o_auth_flows": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllowedOAuthFlowsUserPoolClient
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"allowed_o_auth_flows_user_pool_client": schemaAttributefffcff192fdcf30e1b3632be(),
+		"allowed_o_auth_flows_user_pool_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllowedOAuthScopes
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +65,10 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"allowed_o_auth_scopes": schemaAttribute92f875ac71752acad4dbd205(),
+		"allowed_o_auth_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnalyticsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +93,31 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"analytics_configuration": schemaAttribute624b93f41fe110751b344dba(),
+		"analytics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationArn
+				"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationId
+				"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExternalId
+				"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserDataShared
+				"user_data_shared": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthSessionValidity
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +126,9 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 3,
 		//	  "type": "integer"
 		//	}
-		"auth_session_validity": schemaAttribute1187fb59cf8f94382e133345(),
+		"auth_session_validity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CallbackURLs
 		// CloudFormation resource type schema:
 		//
@@ -171,14 +138,19 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"callback_ur_ls": schemaAttribute92f875ac71752acad4dbd205(),
+		"callback_ur_ls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"client_id": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientName
 		// CloudFormation resource type schema:
 		//
@@ -187,35 +159,45 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_name": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"client_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSecret
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"client_secret": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultRedirectURI
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"default_redirect_uri": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"default_redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnablePropagateAdditionalUserContextData
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enable_propagate_additional_user_context_data": schemaAttributefffcff192fdcf30e1b3632be(),
+		"enable_propagate_additional_user_context_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableTokenRevocation
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enable_token_revocation": schemaAttributefffcff192fdcf30e1b3632be(),
+		"enable_token_revocation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExplicitAuthFlows
 		// CloudFormation resource type schema:
 		//
@@ -225,14 +207,19 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"explicit_auth_flows": schemaAttribute92f875ac71752acad4dbd205(),
+		"explicit_auth_flows": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GenerateSecret
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"generate_secret": schemaAttributefffcff192fdcf30e1b3632be(),
+		"generate_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdTokenValidity
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +228,9 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"id_token_validity": schemaAttribute1187fb59cf8f94382e133345(),
+		"id_token_validity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogoutURLs
 		// CloudFormation resource type schema:
 		//
@@ -251,21 +240,28 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"logout_ur_ls": schemaAttribute92f875ac71752acad4dbd205(),
+		"logout_ur_ls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreventUserExistenceErrors
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"prevent_user_existence_errors": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"prevent_user_existence_errors": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReadAttributes
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +271,10 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"read_attributes": schemaAttribute92f875ac71752acad4dbd205(),
+		"read_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RefreshTokenRotation
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +295,19 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"refresh_token_rotation": schemaAttributecc3b2f5c6152b61b0fc1a97a(),
+		"refresh_token_rotation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Feature
+				"feature": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryGracePeriodSeconds
+				"retry_grace_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RefreshTokenValidity
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +316,9 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"refresh_token_validity": schemaAttribute1187fb59cf8f94382e133345(),
+		"refresh_token_validity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportedIdentityProviders
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +328,10 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"supported_identity_providers": schemaAttribute92f875ac71752acad4dbd205(),
+		"supported_identity_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TokenValidityUnits
 		// CloudFormation resource type schema:
 		//
@@ -334,14 +350,32 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"token_validity_units": schemaAttributedfc4612639f44c38729700eb(),
+		"token_validity_units": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessToken
+				"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdToken
+				"id_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RefreshToken
+				"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttribute783f20e69a3161ae60bc0ad8(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WriteAttributes
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +385,10 @@ func userPoolClientDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"write_attributes": schemaAttribute92f875ac71752acad4dbd205(),
+		"write_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

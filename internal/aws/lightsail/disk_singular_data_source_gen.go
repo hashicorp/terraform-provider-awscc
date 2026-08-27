@@ -14,194 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0616ca5974a6248138139b74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09312207779cd817dd66644f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b1a7c81c57ca8b4b9d780c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cbbdd668c99fec035727ee9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute5ac31f6d6e5b4cf515fabaf7(),
-			// Property: RegionName
-			"region_name": schemaAttribute8a627b563449bef698b18286(),
-		}, /*END SCHEMA*/
-		Description: "Location of a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dcc66d0e5ebf2d2c5c5b476() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Check is Disk is attached state",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a34ea913568c404760a39af() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SnapshotTimeOfDay
-			"snapshot_time_of_day": schemaAttributed5d159c110a9b0b6ed9d015b(),
-		}, /*END SCHEMA*/
-		Description: "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57280fb50af4f393df1537ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ac31f6d6e5b4cf515fabaf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fdb6f20a3ac494769612425() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the Lightsail disk",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f2edc78da2266b49d1bc471() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Path of the  attached Disk",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f7b9e25fe3060847468f1d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Resource type of Lightsail instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ef0a8bfb0f79e9ddf7c9ed1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AddOnType
-				"add_on_type": schemaAttributeb93f286a68df25ecfea44fce(),
-				// Property: AutoSnapshotAddOnRequest
-				"auto_snapshot_add_on_request": schemaAttribute4a34ea913568c404760a39af(),
-				// Property: Status
-				"status": schemaAttributea3195b6d387436d2ce8026ee(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of objects representing the add-ons to enable for the new instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute808cb53c39a695178cb803cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The names to use for your new Lightsail disk.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84307da58e7ec3b81c147e4a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Iops of the Lightsail disk",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a627b563449bef698b18286() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Region Name in which to create your disk.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ea6999be074687c3faee9ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Support code to help identify any issues",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea028d6c921e7e2d1921abbda() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute57280fb50af4f393df1537ec(),
-				// Property: Value
-				"value": schemaAttribute0b1a7c81c57ca8b4b9d780c6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3195b6d387436d2ce8026ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of the Addon",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb93f286a68df25ecfea44fce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The add-on type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb350fe3170e3b211f6805a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attachment State of the Lightsail disk",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5d159c110a9b0b6ed9d015b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The daily time when an automatic snapshot will be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc709218ec26864c451149c1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Size of the Lightsail disk",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff8c07cd615c48879ea8d865() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the attached Lightsail Instance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_disk", diskDataSource)
 }
@@ -259,7 +71,36 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"add_ons": schemaAttribute7ef0a8bfb0f79e9ddf7c9ed1(),
+		"add_ons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AddOnType
+					"add_on_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The add-on type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AutoSnapshotAddOnRequest
+					"auto_snapshot_add_on_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SnapshotTimeOfDay
+							"snapshot_time_of_day": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The daily time when an automatic snapshot will be created.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Status of the Addon",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of objects representing the add-ons to enable for the new instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttachedTo
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +108,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of the attached Lightsail Instance",
 		//	  "type": "string"
 		//	}
-		"attached_to": schemaAttributeff8c07cd615c48879ea8d865(),
+		"attached_to": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the attached Lightsail Instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttachmentState
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +119,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Attachment State of the Lightsail disk",
 		//	  "type": "string"
 		//	}
-		"attachment_state": schemaAttributecb350fe3170e3b211f6805a6(),
+		"attachment_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Attachment State of the Lightsail disk",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -285,14 +132,19 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute09312207779cd817dd66644f(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DiskArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"disk_arn": schemaAttribute0616ca5974a6248138139b74(),
+		"disk_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DiskName
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +155,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"disk_name": schemaAttribute808cb53c39a695178cb803cb(),
+		"disk_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The names to use for your new Lightsail disk.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +166,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Iops of the Lightsail disk",
 		//	  "type": "integer"
 		//	}
-		"iops": schemaAttribute84307da58e7ec3b81c147e4a(),
+		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Iops of the Lightsail disk",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsAttached
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +177,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Check is Disk is attached state",
 		//	  "type": "boolean"
 		//	}
-		"is_attached": schemaAttribute3dcc66d0e5ebf2d2c5c5b476(),
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Check is Disk is attached state",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +199,22 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schemaAttribute2cbbdd668c99fec035727ee9(),
+		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegionName
+				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Region Name in which to create your disk.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Location of a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Path
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +222,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Path of the  attached Disk",
 		//	  "type": "string"
 		//	}
-		"path": schemaAttribute6f2edc78da2266b49d1bc471(),
+		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Path of the  attached Disk",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -354,7 +233,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Resource type of Lightsail instance.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute6f7b9e25fe3060847468f1d2(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Resource type of Lightsail instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SizeInGb
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +244,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Size of the Lightsail disk",
 		//	  "type": "integer"
 		//	}
-		"size_in_gb": schemaAttributefc709218ec26864c451149c1(),
+		"size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Size of the Lightsail disk",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +255,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "State of the Lightsail disk",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute5fdb6f20a3ac494769612425(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the Lightsail disk",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +266,10 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Support code to help identify any issues",
 		//	  "type": "string"
 		//	}
-		"support_code": schemaAttribute9ea6999be074687c3faee9ba(),
+		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Support code to help identify any issues",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -410,7 +301,24 @@ func diskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea028d6c921e7e2d1921abbda(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

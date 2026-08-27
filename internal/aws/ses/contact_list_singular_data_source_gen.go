@@ -14,81 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f0c52b0f5bb154f698d033e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the contact list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute229f5b6f8ee41a2c520889cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name of the topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52cdf5ba78a685b9f5e8eab2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb122b883015aa0a397357c6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the contact list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6f8ba64e7921b2ed0775c8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaac3d20e966a6cd112d2e22() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute52cdf5ba78a685b9f5e8eab2(),
-				// Property: Value
-				"value": schemaAttribute52cdf5ba78a685b9f5e8eab2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags (keys and values) associated with the contact list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee55438495770092649392254() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultSubscriptionStatus
-				"default_subscription_status": schemaAttribute52cdf5ba78a685b9f5e8eab2(),
-				// Property: Description
-				"description": schemaAttributef0f3d8a2dd4f70b03ff675ed(),
-				// Property: DisplayName
-				"display_name": schemaAttribute229f5b6f8ee41a2c520889cf(),
-				// Property: TopicName
-				"topic_name": schemaAttributec6f8ba64e7921b2ed0775c8c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The topics associated with the contact list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0f3d8a2dd4f70b03ff675ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_contact_list", contactListDataSource)
 }
@@ -105,7 +30,10 @@ func contactListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"contact_list_name": schemaAttributeb122b883015aa0a397357c6b(),
+		"contact_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the contact list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +42,10 @@ func contactListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute0f0c52b0f5bb154f698d033e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the contact list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +76,22 @@ func contactListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributecaac3d20e966a6cd112d2e22(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the contact list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Topics
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +133,33 @@ func contactListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"topics": schemaAttributee55438495770092649392254(),
+		"topics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DefaultSubscriptionStatus
+					"default_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The description of the topic.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DisplayName
+					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The display name of the topic.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TopicName
+					"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the topic.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The topics associated with the contact list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

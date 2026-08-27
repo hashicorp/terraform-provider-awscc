@@ -25,397 +25,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute029ddb8facd9b21e84b66fc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 access point's policy.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 200000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Policy is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute052ba3e99de4a2fc87e0f67c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(12, 21),
-			stringvalidator.RegexMatches(regexp.MustCompile("^(vpc-[0-9a-f]{8,})$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13a5487d4ce7d557047f0564() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FileSystemIdentity
-			"file_system_identity": schemaAttributea97057e9eae426efa7a978a6(),
-			// Property: VolumeId
-			"volume_id": schemaAttributeb5bf076d6b9cab5f0a4f6fc7(),
-		}, /*END SCHEMA*/
-		Description: "The OntapConfiguration of the S3 access point attachment.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36eceda3d876f4bc617bc83f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Gid
-				"gid": schemaAttributefaaf539f50caf137bef8dec6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of secondary GIDs for the file system user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a14cc389087150922b7c762() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Gid
-			"gid": schemaAttributefaaf539f50caf137bef8dec6(),
-			// Property: SecondaryGids
-			"secondary_gids": schemaAttribute36eceda3d876f4bc617bc83f(),
-			// Property: Uid
-			"uid": schemaAttributef15aeebef81143fce1e09c50(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the UID and GIDs of the file system POSIX user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f71b13844609cdc7350ef02() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Alias
-			"alias": schemaAttribute4754025eb6fd8478873dc90f(),
-			// Property: Policy
-			"policy": schemaAttribute029ddb8facd9b21e84b66fc7(),
-			// Property: ResourceARN
-			"resource_arn": schemaAttributec1891282652e9b3a50fed51f(),
-			// Property: VpcConfiguration
-			"vpc_configuration": schemaAttribute69873a629b9aa0bb7fc9fb04(),
-		}, /*END SCHEMA*/
-		Description: "The S3 access point configuration of the S3 access point attachment.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4754025eb6fd8478873dc90f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 access point's alias.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49ef062f186175c9d7e8a62f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PosixUser
-			"posix_user": schemaAttribute3a14cc389087150922b7c762(),
-			// Property: Type
-			"type": schemaAttribute9c9a77d498028b47ac40d5cb(),
-		}, /*END SCHEMA*/
-		Description: "The file system identity used to authorize file access requests made using the S3 access point.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e60f93a646e737eb5855894() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FileSystemIdentity
-			"file_system_identity": schemaAttribute49ef062f186175c9d7e8a62f(),
-			// Property: VolumeId
-			"volume_id": schemaAttribute6334e97abd2a87b039a306d4(),
-		}, /*END SCHEMA*/
-		Description: "The OpenZFSConfiguration of the S3 access point attachment.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-			objectplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6334e97abd2a87b039a306d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the FSx for OpenZFS volume that the S3 access point is attached to.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(23, 23),
-			stringvalidator.RegexMatches(regexp.MustCompile("^(fsvol-[0-9a-f]{17,})$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69873a629b9aa0bb7fc9fb04() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcId
-			"vpc_id": schemaAttribute052ba3e99de4a2fc87e0f67c(),
-		}, /*END SCHEMA*/
-		Description: "The S3 access point's virtual private cloud (VPC) configuration.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f5d25c7234484e5443a7afa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the FSx for ONTAP user identity type, accepts either UNIX or WINDOWS.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"UNIX",
-				"WINDOWS",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88e61b19b809e7506f14e432() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributed6b9d79902971168c8bd374d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the properties of the file system Windows user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c9a77d498028b47ac40d5cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the FSx for OpenZFS user identity type, accepts only POSIX.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"POSIX",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea97057e9eae426efa7a978a6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute6f5d25c7234484e5443a7afa(),
-			// Property: UnixUser
-			"unix_user": schemaAttributecfd8fa746dbdf614c7a4ca87(),
-			// Property: WindowsUser
-			"windows_user": schemaAttribute88e61b19b809e7506f14e432(),
-		}, /*END SCHEMA*/
-		Description: "The file system identity used to authorize file access requests made using the S3 access point.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab872192f3b32f2fe5f977d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the UNIX user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5bf076d6b9cab5f0a4f6fc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the FSx for ONTAP volume that the S3 access point is attached to.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(23, 23),
-			stringvalidator.RegexMatches(regexp.MustCompile("^(fsvol-[0-9a-f]{17,})$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1891282652e9b3a50fed51f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 access point's ARN.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec332545a13e9f12e72329d50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of Amazon FSx volume that the S3 access point is attached to.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"OPENZFS",
-				"ONTAP",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfd8fa746dbdf614c7a4ca87() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributeab872192f3b32f2fe5f977d6(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the properties of the file system UNIX user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6b9d79902971168c8bd374d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Windows user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef15aeebef81143fce1e09c50() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The UID of the file system user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(0.000000, 4294967295.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef55ae8b017711a54efb3f640() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 access point attachment; also used for the name of the S3 access point.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 50),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefaaf539f50caf137bef8dec6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The GID of the file system user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(0.000000, 4294967295.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_fsx_s3_access_point_attachment", s3AccessPointAttachmentResource)
 	registry.AddListResourceFactory("awscc_fsx_s3_access_point_attachment", generic.NewListResource(s3AccessPointAttachmentResource))
@@ -435,7 +44,16 @@ func s3AccessPointAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef55ae8b017711a54efb3f640(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the S3 access point attachment; also used for the name of the S3 access point.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OntapConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -521,7 +139,109 @@ func s3AccessPointAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ontap_configuration": schemaAttribute13a5487d4ce7d557047f0564(),
+		"ontap_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FileSystemIdentity
+				"file_system_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the FSx for ONTAP user identity type, accepts either UNIX or WINDOWS.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"UNIX",
+									"WINDOWS",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UnixUser
+						"unix_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the UNIX user.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 256),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the properties of the file system UNIX user.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WindowsUser
+						"windows_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Windows user.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 256),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the properties of the file system Windows user.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The file system identity used to authorize file access requests made using the S3 access point.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VolumeId
+				"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the FSx for ONTAP volume that the S3 access point is attached to.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(23, 23),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(fsvol-[0-9a-f]{17,})$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OntapConfiguration of the S3 access point attachment.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OpenZFSConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -603,7 +323,126 @@ func s3AccessPointAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"open_zfs_configuration": schemaAttribute4e60f93a646e737eb5855894(),
+		"open_zfs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FileSystemIdentity
+				"file_system_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PosixUser
+						"posix_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Gid
+								"gid": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The GID of the file system user.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(0.000000, 4294967295.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecondaryGids
+								"secondary_gids": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Gid
+											"gid": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "The GID of the file system user.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(0.000000, 4294967295.000000),
+													fwvalidators.NotNullFloat64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The list of secondary GIDs for the file system user.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Uid
+								"uid": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The UID of the file system user.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(0.000000, 4294967295.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the UID and GIDs of the file system POSIX user.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the FSx for OpenZFS user identity type, accepts only POSIX.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"POSIX",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The file system identity used to authorize file access requests made using the S3 access point.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VolumeId
+				"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the FSx for OpenZFS volume that the S3 access point is attached to.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(23, 23),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(fsvol-[0-9a-f]{17,})$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OpenZFSConfiguration of the S3 access point attachment.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: S3AccessPoint
 		// CloudFormation resource type schema:
 		//
@@ -651,7 +490,71 @@ func s3AccessPointAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"s3_access_point": schemaAttribute3f71b13844609cdc7350ef02(),
+		"s3_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Alias
+				"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 access point's alias.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Policy
+				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 access point's policy.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 200000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Policy is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceARN
+				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 access point's ARN.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfiguration
+				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcId
+						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 21),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(vpc-[0-9a-f]{8,})$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The S3 access point's virtual private cloud (VPC) configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The S3 access point configuration of the S3 access point attachment.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -663,7 +566,19 @@ func s3AccessPointAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributec332545a13e9f12e72329d50(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of Amazon FSx volume that the S3 access point is attached to.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"OPENZFS",
+					"ONTAP",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

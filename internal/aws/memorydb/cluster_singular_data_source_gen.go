@@ -15,274 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0cedf7755e1406b9cbb874a9() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute669667c8e58fd15309fa623d(),
-				// Property: Value
-				"value": schemaAttributef52e34637583eb0622ca9956(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f18bb227e3e84ad97cedc97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the KMS key used to encrypt the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1996cbb4b1c276383a9508a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ba376700e652759f5ff030b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag that enables automatic minor version upgrade when set to true.\n\nYou cannot modify the value of AutoMinorVersionUpgrade after the cluster is created. To enable AutoMinorVersionUpgrade on a cluster you must set AutoMinorVersionUpgrade to true when you create a cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute300ee8d20e8ce7c0781a8c51() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number that the engine is listening on. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34ae1420366b92a0516a8500() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description of the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3996af5c199f147ba10cdf1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the cluster. For example, Available, Updating, Creating.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4896efe4d3caadca22b122cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50119f20210110d9ab958f7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DNS address of the primary read-write node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51b58f748b6f1671ecb2e4cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For clusters wth dual stack NetworkType, IpDiscovery controls the Ip protocol (ipv4 or ipv6) returned by the engine commands such as `cluster info` and `cluster nodes` which are used by clients to connect to the nodes in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51cfec234d7b06c33ec26dd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the subnet group to be used for the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute669667c8e58fd15309fa623d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for the tag. May not be null.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69c270ed528c211f880bdfe5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Must be either ipv4 | ipv6 | dual_stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute812fae006255b57f84f040d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87b0f0951f6ffb10cd4d6629() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of replicas to apply to each shard. The limit is 5.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b38548a867e8d978d7cd7c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Access Control List to associate with the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f78940b14926fc280aac992() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9279c5267cc78afdbf7369eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compute and memory capacity of the nodes in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b7b190a613db9a932447486() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which each member of the cluster accepts connections.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c501a4a7dd7c0df42197a5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cluster. This value must be unique as it also serves as the cluster identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d56cb025a976c9dbe1e851f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group associated with the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0c96c4d760deff501912b98() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more Amazon VPC security groups associated with this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5ef8c662069591eb0cd0444() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6f813efe59b5e90b60482dd() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag that enables in-transit encryption when set to true.\n\nYou cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacd6bd1d2309e152cc43ada6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of shards the cluster will contain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb21ccbcd03a52d001a1dc137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Redis engine version used by the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4715f8d5848e83560d5389d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec47d869ea56c041941493941() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7256c9a1e84b57573e8b970() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdb96b51944b144bf1b4ee26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Amazon SNS notification topic. Notifications are sent only if the status is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedef9052f4ce17d896da992aa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute50119f20210110d9ab958f7e(),
-			// Property: Port
-			"port": schemaAttribute300ee8d20e8ce7c0781a8c51(),
-		}, /*END SCHEMA*/
-		Description: "The cluster endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1688789a6197a95e718c2d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The engine type used by the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1a51991c14bdd709000dc42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Global Datastore, it is generated by MemoryDB adding a prefix to MultiRegionClusterNameSuffix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee01003844f681a2e35bb010() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the parameter group used by the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef52e34637583eb0622ca9956() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value. May be null.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc7d2fff45a2fde94c072954() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_memorydb_cluster", clusterDataSource)
 }
@@ -299,7 +31,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
-		"acl_name": schemaAttribute8b38548a867e8d978d7cd7c5(),
+		"acl_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Access Control List to associate with the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ARN
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +42,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributefc7d2fff45a2fde94c072954(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +53,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A flag that enables automatic minor version upgrade when set to true.\n\nYou cannot modify the value of AutoMinorVersionUpgrade after the cluster is created. To enable AutoMinorVersionUpgrade on a cluster you must set AutoMinorVersionUpgrade to true when you create a cluster.",
 		//	  "type": "boolean"
 		//	}
-		"auto_minor_version_upgrade": schemaAttribute2ba376700e652759f5ff030b(),
+		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag that enables automatic minor version upgrade when set to true.\n\nYou cannot modify the value of AutoMinorVersionUpgrade after the cluster is created. To enable AutoMinorVersionUpgrade on a cluster you must set AutoMinorVersionUpgrade to true when you create a cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +75,22 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cluster_endpoint": schemaAttributedef9052f4ce17d896da992aa(),
+		"cluster_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The DNS address of the primary read-write node.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The port number that the engine is listening on. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The cluster endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +99,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z][a-z0-9\\-]*",
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttribute9c501a4a7dd7c0df42197a5b(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the cluster. This value must be unique as it also serves as the cluster identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataTiering
 		// CloudFormation resource type schema:
 		//
@@ -355,7 +114,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_tiering": schemaAttribute4896efe4d3caadca22b122cb(),
+		"data_tiering": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -363,7 +125,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An optional description of the cluster.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute34ae1420366b92a0516a8500(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description of the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -371,7 +136,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The engine type used by the cluster.",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttributee1688789a6197a95e718c2d0(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine type used by the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -379,7 +147,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Redis engine version used by the cluster.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttributeb21ccbcd03a52d001a1dc137(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Redis engine version used by the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FinalSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -387,7 +158,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.",
 		//	  "type": "string"
 		//	}
-		"final_snapshot_name": schemaAttributec47d869ea56c041941493941(),
+		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpDiscovery
 		// CloudFormation resource type schema:
 		//
@@ -399,7 +173,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_discovery": schemaAttribute51b58f748b6f1671ecb2e4cf(),
+		"ip_discovery": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For clusters wth dual stack NetworkType, IpDiscovery controls the Ip protocol (ipv4 or ipv6) returned by the engine commands such as `cluster info` and `cluster nodes` which are used by clients to connect to the nodes in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +184,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the KMS key used to encrypt the cluster.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute0f18bb227e3e84ad97cedc97(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the KMS key used to encrypt the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -415,7 +195,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
 		//	  "type": "string"
 		//	}
-		"maintenance_window": schemaAttributea5ef8c662069591eb0cd0444(),
+		"maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionClusterName
 		// CloudFormation resource type schema:
 		//
@@ -423,7 +206,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the Global Datastore, it is generated by MemoryDB adding a prefix to MultiRegionClusterNameSuffix.",
 		//	  "type": "string"
 		//	}
-		"multi_region_cluster_name": schemaAttributee1a51991c14bdd709000dc42(),
+		"multi_region_cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Global Datastore, it is generated by MemoryDB adding a prefix to MultiRegionClusterNameSuffix.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -436,7 +222,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttribute69c270ed528c211f880bdfe5(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Must be either ipv4 | ipv6 | dual_stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeType
 		// CloudFormation resource type schema:
 		//
@@ -444,7 +233,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The compute and memory capacity of the nodes in the cluster.",
 		//	  "type": "string"
 		//	}
-		"node_type": schemaAttribute9279c5267cc78afdbf7369eb(),
+		"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compute and memory capacity of the nodes in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumReplicasPerShard
 		// CloudFormation resource type schema:
 		//
@@ -452,7 +244,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of replicas to apply to each shard. The limit is 5.",
 		//	  "type": "integer"
 		//	}
-		"num_replicas_per_shard": schemaAttribute87b0f0951f6ffb10cd4d6629(),
+		"num_replicas_per_shard": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of replicas to apply to each shard. The limit is 5.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumShards
 		// CloudFormation resource type schema:
 		//
@@ -460,7 +255,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of shards the cluster will contain.",
 		//	  "type": "integer"
 		//	}
-		"num_shards": schemaAttributeacd6bd1d2309e152cc43ada6(),
+		"num_shards": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of shards the cluster will contain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -468,7 +266,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the parameter group associated with the cluster.",
 		//	  "type": "string"
 		//	}
-		"parameter_group_name": schemaAttribute9d56cb025a976c9dbe1e851f(),
+		"parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group associated with the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParameterGroupStatus
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +277,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the parameter group used by the cluster.",
 		//	  "type": "string"
 		//	}
-		"parameter_group_status": schemaAttributeee01003844f681a2e35bb010(),
+		"parameter_group_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the parameter group used by the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -484,7 +288,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port number on which each member of the cluster accepts connections.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute9b7b190a613db9a932447486(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which each member of the cluster accepts connections.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -497,7 +304,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_group_ids": schemaAttributea0c96c4d760deff501912b98(),
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "One or more Amazon VPC security groups associated with this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotArns
 		// CloudFormation resource type schema:
 		//
@@ -510,7 +321,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"snapshot_arns": schemaAttributec4715f8d5848e83560d5389d(),
+		"snapshot_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -518,7 +333,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schemaAttribute1996cbb4b1c276383a9508a3(),
+		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotRetentionLimit
 		// CloudFormation resource type schema:
 		//
@@ -526,7 +344,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_retention_limit": schemaAttribute8f78940b14926fc280aac992(),
+		"snapshot_retention_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotWindow
 		// CloudFormation resource type schema:
 		//
@@ -534,7 +355,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.",
 		//	  "type": "string"
 		//	}
-		"snapshot_window": schemaAttributec7256c9a1e84b57573e8b970(),
+		"snapshot_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -542,7 +366,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schemaAttribute812fae006255b57f84f040d1(),
+		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsTopicStatus
 		// CloudFormation resource type schema:
 		//
@@ -550,7 +377,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the Amazon SNS notification topic. Notifications are sent only if the status is enabled.",
 		//	  "type": "string"
 		//	}
-		"sns_topic_status": schemaAttributecdb96b51944b144bf1b4ee26(),
+		"sns_topic_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the Amazon SNS notification topic. Notifications are sent only if the status is enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -558,7 +388,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the cluster. For example, Available, Updating, Creating.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute3996af5c199f147ba10cdf1f(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the cluster. For example, Available, Updating, Creating.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -566,7 +399,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the subnet group to be used for the cluster.",
 		//	  "type": "string"
 		//	}
-		"subnet_group_name": schemaAttribute51cfec234d7b06c33ec26dd1(),
+		"subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the subnet group to be used for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TLSEnabled
 		// CloudFormation resource type schema:
 		//
@@ -574,7 +410,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A flag that enables in-transit encryption when set to true.\n\nYou cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.",
 		//	  "type": "boolean"
 		//	}
-		"tls_enabled": schemaAttributea6f813efe59b5e90b60482dd(),
+		"tls_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag that enables in-transit encryption when set to true.\n\nYou cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -610,7 +449,24 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute0cedf7755e1406b9cbb874a9(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for the tag. May not be null.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value. May be null.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

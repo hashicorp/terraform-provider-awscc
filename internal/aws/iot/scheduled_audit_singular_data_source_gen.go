@@ -15,78 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute34818f730d176a87c7dcbb5e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute36f78b4d0a4b1954fcf489d8(),
-				// Property: Value
-				"value": schemaAttribute597757234d82facc035c0678(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3506ec97e3d61499c694c573() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36f78b4d0a4b1954fcf489d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute597757234d82facc035c0678() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f73358581058c62ed70aa61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How often the scheduled audit takes place. Can be one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60fd0d5672898109c0e4a4ba() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Which checks are performed during the scheduled audit. Checks must be enabled for your account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6edb63ea4972723a208ab0a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN (Amazon resource name) of the scheduled audit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead62f2bde2ef4ad884af4c57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6f7d049d78d47a30ff57b19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name you want to give to the scheduled audit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_scheduled_audit", scheduledAuditDataSource)
 }
@@ -103,7 +31,10 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^([1-9]|[12][0-9]|3[01])$|^LAST$|^UNSET_VALUE$",
 		//	  "type": "string"
 		//	}
-		"day_of_month": schemaAttribute3506ec97e3d61499c694c573(),
+		"day_of_month": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DayOfWeek
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +52,10 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"day_of_week": schemaAttributead62f2bde2ef4ad884af4c57(),
+		"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Frequency
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +69,10 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"frequency": schemaAttribute5f73358581058c62ed70aa61(),
+		"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How often the scheduled audit takes place. Can be one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledAuditArn
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +82,10 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"scheduled_audit_arn": schemaAttribute6edb63ea4972723a208ab0a9(),
+		"scheduled_audit_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN (Amazon resource name) of the scheduled audit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledAuditName
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +96,10 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-zA-Z0-9:_-]+",
 		//	  "type": "string"
 		//	}
-		"scheduled_audit_name": schemaAttributee6f7d049d78d47a30ff57b19(),
+		"scheduled_audit_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name you want to give to the scheduled audit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +133,24 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute34818f730d176a87c7dcbb5e(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetCheckNames
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +163,11 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_check_names": schemaAttribute60fd0d5672898109c0e4a4ba(),
+		"target_check_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Which checks are performed during the scheduled audit. Checks must be enabled for your account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

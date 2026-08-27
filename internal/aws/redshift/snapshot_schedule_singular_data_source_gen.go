@@ -15,71 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0695e4f6792cefe9a453deab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the snapshot schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10cb7a3fb17b1d5fceb7dd57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c0a6886b100f26f9221c99a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The definition of the snapshot schedule. The definition is made up of schedule expressions, for example \"cron(30 12 *)\" or \"rate(12 hours)\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61b9dbd8f229bc86ebdc4a9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key, or name, for the resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c9f729295f7e4f7707248cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the snapshot schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute886d5b02a4c3cc953e7389cd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of clusters associated with the schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2993a4fbba455256dbc6f0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute61b9dbd8f229bc86ebdc4a9c(),
-				// Property: Value
-				"value": schemaAttributee799fba8058c774e5a3ca2a3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An optional set of tags for the snapshot schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee799fba8058c774e5a3ca2a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_snapshot_schedule", snapshotScheduleDataSource)
 }
@@ -95,7 +30,10 @@ func snapshotScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the snapshot schedule.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6c9f729295f7e4f7707248cc(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the snapshot schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedClusterCount
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +41,10 @@ func snapshotScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The number of clusters associated with the schedule.",
 		//	  "type": "integer"
 		//	}
-		"associated_cluster_count": schemaAttribute886d5b02a4c3cc953e7389cd(),
+		"associated_cluster_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of clusters associated with the schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleDefinitions
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +56,11 @@ func snapshotScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"schedule_definitions": schemaAttribute3c0a6886b100f26f9221c99a(),
+		"schedule_definitions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The definition of the snapshot schedule. The definition is made up of schedule expressions, for example \"cron(30 12 *)\" or \"rate(12 hours)\".",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleDescription
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +68,10 @@ func snapshotScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The description of the snapshot schedule.",
 		//	  "type": "string"
 		//	}
-		"schedule_description": schemaAttribute0695e4f6792cefe9a453deab(),
+		"schedule_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the snapshot schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +79,10 @@ func snapshotScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed.",
 		//	  "type": "string"
 		//	}
-		"schedule_identifier": schemaAttribute10cb7a3fb17b1d5fceb7dd57(),
+		"schedule_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +113,24 @@ func snapshotScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributebf2993a4fbba455256dbc6f0(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key, or name, for the resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An optional set of tags for the snapshot schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

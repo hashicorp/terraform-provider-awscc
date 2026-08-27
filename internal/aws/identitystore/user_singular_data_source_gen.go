@@ -15,448 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute002be11c4f9636fec5952ed5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The country of the address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06f35f77965801bb4de40c60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1160cb425088bcf81ad74af7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of photo.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute146b874bffe25365f00875c8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FamilyName
-			"family_name": schemaAttribute6c6d6c31de49b8766feb3782(),
-			// Property: Formatted
-			"formatted": schemaAttribute4e5738dbec8bcd47be6bbd0d(),
-			// Property: GivenName
-			"given_name": schemaAttribute417935b818963fe6e1588f21(),
-			// Property: HonorificPrefix
-			"honorific_prefix": schemaAttribute96eed1a1b71a0ab3071b6632(),
-			// Property: HonorificSuffix
-			"honorific_suffix": schemaAttribute4329263242091a68ea7f324f(),
-			// Property: MiddleName
-			"middle_name": schemaAttribute61a4f36f678b6987198849f3(),
-		}, /*END SCHEMA*/
-		Description: "The name of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15fc62b463b8404b478ac8e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The preferred language of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16fcbaa17db60c53d1ed83e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute182bc493973cb418c11f7506() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20292b8ac7d7d6d468b5edad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A URL associated with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2332434bb95e301e053557cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23bd330213bad29a711e1ee2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the user was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2790b4bc3464d7a3db6b2d54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29006285bea661e29059d8de() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Country
-				"country": schemaAttribute002be11c4f9636fec5952ed5(),
-				// Property: Formatted
-				"formatted": schemaAttribute35e6f506c80561067918f501(),
-				// Property: Locality
-				"locality": schemaAttributec2ac54a69e9c0bd84d1ca5d6(),
-				// Property: PostalCode
-				"postal_code": schemaAttributea63e663d8d4a5f46b3a9eb6f(),
-				// Property: Primary
-				"primary": schemaAttribute293bba6aee84dd2b8f1e0139(),
-				// Property: Region
-				"region": schemaAttributeccd9e6e80d104a73aa5c88d4(),
-				// Property: StreetAddress
-				"street_address": schemaAttribute60317f83a9ddf719c158522d(),
-				// Property: Type
-				"type": schemaAttribute182bc493973cb418c11f7506(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of addresses associated with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute293bba6aee84dd2b8f1e0139() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether this is the primary address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a55888d7e908b6d568bc85c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The globally unique identifier for the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ba2a0d8f0a4cc4b2abbd499() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A display name for the photo.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35e6f506c80561067918f501() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A formatted version of the address for display.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute386e80f1bad7ae5004995d09() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether this is the primary email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute417935b818963fe6e1588f21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The given name of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4329263242091a68ea7f324f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The honorific suffix of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45abe79174f1496b4569f508() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The title of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cc0db21527c22f0458ccd1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for a user in the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e5738dbec8bcd47be6bbd0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing a formatted version of the name for display.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute500abaf5b9a782dc31e29b6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An alternate name for the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d277ef8298e957b5d45e91d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The role name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e324a9c6a2939a75dbe18d8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Primary
-				"primary": schemaAttributead8fc4f10cfe554675ff6f9e(),
-				// Property: Type
-				"type": schemaAttribute2332434bb95e301e053557cd(),
-				// Property: Value
-				"value": schemaAttribute06f35f77965801bb4de40c60(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of phone numbers associated with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60317f83a9ddf719c158522d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The street of the address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61a4f36f678b6987198849f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The middle name of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62375b5b828f5c49e4cf6410() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The photo data or URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute636b42bd8b4f8807286c1a8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c6d6c31de49b8766feb3782() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The family name of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83a7b46d4ee2465c84834cf1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the user was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute858d935baa77c9fe301bddc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique string used to identify the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute896e6d918d6712c61259df58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the user or system that last updated the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f1a3f746befbff117008287() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the name of the user for display.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f8d8c0bcdc1cbdef9cd6a09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The geographical region or location of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90a53637325415cd4c93b2f5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Display
-				"display": schemaAttribute2ba2a0d8f0a4cc4b2abbd499(),
-				// Property: Primary
-				"primary": schemaAttributebd45d720324eee3773a10a41(),
-				// Property: Type
-				"type": schemaAttribute1160cb425088bcf81ad74af7(),
-				// Property: Value
-				"value": schemaAttribute62375b5b828f5c49e4cf6410(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of photos associated with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96eed1a1b71a0ab3071b6632() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The honorific prefix of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea596b44f3919093f9bd7dd41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user's birthdate in YYYY-MM-DD format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea63e663d8d4a5f46b3a9eb6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The postal code of the address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead8fc4f10cfe554675ff6f9e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether this is the primary phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8fbcf10de53a7fa9106bf58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd45d720324eee3773a10a41() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether this is the primary photo.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf635af87ba6e6f3f9610545() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Primary
-				"primary": schemaAttribute386e80f1bad7ae5004995d09(),
-				// Property: Type
-				"type": schemaAttribute16fcbaa17db60c53d1ed83e6(),
-				// Property: Value
-				"value": schemaAttribute636b42bd8b4f8807286c1a8a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of email addresses associated with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf90deb651f3f84f5a2ff978() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user's personal website or blog URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2ac54a69e9c0bd84d1ca5d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string of the address locality.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec366e1b7ed8306c7c495485a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone for the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecac926a0c244d7b4347071d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string indicating the type of user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccd9e6e80d104a73aa5c88d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The region of the address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9e85d225f0b548d90193213() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether this is the primary role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea7417ba3ed114dba12573b6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Primary
-				"primary": schemaAttributee9e85d225f0b548d90193213(),
-				// Property: Type
-				"type": schemaAttributeb8fbcf10de53a7fa9106bf58(),
-				// Property: Value
-				"value": schemaAttribute5d277ef8298e957b5d45e91d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of roles associated with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeece65ef763a2aae49336fd47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the user account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed60df6a4dc40f426134d2c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the user or system that created the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_identitystore_user", userDataSource)
 }
@@ -525,7 +83,54 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"addresses": schemaAttribute29006285bea661e29059d8de(),
+		"addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Country
+					"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The country of the address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Formatted
+					"formatted": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A formatted version of the address for display.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Locality
+					"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string of the address locality.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PostalCode
+					"postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The postal code of the address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Primary
+					"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether this is the primary address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The region of the address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StreetAddress
+					"street_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The street of the address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of addresses associated with the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -533,7 +138,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the user.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute2790b4bc3464d7a3db6b2d54(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Birthdate
 		// CloudFormation resource type schema:
 		//
@@ -543,7 +151,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"birthdate": schemaAttributea596b44f3919093f9bd7dd41(),
+		"birthdate": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user's birthdate in YYYY-MM-DD format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -552,7 +163,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute23bd330213bad29a711e1ee2(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the user was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -560,7 +175,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the user or system that created the user.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttributeed60df6a4dc40f426134d2c3(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the user or system that created the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -570,7 +188,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute8f1a3f746befbff117008287(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string containing the name of the user for display.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Emails
 		// CloudFormation resource type schema:
 		//
@@ -601,7 +222,29 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"emails": schemaAttributebf635af87ba6e6f3f9610545(),
+		"emails": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Primary
+					"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether this is the primary email address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of email address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The email address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of email addresses associated with the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityStoreId
 		// CloudFormation resource type schema:
 		//
@@ -612,7 +255,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"identity_store_id": schemaAttribute2a55888d7e908b6d568bc85c(),
+		"identity_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The globally unique identifier for the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Locale
 		// CloudFormation resource type schema:
 		//
@@ -622,7 +268,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"locale": schemaAttribute8f8d8c0bcdc1cbdef9cd6a09(),
+		"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The geographical region or location of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -669,7 +318,42 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"name": schemaAttribute146b874bffe25365f00875c8(),
+		"name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FamilyName
+				"family_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The family name of the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Formatted
+				"formatted": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A string containing a formatted version of the name for display.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GivenName
+				"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The given name of the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HonorificPrefix
+				"honorific_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The honorific prefix of the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HonorificSuffix
+				"honorific_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The honorific suffix of the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MiddleName
+				"middle_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The middle name of the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The name of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NickName
 		// CloudFormation resource type schema:
 		//
@@ -679,7 +363,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"nick_name": schemaAttribute500abaf5b9a782dc31e29b6d(),
+		"nick_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An alternate name for the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PhoneNumbers
 		// CloudFormation resource type schema:
 		//
@@ -710,7 +397,29 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"phone_numbers": schemaAttribute5e324a9c6a2939a75dbe18d8(),
+		"phone_numbers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Primary
+					"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether this is the primary phone number.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of phone number.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The phone number.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of phone numbers associated with the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Photos
 		// CloudFormation resource type schema:
 		//
@@ -750,7 +459,34 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 3,
 		//	  "type": "array"
 		//	}
-		"photos": schemaAttribute90a53637325415cd4c93b2f5(),
+		"photos": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Display
+					"display": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A display name for the photo.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Primary
+					"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether this is the primary photo.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of photo.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The photo data or URL.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of photos associated with the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredLanguage
 		// CloudFormation resource type schema:
 		//
@@ -760,7 +496,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"preferred_language": schemaAttribute15fc62b463b8404b478ac8e7(),
+		"preferred_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The preferred language of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileUrl
 		// CloudFormation resource type schema:
 		//
@@ -770,7 +509,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"profile_url": schemaAttribute20292b8ac7d7d6d468b5edad(),
+		"profile_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A URL associated with the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Roles
 		// CloudFormation resource type schema:
 		//
@@ -800,7 +542,29 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"roles": schemaAttributeea7417ba3ed114dba12573b6(),
+		"roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Primary
+					"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether this is the primary role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The role name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of roles associated with the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Timezone
 		// CloudFormation resource type schema:
 		//
@@ -810,7 +574,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"timezone": schemaAttributec366e1b7ed8306c7c495485a(),
+		"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone for the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -820,7 +587,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"title": schemaAttribute45abe79174f1496b4569f508(),
+		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The title of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -829,7 +599,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute83a7b46d4ee2465c84834cf1(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the user was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedBy
 		// CloudFormation resource type schema:
 		//
@@ -837,7 +611,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the user or system that last updated the user.",
 		//	  "type": "string"
 		//	}
-		"updated_by": schemaAttribute896e6d918d6712c61259df58(),
+		"updated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the user or system that last updated the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserId
 		// CloudFormation resource type schema:
 		//
@@ -848,7 +625,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"user_id": schemaAttribute4cc0db21527c22f0458ccd1d(),
+		"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for a user in the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -859,7 +639,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"user_name": schemaAttribute858d935baa77c9fe301bddc1(),
+		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique string used to identify the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserStatus
 		// CloudFormation resource type schema:
 		//
@@ -871,7 +654,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"user_status": schemaAttributeece65ef763a2aae49336fd47(),
+		"user_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the user account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserType
 		// CloudFormation resource type schema:
 		//
@@ -881,7 +667,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"user_type": schemaAttributecac926a0c244d7b4347071d8(),
+		"user_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string indicating the type of user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Website
 		// CloudFormation resource type schema:
 		//
@@ -891,7 +680,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"website": schemaAttributebf90deb651f3f84f5a2ff978(),
+		"website": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user's personal website or blog URL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

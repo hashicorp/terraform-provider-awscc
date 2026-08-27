@@ -15,245 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a38d4f1dba59a19d5221f8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the type of network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2837073285e2118617bbe6da() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43645f23b671ebb4361eb555() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Returns the primary private IP address of the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44489088450d3c9f52aec05e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ecf9a76d91140be1d5b284e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv4Prefix
-				"ipv_4_prefix": schemaAttributed7f605dec734ff9d2066458b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5059d06637951d69c6fe61c8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54a72ca4a8ad11e4748e79b1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed7f605dec734ff9d2066458b(),
-				// Property: Value
-				"value": schemaAttributed7f605dec734ff9d2066458b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5affb78d69954c75c7d1fe4e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TcpEstablishedTimeout
-			"tcp_established_timeout": schemaAttribute2837073285e2118617bbe6da(),
-			// Property: UdpStreamTimeout
-			"udp_stream_timeout": schemaAttribute2837073285e2118617bbe6da(),
-			// Property: UdpTimeout
-			"udp_timeout": schemaAttribute2837073285e2118617bbe6da(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69af72e3aa903c164196bc5f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether traffic to or from the instance is validated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e9629b4a39fe6da4d8c82ee() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Returns the secondary private IP addresses of the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71bc08b37fe47233a06018a8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv6Prefix
-				"ipv_6_prefix": schemaAttributed7f605dec734ff9d2066458b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e98e766829b6b5e1ef99214() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute939f53b083929236a7f5aeab() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d1a8f73bff6b3c8ed4cdea9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DnsHostnameType
-			"dns_hostname_type": schemaAttributed7f605dec734ff9d2066458b(),
-			// Property: PublicDualStackDnsName
-			"public_dual_stack_dns_name": schemaAttributed7f605dec734ff9d2066458b(),
-			// Property: PublicIpv4DnsName
-			"public_ipv_4_dns_name": schemaAttributed7f605dec734ff9d2066458b(),
-			// Property: PublicIpv6DnsName
-			"public_ipv_6_dns_name": schemaAttributed7f605dec734ff9d2066458b(),
-		}, /*END SCHEMA*/
-		Description: "Describes the public hostname type options, including public hostname type, IPv4-enabled public hostname, IPv6-enabled public hostname, and dual-stack public hostname.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead77f8537157eb45bbd05424() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb28c84dd2892855aa7e93e7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the subnet to associate with the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb919f71b0f8398d0a90b6635() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec867ce0207132ca0a0814b45() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security group IDs associated with this network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8ab458649a8f212b5c3aaa5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb43994d7de35fdd5e6a2bc5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The primary IPv6 address",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf3622f674578a6e6b3a3007() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf71a2ab405866f80d840319() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Public IP DNS hostname type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7f605dec734ff9d2066458b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb9f5d36a38dfa66ec044ef0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Network interface id.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede176fc9c5df8316f1b41eae() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Primary
-				"primary": schemaAttributeb919f71b0f8398d0a90b6635(),
-				// Property: PrivateIpAddress
-				"private_ip_address": schemaAttributed7f605dec734ff9d2066458b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee68f441a4bbfce491218f229() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7376c6ee18988562c58552a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv6Address
-				"ipv_6_address": schemaAttributed7f605dec734ff9d2066458b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_network_interface", networkInterfaceDataSource)
 }
@@ -280,7 +41,23 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connection_tracking_specification": schemaAttribute5affb78d69954c75c7d1fe4e(),
+		"connection_tracking_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TcpEstablishedTimeout
+				"tcp_established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UdpStreamTimeout
+				"udp_stream_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UdpTimeout
+				"udp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +65,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A description for the network interface.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributead77f8537157eb45bbd05424(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnablePrimaryIpv6
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +76,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
 		//	  "type": "boolean"
 		//	}
-		"enable_primary_ipv_6": schemaAttributec8ab458649a8f212b5c3aaa5(),
+		"enable_primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupSet
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +92,11 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"group_set": schemaAttributec867ce0207132ca0a0814b45(),
+		"group_set": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of security group IDs associated with this network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +104,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Network interface id.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttributedb9f5d36a38dfa66ec044ef0(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Network interface id.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InterfaceType
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +115,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Indicates the type of network interface.",
 		//	  "type": "string"
 		//	}
-		"interface_type": schemaAttribute0a38d4f1dba59a19d5221f8c(),
+		"interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the type of network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4PrefixCount
 		// CloudFormation resource type schema:
 		//
@@ -333,7 +126,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.",
 		//	  "type": "integer"
 		//	}
-		"ipv_4_prefix_count": schemaAttributee68f441a4bbfce491218f229(),
+		"ipv_4_prefix_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4Prefixes
 		// CloudFormation resource type schema:
 		//
@@ -355,7 +151,18 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ipv_4_prefixes": schemaAttribute4ecf9a76d91140be1d5b284e(),
+		"ipv_4_prefixes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Ipv4Prefix
+					"ipv_4_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6AddressCount
 		// CloudFormation resource type schema:
 		//
@@ -363,7 +170,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_address_count": schemaAttribute5059d06637951d69c6fe61c8(),
+		"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Addresses
 		// CloudFormation resource type schema:
 		//
@@ -385,7 +195,18 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"ipv_6_addresses": schemaAttributef7376c6ee18988562c58552a(),
+		"ipv_6_addresses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Ipv6Address
+					"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6PrefixCount
 		// CloudFormation resource type schema:
 		//
@@ -393,7 +214,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_prefix_count": schemaAttribute939f53b083929236a7f5aeab(),
+		"ipv_6_prefix_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Prefixes
 		// CloudFormation resource type schema:
 		//
@@ -415,7 +239,18 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ipv_6_prefixes": schemaAttribute71bc08b37fe47233a06018a8(),
+		"ipv_6_prefixes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Ipv6Prefix
+					"ipv_6_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrimaryIpv6Address
 		// CloudFormation resource type schema:
 		//
@@ -423,7 +258,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The primary IPv6 address",
 		//	  "type": "string"
 		//	}
-		"primary_ipv_6_address": schemaAttributecb43994d7de35fdd5e6a2bc5(),
+		"primary_ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The primary IPv6 address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrimaryPrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -431,7 +269,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Returns the primary private IP address of the network interface.",
 		//	  "type": "string"
 		//	}
-		"primary_private_ip_address": schemaAttribute43645f23b671ebb4361eb555(),
+		"primary_private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the primary private IP address of the network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -439,7 +280,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property. ",
 		//	  "type": "string"
 		//	}
-		"private_ip_address": schemaAttribute44489088450d3c9f52aec05e(),
+		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -465,7 +309,22 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"private_ip_addresses": schemaAttributede176fc9c5df8316f1b41eae(),
+		"private_ip_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Primary
+					"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: PrivateIpAddress
+					"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicIpDnsHostnameTypeSpecification
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +337,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"public_ip_dns_hostname_type_specification": schemaAttributecf71a2ab405866f80d840319(),
+		"public_ip_dns_hostname_type_specification": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Public IP DNS hostname type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicIpDnsNameOptions
 		// CloudFormation resource type schema:
 		//
@@ -501,7 +363,28 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"public_ip_dns_name_options": schemaAttribute9d1a8f73bff6b3c8ed4cdea9(),
+		"public_ip_dns_name_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsHostnameType
+				"dns_hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicDualStackDnsName
+				"public_dual_stack_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicIpv4DnsName
+				"public_ipv_4_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicIpv6DnsName
+				"public_ipv_6_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the public hostname type options, including public hostname type, IPv4-enabled public hostname, IPv6-enabled public hostname, and dual-stack public hostname.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecondaryPrivateIpAddressCount
 		// CloudFormation resource type schema:
 		//
@@ -509,7 +392,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
 		//	  "type": "integer"
 		//	}
-		"secondary_private_ip_address_count": schemaAttribute8e98e766829b6b5e1ef99214(),
+		"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecondaryPrivateIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +408,11 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"secondary_private_ip_addresses": schemaAttribute6e9629b4a39fe6da4d8c82ee(),
+		"secondary_private_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Returns the secondary private IP addresses of the network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDestCheck
 		// CloudFormation resource type schema:
 		//
@@ -530,7 +420,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Indicates whether traffic to or from the instance is validated.",
 		//	  "type": "boolean"
 		//	}
-		"source_dest_check": schemaAttribute69af72e3aa903c164196bc5f(),
+		"source_dest_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether traffic to or from the instance is validated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -538,7 +431,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the subnet to associate with the network interface.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schemaAttributeb28c84dd2892855aa7e93e7c(),
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the subnet to associate with the network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -564,7 +460,22 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute54a72ca4a8ad11e4748e79b1(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -572,7 +483,10 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the VPC",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributecf3622f674578a6e6b3a3007(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

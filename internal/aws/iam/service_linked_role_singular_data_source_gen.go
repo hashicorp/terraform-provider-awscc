@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute258303f9ceef848ce030905a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ebcbfe9c48d9e9804501f98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string that you provide, which is combined with the service-provided prefix to form the complete role name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute333b355f66d366fbbf498907() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service principal for the AWS service to which this role is attached.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a6bcf15febb4b5ddf53635d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iam_service_linked_role", serviceLinkedRoleDataSource)
 }
@@ -57,7 +29,10 @@ func serviceLinkedRoleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The service principal for the AWS service to which this role is attached.",
 		//	  "type": "string"
 		//	}
-		"aws_service_name": schemaAttribute333b355f66d366fbbf498907(),
+		"aws_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service principal for the AWS service to which this role is attached.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomSuffix
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func serviceLinkedRoleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A string that you provide, which is combined with the service-provided prefix to form the complete role name.",
 		//	  "type": "string"
 		//	}
-		"custom_suffix": schemaAttribute2ebcbfe9c48d9e9804501f98(),
+		"custom_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string that you provide, which is combined with the service-provided prefix to form the complete role name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func serviceLinkedRoleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The description of the role.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute258303f9ceef848ce030905a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleName
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func serviceLinkedRoleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The name of the role.",
 		//	  "type": "string"
 		//	}
-		"role_name": schemaAttribute3a6bcf15febb4b5ddf53635d(),
+		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -23,77 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute82023e5101bababe508d320f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of AWS region identifiers visible to the account in the AWS Console.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(100),
-			setvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}(-[a-z]{1,10}){1,2}-[1-9]$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9a233397023b665a2716d32() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of AWS service identifiers visible to the account in the AWS Console.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(500),
-			setvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 64),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb1f53e352c68537beab94ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The color theme assigned to the account for visual identification in the AWS Console.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"none",
-				"pink",
-				"purple",
-				"darkBlue",
-				"lightBlue",
-				"teal",
-				"green",
-				"yellow",
-				"orange",
-				"red",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcf5ae504fbb460abfc6d480() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID that this customization belongs to. This is automatically determined from the caller's identity.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_uxc_account_customization", accountCustomizationResource)
 }
@@ -121,7 +50,28 @@ func accountCustomizationResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"account_color": schemaAttributebb1f53e352c68537beab94ba(),
+		"account_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The color theme assigned to the account for visual identification in the AWS Console.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"none",
+					"pink",
+					"purple",
+					"darkBlue",
+					"lightBlue",
+					"teal",
+					"green",
+					"yellow",
+					"orange",
+					"red",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +80,13 @@ func accountCustomizationResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributebcf5ae504fbb460abfc6d480(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID that this customization belongs to. This is automatically determined from the caller's identity.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VisibleRegions
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +101,21 @@ func accountCustomizationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"visible_regions": schemaAttribute82023e5101bababe508d320f(),
+		"visible_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of AWS region identifiers visible to the account in the AWS Console.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(100),
+				setvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}(-[a-z]{1,10}){1,2}-[1-9]$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VisibleServices
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +131,21 @@ func accountCustomizationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"visible_services": schemaAttributeb9a233397023b665a2716d32(),
+		"visible_services": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of AWS service identifiers visible to the account in the AWS Console.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(500),
+				setvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 64),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

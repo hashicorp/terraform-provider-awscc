@@ -15,160 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01c3dfce92432a8f4d11ad5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1794943d4126967795192f67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a layout.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute203bcccaccf32b58edbff71d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the field that this rule applies to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22cb6c8c51a0fe635e616baa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28a18b363b7136f229a42dc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the template was created or last modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3195b433cd71e5780c684da5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3284eb7c999dd8beba070da6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldId
-				"field_id": schemaAttribute22cb6c8c51a0fe635e616baa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of fields that must contain a value for a case to be successfully created with this template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59af68a8fc68a647534f1b46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the template. Active templates can be used to create new cases, while Inactive templates are disabled but preserved for existing cases.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea841d7ef8c5ff398813b9e2c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultLayout
-			"default_layout": schemaAttribute1794943d4126967795192f67(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the default layout to use when displaying cases created from this template. The layout determines which fields are visible and their arrangement in the agent interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2dddb558d45dff36aefc8c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the template. It must be unique per domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb72713cd7b33308c3ecc3c5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb80a2e798209cefde6d7dc2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a case rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebae1e9727112d41f05e15842() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Cases domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8f45c14293c931a092741a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the template was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec95d9c4d093b96fd79b65fd5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CaseRuleId
-				"case_rule_id": schemaAttributeb80a2e798209cefde6d7dc2a(),
-				// Property: FieldId
-				"field_id": schemaAttribute203bcccaccf32b58edbff71d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of case rules (also known as case field conditions) on a template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf1a82015a6cfb81fdf39000() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedf79dabe562002ef1cec20c2(),
-				// Property: Value
-				"value": schemaAttribute01c3dfce92432a8f4d11ad5f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags that you attach to this template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5018bf7f69868ef4909f817() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description explaining the purpose and use case for this template. Should indicate what types of cases this template is designed for and any specific workflow it supports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf79dabe562002ef1cec20c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cases_template", templateDataSource)
 }
@@ -185,7 +31,11 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributec8f45c14293c931a092741a3(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the template was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +44,10 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed5018bf7f69868ef4909f817(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description explaining the purpose and use case for this template. Should indicate what types of cases this template is designed for and any specific workflow it supports.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +57,10 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributebae1e9727112d41f05e15842(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the Cases domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +69,11 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttribute28a18b363b7136f229a42dc8(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the template was created or last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LayoutConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +90,17 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"layout_configuration": schemaAttributea841d7ef8c5ff398813b9e2c(),
+		"layout_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultLayout
+				"default_layout": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The unique identifier of a layout.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the default layout to use when displaying cases created from this template. The layout determines which fields are visible and their arrangement in the agent interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +111,10 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*[\\S]$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb2dddb558d45dff36aefc8c0(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the template. It must be unique per domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequiredFields
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +139,19 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 100,
 		//	  "type": "array"
 		//	}
-		"required_fields": schemaAttribute3284eb7c999dd8beba070da6(),
+		"required_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FieldId
+					"field_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of a field.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of fields that must contain a value for a case to be successfully created with this template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +182,24 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"rules": schemaAttributec95d9c4d093b96fd79b65fd5(),
+		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CaseRuleId
+					"case_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of a case rule.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FieldId
+					"field_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the field that this rule applies to.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of case rules (also known as case field conditions) on a template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +211,10 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute59af68a8fc68a647534f1b46(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the template. Active templates can be used to create new cases, while Inactive templates are disabled but preserved for existing cases.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +247,24 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributecf1a82015a6cfb81fdf39000(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags that you attach to this template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -352,7 +274,10 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_arn": schemaAttributeb72713cd7b33308c3ecc3c5c(),
+		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateId
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +287,10 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_id": schemaAttribute3195b433cd71e5780c684da5(),
+		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

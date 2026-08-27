@@ -14,219 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05a99b1eb5fab3bbce915538() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17356b9e7adb8fd811346196() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthType
-				"auth_type": schemaAttributea3682ae166469d5da9267826(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of auth modes for the AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f3c34da3c6cdea9001e860c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34c8a1ca9476e664a5da5c66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner contact information for an API resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute417f393af1964371f64d313d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify this tag. You can specify a maximum of 128 characters for a tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4879c808cd35c9601d65c779() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70371ea21bc6292a7b172f2f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppIdClientRegex
-			"app_id_client_regex": schemaAttribute4879c808cd35c9601d65c779(),
-			// Property: AwsRegion
-			"aws_region": schemaAttribute4879c808cd35c9601d65c779(),
-			// Property: UserPoolId
-			"user_pool_id": schemaAttribute4879c808cd35c9601d65c779(),
-		}, /*END SCHEMA*/
-		Description: "Optional authorization configuration for using Amazon Cognito user pools with your API endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute730015646abd9077cc963a4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AppSync Api",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8242bbc949ee490906b92f08() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Http
-			"http": schemaAttribute4879c808cd35c9601d65c779(),
-			// Property: Realtime
-			"realtime": schemaAttribute4879c808cd35c9601d65c779(),
-		}, /*END SCHEMA*/
-		Description: "A map of DNS names for the AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea057ad027919a76294b37612() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthTTL
-			"auth_ttl": schemaAttribute05a99b1eb5fab3bbce915538(),
-			// Property: ClientId
-			"client_id": schemaAttribute4879c808cd35c9601d65c779(),
-			// Property: IatTTL
-			"iat_ttl": schemaAttribute05a99b1eb5fab3bbce915538(),
-			// Property: Issuer
-			"issuer": schemaAttribute4879c808cd35c9601d65c779(),
-		}, /*END SCHEMA*/
-		Description: "The OpenID Connect configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3682ae166469d5da9267826() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Security configuration for your AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea921715602ef3e5669464589() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute417f393af1964371f64d313d(),
-				// Property: Value
-				"value": schemaAttribute2f3c34da3c6cdea9001e860c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3643d878b57f03160b47fea() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizerResultTtlInSeconds
-			"authorizer_result_ttl_in_seconds": schemaAttributed64820caf83e7d4c911b08d3(),
-			// Property: AuthorizerUri
-			"authorizer_uri": schemaAttribute4879c808cd35c9601d65c779(),
-			// Property: IdentityValidationExpression
-			"identity_validation_expression": schemaAttribute4879c808cd35c9601d65c779(),
-		}, /*END SCHEMA*/
-		Description: "A LambdaAuthorizerConfig holds configuration on how to authorize AWS AppSync API access when using the AWS_LAMBDA authorizer mode. Be aware that an AWS AppSync API may have only one Lambda authorizer configured at a time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe89be3dad851737cdc1f402() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthProviders
-			"auth_providers": schemaAttributecd8d47215d7b0574e1de6d3d(),
-			// Property: ConnectionAuthModes
-			"connection_auth_modes": schemaAttribute17356b9e7adb8fd811346196(),
-			// Property: DefaultPublishAuthModes
-			"default_publish_auth_modes": schemaAttribute17356b9e7adb8fd811346196(),
-			// Property: DefaultSubscribeAuthModes
-			"default_subscribe_auth_modes": schemaAttribute17356b9e7adb8fd811346196(),
-			// Property: LogConfig
-			"log_config": schemaAttributef1a4b4d2d1ebdeb2da49fdc8(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for an Event Api",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd8d47215d7b0574e1de6d3d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthType
-				"auth_type": schemaAttributea3682ae166469d5da9267826(),
-				// Property: CognitoConfig
-				"cognito_config": schemaAttribute70371ea21bc6292a7b172f2f(),
-				// Property: LambdaAuthorizerConfig
-				"lambda_authorizer_config": schemaAttributeb3643d878b57f03160b47fea(),
-				// Property: OpenIDConnectConfig
-				"open_id_connect_config": schemaAttributea057ad027919a76294b37612(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of auth providers for the AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed64820caf83e7d4c911b08d3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda5d852af5793a3c3ce5189f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc1629d9450455f0d8162361() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the AppSync Api generated by the service",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef4814e65687a981af4dc4c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Logging level for the AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1a4b4d2d1ebdeb2da49fdc8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogsRoleArn
-			"cloudwatch_logs_role_arn": schemaAttribute4879c808cd35c9601d65c779(),
-			// Property: LogLevel
-			"log_level": schemaAttributeef4814e65687a981af4dc4c0(),
-		}, /*END SCHEMA*/
-		Description: "The log config for the AppSync API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_api", apiDataSource)
 }
@@ -242,7 +29,10 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the AppSync Api",
 		//	  "type": "string"
 		//	}
-		"api_arn": schemaAttribute730015646abd9077cc963a4c(),
+		"api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AppSync Api",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApiId
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +40,10 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the AppSync Api generated by the service",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttributedc1629d9450455f0d8162361(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the AppSync Api generated by the service",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Dns
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +60,20 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dns": schemaAttribute8242bbc949ee490906b92f08(),
+		"dns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Http
+				"http": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Realtime
+				"realtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A map of DNS names for the AppSync API.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventConfig
 		// CloudFormation resource type schema:
 		//
@@ -467,7 +273,145 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"event_config": schemaAttributebe89be3dad851737cdc1f402(),
+		"event_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthProviders
+				"auth_providers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthType
+							"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Security configuration for your AppSync API.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CognitoConfig
+							"cognito_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppIdClientRegex
+									"app_id_client_regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AwsRegion
+									"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserPoolId
+									"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Optional authorization configuration for using Amazon Cognito user pools with your API endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LambdaAuthorizerConfig
+							"lambda_authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AuthorizerResultTtlInSeconds
+									"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AuthorizerUri
+									"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IdentityValidationExpression
+									"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A LambdaAuthorizerConfig holds configuration on how to authorize AWS AppSync API access when using the AWS_LAMBDA authorizer mode. Be aware that an AWS AppSync API may have only one Lambda authorizer configured at a time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OpenIDConnectConfig
+							"open_id_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AuthTTL
+									"auth_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ClientId
+									"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IatTTL
+									"iat_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Issuer
+									"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The OpenID Connect configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of auth providers for the AppSync API.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionAuthModes
+				"connection_auth_modes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthType
+							"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Security configuration for your AppSync API.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of auth modes for the AppSync API.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultPublishAuthModes
+				"default_publish_auth_modes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthType
+							"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Security configuration for your AppSync API.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of auth modes for the AppSync API.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultSubscribeAuthModes
+				"default_subscribe_auth_modes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthType
+							"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Security configuration for your AppSync API.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of auth modes for the AppSync API.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogConfig
+				"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogsRoleArn
+						"cloudwatch_logs_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogLevel
+						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Logging level for the AppSync API.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The log config for the AppSync API.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for an Event Api",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +422,10 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Za-z0-9_\\-\\ ]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeda5d852af5793a3c3ce5189f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the AppSync API.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerContact
 		// CloudFormation resource type schema:
 		//
@@ -489,7 +436,10 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Za-z0-9_\\-\\ \\.]+",
 		//	  "type": "string"
 		//	}
-		"owner_contact": schemaAttribute34c8a1ca9476e664a5da5c66(),
+		"owner_contact": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner contact information for an API resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -524,7 +474,24 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea921715602ef3e5669464589(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string used to identify this tag. You can specify a maximum of 128 characters for a tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this AppSync API.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

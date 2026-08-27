@@ -15,206 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03b78216d0978b6c9646bbb4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ProductSKU of the license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14ae2a3bb8b0f7b5b5a14afe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributed3206a980185ac2f2de15caf(),
-			// Property: SignKey
-			"sign_key": schemaAttributed3206a980185ac2f2de15caf(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute194b2104faa56b05407a71c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute197dd934da053bf208a2580c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Home region for the created license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d1616d3d2533d45a5a305b5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41857cb228286201146ea7f0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BorrowConfiguration
-			"borrow_configuration": schemaAttribute6afc84a616a261d413670e08(),
-			// Property: ProvisionalConfiguration
-			"provisional_configuration": schemaAttribute7ae38ccd9d994b22b1f3921e(),
-			// Property: RenewType
-			"renew_type": schemaAttributed3206a980185ac2f2de15caf(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42e365a442de7ed3085eaf22() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Begin
-			"begin": schemaAttribute845f4882d86cfe42210b9073(),
-			// Property: End
-			"end": schemaAttribute845f4882d86cfe42210b9073(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute437b69368c982580d848ffa1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Product name for the created license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a686f9f9c86e3e3d3e5c101() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name is a unique name for each resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e92b77f90eeffe04988cd92() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributed3206a980185ac2f2de15caf(),
-				// Property: Value
-				"value": schemaAttributed3206a980185ac2f2de15caf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52b6dd1c69dda60115a34997() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52c265768cb80b94a65dc381() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowCheckIn
-				"allow_check_in": schemaAttribute3d1616d3d2533d45a5a305b5(),
-				// Property: MaxCount
-				"max_count": schemaAttribute98bfc87dc930218f20872d48(),
-				// Property: Name
-				"name": schemaAttributed3206a980185ac2f2de15caf(),
-				// Property: Overage
-				"overage": schemaAttribute3d1616d3d2533d45a5a305b5(),
-				// Property: Unit
-				"unit": schemaAttributed3206a980185ac2f2de15caf(),
-				// Property: Value
-				"value": schemaAttributed3206a980185ac2f2de15caf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6afc84a616a261d413670e08() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowEarlyCheckIn
-			"allow_early_check_in": schemaAttribute3d1616d3d2533d45a5a305b5(),
-			// Property: MaxTimeToLiveInMinutes
-			"max_time_to_live_in_minutes": schemaAttribute98bfc87dc930218f20872d48(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ae38ccd9d994b22b1f3921e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxTimeToLiveInMinutes
-			"max_time_to_live_in_minutes": schemaAttribute98bfc87dc930218f20872d48(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute845f4882d86cfe42210b9073() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Validity begin date for the license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96c91385c8b35bce604769db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Beneficiary of the license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98bfc87dc930218f20872d48() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea16a39f90c3a0d99e0025cf6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute194b2104faa56b05407a71c1(),
-				// Property: Value
-				"value": schemaAttributeeb998b72c984510709965a5c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to attach.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3206a980185ac2f2de15caf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb998b72c984510709965a5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef230b457c646d21780bd94d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name for the created license.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_licensemanager_license", licenseDataSource)
 }
@@ -230,7 +30,10 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Beneficiary of the license.",
 		//	  "type": "string"
 		//	}
-		"beneficiary": schemaAttribute96c91385c8b35bce604769db(),
+		"beneficiary": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Beneficiary of the license.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConsumptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +74,39 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"consumption_configuration": schemaAttribute41857cb228286201146ea7f0(),
+		"consumption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BorrowConfiguration
+				"borrow_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowEarlyCheckIn
+						"allow_early_check_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxTimeToLiveInMinutes
+						"max_time_to_live_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProvisionalConfiguration
+				"provisional_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxTimeToLiveInMinutes
+						"max_time_to_live_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RenewType
+				"renew_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Entitlements
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +142,37 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"entitlements": schemaAttribute52c265768cb80b94a65dc381(),
+		"entitlements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AllowCheckIn
+					"allow_check_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: MaxCount
+					"max_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Overage
+					"overage": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Unit
+					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: HomeRegion
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +180,10 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Home region for the created license.",
 		//	  "type": "string"
 		//	}
-		"home_region": schemaAttribute197dd934da053bf208a2580c(),
+		"home_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Home region for the created license.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Issuer
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +202,19 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"issuer": schemaAttribute14ae2a3bb8b0f7b5b5a14afe(),
+		"issuer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SignKey
+				"sign_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseArn
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +223,10 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"license_arn": schemaAttribute4a686f9f9c86e3e3d3e5c101(),
+		"license_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name is a unique name for each resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseMetadata
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +250,21 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"license_metadata": schemaAttribute4e92b77f90eeffe04988cd92(),
+		"license_metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseName
 		// CloudFormation resource type schema:
 		//
@@ -375,7 +272,10 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name for the created license.",
 		//	  "type": "string"
 		//	}
-		"license_name": schemaAttributef230b457c646d21780bd94d2(),
+		"license_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for the created license.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductName
 		// CloudFormation resource type schema:
 		//
@@ -383,7 +283,10 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Product name for the created license.",
 		//	  "type": "string"
 		//	}
-		"product_name": schemaAttribute437b69368c982580d848ffa1(),
+		"product_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Product name for the created license.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductSKU
 		// CloudFormation resource type schema:
 		//
@@ -393,14 +296,19 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"product_sku": schemaAttribute03b78216d0978b6c9646bbb4(),
+		"product_sku": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ProductSKU of the license.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributed3206a980185ac2f2de15caf(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -429,7 +337,24 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributea16a39f90c3a0d99e0025cf6(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to attach.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Validity
 		// CloudFormation resource type schema:
 		//
@@ -453,7 +378,23 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"validity": schemaAttribute42e365a442de7ed3085eaf22(),
+		"validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Begin
+				"begin": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "Validity begin date for the license.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: End
+				"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "Validity begin date for the license.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -461,7 +402,10 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the license.",
 		//	  "type": "string"
 		//	}
-		"version": schemaAttribute52b6dd1c69dda60115a34997(),
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the license.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

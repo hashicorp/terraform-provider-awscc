@@ -29,333 +29,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute42ad847b0ce0c096fb4ffaee() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of IPv4 addresses in each ENI for the service-managed Resource Gateway.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 62),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv4AddressesPerEni is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b53246847d5c86bb17bb2c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "VPC to create the service-managed Resource Gateway in.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(5, 50),
-			stringvalidator.RegexMatches(regexp.MustCompile("^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4db5228d2b468acc07717742() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourceConfigurationId
-			"resource_configuration_id": schemaAttribute8b3a17d2811bc0b94b0f64c2(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a self-managed Private Connection.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e921299160923d620fd05a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Private Connection.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fa7820b6098415d7f32e21b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Subnets that the service-managed Resource Gateway will span.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 20),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(15, 24),
-				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// SubnetIds is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78ceb11ad98668f1c31dc9b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"PUBLIC",
-				"IN_VPC",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d00c18bf290f8894a1ec7ee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DnsResolution
-			"dns_resolution": schemaAttribute78ceb11ad98668f1c31dc9b1(),
-			// Property: HostAddress
-			"host_address": schemaAttributecf4f3938d67d8f4f8e41626e(),
-			// Property: IpAddressType
-			"ip_address_type": schemaAttributeb5b44f64a4cc739ad231f17e(),
-			// Property: Ipv4AddressesPerEni
-			"ipv_4_addresses_per_eni": schemaAttribute42ad847b0ce0c096fb4ffaee(),
-			// Property: PortRanges
-			"port_ranges": schemaAttributeede11b04734a405123cf10e2(),
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttribute7de560ffb5d8a367f19fa283(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute5fa7820b6098415d7f32e21b(),
-			// Property: VpcId
-			"vpc_id": schemaAttribute4b53246847d5c86bb17bb2c1(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a service-managed Private Connection.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7de560ffb5d8a367f19fa283() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Security groups to attach to the service-managed Resource Gateway.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 5),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(11, 20),
-				stringvalidator.RegexMatches(regexp.MustCompile("^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// SecurityGroupIds is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b3a17d2811bc0b94b0f64c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Resource Configuration.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b0b35077e8eebcb6740c269() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeef9671c8c3cb410288dea113(),
-				// Property: Value
-				"value": schemaAttributefd1c1b8ecd31c6d9a2b26ac4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea15e162c5452941ae42223e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name for this Private Connection within the account.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 30),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7e151f0ccc27fe5eed6e40c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SelfManaged
-			"self_managed": schemaAttribute4db5228d2b468acc07717742(),
-			// Property: ServiceManaged
-			"service_managed": schemaAttribute7d00c18bf290f8894a1ec7ee(),
-		}, /*END SCHEMA*/
-		Description: "The connection configuration for the Private Connection.",
-		Required:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5b44f64a4cc739ad231f17e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IP address type of the service-managed Resource Gateway.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"IPV4",
-				"IPV6",
-				"DUAL_STACK",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// IpAddressType is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb77c076c75acc6116afb938a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Certificate for the Private Connection.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 32768),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Certificate is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd63bc921334ffc203710563() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Private Connection.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec76e14cf1a1db9fef8543df7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The expiry time of the certificate associated with the Private Connection.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf4f3938d67d8f4f8e41626e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IP address or DNS name of the target resource.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 255),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.:\\-]+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeede11b04734a405123cf10e2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "TCP port ranges that a consumer can use to access the resource.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 11),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^((\\d{1,5}\\-\\d{1,5})|(\\d+))$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// PortRanges is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef9671c8c3cb410288dea113() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd1c1b8ecd31c6d9a2b26ac4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_devopsagent_private_connection", privateConnectionResource)
 	registry.AddListResourceFactory("awscc_devopsagent_private_connection", generic.NewListResource(privateConnectionResource))
@@ -372,7 +45,13 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Private Connection.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4e921299160923d620fd05a9(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Private Connection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Certificate
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +61,18 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"certificate": schemaAttributeb77c076c75acc6116afb938a(),
+		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Certificate for the Private Connection.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 32768),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Certificate is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateExpiryTime
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +81,14 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"certificate_expiry_time": schemaAttributec76e14cf1a1db9fef8543df7(),
+		"certificate_expiry_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The expiry time of the certificate associated with the Private Connection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -500,7 +197,177 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connection_configuration": schemaAttributea7e151f0ccc27fe5eed6e40c(),
+		"connection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SelfManaged
+				"self_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ResourceConfigurationId
+						"resource_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the Resource Configuration.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for a self-managed Private Connection.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceManaged
+				"service_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DnsResolution
+						"dns_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PUBLIC",
+									"IN_VPC",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HostAddress
+						"host_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "IP address or DNS name of the target resource.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(3, 255),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.:\\-]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IpAddressType
+						"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "IP address type of the service-managed Resource Gateway.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"IPV4",
+									"IPV6",
+									"DUAL_STACK",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// IpAddressType is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4AddressesPerEni
+						"ipv_4_addresses_per_eni": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of IPv4 addresses in each ENI for the service-managed Resource Gateway.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 62),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// Ipv4AddressesPerEni is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: PortRanges
+						"port_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "TCP port ranges that a consumer can use to access the resource.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 11),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^((\\d{1,5}\\-\\d{1,5})|(\\d+))$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// PortRanges is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups to attach to the service-managed Resource Gateway.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 5),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(11, 20),
+									stringvalidator.RegexMatches(regexp.MustCompile("^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// SecurityGroupIds is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets that the service-managed Resource Gateway will span.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 20),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(15, 24),
+									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// SubnetIds is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: VpcId
+						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "VPC to create the service-managed Resource Gateway in.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(5, 50),
+								stringvalidator.RegexMatches(regexp.MustCompile("^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for a service-managed Private Connection.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The connection configuration for the Private Connection.",
+			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -511,7 +378,17 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea15e162c5452941ae42223e6(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique name for this Private Connection within the account.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 30),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -526,7 +403,13 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributebd63bc921334ffc203710563(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the Private Connection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -559,7 +442,44 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute9b0b35077e8eebcb6740c269(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

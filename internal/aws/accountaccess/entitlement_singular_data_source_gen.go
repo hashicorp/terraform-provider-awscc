@@ -14,102 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0af6b46fdf10e57ad6a025a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the user",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute108a7923db70b19aac54e157() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4718c17b999b3fc76f760854() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PrincipalRole
-			"principal_role": schemaAttributef62912acd9d0df55198c47aa(),
-		}, /*END SCHEMA*/
-		Description: "The entitlement details",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76d2862b424206d2fc745841() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the entitlement was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8855d7a0ec14270089eac879() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cc8ea8b7bcc2247e49f0201() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdentityCenter
-			"identity_center": schemaAttributefec2d41bdcbddb8ccbf56986(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdd2b4ed7c234de6520d35f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the entitlement",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed039698007283c675b4bffd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef62912acd9d0df55198c47aa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Account
-			"account": schemaAttribute108a7923db70b19aac54e157(),
-			// Property: Principal
-			"principal": schemaAttribute8cc8ea8b7bcc2247e49f0201(),
-			// Property: RoleArn
-			"role_arn": schemaAttributed039698007283c675b4bffd7(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd386fdd7f43a52d7dc40c9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the application",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefec2d41bdcbddb8ccbf56986() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GroupId
-			"group_id": schemaAttribute8855d7a0ec14270089eac879(),
-			// Property: UserId
-			"user_id": schemaAttribute0af6b46fdf10e57ad6a025a3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_accountaccess_entitlement", entitlementDataSource)
 }
@@ -126,7 +30,10 @@ func entitlementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z0-9-]+:account-access:[a-z0-9]+(-[a-z0-9]+)*:[0-9]{12}:application/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttributefd386fdd7f43a52d7dc40c9a(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the application",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +41,10 @@ func entitlementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the entitlement was created",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute76d2862b424206d2fc745841(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the entitlement was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Entitlement
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +121,50 @@ func entitlementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"entitlement": schemaAttribute4718c17b999b3fc76f760854(),
+		"entitlement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrincipalRole
+				"principal_role": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Account
+						"account": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS account ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Principal
+						"principal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityCenter
+								"identity_center": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: GroupId
+										"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ID of the group",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: UserId
+										"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ID of the user",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The entitlement details",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntitlementId
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +172,10 @@ func entitlementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the entitlement",
 		//	  "type": "string"
 		//	}
-		"entitlement_id": schemaAttributecdd2b4ed7c234de6520d35f5(),
+		"entitlement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the entitlement",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute176131d87b4ffcbb2c562f69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The label description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cbb4327bf8b945761bfd81c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the label was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43997d82cb265644da0d20d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57d2619158043175f1a88ad2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The label ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b6c7f9cfe3373338e401a29() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute43997d82cb265644da0d20d5(),
-				// Property: Value
-				"value": schemaAttribute43997d82cb265644da0d20d5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this label.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b757b0e1079a83e22e0403c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the label was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef790d867bfd5b03a009284de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the label.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_label", labelDataSource)
 }
@@ -85,7 +29,10 @@ func labelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The label ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute57d2619158043175f1a88ad2(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The label ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +40,10 @@ func labelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the label was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute2cbb4327bf8b945761bfd81c(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the label was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +53,10 @@ func labelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute176131d87b4ffcbb2c562f69(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The label description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +64,10 @@ func labelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the label was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute7b757b0e1079a83e22e0403c(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the label was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +78,10 @@ func labelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef790d867bfd5b03a009284de(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the label.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +112,22 @@ func labelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute7b6c7f9cfe3373338e401a29(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with this label.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

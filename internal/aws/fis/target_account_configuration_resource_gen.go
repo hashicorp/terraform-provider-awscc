@@ -19,53 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2cd2ef6c22ecb3dace5bb3c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role for the target account.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(1224),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39147dd099e270481878be19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the target account.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(512),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf49a4d1fcb497a56c4120ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the target account.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(512),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb60403b8d5653e8a9f5e91c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the experiment template.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_fis_target_account_configuration", targetAccountConfigurationResource)
 }
@@ -82,7 +35,16 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributedf49a4d1fcb497a56c4120ab(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID of the target account.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(512),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +53,17 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute39147dd099e270481878be19(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the target account.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(512),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExperimentTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -99,7 +71,13 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the experiment template.",
 		//	  "type": "string"
 		//	}
-		"experiment_template_id": schemaAttributefb60403b8d5653e8a9f5e91c(),
+		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the experiment template.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +86,13 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 		//	  "maxLength": 1224,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute2cd2ef6c22ecb3dace5bb3c0(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role for the target account.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(1224),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

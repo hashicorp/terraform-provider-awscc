@@ -16,194 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a143a27cd3199c6ae389e47() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Designation
-				"designation": schemaAttributebce79cb92d6e34ee35aee27e(),
-				// Property: Member
-				"member": schemaAttribute4cbd3a964cb9ea885d4e08f1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The project membership assignments.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute102a57809b1affc2989f3f77() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The glossary terms that can be used in this Amazon DataZone project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c14eb0eb47100525867debf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the project was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f49988828632e3f95e86c74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the Amazon DataZone project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cbd3a964cb9ea885d4e08f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GroupIdentifier
-			"group_identifier": schemaAttributebce79cb92d6e34ee35aee27e(),
-			// Property: UserIdentifier
-			"user_identifier": schemaAttributebce79cb92d6e34ee35aee27e(),
-		}, /*END SCHEMA*/
-		Description: "The member of the project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a03f28e77eeba84c330be68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The project category.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d54f529c3fd3bd83917277c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon DataZone user who created the project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f73581dfbf5db82215aa85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of when the project was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0bd6e4146d10a3b137d20f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The project profile ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7fe0a0eea38b894917591c3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnvironmentConfigurationName
-				"environment_configuration_name": schemaAttributebce79cb92d6e34ee35aee27e(),
-				// Property: EnvironmentId
-				"environment_id": schemaAttributebce79cb92d6e34ee35aee27e(),
-				// Property: EnvironmentParameters
-				"environment_parameters": schemaAttributecff4399aa7526b077198174b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The user parameters of the project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead393f9cafe6fe27b9b5585e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf685f62e1ab902ae3d75e0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the domain unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb580d36d9998ea27595239f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone domain in which this project is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb703a26fafce4a5e85fa3579() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon DataZone project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebce79cb92d6e34ee35aee27e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec254183c7551a7428f1924ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec67ec36e9eb641a03f5078e9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebce79cb92d6e34ee35aee27e(),
-				// Property: Value
-				"value": schemaAttributebce79cb92d6e34ee35aee27e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The resource tags of the project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecff4399aa7526b077198174b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributebce79cb92d6e34ee35aee27e(),
-				// Property: Value
-				"value": schemaAttributebce79cb92d6e34ee35aee27e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed13e433c10d5d6e750fe397f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of when the project was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef41bcc78b1539377ce1ae622() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The project execution role ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef89ab46eab0024e0880416c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_project", projectDataSource)
 }
@@ -220,7 +32,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute86f73581dfbf5db82215aa85(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when the project was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +44,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon DataZone user who created the project.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute5d54f529c3fd3bd83917277c(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon DataZone user who created the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +56,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1f49988828632e3f95e86c74(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the Amazon DataZone project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +68,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttribute1c14eb0eb47100525867debf(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the project was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +80,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttributeb580d36d9998ea27595239f3(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone domain in which this project is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainUnitId
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +92,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_\\-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_unit_id": schemaAttributeaf685f62e1ab902ae3d75e0f(),
+		"domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the domain unit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +110,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"glossary_terms": schemaAttribute102a57809b1affc2989f3f77(),
+		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The glossary terms that can be used in this Amazon DataZone project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +123,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_id": schemaAttributef89ab46eab0024e0880416c8(),
+		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +135,11 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttributed13e433c10d5d6e750fe397f(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when the project was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MembershipAssignments
 		// CloudFormation resource type schema:
 		//
@@ -336,7 +178,33 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"membership_assignments": schemaAttribute0a143a27cd3199c6ae389e47(),
+		"membership_assignments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Designation
+					"designation": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Member
+					"member": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: GroupIdentifier
+							"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserIdentifier
+							"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The member of the project.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The project membership assignments.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -347,7 +215,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w -]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb703a26fafce4a5e85fa3579(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Amazon DataZone project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectCategory
 		// CloudFormation resource type schema:
 		//
@@ -355,7 +226,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The project category.",
 		//	  "type": "string"
 		//	}
-		"project_category": schemaAttribute5a03f28e77eeba84c330be68(),
+		"project_category": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project category.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +238,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role/[\\w+=,.@/-]+$",
 		//	  "type": "string"
 		//	}
-		"project_execution_role": schemaAttributef41bcc78b1539377ce1ae622(),
+		"project_execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project execution role ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectProfileId
 		// CloudFormation resource type schema:
 		//
@@ -373,7 +250,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_profile_id": schemaAttributea0bd6e4146d10a3b137d20f2(),
+		"project_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project profile ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectProfileVersion
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +261,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
 		//	  "type": "string"
 		//	}
-		"project_profile_version": schemaAttributec254183c7551a7428f1924ee(),
+		"project_profile_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectStatus
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +280,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"project_status": schemaAttributead393f9cafe6fe27b9b5585e(),
+		"project_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -427,7 +313,22 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resource_tags": schemaAttributec67ec36e9eb641a03f5078e9(),
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The resource tags of the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserParameters
 		// CloudFormation resource type schema:
 		//
@@ -466,7 +367,38 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"user_parameters": schemaAttributea7fe0a0eea38b894917591c3(),
+		"user_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EnvironmentConfigurationName
+					"environment_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentId
+					"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentParameters
+					"environment_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The user parameters of the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,61 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute7abf7d3af28ef4ca7b7d14df() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec25669e560c5eb837d0597f5(),
-				// Property: Value
-				"value": schemaAttributec25669e560c5eb837d0597f5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f83a66cf8d1329d07eb1ae4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Creation timestamp in UNIX epoch time format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebae96e58110b8eb7965be006() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of associated pricing rules",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec25669e560c5eb837d0597f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd7f8c8e5475188518b741e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Pricing Plan ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddaa249a03e30335b13d936b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb0d7074cf5071ac97b0ebc1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Latest modified timestamp in UNIX epoch time format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_billingconductor_pricing_plan", pricingPlanDataSource)
 }
@@ -86,7 +31,10 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|Passthrough|[a-zA-Z0-9]{10})",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributecd7f8c8e5475188518b741e3(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Pricing Plan ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +42,10 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creation timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"creation_time": schemaAttribute8f83a66cf8d1329d07eb1ae4(),
+		"creation_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Creation timestamp in UNIX epoch time format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +53,9 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec25669e560c5eb837d0597f5(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +63,10 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Latest modified timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"last_modified_time": schemaAttributeeb0d7074cf5071ac97b0ebc1(),
+		"last_modified_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Latest modified timestamp in UNIX epoch time format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +76,9 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec25669e560c5eb837d0597f5(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PricingRuleArns
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +91,10 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"pricing_rule_arns": schemaAttributeddaa249a03e30335b13d936b(),
+		"pricing_rule_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Size
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +102,10 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Number of associated pricing rules",
 		//	  "type": "integer"
 		//	}
-		"size": schemaAttributebae96e58110b8eb7965be006(),
+		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Number of associated pricing rules",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +134,21 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute7abf7d3af28ef4ca7b7d14df(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

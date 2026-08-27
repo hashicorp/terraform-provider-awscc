@@ -15,264 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0477d1474928f083e869fe31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the current source file system in the replication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23e4df6c878737e202705eb9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZoneName
-				"availability_zone_name": schemaAttribute53c1e80afaa7d4e36a189fd6(),
-				// Property: FileSystemId
-				"file_system_id": schemaAttribute65eb4dff266b16b6347a55af(),
-				// Property: KmsKeyId
-				"kms_key_id": schemaAttributeb2856acdfc6976f9ff765d27(),
-				// Property: Region
-				"region": schemaAttributea5f6a12fe6467181a025f46d(),
-				// Property: RoleArn
-				"role_arn": schemaAttribute0477d1474928f083e869fe31(),
-				// Property: Status
-				"status": schemaAttributebe95ca8f6398ddbeb4ae30be(),
-				// Property: StatusMessage
-				"status_message": schemaAttribute547228acc55eafa4e20e377e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of destination objects. Only one destination object is supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26d1ee5cd58c64f3db7b8875() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9291ec102ec0a0a7bf59866d(),
-				// Property: Value
-				"value": schemaAttributed24a7d15349701e5b92b2348(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Use to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a ``\"Key\":\"Name\",\"Value\":\"{value}\"`` key-value pair. Each key must be unique. For more information, see [Tagging resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the *General Reference Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e178c79beaaeb91bf7ea2ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The performance mode of the file system. We recommend ``generalPurpose`` performance mode for all file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. The ``maxIO`` mode is not supported on One Zone file systems.\n  Due to the higher per-operation latencies with Max I/O, we recommend using General Purpose performance mode for all file systems.\n  Default is ``generalPurpose``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3872b9ae322bc99321d57768() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Set the backup policy status for the file system.\n  +  *ENABLED* - Turns automatic backups on for the file system. \n  +  *DISABLED* - Turns automatic backups off for the file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bbd9806e3bdfdce0153787d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The number of days after files were last accessed in primary storage (the Standard storage class) at which to move them to Archive storage. Metadata operations such as listing the contents of a directory don't count as file access events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53c1e80afaa7d4e36a189fd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For One Zone file systems, the replication configuration must specify the Availability Zone in which the destination file system is located. \n Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the *Amazon EFS User Guide*.\n  One Zone file system type is not available in all Availability Zones in AWS-Regions where Amazon EFS is available.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute547228acc55eafa4e20e377e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Message that provides details about the ``PAUSED`` or ``ERRROR`` state of the replication destination configuration. For more information about replication status messages, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bf6281e14f5af28d1273567() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttribute3872b9ae322bc99321d57768(),
-		}, /*END SCHEMA*/
-		Description: "Use the ``BackupPolicy`` to turn automatic backups on or off for the file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f0d4c2d9be6e104f0ae8dee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the throughput mode for the file system. The mode can be ``bursting``, ``provisioned``, or ``elastic``. If you set ``ThroughputMode`` to ``provisioned``, you must also set a value for ``ProvisionedThroughputInMibps``. After you create the file system, you can decrease your file system's Provisioned throughput or change between the throughput modes, with certain time restrictions. For more information, see [Specifying throughput with provisioned mode](https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput) in the *Amazon EFS User Guide*. \n Default is ``bursting``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65eb4dff266b16b6347a55af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the destination Amazon EFS file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c7c857f934961588fcc9952() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput, measured in mebibytes per second (MiBps), that you want to provision for a file system that you're creating. Required if ``ThroughputMode`` is set to ``provisioned``. Valid values are 1-3414 MiBps, with the upper limit depending on Region. To increase this limit, contact SUP. For more information, see [Amazon EFS quotas that you can increase](https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the *Amazon EFS User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ded25346cbe0de2851dc80d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the kms-key-long to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault kms-key. If this parameter is not specified, the default kms-key for EFS is used. This ID can be in one of the following formats:\n  +  Key ID - A unique identifier of the key, for example ``1234abcd-12ab-34cd-56ef-1234567890ab``.\n  +  ARN - An Amazon Resource Name (ARN) for the key, for example ``arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``.\n  +  Key alias - A previously created display name for a key, for example ``alias/projectKey1``.\n  +  Key alias ARN - An ARN for a key alias, for example ``arn:aws:kms:us-west-2:444455556666:alias/projectKey1``.\n  \n If ``KmsKeyId`` is specified, the ``Encrypted`` parameter must be set to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81bd79cf981e4ac61da147f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ReplicationOverwriteProtection
-			"replication_overwrite_protection": schemaAttributedb08ac29bb857a49191232d7(),
-		}, /*END SCHEMA*/
-		Description: "Describes the protection on the file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87729facc084c472ed759b72() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "(Optional) A boolean that specifies whether or not to bypass the ``FileSystemPolicy`` lockout safety check. The lockout safety check determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future ``PutFileSystemPolicy`` requests on this file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the IAM principal that is making the request from making subsequent ``PutFileSystemPolicy`` requests on this file system. The default value is ``False``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bde3fc3bd0c8db9ddec2df5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to move files back to primary (Standard) storage after they are accessed in IA or Archive storage. Metadata operations such as listing the contents of a directory don't count as file access events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute920dd5279bf9e5f1e517a0cc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Destinations
-			"destinations": schemaAttribute23e4df6c878737e202705eb9(),
-		}, /*END SCHEMA*/
-		Description: "Describes the replication configuration for a specific file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9291ec102ec0a0a7bf59866d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key (String). The key can't start with ``aws:``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ed3078640f3acbf729118b6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TransitionToArchive
-				"transition_to_archive": schemaAttribute4bbd9806e3bdfdce0153787d(),
-				// Property: TransitionToIA
-				"transition_to_ia": schemaAttributece1a4dfd362dc61f184b2a14(),
-				// Property: TransitionToPrimaryStorageClass
-				"transition_to_primary_storage_class": schemaAttribute8bde3fc3bd0c8db9ddec2df5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of ``LifecyclePolicy`` objects that define the file system's ``LifecycleConfiguration`` object. A ``LifecycleConfiguration`` object informs Lifecycle management of the following:\n  +  When to move files in the file system from primary storage to IA storage.\n  +  When to move files in the file system from primary storage or IA storage to Archive storage.\n  +  When to move files that are in IA or Archive storage to primary storage.\n  \n  EFS requires that each ``LifecyclePolicy`` object have only a single transition. This means that in a request body, ``LifecyclePolicies`` needs to be structured as an array of ``LifecyclePolicy`` objects, one object for each transition, ``TransitionToIA``, ``TransitionToArchive````TransitionToPrimaryStorageClass``. See the example requests in the following section for more information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5f6a12fe6467181a025f46d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb02794fac9ada9051008fa44() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a KmsKeyId for an existing kms-key-long. If you don't specify a kms-key, then the default kms-key for EFS, ``/aws/elasticfilesystem``, is used to protect the encrypted file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2856acdfc6976f9ff765d27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an kms-key-long used to protect the encrypted file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaf3946f47ca53ad36f346f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The ``FileSystemPolicy`` for the EFS file system. A file system policy is an IAM resource policy used to control NFS access to an EFS file system. For more information, see [Using to control NFS access to Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html) in the *Amazon EFS User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe95ca8f6398ddbeb4ae30be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes the status of the replication configuration. For more information about replication status, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece1a4dfd362dc61f184b2a14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The number of days after files were last accessed in primary storage (the Standard storage class) at which to move them to Infrequent Access (IA) storage. Metadata operations such as listing the contents of a directory don't count as file access events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed24a7d15349701e5b92b2348() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed48a6794dd4fd8d399fac7b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb08ac29bb857a49191232d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the file system's replication overwrite protection.\n  +  ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. \n  +  ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.\n  +  ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is modified only by EFS replication.\n  \n If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef646b53d8ab19d2703f550a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For One Zone file systems, specify the AWS Availability Zone in which to create the file system. Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html#file-system-type) in the *Amazon EFS User Guide*.\n  One Zone file systems are not available in all Availability Zones in AWS-Regions where Amazon EFS is available.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbd6cbe4e27644567584d98e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_efs_file_system", fileSystemDataSource)
 }
@@ -287,7 +29,9 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributed48a6794dd4fd8d399fac7b0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneName
 		// CloudFormation resource type schema:
 		//
@@ -295,7 +39,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "For One Zone file systems, specify the AWS Availability Zone in which to create the file system. Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html#file-system-type) in the *Amazon EFS User Guide*.\n  One Zone file systems are not available in all Availability Zones in AWS-Regions where Amazon EFS is available.",
 		//	  "type": "string"
 		//	}
-		"availability_zone_name": schemaAttributef646b53d8ab19d2703f550a9(),
+		"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For One Zone file systems, specify the AWS Availability Zone in which to create the file system. Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html#file-system-type) in the *Amazon EFS User Guide*.\n  One Zone file systems are not available in all Availability Zones in AWS-Regions where Amazon EFS is available.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupPolicy
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +64,17 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"backup_policy": schemaAttribute5bf6281e14f5af28d1273567(),
+		"backup_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Set the backup policy status for the file system.\n  +  *ENABLED* - Turns automatic backups on for the file system. \n  +  *DISABLED* - Turns automatic backups off for the file system.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Use the ``BackupPolicy`` to turn automatic backups on or off for the file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BypassPolicyLockoutSafetyCheck
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +82,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "(Optional) A boolean that specifies whether or not to bypass the ``FileSystemPolicy`` lockout safety check. The lockout safety check determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future ``PutFileSystemPolicy`` requests on this file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the IAM principal that is making the request from making subsequent ``PutFileSystemPolicy`` requests on this file system. The default value is ``False``.",
 		//	  "type": "boolean"
 		//	}
-		"bypass_policy_lockout_safety_check": schemaAttribute87729facc084c472ed759b72(),
+		"bypass_policy_lockout_safety_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "(Optional) A boolean that specifies whether or not to bypass the ``FileSystemPolicy`` lockout safety check. The lockout safety check determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future ``PutFileSystemPolicy`` requests on this file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the IAM principal that is making the request from making subsequent ``PutFileSystemPolicy`` requests on this file system. The default value is ``False``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -333,7 +93,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a KmsKeyId for an existing kms-key-long. If you don't specify a kms-key, then the default kms-key for EFS, ``/aws/elasticfilesystem``, is used to protect the encrypted file system.",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schemaAttributeb02794fac9ada9051008fa44(),
+		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a KmsKeyId for an existing kms-key-long. If you don't specify a kms-key, then the default kms-key for EFS, ``/aws/elasticfilesystem``, is used to protect the encrypted file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileSystemId
 		// CloudFormation resource type schema:
 		//
@@ -341,7 +104,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"file_system_id": schemaAttributefbd6cbe4e27644567584d98e(),
+		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileSystemPolicy
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +115,11 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ``FileSystemPolicy`` for the EFS file system. A file system policy is an IAM resource policy used to control NFS access to an EFS file system. For more information, see [Using to control NFS access to Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html) in the *Amazon EFS User Guide*.",
 		//	  "type": "object"
 		//	}
-		"file_system_policy": schemaAttributebaf3946f47ca53ad36f346f3(),
+		"file_system_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The ``FileSystemPolicy`` for the EFS file system. A file system policy is an IAM resource policy used to control NFS access to an EFS file system. For more information, see [Using to control NFS access to Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html) in the *Amazon EFS User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileSystemProtection
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +138,17 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"file_system_protection": schemaAttribute81bd79cf981e4ac61da147f1(),
+		"file_system_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReplicationOverwriteProtection
+				"replication_overwrite_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status of the file system's replication overwrite protection.\n  +  ``ENABLED`` ? The file system cannot be used as the destination file system in a replication configuration. The file system is writeable. Replication overwrite protection is ``ENABLED`` by default. \n  +  ``DISABLED`` ? The file system can be used as the destination file system in a replication configuration. The file system is read-only and can only be modified by EFS replication.\n  +  ``REPLICATING`` ? The file system is being used as the destination file system in a replication configuration. The file system is read-only and is modified only by EFS replication.\n  \n If the replication configuration is deleted, the file system's replication overwrite protection is re-enabled, the file system becomes writeable.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the protection on the file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileSystemTags
 		// CloudFormation resource type schema:
 		//
@@ -396,7 +176,24 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"file_system_tags": schemaAttribute26d1ee5cd58c64f3db7b8875(),
+		"file_system_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key (String). The key can't start with ``aws:``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Use to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a ``\"Key\":\"Name\",\"Value\":\"{value}\"`` key-value pair. Each key must be unique. For more information, see [Tagging resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the *General Reference Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -404,7 +201,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the kms-key-long to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault kms-key. If this parameter is not specified, the default kms-key for EFS is used. This ID can be in one of the following formats:\n  +  Key ID - A unique identifier of the key, for example ``1234abcd-12ab-34cd-56ef-1234567890ab``.\n  +  ARN - An Amazon Resource Name (ARN) for the key, for example ``arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``.\n  +  Key alias - A previously created display name for a key, for example ``alias/projectKey1``.\n  +  Key alias ARN - An ARN for a key alias, for example ``arn:aws:kms:us-west-2:444455556666:alias/projectKey1``.\n  \n If ``KmsKeyId`` is specified, the ``Encrypted`` parameter must be set to true.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute6ded25346cbe0de2851dc80d(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the kms-key-long to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault kms-key. If this parameter is not specified, the default kms-key for EFS is used. This ID can be in one of the following formats:\n  +  Key ID - A unique identifier of the key, for example ``1234abcd-12ab-34cd-56ef-1234567890ab``.\n  +  ARN - An Amazon Resource Name (ARN) for the key, for example ``arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``.\n  +  Key alias - A previously created display name for a key, for example ``alias/projectKey1``.\n  +  Key alias ARN - An ARN for a key alias, for example ``arn:aws:kms:us-west-2:444455556666:alias/projectKey1``.\n  \n If ``KmsKeyId`` is specified, the ``Encrypted`` parameter must be set to true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicies
 		// CloudFormation resource type schema:
 		//
@@ -432,7 +232,29 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"lifecycle_policies": schemaAttribute9ed3078640f3acbf729118b6(),
+		"lifecycle_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: TransitionToArchive
+					"transition_to_archive": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The number of days after files were last accessed in primary storage (the Standard storage class) at which to move them to Archive storage. Metadata operations such as listing the contents of a directory don't count as file access events.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TransitionToIA
+					"transition_to_ia": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The number of days after files were last accessed in primary storage (the Standard storage class) at which to move them to Infrequent Access (IA) storage. Metadata operations such as listing the contents of a directory don't count as file access events.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TransitionToPrimaryStorageClass
+					"transition_to_primary_storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to move files back to primary (Standard) storage after they are accessed in IA or Archive storage. Metadata operations such as listing the contents of a directory don't count as file access events.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of ``LifecyclePolicy`` objects that define the file system's ``LifecycleConfiguration`` object. A ``LifecycleConfiguration`` object informs Lifecycle management of the following:\n  +  When to move files in the file system from primary storage to IA storage.\n  +  When to move files in the file system from primary storage or IA storage to Archive storage.\n  +  When to move files that are in IA or Archive storage to primary storage.\n  \n  EFS requires that each ``LifecyclePolicy`` object have only a single transition. This means that in a request body, ``LifecyclePolicies`` needs to be structured as an array of ``LifecyclePolicy`` objects, one object for each transition, ``TransitionToIA``, ``TransitionToArchive````TransitionToPrimaryStorageClass``. See the example requests in the following section for more information.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformanceMode
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +262,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The performance mode of the file system. We recommend ``generalPurpose`` performance mode for all file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. The ``maxIO`` mode is not supported on One Zone file systems.\n  Due to the higher per-operation latencies with Max I/O, we recommend using General Purpose performance mode for all file systems.\n  Default is ``generalPurpose``.",
 		//	  "type": "string"
 		//	}
-		"performance_mode": schemaAttribute2e178c79beaaeb91bf7ea2ba(),
+		"performance_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The performance mode of the file system. We recommend ``generalPurpose`` performance mode for all file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. The ``maxIO`` mode is not supported on One Zone file systems.\n  Due to the higher per-operation latencies with Max I/O, we recommend using General Purpose performance mode for all file systems.\n  Default is ``generalPurpose``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedThroughputInMibps
 		// CloudFormation resource type schema:
 		//
@@ -448,7 +273,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The throughput, measured in mebibytes per second (MiBps), that you want to provision for a file system that you're creating. Required if ``ThroughputMode`` is set to ``provisioned``. Valid values are 1-3414 MiBps, with the upper limit depending on Region. To increase this limit, contact SUP. For more information, see [Amazon EFS quotas that you can increase](https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the *Amazon EFS User Guide*.",
 		//	  "type": "number"
 		//	}
-		"provisioned_throughput_in_mibps": schemaAttribute6c7c857f934961588fcc9952(),
+		"provisioned_throughput_in_mibps": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The throughput, measured in mebibytes per second (MiBps), that you want to provision for a file system that you're creating. Required if ``ThroughputMode`` is set to ``provisioned``. Valid values are 1-3414 MiBps, with the upper limit depending on Region. To increase this limit, contact SUP. For more information, see [Amazon EFS quotas that you can increase](https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the *Amazon EFS User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +330,56 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"replication_configuration": schemaAttribute920dd5279bf9e5f1e517a0cc(),
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destinations
+				"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AvailabilityZoneName
+							"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "For One Zone file systems, the replication configuration must specify the Availability Zone in which the destination file system is located. \n Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone file systems, see [EFS file system types](https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the *Amazon EFS User Guide*.\n  One Zone file system type is not available in all Availability Zones in AWS-Regions where Amazon EFS is available.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FileSystemId
+							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the destination Amazon EFS file system.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: KmsKeyId
+							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of an kms-key-long used to protect the encrypted file system.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Region
+							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS-Region in which the destination file system is located.\n  For One Zone file systems, the replication configuration must specify the AWS-Region in which the destination file system is located.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the current source file system in the replication configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Describes the status of the replication configuration. For more information about replication status, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusMessage
+							"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Message that provides details about the ``PAUSED`` or ``ERRROR`` state of the replication destination configuration. For more information about replication status messages, see [Viewing replication details](https://docs.aws.amazon.com//efs/latest/ug/awsbackup.html#restoring-backup-efsmonitoring-replication-status.html) in the *Amazon EFS User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array of destination objects. Only one destination object is supported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the replication configuration for a specific file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ThroughputMode
 		// CloudFormation resource type schema:
 		//
@@ -510,7 +387,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the throughput mode for the file system. The mode can be ``bursting``, ``provisioned``, or ``elastic``. If you set ``ThroughputMode`` to ``provisioned``, you must also set a value for ``ProvisionedThroughputInMibps``. After you create the file system, you can decrease your file system's Provisioned throughput or change between the throughput modes, with certain time restrictions. For more information, see [Specifying throughput with provisioned mode](https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput) in the *Amazon EFS User Guide*. \n Default is ``bursting``.",
 		//	  "type": "string"
 		//	}
-		"throughput_mode": schemaAttribute5f0d4c2d9be6e104f0ae8dee(),
+		"throughput_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the throughput mode for the file system. The mode can be ``bursting``, ``provisioned``, or ``elastic``. If you set ``ThroughputMode`` to ``provisioned``, you must also set a value for ``ProvisionedThroughputInMibps``. After you create the file system, you can decrease your file system's Provisioned throughput or change between the throughput modes, with certain time restrictions. For more information, see [Specifying throughput with provisioned mode](https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput) in the *Amazon EFS User Guide*. \n Default is ``bursting``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

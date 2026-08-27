@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0ce364981f113090ee9ca52d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9146939e343fb3300a6e82da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or full Amazon Resource Name (ARN) of the task set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94047c36b19c6814d0e018eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecs_primary_task_set", primaryTaskSetDataSource)
 }
@@ -50,7 +29,10 @@ func primaryTaskSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
 		//	  "type": "string"
 		//	}
-		"cluster": schemaAttribute94047c36b19c6814d0e018eb(),
+		"cluster": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Service
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +40,10 @@ func primaryTaskSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
 		//	  "type": "string"
 		//	}
-		"service": schemaAttribute0ce364981f113090ee9ca52d(),
+		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TaskSetId
 		// CloudFormation resource type schema:
 		//
@@ -66,7 +51,10 @@ func primaryTaskSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID or full Amazon Resource Name (ARN) of the task set.",
 		//	  "type": "string"
 		//	}
-		"task_set_id": schemaAttribute9146939e343fb3300a6e82da(),
+		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID or full Amazon Resource Name (ARN) of the task set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

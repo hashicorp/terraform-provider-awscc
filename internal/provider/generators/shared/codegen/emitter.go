@@ -72,10 +72,15 @@ var (
 const attributeFunctionHashBytes = 12
 
 type Emitter struct {
-	CfResource         *cfschema.Resource
-	IsDataSource       bool
-	Ui                 cli.Ui
-	Writer             io.Writer
+	CfResource   *cfschema.Resource
+	IsDataSource bool
+	Ui           cli.Ui
+	Writer       io.Writer
+	// Deduplicate enables the shared-attribute-helper emission introduced in
+	// #3270. It is only needed for depth-limited (de-recursed) schemas whose
+	// inline form would exceed the Go compiler's per-function limits. When
+	// false, attributes are emitted inline exactly as they were before #3270.
+	Deduplicate        bool
 	attributeFunctions *attributeFunctionRegistry
 }
 
@@ -156,7 +161,9 @@ func (r *attributeFunctionRegistry) render() string {
 func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[string]string) (Features, string, error) {
 	var features Features
 
-	e.attributeFunctions = newAttributeFunctionRegistry(tfType, e.IsDataSource)
+	if e.Deduplicate {
+		e.attributeFunctions = newAttributeFunctionRegistry(tfType, e.IsDataSource)
+	}
 
 	cfResource := e.CfResource
 	features, err := e.emitSchema(tfType, attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
@@ -177,7 +184,12 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 		}
 	}
 
-	return features, e.attributeFunctions.render(), nil
+	var attributeFunctions string
+	if e.attributeFunctions != nil {
+		attributeFunctions = e.attributeFunctions.render()
+	}
+
+	return features, attributeFunctions, nil
 }
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
@@ -1123,12 +1135,20 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 
 		features = features.LogicalOr(f)
 
-		functionName, err := e.attributeFunctions.register(attributeBody.String())
-		if err != nil {
-			return features, err
-		}
+		if e.attributeFunctions != nil {
+			// #3270 deduplicated emission: reference a shared helper function
+			// that constructs this attribute. Used only for de-recursed
+			// schemas (gated via Emitter.Deduplicate).
+			functionName, err := e.attributeFunctions.register(attributeBody.String())
+			if err != nil {
+				return features, err
+			}
 
-		e.printf("%q:%s(),\n", tfAttributeName, functionName)
+			e.printf("%q:%s(),\n", tfAttributeName, functionName)
+		} else {
+			// Pre-#3270 inline emission.
+			e.printf("%q:%s,\n", tfAttributeName, attributeBody.String())
+		}
 	}
 	e.printf("}/*END SCHEMA*/")
 

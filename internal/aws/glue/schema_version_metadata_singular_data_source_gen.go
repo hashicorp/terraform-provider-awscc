@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute27cfb6cda233fb3f3c34489a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Metadata value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8116380c184f3f481d2a9557() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Metadata key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3d57f147965e1d1d80bfd5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents the version ID associated with the schema version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_schema_version_metadata", schemaVersionMetadataDataSource)
 }
@@ -52,7 +31,10 @@ func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"key": schemaAttribute8116380c184f3f481d2a9557(),
+		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Metadata key",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaVersionId
 		// CloudFormation resource type schema:
 		//
@@ -61,7 +43,10 @@ func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"schema_version_id": schemaAttributeb3d57f147965e1d1d80bfd5c(),
+		"schema_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents the version ID associated with the schema version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +56,10 @@ func schemaVersionMetadataDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"value": schemaAttribute27cfb6cda233fb3f3c34489a(),
+		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Metadata value",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

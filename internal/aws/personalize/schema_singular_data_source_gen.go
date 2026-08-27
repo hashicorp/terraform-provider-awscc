@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0adf38d97b8afb02f021e2dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain of a Domain dataset group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ed1645263c571693e9552af() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute5e0986ace383b64529eb3232(),
-				// Property: Value
-				"value": schemaAttribute5e0986ace383b64529eb3232(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags used to organize, track, or control access for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a1e73ff9aa2fcb3607c01ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn for the schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35d34dd58d14e08d90d5966e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A schema in Avro JSON format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e0986ace383b64529eb3232() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef87011694ad30738f244e923() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name for the schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_personalize_schema", schemaDataSource)
 }
@@ -82,7 +33,10 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain": schemaAttribute0adf38d97b8afb02f021e2dd(),
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain of a Domain dataset group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +47,10 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef87011694ad30738f244e923(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for the schema.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +59,10 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
-		"schema": schemaAttribute35d34dd58d14e08d90d5966e(),
+		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A schema in Avro JSON format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaArn
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +72,10 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"schema_arn": schemaAttribute2a1e73ff9aa2fcb3607c01ea(),
+		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn for the schema.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +106,22 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute1ed1645263c571693e9552af(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,69 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03b8bbf4d0c734a3475e44cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A customer provided encryption key that's used to encrypt data.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2060449f97aae4541a8cd69e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The value of the resource tag.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bf0b6cd2872ca652387ff08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The key of the resource tag.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53c194da55252abb9305332f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A description of the service template.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c82dd396958d047a700fd2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute650e5c34636a61db877a9a8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The name of the service template as displayed in the developer interface.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9f46be36064912d9f2712ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the service template.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed03a122ddafbb3bbbccb568() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3bf0b6cd2872ca652387ff08(),
-				// Property: Value
-				"value": schemaAttribute2060449f97aae4541a8cd69e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>An optional list of metadata items that you can associate with the Proton service template. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_proton_service_template", serviceTemplateDataSource)
 }
@@ -95,7 +32,10 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:([\\w+=,.@-]+[/:])*[\\w+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec9f46be36064912d9f2712ab(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the service template.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +45,10 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute53c194da55252abb9305332f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>A description of the service template.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +58,10 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute650e5c34636a61db877a9a8a(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The name of the service template as displayed in the developer interface.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +72,10 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:([\\w+=,.@-]+[/:])*[\\w+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"encryption_key": schemaAttribute03b8bbf4d0c734a3475e44cf(),
+		"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>A customer provided encryption key that's used to encrypt data.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +85,9 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[0-9A-Za-z]+[0-9A-Za-z_\\-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute5c82dd396958d047a700fd2c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelineProvisioning
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +97,9 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"pipeline_provisioning": schemaAttribute5c82dd396958d047a700fd2c(),
+		"pipeline_provisioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +133,24 @@ func serviceTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeed03a122ddafbb3bbbccb568(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The key of the resource tag.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The value of the resource tag.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>An optional list of metadata items that you can associate with the Proton service template. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -26,215 +26,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute02c79f0eecc648e2fe76f627() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID for the account enforced configuration",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0dee243f33c101fa557d9841() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExcludedModels
-			"excluded_models": schemaAttributed7d5b560e5865d7d79474e96(),
-			// Property: IncludedModels
-			"included_models": schemaAttribute9052dfbc5225d92ff759bfaa(),
-		}, /*END SCHEMA*/
-		Description: "Model-specific information for the enforced guardrail configuration. If not present, the configuration is enforced on all models",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute117f7aa57c6c11f7c5ce043a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role used to create the configuration",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53f54b6572ccc10c080a5f9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the configuration was created",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5703d9c52ee6ff465b29ca68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the configuration was last updated",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57c815f3d8e7102904265d09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role used to update the configuration",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68a65a2d8be3b79da21759d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Selective guarding mode for user messages",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"SELECTIVE",
-				"COMPREHENSIVE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9052dfbc5225d92ff759bfaa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Models to enforce the guardrail on",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtLeast(1),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^(ALL|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1})$"), ""),
-			),
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95b3e4a3779b413f1f2689f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier for the guardrail, could be the ID or the ARN",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3fd87c5be4f7989c129a6d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configuration owner type",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa1b42d69e88f7e4d8e2387e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Numerical guardrail version (not DRAFT)",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[1-9][0-9]{0,7}$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc4d19c2008932efa088cc0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Selective guarding mode for system prompts",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"SELECTIVE",
-				"COMPREHENSIVE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2cc2b11d4a52ea872b9feac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Messages
-			"messages": schemaAttribute68a65a2d8be3b79da21759d9(),
-			// Property: System
-			"system": schemaAttributebc4d19c2008932efa088cc0d(),
-		}, /*END SCHEMA*/
-		Description: "Selective content guarding controls for enforced guardrails",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed68b6727a1ceaa1f8e30bc8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID for the guardrail",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7d5b560e5865d7d79474e96() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Models to exclude from enforcement. If a model is in both lists, it is excluded",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtLeast(0),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1}$"), ""),
-			),
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee25e3d90fa4fb09d60af55e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN representation for the guardrail",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_enforced_guardrail_configuration", enforcedGuardrailConfigurationResource)
 	registry.AddListResourceFactory("awscc_bedrock_enforced_guardrail_configuration", generic.NewListResource(enforcedGuardrailConfigurationResource))
@@ -252,7 +43,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"config_id": schemaAttribute02c79f0eecc648e2fe76f627(),
+		"config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID for the account enforced configuration",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +58,14 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute53f54b6572ccc10c080a5f9d(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the configuration was created",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +73,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "description": "The ARN of the role used to create the configuration",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute117f7aa57c6c11f7c5ce043a(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role used to create the configuration",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailArn
 		// CloudFormation resource type schema:
 		//
@@ -280,7 +90,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_arn": schemaAttributee25e3d90fa4fb09d60af55e4(),
+		"guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN representation for the guardrail",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailId
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +107,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_id": schemaAttributed68b6727a1ceaa1f8e30bc8b(),
+		"guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID for the guardrail",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +124,14 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
 		//	  "type": "string"
 		//	}
-		"guardrail_identifier": schemaAttribute95b3e4a3779b413f1f2689f5(),
+		"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier for the guardrail, could be the ID or the ARN",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailVersion
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +140,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "pattern": "^[1-9][0-9]{0,7}$",
 		//	  "type": "string"
 		//	}
-		"guardrail_version": schemaAttributeaa1b42d69e88f7e4d8e2387e(),
+		"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Numerical guardrail version (not DRAFT)",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[1-9][0-9]{0,7}$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ModelEnforcement
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +181,50 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"model_enforcement": schemaAttribute0dee243f33c101fa557d9841(),
+		"model_enforcement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExcludedModels
+				"excluded_models": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Models to exclude from enforcement. If a model is in both lists, it is excluded",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(0),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1}$"), ""),
+						),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IncludedModels
+				"included_models": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Models to enforce the guardrail on",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^(ALL|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}){0,1})$"), ""),
+						),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Model-specific information for the enforced guardrail configuration. If not present, the configuration is enforced on all models",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +236,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttributea3fd87c5be4f7989c129a6d1(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Configuration owner type",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SelectiveContentGuarding
 		// CloudFormation resource type schema:
 		//
@@ -385,7 +269,46 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"selective_content_guarding": schemaAttributec2cc2b11d4a52ea872b9feac(),
+		"selective_content_guarding": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Messages
+				"messages": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Selective guarding mode for user messages",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SELECTIVE",
+							"COMPREHENSIVE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: System
+				"system": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Selective guarding mode for system prompts",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SELECTIVE",
+							"COMPREHENSIVE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Selective content guarding controls for enforced guardrails",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -394,7 +317,14 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute5703d9c52ee6ff465b29ca68(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the configuration was last updated",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedBy
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +332,13 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	  "description": "The ARN of the role used to update the configuration",
 		//	  "type": "string"
 		//	}
-		"updated_by": schemaAttribute57c815f3d8e7102904265d09(),
+		"updated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role used to update the configuration",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

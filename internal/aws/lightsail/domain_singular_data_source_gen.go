@@ -14,153 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f9d2833bc8bca695b3f4d62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f8179e452efc9beef4a71a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the domain recordset entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2736fc8e9b2b58f69b78f125() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2991f69f61793bbb0b7b8b8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ae28660d5c96f05ec416db4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the domain entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e189cf956952807f09d795d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, specifies whether the domain entry is an alias used by the Lightsail load balancer, Lightsail container service, Lightsail content delivery network (CDN) distribution, or another AWS resource. You can include an alias (A type) record in your request, which points to the DNS name of a load balancer, container service, CDN distribution, or other AWS resource and routes traffic to that resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute561d66411322244e8a29af09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The support code. Include this code in your email to support when you have questions (read-only).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ade49da1ed6c503682d86ad() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Id
-				"id": schemaAttribute1f8179e452efc9beef4a71a7(),
-				// Property: IsAlias
-				"is_alias": schemaAttribute2e189cf956952807f09d795d(),
-				// Property: Name
-				"name": schemaAttribute2ae28660d5c96f05ec416db4(),
-				// Property: Target
-				"target": schemaAttribute6f2801c1ef1bb38e6d57814b(),
-				// Property: Type
-				"type": schemaAttribute953352aff53fbea3b19e5d70(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs containing information about the domain entries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b94386b398bac7c792f4927() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Lightsail resource type (read-only).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62b7f82670b1eed8812584c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the domain (read-only).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f2801c1ef1bb38e6d57814b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The target AWS name server (e.g., ns-111.awsdns-11.com).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute953352aff53fbea3b19e5d70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of domain entry (e.g., A, CNAME, MX, NS, SOA, SRV, TXT).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ab0e8c42f2466e0f91af613() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the domain was created (read-only).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7de21112178e319a73d533e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the domain to manage in Lightsail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8c69e627003e32be343b7ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1e4e6bd4b96d6c1608b3336() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute2991f69f61793bbb0b7b8b8a(),
-			// Property: RegionName
-			"region_name": schemaAttributec8c69e627003e32be343b7ad(),
-		}, /*END SCHEMA*/
-		Description: "The AWS Region and Availability Zone where the domain was created (read-only).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef662ac80b86bc3f7349c644f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0f9d2833bc8bca695b3f4d62(),
-				// Property: Value
-				"value": schemaAttribute2736fc8e9b2b58f69b78f125(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_domain", domainDataSource)
 }
@@ -177,7 +30,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+:lightsail:[a-z0-9-]+:[0-9]{12}:Domain/[a-zA-Z0-9][a-zA-Z0-9-_.]{0,253}[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute62b7f82670b1eed8812584c0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the domain (read-only).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +41,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the domain was created (read-only).",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute9ab0e8c42f2466e0f91af613(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the domain was created (read-only).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainEntries
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +96,39 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"domain_entries": schemaAttribute5ade49da1ed6c503682d86ad(),
+		"domain_entries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the domain recordset entry.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IsAlias
+					"is_alias": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "When true, specifies whether the domain entry is an alias used by the Lightsail load balancer, Lightsail container service, Lightsail content delivery network (CDN) distribution, or another AWS resource. You can include an alias (A type) record in your request, which points to the DNS name of a load balancer, container service, CDN distribution, or other AWS resource and routes traffic to that resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the domain entry.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Target
+					"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The target AWS name server (e.g., ns-111.awsdns-11.com).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of domain entry (e.g., A, CNAME, MX, NS, SOA, SRV, TXT).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs containing information about the domain entries.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +136,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the domain to manage in Lightsail.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttributea7de21112178e319a73d533e(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the domain to manage in Lightsail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +158,22 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schemaAttributef1e4e6bd4b96d6c1608b3336(),
+		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Availability Zone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegionName
+				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The AWS Region and Availability Zone where the domain was created (read-only).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +184,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute5b94386b398bac7c792f4927(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Lightsail resource type (read-only).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +195,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The support code. Include this code in your email to support when you have questions (read-only).",
 		//	  "type": "string"
 		//	}
-		"support_code": schemaAttribute561d66411322244e8a29af09(),
+		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The support code. Include this code in your email to support when you have questions (read-only).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +226,24 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef662ac80b86bc3f7349c644f(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

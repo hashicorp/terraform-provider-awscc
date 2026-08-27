@@ -14,53 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2364c2abbf5fd4182937815a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute361ad32b57ead4d63cde45fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the apiDestination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c472d3caf4fa301d5fbc4d7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec514229dd66a313ad262d61b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Url endpoint to invoke.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6c4ba3d4cf3253685e6e416() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the api destination to be used in IAM policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf9a2bed5b80112e1f7c7daa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the api destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6a2f601fad772a35be12579() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_events_api_destination", apiDestinationDataSource)
 }
@@ -77,7 +30,10 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:api-destination/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributecf9a2bed5b80112e1f7c7daa(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the api destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArnForPolicy
 		// CloudFormation resource type schema:
 		//
@@ -86,7 +42,10 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:api-destination/[\\.\\-_A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"arn_for_policy": schemaAttributec6c4ba3d4cf3253685e6e416(),
+		"arn_for_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the api destination to be used in IAM policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +54,10 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection/[\\.\\-_A-Za-z0-9]+/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"connection_arn": schemaAttributee6a2f601fad772a35be12579(),
+		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +65,9 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2364c2abbf5fd4182937815a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: HttpMethod
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +83,9 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"http_method": schemaAttribute2364c2abbf5fd4182937815a(),
+		"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InvocationEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +94,10 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^((%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@\\x26=+$,A-Za-z0-9])+)([).!';/?:,])?$",
 		//	  "type": "string"
 		//	}
-		"invocation_endpoint": schemaAttributec514229dd66a313ad262d61b(),
+		"invocation_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Url endpoint to invoke.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InvocationRateLimitPerSecond
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +105,9 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"invocation_rate_limit_per_second": schemaAttribute3c472d3caf4fa301d5fbc4d7(),
+		"invocation_rate_limit_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +118,10 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute361ad32b57ead4d63cde45fa(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the apiDestination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

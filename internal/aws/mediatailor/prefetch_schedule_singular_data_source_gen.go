@@ -16,318 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute021005508eb7de0a5b3095ef() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DynamicVariable
-				"dynamic_variable": schemaAttribute0525c874bdd64c5b572ec240(),
-				// Property: Operator
-				"operator": schemaAttributed63abfd9a9d38aabe85a7fb2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "If you only want MediaTailor to insert prefetched ads into avails that match specific dynamic variables, set the avail matching criteria.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute033d8c3dd452e2c1ca310386() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when MediaTailor no longer considers the prefetched ads for use in an ad break, as an ISO 8601 date-time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute039cae0f6d19f7ee8868342c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The expected peak number of concurrent viewers for your content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0525c874bdd64c5b572ec240() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The dynamic variable(s) that MediaTailor should use as avail matching criteria.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c8b3bfe32904b57613d8153() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time, in seconds, that MediaTailor spreads prefetch requests to the ADS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cb1ec01e5936cf16328f90a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the playback configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f6ef542deadb8bec2cfd839() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the type of traffic shaping used to limit the number of requests to the ADS at one time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44642d082f76973bccef9143() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailMatchingCriteria
-			"avail_matching_criteria": schemaAttributeee7282d1e53c559d43819107(),
-			// Property: RetrievedAdExpirationSeconds
-			"retrieved_ad_expiration_seconds": schemaAttributea6fee26776e2bdfb2ed5926c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f29445de76a2fa95ba51f71() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PeakConcurrentUsers
-			"peak_concurrent_users": schemaAttribute039cae0f6d19f7ee8868342c(),
-			// Property: PeakTps
-			"peak_tps": schemaAttributefe5389776fe75a862bef828b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute500bea9746bd87bfb4ffa324() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when prefetch retrieval ends for the ad break, as an ISO 8601 date-time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50315e39273dcfb863dc9841() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when prefetch retrievals can start for this break, as an ISO 8601 date-time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64bfa2360f895e88c9820f54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The frequency that MediaTailor creates prefetch schedules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c74165ef51ee89ab4397b14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the prefetch schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute764c8abc25f4ae99e747f657() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailMatchingCriteria
-			"avail_matching_criteria": schemaAttribute021005508eb7de0a5b3095ef(),
-			// Property: EndTime
-			"end_time": schemaAttribute033d8c3dd452e2c1ca310386(),
-			// Property: StartTime
-			"start_time": schemaAttributeca5a65feb83d1c6cf18e060a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute817b2da0ded430f8687d4b90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87f531507106b4da0e601cf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name to assign to the prefetch schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93b679365b08a0b273a043e3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9c56ab1b411e8d95e309ee1d(),
-				// Property: Value
-				"value": schemaAttribute9c56ab1b411e8d95e309ee1d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the prefetch schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97f78ceb726a853b9fedde50() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DynamicVariables
-			"dynamic_variables": schemaAttributed1e3037effa86573d8300b4e(),
-			// Property: EndTime
-			"end_time": schemaAttribute500bea9746bd87bfb4ffa324(),
-			// Property: StartTime
-			"start_time": schemaAttribute50315e39273dcfb863dc9841(),
-			// Property: TrafficShapingRetrievalWindow
-			"traffic_shaping_retrieval_window": schemaAttributeb751d7fd0b8ac4a10adb477d(),
-			// Property: TrafficShapingTpsConfiguration
-			"traffic_shaping_tps_configuration": schemaAttribute4f29445de76a2fa95ba51f71(),
-			// Property: TrafficShapingType
-			"traffic_shaping_type": schemaAttribute2f6ef542deadb8bec2cfd839(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c56ab1b411e8d95e309ee1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6fee26776e2bdfb2ed5926c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds that an ad is available for insertion after it was prefetched.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2ec1419b4361400e830c5b6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds that MediaTailor waits after an ad avail before prefetching ads for the next avail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb751d7fd0b8ac4a10adb477d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RetrievalWindowDurationSeconds
-			"retrieval_window_duration_seconds": schemaAttribute0c8b3bfe32904b57613d8153(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9ea1b73761cb57da603214e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The end time for the window that MediaTailor prefetches and inserts ads in a live event, as an ISO 8601 date-time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca5a65feb83d1c6cf18e060a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when prefetched ads are considered for use in an ad break, as an ISO 8601 date-time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1e3037effa86573d8300b4e() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The dynamic variables to use for substitution during prefetch requests to the ad decision server (ADS).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed63abfd9a9d38aabe85a7fb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is used for the comparison.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb8be924743eeeb38aaf0618() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The start time for the window that MediaTailor prefetches and inserts ads in a live event, as an ISO 8601 date-time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee11a2d4a2b67ce25694aadf8() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The dynamic variables to use for substitution during prefetch requests to the ADS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3c8b104f784bca52bb14b3e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DelayAfterAvailEndSeconds
-			"delay_after_avail_end_seconds": schemaAttributeb2ec1419b4361400e830c5b6(),
-			// Property: DynamicVariables
-			"dynamic_variables": schemaAttributee11a2d4a2b67ce25694aadf8(),
-			// Property: TrafficShapingRetrievalWindow
-			"traffic_shaping_retrieval_window": schemaAttributeb751d7fd0b8ac4a10adb477d(),
-			// Property: TrafficShapingTpsConfiguration
-			"traffic_shaping_tps_configuration": schemaAttribute4f29445de76a2fa95ba51f71(),
-			// Property: TrafficShapingType
-			"traffic_shaping_type": schemaAttribute2f6ef542deadb8bec2cfd839(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee7282d1e53c559d43819107() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DynamicVariable
-				"dynamic_variable": schemaAttribute0525c874bdd64c5b572ec240(),
-				// Property: Operator
-				"operator": schemaAttributed63abfd9a9d38aabe85a7fb2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The configuration for the dynamic variables that determine which ad breaks that MediaTailor inserts prefetched ads in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8e8b3911281f3933f265ff8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndTime
-			"end_time": schemaAttributec9ea1b73761cb57da603214e(),
-			// Property: RecurringConsumption
-			"recurring_consumption": schemaAttribute44642d082f76973bccef9143(),
-			// Property: RecurringRetrieval
-			"recurring_retrieval": schemaAttributee3c8b104f784bca52bb14b3e(),
-			// Property: StartTime
-			"start_time": schemaAttributedb8be924743eeeb38aaf0618(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe5389776fe75a862bef828b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of transactions per second (TPS) that your ad decision server (ADS) can handle.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediatailor_prefetch_schedule", prefetchScheduleDataSource)
 }
@@ -343,7 +31,10 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the prefetch schedule.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6c74165ef51ee89ab4397b14(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the prefetch schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Consumption
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +82,42 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"consumption": schemaAttribute764c8abc25f4ae99e747f657(),
+		"consumption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailMatchingCriteria
+				"avail_matching_criteria": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DynamicVariable
+							"dynamic_variable": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The dynamic variable(s) that MediaTailor should use as avail matching criteria.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Operator
+							"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is used for the comparison.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "If you only want MediaTailor to insert prefetched ads into avails that match specific dynamic variables, set the avail matching criteria.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EndTime
+				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The time when MediaTailor no longer considers the prefetched ads for use in an ad break, as an ISO 8601 date-time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartTime
+				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The time when prefetched ads are considered for use in an ad break, as an ISO 8601 date-time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -399,7 +125,10 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name to assign to the prefetch schedule.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute87f531507106b4da0e601cf9(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name to assign to the prefetch schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PlaybackConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +136,10 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name of the playback configuration.",
 		//	  "type": "string"
 		//	}
-		"playback_configuration_name": schemaAttribute1cb1ec01e5936cf16328f90a(),
+		"playback_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the playback configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecurringPrefetchConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -519,7 +251,103 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"recurring_prefetch_configuration": schemaAttributef8e8b3911281f3933f265ff8(),
+		"recurring_prefetch_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndTime
+				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The end time for the window that MediaTailor prefetches and inserts ads in a live event, as an ISO 8601 date-time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RecurringConsumption
+				"recurring_consumption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AvailMatchingCriteria
+						"avail_matching_criteria": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DynamicVariable
+									"dynamic_variable": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The dynamic variable(s) that MediaTailor should use as avail matching criteria.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Operator
+									"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is used for the comparison.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The configuration for the dynamic variables that determine which ad breaks that MediaTailor inserts prefetched ads in.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RetrievedAdExpirationSeconds
+						"retrieved_ad_expiration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of seconds that an ad is available for insertion after it was prefetched.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RecurringRetrieval
+				"recurring_retrieval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DelayAfterAvailEndSeconds
+						"delay_after_avail_end_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of seconds that MediaTailor waits after an ad avail before prefetching ads for the next avail.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DynamicVariables
+						"dynamic_variables": // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The dynamic variables to use for substitution during prefetch requests to the ADS.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrafficShapingRetrievalWindow
+						"traffic_shaping_retrieval_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RetrievalWindowDurationSeconds
+								"retrieval_window_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The amount of time, in seconds, that MediaTailor spreads prefetch requests to the ADS.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrafficShapingTpsConfiguration
+						"traffic_shaping_tps_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PeakConcurrentUsers
+								"peak_concurrent_users": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The expected peak number of concurrent viewers for your content.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PeakTps
+								"peak_tps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of transactions per second (TPS) that your ad decision server (ADS) can handle.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrafficShapingType
+						"traffic_shaping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates the type of traffic shaping used to limit the number of requests to the ADS at one time.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartTime
+				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The start time for the window that MediaTailor prefetches and inserts ads in a live event, as an ISO 8601 date-time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Retrieval
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +412,62 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"retrieval": schemaAttribute97f78ceb726a853b9fedde50(),
+		"retrieval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DynamicVariables
+				"dynamic_variables": // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The dynamic variables to use for substitution during prefetch requests to the ad decision server (ADS).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EndTime
+				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The time when prefetch retrieval ends for the ad break, as an ISO 8601 date-time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartTime
+				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The time when prefetch retrievals can start for this break, as an ISO 8601 date-time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrafficShapingRetrievalWindow
+				"traffic_shaping_retrieval_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RetrievalWindowDurationSeconds
+						"retrieval_window_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The amount of time, in seconds, that MediaTailor spreads prefetch requests to the ADS.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrafficShapingTpsConfiguration
+				"traffic_shaping_tps_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PeakConcurrentUsers
+						"peak_concurrent_users": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The expected peak number of concurrent viewers for your content.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PeakTps
+						"peak_tps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of transactions per second (TPS) that your ad decision server (ADS) can handle.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrafficShapingType
+				"traffic_shaping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates the type of traffic shaping used to limit the number of requests to the ADS at one time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleType
 		// CloudFormation resource type schema:
 		//
@@ -596,7 +479,10 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"schedule_type": schemaAttribute64bfa2360f895e88c9820f54(),
+		"schedule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The frequency that MediaTailor creates prefetch schedules.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamId
 		// CloudFormation resource type schema:
 		//
@@ -604,7 +490,10 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration.",
 		//	  "type": "string"
 		//	}
-		"stream_id": schemaAttribute817b2da0ded430f8687d4b90(),
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -628,7 +517,22 @@ func prefetchScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute93b679365b08a0b273a043e3(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the prefetch schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

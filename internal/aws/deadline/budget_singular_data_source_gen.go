@@ -15,180 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f380735fa0ba078575957ca() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee3d89e97d5a2d783f513aeae(),
-				// Property: Value
-				"value": schemaAttribute36d9fe9d4cb510add0cd4005(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e87fc7a98bc4eb8a77b346e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the budget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1fb0a95eb04b670ce657d6f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the budget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fe71c1962d2eb0265796190() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage threshold for the budget action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36d9fe9d4cb510add0cd4005() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44721b5be67be2cdd19e70fd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Fixed
-			"fixed": schemaAttributece98d49fa805e132f8147b0d(),
-		}, /*END SCHEMA*/
-		Description: "The start and end time of the budget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute499e3afe310a5cca3e4955d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The farm ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a49d66e497b2e78951744d5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttributecda21e47ea9797c54d95a457(),
-				// Property: ThresholdPercentage
-				"threshold_percentage": schemaAttribute2fe71c1962d2eb0265796190(),
-				// Property: Type
-				"type": schemaAttributeeb92de5f0d5791b51427d1b5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The budget actions to specify what happens when the budget runs out.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f9a9f03862a625a0dc164fa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: QueueId
-			"queue_id": schemaAttribute83afbd7136f10f7e2db952a5(),
-		}, /*END SCHEMA*/
-		Description: "The usage details of the allotted budget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute778c6254c4a5196dd9d4bc58() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The dollar limit based on consumed usage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83afbd7136f10f7e2db952a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The queue ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute897a76b82dddf4272a4d1563() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name of the budget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9df25478e2b14313c77f4793() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the budget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecda21e47ea9797c54d95a457() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the budget action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece98d49fa805e132f8147b0d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndTime
-			"end_time": schemaAttributed10de1cc690aaf756900552a(),
-			// Property: StartTime
-			"start_time": schemaAttributedc657272356c116fb01c4aea(),
-		}, /*END SCHEMA*/
-		Description: "The details of a fixed budget schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed10de1cc690aaf756900552a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "When the budget ends.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc657272356c116fb01c4aea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "When the budget starts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3d89e97d5a2d783f513aeae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb92de5f0d5791b51427d1b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of budget action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed15e157b67062d35700adbe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The budget ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_budget", budgetDataSource)
 }
@@ -237,7 +63,29 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"actions": schemaAttribute5a49d66e497b2e78951744d5(),
+		"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description for the budget action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ThresholdPercentage
+					"threshold_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The percentage threshold for the budget action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of budget action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The budget actions to specify what happens when the budget runs out.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApproximateDollarLimit
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +94,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0.01,
 		//	  "type": "number"
 		//	}
-		"approximate_dollar_limit": schemaAttribute778c6254c4a5196dd9d4bc58(),
+		"approximate_dollar_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The dollar limit based on consumed usage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +105,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the budget.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute9df25478e2b14313c77f4793(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the budget.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BudgetId
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +117,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^budget-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"budget_id": schemaAttributeed15e157b67062d35700adbe(),
+		"budget_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The budget ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +130,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1e87fc7a98bc4eb8a77b346e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the budget.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +143,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute897a76b82dddf4272a4d1563(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name of the budget.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FarmId
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +155,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schemaAttribute499e3afe310a5cca3e4955d3(),
+		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The farm ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +193,31 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schedule": schemaAttribute44721b5be67be2cdd19e70fd(),
+		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Fixed
+				"fixed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EndTime
+						"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "When the budget ends.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartTime
+						"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "When the budget starts.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The details of a fixed budget schedule.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The start and end time of the budget.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +229,10 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute1fb0a95eb04b670ce657d6f7(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the budget.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +265,24 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute0f380735fa0ba078575957ca(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UsageTrackingResource
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +301,17 @@ func budgetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"usage_tracking_resource": schemaAttribute6f9a9f03862a625a0dc164fa(),
+		"usage_tracking_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QueueId
+				"queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The queue ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The usage details of the allotted budget.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,341 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07ee1527b8454509f37a1e24() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaFunctionArn
-			"lambda_function_arn": schemaAttributecbbde66bb0d1a10a8011980d(),
-		}, /*END SCHEMA*/
-		Description: "An ARN of a Lambda function in valid ARN format. This can be the ARN of a Lambda function that exists in the current account or in another account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b724db58b1cbc4d897c9c18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes that an Item is stored in the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f7841e3b259062b98cbf62e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization type that the HTTP endpoint requires.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d37fdf95cc406db5cc884e0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EventBusArn
-			"event_bus_arn": schemaAttributefc272c7ed73d9e79946fd4e5(),
-		}, /*END SCHEMA*/
-		Description: "ARN for the EventBridge bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute347b3cb0ed98e8dc51c5a200() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsRegion
-			"aws_region": schemaAttributea35b9eb6a541c662f004d31e(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute71dd09849533fa08645e641e(),
-		}, /*END SCHEMA*/
-		Description: "AWS Region and Endpoints for an Amazon OpenSearch Service domain in your account.\nAs of September 2021, Amazon Elasticsearch Service is Amazon OpenSearch Service. This property is deprecated. For new data sources, use OpenSearchServiceConfig to specify an OpenSearch Service data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d06189864868d9b942f70a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The signing Region for AWS Identity and Access Management authorization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d393ae5c17f6175fbe883bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of relational data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute427b2d6b4ba7e10515054b99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The signing service name for AWS Identity and Access Management authorization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute435606c77a1e4da00d706ec2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationType
-			"authorization_type": schemaAttribute0f7841e3b259062b98cbf62e(),
-			// Property: AwsIamConfig
-			"aws_iam_config": schemaAttributef6cae7fe0a8371fdbe4f9a7d(),
-		}, /*END SCHEMA*/
-		Description: "The authorization configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45fe12cdd54bd4cd4bf00527() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute498a65f67229e4e152c56d10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The table name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b18afed041ce895854529c9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RdsHttpEndpointConfig
-			"rds_http_endpoint_config": schemaAttributefc5bec9bc88e2c6730567ff7(),
-			// Property: RelationalDatabaseSourceType
-			"relational_database_source_type": schemaAttribute3d393ae5c17f6175fbe883bc(),
-		}, /*END SCHEMA*/
-		Description: "Relational Database configuration of the relational database data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50b021198e94da73a2de388f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsRegion
-			"aws_region": schemaAttributea35b9eb6a541c662f004d31e(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute71dd09849533fa08645e641e(),
-		}, /*END SCHEMA*/
-		Description: "AWS Region and Endpoints for an Amazon OpenSearch Service domain in your account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute551e98febc6bf68aad4f7a56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS Region for RDS HTTP endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d85bf63f73c4433a79095cd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BaseTableTTL
-			"base_table_ttl": schemaAttribute0b724db58b1cbc4d897c9c18(),
-			// Property: DeltaSyncTableName
-			"delta_sync_table_name": schemaAttributef0cbb11bea97451448f857b5(),
-			// Property: DeltaSyncTableTTL
-			"delta_sync_table_ttl": schemaAttribute74bf124e82f96107807d985c(),
-		}, /*END SCHEMA*/
-		Description: "The DeltaSyncConfig for a versioned datasource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a5525934eae3bf15dd40e43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the API key, such as arn:aws:appsync:us-east-1:123456789012:apis/graphqlapiid/datasources/datasourcename.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c0db8a9842709d4ce4ef0c5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set to TRUE to use AWS Identity and Access Management with this data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71a6699ffaf108385168e541() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Logical schema name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71dd09849533fa08645e641e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7469d280e82adb7b58534bb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique AWS AppSync GraphQL API identifier where this data source will be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74bf124e82f96107807d985c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77af9046eb56f1dd8fb6d865() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7869d9670b8e201830cde322() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Logical database name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91e0fec4525c3ef11ec621bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea17edb203e79845cfff30897() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationConfig
-			"authorization_config": schemaAttribute435606c77a1e4da00d706ec2(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute71dd09849533fa08645e641e(),
-		}, /*END SCHEMA*/
-		Description: "Endpoints for an HTTP data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea35b9eb6a541c662f004d31e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa20f1f2942caf2351ed54d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon RDS cluster Amazon Resource Name (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaa92d9e921982d662e4e767() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Friendly name for you to identify your AppSync data source after creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac14d95c8856024d4a96850e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsRegion
-			"aws_region": schemaAttributea35b9eb6a541c662f004d31e(),
-			// Property: DeltaSyncConfig
-			"delta_sync_config": schemaAttribute5d85bf63f73c4433a79095cd(),
-			// Property: TableName
-			"table_name": schemaAttribute498a65f67229e4e152c56d10(),
-			// Property: UseCallerCredentials
-			"use_caller_credentials": schemaAttribute6c0db8a9842709d4ce4ef0c5(),
-			// Property: Versioned
-			"versioned": schemaAttributed6c29d0d4a80702f2dd908e1(),
-		}, /*END SCHEMA*/
-		Description: "AWS Region and TableName for an Amazon DynamoDB table in your account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2598852a1156e0bb1ad7aa3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbbde66bb0d1a10a8011980d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6c29d0d4a80702f2dd908e1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set to TRUE to use Conflict Detection and Resolution with this data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1b3eef1dae2cda1d4635451() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for database credentials stored in AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0cbb11bea97451448f857b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Delta Sync table name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6cae7fe0a8371fdbe4f9a7d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SigningRegion
-			"signing_region": schemaAttribute3d06189864868d9b942f70a5(),
-			// Property: SigningServiceName
-			"signing_service_name": schemaAttribute427b2d6b4ba7e10515054b99(),
-		}, /*END SCHEMA*/
-		Description: "The AWS Identity and Access Management settings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc272c7ed73d9e79946fd4e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN for the EventBridge bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc5bec9bc88e2c6730567ff7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsRegion
-			"aws_region": schemaAttribute551e98febc6bf68aad4f7a56(),
-			// Property: AwsSecretStoreArn
-			"aws_secret_store_arn": schemaAttributee1b3eef1dae2cda1d4635451(),
-			// Property: DatabaseName
-			"database_name": schemaAttribute7869d9670b8e201830cde322(),
-			// Property: DbClusterIdentifier
-			"db_cluster_identifier": schemaAttributeaa20f1f2942caf2351ed54d7(),
-			// Property: Schema
-			"schema": schemaAttribute71a6699ffaf108385168e541(),
-		}, /*END SCHEMA*/
-		Description: "Information about the Amazon RDS resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_data_source", dataSourceDataSource)
 }
@@ -364,7 +29,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Unique AWS AppSync GraphQL API identifier where this data source will be created.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttribute7469d280e82adb7b58534bb5(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique AWS AppSync GraphQL API identifier where this data source will be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSourceArn
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +40,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the API key, such as arn:aws:appsync:us-east-1:123456789012:apis/graphqlapiid/datasources/datasourcename.",
 		//	  "type": "string"
 		//	}
-		"data_source_arn": schemaAttribute6a5525934eae3bf15dd40e43(),
+		"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the API key, such as arn:aws:appsync:us-east-1:123456789012:apis/graphqlapiid/datasources/datasourcename.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +51,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the data source.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute45fe12cdd54bd4cd4bf00527(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DynamoDBConfig
 		// CloudFormation resource type schema:
 		//
@@ -435,7 +109,54 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"dynamo_db_config": schemaAttributeac14d95c8856024d4a96850e(),
+		"dynamo_db_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsRegion
+				"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeltaSyncConfig
+				"delta_sync_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BaseTableTTL
+						"base_table_ttl": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The number of minutes that an Item is stored in the data source.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeltaSyncTableName
+						"delta_sync_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Delta Sync table name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeltaSyncTableTTL
+						"delta_sync_table_ttl": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The DeltaSyncConfig for a versioned datasource.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TableName
+				"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The table name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseCallerCredentials
+				"use_caller_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set to TRUE to use AWS Identity and Access Management with this data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Versioned
+				"versioned": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set to TRUE to use Conflict Detection and Resolution with this data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AWS Region and TableName for an Amazon DynamoDB table in your account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticsearchConfig
 		// CloudFormation resource type schema:
 		//
@@ -458,7 +179,22 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"elasticsearch_config": schemaAttribute347b3cb0ed98e8dc51c5a200(),
+		"elasticsearch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsRegion
+				"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AWS Region and Endpoints for an Amazon OpenSearch Service domain in your account.\nAs of September 2021, Amazon Elasticsearch Service is Amazon OpenSearch Service. This property is deprecated. For new data sources, use OpenSearchServiceConfig to specify an OpenSearch Service data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBridgeConfig
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +212,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"event_bridge_config": schemaAttribute2d37fdf95cc406db5cc884e0(),
+		"event_bridge_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventBusArn
+				"event_bus_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN for the EventBridge bus.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "ARN for the EventBridge bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HttpConfig
 		// CloudFormation resource type schema:
 		//
@@ -523,7 +269,46 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"http_config": schemaAttributea17edb203e79845cfff30897(),
+		"http_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizationConfig
+				"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthorizationType
+						"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authorization type that the HTTP endpoint requires.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AwsIamConfig
+						"aws_iam_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SigningRegion
+								"signing_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The signing Region for AWS Identity and Access Management authorization.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SigningServiceName
+								"signing_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The signing service name for AWS Identity and Access Management authorization.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The AWS Identity and Access Management settings.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The authorization configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Endpoints for an HTTP data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LambdaConfig
 		// CloudFormation resource type schema:
 		//
@@ -541,7 +326,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lambda_config": schemaAttribute07ee1527b8454509f37a1e24(),
+		"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LambdaFunctionArn
+				"lambda_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN for the Lambda function.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An ARN of a Lambda function in valid ARN format. This can be the ARN of a Lambda function that exists in the current account or in another account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsConfig
 		// CloudFormation resource type schema:
 		//
@@ -553,7 +348,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metrics_config": schemaAttribute77af9046eb56f1dd8fb6d865(),
+		"metrics_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -561,7 +359,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Friendly name for you to identify your AppSync data source after creation.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeaaa92d9e921982d662e4e767(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Friendly name for you to identify your AppSync data source after creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OpenSearchServiceConfig
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +385,22 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"open_search_service_config": schemaAttribute50b021198e94da73a2de388f(),
+		"open_search_service_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsRegion
+				"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Endpoint
+				"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AWS Region and Endpoints for an Amazon OpenSearch Service domain in your account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseConfig
 		// CloudFormation resource type schema:
 		//
@@ -634,7 +450,49 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"relational_database_config": schemaAttribute4b18afed041ce895854529c9(),
+		"relational_database_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RdsHttpEndpointConfig
+				"rds_http_endpoint_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AwsRegion
+						"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "AWS Region for RDS HTTP endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AwsSecretStoreArn
+						"aws_secret_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN for database credentials stored in AWS Secrets Manager.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Logical database name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DbClusterIdentifier
+						"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Amazon RDS cluster Amazon Resource Name (ARN).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Schema
+						"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Logical schema name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about the Amazon RDS resource.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RelationalDatabaseSourceType
+				"relational_database_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of relational data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Relational Database configuration of the relational database data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -642,7 +500,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.",
 		//	  "type": "string"
 		//	}
-		"service_role_arn": schemaAttributec2598852a1156e0bb1ad7aa3(),
+		"service_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -650,7 +511,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the data source.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute91e0fec4525c3ef11ec621bb(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

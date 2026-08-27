@@ -24,66 +24,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1bb563487d1b22cb7f3340e0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The downstream scopes that Glue identity center configuration can access",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.UniqueValues(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66584e98d3e682996b58d19c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Glue IAM identity center application arn",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aad34c735fe38df416df143() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enable or disable user background sessions for Glue Identity Center",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute832d87e5cffc4e50a9310361() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM identity center instance arn",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(10, 1224),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5c7bbc17695ee43cd9db9c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified AWS account.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_glue_identity_center_configuration", identityCenterConfigurationResource)
 }
@@ -99,7 +39,13 @@ func identityCenterConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The identifier for the specified AWS account.",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributed5c7bbc17695ee43cd9db9c9(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the specified AWS account.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +56,13 @@ func identityCenterConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttribute66584e98d3e682996b58d19c(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Glue IAM identity center application arn",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +73,17 @@ func identityCenterConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute832d87e5cffc4e50a9310361(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM identity center instance arn",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(10, 1224),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Scopes
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +96,18 @@ func identityCenterConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"scopes": schemaAttribute1bb563487d1b22cb7f3340e0(),
+		"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The downstream scopes that Glue identity center configuration can access",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UserBackgroundSessionsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +115,14 @@ func identityCenterConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "Enable or disable user background sessions for Glue Identity Center",
 		//	  "type": "boolean"
 		//	}
-		"user_background_sessions_enabled": schemaAttribute7aad34c735fe38df416df143(),
+		"user_background_sessions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable or disable user background sessions for Glue Identity Center",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

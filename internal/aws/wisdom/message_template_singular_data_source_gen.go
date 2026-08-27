@@ -15,917 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02155b70db3b183c8cdb7c2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state in which a customer lives.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute072d2a1cab4381d6d5a2183f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Any additional information relevant to the customer's profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cb315c19ba2461157ddd7b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The second line of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0db9da18d8b472b93d4991db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fourth line of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f8244eed0194271a6c70e6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The county of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15f188df21aa986c6c1f7750() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's last name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1803e03e7bf699086b292153() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The third line of a customer address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19ae1513ea21542602d5f8af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's first name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b200796a52f20814f3c8662() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The third line of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b768495d8a2c004e8994b30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fourth line of a customer?s shipping address",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f6cb8ac981f85d22614ef9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's business phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26b89aea815361eb48220614() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fourth line of a customer address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b97cb5403f525bd75fdbc0f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirstName
-			"first_name": schemaAttribute8efe2c21b83e8c9c7bcbfbbd(),
-			// Property: LastName
-			"last_name": schemaAttribute621f032f3fb7ee54d9da1268(),
-		}, /*END SCHEMA*/
-		Description: "The agent attributes that are used with the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2df1af61fae1f1b9835b8492() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The third line of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e2df2f94b94dc0b390bbd37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique account number that you have given to the customer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30b6dbe95130992aa0c610ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The county of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute369318422ddeee3b0e00cc7e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttributec59b896ab7cb8d3e351cbddc(),
-		}, /*END SCHEMA*/
-		Description: "The SystemEndpoint attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36ca1bfb579b12bef065e75e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of values that define different groups of Amazon Q in Connect users.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39c81c6befbab2336325d3e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the customer's business.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ce739b5f514b9adc742f706() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dd15ba80d47283c1f9ef5f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42daab56e89fb95f225386ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content SHA256 of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4414c60af136cd0f1a0e4c43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The country in which a customer lives.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45eedd38bf73b197006c70d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute490945e32378bfe94ef1fc8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The country of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dfe150d7ddefd4edc1a22db() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Html
-			"html": schemaAttributebebd21f121455c0c9cd8623a(),
-			// Property: PlainText
-			"plain_text": schemaAttributeb62fb586be6564e412baa3d6(),
-		}, /*END SCHEMA*/
-		Description: "The body to use in email messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4eb7edc2fbbcf799538d3c49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's email address, which has not been specified as a personal or business address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54d9c1b1f21ade0634588ad8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The first line of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b5b91b43bbe5e299f77b391() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The custom attributes that are used with the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b69b7836c234d9c9279651d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AgentAttributes
-			"agent_attributes": schemaAttribute2b97cb5403f525bd75fdbc0f(),
-			// Property: CustomAttributes
-			"custom_attributes": schemaAttribute5b5b91b43bbe5e299f77b391(),
-			// Property: CustomerProfileAttributes
-			"customer_profile_attributes": schemaAttributee93ab7a8678035bbc377f445(),
-			// Property: SystemAttributes
-			"system_attributes": schemaAttribute5fd53dc4ec3722563ed3f4c8(),
-		}, /*END SCHEMA*/
-		Description: "An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bffd4bf209fff2b0541ae30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the knowledge base to which the message template belongs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d5b3b0d553e48edafee90d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fb27b9223a58e5dbade5c24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The city of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fd53dc4ec3722563ed3f4c8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomerEndpoint
-			"customer_endpoint": schemaAttributecc381163fd5feca3943fafb8(),
-			// Property: Name
-			"name": schemaAttributeb345da3301bd4614bc833fef(),
-			// Property: SystemEndpoint
-			"system_endpoint": schemaAttribute369318422ddeee3b0e00cc7e(),
-		}, /*END SCHEMA*/
-		Description: "The system attributes that are used with the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute621f032f3fb7ee54d9da1268() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The agent?s last name as entered in their Amazon Connect user account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute656307daa3d715e5212319d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's party type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65973fbbf046bb5dbf125b16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the email header.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute689700a99c56be2f644dd5ad() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributef033bd9edd1586834ce81d91(),
-				// Property: Value
-				"value": schemaAttribute65973fbbf046bb5dbf125b16(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The email headers to include in email messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68b81d491d70f95fcf88d93e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The city in which a customer lives.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute692ad4acc99766615ac8969e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ed3b483f3984445c802052c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The city of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f7a2059baba1e055069cb10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71dd997b0edc3b96ce405ed2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a customer profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75bff7944483d1c8e4079a16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's middle name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75e9addaaa3212421e0ccb74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The county of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c1e0eee1e60594de87e574f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The first line of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82e5086dc4512a81f5f6359a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subject line, or title, to use in email messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8664d829c96d3026a83dca4d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EmailMessageTemplateContent
-			"email_message_template_content": schemaAttributedc0ebb25ab1b9d63d6d4e447(),
-			// Property: SmsMessageTemplateContent
-			"sms_message_template_content": schemaAttributee8cbad251cfef6c274b6f05d(),
-		}, /*END SCHEMA*/
-		Description: "The content of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8690b654acc35ec139d124af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's phone number, which has not been specified as a mobile, home, or business number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87775175cb92a517d70d58dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's business email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8797a4cae822070dfaafe18e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The second line of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8efe2c21b83e8c9c7bcbfbbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The agent?s first name as entered in their Amazon Connect user account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute938f74f5bda01506ecc79f1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The province of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97bd5a91dc40d16b9ec187bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the attachment file being uploaded. The name should include the file extension.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ac94b7af96ad904d731d9a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The province of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bd88f33136ca22013df602b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The channel subtype this message template applies to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bfcd27b934cc6be3bde8e09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The city of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f14a1cac93a3a8afc1fa1a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 Presigned URL for the attachment file. When generating the PreSignedUrl, please ensure that the expires-in time is set to 30 minutes. The URL can be generated through the AWS Console or through the AWS CLI (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea190129fdf491372f35243ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6a174137c4ebdfcc42b2111() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The second line of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea861254508e33b7ffa22e0b3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AttachmentId
-				"attachment_id": schemaAttribute5d5b3b0d553e48edafee90d7(),
-				// Property: AttachmentName
-				"attachment_name": schemaAttribute97bd5a91dc40d16b9ec187bf(),
-				// Property: S3PresignedUrl
-				"s3_presigned_url": schemaAttribute9f14a1cac93a3a8afc1fa1a4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of message template attachments",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead714be5fb81360f03c306e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead982343d3cfd7af32bee81f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The criteria used for grouping Amazon Q in Connect users.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2d2b2991aed2eec1b62e6f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code value for the language in which the message template is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb345da3301bd4614bc833fef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the task.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb62fb586be6564e412baa3d6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Content
-			"content": schemaAttribute5d5b3b0d553e48edafee90d7(),
-		}, /*END SCHEMA*/
-		Description: "The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7c6ad13e11b570f6fa2087b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fourth line of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7fea86b0ed5e0a71fdcd108() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The first line of a customer address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8b84cfb45bd004bda3f322e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The county in which a customer lives.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebebd21f121455c0c9cd8623a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Content
-			"content": schemaAttribute5d5b3b0d553e48edafee90d7(),
-		}, /*END SCHEMA*/
-		Description: "The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf0a6f453a207dc156149cc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The postal code of a customer address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4ad706f6b43c61f95986ae7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The postal code of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec52d777488cd649ea7a6b08c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec59b896ab7cb8d3e351cbddc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's phone number if used with customerEndpoint, or the number the customer dialed to call your contact center if used with systemEndpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9de043ff70ea74ccb1ada27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's gender.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca4c271274baa1787021d9b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The postal code of a customer?s mailing address",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc381163fd5feca3943fafb8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttributec59b896ab7cb8d3e351cbddc(),
-		}, /*END SCHEMA*/
-		Description: "The CustomerEndpoint attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccd4a5de6ca2ef1077abe3b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's birth date.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece3a6deda3163f780babf420() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The postal code of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed16b6940a18e2c093bca7512() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PlainText
-			"plain_text": schemaAttributee06af36517be4124edfa15b6(),
-		}, /*END SCHEMA*/
-		Description: "The body to use in SMS messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed255b2ee08a3191ed5e41112() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The country of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8085e75300c93b36bee2097() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's mobile phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda1c01c7dcab31612ca7f6a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The second line of a customer address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda1f407881bf06e7ee84cd46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The province in which a customer lives.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc0ebb25ab1b9d63d6d4e447() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Body
-			"body": schemaAttribute4dfe150d7ddefd4edc1a22db(),
-			// Property: Headers
-			"headers": schemaAttribute689700a99c56be2f644dd5ad(),
-			// Property: Subject
-			"subject": schemaAttribute82e5086dc4512a81f5f6359a(),
-		}, /*END SCHEMA*/
-		Description: "The content of message template that applies to email channel subtype.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee06af36517be4124edfa15b6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Content
-			"content": schemaAttribute5d5b3b0d553e48edafee90d7(),
-		}, /*END SCHEMA*/
-		Description: "The container of message template body.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0fe613e6c50db6a25f73c63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee755cf3919edc2be7b71dcfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer's home phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8cbad251cfef6c274b6f05d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Body
-			"body": schemaAttributed16b6940a18e2c093bca7512(),
-		}, /*END SCHEMA*/
-		Description: "The content of message template that applies to SMS channel subtype.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee93ab7a8678035bbc377f445() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountNumber
-			"account_number": schemaAttribute2e2df2f94b94dc0b390bbd37(),
-			// Property: AdditionalInformation
-			"additional_information": schemaAttribute072d2a1cab4381d6d5a2183f(),
-			// Property: Address1
-			"address_1": schemaAttributeb7fea86b0ed5e0a71fdcd108(),
-			// Property: Address2
-			"address_2": schemaAttributeda1c01c7dcab31612ca7f6a6(),
-			// Property: Address3
-			"address_3": schemaAttribute1803e03e7bf699086b292153(),
-			// Property: Address4
-			"address_4": schemaAttribute26b89aea815361eb48220614(),
-			// Property: BillingAddress1
-			"billing_address_1": schemaAttribute54d9c1b1f21ade0634588ad8(),
-			// Property: BillingAddress2
-			"billing_address_2": schemaAttribute8797a4cae822070dfaafe18e(),
-			// Property: BillingAddress3
-			"billing_address_3": schemaAttribute2df1af61fae1f1b9835b8492(),
-			// Property: BillingAddress4
-			"billing_address_4": schemaAttribute0db9da18d8b472b93d4991db(),
-			// Property: BillingCity
-			"billing_city": schemaAttribute6ed3b483f3984445c802052c(),
-			// Property: BillingCountry
-			"billing_country": schemaAttributed255b2ee08a3191ed5e41112(),
-			// Property: BillingCounty
-			"billing_county": schemaAttribute75e9addaaa3212421e0ccb74(),
-			// Property: BillingPostalCode
-			"billing_postal_code": schemaAttributec4ad706f6b43c61f95986ae7(),
-			// Property: BillingProvince
-			"billing_province": schemaAttributeef9d8d0717c7fb1e5c814238(),
-			// Property: BillingState
-			"billing_state": schemaAttributee0fe613e6c50db6a25f73c63(),
-			// Property: BirthDate
-			"birth_date": schemaAttributeccd4a5de6ca2ef1077abe3b6(),
-			// Property: BusinessEmailAddress
-			"business_email_address": schemaAttribute87775175cb92a517d70d58dc(),
-			// Property: BusinessName
-			"business_name": schemaAttribute39c81c6befbab2336325d3e3(),
-			// Property: BusinessPhoneNumber
-			"business_phone_number": schemaAttribute1f6cb8ac981f85d22614ef9a(),
-			// Property: City
-			"city": schemaAttribute68b81d491d70f95fcf88d93e(),
-			// Property: Country
-			"country": schemaAttribute4414c60af136cd0f1a0e4c43(),
-			// Property: County
-			"county": schemaAttributeb8b84cfb45bd004bda3f322e(),
-			// Property: Custom
-			"custom": schemaAttribute5b5b91b43bbe5e299f77b391(),
-			// Property: EmailAddress
-			"email_address": schemaAttribute4eb7edc2fbbcf799538d3c49(),
-			// Property: FirstName
-			"first_name": schemaAttribute19ae1513ea21542602d5f8af(),
-			// Property: Gender
-			"gender": schemaAttributec9de043ff70ea74ccb1ada27(),
-			// Property: HomePhoneNumber
-			"home_phone_number": schemaAttributee755cf3919edc2be7b71dcfd(),
-			// Property: LastName
-			"last_name": schemaAttribute15f188df21aa986c6c1f7750(),
-			// Property: MailingAddress1
-			"mailing_address_1": schemaAttributef47e66c0db626edf150d19b9(),
-			// Property: MailingAddress2
-			"mailing_address_2": schemaAttribute0cb315c19ba2461157ddd7b7(),
-			// Property: MailingAddress3
-			"mailing_address_3": schemaAttributef90f12cc045445332fa85346(),
-			// Property: MailingAddress4
-			"mailing_address_4": schemaAttributeb7c6ad13e11b570f6fa2087b(),
-			// Property: MailingCity
-			"mailing_city": schemaAttribute5fb27b9223a58e5dbade5c24(),
-			// Property: MailingCountry
-			"mailing_country": schemaAttribute490945e32378bfe94ef1fc8c(),
-			// Property: MailingCounty
-			"mailing_county": schemaAttribute30b6dbe95130992aa0c610ac(),
-			// Property: MailingPostalCode
-			"mailing_postal_code": schemaAttributeca4c271274baa1787021d9b1(),
-			// Property: MailingProvince
-			"mailing_province": schemaAttribute9ac94b7af96ad904d731d9a5(),
-			// Property: MailingState
-			"mailing_state": schemaAttribute692ad4acc99766615ac8969e(),
-			// Property: MiddleName
-			"middle_name": schemaAttribute75bff7944483d1c8e4079a16(),
-			// Property: MobilePhoneNumber
-			"mobile_phone_number": schemaAttributed8085e75300c93b36bee2097(),
-			// Property: PartyType
-			"party_type": schemaAttribute656307daa3d715e5212319d9(),
-			// Property: PhoneNumber
-			"phone_number": schemaAttribute8690b654acc35ec139d124af(),
-			// Property: PostalCode
-			"postal_code": schemaAttributebf0a6f453a207dc156149cc6(),
-			// Property: ProfileARN
-			"profile_arn": schemaAttribute71dd997b0edc3b96ce405ed2(),
-			// Property: ProfileId
-			"profile_id": schemaAttributeecff28e0e9c07acb0ef5058f(),
-			// Property: Province
-			"province": schemaAttributeda1f407881bf06e7ee84cd46(),
-			// Property: ShippingAddress1
-			"shipping_address_1": schemaAttribute7c1e0eee1e60594de87e574f(),
-			// Property: ShippingAddress2
-			"shipping_address_2": schemaAttributea6a174137c4ebdfcc42b2111(),
-			// Property: ShippingAddress3
-			"shipping_address_3": schemaAttribute1b200796a52f20814f3c8662(),
-			// Property: ShippingAddress4
-			"shipping_address_4": schemaAttribute1b768495d8a2c004e8994b30(),
-			// Property: ShippingCity
-			"shipping_city": schemaAttribute9bfcd27b934cc6be3bde8e09(),
-			// Property: ShippingCountry
-			"shipping_country": schemaAttributefdea8963251ac72f3c39ffa9(),
-			// Property: ShippingCounty
-			"shipping_county": schemaAttribute0f8244eed0194271a6c70e6b(),
-			// Property: ShippingPostalCode
-			"shipping_postal_code": schemaAttributece3a6deda3163f780babf420(),
-			// Property: ShippingProvince
-			"shipping_province": schemaAttribute938f74f5bda01506ecc79f1c(),
-			// Property: ShippingState
-			"shipping_state": schemaAttribute45eedd38bf73b197006c70d1(),
-			// Property: State
-			"state": schemaAttribute02155b70db3b183c8cdb7c2f(),
-		}, /*END SCHEMA*/
-		Description: "The customer profile attributes that are used with the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecff28e0e9c07acb0ef5058f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a customer profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef9d8d0717c7fb1e5c814238() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The province of a customer?s billing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef033bd9edd1586834ce81d91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the email header.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef47e66c0db626edf150d19b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The first line of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef67b945ad92aea891115b475() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea190129fdf491372f35243ed(),
-				// Property: Value
-				"value": schemaAttribute6f7a2059baba1e055069cb10(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef90f12cc045445332fa85346() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The third line of a customer?s mailing address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9a0216fcf575a7e9d5d2b2d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Criteria
-			"criteria": schemaAttributead982343d3cfd7af32bee81f(),
-			// Property: Values
-			"values": schemaAttribute36ca1bfb579b12bef065e75e(),
-		}, /*END SCHEMA*/
-		Description: "The configuration information of the user groups that the message template is accessible to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdea8963251ac72f3c39ffa9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The country of a customer?s shipping address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_message_template", messageTemplateDataSource)
 }
@@ -945,7 +34,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"channel_subtype": schemaAttribute9bd88f33136ca22013df602b(),
+		"channel_subtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The channel subtype this message template applies to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -1071,7 +163,97 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"content": schemaAttribute8664d829c96d3026a83dca4d(),
+		"content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EmailMessageTemplateContent
+				"email_message_template_content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Body
+						"body": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Html
+								"html": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Content
+										"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The message body, in HTML format, to use in email messages that are based on the message template. We recommend using HTML format for email clients that render HTML content. You can include links, formatted text, and more in an HTML message.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PlainText
+								"plain_text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Content
+										"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The message body, in plain text format, to use in email messages that are based on the message template. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The body to use in email messages.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Headers
+						"headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the email header.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The value of the email header.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The email headers to include in email messages.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subject
+						"subject": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The subject line, or title, to use in email messages.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The content of message template that applies to email channel subtype.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SmsMessageTemplateContent
+				"sms_message_template_content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Body
+						"body": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PlainText
+								"plain_text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Content
+										"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The container of message template body.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The body to use in SMS messages.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The content of message template that applies to SMS channel subtype.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The content of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultAttributes
 		// CloudFormation resource type schema:
 		//
@@ -1515,7 +697,371 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"default_attributes": schemaAttribute5b69b7836c234d9c9279651d(),
+		"default_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AgentAttributes
+				"agent_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FirstName
+						"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The agent?s first name as entered in their Amazon Connect user account.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LastName
+						"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The agent?s last name as entered in their Amazon Connect user account.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The agent attributes that are used with the message template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomAttributes
+				"custom_attributes": // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The custom attributes that are used with the message template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomerProfileAttributes
+				"customer_profile_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccountNumber
+						"account_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A unique account number that you have given to the customer.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AdditionalInformation
+						"additional_information": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Any additional information relevant to the customer's profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Address1
+						"address_1": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The first line of a customer address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Address2
+						"address_2": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The second line of a customer address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Address3
+						"address_3": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The third line of a customer address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Address4
+						"address_4": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The fourth line of a customer address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingAddress1
+						"billing_address_1": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The first line of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingAddress2
+						"billing_address_2": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The second line of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingAddress3
+						"billing_address_3": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The third line of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingAddress4
+						"billing_address_4": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The fourth line of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingCity
+						"billing_city": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The city of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingCountry
+						"billing_country": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The country of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingCounty
+						"billing_county": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The county of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingPostalCode
+						"billing_postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The postal code of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingProvince
+						"billing_province": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The province of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BillingState
+						"billing_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The state of a customer?s billing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BirthDate
+						"birth_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's birth date.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BusinessEmailAddress
+						"business_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's business email address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BusinessName
+						"business_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the customer's business.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BusinessPhoneNumber
+						"business_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's business phone number.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: City
+						"city": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The city in which a customer lives.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Country
+						"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The country in which a customer lives.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: County
+						"county": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The county in which a customer lives.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Custom
+						"custom":            // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The custom attributes that are used with the message template.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailAddress
+						"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's email address, which has not been specified as a personal or business address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FirstName
+						"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's first name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Gender
+						"gender": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's gender.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HomePhoneNumber
+						"home_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's home phone number.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LastName
+						"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's last name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingAddress1
+						"mailing_address_1": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The first line of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingAddress2
+						"mailing_address_2": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The second line of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingAddress3
+						"mailing_address_3": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The third line of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingAddress4
+						"mailing_address_4": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The fourth line of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingCity
+						"mailing_city": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The city of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingCountry
+						"mailing_country": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The country of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingCounty
+						"mailing_county": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The county of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingPostalCode
+						"mailing_postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The postal code of a customer?s mailing address",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingProvince
+						"mailing_province": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The province of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MailingState
+						"mailing_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The state of a customer?s mailing address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MiddleName
+						"middle_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's middle name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MobilePhoneNumber
+						"mobile_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's mobile phone number.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PartyType
+						"party_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's party type.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PhoneNumber
+						"phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The customer's phone number, which has not been specified as a mobile, home, or business number.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PostalCode
+						"postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The postal code of a customer address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProfileARN
+						"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of a customer profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProfileId
+						"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The unique identifier of a customer profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Province
+						"province": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The province in which a customer lives.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingAddress1
+						"shipping_address_1": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The first line of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingAddress2
+						"shipping_address_2": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The second line of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingAddress3
+						"shipping_address_3": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The third line of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingAddress4
+						"shipping_address_4": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The fourth line of a customer?s shipping address",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingCity
+						"shipping_city": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The city of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingCountry
+						"shipping_country": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The country of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingCounty
+						"shipping_county": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The county of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingPostalCode
+						"shipping_postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The postal code of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingProvince
+						"shipping_province": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The province of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShippingState
+						"shipping_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The state of a customer?s shipping address.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The state in which a customer lives.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The customer profile attributes that are used with the message template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SystemAttributes
+				"system_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomerEndpoint
+						"customer_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Address
+								"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The customer's phone number if used with customerEndpoint, or the number the customer dialed to call your contact center if used with systemEndpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The CustomerEndpoint attribute.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the task.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SystemEndpoint
+						"system_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Address
+								"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The customer's phone number if used with customerEndpoint, or the number the customer dialed to call your contact center if used with systemEndpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The SystemEndpoint attribute.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The system attributes that are used with the message template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object that specifies the default values to use for variables in the message template. This object contains different categories of key-value pairs. Each key defines a variable or placeholder in the message template. The corresponding value defines the default value for that variable.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1526,7 +1072,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9\\\\s_.,-]+",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3ce739b5f514b9adc742f706(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1559,7 +1108,23 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"grouping_configuration": schemaAttributef9a0216fcf575a7e9d5d2b2d(),
+		"grouping_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Criteria
+				"criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The criteria used for grouping Amazon Q in Connect users.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Values
+				"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of values that define different groups of Amazon Q in Connect users.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration information of the user groups that the message template is accessible to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseArn
 		// CloudFormation resource type schema:
 		//
@@ -1568,7 +1133,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_arn": schemaAttribute5bffd4bf209fff2b0541ae30(),
+		"knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the knowledge base to which the message template belongs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Language
 		// CloudFormation resource type schema:
 		//
@@ -1578,7 +1146,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"language": schemaAttributeb2d2b2991aed2eec1b62e6f2(),
+		"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code value for the language in which the message template is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -1587,7 +1158,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 		//	  "type": "string"
 		//	}
-		"message_template_arn": schemaAttribute3dd15ba80d47283c1f9ef5f0(),
+		"message_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateAttachments
 		// CloudFormation resource type schema:
 		//
@@ -1622,7 +1196,28 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"message_template_attachments": schemaAttributea861254508e33b7ffa22e0b3(),
+		"message_template_attachments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttachmentId
+					"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: AttachmentName
+					"attachment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the attachment file being uploaded. The name should include the file extension.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3PresignedUrl
+					"s3_presigned_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The S3 Presigned URL for the attachment file. When generating the PreSignedUrl, please ensure that the expires-in time is set to 30 minutes. The URL can be generated through the AWS Console or through the AWS CLI (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of message template attachments",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -1632,7 +1227,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"message_template_content_sha_256": schemaAttribute42daab56e89fb95f225386ea(),
+		"message_template_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content SHA256 of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -1641,7 +1239,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"message_template_id": schemaAttributec52d777488cd649ea7a6b08c(),
+		"message_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1652,7 +1253,10 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9\\\\s_.,-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributead714be5fb81360f03c306e3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1686,7 +1290,24 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef67b945ad92aea891115b475(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

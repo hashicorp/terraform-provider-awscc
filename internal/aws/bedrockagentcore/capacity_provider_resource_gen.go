@@ -31,1002 +31,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute0be6f6ac2c213eb3a84fa777() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LaunchParameters
-			"launch_parameters": schemaAttribute27da99703b56cbcea808b8c3(),
-		}, /*END SCHEMA*/
-		Description: "How the launch template is specified.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e650dd4df022eb75d5080e7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Ec2Configuration
-			"ec_2_configuration": schemaAttributedc754afe1fa6d95602f1459f(),
-		}, /*END SCHEMA*/
-		Description: "The capacity configuration for the capacity provider. Defines the compute resources for this capacity provider.",
-		Required:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute116c86544141e9b8ab7dba32() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput in MiB/s. Only valid for gp3 volumes.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(125, 2000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute141e8fbe4b21c8c534027272() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedInstanceTypes
-			"allowed_instance_types": schemaAttribute28cd8fc7f8be3c805b5e7ccf(),
-		}, /*END SCHEMA*/
-		Description: "Requirements for EC2 instance types.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute157de61774cc438f11355b06() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput to provision for a gp3 volume, in MiB/s. Valid range: 125-2000 MiB/s.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(125, 2000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18d8a03c085d20bc5991a38f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EbsCardIndex
-			"ebs_card_index": schemaAttribute2108442b467d6d0b4a7583e6(),
-			// Property: Encrypted
-			"encrypted": schemaAttribute71ee13f149be3d8cde6ba824(),
-			// Property: Iops
-			"iops": schemaAttributeda8608d6e1d3c9dd182d582d(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributee8d063d27f5dcdab24ca3b36(),
-			// Property: SnapshotId
-			"snapshot_id": schemaAttributeb08f4c8d77bb25c4e9d3eb95(),
-			// Property: Throughput
-			"throughput": schemaAttribute349f895a0cc19db47bd5029d(),
-			// Property: VolumeInitializationRate
-			"volume_initialization_rate": schemaAttribute3f590bb369276f37456bd6a0(),
-			// Property: VolumeSize
-			"volume_size": schemaAttribute1f197f7f6167d904f95cc057(),
-			// Property: VolumeType
-			"volume_type": schemaAttribute3910f5e1c5bd040788577d68(),
-		}, /*END SCHEMA*/
-		Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cb173b9b6b5c3c7adb51eb3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of the subnets in which to launch instances.",
-		Required:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 16),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-zA-Z]{8,17}$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1db9a094fef71edcc849934c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f197f7f6167d904f95cc057() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the volume, in GiBs.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 65536),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2108442b467d6d0b4a7583e6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The index of the EBS card. Applies to instances with multiple EBS cards.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.AtLeast(0),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23a9c25147f8919e7a2198fd() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tags to apply to all EC2 resources (instances, volumes, and network interfaces) created by this capacity provider.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27da99703b56cbcea808b8c3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationSpecification
-			"capacity_reservation_specification": schemaAttributee7214909867c01e192b32854(),
-			// Property: EphemeralVolumes
-			"ephemeral_volumes": schemaAttributee48efc58e0924b746af68c90(),
-			// Property: InstanceProfileArn
-			"instance_profile_arn": schemaAttributed76610a108104131fc328b22(),
-			// Property: InstanceRequirements
-			"instance_requirements": schemaAttribute141e8fbe4b21c8c534027272(),
-			// Property: LicenseSpecifications
-			"license_specifications": schemaAttributec35752491097ab61828418b5(),
-			// Property: Monitoring
-			"monitoring": schemaAttribute9b44f89ec4cdf6c20de09c48(),
-			// Property: OperatingSystem
-			"operating_system": schemaAttribute7583827a4d50e397a0ec79f3(),
-			// Property: PropagatedTags
-			"propagated_tags": schemaAttribute23a9c25147f8919e7a2198fd(),
-			// Property: SshKeyName
-			"ssh_key_name": schemaAttribute6a0c2b08690c82dc225c7e5c(),
-		}, /*END SCHEMA*/
-		Description: "Parameters for launching EC2 instances.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28cd8fc7f8be3c805b5e7ccf() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of allowed instance types.",
-		Required:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 30),
-			listvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(1, 255),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute349f895a0cc19db47bd5029d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput to provision for a gp3 volume, in MiB/s.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(125, 2000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute379bde40f9d2d222f1278ee6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityProviderOperatorRoleArn
-			"capacity_provider_operator_role_arn": schemaAttribute9876a5da9b166c7c9d3bcb43(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for permissions associated with a capacity provider.",
-		Required:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3910f5e1c5bd040788577d68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The volume type. Defaults to gp3 if not specified.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"standard",
-				"io1",
-				"io2",
-				"gp2",
-				"sc1",
-				"st1",
-				"gp3",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a306fa1ee5a0cce746448d7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EbsConfiguration
-				"ebs_configuration": schemaAttribute8cac245fd272027fcf7b9669(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Named persistent EBS volumes for this capacity provider.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(5),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b9712eb5a2ac64b99d8d93c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated regardless of activity. Default: 28800 seconds (8 hours). Maximum: 1209600 seconds (14 days).",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(60, 1209600),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ce99360ae6c994725f7fe2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logical name of the volume, used to reference it when mounting.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 48),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f590bb369276f37456bd6a0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The rate at which the volume is initialized after creation, in MiB/s. Supported only for volumes created from snapshots. If the snapshot is enabled for fast snapshot restore and a volume initialization rate is also specified, the volume is initialized at the specified rate instead of by fast snapshot restore. Valid range: 100-300 MiB/s.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(100, 300),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4835384775c2cac4944725b0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of the security groups to associate with the instances.",
-		Required:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 16),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]{8,17}$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f3dac646b808865c328c969() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdleInstanceTimeout
-			"idle_instance_timeout": schemaAttribute56a01f9c041a1c7889c80f0c(),
-			// Property: MaxLifetime
-			"max_lifetime": schemaAttribute3b9712eb5a2ac64b99d8d93c(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for managing the lifecycle of instances in a capacity provider.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54a291dfdf861500accbdec4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to encrypt the volume. Defaults to true.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56a01f9c041a1c7889c80f0c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds an instance can remain idle before it is stopped.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(60, 1209600),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58787ee2690772833abd267e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device name (for example, /dev/sdh or xvdh).",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/._-]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a2d68185c552f6b1ce5062d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the capacity provider.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a0c2b08690c82dc225c7e5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SSH key pair to configure on instances for SSH connectivity.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[!-~][ -~]*[!-~]$|^[!-~]$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6eb0bf8d12c15f234b8b7d6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The EBS volume type. Defaults to gp3 if not specified.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"standard",
-				"io1",
-				"io2",
-				"gp2",
-				"sc1",
-				"st1",
-				"gp3",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71ee13f149be3d8cde6ba824() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the EBS volume is encrypted.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7583827a4d50e397a0ec79f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operating system and CPU architecture for the instances.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"LINUX_X86_64",
-				"LINUX_ARM64",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8962dafd953861d32b5454e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional EBS snapshot ID to initialize the volume from.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(13, 64),
-			stringvalidator.RegexMatches(regexp.MustCompile("^snap-[a-f0-9]{8,17}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cac245fd272027fcf7b9669() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encrypted
-			"encrypted": schemaAttribute54a291dfdf861500accbdec4(),
-			// Property: Iops
-			"iops": schemaAttributee4bb4c7a7a13d1fde378b30e(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributeb5602119e26d8dffa8be4032(),
-			// Property: Name
-			"name": schemaAttribute3ce99360ae6c994725f7fe2e(),
-			// Property: SizeGiB
-			"size_gi_b": schemaAttributea457e9ac65910cc671a3fbc1(),
-			// Property: SnapshotId
-			"snapshot_id": schemaAttribute8962dafd953861d32b5454e8(),
-			// Property: Throughput
-			"throughput": schemaAttribute116c86544141e9b8ab7dba32(),
-			// Property: VolumeType
-			"volume_type": schemaAttribute6eb0bf8d12c15f234b8b7d6f(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an EBS-backed persistent volume.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute931a59c298f5143f0f0ff472() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The free space guaranteed on the root volume, in GiB. The service adds the operating system overhead on top of this value. Defaults to 8 GiB. The maximum is below the 65,536 GiB gp3 ceiling because the service adds the AMI size bucket on top of this value, and the resulting total must still be a provisionable gp3 volume.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(2, 65000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9876a5da9b166c7c9d3bcb43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that operators use to manage the capacity provider.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b44f89ec4cdf6c20de09c48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The monitoring level for the instance.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"BASIC",
-				"DETAILED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea457e9ac65910cc671a3fbc1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the volume in GiB.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 65536),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead4096cdf4be4df908b9ea71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the capacity provider.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 48),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]{0,47}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb08f4c8d77bb25c4e9d3eb95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the snapshot.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(13, 64),
-			stringvalidator.RegexMatches(regexp.MustCompile("^snap-[a-f0-9]{8,17}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2fd060f41ce7c4a056ca1f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the capacity provider was last updated.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb52464a3c3de0b703cdafc08() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encrypted
-			"encrypted": schemaAttribute1db9a094fef71edcc849934c(),
-			// Property: FreeSpaceGiB
-			"free_space_gi_b": schemaAttribute931a59c298f5143f0f0ff472(),
-			// Property: Iops
-			"iops": schemaAttributee4bb4c7a7a13d1fde378b30e(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributee8d063d27f5dcdab24ca3b36(),
-			// Property: Throughput
-			"throughput": schemaAttribute157de61774cc438f11355b06(),
-			// Property: VolumeType
-			"volume_type": schemaAttribute6eb0bf8d12c15f234b8b7d6f(),
-		}, /*END SCHEMA*/
-		Description: "Customer-facing configuration for the (service-managed) root volume. The service provisions the root volume at its own AMI size estimate plus FreeSpaceGiB, and pins the visible free space to FreeSpaceGiB with a filler file, so the space you are guaranteed does not change as the underlying AMI grows. The device name and the delete-on-termination behavior are service-owned and are not configurable.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5602119e26d8dffa8be4032() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier of the KMS key to use for encryption.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1d62ae7bcd07b73766e67b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationId
-			"capacity_reservation_id": schemaAttributef31d7f3b8d8a40e08abae645(),
-			// Property: CapacityReservationResourceGroupArn
-			"capacity_reservation_resource_group_arn": schemaAttributee36f7bea99dd5d7754fa860c(),
-		}, /*END SCHEMA*/
-		Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec35752491097ab61828418b5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LicenseConfigurationArn
-				"license_configuration_arn": schemaAttributed8a87f345439b9055b051d49(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The license configurations.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(5),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccf2586df90f6fe25ff3ec12() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroups
-			"security_groups": schemaAttribute4835384775c2cac4944725b0(),
-			// Property: Subnets
-			"subnets": schemaAttribute1cb173b9b6b5c3c7adb51eb3(),
-		}, /*END SCHEMA*/
-		Description: "VPC configuration for launching EC2 instances.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1c37997498a5d29d2b8cf37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the capacity provider.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed76610a108104131fc328b22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM instance profile to associate with launched instances.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:instance-profile/([!-~]{1,510}/)?([\\w+=,.@-]{1,128})$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8a87f345439b9055b051d49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the license configuration.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:license-manager:[a-z0-9-]+:[0-9]{12}:license-configuration:[a-zA-Z0-9_-]+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8d3690aa304b15a9fd89079() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the capacity provider was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda8608d6e1d3c9dd182d582d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of I/O operations per second (IOPS).",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(100, 256000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc754afe1fa6d95602f1459f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LaunchTemplateSource
-			"launch_template_source": schemaAttribute0be6f6ac2c213eb3a84fa777(),
-			// Property: LifecycleConfiguration
-			"lifecycle_configuration": schemaAttribute4f3dac646b808865c328c969(),
-			// Property: RootVolume
-			"root_volume": schemaAttributeb52464a3c3de0b703cdafc08(),
-			// Property: Volumes
-			"volumes": schemaAttribute3a306fa1ee5a0cce746448d7(),
-			// Property: VpcConfiguration
-			"vpc_configuration": schemaAttributeccf2586df90f6fe25ff3ec12(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for EC2-based capacity.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee02dc0f407b9c1354d115ec9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The virtual device name (ephemeralN).",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-			stringvalidator.RegexMatches(regexp.MustCompile("^ephemeral[0-9]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2e0ad42a0fb67b8ec56cc9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the capacity provider.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee36f7bea99dd5d7754fa860c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Capacity Reservation resource group in which to run the instance.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:resource-groups:[a-z0-9-]+:[0-9]{12}:group/[a-zA-Z0-9_-]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee48efc58e0924b746af68c90() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeviceName
-				"device_name": schemaAttribute58787ee2690772833abd267e(),
-				// Property: Ebs
-				"ebs": schemaAttribute18d8a03c085d20bc5991a38f(),
-				// Property: VirtualName
-				"virtual_name": schemaAttributee02dc0f407b9c1354d115ec9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The block device mapping for ephemeral (instance store) volumes.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(5),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4bb4c7a7a13d1fde378b30e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(100, 256000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7214909867c01e192b32854() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationPreference
-			"capacity_reservation_preference": schemaAttributef97328f59f8e0cba556017ee(),
-			// Property: CapacityReservationTarget
-			"capacity_reservation_target": schemaAttributec1d62ae7bcd07b73766e67b4(),
-		}, /*END SCHEMA*/
-		Description: "The Capacity Reservation targeting option.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8d063d27f5dcdab24ca3b36() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier of the customer managed KMS key to use for EBS encryption.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef15447328eec2fe5c7bce932() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description of the capacity provider.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 4096),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2b5496c6c7afaefdc03d900() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeff67949a1e5a4a7a6abe7f40(),
-				// Property: Value
-				"value": schemaAttributefedfb0d215a4455de673a55e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to the capacity provider.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef31d7f3b8d8a40e08abae645() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Capacity Reservation in which to run the instance.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-			stringvalidator.RegexMatches(regexp.MustCompile("^cr-[0-9a-z]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef97328f59f8e0cba556017ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the instance's Capacity Reservation preferences.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"capacity-reservations-only",
-				"open",
-				"none",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefedfb0d215a4455de673a55e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff67949a1e5a4a7a6abe7f40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_bedrockagentcore_capacity_provider", capacityProviderResource)
 	registry.AddListResourceFactory("awscc_bedrockagentcore_capacity_provider", generic.NewListResource(capacityProviderResource))
@@ -1044,7 +48,13 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5a2d68185c552f6b1ce5062d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the capacity provider.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CapacityProviderId
 		// CloudFormation resource type schema:
 		//
@@ -1055,7 +65,13 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"capacity_provider_id": schemaAttributee2e0ad42a0fb67b8ec56cc9c(),
+		"capacity_provider_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the capacity provider.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ComputeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1501,7 +517,683 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"compute_configuration": schemaAttribute0e650dd4df022eb75d5080e7(),
+		"compute_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ec2Configuration
+				"ec_2_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LaunchTemplateSource
+						"launch_template_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LaunchParameters
+								"launch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CapacityReservationSpecification
+										"capacity_reservation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CapacityReservationPreference
+												"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates the instance's Capacity Reservation preferences.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"capacity-reservations-only",
+															"open",
+															"none",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: CapacityReservationTarget
+												"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CapacityReservationId
+														"capacity_reservation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the Capacity Reservation in which to run the instance.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 255),
+																stringvalidator.RegexMatches(regexp.MustCompile("^cr-[0-9a-z]+$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: CapacityReservationResourceGroupArn
+														"capacity_reservation_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ARN of the Capacity Reservation resource group in which to run the instance.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 2048),
+																stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:resource-groups:[a-z0-9-]+:[0-9]{12}:group/[a-zA-Z0-9_-]+$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The Capacity Reservation targeting option.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: EphemeralVolumes
+										"ephemeral_volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DeviceName
+													"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The device name (for example, /dev/sdh or xvdh).",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 255),
+															stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/._-]+$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Ebs
+													"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: EbsCardIndex
+															"ebs_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The index of the EBS card. Applies to instances with multiple EBS cards.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.AtLeast(0),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Encrypted
+															"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the EBS volume is encrypted.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																	boolplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Iops
+															"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The number of I/O operations per second (IOPS).",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(100, 256000),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: KmsKeyId
+															"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Identifier of the customer managed KMS key to use for EBS encryption.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(20, 2048),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: SnapshotId
+															"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The ID of the snapshot.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(13, 64),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^snap-[a-f0-9]{8,17}$"), ""),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Throughput
+															"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The throughput to provision for a gp3 volume, in MiB/s.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(125, 2000),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: VolumeInitializationRate
+															"volume_initialization_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The rate at which the volume is initialized after creation, in MiB/s. Supported only for volumes created from snapshots. If the snapshot is enabled for fast snapshot restore and a volume initialization rate is also specified, the volume is initialized at the specified rate instead of by fast snapshot restore. Valid range: 100-300 MiB/s.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(100, 300),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: VolumeSize
+															"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The size of the volume, in GiBs.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(1, 65536),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: VolumeType
+															"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The volume type. Defaults to gp3 if not specified.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.OneOf(
+																		"standard",
+																		"io1",
+																		"io2",
+																		"gp2",
+																		"sc1",
+																		"st1",
+																		"gp3",
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: VirtualName
+													"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The virtual device name (ephemeralN).",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 255),
+															stringvalidator.RegexMatches(regexp.MustCompile("^ephemeral[0-9]+$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The block device mapping for ephemeral (instance store) volumes.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtMost(5),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: InstanceProfileArn
+										"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the IAM instance profile to associate with launched instances.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:instance-profile/([!-~]{1,510}/)?([\\w+=,.@-]{1,128})$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: InstanceRequirements
+										"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowedInstanceTypes
+												"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Description: "List of allowed instance types.",
+													Required:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 30),
+														listvalidator.ValueStringsAre(
+															stringvalidator.LengthBetween(1, 255),
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Requirements for EC2 instance types.",
+											Required:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: LicenseSpecifications
+										"license_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: LicenseConfigurationArn
+													"license_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN of the license configuration.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+															stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:license-manager:[a-z0-9-]+:[0-9]{12}:license-configuration:[a-zA-Z0-9_-]+$"), ""),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The license configurations.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtMost(5),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Monitoring
+										"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The monitoring level for the instance.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"BASIC",
+													"DETAILED",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: OperatingSystem
+										"operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The operating system and CPU architecture for the instances.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"LINUX_X86_64",
+													"LINUX_ARM64",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PropagatedTags
+										"propagated_tags":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Tags to apply to all EC2 resources (instances, volumes, and network interfaces) created by this capacity provider.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SshKeyName
+										"ssh_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the SSH key pair to configure on instances for SSH connectivity.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 255),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[!-~][ -~]*[!-~]$|^[!-~]$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Parameters for launching EC2 instances.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "How the launch template is specified.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfiguration
+						"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleInstanceTimeout
+								"idle_instance_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of seconds an instance can remain idle before it is stopped.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(60, 1209600),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MaxLifetime
+								"max_lifetime": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated regardless of activity. Default: 28800 seconds (8 hours). Maximum: 1209600 seconds (14 days).",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(60, 1209600),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for managing the lifecycle of instances in a capacity provider.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RootVolume
+						"root_volume": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Encrypted
+								"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: FreeSpaceGiB
+								"free_space_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The free space guaranteed on the root volume, in GiB. The service adds the operating system overhead on top of this value. Defaults to 8 GiB. The maximum is below the 65,536 GiB gp3 ceiling because the service adds the AMI size bucket on top of this value, and the resulting total must still be a provisionable gp3 volume.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(2, 65000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Iops
+								"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(100, 256000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKeyId
+								"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Identifier of the customer managed KMS key to use for EBS encryption.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(20, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Throughput
+								"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The throughput to provision for a gp3 volume, in MiB/s. Valid range: 125-2000 MiB/s.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(125, 2000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: VolumeType
+								"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The EBS volume type. Defaults to gp3 if not specified.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"standard",
+											"io1",
+											"io2",
+											"gp2",
+											"sc1",
+											"st1",
+											"gp3",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Customer-facing configuration for the (service-managed) root volume. The service provisions the root volume at its own AMI size estimate plus FreeSpaceGiB, and pins the visible free space to FreeSpaceGiB with a filler file, so the space you are guaranteed does not change as the underlying AMI grows. The device name and the delete-on-termination behavior are service-owned and are not configurable.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Volumes
+						"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EbsConfiguration
+									"ebs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Encrypted
+											"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "Whether to encrypt the volume. Defaults to true.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Iops
+											"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(100, 256000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: KmsKeyId
+											"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Identifier of the KMS key to use for encryption.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(20, 2048),
+													stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The logical name of the volume, used to reference it when mounting.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 48),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SizeGiB
+											"size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The size of the volume in GiB.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(1, 65536),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SnapshotId
+											"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Optional EBS snapshot ID to initialize the volume from.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(13, 64),
+													stringvalidator.RegexMatches(regexp.MustCompile("^snap-[a-f0-9]{8,17}$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Throughput
+											"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The throughput in MiB/s. Only valid for gp3 volumes.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(125, 2000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: VolumeType
+											"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The EBS volume type. Defaults to gp3 if not specified.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"standard",
+														"io1",
+														"io2",
+														"gp2",
+														"sc1",
+														"st1",
+														"gp3",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration for an EBS-backed persistent volume.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Named persistent EBS volumes for this capacity provider.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtMost(5),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroups
+								"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The IDs of the security groups to associate with the instances.",
+									Required:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 16),
+										listvalidator.ValueStringsAre(
+											stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]{8,17}$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Subnets
+								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The IDs of the subnets in which to launch instances.",
+									Required:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 16),
+										listvalidator.ValueStringsAre(
+											stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-zA-Z]{8,17}$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "VPC configuration for launching EC2 instances.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for EC2-based capacity.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The capacity configuration for the capacity provider. Defines the compute resources for this capacity provider.",
+			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1510,7 +1202,14 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributed8d3690aa304b15a9fd89079(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the capacity provider was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1520,7 +1219,17 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef15447328eec2fe5c7bce932(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description of the capacity provider.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 4096),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1529,7 +1238,14 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttributeb2fd060f41ce7c4a056ca1f2(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the capacity provider was last updated.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1540,7 +1256,17 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributead4096cdf4be4df908b9ea71(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the capacity provider.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 48),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]{0,47}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1561,7 +1287,24 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"permissions_configuration": schemaAttribute379bde40f9d2d222f1278ee6(),
+		"permissions_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityProviderOperatorRoleArn
+				"capacity_provider_operator_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that operators use to manage the capacity provider.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for permissions associated with a capacity provider.",
+			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1577,7 +1320,13 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributed1c37997498a5d29d2b8cf37(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the capacity provider.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1610,7 +1359,44 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef2b5496c6c7afaefdc03d900(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to the capacity provider.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

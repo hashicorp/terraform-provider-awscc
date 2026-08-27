@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute92150c9b65814742e6b2bbb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the target account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb885717b61b2feed45cc7bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the target account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4c65de65f67abd6d5046214() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role for the target account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef700a2b82a4192a29fa72fa1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the experiment template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_fis_target_account_configuration", targetAccountConfigurationDataSource)
 }
@@ -58,7 +30,10 @@ func targetAccountConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute92150c9b65814742e6b2bbb8(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID of the target account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +42,10 @@ func targetAccountConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebb885717b61b2feed45cc7bf(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the target account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExperimentTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +53,10 @@ func targetAccountConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the experiment template.",
 		//	  "type": "string"
 		//	}
-		"experiment_template_id": schemaAttributef700a2b82a4192a29fa72fa1(),
+		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the experiment template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -84,7 +65,10 @@ func targetAccountConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "maxLength": 1224,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributee4c65de65f67abd6d5046214(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role for the target account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

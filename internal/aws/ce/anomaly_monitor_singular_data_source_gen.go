@@ -14,90 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute021eb02291ecbb4fd9040f46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The dimensions to evaluate",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ed52e6abb04006e3d83fa54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date when the monitor last evaluated for anomalies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21dd17e3935044bad9627ff0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute262473b6e8a7481db32bda14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49e67130fcdb82e469f0cc33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the monitor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80a2d165f0664f367e4c1798() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Monitor ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea326e3c05e82d242bf918fb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9cbeaf5ec4186d92f7b6519() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value for evaluated dimensions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebefd302ff3bb08e9d6976fdb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date when the monitor was created. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec931684e1fe359f5b283d4e3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute262473b6e8a7481db32bda14(),
-				// Property: Value
-				"value": schemaAttributea326e3c05e82d242bf918fb8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to monitor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf0c7a203d3826c29b81f5d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date when the monitor was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ce_anomaly_monitor", anomalyMonitorDataSource)
 }
@@ -116,7 +32,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
 		//	  "type": "string"
 		//	}
-		"creation_date": schemaAttributebefd302ff3bb08e9d6976fdb(),
+		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date when the monitor was created. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DimensionalValueCount
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +44,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"dimensional_value_count": schemaAttributeb9cbeaf5ec4186d92f7b6519(),
+		"dimensional_value_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The value for evaluated dimensions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastEvaluatedDate
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +58,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?|(NOT_EVALUATED_YET)",
 		//	  "type": "string"
 		//	}
-		"last_evaluated_date": schemaAttribute1ed52e6abb04006e3d83fa54(),
+		"last_evaluated_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date when the monitor last evaluated for anomalies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedDate
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +72,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
 		//	  "type": "string"
 		//	}
-		"last_updated_date": schemaAttributecf0c7a203d3826c29b81f5d4(),
+		"last_updated_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date when the monitor was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorArn
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +84,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
-		"monitor_arn": schemaAttribute80a2d165f0664f367e4c1798(),
+		"monitor_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Monitor ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorDimension
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +101,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"monitor_dimension": schemaAttribute021eb02291ecbb4fd9040f46(),
+		"monitor_dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The dimensions to evaluate",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorName
 		// CloudFormation resource type schema:
 		//
@@ -181,14 +115,19 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\S\\s]*",
 		//	  "type": "string"
 		//	}
-		"monitor_name": schemaAttribute49e67130fcdb82e469f0cc33(),
+		"monitor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorSpecification
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"monitor_specification": schemaAttribute21dd17e3935044bad9627ff0(),
+		"monitor_specification": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorType
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +138,9 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"monitor_type": schemaAttribute21dd17e3935044bad9627ff0(),
+		"monitor_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +175,24 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"resource_tags": schemaAttributec931684e1fe359f5b283d4e3(),
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

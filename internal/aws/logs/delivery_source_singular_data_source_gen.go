@@ -15,102 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01a4f980144affcc29d10e58() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c97008511459db8e473c265() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS service that is sending logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute149c29ea67de71831d8975c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fee6f35146f1a25cd717e62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the resource that will be sending the logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66dc04454c8e8b199afe63f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94b57cad2ea9ca9d4d6c5fae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the Log source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99240deb0f58996d6f19ff67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab28bba4996f62ce56bc6043() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute66dc04454c8e8b199afe63f7(),
-				// Property: Value
-				"value": schemaAttribute99240deb0f58996d6f19ff67(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags that have been assigned to this delivery source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee35dba7d1317ab8200d0ae20() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "This array contains the ARN of the AWS resource that sends logs and is represented by this delivery source. Currently, only one ARN can be in the array.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3f33786eaa1133dbb60855b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee42f3e37a7e2eb1dfdadcd73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4c4c0bfe011b4eafd666ce4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of logs being delivered. Only mandatory when the resourceArn could match more than one. In such a case, the error message will contain all the possible options.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_delivery_source", deliverySourceDataSource)
 }
@@ -129,7 +33,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute149c29ea67de71831d8975c3(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliverySourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +52,12 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"delivery_source_configuration": schemaAttribute01a4f980144affcc29d10e58(),
+		"delivery_source_configuration": // Pattern: ""
+		schema.MapAttribute{             /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogType
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +68,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\w-]*$",
 		//	  "type": "string"
 		//	}
-		"log_type": schemaAttributef4c4c0bfe011b4eafd666ce4(),
+		"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of logs being delivered. Only mandatory when the resourceArn could match more than one. In such a case, the error message will contain all the possible options.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +82,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\w-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute94b57cad2ea9ca9d4d6c5fae(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the Log source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +96,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttribute4fee6f35146f1a25cd717e62(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the resource that will be sending the logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArns
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +116,11 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resource_arns": schemaAttributee35dba7d1317ab8200d0ae20(),
+		"resource_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "This array contains the ARN of the AWS resource that sends logs and is represented by this delivery source. Currently, only one ARN can be in the array.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Service
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +131,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\w-]*$",
 		//	  "type": "string"
 		//	}
-		"service": schemaAttribute0c97008511459db8e473c265(),
+		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS service that is sending logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +146,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee3f33786eaa1133dbb60855b(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +160,10 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status_reason": schemaAttributee42f3e37a7e2eb1dfdadcd73(),
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +196,24 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeab28bba4996f62ce56bc6043(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags that have been assigned to this delivery source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

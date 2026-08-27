@@ -17,66 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute053a9c2b5d701f250d7745f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A json encoded string of the template constraint rules",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fb05a293b52f8e52a692344() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// AcceptLanguage is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute453359352bd711e460894292() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The portfolio identifier.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a72fc60de801921ab669040() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the constraint",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2ae2684d09d90bbb82eb8b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The product identifier.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb96de96ff3e7d47204ab367() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the constraint.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_launch_template_constraint", launchTemplateConstraintResource)
 }
@@ -92,7 +32,15 @@ func launchTemplateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schemaAttribute0fb05a293b52f8e52a692344(),
+		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AcceptLanguage is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +48,14 @@ func launchTemplateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The description of the constraint.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeeb96de96ff3e7d47204ab367(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the constraint.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +63,13 @@ func launchTemplateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "Unique identifier for the constraint",
 		//	  "type": "string"
 		//	}
-		"launch_template_constraint_id": schemaAttribute8a72fc60de801921ab669040(),
+		"launch_template_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for the constraint",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +77,13 @@ func launchTemplateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schemaAttribute453359352bd711e460894292(),
+		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The portfolio identifier.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +91,13 @@ func launchTemplateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The product identifier.",
 		//	  "type": "string"
 		//	}
-		"product_id": schemaAttributea2ae2684d09d90bbb82eb8b6(),
+		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The product identifier.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +105,10 @@ func launchTemplateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "A json encoded string of the template constraint rules",
 		//	  "type": "string"
 		//	}
-		"rules": schemaAttribute053a9c2b5d701f250d7745f0(),
+		"rules": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A json encoded string of the template constraint rules",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -14,116 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0927980a9f5813120b43d72c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Memory for the Graph.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a6ca92a0487b6315a890213() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains a user-supplied name for the Graph. \n\nIf you don't specify a name, we generate a unique Graph Name using a combination of Stack Name and a UUID comprising of 4 characters.\n\n_Important_: If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42eee1bca84b401dadc9d39e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.\n\nWhen the Graph is publicly reachable, its Domain Name System (DNS) endpoint resolves to the public IP address from the internet.\n\nWhen the Graph isn't publicly reachable, you need to create a PrivateGraphEndpoint in a given VPC to ensure the DNS name resolves to a private IP address that is reachable from the VPC.\n\n_Default_: If not specified, the default value is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bf8769162db91d5b20f3270() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Value that indicates whether the Graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.\n\n_Default_: If not specified, the default value is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5752b3033cf53989d3459dd5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of replicas you want when finished. All replicas will be provisioned in different availability zones.\n\nReplica Count should always be less than or equal to 2.\n\n_Default_: If not specified, the default value is 1.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77485c4b591f7706a4ad804f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VectorSearchDimension
-			"vector_search_dimension": schemaAttributea5b8e874ea807eda7f931991(),
-		}, /*END SCHEMA*/
-		Description: "Vector Search Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9732c5557a8d287a6337f2b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5b8e874ea807eda7f931991() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The vector search dimension",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec546bdd36bb24d5ee84c2fc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The auto-generated id assigned by the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbd3bd78ea4fdac4dee39940() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Graph resource ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1ca1c8ca889f8e0d628bc86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection endpoint for the graph. For example: `g-12a3bcdef4.us-east-1.neptune-graph.amazonaws.com`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbeed20857e42ebaebd22e1f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeeaf5665ce337a728fa633012(),
-				// Property: Value
-				"value": schemaAttributeedcb6f5474cbca3a0af99ae5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with this graph.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaf5665ce337a728fa633012() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedcb6f5474cbca3a0af99ae5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_neptunegraph_graph", graphDataSource)
 }
@@ -139,7 +29,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Value that indicates whether the Graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.\n\n_Default_: If not specified, the default value is true.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schemaAttribute4bf8769162db91d5b20f3270(),
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Value that indicates whether the Graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.\n\n_Default_: If not specified, the default value is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +40,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The connection endpoint for the graph. For example: `g-12a3bcdef4.us-east-1.neptune-graph.amazonaws.com`",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttributed1ca1c8ca889f8e0d628bc86(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection endpoint for the graph. For example: `g-12a3bcdef4.us-east-1.neptune-graph.amazonaws.com`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GraphArn
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +51,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Graph resource ARN",
 		//	  "type": "string"
 		//	}
-		"graph_arn": schemaAttributecbd3bd78ea4fdac4dee39940(),
+		"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Graph resource ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GraphId
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +62,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The auto-generated id assigned by the service.",
 		//	  "type": "string"
 		//	}
-		"graph_id": schemaAttributec546bdd36bb24d5ee84c2fc6(),
+		"graph_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The auto-generated id assigned by the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GraphName
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +76,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"graph_name": schemaAttribute0a6ca92a0487b6315a890213(),
+		"graph_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Contains a user-supplied name for the Graph. \n\nIf you don't specify a name, we generate a unique Graph Name using a combination of Stack Name and a UUID comprising of 4 characters.\n\n_Important_: If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +90,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}",
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schemaAttribute9732c5557a8d287a6337f2b6(),
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedMemory
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +101,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Memory for the Graph.",
 		//	  "type": "integer"
 		//	}
-		"provisioned_memory": schemaAttribute0927980a9f5813120b43d72c(),
+		"provisioned_memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Memory for the Graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicConnectivity
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +112,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.\n\nWhen the Graph is publicly reachable, its Domain Name System (DNS) endpoint resolves to the public IP address from the internet.\n\nWhen the Graph isn't publicly reachable, you need to create a PrivateGraphEndpoint in a given VPC to ensure the DNS name resolves to a private IP address that is reachable from the VPC.\n\n_Default_: If not specified, the default value is false.",
 		//	  "type": "boolean"
 		//	}
-		"public_connectivity": schemaAttribute42eee1bca84b401dadc9d39e(),
+		"public_connectivity": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.\n\nWhen the Graph is publicly reachable, its Domain Name System (DNS) endpoint resolves to the public IP address from the internet.\n\nWhen the Graph isn't publicly reachable, you need to create a PrivateGraphEndpoint in a given VPC to ensure the DNS name resolves to a private IP address that is reachable from the VPC.\n\n_Default_: If not specified, the default value is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicaCount
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +123,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the number of replicas you want when finished. All replicas will be provisioned in different availability zones.\n\nReplica Count should always be less than or equal to 2.\n\n_Default_: If not specified, the default value is 1.",
 		//	  "type": "integer"
 		//	}
-		"replica_count": schemaAttribute5752b3033cf53989d3459dd5(),
+		"replica_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the number of replicas you want when finished. All replicas will be provisioned in different availability zones.\n\nReplica Count should always be less than or equal to 2.\n\n_Default_: If not specified, the default value is 1.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +159,24 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributedbeed20857e42ebaebd22e1f(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with this graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VectorSearchConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +194,17 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vector_search_configuration": schemaAttribute77485c4b591f7706a4ad804f(),
+		"vector_search_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VectorSearchDimension
+				"vector_search_dimension": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The vector search dimension",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Vector Search Configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

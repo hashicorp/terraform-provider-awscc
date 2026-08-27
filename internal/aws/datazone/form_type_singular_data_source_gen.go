@@ -15,94 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1445dd8b05b9ec0128224393() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user who created this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1755d16dfed001b32d8faf0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1fc7bf720d8f4f0305b7ba83() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Smithy
-			"smithy": schemaAttributed0f1e2d8106c4c6a1a74b790(),
-		}, /*END SCHEMA*/
-		Description: "The model of this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c27b4777733f26fced7dbfe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6175cd89d079dd37e7bd7301() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of when this Amazon DataZone metadata form type was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81e2275118fbb5f69eb94b1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabbbf44e9912aad1d08d3cf3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the project that owns this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0f1e2d8106c4c6a1a74b790() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4b8c1b2635e20b44f8f3176() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5f0f6304c0a2909fa9917e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The revision of this Amazon DataZone metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9e3a31a9a3c5a2a9bcab28c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone domain in which this metadata form type is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4bc47c686bb6c2018a95785() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone project that owns this metadata form type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_form_type", formTypeDataSource)
 }
@@ -119,7 +31,11 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute6175cd89d079dd37e7bd7301(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when this Amazon DataZone metadata form type was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +44,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute1445dd8b05b9ec0128224393(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user who created this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +57,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1755d16dfed001b32d8faf0c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +69,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributee9e3a31a9a3c5a2a9bcab28c(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone domain in which this metadata form type is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +81,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttributee9e3a31a9a3c5a2a9bcab28c(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone domain in which this metadata form type is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FormTypeIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +95,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"form_type_identifier": schemaAttributed4b8c1b2635e20b44f8f3176(),
+		"form_type_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Model
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +114,16 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"model": schemaAttribute1fc7bf720d8f4f0305b7ba83(),
+		"model": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Smithy
+				"smithy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The model of this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +134,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute81e2275118fbb5f69eb94b1b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwningProjectId
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +146,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"owning_project_id": schemaAttributeabbbf44e9912aad1d08d3cf3(),
+		"owning_project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the project that owns this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwningProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +158,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"owning_project_identifier": schemaAttributef4bc47c686bb6c2018a95785(),
+		"owning_project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone project that owns this metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Revision
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +171,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"revision": schemaAttributee5f0f6304c0a2909fa9917e1(),
+		"revision": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The revision of this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +186,10 @@ func formTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute4c27b4777733f26fced7dbfe(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this Amazon DataZone metadata form type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

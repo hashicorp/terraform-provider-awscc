@@ -15,28 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1c443a4c3d5e44b3b274f26c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the knowledge base",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43480bde2bb06ad2b5b70c85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The IAM policy document defining access permissions for the knowledge base",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4d2b70065551284c8616701() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The revision identifier for the policy, used for optimistic concurrency control",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_knowledge_base_policy", knowledgeBasePolicyDataSource)
 }
@@ -55,7 +33,10 @@ func knowledgeBasePolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_id": schemaAttribute1c443a4c3d5e44b3b274f26c(),
+		"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the knowledge base",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -63,7 +44,11 @@ func knowledgeBasePolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The IAM policy document defining access permissions for the knowledge base",
 		//	  "type": "object"
 		//	}
-		"policy_document": schemaAttribute43480bde2bb06ad2b5b70c85(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The IAM policy document defining access permissions for the knowledge base",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RevisionId
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +58,10 @@ func knowledgeBasePolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"revision_id": schemaAttributed4d2b70065551284c8616701(),
+		"revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The revision identifier for the policy, used for optimistic concurrency control",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

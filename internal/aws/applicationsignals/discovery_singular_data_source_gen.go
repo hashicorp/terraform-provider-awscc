@@ -14,13 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute234ed6e99700e6253e0ede81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_applicationsignals_discovery", discoveryDataSource)
 }
@@ -39,7 +32,10 @@ func discoveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute234ed6e99700e6253e0ede81(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the specified AWS account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

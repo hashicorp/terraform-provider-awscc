@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute87c594adb40e8e469626d207() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_inspector_assessment_target", assessmentTargetDataSource)
 }
@@ -34,21 +28,27 @@ func assessmentTargetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute87c594adb40e8e469626d207(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssessmentTargetName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"assessment_target_name": schemaAttribute87c594adb40e8e469626d207(),
+		"assessment_target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceGroupArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"resource_group_arn": schemaAttribute87c594adb40e8e469626d207(),
+		"resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

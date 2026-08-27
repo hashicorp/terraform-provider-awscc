@@ -20,282 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute09a692b3d6f733a1948efff0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CleanExpiredFiles
-			"clean_expired_files": schemaAttributefc80c055007609154e0662c5(),
-			// Property: NumberOfSnapshotsToRetain
-			"number_of_snapshots_to_retain": schemaAttribute6b00f26289e70b12bf5c10d3(),
-			// Property: SnapshotRetentionPeriodInDays
-			"snapshot_retention_period_in_days": schemaAttribute6b00f26289e70b12bf5c10d3(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for an Iceberg snapshot retention optimizer.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a2518b5d7f058ee532df726() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IcebergConfiguration
-			"iceberg_configuration": schemaAttributeef4fa4132b8eab42c7d36189(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15c79e8644fb66901dc81780() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IcebergConfiguration
-			"iceberg_configuration": schemaAttribute09a692b3d6f733a1948efff0(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for a snapshot retention optimizer for Apache Iceberg tables.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20a06aa7ee16f91f2dd3d083() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AWS Glue connection used for the VPC for the table optimizer.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25f3d8de51691558947e8089() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GlueConnectionName
-			"glue_connection_name": schemaAttribute20a06aa7ee16f91f2dd3d083(),
-		}, /*END SCHEMA*/
-		Description: "An object that describes the VPC configuration for a table optimizer. This configuration is necessary to perform optimization on tables that are in a customer VPC.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5292433e019546140871aec7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The specific number of days you want to keep the orphan files.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b00f26289e70b12bf5c10d3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7243dfe232e87031b1adf4e8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IcebergConfiguration
-			"iceberg_configuration": schemaAttributea0f3eaebdaa48b075138af81(),
-		}, /*END SCHEMA*/
-		Description: "OrphanFileDeletionConfiguration is a property that can be included within the TableOptimizer resource. It controls the automatic deletion of orphaned files - files that are not tracked by the table metadata, and older than the configured age limit.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7afda9435480925f777dd4ad() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the table optimization is enabled.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8873c671cb42fc43dc464983() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of deletes in a data file to make it eligible for compaction.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8afd43b039d6c709273c0ad5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bc2cfb3a6816e43ff9136b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of table optimizer.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a10c13553c542e01eb6d5f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The catalog ID of the table",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e77b4f7908df7ad872f46e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The table name. For Hive compatibility, this must be entirely lowercase.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0f3eaebdaa48b075138af81() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Location
-			"location": schemaAttributefe378e32d4eae4ef728b2e84(),
-			// Property: OrphanFileRetentionPeriodInDays
-			"orphan_file_retention_period_in_days": schemaAttribute5292433e019546140871aec7(),
-		}, /*END SCHEMA*/
-		Description: "The IcebergConfiguration property helps optimize your Iceberg tables in AWS Glue by allowing you to specify format-specific settings that control how data is stored, compressed, and managed.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea74a39927d859ad46c7489e0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CompactionConfiguration
-			"compaction_configuration": schemaAttribute0a2518b5d7f058ee532df726(),
-			// Property: Enabled
-			"enabled": schemaAttribute7afda9435480925f777dd4ad(),
-			// Property: OrphanFileDeletionConfiguration
-			"orphan_file_deletion_configuration": schemaAttribute7243dfe232e87031b1adf4e8(),
-			// Property: RetentionConfiguration
-			"retention_configuration": schemaAttribute15c79e8644fb66901dc81780(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute8afd43b039d6c709273c0ad5(),
-			// Property: VpcConfiguration
-			"vpc_configuration": schemaAttribute25f3d8de51691558947e8089(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration details of a table optimizer.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed79f1cc72ed0e10c083fc22c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef4fa4132b8eab42c7d36189() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeleteFileThreshold
-			"delete_file_threshold": schemaAttribute8873c671cb42fc43dc464983(),
-			// Property: MinInputFiles
-			"min_input_files": schemaAttributefb335a697d9766caa1e890a0(),
-			// Property: Strategy
-			"strategy": schemaAttributef0fc90af921fbc7184a7f329(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for an Iceberg compaction optimizer.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0fc90af921fbc7184a7f329() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compaction strategy to use. Valid values are binpack, sort, and z-order.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb335a697d9766caa1e890a0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of input files before compaction is triggered.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc80c055007609154e0662c5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe378e32d4eae4ef728b2e84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a directory in which to look for orphan files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_glue_table_optimizer", tableOptimizerResource)
 }
@@ -311,7 +35,13 @@ func tableOptimizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The catalog ID of the table",
 		//	  "type": "string"
 		//	}
-		"catalog_id": schemaAttribute9a10c13553c542e01eb6d5f3(),
+		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The catalog ID of the table",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +49,13 @@ func tableOptimizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
 		//	  "type": "string"
 		//	}
-		"database_name": schemaAttributed79f1cc72ed0e10c083fc22c(),
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +63,13 @@ func tableOptimizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The table name. For Hive compatibility, this must be entirely lowercase.",
 		//	  "type": "string"
 		//	}
-		"table_name": schemaAttribute9e77b4f7908df7ad872f46e8(),
+		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The table name. For Hive compatibility, this must be entirely lowercase.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableOptimizerConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -432,7 +174,177 @@ func tableOptimizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"table_optimizer_configuration": schemaAttributea74a39927d859ad46c7489e0(),
+		"table_optimizer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CompactionConfiguration
+				"compaction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IcebergConfiguration
+						"iceberg_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeleteFileThreshold
+								"delete_file_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum number of deletes in a data file to make it eligible for compaction.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MinInputFiles
+								"min_input_files": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum number of input files before compaction is triggered.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Strategy
+								"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The compaction strategy to use. Valid values are binpack, sort, and z-order.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration for an Iceberg compaction optimizer.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether the table optimization is enabled.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OrphanFileDeletionConfiguration
+				"orphan_file_deletion_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IcebergConfiguration
+						"iceberg_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Location
+								"location": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies a directory in which to look for orphan files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OrphanFileRetentionPeriodInDays
+								"orphan_file_retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The specific number of days you want to keep the orphan files.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The IcebergConfiguration property helps optimize your Iceberg tables in AWS Glue by allowing you to specify format-specific settings that control how data is stored, compressed, and managed.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "OrphanFileDeletionConfiguration is a property that can be included within the TableOptimizer resource. It controls the automatic deletion of orphaned files - files that are not tracked by the table metadata, and older than the configured age limit.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RetentionConfiguration
+				"retention_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IcebergConfiguration
+						"iceberg_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CleanExpiredFiles
+								"clean_expired_files": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NumberOfSnapshotsToRetain
+								"number_of_snapshots_to_retain": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SnapshotRetentionPeriodInDays
+								"snapshot_retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration for an Iceberg snapshot retention optimizer.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a snapshot retention optimizer for Apache Iceberg tables.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfiguration
+				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GlueConnectionName
+						"glue_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the AWS Glue connection used for the VPC for the table optimizer.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that describes the VPC configuration for a table optimizer. This configuration is necessary to perform optimization on tables that are in a customer VPC.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration details of a table optimizer.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +352,13 @@ func tableOptimizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of table optimizer.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute8bc2cfb3a6816e43ff9136b7(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of table optimizer.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

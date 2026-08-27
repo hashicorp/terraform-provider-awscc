@@ -21,90 +21,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute23d8da0578cd7a990eda6b41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the transit gateway metering policy",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37492631bed5128774db55da() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeeb1e50f28417a5cc2aecd03a(),
-				// Property: Value
-				"value": schemaAttributeeb1e50f28417a5cc2aecd03a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute771f5552de89563febb14db5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of transit gateway",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute898c59b6016729b1752e17fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the transit gateway metering policy",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf08efc46e2f4273a2e75819() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp at which the latest action performed on the metering policy will become effective",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb1e50f28417a5cc2aecd03a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4d6348470f7665539c9aa9e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Middle box attachment Ids",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_metering_policy", transitGatewayMeteringPolicyResource)
 	registry.AddListResourceFactory("awscc_ec2_transit_gateway_metering_policy", generic.NewListResource(transitGatewayMeteringPolicyResource))
@@ -124,7 +40,15 @@ func transitGatewayMeteringPolicyResource(ctx context.Context) (resource.Resourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"middlebox_attachment_ids": schemaAttributef4d6348470f7665539c9aa9e(),
+		"middlebox_attachment_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Middle box attachment Ids",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +56,13 @@ func transitGatewayMeteringPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "description": "State of the transit gateway metering policy",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute898c59b6016729b1752e17fc(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the transit gateway metering policy",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +87,40 @@ func transitGatewayMeteringPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute37492631bed5128774db55da(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +128,13 @@ func transitGatewayMeteringPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The Id of transit gateway",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttribute771f5552de89563febb14db5(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of transit gateway",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayMeteringPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +142,13 @@ func transitGatewayMeteringPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The Id of the transit gateway metering policy",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_metering_policy_id": schemaAttribute23d8da0578cd7a990eda6b41(),
+		"transit_gateway_metering_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the transit gateway metering policy",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateEffectiveAt
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +156,13 @@ func transitGatewayMeteringPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The timestamp at which the latest action performed on the metering policy will become effective",
 		//	  "type": "string"
 		//	}
-		"update_effective_at": schemaAttributebf08efc46e2f4273a2e75819(),
+		"update_effective_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp at which the latest action performed on the metering policy will become effective",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

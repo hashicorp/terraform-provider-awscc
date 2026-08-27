@@ -15,544 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0eb4d36ee647911e2b78eb3c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An array of arguments for the container used to run the monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f93fae95fb0e26e3b14765f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LocalPath
-			"local_path": schemaAttribute1c5543302165c5658f863d1e(),
-			// Property: S3UploadMode
-			"s3_upload_mode": schemaAttributeb58e9e3502a47352c6ef2308(),
-			// Property: S3Uri
-			"s3_uri": schemaAttributeafd245579ec8a0c90da64cd1(),
-		}, /*END SCHEMA*/
-		Description: "Information about where and how to store the results of a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute121d24bacf0a1befbf6c192d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefe51c2dc9107329dd807e04a(),
-				// Property: Value
-				"value": schemaAttributece2f7901a7e6a8f82c2e20f8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a2e72b9c8b5d4dac00ebcda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of job definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c5543302165c5658f863d1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f877e604458c7e80d3f210c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2297a8ca4aca8e76686e8e96() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute37eb77656c98ef14be0669f4(),
-			// Property: MonitoringOutputs
-			"monitoring_outputs": schemaAttributef086e8220f3fe498d2feb0d9(),
-		}, /*END SCHEMA*/
-		Description: "The output configuration for monitoring jobs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a3e96ba6ea323e6691544ae() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c22c74d273548bc2c2cceaf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttribute2a3e96ba6ea323e6691544ae(),
-			// Property: Subnets
-			"subnets": schemaAttribute99da52aaf1032f54398655fb(),
-		}, /*END SCHEMA*/
-		Description: "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e06cbf775646b8863f4fba2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BatchTransformInput
-			"batch_transform_input": schemaAttribute4b080c30e08faff25461ca19(),
-			// Property: EndpointInput
-			"endpoint_input": schemaAttributedb75085597d1ddc5b4ced605(),
-		}, /*END SCHEMA*/
-		Description: "The inputs for a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute328cf5964d0b95375850064c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Csv
-			"csv": schemaAttribute530a8408aa8e8aaa3d99958d(),
-			// Property: Json
-			"json": schemaAttribute8e2f4b8fb0838c2e8bf8b948(),
-			// Property: Parquet
-			"parquet": schemaAttributeb8420e141de1e491f5daa47e(),
-		}, /*END SCHEMA*/
-		Description: "The dataset format of the data to monitor",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33d2ba5cb8488fe657a3643e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37eb77656c98ef14be0669f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39b9649a793caa961daac0af() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		// Pattern "[\\S\\s]*" ignored.
-		Description: "Sets the environment variables in the Docker container",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a83ea2a0c739363661dfa57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a processing job",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b080c30e08faff25461ca19() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataCapturedDestinationS3Uri
-			"data_captured_destination_s3_uri": schemaAttributef9bc74c0138f5879f16de984(),
-			// Property: DatasetFormat
-			"dataset_format": schemaAttribute328cf5964d0b95375850064c(),
-			// Property: ExcludeFeaturesAttribute
-			"exclude_features_attribute": schemaAttribute87199bd7c087563f924242e8(),
-			// Property: LocalPath
-			"local_path": schemaAttributeb07efe8990eacda740837253(),
-			// Property: S3DataDistributionType
-			"s3_data_distribution_type": schemaAttribute33d2ba5cb8488fe657a3643e(),
-			// Property: S3InputMode
-			"s3_input_mode": schemaAttributee8bd388f372c1227d9b937d6(),
-		}, /*END SCHEMA*/
-		Description: "The batch transform input for a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute530a8408aa8e8aaa3d99958d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Header
-			"header": schemaAttribute5a756396a446ae773c46655d(),
-		}, /*END SCHEMA*/
-		Description: "The CSV format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute536b15f54e6c210a25919dc2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a08118a715259a35038055b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BaseliningJobName
-			"baselining_job_name": schemaAttribute4a83ea2a0c739363661dfa57(),
-			// Property: ConstraintsResource
-			"constraints_resource": schemaAttributef1398c310c18b9d358b7b646(),
-			// Property: StatisticsResource
-			"statistics_resource": schemaAttributeb9f26b5ec88c14427147d822(),
-		}, /*END SCHEMA*/
-		Description: "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a756396a446ae773c46655d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean flag indicating if given CSV has header",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a79a733a4e98fa78b3afc1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the job definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c753bfaeb52fa63537f319f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the endpoint used to run the monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77404874b56f2ea65febb864() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87199bd7c087563f924242e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indexes or names of the features to be excluded from analysis",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e2f4b8fb0838c2e8bf8b948() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Line
-			"line": schemaAttributeb70abaaede62225ff5ca2ee6(),
-		}, /*END SCHEMA*/
-		Description: "The Json format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute999461ae35dd846b12137a1f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableInterContainerTrafficEncryption
-			"enable_inter_container_traffic_encryption": schemaAttributed964fb075e0aa83ed3f872e8(),
-			// Property: EnableNetworkIsolation
-			"enable_network_isolation": schemaAttribute77404874b56f2ea65febb864(),
-			// Property: VpcConfig
-			"vpc_config": schemaAttribute2c22c74d273548bc2c2cceaf(),
-		}, /*END SCHEMA*/
-		Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99da52aaf1032f54398655fb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fe1645048585db2592e76d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ML compute instance type for the processing job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea02f790e6175e79e42229f3b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxRuntimeInSeconds
-			"max_runtime_in_seconds": schemaAttributeb775889d07f03e3969498aba(),
-		}, /*END SCHEMA*/
-		Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea470a1369b2d43a32431b903() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceCount
-			"instance_count": schemaAttribute536b15f54e6c210a25919dc2(),
-			// Property: InstanceType
-			"instance_type": schemaAttribute9fe1645048585db2592e76d8(),
-			// Property: VolumeKmsKeyId
-			"volume_kms_key_id": schemaAttributef9364ffe520211e52b37befa(),
-			// Property: VolumeSizeInGB
-			"volume_size_in_gb": schemaAttributebbba2762c265d803fa5efe88(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for the cluster used to run model monitoring jobs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaba774443b62031ec271b8a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClusterConfig
-			"cluster_config": schemaAttributea470a1369b2d43a32431b903(),
-		}, /*END SCHEMA*/
-		Description: "Identifies the resources to deploy for a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead2c4e6b4a6ed457167884bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time at which the job definition was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafd245579ec8a0c90da64cd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb07efe8990eacda740837253() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Path to the filesystem where the endpoint data is available to the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb58e9e3502a47352c6ef2308() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb70abaaede62225ff5ca2ee6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean flag indicating if it is JSON line format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb775889d07f03e3969498aba() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum runtime allowed in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8420e141de1e491f5daa47e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag indicate if the dataset format is Parquet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9f26b5ec88c14427147d822() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Uri
-			"s3_uri": schemaAttributedba8681eee6ce2fb02b958c4(),
-		}, /*END SCHEMA*/
-		Description: "The baseline statistics resource for a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbba2762c265d803fa5efe88() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece2f7901a7e6a8f82c2e20f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed84ac29c893f2444aac8f9d2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Specifies the entrypoint for a container used to run the monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed964fb075e0aa83ed3f872e8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb75085597d1ddc5b4ced605() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndpointName
-			"endpoint_name": schemaAttribute6c753bfaeb52fa63537f319f(),
-			// Property: ExcludeFeaturesAttribute
-			"exclude_features_attribute": schemaAttribute87199bd7c087563f924242e8(),
-			// Property: LocalPath
-			"local_path": schemaAttributeb07efe8990eacda740837253(),
-			// Property: S3DataDistributionType
-			"s3_data_distribution_type": schemaAttribute33d2ba5cb8488fe657a3643e(),
-			// Property: S3InputMode
-			"s3_input_mode": schemaAttributee8bd388f372c1227d9b937d6(),
-		}, /*END SCHEMA*/
-		Description: "The endpoint for a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedba8681eee6ce2fb02b958c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcc9c7a7952bd80736d4ad29() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerArguments
-			"container_arguments": schemaAttribute0eb4d36ee647911e2b78eb3c(),
-			// Property: ContainerEntrypoint
-			"container_entrypoint": schemaAttributed84ac29c893f2444aac8f9d2(),
-			// Property: Environment
-			"environment": schemaAttribute39b9649a793caa961daac0af(),
-			// Property: ImageUri
-			"image_uri": schemaAttributeddde2943239d38f116786ab4(),
-			// Property: PostAnalyticsProcessorSourceUri
-			"post_analytics_processor_source_uri": schemaAttribute1f877e604458c7e80d3f210c(),
-			// Property: RecordPreprocessorSourceUri
-			"record_preprocessor_source_uri": schemaAttributedee0dee95e1ddd842d8adf80(),
-		}, /*END SCHEMA*/
-		Description: "Container image configuration object for the monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddde2943239d38f116786ab4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The container image to be run by the monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedee0dee95e1ddd842d8adf80() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf4d588bec2275775744119d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8bd388f372c1227d9b937d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebf31eee44a573f3645b824b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef086e8220f3fe498d2feb0d9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Output
-				"s3_output": schemaAttribute0f93fae95fb0e26e3b14765f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1398c310c18b9d358b7b646() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Uri
-			"s3_uri": schemaAttributedf4d588bec2275775744119d(),
-		}, /*END SCHEMA*/
-		Description: "The baseline constraints resource for a monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9364ffe520211e52b37befa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9bc74c0138f5879f16de984() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe51c2dc9107329dd807e04a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_data_quality_job_definition", dataQualityJobDefinitionDataSource)
 }
@@ -568,7 +30,10 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The time at which the job definition was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributead2c4e6b4a6ed457167884bd(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time at which the job definition was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataQualityAppSpecification
 		// CloudFormation resource type schema:
 		//
@@ -636,7 +101,47 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_quality_app_specification": schemaAttributedcc9c7a7952bd80736d4ad29(),
+		"data_quality_app_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerArguments
+				"container_arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "An array of arguments for the container used to run the monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ContainerEntrypoint
+				"container_entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Specifies the entrypoint for a container used to run the monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Environment
+				"environment":       // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					// Pattern "[\\S\\s]*" ignored.
+					Description: "Sets the environment variables in the Docker container",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageUri
+				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The container image to be run by the monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostAnalyticsProcessorSourceUri
+				"post_analytics_processor_source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RecordPreprocessorSourceUri
+				"record_preprocessor_source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Container image configuration object for the monitoring job.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataQualityBaselineConfig
 		// CloudFormation resource type schema:
 		//
@@ -680,7 +185,41 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_quality_baseline_config": schemaAttribute5a08118a715259a35038055b(),
+		"data_quality_baseline_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BaseliningJobName
+				"baselining_job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of a processing job",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConstraintsResource
+				"constraints_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The baseline constraints resource for a monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StatisticsResource
+				"statistics_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The baseline statistics resource for a monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataQualityJobInput
 		// CloudFormation resource type schema:
 		//
@@ -810,7 +349,112 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_quality_job_input": schemaAttribute2e06cbf775646b8863f4fba2(),
+		"data_quality_job_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BatchTransformInput
+				"batch_transform_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DataCapturedDestinationS3Uri
+						"data_captured_destination_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatasetFormat
+						"dataset_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Csv
+								"csv": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Header
+										"header": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "A boolean flag indicating if given CSV has header",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The CSV format",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Json
+								"json": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Line
+										"line": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "A boolean flag indicating if it is JSON line format",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The Json format",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Parquet
+								"parquet": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "A flag indicate if the dataset format is Parquet",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The dataset format of the data to monitor",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeFeaturesAttribute
+						"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indexes or names of the features to be excluded from analysis",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocalPath
+						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Path to the filesystem where the endpoint data is available to the container.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3DataDistributionType
+						"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3InputMode
+						"s3_input_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The batch transform input for a monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EndpointInput
+				"endpoint_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EndpointName
+						"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the endpoint used to run the monitoring job.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeFeaturesAttribute
+						"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indexes or names of the features to be excluded from analysis",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocalPath
+						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Path to the filesystem where the endpoint data is available to the container.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3DataDistributionType
+						"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3InputMode
+						"s3_input_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The endpoint for a monitoring job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The inputs for a monitoring job.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataQualityJobOutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -877,7 +521,48 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_quality_job_output_config": schemaAttribute2297a8ca4aca8e76686e8e96(),
+		"data_quality_job_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitoringOutputs
+				"monitoring_outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: S3Output
+							"s3_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LocalPath
+									"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3UploadMode
+									"s3_upload_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Information about where and how to store the results of a monitoring job.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The output configuration for monitoring jobs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -887,7 +572,10 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schemaAttribute6c753bfaeb52fa63537f319f(),
+		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the endpoint used to run the monitoring job.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -897,7 +585,10 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"job_definition_arn": schemaAttribute1a2e72b9c8b5d4dac00ebcda(),
+		"job_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of job definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -907,7 +598,10 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"job_definition_name": schemaAttribute6a79a733a4e98fa78b3afc1e(),
+		"job_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the job definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobResources
 		// CloudFormation resource type schema:
 		//
@@ -955,7 +649,39 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"job_resources": schemaAttributeaba774443b62031ec271b8a7(),
+		"job_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClusterConfig
+				"cluster_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InstanceCount
+						"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceType
+						"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ML compute instance type for the processing job.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VolumeKmsKeyId
+						"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VolumeSizeInGB
+						"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for the cluster used to run model monitoring jobs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Identifies the resources to deploy for a monitoring job.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfig
 		// CloudFormation resource type schema:
 		//
@@ -1007,7 +733,41 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_config": schemaAttribute999461ae35dd846b12137a1f(),
+		"network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableInterContainerTrafficEncryption
+				"enable_inter_container_traffic_encryption": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnableNetworkIsolation
+				"enable_network_isolation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfig
+				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1018,7 +778,10 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributeebf31eee44a573f3645b824b(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StoppingCondition
 		// CloudFormation resource type schema:
 		//
@@ -1038,7 +801,17 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stopping_condition": schemaAttributea02f790e6175e79e42229f3b(),
+		"stopping_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxRuntimeInSeconds
+				"max_runtime_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum runtime allowed in seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1071,7 +844,24 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute121d24bacf0a1befbf6c192d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

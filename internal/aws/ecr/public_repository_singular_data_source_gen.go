@@ -15,112 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08b35a74edcd59e4014eead6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13a678fa645c9266359fb9f7() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Select the operating systems that the images in your repository are compatible with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute174af890ffca3e6aedf2873c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute306a1be5cf94b0e0c5f3d0cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the public repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33720d675cc6de1706431560() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name to use for the public repository. The repository name may be specified on its own (such as ``nginx-web-app``) or it can be prepended with a namespace to group the repository into a category (such as ``project-a/nginx-web-app``). If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the repository name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5130f97baef9194384e24e4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON repository policy text to apply to the public repository. For more information, see [Amazon ECR Public repository policies](https://docs.aws.amazon.com/AmazonECR/latest/public/public-repository-policies.html) in the *Amazon ECR Public User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6eed7991c868f8306165e571() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AboutText
-			"about_text": schemaAttribute08b35a74edcd59e4014eead6(),
-			// Property: Architectures
-			"architectures": schemaAttributeca3293b5fc8df39c6116296a(),
-			// Property: OperatingSystems
-			"operating_systems": schemaAttribute13a678fa645c9266359fb9f7(),
-			// Property: RepositoryDescription
-			"repository_description": schemaAttribute306a1be5cf94b0e0c5f3d0cc(),
-			// Property: UsageText
-			"usage_text": schemaAttribute174af890ffca3e6aedf2873c(),
-		}, /*END SCHEMA*/
-		Description: "The details about the repository that are publicly visible in the Amazon ECR Public Gallery. For more information, see [Amazon ECR Public repository catalog data](https://docs.aws.amazon.com/AmazonECR/latest/public/public-repository-catalog-data.html) in the *Amazon ECR Public User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea55c9d818b6b3958b581388b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec10fc525bb05b0154c787c1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A ``value`` acts as a descriptor within a tag category (key).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca3293b5fc8df39c6116296a() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Select the system architectures that the images in your repository are compatible with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede7854a0083acf83a9c57e96() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef338bc0f8da862c38a1655ee(),
-				// Property: Value
-				"value": schemaAttributec10fc525bb05b0154c787c1e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef338bc0f8da862c38a1655ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_public_repository", publicRepositoryDataSource)
 }
@@ -136,7 +30,10 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea55c9d818b6b3958b581388b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryCatalogData
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +85,39 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"repository_catalog_data": schemaAttribute6eed7991c868f8306165e571(),
+		"repository_catalog_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AboutText
+				"about_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Architectures
+				"architectures": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Select the system architectures that the images in your repository are compatible with.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OperatingSystems
+				"operating_systems": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Select the operating systems that the images in your repository are compatible with.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RepositoryDescription
+				"repository_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The description of the public repository.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UsageText
+				"usage_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The details about the repository that are publicly visible in the Amazon ECR Public Gallery. For more information, see [Amazon ECR Public repository catalog data](https://docs.aws.amazon.com/AmazonECR/latest/public/public-repository-catalog-data.html) in the *Amazon ECR Public User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryName
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +128,10 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"repository_name": schemaAttribute33720d675cc6de1706431560(),
+		"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name to use for the public repository. The repository name may be specified on its own (such as ``nginx-web-app``) or it can be prepended with a namespace to group the repository into a category (such as ``project-a/nginx-web-app``). If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the repository name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryPolicyText
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +139,10 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The JSON repository policy text to apply to the public repository. For more information, see [Amazon ECR Public repository policies](https://docs.aws.amazon.com/AmazonECR/latest/public/public-repository-policies.html) in the *Amazon ECR Public User Guide*.",
 		//	  "type": "string"
 		//	}
-		"repository_policy_text": schemaAttribute5130f97baef9194384e24e4e(),
+		"repository_policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The JSON repository policy text to apply to the public repository. For more information, see [Amazon ECR Public repository policies](https://docs.aws.amazon.com/AmazonECR/latest/public/public-repository-policies.html) in the *Amazon ECR Public User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +176,24 @@ func publicRepositoryDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributede7854a0083acf83a9c57e96(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A ``value`` acts as a descriptor within a tag category (key).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

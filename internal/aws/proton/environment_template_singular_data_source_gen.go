@@ -14,69 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06b7bb62657597885f2147ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c51a047c889424bfe3d42e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The key of the resource tag.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1857531b83b11fda19152385() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0c51a047c889424bfe3d42e3(),
-				// Property: Value
-				"value": schemaAttribute70155311f2428b63cad1d3f7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>An optional list of metadata items that you can associate with the Proton environment template. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute623273fa63a063cbd3862f4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A description of the environment template.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70155311f2428b63cad1d3f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The value of the resource tag.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec592ac06f391f569e1281116() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The environment template name as displayed in the developer interface.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed45c654d39bf6bf33554d57b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A customer provided encryption key that Proton uses to encrypt data.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd5dac27bcd9cafebbc21658() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the environment template.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_proton_environment_template", environmentTemplateDataSource)
 }
@@ -92,7 +29,10 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the environment template.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributefd5dac27bcd9cafebbc21658(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the environment template.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +42,10 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute623273fa63a063cbd3862f4a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>A description of the environment template.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +55,10 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttributec592ac06f391f569e1281116(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The environment template name as displayed in the developer interface.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +69,10 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:\\d{12}:([\\w+=,.@-]+[/:])*[\\w+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"encryption_key": schemaAttributed45c654d39bf6bf33554d57b(),
+		"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>A customer provided encryption key that Proton uses to encrypt data.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +82,9 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[0-9A-Za-z]+[0-9A-Za-z_\\-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute06b7bb62657597885f2147ae(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Provisioning
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +94,9 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provisioning": schemaAttribute06b7bb62657597885f2147ae(),
+		"provisioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +130,24 @@ func environmentTemplateDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute1857531b83b11fda19152385(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The key of the resource tag.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The value of the resource tag.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>An optional list of metadata items that you can associate with the Proton environment template. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

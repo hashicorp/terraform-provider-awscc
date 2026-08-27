@@ -20,29 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0afc9d424f1de70e353b1d02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d0c81bdd9ee39e833ae7aa6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_delegated_admin", delegatedAdminResource)
 	registry.AddListResourceFactory("awscc_securityhub_delegated_admin", generic.NewListResource(delegatedAdminResource))
@@ -60,7 +37,16 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"admin_account_id": schemaAttribute0afc9d424f1de70e353b1d02(),
+		"admin_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DelegatedAdminIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -69,7 +55,13 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
-		"delegated_admin_identifier": schemaAttribute6d0c81bdd9ee39e833ae7aa6(),
+		"delegated_admin_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +73,13 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute6d0c81bdd9ee39e833ae7aa6(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

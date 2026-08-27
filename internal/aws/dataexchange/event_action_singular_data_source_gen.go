@@ -15,172 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00f72aaf52f7e25f8946d862() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of server side encryption used for encrypting the objects in Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b1f970dcaab6d911771bb7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the event action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cc46b1a03d60544d15bf095() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the event action was last updated, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f2d9e0bc033f8b9244b2601() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the event action was created, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3753bf7fc6a3abc1d0b4067d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encryption
-			"encryption": schemaAttribute85fc82648fb82c438efec297(),
-			// Property: RevisionDestination
-			"revision_destination": schemaAttributeae54bb5496ddb37f8ced186d(),
-		}, /*END SCHEMA*/
-		Description: "Details of the operation to be performed by the job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a5784af1aad41c4c95d883f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43857af5e9ed1a703e0a724c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket that is the destination for the event action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d7b4792a930ff08a470cd02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string representing the pattern for generated names of the individual assets in the revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50611e13ef0a66c9603d190e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExportRevisionToS3
-			"export_revision_to_s3": schemaAttribute3753bf7fc6a3abc1d0b4067d(),
-		}, /*END SCHEMA*/
-		Description: "What occurs after a certain event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68626b4c85402b7969b77d52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b7204c4737727c73772d51b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the event action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85fc82648fb82c438efec297() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute969591ab60e1d7cb99604ea5(),
-			// Property: Type
-			"type": schemaAttribute00f72aaf52f7e25f8946d862(),
-		}, /*END SCHEMA*/
-		Description: "Encryption configuration of the export job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute969591ab60e1d7cb99604ea5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea718c2283b60595909f20df8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data set ID of the published revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae54bb5496ddb37f8ced186d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute43857af5e9ed1a703e0a724c(),
-			// Property: KeyPattern
-			"key_pattern": schemaAttribute4d7b4792a930ff08a470cd02(),
-		}, /*END SCHEMA*/
-		Description: "A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb04d9fb7b5442ce6bdf54b99() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute68626b4c85402b7969b77d52(),
-				// Property: Value
-				"value": schemaAttribute3a5784af1aad41c4c95d883f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the event action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba900062fc12113a8dca436c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataSetId
-			"data_set_id": schemaAttributea718c2283b60595909f20df8(),
-		}, /*END SCHEMA*/
-		Description: "Information about the published revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdad4c524208a241b5c73d81() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RevisionPublished
-			"revision_published": schemaAttributeba900062fc12113a8dca436c(),
-		}, /*END SCHEMA*/
-		Description: "What occurs to start an action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dataexchange_event_action", eventActionDataSource)
 }
@@ -249,7 +83,53 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"action": schemaAttribute50611e13ef0a66c9603d190e(),
+		"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExportRevisionToS3
+				"export_revision_to_s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Encryption
+						"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of server side encryption used for encrypting the objects in Amazon S3.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Encryption configuration of the export job.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RevisionDestination
+						"revision_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 bucket that is the destination for the event action.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyPattern
+								"key_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A string representing the pattern for generated names of the individual assets in the revision.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Details of the operation to be performed by the job.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "What occurs after a certain event.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +137,10 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN for the event action.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7b7204c4737727c73772d51b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the event action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +149,11 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute2f2d9e0bc033f8b9244b2601(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the event action was created, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Event
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +179,24 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"event": schemaAttributefdad4c524208a241b5c73d81(),
+		"event": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RevisionPublished
+				"revision_published": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DataSetId
+						"data_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The data set ID of the published revision.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about the published revision.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "What occurs to start an action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventActionId
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +205,10 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{30,40}$",
 		//	  "type": "string"
 		//	}
-		"event_action_id": schemaAttribute2b1f970dcaab6d911771bb7b(),
+		"event_action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the event action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +237,24 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb04d9fb7b5442ce6bdf54b99(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the event action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +263,11 @@ func eventActionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute2cc46b1a03d60544d15bf095(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the event action was last updated, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

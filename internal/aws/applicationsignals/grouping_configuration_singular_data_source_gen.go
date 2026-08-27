@@ -15,42 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute139206c1b1c4ef027a6df144() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultGroupingValue
-				"default_grouping_value": schemaAttributecb9820864b371b1ab1e9d277(),
-				// Property: GroupingName
-				"grouping_name": schemaAttributecb9820864b371b1ab1e9d277(),
-				// Property: GroupingSourceKeys
-				"grouping_source_keys": schemaAttributeb5f720f309bdaa82c2f7eeb2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80c9eb1abf1ed17bc45893db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5f720f309bdaa82c2f7eeb2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb9820864b371b1ab1e9d277() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_applicationsignals_grouping_configuration", groupingConfigurationDataSource)
 }
@@ -69,7 +33,10 @@ func groupingConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute80c9eb1abf1ed17bc45893db(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the specified AWS account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupingAttributeDefinitions
 		// CloudFormation resource type schema:
 		//
@@ -107,14 +74,35 @@ func groupingConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"grouping_attribute_definitions": schemaAttribute139206c1b1c4ef027a6df144(),
+		"grouping_attribute_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DefaultGroupingValue
+					"default_grouping_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: GroupingName
+					"grouping_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: GroupingSourceKeys
+					"grouping_source_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributecb9820864b371b1ab1e9d277(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

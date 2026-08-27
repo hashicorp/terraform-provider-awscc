@@ -27,1146 +27,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute0349d0f98dc7e9053d771dc5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Gutter
-			"gutter": schemaAttributeac9e2f9019d92ca5f7c3e7cb(),
-			// Property: Margin
-			"margin": schemaAttribute834cd25644ce9687631fc0b1(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for the layout of tiles on a sheet.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09b87767d312afdcce88cdc0() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The version number of the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ccf65680bfa4abda377d0ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 512),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute138c2f9c46d44bdca230d7ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14c7644b03ba8fcc6d505d55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This color is that applies to selected states and buttons.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15071a01fb9ce181534ceed9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttribute3d7d33fff422d123c4abe282(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute195a5b32ed399baf4f9e37a9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef31cbbe835ee4558a9858c5a(),
-				// Property: Value
-				"value": schemaAttribute6efddce07e6363dad3f456e5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute195d05bde3d434b0e5b8bb25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ba0c08d2dbfe3444efb22b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d66d413d3041a24c66e0d73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time that this theme version was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e248280e354bca94086c12d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(12, 12),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e2b9893c1b30fb128c1cb31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Tile
-			"tile": schemaAttribute655be376ee117d0cfceda7fd(),
-			// Property: TileLayout
-			"tile_layout": schemaAttribute6e2b4185e4aefeca346410bf(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme display options for sheets. </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f4f85b5ac6942f6ae147a86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21b6233c533c1358677f9c2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2be3bbe9ac7446ea22485b0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e7520f485640ee19a13ff87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to error messages.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute364e3ef2ec4459110d3b3c8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d7d33fff422d123c4abe282() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e572d71882db8f43104c8db() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ebe67bde67a1817619bcd1a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttributeff8f15bdd32876e7e0dfbfdf(),
-			// Property: BaseThemeId
-			"base_theme_id": schemaAttribute85ddb964824aa77cd7906cca(),
-			// Property: Configuration
-			"configuration": schemaAttribute7b7e2d033c5a5e38c4c4b730(),
-			// Property: CreatedTime
-			"created_time": schemaAttribute1d66d413d3041a24c66e0d73(),
-			// Property: Description
-			"description": schemaAttribute865684e07fb2d8c0d4eee696(),
-			// Property: Errors
-			"errors": schemaAttribute71c235067efc65be253a9d3b(),
-			// Property: Status
-			"status": schemaAttributeb28b998739d22e8e9ade24cc(),
-			// Property: VersionNumber
-			"version_number": schemaAttribute09b87767d312afdcce88cdc0(),
-		}, /*END SCHEMA*/
-		Description: "<p>A version of a theme.</p>",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f1d40800a5d72324ac016bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40bd39ca65d44d14058dad76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47b207ad8750b61408252e7d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 20),
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56ab03954c13fc4e28ba4964() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56ba96336bb6d4b1ba8f8887() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bd8cac061554486a214a6b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5daa1e58d652166f5a7d1ad1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FontFamily
-				"font_family": schemaAttributeb28b998739d22e8e9ade24cc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5df69bffb6c1cb519a6d1e17() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The option to enable display of borders for visuals.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e11e3bff70447dbb44ef4a2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e7e0f5060558b23b9e374b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute655be376ee117d0cfceda7fd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Border
-			"border": schemaAttributebaaf7c70d9a334473d5c3a77(),
-		}, /*END SCHEMA*/
-		Description: "<p>Display options related to tiles on a sheet.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute660b63f301752a15f1efd4e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6692c856f30346aeae1e03fd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataColorPalette
-			"data_color_palette": schemaAttributec17922cad79fb66c2255da5f(),
-			// Property: Sheet
-			"sheet": schemaAttributef05f09a43518e37d7ca85496(),
-			// Property: Typography
-			"typography": schemaAttributeb93ff755eb76f973a9f984ca(),
-			// Property: UIColorPalette
-			"ui_color_palette": schemaAttribute876cf63ea02f31cb89eedf4f(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68bec21b9e4fa0e9b5fa5346() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a6a259038ee74f68eeba535() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The hexadecimal codes for the colors.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(0, 100),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b5bca83d2e3ccfe8ce3550c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e2b4185e4aefeca346410bf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Gutter
-			"gutter": schemaAttribute15071a01fb9ce181534ceed9(),
-			// Property: Margin
-			"margin": schemaAttributecfc4c40f12c45cc8ca4247cc(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for the layout of tiles on a sheet.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6efddce07e6363dad3f456e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fa5d3402ab192a52c5a484d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 512),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\-]+$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71c235067efc65be253a9d3b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Message
-				"message": schemaAttributef20f5957416b87446be551bc(),
-				// Property: Type
-				"type": schemaAttributeb28b998739d22e8e9ade24cc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Errors associated with the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7296059913a3c82896d55f4d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Accent
-			"accent": schemaAttributeee0c41ab0fee705dd65dea70(),
-			// Property: AccentForeground
-			"accent_foreground": schemaAttribute9f82a16dbe4f828633483879(),
-			// Property: Danger
-			"danger": schemaAttribute2e7520f485640ee19a13ff87(),
-			// Property: DangerForeground
-			"danger_foreground": schemaAttribute56ab03954c13fc4e28ba4964(),
-			// Property: Dimension
-			"dimension": schemaAttribute21b6233c533c1358677f9c2b(),
-			// Property: DimensionForeground
-			"dimension_foreground": schemaAttributeae57484297ea0f60cea16feb(),
-			// Property: Measure
-			"measure": schemaAttribute138c2f9c46d44bdca230d7ee(),
-			// Property: MeasureForeground
-			"measure_foreground": schemaAttribute68bec21b9e4fa0e9b5fa5346(),
-			// Property: PrimaryBackground
-			"primary_background": schemaAttribute9b4716562c7f4c328fec7074(),
-			// Property: PrimaryForeground
-			"primary_foreground": schemaAttribute195d05bde3d434b0e5b8bb25(),
-			// Property: SecondaryBackground
-			"secondary_background": schemaAttributece409e4aa7024eddb11a991a(),
-			// Property: SecondaryForeground
-			"secondary_foreground": schemaAttribute3f1d40800a5d72324ac016bd(),
-			// Property: Success
-			"success": schemaAttributeea17dbe688a125ca62e73d74(),
-			// Property: SuccessForeground
-			"success_foreground": schemaAttribute2be3bbe9ac7446ea22485b0f(),
-			// Property: Warning
-			"warning": schemaAttribute9fdb52337f485702cb27864c(),
-			// Property: WarningForeground
-			"warning_foreground": schemaAttribute9a666c7451b55481756eaf13(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute773ce00c28361da1e0945f0e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FontFamilies
-			"font_families": schemaAttribute5daa1e58d652166f5a7d1ad1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b7e2d033c5a5e38c4c4b730() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataColorPalette
-			"data_color_palette": schemaAttribute91a02e9969b4b5cbdb75507e(),
-			// Property: Sheet
-			"sheet": schemaAttribute1e2b9893c1b30fb128c1cb31(),
-			// Property: Typography
-			"typography": schemaAttribute773ce00c28361da1e0945f0e(),
-			// Property: UIColorPalette
-			"ui_color_palette": schemaAttribute7296059913a3c82896d55f4d(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ed54e440d8c875282f5a35a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FontFamily
-				"font_family": schemaAttribute56ba96336bb6d4b1ba8f8887(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(0, 5),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute834cd25644ce9687631fc0b1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttribute3e572d71882db8f43104c8db(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for margins around the outside edge of sheets.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85ddb964824aa77cd7906cca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86098efc4e58eb313c0384e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute865684e07fb2d8c0d4eee696() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The description of the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute876cf63ea02f31cb89eedf4f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Accent
-			"accent": schemaAttribute14c7644b03ba8fcc6d505d55(),
-			// Property: AccentForeground
-			"accent_foreground": schemaAttribute86098efc4e58eb313c0384e3(),
-			// Property: Danger
-			"danger": schemaAttributec3db3f9b705f2e8c92355cb2(),
-			// Property: DangerForeground
-			"danger_foreground": schemaAttribute660b63f301752a15f1efd4e4(),
-			// Property: Dimension
-			"dimension": schemaAttributef79a43dc774827b3d4644358(),
-			// Property: DimensionForeground
-			"dimension_foreground": schemaAttributeea16506d87aac215c092d6ad(),
-			// Property: Measure
-			"measure": schemaAttributecdfb506a432cad39df177507(),
-			// Property: MeasureForeground
-			"measure_foreground": schemaAttributef1b945498c0eb2d62c057be4(),
-			// Property: PrimaryBackground
-			"primary_background": schemaAttribute40bd39ca65d44d14058dad76(),
-			// Property: PrimaryForeground
-			"primary_foreground": schemaAttribute364e3ef2ec4459110d3b3c8a(),
-			// Property: SecondaryBackground
-			"secondary_background": schemaAttribute1f4f85b5ac6942f6ae147a86(),
-			// Property: SecondaryForeground
-			"secondary_foreground": schemaAttributeeaa162c345c2ad0266b6e8d6(),
-			// Property: Success
-			"success": schemaAttribute6b5bca83d2e3ccfe8ce3550c(),
-			// Property: SuccessForeground
-			"success_foreground": schemaAttributeaf306372be86888a89d4a6e4(),
-			// Property: Warning
-			"warning": schemaAttribute8b8b27684d32cbf292145ec1(),
-			// Property: WarningForeground
-			"warning_foreground": schemaAttributef44346124a461f44a5036884(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b8b27684d32cbf292145ec1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This color that applies to warning and informational messages.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91a02e9969b4b5cbdb75507e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Colors
-			"colors": schemaAttribute9e412c998c0563d8b5bcb72f(),
-			// Property: EmptyFillColor
-			"empty_fill_color": schemaAttribute5bd8cac061554486a214a6b0(),
-			// Property: MinMaxGradient
-			"min_max_gradient": schemaAttributed8779ab4353ba77bbf29a377(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94112e344e90cdba5f80e7b0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttribute47b207ad8750b61408252e7d(),
-				// Property: Principal
-				"principal": schemaAttributea73d6839ba16447a770b82c8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a666c7451b55481756eaf13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b4716562c7f4c328fec7074() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e412c998c0563d8b5bcb72f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The hexadecimal codes for the colors.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f82a16dbe4f828633483879() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fdb52337f485702cb27864c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This color that applies to warning and informational messages.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea081d0e5234e0668b5c6e1c4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttribute5df69bffb6c1cb519a6d1e17(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for tile borders for visuals.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea73d6839ba16447a770b82c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac9e2f9019d92ca5f7c3e7cb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttribute5e11e3bff70447dbb44ef4a2(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae57484297ea0f60cea16feb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae7886e59014d28d7c9c682e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Border
-			"border": schemaAttributea081d0e5234e0668b5c6e1c4(),
-		}, /*END SCHEMA*/
-		Description: "<p>Display options related to tiles on a sheet.</p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf306372be86888a89d4a6e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb28b998739d22e8e9ade24cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb660f45e783f0a057729e287() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(0, 100),
-			listvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb93ff755eb76f973a9f984ca() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FontFamilies
-			"font_families": schemaAttribute7ed54e440d8c875282f5a35a(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaaf7c70d9a334473d5c3a77() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttributec93b8c4e9aa29d77c09795b3(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for tile borders for visuals.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb3e75735eadd6446f182151() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 512),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\-]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec17922cad79fb66c2255da5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Colors
-			"colors": schemaAttribute6a6a259038ee74f68eeba535(),
-			// Property: EmptyFillColor
-			"empty_fill_color": schemaAttribute1ba0c08d2dbfe3444efb22b7(),
-			// Property: MinMaxGradient
-			"min_max_gradient": schemaAttributeb660f45e783f0a057729e287(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3db3f9b705f2e8c92355cb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to error messages.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec93b8c4e9aa29d77c09795b3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The option to enable display of borders for visuals.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdfb506a432cad39df177507() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece409e4aa7024eddb11a991a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfc4c40f12c45cc8ca4247cc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttributef9522e4b41fb3a110cc63899(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for margins around the outside edge of sheets.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b3e4a0bf7616ae456c515d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time that the theme was created.</p>",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8779ab4353ba77bbf29a377() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3ac5bba07a324fac863327b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee466bfa24b7fed92380e8eee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea16506d87aac215c092d6ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea17dbe688a125ca62e73d74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaa162c345c2ad0266b6e8d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee0c41ab0fee705dd65dea70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This color is that applies to selected states and buttons.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef05f09a43518e37d7ca85496() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Tile
-			"tile": schemaAttributeae7886e59014d28d7c9c682e(),
-			// Property: TileLayout
-			"tile_layout": schemaAttribute0349d0f98dc7e9053d771dc5(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme display options for sheets. </p>",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1b945498c0eb2d62c057be4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef20f5957416b87446be551bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The error message.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef31cbbe835ee4558a9858c5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef44346124a461f44a5036884() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef79a43dc774827b3d4644358() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9522e4b41fb3a110cc63899() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff3c450aca988fb05784a457() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time that the theme was last updated.</p>",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff8f15bdd32876e7e0dfbfdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_theme", themeResource)
 }
@@ -1182,7 +42,13 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the theme.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee3ac5bba07a324fac863327b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -1192,7 +58,16 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute1e248280e354bca94086c12d(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BaseThemeId
 		// CloudFormation resource type schema:
 		//
@@ -1202,7 +77,13 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[\\w\\-]+$",
 		//	  "type": "string"
 		//	}
-		"base_theme_id": schemaAttribute6fa5d3402ab192a52c5a484d(),
+		"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\-]+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -1406,7 +287,396 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttribute6692c856f30346aeae1e03fd(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataColorPalette
+				"data_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Colors
+						"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "<p>The hexadecimal codes for the colors.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 100),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EmptyFillColor
+						"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinMaxGradient
+						"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 100),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Sheet
+				"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Tile
+						"tile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Border
+								"border": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Show
+										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The option to enable display of borders for visuals.</p>",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for tile borders for visuals.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>Display options related to tiles on a sheet.</p>",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TileLayout
+						"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Gutter
+								"gutter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Show
+										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Margin
+								"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Show
+										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for margins around the outside edge of sheets.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The display options for the layout of tiles on a sheet.</p>",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme display options for sheets. </p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Typography
+				"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FontFamilies
+						"font_families": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FontFamily
+									"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 5),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UIColorPalette
+				"ui_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Accent
+						"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>This color is that applies to selected states and buttons.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AccentForeground
+						"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Danger
+						"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to error messages.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DangerForeground
+						"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Dimension
+						"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DimensionForeground
+						"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Measure
+						"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MeasureForeground
+						"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrimaryBackground
+						"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrimaryForeground
+						"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryBackground
+						"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryForeground
+						"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Success
+						"success": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SuccessForeground
+						"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Warning
+						"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>This color that applies to warning and informational messages.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WarningForeground
+						"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -1415,7 +685,14 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributed5b3e4a0bf7616ae456c515d(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time that the theme was created.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -1424,7 +701,14 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributeff3c450aca988fb05784a457(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time that the theme was last updated.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1433,7 +717,12 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee466bfa24b7fed92380e8eee(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -1468,7 +757,47 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"permissions": schemaAttribute94112e344e90cdba5f80e7b0(),
+		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 20),
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1500,7 +829,46 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute195a5b32ed399baf4f9e37a9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ThemeId
 		// CloudFormation resource type schema:
 		//
@@ -1510,7 +878,16 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[\\w\\-]+$",
 		//	  "type": "string"
 		//	}
-		"theme_id": schemaAttributebb3e75735eadd6446f182151(),
+		"theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1522,7 +899,12 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute5e7e0f5060558b23b9e374b2(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -1796,7 +1178,256 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"version": schemaAttribute3ebe67bde67a1817619bcd1a(),
+		"version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BaseThemeId
+				"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Configuration
+				"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DataColorPalette
+						"data_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Colors
+								"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "<p>The hexadecimal codes for the colors.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EmptyFillColor
+								"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MinMaxGradient
+								"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Sheet
+						"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Tile
+								"tile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Border
+										"border": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Show
+												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The option to enable display of borders for visuals.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "<p>The display options for tile borders for visuals.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>Display options related to tiles on a sheet.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TileLayout
+								"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Gutter
+										"gutter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Show
+												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Margin
+										"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Show
+												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "<p>The display options for margins around the outside edge of sheets.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for the layout of tiles on a sheet.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The theme display options for sheets. </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Typography
+						"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontFamilies
+								"font_families": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FontFamily
+											"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UIColorPalette
+						"ui_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Accent
+								"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>This color is that applies to selected states and buttons.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AccentForeground
+								"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Danger
+								"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to error messages.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DangerForeground
+								"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Dimension
+								"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DimensionForeground
+								"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Measure
+								"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MeasureForeground
+								"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrimaryBackground
+								"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrimaryForeground
+								"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecondaryBackground
+								"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecondaryForeground
+								"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Success
+								"success": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SuccessForeground
+								"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Warning
+								"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>This color that applies to warning and informational messages.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: WarningForeground
+								"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreatedTime
+				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "<p>The date and time that this theme version was created.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The description of the theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Errors
+				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Message
+							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The error message.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "<p>Errors associated with the theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VersionNumber
+				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "<p>The version number of the theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>A version of a theme.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VersionDescription
 		// CloudFormation resource type schema:
 		//
@@ -1805,7 +1436,16 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"version_description": schemaAttribute0ccf65680bfa4abda377d0ab(),
+		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

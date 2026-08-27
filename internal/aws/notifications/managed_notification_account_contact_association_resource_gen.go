@@ -20,37 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute42ee26e876f9e6924c259f56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This unique identifier for Contact",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ACCOUNT_PRIMARY",
-				"ACCOUNT_ALTERNATE_SECURITY",
-				"ACCOUNT_ALTERNATE_OPERATIONS",
-				"ACCOUNT_ALTERNATE_BILLING",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed72d7b9ed1660bec2aea8b37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The managed notification configuration ARN, against which the account contact association will be created",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_notifications_managed_notification_account_contact_association", managedNotificationAccountContactAssociationResource)
 	registry.AddListResourceFactory("awscc_notifications_managed_notification_account_contact_association", generic.NewListResource(managedNotificationAccountContactAssociationResource))
@@ -73,7 +42,21 @@ func managedNotificationAccountContactAssociationResource(ctx context.Context) (
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"contact_identifier": schemaAttribute42ee26e876f9e6924c259f56(),
+		"contact_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This unique identifier for Contact",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ACCOUNT_PRIMARY",
+					"ACCOUNT_ALTERNATE_SECURITY",
+					"ACCOUNT_ALTERNATE_OPERATIONS",
+					"ACCOUNT_ALTERNATE_BILLING",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedNotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +65,16 @@ func managedNotificationAccountContactAssociationResource(ctx context.Context) (
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$",
 		//	  "type": "string"
 		//	}
-		"managed_notification_configuration_arn": schemaAttributed72d7b9ed1660bec2aea8b37(),
+		"managed_notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The managed notification configuration ARN, against which the account contact association will be created",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -15,78 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0eb5663aa445669e1f6938a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24a025e11676dbf1a875d8dd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The current version number of the registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute272b17a2b1cebfbdcd68a555() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ba7127f0160e6d4b9efc0ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60a6a10a01b176b6ee2a3c21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The string value associated with the key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a0acb96cce6986a66ed58fb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeabb4901864e79593b8ce9e0f(),
-				// Property: Value
-				"value": schemaAttribute60a6a10a01b176b6ee2a3c21(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of tags (key and value pairs) to associate with the registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea985f26ed2016752854da5f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of registration form to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabb4901864e79593b8ce9e0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key identifier, or name, of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef98078c4eaab758591461925() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the registration was created, in UNIX epoch time format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_smsvoice_registration", registrationDataSource)
 }
@@ -103,7 +31,11 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schemaAttributef98078c4eaab758591461925(),
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the registration was created, in UNIX epoch time format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CurrentVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +45,10 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"current_version_number": schemaAttribute24a025e11676dbf1a875d8dd(),
+		"current_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The current version number of the registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistrationArn
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +56,10 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) for the registration.",
 		//	  "type": "string"
 		//	}
-		"registration_arn": schemaAttribute0eb5663aa445669e1f6938a1(),
+		"registration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistrationId
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +67,10 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The unique identifier for the registration.",
 		//	  "type": "string"
 		//	}
-		"registration_id": schemaAttribute5ba7127f0160e6d4b9efc0ed(),
+		"registration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistrationStatus
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +90,10 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"registration_status": schemaAttribute272b17a2b1cebfbdcd68a555(),
+		"registration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistrationType
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +104,10 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[A-Za-z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"registration_type": schemaAttributea985f26ed2016752854da5f2(),
+		"registration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of registration form to create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +139,24 @@ func registrationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute9a0acb96cce6986a66ed58fb(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key identifier, or name, of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The string value associated with the key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of tags (key and value pairs) to associate with the registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

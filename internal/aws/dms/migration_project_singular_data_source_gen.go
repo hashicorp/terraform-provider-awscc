@@ -14,159 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2e22dba2b49f8fe2b0902a6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, , and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53d786025646baa9a2d99440() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The optional description of the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5feab92c56c361e287763dac() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataProviderArn
-				"data_provider_arn": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: DataProviderIdentifier
-				"data_provider_identifier": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: DataProviderName
-				"data_provider_name": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: SecretsManagerAccessRoleArn
-				"secrets_manager_access_role_arn": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: SecretsManagerSecretId
-				"secrets_manager_secret_id": schemaAttribute75507d6dac0c6808bd4ead88(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The property describes target data provider descriptors for the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64b9a847ca63f1807a61af53() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2e22dba2b49f8fe2b0902a6c(),
-				// Property: Value
-				"value": schemaAttribute79cf0b8bd087eaf11db7de3c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute687b925e622cf7e65decaf2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an instance profile arn for the migration project. For read",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75507d6dac0c6808bd4ead88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79cf0b8bd087eaf11db7de3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, , and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82cbc06aedf13e279660d1c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an instance profile name for the migration project. For read",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ecdde15957b35bc77ba0187() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3BucketPath
-			"s3_bucket_path": schemaAttribute75507d6dac0c6808bd4ead88(),
-			// Property: S3BucketRoleArn
-			"s3_bucket_role_arn": schemaAttribute75507d6dac0c6808bd4ead88(),
-		}, /*END SCHEMA*/
-		Description: "The property describes schema conversion application attributes for the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2346c510287a1b47d70a061() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes transformation rules for the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4c72bfc4bc6d565b133d3a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an instance profile identifier for the migration project. For create",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe57a27401492afa201e9033() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf055c7a80dc8b081f3f70df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an ARN of the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee00d3c67b8f36768871b6b8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes a name to identify the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9d1c71963a82aeb769a466b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataProviderArn
-				"data_provider_arn": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: DataProviderIdentifier
-				"data_provider_identifier": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: DataProviderName
-				"data_provider_name": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: SecretsManagerAccessRoleArn
-				"secrets_manager_access_role_arn": schemaAttribute75507d6dac0c6808bd4ead88(),
-				// Property: SecretsManagerSecretId
-				"secrets_manager_secret_id": schemaAttribute75507d6dac0c6808bd4ead88(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The property describes source data provider descriptors for the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd4a4be5137bdd3693434912() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes a creating time of the migration project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_migration_project", migrationProjectDataSource)
 }
@@ -184,7 +31,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute53d786025646baa9a2d99440(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The optional description of the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +44,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_arn": schemaAttribute687b925e622cf7e65decaf2a(),
+		"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an instance profile arn for the migration project. For read",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +57,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_identifier": schemaAttributeb4c72bfc4bc6d565b133d3a5(),
+		"instance_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an instance profile identifier for the migration project. For create",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileName
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +70,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_name": schemaAttribute82cbc06aedf13e279660d1c9(),
+		"instance_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an instance profile name for the migration project. For read",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MigrationProjectArn
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +83,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"migration_project_arn": schemaAttributedf055c7a80dc8b081f3f70df(),
+		"migration_project_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an ARN of the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MigrationProjectCreationTime
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +96,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"migration_project_creation_time": schemaAttributefd4a4be5137bdd3693434912(),
+		"migration_project_creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes a creating time of the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MigrationProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +109,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"migration_project_identifier": schemaAttributebe57a27401492afa201e9033(),
+		"migration_project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MigrationProjectName
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +122,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"migration_project_name": schemaAttributee00d3c67b8f36768871b6b8c(),
+		"migration_project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes a name to identify the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaConversionApplicationAttributes
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +142,20 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schema_conversion_application_attributes": schemaAttribute9ecdde15957b35bc77ba0187(),
+		"schema_conversion_application_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3BucketPath
+				"s3_bucket_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3BucketRoleArn
+				"s3_bucket_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The property describes schema conversion application attributes for the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDataProviderDescriptors
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +187,34 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"source_data_provider_descriptors": schemaAttributef9d1c71963a82aeb769a466b(),
+		"source_data_provider_descriptors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataProviderArn
+					"data_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataProviderIdentifier
+					"data_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataProviderName
+					"data_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecretsManagerAccessRoleArn
+					"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecretsManagerSecretId
+					"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The property describes source data provider descriptors for the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -336,7 +247,24 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute64b9a847ca63f1807a61af53(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, , and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, , and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetDataProviderDescriptors
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +296,34 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_data_provider_descriptors": schemaAttribute5feab92c56c361e287763dac(),
+		"target_data_provider_descriptors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataProviderArn
+					"data_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataProviderIdentifier
+					"data_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataProviderName
+					"data_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecretsManagerAccessRoleArn
+					"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecretsManagerSecretId
+					"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The property describes target data provider descriptors for the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransformationRules
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +331,10 @@ func migrationProjectDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The property describes transformation rules for the migration project.",
 		//	  "type": "string"
 		//	}
-		"transformation_rules": schemaAttributeb2346c510287a1b47d70a061(),
+		"transformation_rules": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes transformation rules for the migration project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

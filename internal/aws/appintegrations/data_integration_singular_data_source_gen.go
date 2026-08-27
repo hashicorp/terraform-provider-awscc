@@ -15,154 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0433c8a93d7a2cb661b3ba35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cd77cf5993fb3560fa2f618() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How often the data should be pulled from data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e4b201132d7b275462bd03e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the data integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22dd7747bee07bd479c05c6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key of the data integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute298a8d500558651b9ca9920b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Corresponding tag value for the key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute348bfa3a7881e1a202b6dcb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URI of the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53c9fd34ce1b0e674801fc5b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirstExecutionFrom
-			"first_execution_from": schemaAttribute0433c8a93d7a2cb661b3ba35(),
-			// Property: Object
-			"object": schemaAttribute82b0c454f8a2ebeadc11165e(),
-			// Property: ScheduleExpression
-			"schedule_expression": schemaAttribute0cd77cf5993fb3560fa2f618(),
-		}, /*END SCHEMA*/
-		Description: "The name of the data and how often it should be pulled from the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62fdb8bebbe58c6ddab18653() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifer of the data integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute738a1b62538fb92c24f2f87c() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.MapType{ElemType: types.ListType{ElemType: types.StringType}},
-		Description: "The configuration for what data should be pulled from the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82b0c454f8a2ebeadc11165e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the object to pull from the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9175b4764c9b11956776cc93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the data integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9611c1c8fbe66dbfd9f60dc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data integration description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead177e3020cc0a04403e918b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Identifiers for the source folders to pull all files from recursively.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec487c021042df03334351419() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A key to identify the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7c7a48d404f4164ac48a778() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.ListType{ElemType: types.StringType},
-		Description: "Restrictions for what files should be pulled from the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee12267253e8177636b61a8e6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Filters
-			"filters": schemaAttributec7c7a48d404f4164ac48a778(),
-			// Property: Folders
-			"folders": schemaAttributead177e3020cc0a04403e918b(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for what files should be pulled from the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8c7007aece05b925fa6c15a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec487c021042df03334351419(),
-				// Property: Value
-				"value": schemaAttribute298a8d500558651b9ca9920b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags (keys and values) associated with the data integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appintegrations_data_integration", dataIntegrationDataSource)
 }
@@ -181,7 +33,10 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"data_integration_arn": schemaAttribute9175b4764c9b11956776cc93(),
+		"data_integration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the data integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +46,10 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9611c1c8fbe66dbfd9f60dc1(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The data integration description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +92,25 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"file_configuration": schemaAttributee12267253e8177636b61a8e6(),
+		"file_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filters
+				"filters":           // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.ListType{ElemType: types.StringType},
+					Description: "Restrictions for what files should be pulled from the source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Folders
+				"folders": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Identifiers for the source folders to pull all files from recursively.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for what files should be pulled from the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +121,10 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"data_integration_id": schemaAttribute62fdb8bebbe58c6ddab18653(),
+		"data_integration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifer of the data integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKey
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +135,10 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"kms_key": schemaAttribute22dd7747bee07bd479c05c6a(),
+		"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key of the data integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +149,10 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1e4b201132d7b275462bd03e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the data integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +179,12 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"object_configuration": schemaAttribute738a1b62538fb92c24f2f87c(),
+		"object_configuration": // Pattern: ""
+		schema.MapAttribute{    /*START ATTRIBUTE*/
+			ElementType: types.MapType{ElemType: types.ListType{ElemType: types.StringType}},
+			Description: "The configuration for what data should be pulled from the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleConfig
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +219,27 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schedule_config": schemaAttribute53c9fd34ce1b0e674801fc5b(),
+		"schedule_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FirstExecutionFrom
+				"first_execution_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Object
+				"object": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the object to pull from the data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduleExpression
+				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "How often the data should be pulled from data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The name of the data and how often it should be pulled from the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceURI
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +250,10 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)",
 		//	  "type": "string"
 		//	}
-		"source_uri": schemaAttribute348bfa3a7881e1a202b6dcb5(),
+		"source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URI of the data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +287,24 @@ func dataIntegrationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributef8c7007aece05b925fa6c15a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A key to identify the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Corresponding tag value for the key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the data integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

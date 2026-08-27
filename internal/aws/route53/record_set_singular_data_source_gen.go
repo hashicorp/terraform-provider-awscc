@@ -15,197 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute001b57de4135a2ab044800f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier that differentiates among multiple resource record sets that have the same combination of name and type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ed27a96144b6cf1241c4b32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If you want Amazon Route 53 to return this resource record set in response to a DNS query only when the status of a health check is healthy, include the HealthCheckId element and specify the ID of the applicable health check.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1452fd8ac0f27e531555623f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource record cache time to live (TTL), in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1707cdeca663ef46ff07db17() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DNSName
-			"dns_name": schemaAttributef1f798ac65e968c0842e73d9(),
-			// Property: EvaluateTargetHealth
-			"evaluate_target_health": schemaAttributec1d8fc070218840cad4dbb6a(),
-			// Property: HostedZoneId
-			"hosted_zone_id": schemaAttributee549e9cf20dfc95ddb9cc562(),
-		}, /*END SCHEMA*/
-		Description: "Alias resource record sets only: Information about the AWS resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1be00af2cdba4acf0f631df9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the hosted zone that you want to create records in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1fd3e79fb2cbb4081957e591() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CollectionId
-			"collection_id": schemaAttribute782d89545b99cbdf2640ee03(),
-			// Property: LocationName
-			"location_name": schemaAttributeb4549fb538f325b24be41ed8(),
-		}, /*END SCHEMA*/
-		Description: "The object that is specified in resource record set object when you are linking a resource record set to a CIDR location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute265436bc42515fb74f01e09f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "To route traffic approximately randomly to multiple resources, such as web servers, create one multivalue answer record for each resource and specify true for MultiValueAnswer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b026c0367028109a5d71340() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "To configure failover, you add the Failover element to two resource record sets. For one resource record set, you specify PRIMARY as the value for Failover; for the other resource record set, you specify SECONDARY. In addition, you include the HealthCheckId element and specify the health check that you want Amazon Route 53 to perform for each resource record set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ec3cc0b44eb0b24b3dceee4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon EC2 Region where you created the resource that this resource record set refers to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64504b561a81eea4c301b58a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For geolocation resource record sets, the two-letter code for a state of the United States.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6aa3c348c5b64d7f830fadfe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DNS record type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75e21a94f06af2747839b51b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For geolocation resource record sets, the two-letter code for a country.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute782d89545b99cbdf2640ee03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR collection ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute829614fa4c08b094d018032b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Among resource record sets that have the same combination of DNS name and type, a value that determines the proportion of DNS queries that Amazon Route 53 responds to using the current resource record set. Route 53 calculates the sum of the weights for the resource record sets that have the same combination of DNS name and type. Route 53 then responds to queries based on the ratio of a resource's weight to the total.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88fe6d7a6afa259169567bf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For geolocation resource record sets, a two-letter abbreviation that identifies a continent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cbdb48068e09800128fd34d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContinentCode
-			"continent_code": schemaAttribute88fe6d7a6afa259169567bf9(),
-			// Property: CountryCode
-			"country_code": schemaAttribute75e21a94f06af2747839b51b(),
-			// Property: SubdivisionCode
-			"subdivision_code": schemaAttribute64504b561a81eea4c301b58a(),
-		}, /*END SCHEMA*/
-		Description: "A complex type that lets you control how Amazon Route 53 responds to DNS queries based on the geographic origin of the query.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4549fb538f325b24be41ed8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR collection location name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1d8fc070218840cad4dbb6a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When EvaluateTargetHealth is true, an alias resource record set inherits the health of the referenced AWS resource, such as an ELB load balancer or another resource record set in the hosted zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9d13d38f8522ab9fd81dfc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional: Any comments you want to include about a change batch request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee549e9cf20dfc95ddb9cc562() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value used depends on where you want to route traffic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9c4413aa787a299004e4f58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the record that you want to create, update, or delete.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebc9079557b8375fe04c2d06() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the hosted zone that you want to create records in. You must include a trailing dot (for example, www.example.com.) as part of the HostedZoneName.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1f798ac65e968c0842e73d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value that you specify depends on where you want to route queries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7afb228014c53e6e311418d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more values that correspond with the value that you specified for the Type property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53_record_set", recordSetDataSource)
 }
@@ -243,7 +52,27 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"alias_target": schemaAttribute1707cdeca663ef46ff07db17(),
+		"alias_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DNSName
+				"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value that you specify depends on where you want to route queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EvaluateTargetHealth
+				"evaluate_target_health": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When EvaluateTargetHealth is true, an alias resource record set inherits the health of the referenced AWS resource, such as an ELB load balancer or another resource record set in the hosted zone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HostedZoneId
+				"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value used depends on where you want to route traffic.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Alias resource record sets only: Information about the AWS resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CidrRoutingConfig
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +99,22 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cidr_routing_config": schemaAttribute1fd3e79fb2cbb4081957e591(),
+		"cidr_routing_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CollectionId
+				"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR collection ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LocationName
+				"location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR collection location name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The object that is specified in resource record set object when you are linking a resource record set to a CIDR location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Comment
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +123,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"comment": schemaAttributed9d13d38f8522ab9fd81dfc4(),
+		"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Optional: Any comments you want to include about a change batch request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Failover
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +138,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"failover": schemaAttribute4b026c0367028109a5d71340(),
+		"failover": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "To configure failover, you add the Failover element to two resource record sets. For one resource record set, you specify PRIMARY as the value for Failover; for the other resource record set, you specify SECONDARY. In addition, you include the HealthCheckId element and specify the health check that you want Amazon Route 53 to perform for each resource record set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GeoLocation
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +182,27 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"geo_location": schemaAttribute8cbdb48068e09800128fd34d(),
+		"geo_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContinentCode
+				"continent_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For geolocation resource record sets, a two-letter abbreviation that identifies a continent.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CountryCode
+				"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For geolocation resource record sets, the two-letter code for a country.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubdivisionCode
+				"subdivision_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For geolocation resource record sets, the two-letter code for a state of the United States.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A complex type that lets you control how Amazon Route 53 responds to DNS queries based on the geographic origin of the query.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckId
 		// CloudFormation resource type schema:
 		//
@@ -341,7 +211,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
-		"health_check_id": schemaAttribute0ed27a96144b6cf1241c4b32(),
+		"health_check_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If you want Amazon Route 53 to return this resource record set in response to a DNS query only when the status of a health check is healthy, include the HealthCheckId element and specify the ID of the applicable health check.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +223,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 44,
 		//	  "type": "string"
 		//	}
-		"hosted_zone_id": schemaAttribute1be00af2cdba4acf0f631df9(),
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the hosted zone that you want to create records in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneName
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +235,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"hosted_zone_name": schemaAttributeebc9079557b8375fe04c2d06(),
+		"hosted_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the hosted zone that you want to create records in. You must include a trailing dot (for example, www.example.com.) as part of the HostedZoneName.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiValueAnswer
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +246,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "To route traffic approximately randomly to multiple resources, such as web servers, create one multivalue answer record for each resource and specify true for MultiValueAnswer.",
 		//	  "type": "boolean"
 		//	}
-		"multi_value_answer": schemaAttribute265436bc42515fb74f01e09f(),
+		"multi_value_answer": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "To route traffic approximately randomly to multiple resources, such as web servers, create one multivalue answer record for each resource and specify true for MultiValueAnswer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +258,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee9c4413aa787a299004e4f58(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the record that you want to create, update, or delete.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
@@ -384,7 +269,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon EC2 Region where you created the resource that this resource record set refers to.",
 		//	  "type": "string"
 		//	}
-		"region": schemaAttribute5ec3cc0b44eb0b24b3dceee4(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon EC2 Region where you created the resource that this resource record set refers to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceRecords
 		// CloudFormation resource type schema:
 		//
@@ -398,7 +286,11 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resource_records": schemaAttributef7afb228014c53e6e311418d(),
+		"resource_records": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "One or more values that correspond with the value that you specified for the Type property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SetIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -408,7 +300,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"set_identifier": schemaAttribute001b57de4135a2ab044800f5(),
+		"set_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An identifier that differentiates among multiple resource record sets that have the same combination of name and type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TTL
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +311,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource record cache time to live (TTL), in seconds.",
 		//	  "type": "string"
 		//	}
-		"ttl": schemaAttribute1452fd8ac0f27e531555623f(),
+		"ttl": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource record cache time to live (TTL), in seconds.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -424,7 +322,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The DNS record type.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute6aa3c348c5b64d7f830fadfe(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DNS record type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Weight
 		// CloudFormation resource type schema:
 		//
@@ -432,7 +333,10 @@ func recordSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Among resource record sets that have the same combination of DNS name and type, a value that determines the proportion of DNS queries that Amazon Route 53 responds to using the current resource record set. Route 53 calculates the sum of the weights for the resource record sets that have the same combination of DNS name and type. Route 53 then responds to queries based on the ratio of a resource's weight to the total.",
 		//	  "type": "integer"
 		//	}
-		"weight": schemaAttribute829614fa4c08b094d018032b(),
+		"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Among resource record sets that have the same combination of DNS name and type, a value that determines the proportion of DNS queries that Amazon Route 53 responds to using the current resource record set. Route 53 calculates the sum of the weights for the resource record sets that have the same combination of DNS name and type. Route 53 then responds to queries based on the ratio of a resource's weight to the total.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

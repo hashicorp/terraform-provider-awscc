@@ -14,123 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b624804b89652d4c1759f37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the cloud flow used as a source of this bridge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27a754b738cea4eb1ce3640a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30cd610a529377a9be0c1749() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Number (ARN) of the bridge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34fe891a02a04521b48227d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network source protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56153197c166ffcb6b461f63() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MulticastSourceIp
-			"multicast_source_ip": schemaAttribute7532552ff9d7aa65fa75ef77(),
-		}, /*END SCHEMA*/
-		Description: "The settings related to the multicast source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5988b394989739c598a9cd2b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FlowArn
-			"flow_arn": schemaAttribute0b624804b89652d4c1759f37(),
-			// Property: FlowVpcInterfaceAttachment
-			"flow_vpc_interface_attachment": schemaAttribute6919cce3232aabe221f33acc(),
-		}, /*END SCHEMA*/
-		Description: "The source of the bridge. A flow source originates in MediaConnect as an existing cloud flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6362843bb478858fe7218365() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The network source port.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6919cce3232aabe221f33acc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcInterfaceName
-			"vpc_interface_name": schemaAttribute737c555661d98528a825efd2(),
-		}, /*END SCHEMA*/
-		Description: "The name of the VPC interface attachment to use for this source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute737c555661d98528a825efd2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the VPC interface to use for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7532552ff9d7aa65fa75ef77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address of the source for source-specific multicast (SSM).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83faa6030a523950b88a3550() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MulticastIp
-			"multicast_ip": schemaAttributec6d263896e4c3ba567c64190(),
-			// Property: MulticastSourceSettings
-			"multicast_source_settings": schemaAttribute56153197c166ffcb6b461f63(),
-			// Property: NetworkName
-			"network_name": schemaAttributed679efc3a84154bba67d602f(),
-			// Property: Port
-			"port": schemaAttribute6362843bb478858fe7218365(),
-			// Property: Protocol
-			"protocol": schemaAttribute34fe891a02a04521b48227d1(),
-		}, /*END SCHEMA*/
-		Description: "The source of the bridge. A network source originates at your premises.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6d263896e4c3ba567c64190() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network source multicast IP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed679efc3a84154bba67d602f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network source's gateway network name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_bridge_source", bridgeSourceDataSource)
 }
@@ -146,7 +29,10 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Number (ARN) of the bridge.",
 		//	  "type": "string"
 		//	}
-		"bridge_arn": schemaAttribute30cd610a529377a9be0c1749(),
+		"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Number (ARN) of the bridge.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowSource
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +61,29 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"flow_source": schemaAttribute5988b394989739c598a9cd2b(),
+		"flow_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FlowArn
+				"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the cloud flow used as a source of this bridge.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FlowVpcInterfaceAttachment
+				"flow_vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcInterfaceName
+						"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the VPC interface to use for this resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The name of the VPC interface attachment to use for this source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source of the bridge. A flow source originates in MediaConnect as an existing cloud flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +91,10 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the source.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute27a754b738cea4eb1ce3640a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkSource
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +143,44 @@ func bridgeSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"network_source": schemaAttribute83faa6030a523950b88a3550(),
+		"network_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MulticastIp
+				"multicast_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network source multicast IP.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MulticastSourceSettings
+				"multicast_source_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MulticastSourceIp
+						"multicast_source_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IP address of the source for source-specific multicast (SSM).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The settings related to the multicast source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkName
+				"network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network source's gateway network name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The network source port.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network source protocol.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source of the bridge. A network source originates at your premises.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

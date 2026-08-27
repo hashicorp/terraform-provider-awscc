@@ -14,236 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1539440d04e5bed378b63658() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the FSx for OpenZFS volume that the S3 access point is attached to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b64467dea3d87e90489c4ec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributee510463ae0dbd7b808b40a48(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the properties of the file system Windows user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f041ef6f72eec1babd95f44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 access point's alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ff33e42cb8aac79d1c6cf0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute524a11c23583c286515d18b5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FileSystemIdentity
-			"file_system_identity": schemaAttributed36ebaa78cac9ea9885906da(),
-			// Property: VolumeId
-			"volume_id": schemaAttribute1539440d04e5bed378b63658(),
-		}, /*END SCHEMA*/
-		Description: "The OpenZFSConfiguration of the S3 access point attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5990aec08833e538b0d232fd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FileSystemIdentity
-			"file_system_identity": schemaAttribute6b08a908bca2d45d95f0a734(),
-			// Property: VolumeId
-			"volume_id": schemaAttributeea66d342dc9836e75399e02c(),
-		}, /*END SCHEMA*/
-		Description: "The OntapConfiguration of the S3 access point attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute648afc3f5912fc8374bec29f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of Amazon FSx volume that the S3 access point is attached to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b08a908bca2d45d95f0a734() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttributecfb9706c767e45a92198f5a2(),
-			// Property: UnixUser
-			"unix_user": schemaAttribute7d0c1446b791aa2e3f7c61f0(),
-			// Property: WindowsUser
-			"windows_user": schemaAttribute1b64467dea3d87e90489c4ec(),
-		}, /*END SCHEMA*/
-		Description: "The file system identity used to authorize file access requests made using the S3 access point.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7189fb0ca2832f6976f90df0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 access point's ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d0c1446b791aa2e3f7c61f0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributef0d2f6913a10e68d3a227baf(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the properties of the file system UNIX user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d660cd8b178f22f733a2d21() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Gid
-			"gid": schemaAttributeec8287774f3fcbfd976df58a(),
-			// Property: SecondaryGids
-			"secondary_gids": schemaAttributecff681dd6869fca594d33c3d(),
-			// Property: Uid
-			"uid": schemaAttributef63816c47e1e0cc025a0783a(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the UID and GIDs of the file system POSIX user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b451c158cccd9358fb4434b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 access point attachment; also used for the name of the S3 access point.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea983d19a8a2f1c4c3a30c780() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the FSx for OpenZFS user identity type, accepts only POSIX.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7916c74ea6055b3adb8145f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Alias
-			"alias": schemaAttribute1f041ef6f72eec1babd95f44(),
-			// Property: Policy
-			"policy": schemaAttributeda1e5efe04d5a248a7e1f010(),
-			// Property: ResourceARN
-			"resource_arn": schemaAttribute7189fb0ca2832f6976f90df0(),
-			// Property: VpcConfiguration
-			"vpc_configuration": schemaAttributed537f51b928cd84c956f38a8(),
-		}, /*END SCHEMA*/
-		Description: "The S3 access point configuration of the S3 access point attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfb9706c767e45a92198f5a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the FSx for ONTAP user identity type, accepts either UNIX or WINDOWS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecff681dd6869fca594d33c3d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Gid
-				"gid": schemaAttributeec8287774f3fcbfd976df58a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of secondary GIDs for the file system user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed36ebaa78cac9ea9885906da() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PosixUser
-			"posix_user": schemaAttribute7d660cd8b178f22f733a2d21(),
-			// Property: Type
-			"type": schemaAttributea983d19a8a2f1c4c3a30c780(),
-		}, /*END SCHEMA*/
-		Description: "The file system identity used to authorize file access requests made using the S3 access point.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed537f51b928cd84c956f38a8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcId
-			"vpc_id": schemaAttribute4ff33e42cb8aac79d1c6cf0d(),
-		}, /*END SCHEMA*/
-		Description: "The S3 access point's virtual private cloud (VPC) configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda1e5efe04d5a248a7e1f010() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 access point's policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee510463ae0dbd7b808b40a48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Windows user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea66d342dc9836e75399e02c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the FSx for ONTAP volume that the S3 access point is attached to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec8287774f3fcbfd976df58a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The GID of the file system user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0d2f6913a10e68d3a227baf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the UNIX user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef63816c47e1e0cc025a0783a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The UID of the file system user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_fsx_s3_access_point_attachment", s3AccessPointAttachmentDataSource)
 }
@@ -262,7 +32,10 @@ func s3AccessPointAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute8b451c158cccd9358fb4434b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the S3 access point attachment; also used for the name of the S3 access point.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OntapConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +121,53 @@ func s3AccessPointAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ontap_configuration": schemaAttribute5990aec08833e538b0d232fd(),
+		"ontap_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FileSystemIdentity
+				"file_system_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the FSx for ONTAP user identity type, accepts either UNIX or WINDOWS.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UnixUser
+						"unix_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the UNIX user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the properties of the file system UNIX user.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WindowsUser
+						"windows_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Windows user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the properties of the file system Windows user.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The file system identity used to authorize file access requests made using the S3 access point.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VolumeId
+				"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the FSx for ONTAP volume that the S3 access point is attached to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OntapConfiguration of the S3 access point attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OpenZFSConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -430,7 +249,60 @@ func s3AccessPointAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"open_zfs_configuration": schemaAttribute524a11c23583c286515d18b5(),
+		"open_zfs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FileSystemIdentity
+				"file_system_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PosixUser
+						"posix_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Gid
+								"gid": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The GID of the file system user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecondaryGids
+								"secondary_gids": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Gid
+											"gid": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "The GID of the file system user.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The list of secondary GIDs for the file system user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Uid
+								"uid": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The UID of the file system user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the UID and GIDs of the file system POSIX user.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the FSx for OpenZFS user identity type, accepts only POSIX.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The file system identity used to authorize file access requests made using the S3 access point.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VolumeId
+				"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the FSx for OpenZFS volume that the S3 access point is attached to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OpenZFSConfiguration of the S3 access point attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3AccessPoint
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +350,39 @@ func s3AccessPointAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"s3_access_point": schemaAttributec7916c74ea6055b3adb8145f(),
+		"s3_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Alias
+				"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 access point's alias.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Policy
+				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 access point's policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceARN
+				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 access point's ARN.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfiguration
+				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcId
+						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The S3 access point's virtual private cloud (VPC) configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The S3 access point configuration of the S3 access point attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -490,7 +394,10 @@ func s3AccessPointAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute648afc3f5912fc8374bec29f(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of Amazon FSx volume that the S3 access point is attached to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,121 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0666e0e85819e422786e51ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key in the key-value pair",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14ffafa37d4fb28a62c65226() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxIndexingCapacityInOcu
-			"max_indexing_capacity_in_ocu": schemaAttribute374cdd30f882d0ac1be91bbd(),
-			// Property: MaxSearchCapacityInOcu
-			"max_search_capacity_in_ocu": schemaAttribute6d44e5f5860f0b9f3f43a00f(),
-			// Property: MinIndexingCapacityInOcu
-			"min_indexing_capacity_in_ocu": schemaAttribute2d119d61c9d49f5eeecb3f84(),
-			// Property: MinSearchCapacityInOcu
-			"min_search_capacity_in_ocu": schemaAttribute8f38dda808ff882f6d9de87c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute213be50f004a41827048e2b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the collection group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d119d61c9d49f5eeecb3f84() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum indexing capacity for collections in the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute374cdd30f882d0ac1be91bbd() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum indexing capacity for collections in the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d44e5f5860f0b9f3f43a00f() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum search capacity for collections in the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute779244394660ec69795c9186() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the collection group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f38dda808ff882f6d9de87c() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum search capacity for collections in the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95dc51f33cc4acd64a734837() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether standby replicas are used for the collection group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb68f64f3fefd00a050f3709f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the collection group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca7734989cdb9f25813753d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value in the key-value pair",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8f4bbd61d49e00be7da51d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the collection group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef17c4365c900612904f5b164() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef524a12a0c2fca5da5156442() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0666e0e85819e422786e51ce(),
-				// Property: Value
-				"value": schemaAttributeca7734989cdb9f25813753d7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_collection_group", collectionGroupDataSource)
 }
@@ -144,7 +29,10 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The Amazon Resource Name (ARN) of the collection group.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute213be50f004a41827048e2b7(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the collection group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CapacityLimits
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +58,31 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"capacity_limits": schemaAttribute14ffafa37d4fb28a62c65226(),
+		"capacity_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxIndexingCapacityInOcu
+				"max_indexing_capacity_in_ocu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum indexing capacity for collections in the group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxSearchCapacityInOcu
+				"max_search_capacity_in_ocu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum search capacity for collections in the group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinIndexingCapacityInOcu
+				"min_indexing_capacity_in_ocu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum indexing capacity for collections in the group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinSearchCapacityInOcu
+				"min_search_capacity_in_ocu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum search capacity for collections in the group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +91,10 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee8f4bbd61d49e00be7da51d9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the collection group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Generation
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +106,10 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"generation": schemaAttributef17c4365c900612904f5b164(),
+		"generation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +119,10 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"collection_group_id": schemaAttributeb68f64f3fefd00a050f3709f(),
+		"collection_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the collection group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +133,10 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute779244394660ec69795c9186(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the collection group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StandbyReplicas
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +148,10 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"standby_replicas": schemaAttribute95dc51f33cc4acd64a734837(),
+		"standby_replicas": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether standby replicas are used for the collection group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +184,24 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef524a12a0c2fca5da5156442(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key in the key-value pair",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value in the key-value pair",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute8a132f824d4e2e55ab56aa4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute937b2616d46588d714eed344() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow module alias (ARN). This is constructed from the ContactFlowModuleArn and AliasId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb150b87b3932d23528d5a43b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8c4de13b09987473671cd4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9b024373bd8491e2bf78769() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The version number of the contact flow module this alias points to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdcc778286496853afc612b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow module (ARN) this alias is tied to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_contact_flow_module_alias", contactFlowModuleAliasDataSource)
 }
@@ -73,7 +31,10 @@ func contactFlowModuleAliasDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alias_id": schemaAttribute8a132f824d4e2e55ab56aa4b(),
+		"alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactFlowModuleAliasARN
 		// CloudFormation resource type schema:
 		//
@@ -84,7 +45,10 @@ func contactFlowModuleAliasDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+:[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_alias_arn": schemaAttribute937b2616d46588d714eed344(),
+		"contact_flow_module_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow module alias (ARN). This is constructed from the ContactFlowModuleArn and AliasId.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactFlowModuleId
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +59,10 @@ func contactFlowModuleAliasDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_id": schemaAttributefdcc778286496853afc612b3(),
+		"contact_flow_module_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow module (ARN) this alias is tied to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactFlowModuleVersion
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +71,10 @@ func contactFlowModuleAliasDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"contact_flow_module_version": schemaAttributef9b024373bd8491e2bf78769(),
+		"contact_flow_module_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the contact flow module this alias points to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +84,10 @@ func contactFlowModuleAliasDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee8c4de13b09987473671cd4c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +98,10 @@ func contactFlowModuleAliasDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^([$0-9a-zA-Z][_-]?)+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb150b87b3932d23528d5a43b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

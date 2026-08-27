@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute047c7910657290a7cd9bf290() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19509e3483e6c10ac7ea5b0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d567e17c453b3345b39864f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3183542c5d237e9f3dfda801() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute19509e3483e6c10ac7ea5b0d(),
-				// Property: Value
-				"value": schemaAttribute19509e3483e6c10ac7ea5b0d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bbea3df6c38b886d2ef5c77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the outpost.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute703a87e8cd5977809ffb2e2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute870eaa1edb44c548ed022961() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabb8878f4f4cf1d10ab82715() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mode of the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed06290bee8eeebcd81bf055b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_local_gateway_route_table", localGatewayRouteTableDataSource)
 }
@@ -99,7 +29,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the local gateway.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttribute703a87e8cd5977809ffb2e2d(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableArn
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +40,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ARN of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_arn": schemaAttribute870eaa1edb44c548ed022961(),
+		"local_gateway_route_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +51,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_id": schemaAttribute1d567e17c453b3345b39864f(),
+		"local_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +62,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The mode of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttributeabb8878f4f4cf1d10ab82715(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode of the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +73,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ARN of the outpost.",
 		//	  "type": "string"
 		//	}
-		"outpost_arn": schemaAttribute5bbea3df6c38b886d2ef5c77(),
+		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the outpost.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +84,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The owner of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute047c7910657290a7cd9bf290(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +95,10 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The state of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributed06290bee8eeebcd81bf055b(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +126,22 @@ func localGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3183542c5d237e9f3dfda801(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

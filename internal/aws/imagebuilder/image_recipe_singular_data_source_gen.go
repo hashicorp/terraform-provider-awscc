@@ -15,332 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06211679627858be261003f8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure device encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ab0c1df69db796adde07ccc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure delete on termination of the associated device.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0eeb2806aedc6492eb835377() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute156884c9a5403b62f4d1868d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SystemsManagerAgent
-			"systems_manager_agent": schemaAttribute90a915099ce332abbd61257d(),
-			// Property: UserDataOverride
-			"user_data_override": schemaAttribute521a49acbc8bbd15b5e0c883(),
-		}, /*END SCHEMA*/
-		Description: "Specify additional settings and launch scripts for your build instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a7a7bb4491923592de2034b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The working directory to be used during build and test workflows.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute246f98a383088fd409418bb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The parent image of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28274c6da2316dfa55fbc4f2() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags to apply to the AMI created by this image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3831734f9c4f5455ebb7c5ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the component parameter to set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute521a49acbc8bbd15b5e0c883() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use this property to provide commands or a command script to run when you launch your build instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f002a9b9204fadae5282485() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure device IOPS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f5d1ef76a1246c680868feb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Sets the value for the named component parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute614031fa049c8980c66309de() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute9f44961335cc51843e01b1c1(),
-			// Property: Major
-			"major": schemaAttributea1fbdbc49fa20e859431f367(),
-			// Property: Minor
-			"minor": schemaAttributeb22071da1368466a575b882b(),
-			// Property: Patch
-			"patch": schemaAttribute9b1711e2f0d36c2f31b91013(),
-		}, /*END SCHEMA*/
-		Description: "The latest version references of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64637079735494dc99865120() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to override the device's volume type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69ba055eb30302fd7ecbf003() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6add6348682697de1d69b6b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75e9e260a3b74b8da65ea068() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComponentArn
-				"component_arn": schemaAttributebed64732b5e5e1dd384471ad(),
-				// Property: Parameters
-				"parameters": schemaAttributec1602c79e28054e758d9d4a0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The components of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fc7d1e0006661a27a580562() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b4510850f65f870d0d2eff6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Use to override the device's volume size.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90a915099ce332abbd61257d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: UninstallAfterBuild
-			"uninstall_after_build": schemaAttributea6b545ef4d3ee151614f1ce9(),
-		}, /*END SCHEMA*/
-		Description: "Contains settings for the SSM agent on your build instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b1711e2f0d36c2f31b91013() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest version ARN of the created image recipe, with the same patch version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f44961335cc51843e01b1c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest version ARN of the created image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea07c904f187d7ec148d7f893() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to remove a mapping from the parent image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1fbdbc49fa20e859431f367() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest version ARN of the created image recipe, with the same major version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6b545ef4d3ee151614f1ce9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1d27a1a6e3bc4b5ef2b990e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeviceName
-				"device_name": schemaAttributee07401e812d058f98aa2f1e5(),
-				// Property: Ebs
-				"ebs": schemaAttributeb916f1d09fd2d44cc44dc4c7(),
-				// Property: NoDevice
-				"no_device": schemaAttributea07c904f187d7ec148d7f893(),
-				// Property: VirtualName
-				"virtual_name": schemaAttributeb6a64130464bac6a973cb846(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The block device mappings to apply when creating images from this recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb22071da1368466a575b882b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest version ARN of the created image recipe, with the same minor version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb44b09b109a2d7d4081e4213() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6a64130464bac6a973cb846() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to manage instance ephemeral devices.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb916f1d09fd2d44cc44dc4c7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeleteOnTermination
-			"delete_on_termination": schemaAttribute0ab0c1df69db796adde07ccc(),
-			// Property: Encrypted
-			"encrypted": schemaAttribute06211679627858be261003f8(),
-			// Property: Iops
-			"iops": schemaAttribute5f002a9b9204fadae5282485(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributec831ff8a5e51a9ade41892e5(),
-			// Property: SnapshotId
-			"snapshot_id": schemaAttributed496ffe83b557d086589a8fd(),
-			// Property: Throughput
-			"throughput": schemaAttributee1a69392f804dee404729456(),
-			// Property: VolumeSize
-			"volume_size": schemaAttribute8b4510850f65f870d0d2eff6(),
-			// Property: VolumeType
-			"volume_type": schemaAttribute64637079735494dc99865120(),
-		}, /*END SCHEMA*/
-		Description: "Use to manage Amazon EBS-specific configuration for this mapping.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebed64732b5e5e1dd384471ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the component.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1602c79e28054e758d9d4a0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute3831734f9c4f5455ebb7c5ce(),
-				// Property: Value
-				"value": schemaAttribute5f5d1ef76a1246c680868feb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec831ff8a5e51a9ade41892e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure the KMS key to use when encrypting the device.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4641e8a5fb64f9e5d80d01a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the image recipe.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed496ffe83b557d086589a8fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The snapshot that defines the device contents.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee07401e812d058f98aa2f1e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device to which these mappings apply.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1a69392f804dee404729456() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_image_recipe", imageRecipeDataSource)
 }
@@ -374,7 +48,29 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_instance_configuration": schemaAttribute156884c9a5403b62f4d1868d(),
+		"additional_instance_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SystemsManagerAgent
+				"systems_manager_agent": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: UninstallAfterBuild
+						"uninstall_after_build": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains settings for the SSM agent on your build instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserDataOverride
+				"user_data_override": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Use this property to provide commands or a command script to run when you launch your build instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specify additional settings and launch scripts for your build instances.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AmiTags
 		// CloudFormation resource type schema:
 		//
@@ -388,7 +84,12 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ami_tags": schemaAttribute28274c6da2316dfa55fbc4f2(),
+		"ami_tags":          // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags to apply to the AMI created by this image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AmiWatermarks
 		// CloudFormation resource type schema:
 		//
@@ -405,7 +106,11 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"ami_watermarks": schemaAttribute7fc7d1e0006661a27a580562(),
+		"ami_watermarks": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -414,7 +119,10 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-recipe/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6add6348682697de1d69b6b6(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockDeviceMappings
 		// CloudFormation resource type schema:
 		//
@@ -492,7 +200,76 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"block_device_mappings": schemaAttributeb1d27a1a6e3bc4b5ef2b990e(),
+		"block_device_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DeviceName
+					"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The device to which these mappings apply.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ebs
+					"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteOnTermination
+							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Use to configure delete on termination of the associated device.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Encrypted
+							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Use to configure device encryption.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Iops
+							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Use to configure device IOPS.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: KmsKeyId
+							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Use to configure the KMS key to use when encrypting the device.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SnapshotId
+							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The snapshot that defines the device contents.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Throughput
+							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeSize
+							"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Use to override the device's volume size.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeType
+							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Use to override the device's volume type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Use to manage Amazon EBS-specific configuration for this mapping.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NoDevice
+					"no_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Use to remove a mapping from the parent image.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VirtualName
+					"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Use to manage instance ephemeral devices.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The block device mappings to apply when creating images from this recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Components
 		// CloudFormation resource type schema:
 		//
@@ -540,7 +317,39 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"components": schemaAttribute75e9e260a3b74b8da65ea068(),
+		"components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComponentArn
+					"component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the component.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Parameters
+					"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the component parameter to set.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Sets the value for the named component parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The components of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -548,7 +357,10 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the image recipe.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute0eeb2806aedc6492eb835377(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -575,7 +387,32 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"latest_version": schemaAttribute614031fa049c8980c66309de(),
+		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Major
+				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe, with the same major version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Minor
+				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe, with the same minor version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Patch
+				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe, with the same patch version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The latest version references of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -583,7 +420,10 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the image recipe.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed4641e8a5fb64f9e5d80d01a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParentImage
 		// CloudFormation resource type schema:
 		//
@@ -591,7 +431,10 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The parent image of the image recipe.",
 		//	  "type": "string"
 		//	}
-		"parent_image": schemaAttribute246f98a383088fd409418bb8(),
+		"parent_image": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The parent image of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -605,7 +448,12 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributeb44b09b109a2d7d4081e4213(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -613,7 +461,10 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the image recipe.",
 		//	  "type": "string"
 		//	}
-		"version": schemaAttribute69ba055eb30302fd7ecbf003(),
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkingDirectory
 		// CloudFormation resource type schema:
 		//
@@ -621,7 +472,10 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The working directory to be used during build and test workflows.",
 		//	  "type": "string"
 		//	}
-		"working_directory": schemaAttribute1a7a7bb4491923592de2034b(),
+		"working_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The working directory to be used during build and test workflows.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

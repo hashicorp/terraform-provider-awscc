@@ -14,26 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute402cf7aefdc548d63e5594a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or the Id of the AttributeGroup.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb08b3098b8c0bd98694cf99b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or the Id of the Application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecda7ae7d9c17b5dc6dec5b11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalogappregistry_attribute_group_association", attributeGroupAssociationDataSource)
 }
@@ -52,7 +32,10 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "\\w+|[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"application": schemaAttributeb08b3098b8c0bd98694cf99b(),
+		"application": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name or the Id of the Application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -60,7 +43,9 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttributecda7ae7d9c17b5dc6dec5b11(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttributeGroup
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +56,10 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "\\w+|[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"attribute_group": schemaAttribute402cf7aefdc548d63e5594a1(),
+		"attribute_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name or the Id of the AttributeGroup.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttributeGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +67,9 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"attribute_group_arn": schemaAttributecda7ae7d9c17b5dc6dec5b11(),
+		"attribute_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

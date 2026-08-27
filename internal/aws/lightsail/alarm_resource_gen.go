@@ -24,136 +24,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0ff81176cba18d2b42c97e1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets how this alarm will handle missing data points.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38f98c5464d3c40a4f9370ff() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c31bda83348a0286509a312() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Lightsail resource that the alarm monitors.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4258d4e9c20213a3bef43247() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49d0c803669617295076d55a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e7844e78cb15233f31904b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5021ecc470cf23aad63286d5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64978ef1055d404078266ce5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the alarm.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute688a01164ffee06a3d4c13fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric to associate with the alarm.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9abbff24687fe285b5106a6b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value against which the specified statistic is compared.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed36cbc43b7ddd68f3ce140f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeac7ff1b01117c9321abf4f5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeba6471b4132489d1e712339() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The alarm states that trigger a notification.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_alarm", alarmResource)
 	registry.AddListResourceFactory("awscc_lightsail_alarm", generic.NewListResource(alarmResource))
@@ -169,7 +39,12 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"alarm_arn": schemaAttribute4e7844e78cb15233f31904b7(),
+		"alarm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AlarmName
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +53,16 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"alarm_name": schemaAttributed36cbc43b7ddd68f3ce140f8(),
+		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ComparisonOperator
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +70,10 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
 		//	  "type": "string"
 		//	}
-		"comparison_operator": schemaAttribute49d0c803669617295076d55a(),
+		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactProtocols
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +86,15 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"contact_protocols": schemaAttribute38f98c5464d3c40a4f9370ff(),
+		"contact_protocols": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DatapointsToAlarm
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +102,14 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
 		//	  "type": "integer"
 		//	}
-		"datapoints_to_alarm": schemaAttributeeac7ff1b01117c9321abf4f5(),
+		"datapoints_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationPeriods
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +117,10 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
 		//	  "type": "integer"
 		//	}
-		"evaluation_periods": schemaAttribute4258d4e9c20213a3bef43247(),
+		"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricName
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +128,13 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the metric to associate with the alarm.",
 		//	  "type": "string"
 		//	}
-		"metric_name": schemaAttribute688a01164ffee06a3d4c13fa(),
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the metric to associate with the alarm.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MonitoredResourceName
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +142,13 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the Lightsail resource that the alarm monitors.",
 		//	  "type": "string"
 		//	}
-		"monitored_resource_name": schemaAttribute3c31bda83348a0286509a312(),
+		"monitored_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Lightsail resource that the alarm monitors.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +156,14 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
 		//	  "type": "boolean"
 		//	}
-		"notification_enabled": schemaAttribute5021ecc470cf23aad63286d5(),
+		"notification_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationTriggers
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +176,15 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"notification_triggers": schemaAttributeeba6471b4132489d1e712339(),
+		"notification_triggers": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The alarm states that trigger a notification.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +192,13 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The current state of the alarm.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute64978ef1055d404078266ce5(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the alarm.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +206,10 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The value against which the specified statistic is compared.",
 		//	  "type": "number"
 		//	}
-		"threshold": schemaAttribute9abbff24687fe285b5106a6b(),
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The value against which the specified statistic is compared.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TreatMissingData
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +217,14 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Sets how this alarm will handle missing data points.",
 		//	  "type": "string"
 		//	}
-		"treat_missing_data": schemaAttribute0ff81176cba18d2b42c97e1e(),
+		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Sets how this alarm will handle missing data points.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

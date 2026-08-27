@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributebc666a7476c2285074788b4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_ui_customization_attachment", userPoolUICustomizationAttachmentDataSource)
 }
@@ -34,21 +28,27 @@ func userPoolUICustomizationAttachmentDataSource(ctx context.Context) (datasourc
 		//	{
 		//	  "type": "string"
 		//	}
-		"css": schemaAttributebc666a7476c2285074788b4e(),
+		"css": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"client_id": schemaAttributebc666a7476c2285074788b4e(),
+		"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttributebc666a7476c2285074788b4e(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

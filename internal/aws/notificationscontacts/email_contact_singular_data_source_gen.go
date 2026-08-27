@@ -15,54 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08635cb539313c6615bd1d9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1df8b4a3f9289d881552cd5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75bee884c2a8d59865a5dcc7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute1df8b4a3f9289d881552cd5a(),
-			// Property: Arn
-			"arn": schemaAttribute1df8b4a3f9289d881552cd5a(),
-			// Property: CreationTime
-			"creation_time": schemaAttribute08635cb539313c6615bd1d9f(),
-			// Property: Name
-			"name": schemaAttribute1df8b4a3f9289d881552cd5a(),
-			// Property: Status
-			"status": schemaAttribute1df8b4a3f9289d881552cd5a(),
-			// Property: UpdateTime
-			"update_time": schemaAttribute08635cb539313c6615bd1d9f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5499c8679f92ee3977a719a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1df8b4a3f9289d881552cd5a(),
-				// Property: Value
-				"value": schemaAttribute1df8b4a3f9289d881552cd5a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags that are attached to the role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_notificationscontacts_email_contact", emailContactDataSource)
 }
@@ -78,7 +30,9 @@ func emailContactDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws:notifications-contacts::[0-9]{12}:emailcontact/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute1df8b4a3f9289d881552cd5a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EmailAddress
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +42,9 @@ func emailContactDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^(.+)@(.+)$",
 		//	  "type": "string"
 		//	}
-		"email_address": schemaAttribute1df8b4a3f9289d881552cd5a(),
+		"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EmailContact
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +93,37 @@ func emailContactDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"email_contact": schemaAttribute75bee884c2a8d59865a5dcc7(),
+		"email_contact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreationTime
+				"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: timetypes.RFC3339Type{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateTime
+				"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: timetypes.RFC3339Type{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +133,9 @@ func emailContactDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[\\w-.~]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1df8b4a3f9289d881552cd5a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +165,22 @@ func emailContactDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributee5499c8679f92ee3977a719a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags that are attached to the role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,154 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute087a9d8bdb57e610a9741485() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS administrator's contact email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute096d10b46df001702f6fde01() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d4d58943fe4303efa2014c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0dc3a3f7d0e042c32a7f6cef() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AlarmRoleArn
-			"alarm_role_arn": schemaAttribute22a972d8fd594647c8e8908d(),
-			// Property: NotificationLambdaArn
-			"notification_lambda_arn": schemaAttributec1bb98feea7f0282db67a0cf(),
-		}, /*END SCHEMA*/
-		Description: "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13c101af1b37afb18992a7c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e33a11b8773fdea5052a0fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22a972d8fd594647c8e8908d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34c904302e355ad632b00fe2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute423c99e60001b9e7250d8741() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5467ea1289b2cc572cc538dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address that sends alarm notifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute546c616d323bd175ec667b91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the portal, which has the following format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f97de5ad37eb9f5733c3484() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PortalTools
-				"portal_tools": schemaAttributece20c03d8b8d0e9e0b875bc8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Map to associate detail of configuration related with a PortalType.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute925872a28678d6fc91486ce9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of portal",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1fe0887adccbcdf9d868e8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A friendly name for the portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1bb98feea7f0282db67a0cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2d4be96deee75f37f65914d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece20c03d8b8d0e9e0b875bc8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of enabled Tools for a certain portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf20876a3dbd3223e1257592() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute34c904302e355ad632b00fe2(),
-				// Property: Value
-				"value": schemaAttribute34c904302e355ad632b00fe2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_portal", portalDataSource)
 }
@@ -189,7 +41,22 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"alarms": schemaAttribute0dc3a3f7d0e042c32a7f6cef(),
+		"alarms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmRoleArn
+				"alarm_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NotificationLambdaArn
+				"notification_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationSenderEmail
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +64,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The email address that sends alarm notifications.",
 		//	  "type": "string"
 		//	}
-		"notification_sender_email": schemaAttribute5467ea1289b2cc572cc538dd(),
+		"notification_sender_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address that sends alarm notifications.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalArn
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +75,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the portal, which has the following format.",
 		//	  "type": "string"
 		//	}
-		"portal_arn": schemaAttribute546c616d323bd175ec667b91(),
+		"portal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the portal, which has the following format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalAuthMode
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +86,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
 		//	  "type": "string"
 		//	}
-		"portal_auth_mode": schemaAttribute1e33a11b8773fdea5052a0fb(),
+		"portal_auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalClientId
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +97,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS SSO application generated client ID (used with AWS SSO APIs).",
 		//	  "type": "string"
 		//	}
-		"portal_client_id": schemaAttribute423c99e60001b9e7250d8741(),
+		"portal_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalContactEmail
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +108,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS administrator's contact email address.",
 		//	  "type": "string"
 		//	}
-		"portal_contact_email": schemaAttribute087a9d8bdb57e610a9741485(),
+		"portal_contact_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS administrator's contact email address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalDescription
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +119,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the portal.",
 		//	  "type": "string"
 		//	}
-		"portal_description": schemaAttribute096d10b46df001702f6fde01(),
+		"portal_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the portal.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalId
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +130,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the portal.",
 		//	  "type": "string"
 		//	}
-		"portal_id": schemaAttribute0d4d58943fe4303efa2014c3(),
+		"portal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the portal.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalName
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +141,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A friendly name for the portal.",
 		//	  "type": "string"
 		//	}
-		"portal_name": schemaAttributeb1fe0887adccbcdf9d868e8b(),
+		"portal_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A friendly name for the portal.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalStartUrl
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +152,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
 		//	  "type": "string"
 		//	}
-		"portal_start_url": schemaAttribute13c101af1b37afb18992a7c7(),
+		"portal_start_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalType
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +167,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"portal_type": schemaAttribute925872a28678d6fc91486ce9(),
+		"portal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of portal",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalTypeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +198,21 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"portal_type_configuration": schemaAttribute6f97de5ad37eb9f5733c3484(),
+		"portal_type_configuration": // Pattern: ""
+		schema.MapNestedAttribute{   /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: PortalTools
+					"portal_tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "List of enabled Tools for a certain portal.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Map to associate detail of configuration related with a PortalType.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +220,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributec2d4be96deee75f37f65914d(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -336,7 +250,22 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributecf20876a3dbd3223e1257592(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the portal.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

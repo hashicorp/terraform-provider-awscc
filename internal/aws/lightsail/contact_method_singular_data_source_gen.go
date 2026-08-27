@@ -15,63 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3e597c5560d58b273c3c5f13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the contact method.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e9c997bebb407f76916ef67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol of the contact method, such as Email or SMS (text messaging).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute729c61b1598aee66f8dfd0bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the contact method.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80f7704a68cd416987cf1109() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The support code for the contact method.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3e6819c4ec6aaf4eb38da25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the contact method was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb13b6c134cf6af8074142252() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Lightsail resource type of the contact method.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd1262a316c2da9df1292420() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the contact method.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec71f42d0317995c3b5437e93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination of the contact method, such as an email address or a mobile phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_contact_method", contactMethodDataSource)
 }
@@ -88,7 +31,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws(-[a-z]+)*:lightsail:[a-z0-9-]+:[0-9]+:ContactMethod/(Email|SMS)$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributebd1262a316c2da9df1292420(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the contact method.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +44,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"contact_endpoint": schemaAttributec71f42d0317995c3b5437e93(),
+		"contact_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The destination of the contact method, such as an email address or a mobile phone number.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +56,11 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributea3e6819c4ec6aaf4eb38da25(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the contact method was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +68,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the contact method.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3e597c5560d58b273c3c5f13(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the contact method.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +83,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttribute3e9c997bebb407f76916ef67(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The protocol of the contact method, such as Email or SMS (text messaging).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +94,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Lightsail resource type of the contact method.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttributeb13b6c134cf6af8074142252(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Lightsail resource type of the contact method.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +110,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute729c61b1598aee66f8dfd0bc(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the contact method.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +121,10 @@ func contactMethodDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The support code for the contact method.",
 		//	  "type": "string"
 		//	}
-		"support_code": schemaAttribute80f7704a68cd416987cf1109(),
+		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The support code for the contact method.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

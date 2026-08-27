@@ -21,189 +21,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute27d258571cb2b08717c8e09d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Priority",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a54edfd18da12fc0e5ffe09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the creator request.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea09d9a4c43266640dcebc281() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "MutationProtectionStatus",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea905ab8666cff985377a74cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 255),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac06940e692e8b35edf149d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallDomainListAssociationStatus",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2fd90a46e9d0415b29b8bd() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec472ce3cb4bc013b5b83b00f(),
-				// Property: Value
-				"value": schemaAttributea905ab8666cff985377a74cd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec472ce3cb4bc013b5b83b00f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 127),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca4a23d762c896958f1262be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallRuleGroupAssociationName",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9fdb4b0cb9147023628e2be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede4b2b67ab234dca34f5c77f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallRuleGroupId",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef722d41debc6441915fceb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rfc3339TimeString",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2b79e0ef3e9b39ab312d7b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "VpcId",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef732a4f569e3c8086d42a46b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef86e382e407c329cf5f192e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefba074750710cb2c8eed091f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ServicePrincipal",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResource)
 	registry.AddListResourceFactory("awscc_route53resolver_firewall_rule_group_association", generic.NewListResource(firewallRuleGroupAssociationResource))
@@ -222,7 +39,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef86e382e407c329cf5f192e3(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +55,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributeef722d41debc6441915fceb7(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorRequestId
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +71,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"creator_request_id": schemaAttribute5a54edfd18da12fc0e5ffe09(),
+		"creator_request_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the creator request.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallRuleGroupId
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +87,16 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firewall_rule_group_id": schemaAttributede4b2b67ab234dca34f5c77f(),
+		"firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallRuleGroupId",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +106,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firewall_rule_group_association_id": schemaAttributed9fdb4b0cb9147023628e2be(),
+		"firewall_rule_group_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedOwnerName
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +122,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"managed_owner_name": schemaAttributefba074750710cb2c8eed091f(),
+		"managed_owner_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ServicePrincipal",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +138,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"modification_time": schemaAttributeef722d41debc6441915fceb7(),
+		"modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MutationProtection
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +156,20 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mutation_protection": schemaAttributea09d9a4c43266640dcebc281(),
+		"mutation_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "MutationProtectionStatus",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +180,17 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeca4a23d762c896958f1262be(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallRuleGroupAssociationName",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +198,10 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "description": "Priority",
 		//	  "type": "integer"
 		//	}
-		"priority": schemaAttribute27d258571cb2b08717c8e09d(),
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Priority",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +215,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributef732a4f569e3c8086d42a46b(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -335,7 +229,13 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "description": "FirewallDomainListAssociationStatus",
 		//	  "type": "string"
 		//	}
-		"status_message": schemaAttributeac06940e692e8b35edf149d9(),
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallDomainListAssociationStatus",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +268,44 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributebf2fd90a46e9d0415b29b8bd(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 255),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +315,16 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributef2b79e0ef3e9b39ab312d7b8(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "VpcId",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

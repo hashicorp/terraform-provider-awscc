@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute7870bfb9fdc705fe86e9288a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Determines the percentage of traces indexed from CloudWatch Logs to X-Ray",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4ac58447d109f5f51abf940() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User account id, used as the primary identifier for the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_xray_transaction_search_config", transactionSearchConfigDataSource)
 }
@@ -44,7 +30,10 @@ func transactionSearchConfigDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributeb4ac58447d109f5f51abf940(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User account id, used as the primary identifier for the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexingPercentage
 		// CloudFormation resource type schema:
 		//
@@ -54,7 +43,10 @@ func transactionSearchConfigDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"indexing_percentage": schemaAttribute7870bfb9fdc705fe86e9288a(),
+		"indexing_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Determines the percentage of traces indexed from CloudWatch Logs to X-Ray",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

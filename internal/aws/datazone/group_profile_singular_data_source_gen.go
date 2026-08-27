@@ -14,69 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01f34d318ef07e6704940502() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the group profile would be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cac95b6885d05574d4cbf4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone group profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e371066df9bb4d513f4bb09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the role principal for the group profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e58a0f6314af6ab7e3eac49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The group-name of the Group Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b2524fd85496c3aba57905c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the group profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea11356e866f726ef524983b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec54755efeb336607a835dcca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the group profile is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6e289cfc67dfe6aeddcdd3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role principal for the group profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe6232fe62d4e26cd6ab1709() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_group_profile", groupProfileDataSource)
 }
@@ -93,7 +30,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributec54755efeb336607a835dcca(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the group profile is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +42,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttribute01f34d318ef07e6704940502(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the group profile would be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +54,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)",
 		//	  "type": "string"
 		//	}
-		"group_identifier": schemaAttributefe6232fe62d4e26cd6ab1709(),
+		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +68,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z_0-9+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"group_name": schemaAttribute4e58a0f6314af6ab7e3eac49(),
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The group-name of the Group Profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupType
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +83,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"group_type": schemaAttributea11356e866f726ef524983b5(),
+		"group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +95,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"group_profile_id": schemaAttribute3cac95b6885d05574d4cbf4e(),
+		"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone group profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RolePrincipalArn
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +106,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ARN of the role principal for the group profile.",
 		//	  "type": "string"
 		//	}
-		"role_principal_arn": schemaAttributef6e289cfc67dfe6aeddcdd3d(),
+		"role_principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role principal for the group profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RolePrincipalId
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +117,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the role principal for the group profile.",
 		//	  "type": "string"
 		//	}
-		"role_principal_id": schemaAttribute3e371066df9bb4d513f4bb09(),
+		"role_principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the role principal for the group profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +132,10 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute6b2524fd85496c3aba57905c(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the group profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

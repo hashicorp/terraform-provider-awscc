@@ -14,182 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute10182e37682ebe9f3c727300() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that grants permission to send notifications to the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a1690d332d87f1c0305125a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertExpirationThresholdInDays
-			"cert_expiration_threshold_in_days": schemaAttributebfbb7c89a2f864af0758ab0d(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing the configName and corresponding configValue for configuring audit checks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c4d4cd908b39996834799b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the target (SNS topic) to which audit notifications are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a9f83cd01ecee6a6c7ea3a2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Sns
-			"sns": schemaAttribute8c7fc36156a382c3432e0829(),
-		}, /*END SCHEMA*/
-		Description: "Information about the targets to which audit notifications are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59136bf888286150aa45b9f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c7fc36156a382c3432e0829() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributef356d0fac09a6a2b9a7a753b(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute10182e37682ebe9f3c727300(),
-			// Property: TargetArn
-			"target_arn": schemaAttribute1c4d4cd908b39996834799b6(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90ba79ec7af2d32015312734() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticatedCognitoRoleOverlyPermissiveCheck
-			"authenticated_cognito_role_overly_permissive_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: CaCertificateExpiringCheck
-			"ca_certificate_expiring_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: CaCertificateKeyQualityCheck
-			"ca_certificate_key_quality_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: ConflictingClientIdsCheck
-			"conflicting_client_ids_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: DeviceCertificateAgeCheck
-			"device_certificate_age_check": schemaAttributeba9f5848415664677d558a55(),
-			// Property: DeviceCertificateExpiringCheck
-			"device_certificate_expiring_check": schemaAttributec6111dff51728bae366de0c1(),
-			// Property: DeviceCertificateKeyQualityCheck
-			"device_certificate_key_quality_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: DeviceCertificateSharedCheck
-			"device_certificate_shared_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: IntermediateCaRevokedForActiveDeviceCertificatesCheck
-			"intermediate_ca_revoked_for_active_device_certificates_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: IoTPolicyPotentialMisConfigurationCheck
-			"io_t_policy_potential_mis_configuration_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: IotPolicyOverlyPermissiveCheck
-			"iot_policy_overly_permissive_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: IotRoleAliasAllowsAccessToUnusedServicesCheck
-			"iot_role_alias_allows_access_to_unused_services_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: IotRoleAliasOverlyPermissiveCheck
-			"iot_role_alias_overly_permissive_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: LoggingDisabledCheck
-			"logging_disabled_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: RevokedCaCertificateStillActiveCheck
-			"revoked_ca_certificate_still_active_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: RevokedDeviceCertificateStillActiveCheck
-			"revoked_device_certificate_still_active_check": schemaAttributea541fa15dbb089ded4024b93(),
-			// Property: UnauthenticatedCognitoRoleOverlyPermissiveCheck
-			"unauthenticated_cognito_role_overly_permissive_check": schemaAttributea541fa15dbb089ded4024b93(),
-		}, /*END SCHEMA*/
-		Description: "Specifies which audit checks are enabled and disabled for this account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea541fa15dbb089ded4024b93() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributecb91768701a116941aeaf8eb(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for a specific audit check.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb18d252895017cec1bd04999() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba9f5848415664677d558a55() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Configuration
-			"configuration": schemaAttributede609a712be26a24a1fc04bb(),
-			// Property: Enabled
-			"enabled": schemaAttributecb91768701a116941aeaf8eb(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing the configName and corresponding configValue for configuring DeviceCertAgeCheck.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfbb7c89a2f864af0758ab0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configValue for configuring audit checks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6111dff51728bae366de0c1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Configuration
-			"configuration": schemaAttribute1a1690d332d87f1c0305125a(),
-			// Property: Enabled
-			"enabled": schemaAttributecb91768701a116941aeaf8eb(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing the configName and corresponding configValue for configuring DeviceCertExpirationCheck.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb91768701a116941aeaf8eb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "True if the check is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede609a712be26a24a1fc04bb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertAgeThresholdInDays
-			"cert_age_threshold_in_days": schemaAttributebfbb7c89a2f864af0758ab0d(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing the configName and corresponding configValue for configuring audit checks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef356d0fac09a6a2b9a7a753b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "True if notifications to the target are enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_account_audit_configuration", accountAuditConfigurationDataSource)
 }
@@ -207,7 +31,10 @@ func accountAuditConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute59136bf888286150aa45b9f5(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuditCheckConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -431,7 +258,240 @@ func accountAuditConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"audit_check_configurations": schemaAttribute90ba79ec7af2d32015312734(),
+		"audit_check_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticatedCognitoRoleOverlyPermissiveCheck
+				"authenticated_cognito_role_overly_permissive_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CaCertificateExpiringCheck
+				"ca_certificate_expiring_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CaCertificateKeyQualityCheck
+				"ca_certificate_key_quality_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConflictingClientIdsCheck
+				"conflicting_client_ids_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceCertificateAgeCheck
+				"device_certificate_age_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Configuration
+						"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertAgeThresholdInDays
+								"cert_age_threshold_in_days": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The configValue for configuring audit checks.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure containing the configName and corresponding configValue for configuring audit checks.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A structure containing the configName and corresponding configValue for configuring DeviceCertAgeCheck.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceCertificateExpiringCheck
+				"device_certificate_expiring_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Configuration
+						"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertExpirationThresholdInDays
+								"cert_expiration_threshold_in_days": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The configValue for configuring audit checks.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure containing the configName and corresponding configValue for configuring audit checks.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A structure containing the configName and corresponding configValue for configuring DeviceCertExpirationCheck.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceCertificateKeyQualityCheck
+				"device_certificate_key_quality_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceCertificateSharedCheck
+				"device_certificate_shared_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IntermediateCaRevokedForActiveDeviceCertificatesCheck
+				"intermediate_ca_revoked_for_active_device_certificates_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IoTPolicyPotentialMisConfigurationCheck
+				"io_t_policy_potential_mis_configuration_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IotPolicyOverlyPermissiveCheck
+				"iot_policy_overly_permissive_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IotRoleAliasAllowsAccessToUnusedServicesCheck
+				"iot_role_alias_allows_access_to_unused_services_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IotRoleAliasOverlyPermissiveCheck
+				"iot_role_alias_overly_permissive_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LoggingDisabledCheck
+				"logging_disabled_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RevokedCaCertificateStillActiveCheck
+				"revoked_ca_certificate_still_active_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RevokedDeviceCertificateStillActiveCheck
+				"revoked_device_certificate_still_active_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UnauthenticatedCognitoRoleOverlyPermissiveCheck
+				"unauthenticated_cognito_role_overly_permissive_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if the check is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for a specific audit check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies which audit checks are enabled and disabled for this account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuditNotificationTargetConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -463,7 +523,33 @@ func accountAuditConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"audit_notification_target_configurations": schemaAttribute4a9f83cd01ecee6a6c7ea3a2(),
+		"audit_notification_target_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Sns
+				"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "True if notifications to the target are enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the role that grants permission to send notifications to the target.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetArn
+						"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the target (SNS topic) to which audit notifications are sent.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the targets to which audit notifications are sent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -473,7 +559,10 @@ func accountAuditConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributeb18d252895017cec1bd04999(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

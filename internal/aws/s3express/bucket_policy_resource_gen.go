@@ -17,23 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02c7e4a8915baa25a6548137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 directory bucket to which the policy applies.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4504f71ad1f5f934498516d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_s3express_bucket_policy", bucketPolicyResource)
 	registry.AddListResourceFactory("awscc_s3express_bucket_policy", generic.NewListResource(bucketPolicyResource))
@@ -50,7 +33,13 @@ func bucketPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the S3 directory bucket to which the policy applies.",
 		//	  "type": "string"
 		//	}
-		"bucket": schemaAttribute02c7e4a8915baa25a6548137(),
+		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the S3 directory bucket to which the policy applies.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +47,10 @@ func bucketPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schemaAttributed4504f71ad1f5f934498516d(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A policy document containing permissions to add to the specified bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

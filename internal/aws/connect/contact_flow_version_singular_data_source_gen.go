@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute31e6a2ae20c6e7df8f98a6ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4002251369c12c1799d19fd8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the contact flow this version is tied to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc6683a2e19fe222a6f4b343() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The version number of this revision",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5fd14c3372293a3f130df37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the checksum value of the latest published flow content",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec62da27de7dbf6dfefc13c74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow version (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_contact_flow_version", contactFlowVersionDataSource)
 }
@@ -67,7 +32,10 @@ func contactFlowVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_id": schemaAttribute4002251369c12c1799d19fd8(),
+		"contact_flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the contact flow this version is tied to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactFlowVersionARN
 		// CloudFormation resource type schema:
 		//
@@ -78,7 +46,10 @@ func contactFlowVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+:[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_version_arn": schemaAttributec62da27de7dbf6dfefc13c74(),
+		"contact_flow_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow version (ARN).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +58,10 @@ func contactFlowVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute31e6a2ae20c6e7df8f98a6ae(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +72,10 @@ func contactFlowVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9]{64}$",
 		//	  "type": "string"
 		//	}
-		"flow_content_sha_256": schemaAttributec5fd14c3372293a3f130df37(),
+		"flow_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the checksum value of the latest published flow content",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +83,10 @@ func contactFlowVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The version number of this revision",
 		//	  "type": "integer"
 		//	}
-		"version": schemaAttributebc6683a2e19fe222a6f4b343(),
+		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of this revision",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

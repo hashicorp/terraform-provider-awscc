@@ -14,120 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06f6bba9398d511404e37756() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of S3SubPrefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25ce40846d4f6921f188cae5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2778765cf7150d0afc3104f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID assigned to this access grant.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute314e45429d3352a7ce55fb08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 sub prefix of a registered location in your S3 Access Grants instance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute356c06e8e7e5d81e91f8cc94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configures the transfer acceleration state for an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f70ce704e7734acfa9f785e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3SubPrefix
-			"s3_sub_prefix": schemaAttribute314e45429d3352a7ce55fb08(),
-		}, /*END SCHEMA*/
-		Description: "The configuration options of the grant location, which is the S3 path to the data to which you are granting access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59a53454e9bbad7ee134e582() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The custom S3 location to be accessed by the grantee",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d5c749912f1fd9865acbb11() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute25ce40846d4f6921f188cae5(),
-				// Property: Value
-				"value": schemaAttribute25ce40846d4f6921f188cae5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute778ed70d4225e505ef103a8b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GranteeIdentifier
-			"grantee_identifier": schemaAttributef7f21d6141b817a15585ca56(),
-			// Property: GranteeType
-			"grantee_type": schemaAttribute356c06e8e7e5d81e91f8cc94(),
-		}, /*END SCHEMA*/
-		Description: "The principal who will be granted permission to access S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5d22dd8847887d9e289d280() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified access grant.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd137da8f07194b7e4da4b45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 path of the data to which you are granting access. It is a combination of the S3 path of the registered location and the subprefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9f9da63aa1bcc169cc25946() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the application grantees will use to access the location",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef68bb29518a88b433dccf8bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The level of access to be afforded to the grantee",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7f21d6141b817a15585ca56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Grantee",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_access_grant", accessGrantDataSource)
 }
@@ -143,7 +29,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the specified access grant.",
 		//	  "type": "string"
 		//	}
-		"access_grant_arn": schemaAttributea5d22dd8847887d9e289d280(),
+		"access_grant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified access grant.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantId
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +43,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_grant_id": schemaAttribute2778765cf7150d0afc3104f1(),
+		"access_grant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID assigned to this access grant.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantsLocationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +64,17 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"access_grants_location_configuration": schemaAttribute3f70ce704e7734acfa9f785e(),
+		"access_grants_location_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3SubPrefix
+				"s3_sub_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 sub prefix of a registered location in your S3 Access Grants instance",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options of the grant location, which is the S3 path to the data to which you are granting access.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantsLocationId
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +85,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_grants_location_id": schemaAttribute59a53454e9bbad7ee134e582(),
+		"access_grants_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The custom S3 location to be accessed by the grantee",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +96,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the application grantees will use to access the location",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttributed9f9da63aa1bcc169cc25946(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the application grantees will use to access the location",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GrantScope
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +107,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The S3 path of the data to which you are granting access. It is a combination of the S3 path of the registered location and the subprefix.",
 		//	  "type": "string"
 		//	}
-		"grant_scope": schemaAttributebd137da8f07194b7e4da4b45(),
+		"grant_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The S3 path of the data to which you are granting access. It is a combination of the S3 path of the registered location and the subprefix.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Grantee
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +138,22 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"grantee": schemaAttribute778ed70d4225e505ef103a8b(),
+		"grantee": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GranteeIdentifier
+				"grantee_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The unique identifier of the Grantee",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GranteeType
+				"grantee_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures the transfer acceleration state for an Amazon S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The principal who will be granted permission to access S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permission
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +166,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"permission": schemaAttributef68bb29518a88b433dccf8bb(),
+		"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The level of access to be afforded to the grantee",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3PrefixType
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +180,10 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"s3_prefix_type": schemaAttribute06f6bba9398d511404e37756(),
+		"s3_prefix_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of S3SubPrefix.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +208,21 @@ func accessGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute6d5c749912f1fd9865acbb11(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

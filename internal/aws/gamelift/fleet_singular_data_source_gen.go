@@ -15,603 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute194bee48da6b84b740e5bf02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique fleet ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a2170ece080fdfc271e89ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a735dd7c670a9acdf8cd477() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of adjustment to make to a fleet's instance count.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b81ff438e2aa2162d854d54() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cost
-			"cost": schemaAttribute60034149410af2c5d0418348(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for Anywhere fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f0d59b975444119bd3ae357() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GameSessionActivationTimeoutSeconds
-			"game_session_activation_timeout_seconds": schemaAttributeab9e87ddfed5a5c3046ea8d2(),
-			// Property: MaxConcurrentGameSessionActivations
-			"max_concurrent_game_session_activations": schemaAttribute8ac34e27db77a398c2a578cb(),
-			// Property: ServerProcesses
-			"server_processes": schemaAttribute3f447eb4dd7dc1005b7759ae(),
-		}, /*END SCHEMA*/
-		Description: "Instructions for launching server processes on each instance in the fleet. Server processes run either a custom game build executable or a Realtime script. The runtime configuration defines the server executables or launch script file, launch parameters, and the number of processes to run concurrently on each instance. When creating a fleet, the runtime configuration must have at least one server process configuration; otherwise the request fails with an invalid request exception.\n\nThis parameter is required unless the parameters ServerLaunchPath and ServerLaunchParameters are defined. Runtime configuration has replaced these parameters, but fleets that use them will continue to work.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute290c1caa625adfc15e482b2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines when and how to apply fleet or location capacities. Allowed options are ON_UPDATE (default), ON_CREATE_AND_UPDATE and ON_CREATE_AND_UPDATE_WITH_AUTOSCALING. If you choose ON_CREATE_AND_UPDATE_WITH_AUTOSCALING, MinSize and MaxSize will still be applied on creation and on updates, but DesiredEC2Instances will only be applied once on fleet creation and will be ignored during updates to prevent conflicts with auto-scaling. During updates with ON_CREATE_AND_UPDATE_WITH_AUTOSCALING chosen, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c32e7df3a98eb1f7de10ebe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2facc46d87017b693b06b2c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34700d71a3f691c6be3fb444() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A starting value for a range of allowed port numbers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute365406a641e577da8a672c65() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComparisonOperator
-				"comparison_operator": schemaAttributed2f9fa561f31bbba5636f85a(),
-				// Property: EvaluationPeriods
-				"evaluation_periods": schemaAttributeafc1da463533a9c9b732790d(),
-				// Property: Location
-				"location": schemaAttributee120df610ee0e311b3eba8e3(),
-				// Property: MetricName
-				"metric_name": schemaAttribute6d0314933f5d807245899cda(),
-				// Property: Name
-				"name": schemaAttribute5600cb831d7b08ca730bb7a9(),
-				// Property: PolicyType
-				"policy_type": schemaAttribute3f57da08eafd31c807e83137(),
-				// Property: ScalingAdjustment
-				"scaling_adjustment": schemaAttributebc8970752df0721c9b10aeb0(),
-				// Property: ScalingAdjustmentType
-				"scaling_adjustment_type": schemaAttribute1a735dd7c670a9acdf8cd477(),
-				// Property: Status
-				"status": schemaAttribute55ad51a3440e0017cbaab9cf(),
-				// Property: TargetConfiguration
-				"target_configuration": schemaAttribute84681c8f838174b6b9793965(),
-				// Property: Threshold
-				"threshold": schemaAttributee53fd0e1384208b54b47e9a4(),
-				// Property: UpdateStatus
-				"update_status": schemaAttribute1a2170ece080fdfc271e89ae(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of rules that control how a fleet is scaled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38001380cd136aea9e3b38e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network communication protocol used by the fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dd2e38efc27333153e3e39e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f32a75bd739c150ec69686c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional list of parameters to pass to the server executable or Realtime script on launch.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f447eb4dd7dc1005b7759ae() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConcurrentExecutions
-				"concurrent_executions": schemaAttributefaf3fb458eb5d621b6e78b97(),
-				// Property: LaunchPath
-				"launch_path": schemaAttribute8dc63ec2d4d895699258ed58(),
-				// Property: Parameters
-				"parameters": schemaAttribute3f32a75bd739c150ec69686c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of server process configurations that describe which server processes to run on each instance in a fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f57da08eafd31c807e83137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a35f7230dd0508a154c236c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "This parameter is no longer used. When hosting a custom game build, specify where Amazon GameLift should store log files using the Amazon GameLift server API call ProcessReady()",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d576c80c96f97dec19f70a0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55ad51a3440e0017cbaab9cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5600cb831d7b08ca730bb7a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60034149410af2c5d0418348() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute604dd2afa5c863d140899c51() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NewGameSessionsPerCreator
-			"new_game_sessions_per_creator": schemaAttributeb05f189f51a7b2d2ff1bc735(),
-			// Property: PolicyPeriodInMinutes
-			"policy_period_in_minutes": schemaAttributed6cc34953af93d414a6d53e2(),
-		}, /*END SCHEMA*/
-		Description: "A policy that limits the number of game sessions an individual player can create over a span of time for this fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62d873651a9d12b0d862fac6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[DEPRECATED] The minimum value allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cd2514ecaf47899ab7dcedf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The player gateway status for the location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d0314933f5d807245899cda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fbba65909bb6cf84ea48504() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter is no longer used. Instead, specify a server launch path using the RuntimeConfiguration parameter. Requests that specify a server launch path and launch parameters instead of a runtime configuration will continue to work.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f127c66eba66649365f27ba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DesiredEC2Instances
-			"desired_ec2_instances": schemaAttributedf7e3706342a5c58cb6ade82(),
-			// Property: ManagedCapacityConfiguration
-			"managed_capacity_configuration": schemaAttributef190cebf0cb6510726eff3b8(),
-			// Property: MaxSize
-			"max_size": schemaAttributea5401f5c80846cf66a35a6f5(),
-			// Property: MinSize
-			"min_size": schemaAttribute4d576c80c96f97dec19f70a0(),
-		}, /*END SCHEMA*/
-		Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81774c3093698c39e2a87722() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The player gateway mode for the fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute840a9452806b62a789cf8c16() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertificateType
-			"certificate_type": schemaAttributee120df610ee0e311b3eba8e3(),
-		}, /*END SCHEMA*/
-		Description: "Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84681c8f838174b6b9793965() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TargetValue
-			"target_value": schemaAttributeb115207e952cb2bfdcd67b1d(),
-		}, /*END SCHEMA*/
-		Description: "An object that contains settings for a target-based scaling policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84caa50c7ce3dd093d944817() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88c854cbba260249648a28db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A human-readable description of a fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ac34e27db77a398c2a578cb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dc63ec2d4d895699258ed58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e197c8688d339be23cb0850() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FromPort
-				"from_port": schemaAttribute34700d71a3f691c6be3fb444(),
-				// Property: IpRange
-				"ip_range": schemaAttribute3dd2e38efc27333153e3e39e(),
-				// Property: Protocol
-				"protocol": schemaAttribute38001380cd136aea9e3b38e0(),
-				// Property: ToPort
-				"to_port": schemaAttributed090f60d795fcf0e1df6b10b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9767e847dccf2a3c19405883() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c6ff069b85882a643abb849() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5401f5c80846cf66a35a6f5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5c2e53dce8a70ecb53ab4bb() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea9ab55e7639b93255500ec65(),
-				// Property: Value
-				"value": schemaAttributecd6e5a8e4643d4eb912ac244(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9ab55e7639b93255500ec65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab9e87ddfed5a5c3046ea8d2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead571f6b65c5977ef051db05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafc1da463533a9c9b732790d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb05f189f51a7b2d2ff1bc735() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of game sessions that an individual can create during the policy period.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb115207e952cb2bfdcd67b1d() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7a71de532eae22b0c76bda3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter is no longer used but is retained for backward compatibility. Instead, specify server launch parameters in the RuntimeConfiguration parameter. A request must specify either a runtime configuration or values for both ServerLaunchParameters and ServerLaunchPath.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba7b976e8c96bcff088af7ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc8970752df0721c9b10aeb0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Amount of adjustment to make, based on the scaling adjustment type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec14508844ceca5418b19baf0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd6e5a8e4643d4eb912ac244() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed090f60d795fcf0e1df6b10b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed19e2f7472b645c67cf26bd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2f9fa561f31bbba5636f85a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Comparison operator to use when measuring a metric against the threshold value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6cc34953af93d414a6d53e2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time span used in evaluating the resource creation limit policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed880e360bfaa03bdd836313a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Location
-				"location": schemaAttributee120df610ee0e311b3eba8e3(),
-				// Property: LocationCapacity
-				"location_capacity": schemaAttribute7f127c66eba66649365f27ba(),
-				// Property: PlayerGatewayStatus
-				"player_gateway_status": schemaAttribute6cd2514ecaf47899ab7dcedf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda0b42a6f0d772e482f5db5f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf0fd09e96a35728efd65bda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive label that is associated with a fleet. Fleet names do not need to be unique.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf343b09d0215b7b2424e9ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Servers Fleet resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Fleet ARN, the resource ID matches the FleetId value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf7e3706342a5c58cb6ade82() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee120df610ee0e311b3eba8e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3290a9881b9b686cf73b74e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP protocol supported by the game server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee53d6fc9a13b4baa7d7f7db9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee53fd0e1384208b54b47e9a4() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Metric value used to trigger a scaling event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee869d13209c277fdf3beeaba() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The name of an Amazon CloudWatch metric group. A metric group aggregates the metrics for all fleets in the group. Specify a string containing the metric group name. You can use an existing name or use a new name to create a new metric group. Currently, this parameter can have only one string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee88b95fbac5c077e844b65f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebe0cca95b15659699b625e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the AWS account with the VPC that you want to peer your Amazon GameLift fleet with. You can find your account ID in the AWS Management Console under account settings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef190cebf0cb6510726eff3b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ScaleInAfterInactivityMinutes
-			"scale_in_after_inactivity_minutes": schemaAttributeda0b42a6f0d772e482f5db5f(),
-			// Property: ZeroCapacityStrategy
-			"zero_capacity_strategy": schemaAttribute2facc46d87017b693b06b2c3(),
-		}, /*END SCHEMA*/
-		Description: "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef59190486d7393a68bac78e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GameServerIpProtocolSupported
-			"game_server_ip_protocol_supported": schemaAttributee3290a9881b9b686cf73b74e(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for player gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefaf3fb458eb5d621b6e78b97() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of server processes that use this configuration to run concurrently on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdf5f291bbea4d6a0b904c44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to use On-Demand instances or Spot instances for this fleet. If empty, the default is ON_DEMAND. Both categories of instances use identical hardware and configurations based on the instance type selected for this fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_fleet", fleetDataSource)
 }
@@ -639,7 +42,17 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Cost"
 		//	  ]
 		//	}
-		"anywhere_configuration": schemaAttribute1b81ff438e2aa2162d854d54(),
+		"anywhere_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cost
+				"cost": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Cost of compute can be specified on Anywhere Fleets to prioritize placement across Queue destinations based on Cost.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for Anywhere fleet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplyCapacity
 		// CloudFormation resource type schema:
 		//
@@ -652,7 +65,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"apply_capacity": schemaAttribute290c1caa625adfc15e482b2f(),
+		"apply_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines when and how to apply fleet or location capacities. Allowed options are ON_UPDATE (default), ON_CREATE_AND_UPDATE and ON_CREATE_AND_UPDATE_WITH_AUTOSCALING. If you choose ON_CREATE_AND_UPDATE_WITH_AUTOSCALING, MinSize and MaxSize will still be applied on creation and on updates, but DesiredEC2Instances will only be applied once on fleet creation and will be ignored during updates to prevent conflicts with auto-scaling. During updates with ON_CREATE_AND_UPDATE_WITH_AUTOSCALING chosen, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BuildId
 		// CloudFormation resource type schema:
 		//
@@ -661,7 +77,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^build-\\S+|^arn:.*:build/build-\\S+",
 		//	  "type": "string"
 		//	}
-		"build_id": schemaAttributed19e2f7472b645c67cf26bd6(),
+		"build_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -682,7 +101,16 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"certificate_configuration": schemaAttribute840a9452806b62a789cf8c16(),
+		"certificate_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateType
+				"certificate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComputeType
 		// CloudFormation resource type schema:
 		//
@@ -694,7 +122,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compute_type": schemaAttributec14508844ceca5418b19baf0(),
+		"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -704,7 +135,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute88c854cbba260249648a28db(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A human-readable description of a fleet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DesiredEC2Instances
 		// CloudFormation resource type schema:
 		//
@@ -713,7 +147,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"desired_ec2_instances": schemaAttribute9c6ff069b85882a643abb849(),
+		"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EC2InboundPermissions
 		// CloudFormation resource type schema:
 		//
@@ -761,7 +198,34 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"ec2_inbound_permissions": schemaAttribute8e197c8688d339be23cb0850(),
+		"ec2_inbound_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FromPort
+					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "A starting value for a range of allowed port numbers.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IpRange
+					"ip_range": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Protocol
+					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The network communication protocol used by the fleet.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ToPort
+					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EC2InstanceType
 		// CloudFormation resource type schema:
 		//
@@ -770,7 +234,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*..*$",
 		//	  "type": "string"
 		//	}
-		"ec2_instance_type": schemaAttributeba7b976e8c96bcff088af7ec(),
+		"ec2_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FleetArn
 		// CloudFormation resource type schema:
 		//
@@ -779,7 +246,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*:fleet/[a-z]*fleet-[a-zA-Z0-9\\-]+$",
 		//	  "type": "string"
 		//	}
-		"fleet_arn": schemaAttributedf343b09d0215b7b2424e9ed(),
+		"fleet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Servers Fleet resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Fleet ARN, the resource ID matches the FleetId value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FleetId
 		// CloudFormation resource type schema:
 		//
@@ -788,7 +258,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^fleet-\\S+",
 		//	  "type": "string"
 		//	}
-		"fleet_id": schemaAttribute194bee48da6b84b740e5bf02(),
+		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique fleet ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FleetType
 		// CloudFormation resource type schema:
 		//
@@ -800,7 +273,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"fleet_type": schemaAttributefdf5f291bbea4d6a0b904c44(),
+		"fleet_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to use On-Demand instances or Spot instances for this fleet. If empty, the default is ON_DEMAND. Both categories of instances use identical hardware and configurations based on the instance type selected for this fleet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceRoleARN
 		// CloudFormation resource type schema:
 		//
@@ -810,7 +286,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-.*)?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"instance_role_arn": schemaAttributee88b95fbac5c077e844b65f3(),
+		"instance_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceRoleCredentialsProvider
 		// CloudFormation resource type schema:
 		//
@@ -821,7 +300,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"instance_role_credentials_provider": schemaAttribute2c32e7df3a98eb1f7de10ebe(),
+		"instance_role_credentials_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Locations
 		// CloudFormation resource type schema:
 		//
@@ -904,7 +386,61 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"locations": schemaAttributed880e360bfaa03bdd836313a(),
+		"locations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Location
+					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: LocationCapacity
+					"location_capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DesiredEC2Instances
+							"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ManagedCapacityConfiguration
+							"managed_capacity_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ScaleInAfterInactivityMinutes
+									"scale_in_after_inactivity_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ZeroCapacityStrategy
+									"zero_capacity_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaxSize
+							"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MinSize
+							"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PlayerGatewayStatus
+					"player_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The player gateway status for the location.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogPaths
 		// CloudFormation resource type schema:
 		//
@@ -916,7 +452,11 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"log_paths": schemaAttribute4a35f7230dd0508a154c236c(),
+		"log_paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "This parameter is no longer used. When hosting a custom game build, specify where Amazon GameLift should store log files using the Amazon GameLift server API call ProcessReady()",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
 		//
@@ -925,7 +465,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"max_size": schemaAttribute84caa50c7ce3dd093d944817(),
+		"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "[DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricGroups
 		// CloudFormation resource type schema:
 		//
@@ -938,7 +481,11 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"metric_groups": schemaAttributee869d13209c277fdf3beeaba(),
+		"metric_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The name of an Amazon CloudWatch metric group. A metric group aggregates the metrics for all fleets in the group. Specify a string containing the metric group name. You can use an existing name or use a new name to create a new metric group. Currently, this parameter can have only one string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
 		//
@@ -947,7 +494,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"min_size": schemaAttribute62d873651a9d12b0d862fac6(),
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "[DEPRECATED] The minimum value allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -957,7 +507,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributedf0fd09e96a35728efd65bda(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A descriptive label that is associated with a fleet. Fleet names do not need to be unique.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NewGameSessionProtectionPolicy
 		// CloudFormation resource type schema:
 		//
@@ -969,7 +522,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"new_game_session_protection_policy": schemaAttributee53d6fc9a13b4baa7d7f7db9(),
+		"new_game_session_protection_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerVpcAwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -980,7 +536,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"peer_vpc_aws_account_id": schemaAttributeebe0cca95b15659699b625e6(),
+		"peer_vpc_aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the AWS account with the VPC that you want to peer your Amazon GameLift fleet with. You can find your account ID in the AWS Management Console under account settings.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerVpcId
 		// CloudFormation resource type schema:
 		//
@@ -991,7 +550,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpc-\\S+",
 		//	  "type": "string"
 		//	}
-		"peer_vpc_id": schemaAttribute9767e847dccf2a3c19405883(),
+		"peer_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PlayerGatewayConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1010,7 +572,17 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"player_gateway_configuration": schemaAttributef59190486d7393a68bac78e4(),
+		"player_gateway_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GameServerIpProtocolSupported
+				"game_server_ip_protocol_supported": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP protocol supported by the game server.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for player gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PlayerGatewayMode
 		// CloudFormation resource type schema:
 		//
@@ -1023,7 +595,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"player_gateway_mode": schemaAttribute81774c3093698c39e2a87722(),
+		"player_gateway_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The player gateway mode for the fleet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceCreationLimitPolicy
 		// CloudFormation resource type schema:
 		//
@@ -1044,7 +619,22 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_creation_limit_policy": schemaAttribute604dd2afa5c863d140899c51(),
+		"resource_creation_limit_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NewGameSessionsPerCreator
+				"new_game_sessions_per_creator": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of game sessions that an individual can create during the policy period.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PolicyPeriodInMinutes
+				"policy_period_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time span used in evaluating the resource creation limit policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A policy that limits the number of game sessions an individual player can create over a span of time for this fleet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuntimeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1102,7 +692,46 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"runtime_configuration": schemaAttribute1f0d59b975444119bd3ae357(),
+		"runtime_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GameSessionActivationTimeoutSeconds
+				"game_session_activation_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxConcurrentGameSessionActivations
+				"max_concurrent_game_session_activations": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerProcesses
+				"server_processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConcurrentExecutions
+							"concurrent_executions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of server processes that use this configuration to run concurrently on an instance.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LaunchPath
+							"launch_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Parameters
+							"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An optional list of parameters to pass to the server executable or Realtime script on launch.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A collection of server process configurations that describe which server processes to run on each instance in a fleet.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instructions for launching server processes on each instance in the fleet. Server processes run either a custom game build executable or a Realtime script. The runtime configuration defines the server executables or launch script file, launch parameters, and the number of processes to run concurrently on each instance. When creating a fleet, the runtime configuration must have at least one server process configuration; otherwise the request fails with an invalid request exception.\n\nThis parameter is required unless the parameters ServerLaunchPath and ServerLaunchParameters are defined. Runtime configuration has replaced these parameters, but fleets that use them will continue to work.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScalingPolicies
 		// CloudFormation resource type schema:
 		//
@@ -1227,7 +856,80 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"scaling_policies": schemaAttribute365406a641e577da8a672c65(),
+		"scaling_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComparisonOperator
+					"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Comparison operator to use when measuring a metric against the threshold value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EvaluationPeriods
+					"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Location
+					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricName
+					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PolicyType
+					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ScalingAdjustment
+					"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Amount of adjustment to make, based on the scaling adjustment type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ScalingAdjustmentType
+					"scaling_adjustment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of adjustment to make to a fleet's instance count.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TargetConfiguration
+					"target_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TargetValue
+							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "An object that contains settings for a target-based scaling policy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Threshold
+					"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "Metric value used to trigger a scaling event.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UpdateStatus
+					"update_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of rules that control how a fleet is scaled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScriptId
 		// CloudFormation resource type schema:
 		//
@@ -1236,7 +938,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^script-\\S+|^arn:.*:script/script-\\S+",
 		//	  "type": "string"
 		//	}
-		"script_id": schemaAttributead571f6b65c5977ef051db05(),
+		"script_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerLaunchParameters
 		// CloudFormation resource type schema:
 		//
@@ -1246,7 +951,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"server_launch_parameters": schemaAttributeb7a71de532eae22b0c76bda3(),
+		"server_launch_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter is no longer used but is retained for backward compatibility. Instead, specify server launch parameters in the RuntimeConfiguration parameter. A request must specify either a runtime configuration or values for both ServerLaunchParameters and ServerLaunchPath.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerLaunchPath
 		// CloudFormation resource type schema:
 		//
@@ -1256,7 +964,10 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"server_launch_path": schemaAttribute6fbba65909bb6cf84ea48504(),
+		"server_launch_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter is no longer used. Instead, specify a server launch path using the RuntimeConfiguration parameter. Requests that specify a server launch path and launch parameters instead of a runtime configuration will continue to work.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1290,7 +1001,24 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea5c2e53dce8a70ecb53ab4bb(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

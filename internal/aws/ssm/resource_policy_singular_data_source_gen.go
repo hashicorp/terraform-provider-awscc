@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03aae978687caf26bd40ba87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A snapshot identifier for the policy over time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4da5075ddd778a31ce165895() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Actual policy statement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97c7ec6e18c9c0b6bdc4c911() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of OpsItemGroup etc.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef490d1de9a3a12e7d008b43e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An unique identifier within the policies of a resource. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_resource_policy", resourcePolicyDataSource)
 }
@@ -57,7 +29,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Actual policy statement.",
 		//	  "type": "string"
 		//	}
-		"policy": schemaAttribute4da5075ddd778a31ce165895(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Actual policy statement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyHash
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A snapshot identifier for the policy over time.",
 		//	  "type": "string"
 		//	}
-		"policy_hash": schemaAttribute03aae978687caf26bd40ba87(),
+		"policy_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A snapshot identifier for the policy over time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyId
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "An unique identifier within the policies of a resource. ",
 		//	  "type": "string"
 		//	}
-		"policy_id": schemaAttributef490d1de9a3a12e7d008b43e(),
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An unique identifier within the policies of a resource. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Arn of OpsItemGroup etc.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttribute97c7ec6e18c9c0b6bdc4c911(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of OpsItemGroup etc.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

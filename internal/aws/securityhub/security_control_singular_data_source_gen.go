@@ -15,133 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0999902a596f8ed9a8caa79e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A control parameter that is a list of strings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute496ca7e73385d291440c8a88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The most recent reason for updating the customizable properties of a security control. This differs from the UpdateReason field of the BatchUpdateStandardsControlAssociations API, which tracks the reason for updating the enablement status of a control. This field accepts alphanumeric characters in addition to white spaces, dashes, and underscores.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute515b2bbe05239045f5fc7fa4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a enum.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d5080d0db738f26f42646d8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Description: "A control parameter that is a list of integers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f6e7017b56462423c63811c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Boolean
-			"boolean": schemaAttribute910d7b52e423e1b220a231a8(),
-			// Property: Double
-			"double": schemaAttributeb77302105358ffc46de1b32c(),
-			// Property: Enum
-			"enum": schemaAttribute515b2bbe05239045f5fc7fa4(),
-			// Property: EnumList
-			"enum_list": schemaAttributea973673ec99169f5f7687c69(),
-			// Property: Integer
-			"integer": schemaAttribute8229cf1b94d697435d7288a5(),
-			// Property: IntegerList
-			"integer_list": schemaAttribute5d5080d0db738f26f42646d8(),
-			// Property: String
-			"string": schemaAttribute7ddb043a80311bfe57972262(),
-			// Property: StringList
-			"string_list": schemaAttribute0999902a596f8ed9a8caa79e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ddb043a80311bfe57972262() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8229cf1b94d697435d7288a5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a integer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89ca6ac6b794546ed774173f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for a security control across standards, such as `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`. This parameter doesn't mention a specific standard.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fd36c99052b2d166b783b81() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Value
-				"value": schemaAttribute5f6e7017b56462423c63811c(),
-				// Property: ValueType
-				"value_type": schemaAttribute9f7e67a4bc13110fb937783a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An object that identifies the name of a control parameter, its current value, and whether it has been customized.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute910d7b52e423e1b220a231a8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a boolean.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f7e67a4bc13110fb937783a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea973673ec99169f5f7687c69() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A control parameter that is a list of enums.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb77302105358ffc46de1b32c() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a double.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd73410074479998c75d9155() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a security control across standards. Values for this field typically consist of an AWS service name and a number, such as APIGateway.3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_security_control", securityControlDataSource)
 }
@@ -158,7 +31,10 @@ func securityControlDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([^\u0000-]|[-_ a-zA-Z0-9])+$",
 		//	  "type": "string"
 		//	}
-		"last_update_reason": schemaAttribute496ca7e73385d291440c8a88(),
+		"last_update_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The most recent reason for updating the customizable properties of a security control. This differs from the UpdateReason field of the BatchUpdateStandardsControlAssociations API, which tracks the reason for updating the enablement status of a control. This field accepts alphanumeric characters in addition to white spaces, dashes, and underscores.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +154,68 @@ func securityControlDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttribute8fd36c99052b2d166b783b81(),
+		"parameters":              // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Value
+					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Boolean
+							"boolean": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "A control parameter that is a boolean.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Double
+							"double": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "A control parameter that is a double.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Enum
+							"enum": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A control parameter that is a enum.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EnumList
+							"enum_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A control parameter that is a list of enums.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Integer
+							"integer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "A control parameter that is a integer.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IntegerList
+							"integer_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.Int64Type,
+								Description: "A control parameter that is a list of integers.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: String
+							"string": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A control parameter that is a string.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StringList
+							"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A control parameter that is a list of strings.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ValueType
+					"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An object that identifies the name of a control parameter, its current value, and whether it has been customized.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityControlArn
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +224,10 @@ func securityControlDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"security_control_arn": schemaAttribute89ca6ac6b794546ed774173f(),
+		"security_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for a security control across standards, such as `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`. This parameter doesn't mention a specific standard.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityControlId
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +236,10 @@ func securityControlDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"security_control_id": schemaAttributebd73410074479998c75d9155(),
+		"security_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a security control across standards. Values for this field typically consist of an AWS service name and a number, such as APIGateway.3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

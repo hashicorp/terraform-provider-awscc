@@ -15,206 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a479e45a30c1cd5150ebc3a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b2b4c215f0e1653f60ba12d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f295149f776e06f2c0a088d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef139faa2cc28991d1253a959(),
-				// Property: Value
-				"value": schemaAttribute5ace4ce7fcdabba1990cec04(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to be assigned to the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute102390b57826cd751e4f9fa0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port that the database engine was listening on at the time of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b5f12b7317d3fd0e7b2d6a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the source DB instance, which is unique to an AWS Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26b47c24e4ea2bdcde8bf72e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Availability Zone the DB instance was located in at the time of the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute272a452d37b88149620e01f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the DB instance that you want to create the snapshot of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29510588238d29fc65da8469() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "License model information for the restored DB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31ff5db394843c57a8155b11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the snapshot was taken, in UTC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute570ba5dcf93ca39ee10d25f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ace4ce7fcdabba1990cec04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fc11046f2202b0a55ca7a74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The storage type associated with the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63c565f790506adec7182473() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the DB snapshot is encrypted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68a1f587ef0d15d37c318a0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The master username for the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68bb5b4a2f4df3ef0f3d6e15() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The allocated storage size in gibibytes (GiB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute692c9586bf99e0542c0660d4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The Provisioned IOPS value of the DB instance at the time of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69404f1e29480df1c7e582b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The option group name for the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69442abae8464e77bf75a5a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the DB instance was created, in UTC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fe40b3f65bd398e47a3a944() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time of the CreateDBSnapshot operation in UTC. Doesn't change when the snapshot is copied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89d9ad1301601748cf32f9e6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dd3f2e4e029a6d48f75532a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of this DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa15853585687dd703477fc8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The storage throughput for the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecde091eca2dc1344b9f8488b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the DB snapshot. Must contain from 1 to 255 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7c0d93ce79bfacc666da25c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb7032e326e00101696bf215() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC ID associated with the DB snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecf4b0badb2de820d9c2acee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the database engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef139faa2cc28991d1253a959() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_snapshot", dBSnapshotDataSource)
 }
@@ -230,7 +30,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The allocated storage size in gibibytes (GiB).",
 		//	  "type": "integer"
 		//	}
-		"allocated_storage": schemaAttribute68bb5b4a2f4df3ef0f3d6e15(),
+		"allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The allocated storage size in gibibytes (GiB).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +41,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the Availability Zone the DB instance was located in at the time of the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute26b47c24e4ea2bdcde8bf72e(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Availability Zone the DB instance was located in at the time of the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBInstanceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +52,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the DB instance that you want to create the snapshot of.",
 		//	  "type": "string"
 		//	}
-		"db_instance_identifier": schemaAttribute272a452d37b88149620e01f5(),
+		"db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the DB instance that you want to create the snapshot of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSnapshotArn
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +63,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"db_snapshot_arn": schemaAttribute570ba5dcf93ca39ee10d25f2(),
+		"db_snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +77,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"db_snapshot_identifier": schemaAttributecde091eca2dc1344b9f8488b(),
+		"db_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the DB snapshot. Must contain from 1 to 255 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbiResourceId
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +88,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier for the source DB instance, which is unique to an AWS Region.",
 		//	  "type": "string"
 		//	}
-		"dbi_resource_id": schemaAttribute1b5f12b7317d3fd0e7b2d6a5(),
+		"dbi_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the source DB instance, which is unique to an AWS Region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +99,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the DB snapshot is encrypted.",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schemaAttribute63c565f790506adec7182473(),
+		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB snapshot is encrypted.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +110,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the database engine.",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttributed7c0d93ce79bfacc666da25c(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database engine.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +121,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the database engine.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttributeecf4b0badb2de820d9c2acee(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the database engine.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IAMDatabaseAuthenticationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +132,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"iam_database_authentication_enabled": schemaAttribute89d9ad1301601748cf32f9e6(),
+		"iam_database_authentication_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +144,11 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"instance_create_time": schemaAttribute69442abae8464e77bf75a5a2(),
+		"instance_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the DB instance was created, in UTC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +156,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Provisioned IOPS value of the DB instance at the time of the snapshot.",
 		//	  "type": "integer"
 		//	}
-		"iops": schemaAttribute692c9586bf99e0542c0660d4(),
+		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The Provisioned IOPS value of the DB instance at the time of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +167,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute0a479e45a30c1cd5150ebc3a(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +178,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "License model information for the restored DB instance.",
 		//	  "type": "string"
 		//	}
-		"license_model": schemaAttribute29510588238d29fc65da8469(),
+		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "License model information for the restored DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +189,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The master username for the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttribute68a1f587ef0d15d37c318a0c(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The master username for the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OptionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -354,7 +200,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The option group name for the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"option_group_name": schemaAttribute69404f1e29480df1c7e582b4(),
+		"option_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The option group name for the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OriginalSnapshotCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -363,7 +212,11 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"original_snapshot_create_time": schemaAttribute6fe40b3f65bd398e47a3a944(),
+		"original_snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time of the CreateDBSnapshot operation in UTC. Doesn't change when the snapshot is copied.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -371,7 +224,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port that the database engine was listening on at the time of the snapshot.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute102390b57826cd751e4f9fa0(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the database engine was listening on at the time of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +236,11 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"snapshot_create_time": schemaAttribute31ff5db394843c57a8155b11(),
+		"snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the snapshot was taken, in UTC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotType
 		// CloudFormation resource type schema:
 		//
@@ -388,7 +248,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"snapshot_type": schemaAttribute0b2b4c215f0e1653f60ba12d(),
+		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -396,7 +259,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of this DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute9dd3f2e4e029a6d48f75532a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageThroughput
 		// CloudFormation resource type schema:
 		//
@@ -404,7 +270,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The storage throughput for the DB snapshot.",
 		//	  "type": "integer"
 		//	}
-		"storage_throughput": schemaAttributeaa15853585687dd703477fc8(),
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The storage throughput for the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageType
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +281,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The storage type associated with the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"storage_type": schemaAttribute5fc11046f2202b0a55ca7a74(),
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The storage type associated with the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -443,7 +315,24 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute0f295149f776e06f2c0a088d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to be assigned to the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -451,7 +340,10 @@ func dBSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The VPC ID associated with the DB snapshot.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributeeb7032e326e00101696bf215(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC ID associated with the DB snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

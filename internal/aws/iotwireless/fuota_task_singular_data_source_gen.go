@@ -14,131 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1ab29898d11167a20ed45472() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RfRegion
-			"rf_region": schemaAttributeb123dfd3c60093464e590f7e(),
-			// Property: StartTime
-			"start_time": schemaAttribute8d9e04f849e560cf378291c2(),
-		}, /*END SCHEMA*/
-		Description: "FUOTA task LoRaWAN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26cbbcfda30b0ac9f983dffa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task arn. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e2e71b4a963ae1bf80416e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task firmware update image binary S3 link",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e7fb1f43c87170d496e0a0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Wireless device to disassociate. Only for update request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3112350821fa8bf07a2cdceb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Wireless device to associate. Only for update request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e305146bf1aa79a7bc81b23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group to associate. Only for update request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60a5610852d3e556f43913ad() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefcfdda5fcbb5573ee3e2268f(),
-				// Property: Value
-				"value": schemaAttributefcfdda5fcbb5573ee3e2268f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the FUOTA task.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute624797e81a700bed429be7cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group to disassociate. Only for update request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67c01a96777fc4d5906bb53b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task firmware IAM role for reading S3",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute854a51df22ee10afb3599d1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task status. Returned after successful read.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d9e04f849e560cf378291c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task LoRaWAN start time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98cdb58069520b3d5a5cd239() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task id. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb123dfd3c60093464e590f7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task LoRaWAN RF region",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee93cf0004d17ade3d0ceff33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FUOTA task description",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef932ecb3ddfc1afbc5e5809e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of FUOTA task",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcfdda5fcbb5573ee3e2268f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_fuota_task", fuotaTaskDataSource)
 }
@@ -154,7 +29,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "FUOTA task arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute26cbbcfda30b0ac9f983dffa(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FUOTA task arn. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociateMulticastGroup
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +41,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"associate_multicast_group": schemaAttribute5e305146bf1aa79a7bc81b23(),
+		"associate_multicast_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Multicast group to associate. Only for update request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociateWirelessDevice
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +53,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"associate_wireless_device": schemaAttribute3112350821fa8bf07a2cdceb(),
+		"associate_wireless_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Wireless device to associate. Only for update request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +65,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee93cf0004d17ade3d0ceff33(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FUOTA task description",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisassociateMulticastGroup
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +77,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"disassociate_multicast_group": schemaAttribute624797e81a700bed429be7cb(),
+		"disassociate_multicast_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Multicast group to disassociate. Only for update request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisassociateWirelessDevice
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +89,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"disassociate_wireless_device": schemaAttribute2e7fb1f43c87170d496e0a0d(),
+		"disassociate_wireless_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Wireless device to disassociate. Only for update request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirmwareUpdateImage
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +102,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firmware_update_image": schemaAttribute2e2e71b4a963ae1bf80416e7(),
+		"firmware_update_image": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FUOTA task firmware update image binary S3 link",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirmwareUpdateRole
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +115,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firmware_update_role": schemaAttribute67c01a96777fc4d5906bb53b(),
+		"firmware_update_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FUOTA task firmware IAM role for reading S3",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FuotaTaskStatus
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +126,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "FUOTA task status. Returned after successful read.",
 		//	  "type": "string"
 		//	}
-		"fuota_task_status": schemaAttribute854a51df22ee10afb3599d1b(),
+		"fuota_task_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FUOTA task status. Returned after successful read.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +138,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"fuota_task_id": schemaAttribute98cdb58069520b3d5a5cd239(),
+		"fuota_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FUOTA task id. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoRaWAN
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +166,22 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan": schemaAttribute1ab29898d11167a20ed45472(),
+		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RfRegion
+				"rf_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "FUOTA task LoRaWAN RF region",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartTime
+				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "FUOTA task LoRaWAN start time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "FUOTA task LoRaWAN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +190,10 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef932ecb3ddfc1afbc5e5809e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of FUOTA task",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +220,22 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute60a5610852d3e556f43913ad(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the FUOTA task.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

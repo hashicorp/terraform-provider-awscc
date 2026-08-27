@@ -15,587 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0064f42610fdbd6ee774dcf9() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ActionCondition
-				"action_condition": schemaAttribute839a323c461f2a42b09dc3dc(),
-				// Property: LabelNameCondition
-				"label_name_condition": schemaAttributea036d250bceff872dce92637(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of conditions for a filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a6584e69b53f311389b32ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The label name of the condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b319b7a969c8fd96f3d1402() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A delimiter to delineate log fields",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ea27a318b29819d2284dee9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogType
-			"log_type": schemaAttribute4e5c97f805cccf0c5497f1d3(),
-			// Property: LoggingFilter
-			"logging_filter": schemaAttribute7be909712c040e77d68f3a5f(),
-			// Property: RedactedFields
-			"redacted_fields": schemaAttribute19b4273f39ffb337d4b29ddf(),
-		}, /*END SCHEMA*/
-		Description: "Telemetry parameters for WAF v2 Web ACL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12f9778ae624377720691eac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The query string to find the resource to match this field to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1473703750eb99d444febeb3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute178395eb4790c5bfd5d6bfb5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FieldDelimiter
-			"field_delimiter": schemaAttribute0b319b7a969c8fd96f3d1402(),
-			// Property: OutputFormat
-			"output_format": schemaAttributed8c40927defcef5d1152dbdd(),
-		}, /*END SCHEMA*/
-		Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19b4273f39ffb337d4b29ddf() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Method
-				"method": schemaAttributeba345ec74fe0246b689a1ea9(),
-				// Property: QueryString
-				"query_string": schemaAttribute12f9778ae624377720691eac(),
-				// Property: SingleHeader
-				"single_header": schemaAttributed79137b01657e6019f858c38(),
-				// Property: UriPath
-				"uri_path": schemaAttributeef1f048d19172806d8053103(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Fields not to be included in the logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a26ce73df46ef050ad951e3() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c930854f1f8fafc66851298() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the telemetry rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f04f4717b25e41272001d5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32713c7659681e6da3af0de9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38f94bdd82d11abcb58e749f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the rule in this region",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e22d409652b8f2e22c0dc13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The requirement portion of the filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a0af4e47f78a632a72009c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the telemetry rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4908ebbcef609245bf9da072() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The replication status of the rule in this region",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e5c97f805cccf0c5497f1d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of logs to generate for WAF.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f87d882c479c228781073ca() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5453c62996dcb196b8d80360() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The enumerated action to take.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55abe124c1ec717ef3c23dee() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record. Default is 600s.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute574b1799fcc05e1f8f7e7023() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57b4f94ea0b9c53a640fa41e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fields to include in the flow log record. If you omit this parameter, the flow log is created using the default format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute597d4b1f5c536bd95556e162() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the header",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c11f02472e84dfa34a20a92() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogFormat
-			"log_format": schemaAttribute57b4f94ea0b9c53a640fa41e(),
-			// Property: MaxAggregationInterval
-			"max_aggregation_interval": schemaAttribute55abe124c1ec717ef3c23dee(),
-			// Property: TrafficType
-			"traffic_type": schemaAttributeef1387132f25c375b2e2dfab(),
-		}, /*END SCHEMA*/
-		Description: "Telemetry parameters for VPC Flow logs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e11470b5c8bc6b48d7987bd() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of AWS region codes where the rule should be replicated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6feb0fb776896ece2e0aff57() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldSelectors
-				"field_selectors": schemaAttributed0d8cc84a495d8ae89604207(),
-				// Property: Name
-				"name": schemaAttributef4bdacf0ecf3acee79dd9b95(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Create fine-grained selectors for AWS CloudTrail management and data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute773b56232ee18ef081a37de9() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a0816b5064d5972bd604bda() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1473703750eb99d444febeb3(),
-				// Property: Value
-				"value": schemaAttribute574b1799fcc05e1f8f7e7023(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7be909712c040e77d68f3a5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultBehavior
-			"default_behavior": schemaAttributefdb200bd4db8a6e3b38d4950(),
-			// Property: Filters
-			"filters": schemaAttributed0b42af713eae441621ebeb7(),
-		}, /*END SCHEMA*/
-		Description: "Default handling for logs that don't match any of the specified filtering conditions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute839a323c461f2a42b09dc3dc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Action
-			"action": schemaAttribute5453c62996dcb196b8d80360(),
-		}, /*END SCHEMA*/
-		Description: "The condition of the action desired in the filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8650d4249e1c7f15a0e6b279() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Telemetry Type associated with the Telemetry Rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a6ac7d1a377cc6642e085ae() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Types of logs to deliver",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96e593dab6676514dcfbb186() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of telemetry destination",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea036d250bceff872dce92637() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LabelName
-			"label_name": schemaAttribute0a6584e69b53f311389b32ce(),
-		}, /*END SCHEMA*/
-		Description: "The label name of the condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2cdf6869bc545cabdd89c6a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Region
-				"region": schemaAttributeaea0d5d5f83dbcbce1b23c1c(),
-				// Property: RuleArn
-				"rule_arn": schemaAttribute38f94bdd82d11abcb58e749f(),
-				// Property: Status
-				"status": schemaAttribute4908ebbcef609245bf9da072(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Per-region replication status of the rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7a61c06521260a19aefc452() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Selection Criteria on resource level for rule application",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacdea69fafdc84cb49fbb151() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaea0d5d5f83dbcbce1b23c1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS region code",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb215b5c813eb95cde646dd1a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdvancedEventSelectors
-			"advanced_event_selectors": schemaAttribute6feb0fb776896ece2e0aff57(),
-		}, /*END SCHEMA*/
-		Description: "Telemetry parameters for Cloudtrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb475b3935e66ac4af87376bb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of days to retain the telemetry data in the specified destination",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba345ec74fe0246b689a1ea9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The method with which to match this rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebea8e78786b755a7fb959647() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudtrailParameters
-			"cloudtrail_parameters": schemaAttributeb215b5c813eb95cde646dd1a(),
-			// Property: DestinationPattern
-			"destination_pattern": schemaAttributec0199f078db96b6fc381c54f(),
-			// Property: DestinationType
-			"destination_type": schemaAttribute96e593dab6676514dcfbb186(),
-			// Property: ELBLoadBalancerLoggingParameters
-			"elb_load_balancer_logging_parameters": schemaAttribute178395eb4790c5bfd5d6bfb5(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute1f04f4717b25e41272001d5a(),
-			// Property: LogDeliveryParameters
-			"log_delivery_parameters": schemaAttributec33a8036bb3e23930f88ae1b(),
-			// Property: RetentionInDays
-			"retention_in_days": schemaAttributeb475b3935e66ac4af87376bb(),
-			// Property: VPCFlowLogParameters
-			"vpc_flow_log_parameters": schemaAttribute5c11f02472e84dfa34a20a92(),
-			// Property: WAFLoggingParameters
-			"waf_logging_parameters": schemaAttribute0ea27a318b29819d2284dee9(),
-		}, /*END SCHEMA*/
-		Description: "The destination configuration for telemetry data",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec003503b39456dd5e5bdd611() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0199f078db96b6fc381c54f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Pattern for telemetry data destination",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec33a8036bb3e23930f88ae1b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogTypes
-			"log_types": schemaAttribute8a6ac7d1a377cc6642e085ae(),
-		}, /*END SCHEMA*/
-		Description: "Parameters for log delivery configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec855e94a4bfa7a2dce8bed2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A field in a CloudTrail event record on which to filter events to be logged",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0b42af713eae441621ebeb7() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Behavior
-				"behavior": schemaAttributefdb200bd4db8a6e3b38d4950(),
-				// Property: Conditions
-				"conditions": schemaAttribute0064f42610fdbd6ee774dcf9(),
-				// Property: Requirement
-				"requirement": schemaAttribute3e22d409652b8f2e22c0dc13(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of filters to be applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0d8cc84a495d8ae89604207() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndsWith
-				"ends_with": schemaAttributec003503b39456dd5e5bdd611(),
-				// Property: Equals
-				"equals": schemaAttribute1a26ce73df46ef050ad951e3(),
-				// Property: Field
-				"field": schemaAttributec855e94a4bfa7a2dce8bed2f(),
-				// Property: NotEndsWith
-				"not_ends_with": schemaAttributeacdea69fafdc84cb49fbb151(),
-				// Property: NotEquals
-				"not_equals": schemaAttributefc249f4b129a3e4a14866a06(),
-				// Property: NotStartsWith
-				"not_starts_with": schemaAttribute4f87d882c479c228781073ca(),
-				// Property: StartsWith
-				"starts_with": schemaAttribute773b56232ee18ef081a37de9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains all selector statements in an advanced event selector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed79137b01657e6019f858c38() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute597d4b1f5c536bd95556e162(),
-		}, /*END SCHEMA*/
-		Description: "Header for the field to match.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed85a395421c1a5dc0f7b35af() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, the rule is replicated to all supported regions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8c40927defcef5d1152dbdd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee217f6dae13e34efde260755() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The telemetry source types for a telemetry rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2f758847360502525005a0d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllRegions
-			"all_regions": schemaAttributed85a395421c1a5dc0f7b35af(),
-			// Property: AllowFieldUpdates
-			"allow_field_updates": schemaAttribute32713c7659681e6da3af0de9(),
-			// Property: DestinationConfiguration
-			"destination_configuration": schemaAttributebea8e78786b755a7fb959647(),
-			// Property: Regions
-			"regions": schemaAttribute6e11470b5c8bc6b48d7987bd(),
-			// Property: ResourceType
-			"resource_type": schemaAttributeeed058634a4daad3e508cfa1(),
-			// Property: SelectionCriteria
-			"selection_criteria": schemaAttributea7a61c06521260a19aefc452(),
-			// Property: TelemetrySourceTypes
-			"telemetry_source_types": schemaAttributee217f6dae13e34efde260755(),
-			// Property: TelemetryType
-			"telemetry_type": schemaAttribute8650d4249e1c7f15a0e6b279(),
-		}, /*END SCHEMA*/
-		Description: "The telemetry rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeed058634a4daad3e508cfa1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Resource Type associated with the Telemetry Rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef1387132f25c375b2e2dfab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of traffic captured for the flow log. Default is ALL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef1f048d19172806d8053103() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This is the URI path to match this rule to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4bdacf0ecf3acee79dd9b95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional descriptive name for the advanced event selector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc249f4b129a3e4a14866a06() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdb200bd4db8a6e3b38d4950() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The behavior required of the filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_observabilityadmin_telemetry_rule", telemetryRuleDataSource)
 }
@@ -631,7 +50,29 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"region_statuses": schemaAttributea2cdf6869bc545cabdd89c6a(),
+		"region_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS region code",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleArn
+					"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the rule in this region",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The replication status of the rule in this region",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Per-region replication status of the rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rule
 		// CloudFormation resource type schema:
 		//
@@ -1042,7 +483,310 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule": schemaAttributee2f758847360502525005a0d(),
+		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllRegions
+				"all_regions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, the rule is replicated to all supported regions",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowFieldUpdates
+				"allow_field_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DestinationConfiguration
+				"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudtrailParameters
+						"cloudtrail_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdvancedEventSelectors
+								"advanced_event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FieldSelectors
+											"field_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: EndsWith
+														"ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Equals
+														"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Field
+														"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "A field in a CloudTrail event record on which to filter events to be logged",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: NotEndsWith
+														"not_ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: NotEquals
+														"not_equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: NotStartsWith
+														"not_starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: StartsWith
+														"starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Contains all selector statements in an advanced event selector.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An optional descriptive name for the advanced event selector",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Create fine-grained selectors for AWS CloudTrail management and data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for Cloudtrail",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DestinationPattern
+						"destination_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Pattern for telemetry data destination",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DestinationType
+						"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Type of telemetry destination",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ELBLoadBalancerLoggingParameters
+						"elb_load_balancer_logging_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FieldDelimiter
+								"field_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A delimiter to delineate log fields",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputFormat
+								"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogDeliveryParameters
+						"log_delivery_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogTypes
+								"log_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Types of logs to deliver",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Parameters for log delivery configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RetentionInDays
+						"retention_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of days to retain the telemetry data in the specified destination",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VPCFlowLogParameters
+						"vpc_flow_log_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogFormat
+								"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The fields to include in the flow log record. If you omit this parameter, the flow log is created using the default format.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxAggregationInterval
+								"max_aggregation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record. Default is 600s.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TrafficType
+								"traffic_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of traffic captured for the flow log. Default is ALL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for VPC Flow logs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WAFLoggingParameters
+						"waf_logging_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogType
+								"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of logs to generate for WAF.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LoggingFilter
+								"logging_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DefaultBehavior
+										"default_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The behavior required of the filter.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Filters
+										"filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Behavior
+													"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The behavior required of the filter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Conditions
+													"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: ActionCondition
+																"action_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Action
+																		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The enumerated action to take.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "The condition of the action desired in the filter.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LabelNameCondition
+																"label_name_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: LabelName
+																		"label_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The label name of the condition.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "The label name of the condition.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "A list of conditions for a filter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Requirement
+													"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The requirement portion of the filter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A list of filters to be applied.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Default handling for logs that don't match any of the specified filtering conditions.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RedactedFields
+								"redacted_fields": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Method
+											"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The method with which to match this rule.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: QueryString
+											"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The query string to find the resource to match this field to.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SingleHeader
+											"single_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the header",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Header for the field to match.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: UriPath
+											"uri_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "This is the URI path to match this rule to.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Fields not to be included in the logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for WAF v2 Web ACL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The destination configuration for telemetry data",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Regions
+				"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of AWS region codes where the rule should be replicated",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceType
+				"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resource Type associated with the Telemetry Rule",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SelectionCriteria
+				"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Selection Criteria on resource level for rule application",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TelemetrySourceTypes
+				"telemetry_source_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The telemetry source types for a telemetry rule.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TelemetryType
+				"telemetry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Telemetry Type associated with the Telemetry Rule",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The telemetry rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleArn
 		// CloudFormation resource type schema:
 		//
@@ -1053,7 +797,10 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
-		"rule_arn": schemaAttribute1c930854f1f8fafc66851298(),
+		"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the telemetry rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleName
 		// CloudFormation resource type schema:
 		//
@@ -1064,7 +811,10 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9A-Za-z-]+$",
 		//	  "type": "string"
 		//	}
-		"rule_name": schemaAttribute45a0af4e47f78a632a72009c(),
+		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the telemetry rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1097,7 +847,24 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute7a0816b5064d5972bd604bda(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

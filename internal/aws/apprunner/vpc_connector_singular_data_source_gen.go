@@ -15,64 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2d6ce993fdff9bd92a608eb7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The revision of this VPC connector. It's unique among all the active connectors (\"Status\": \"ACTIVE\") that share the same Name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute584e961c39a9f3b748dce24e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec9c322ec65f6dcc6d8901d5b(),
-				// Property: Value
-				"value": schemaAttributec9c322ec65f6dcc6d8901d5b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cecbf0d71db2916ef4ef7bf() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9c322ec65f6dcc6d8901d5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee42d0f29d91837ff362225c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of this VPC connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea28fb83b990c7fbc076b517() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1b06425c1d32a551098e2b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apprunner_vpc_connector", vpcConnectorDataSource)
 }
@@ -93,7 +35,11 @@ func vpcConnectorDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_groups": schemaAttribute9cecbf0d71db2916ef4ef7bf(),
+		"security_groups": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subnets
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +53,11 @@ func vpcConnectorDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnets": schemaAttributeea28fb83b990c7fbc076b517(),
+		"subnets": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +77,22 @@ func vpcConnectorDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute584e961c39a9f3b748dce24e(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConnectorArn
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +103,10 @@ func vpcConnectorDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"vpc_connector_arn": schemaAttributee42d0f29d91837ff362225c2(),
+		"vpc_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of this VPC connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConnectorName
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +117,10 @@ func vpcConnectorDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9-\\\\_]{3,39}$",
 		//	  "type": "string"
 		//	}
-		"vpc_connector_name": schemaAttributef1b06425c1d32a551098e2b9(),
+		"vpc_connector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConnectorRevision
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +128,10 @@ func vpcConnectorDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The revision of this VPC connector. It's unique among all the active connectors (\"Status\": \"ACTIVE\") that share the same Name.",
 		//	  "type": "integer"
 		//	}
-		"vpc_connector_revision": schemaAttribute2d6ce993fdff9bd92a608eb7(),
+		"vpc_connector_revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The revision of this VPC connector. It's unique among all the active connectors (\"Status\": \"ACTIVE\") that share the same Name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,133 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e2949c6403c32be897f6a17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2947a19119f621f2fc5288dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the usage type for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4621b4f6c144bd49e9decc4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describing the type of certificate. With or without a private key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73f1389ce0123ac1ea129af0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the certificate body to be imported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7459fb6e7af1f8e09283d824() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88286ae019ed0478938fd0b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c12b0e3dc3a343a6cf0ff5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the certificate chain to be imported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e6a29777ca8ed3bd2da2f90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the not before date for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdb3c7a53939430295c74d3e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7459fb6e7af1f8e09283d824(),
-				// Property: Value
-				"value": schemaAttribute88286ae019ed0478938fd0b2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to group and search for certificates. Tags are metadata attached to certificates for any purpose.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5ab05561a8243a0b1b4d307() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the active date for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1b3d8df2277a7737affbead() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9fa96454ae512dc12bc08e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the not after date for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2209297c786e2d7568df561() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A textual description for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee42842a4a4a3228346c6c4c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A status description for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7c0f49867e8f10d0dfeade5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies Certificate's serial.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeeb14b1fb99dba1e8363dad2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the private key for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4bfbc4898a95c775c6c9e2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the inactive date for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_certificate", certificateDataSource)
 }
@@ -156,7 +29,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the active date for the certificate.",
 		//	  "type": "string"
 		//	}
-		"active_date": schemaAttributec5ab05561a8243a0b1b4d307(),
+		"active_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the active date for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +43,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributed1b3d8df2277a7737affbead(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Certificate
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +57,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"certificate": schemaAttribute73f1389ce0123ac1ea129af0(),
+		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the certificate body to be imported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateChain
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +71,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"certificate_chain": schemaAttribute9c12b0e3dc3a343a6cf0ff5f(),
+		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the certificate chain to be imported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateId
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +85,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^cert-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"certificate_id": schemaAttribute0e2949c6403c32be897f6a17(),
+		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +99,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee2209297c786e2d7568df561(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A textual description for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InactiveDate
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +110,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the inactive date for the certificate.",
 		//	  "type": "string"
 		//	}
-		"inactive_date": schemaAttributef4bfbc4898a95c775c6c9e2f(),
+		"inactive_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the inactive date for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotAfterDate
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +121,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the not after date for the certificate.",
 		//	  "type": "string"
 		//	}
-		"not_after_date": schemaAttributed9fa96454ae512dc12bc08e7(),
+		"not_after_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the not after date for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotBeforeDate
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +132,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the not before date for the certificate.",
 		//	  "type": "string"
 		//	}
-		"not_before_date": schemaAttribute9e6a29777ca8ed3bd2da2f90(),
+		"not_before_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the not before date for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateKey
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +146,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"private_key": schemaAttributeeeb14b1fb99dba1e8363dad2(),
+		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the private key for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Serial
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +160,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-fA-F{}:?]*$",
 		//	  "type": "string"
 		//	}
-		"serial": schemaAttributee7c0f49867e8f10d0dfeade5(),
+		"serial": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies Certificate's serial.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +176,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee42842a4a4a3228346c6c4c4(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A status description for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -304,7 +213,24 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributebdb3c7a53939430295c74d3e(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for certificates. Tags are metadata attached to certificates for any purpose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +242,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute4621b4f6c144bd49e9decc4f(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Describing the type of certificate. With or without a private key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Usage
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +258,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"usage": schemaAttribute2947a19119f621f2fc5288dd(),
+		"usage": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the usage type for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

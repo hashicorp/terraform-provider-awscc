@@ -15,996 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02039e6082e727ddecf4355b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The region of the Snow?ake account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute022fc53af9c787e2aae3a5bd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Password
-			"password": schemaAttribute2a4dfd07954b10b6f475bc4e(),
-			// Property: Username
-			"username": schemaAttributec6af674ffe9fa49e021f7bde(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute042ebaf2beea3f0b58867195() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the ServiceNow resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute086d49d33ceaf490d07e6bbe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessKeyId
-			"access_key_id": schemaAttribute12295bec0c8dbc76bf171d4d(),
-			// Property: Datakey
-			"datakey": schemaAttribute0c5b3f1d26aef70fe80ea0f3(),
-			// Property: SecretAccessKey
-			"secret_access_key": schemaAttribute81654cf335ff70029e5e6258(),
-			// Property: UserId
-			"user_id": schemaAttribute838073f40a0e99172850ed92(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c5b3f1d26aef70fe80ea0f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption keys used to encrypt data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0eded75815a933959a6a0397() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomConnector
-			"custom_connector": schemaAttributed743df6b11186928bb3d8e20(),
-			// Property: Datadog
-			"datadog": schemaAttribute69d46c5dc3d7504c75ae303d(),
-			// Property: Dynatrace
-			"dynatrace": schemaAttribute626bd31a5acff43de2041474(),
-			// Property: InforNexus
-			"infor_nexus": schemaAttribute72f3837c0b710ae69cf7af80(),
-			// Property: Marketo
-			"marketo": schemaAttribute6152771cabdfc76ae904a3f6(),
-			// Property: Pardot
-			"pardot": schemaAttributefa630b614530f57d63fb73dd(),
-			// Property: Redshift
-			"redshift": schemaAttribute9f7fd1019fe164e7aa9a3a9e(),
-			// Property: SAPOData
-			"sapo_data": schemaAttribute116ea4ee01aed1dec4829512(),
-			// Property: Salesforce
-			"salesforce": schemaAttribute3dd912dd495fb788dc8efa72(),
-			// Property: ServiceNow
-			"service_now": schemaAttribute307c42ff31beab457aab0426(),
-			// Property: Slack
-			"slack": schemaAttribute7830068da8d394c457a36df6(),
-			// Property: Snowflake
-			"snowflake": schemaAttributeebeb39bedd15209f32a80829(),
-			// Property: Veeva
-			"veeva": schemaAttributed5a2e7331b752d39e6846ba1(),
-			// Property: Zendesk
-			"zendesk": schemaAttribute6f323a69ca15f223dbde76dd(),
-		}, /*END SCHEMA*/
-		Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute116ea4ee01aed1dec4829512() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationHostUrl
-			"application_host_url": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ApplicationServicePath
-			"application_service_path": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ClientNumber
-			"client_number": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: LogonLanguage
-			"logon_language": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: OAuthProperties
-			"o_auth_properties": schemaAttribute56f280198efcd2407e441fe7(),
-			// Property: PortNumber
-			"port_number": schemaAttribute772f813ce13e4b115e1276c3(),
-			// Property: PrivateLinkServiceName
-			"private_link_service_name": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12295bec0c8dbc76bf171d4d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Access Key portion of the credentials.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute132cf5437a990867a4ff9dbb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ClientId
-			"client_id": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ConnectorOAuthRequest
-			"connector_o_auth_request": schemaAttributedc8cd35a75339ca3bec07a98(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14b746a86693bf2b9bfa31ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique Arn for Connector-Profile resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18c63a58b4557ae6fbf93514() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CredentialsMap
-			"credentials_map": schemaAttributed79ac74853919caefbb6a48a(),
-			// Property: CustomAuthenticationType
-			"custom_authentication_type": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b331d28722284d3e235f338() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute295d76428654ed751321bf18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Dynatrace resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a4dfd07954b10b6f475bc4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password that corresponds to the username.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c2ddb2e7935c77667dafb23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon Redshift serverless workgroup",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d9f23cf6a36cef771662c41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the InforNexus resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e625c684ccfd567b2753610() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKey
-			"api_key": schemaAttributee506b4f7e36b86913d336973(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute307c42ff31beab457aab0426() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttribute042ebaf2beea3f0b58867195(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31c03566c91e3a16f6d33ccf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JDBC URL of the Amazon Redshift cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute366db8a32aed3714516c2f2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Snow?ake Private Link service name to be used for private data transfers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dd912dd495fb788dc8efa72() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttributeedb72a00cbd7a5fe2db4a611(),
-			// Property: IsSandboxEnvironment
-			"is_sandbox_environment": schemaAttributecbb4280b84e5c078fdc57f43(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute421954c4dd49776379715052() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b8663f80a030b79fabc3e75() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c42530559f788db9a000323() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Veeva resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute502d8c629a9346c40d5b429a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The credentials used to acquire new access tokens.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56f280198efcd2407e441fe7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthCodeUrl
-			"auth_code_url": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: OAuthScopes
-			"o_auth_scopes": schemaAttribute57def3c5c193c3aaa132cdac(),
-			// Property: TokenUrl
-			"token_url": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57def3c5c193c3aaa132cdac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6139c0031ca965048f6c17c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "List of Saas providers that need connector profile to be created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6152771cabdfc76ae904a3f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttributefe121f34c09df3f768868030(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute626bd31a5acff43de2041474() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttribute295d76428654ed751321bf18(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62f0dd5bf8bd3af006805068() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute652acf931966e0aafc9c914b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Snow?ake warehouse.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65fb474ea9fc42bc993cd56a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6603d8498392a23ec2353296() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69d46c5dc3d7504c75ae303d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttribute86f21179b9c867737c0d9c3e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b9d5cd45b3d3cdcf908c5ec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKey
-			"api_key": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ApiSecretKey
-			"api_secret_key": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d26da4a6d2f5d1da05448af() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthCode
-			"auth_code": schemaAttribute8e19213ee2d525e08399c270(),
-			// Property: RedirectUri
-			"redirect_uri": schemaAttributef88a841fa2a4fc0ca5c99130(),
-		}, /*END SCHEMA*/
-		Description: "The oauth needed to request security tokens from the connector endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f323a69ca15f223dbde76dd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttribute95c69119ade80f21245ce62a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72f3837c0b710ae69cf7af80() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttribute2d9f23cf6a36cef771662c41(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute772f813ce13e4b115e1276c3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77ce9c028493a199355bcf7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of items to retrieve in a single batch.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7830068da8d394c457a36df6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttributea991c964704888f456ef95ec(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e6d96dbd9f7d1ba7efef140() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for connector profile resources",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81654cf335ff70029e5e6258() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The secret key used to sign requests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81b31fe48cce6493709376fb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ClientId
-			"client_id": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: OAuthRequest
-			"o_auth_request": schemaAttributedc8cd35a75339ca3bec07a98(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute820df11786ada9ef0024ab5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttributec5f026e6860ddc6c0d5182fe(),
-			// Property: ClientId
-			"client_id": schemaAttributec595f522c2cb198efc7c3074(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute65fb474ea9fc42bc993cd56a(),
-			// Property: ConnectorOAuthRequest
-			"connector_o_auth_request": schemaAttribute6d26da4a6d2f5d1da05448af(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute502d8c629a9346c40d5b429a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute838073f40a0e99172850ed92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identi?er for the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f21179b9c867737c0d9c3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Datadog resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8afdf1a47aa1231c0c570ab8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectorProfileCredentials
-			"connector_profile_credentials": schemaAttribute95201861effe34f73db84c42(),
-			// Property: ConnectorProfileProperties
-			"connector_profile_properties": schemaAttribute0eded75815a933959a6a0397(),
-		}, /*END SCHEMA*/
-		Description: "Connector specific configurations needed to create connector profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e19213ee2d525e08399c270() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The code provided by the connector when it has been authenticated via the connected app.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute930b8b1a0a8c19618fad33ac() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map for properties for custom connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94a7eee8cab5599b9521a88b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95201861effe34f73db84c42() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Amplitude
-			"amplitude": schemaAttributed61addee2d4a19a7a6eb7d44(),
-			// Property: CustomConnector
-			"custom_connector": schemaAttributecdfb04193560e353d4474abc(),
-			// Property: Datadog
-			"datadog": schemaAttributed3fed107f20129950d08182b(),
-			// Property: Dynatrace
-			"dynatrace": schemaAttribute9bed3577486bffa00087cc6e(),
-			// Property: GoogleAnalytics
-			"google_analytics": schemaAttribute820df11786ada9ef0024ab5f(),
-			// Property: InforNexus
-			"infor_nexus": schemaAttribute086d49d33ceaf490d07e6bbe(),
-			// Property: Marketo
-			"marketo": schemaAttributeb982112f8425079549ba9837(),
-			// Property: Pardot
-			"pardot": schemaAttributed7d9f9e7e43361af2da2e444(),
-			// Property: Redshift
-			"redshift": schemaAttribute022fc53af9c787e2aae3a5bd(),
-			// Property: SAPOData
-			"sapo_data": schemaAttributed4856e9893c95b5a5b6fd520(),
-			// Property: Salesforce
-			"salesforce": schemaAttributed7d9f9e7e43361af2da2e444(),
-			// Property: ServiceNow
-			"service_now": schemaAttribute022fc53af9c787e2aae3a5bd(),
-			// Property: Singular
-			"singular": schemaAttribute2e625c684ccfd567b2753610(),
-			// Property: Slack
-			"slack": schemaAttributeb982112f8425079549ba9837(),
-			// Property: Snowflake
-			"snowflake": schemaAttribute022fc53af9c787e2aae3a5bd(),
-			// Property: Trendmicro
-			"trendmicro": schemaAttributecd2a732d9e6f6a41f3446c20(),
-			// Property: Veeva
-			"veeva": schemaAttribute022fc53af9c787e2aae3a5bd(),
-			// Property: Zendesk
-			"zendesk": schemaAttributeb982112f8425079549ba9837(),
-		}, /*END SCHEMA*/
-		Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95c69119ade80f21245ce62a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Zendesk resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bcfbe155a2e1630218cbcf2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Password
-			"password": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: Username
-			"username": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bed3577486bffa00087cc6e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiToken
-			"api_token": schemaAttributec157f4a2e6fd375c60cd39fb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e9f0dc7a38bc18c2cd889ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Secret Access Key portion of the credentials.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f7fd1019fe164e7aa9a3a9e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttributec88edbdd36624d87c29fe25d(),
-			// Property: BucketPrefix
-			"bucket_prefix": schemaAttributec2c156c709fa8c0001b9e48f(),
-			// Property: ClusterIdentifier
-			"cluster_identifier": schemaAttributea2b82935b6e777a8cee84114(),
-			// Property: DataApiRoleArn
-			"data_api_role_arn": schemaAttributec63ef1067dadb9b9591070c2(),
-			// Property: DatabaseName
-			"database_name": schemaAttributef225457d3e087eddfbfa1c22(),
-			// Property: DatabaseUrl
-			"database_url": schemaAttribute31c03566c91e3a16f6d33ccf(),
-			// Property: IsRedshiftServerless
-			"is_redshift_serverless": schemaAttributeb12fcbc99a5bbed6cf358842(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute4b8663f80a030b79fabc3e75(),
-			// Property: WorkgroupName
-			"workgroup_name": schemaAttribute2c2ddb2e7935c77667dafb23(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2b82935b6e777a8cee84114() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Amazon Redshift cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea991c964704888f456ef95ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Slack resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb12fcbc99a5bbed6cf358842() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb53c50df2ad739c1f56fdcc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6c5f663522441c3b82b3cb7() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map for properties for custom connector Token Url.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb982112f8425079549ba9837() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttributec5f026e6860ddc6c0d5182fe(),
-			// Property: ClientId
-			"client_id": schemaAttributec595f522c2cb198efc7c3074(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute65fb474ea9fc42bc993cd56a(),
-			// Property: ConnectorOAuthRequest
-			"connector_o_auth_request": schemaAttribute6d26da4a6d2f5d1da05448af(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec157f4a2e6fd375c60cd39fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2c156c709fa8c0001b9e48f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec595f522c2cb198efc7c3074() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identi?er for the desired client.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5f026e6860ddc6c0d5182fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The credentials used to access protected resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec63ef1067dadb9b9591070c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6af674ffe9fa49e021f7bde() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec88edbdd36624d87c29fe25d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket associated with Redshift.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecac27b5b21545571ab9c8317() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client credentials to fetch access token and refresh token.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb75770b38ae88cf64600c7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbb4280b84e5c078fdc57f43() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the connector profile applies to a sandbox or production environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd2a732d9e6f6a41f3446c20() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiSecretKey
-			"api_secret_key": schemaAttribute9e9f0dc7a38bc18c2cd889ce(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdfb04193560e353d4474abc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKey
-			"api_key": schemaAttribute6b9d5cd45b3d3cdcf908c5ec(),
-			// Property: AuthenticationType
-			"authentication_type": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: Basic
-			"basic": schemaAttribute9bcfbe155a2e1630218cbcf2(),
-			// Property: Custom
-			"custom": schemaAttribute18c63a58b4557ae6fbf93514(),
-			// Property: Oauth2
-			"oauth_2": schemaAttribute81b31fe48cce6493709376fb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfb99f03c22ebe01c6451555() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Salesforce Pardot resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3586b81026610c5bd51a1a6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OAuth2GrantType
-			"o_auth_2_grant_type": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: TokenUrl
-			"token_url": schemaAttribute6603d8498392a23ec2353296(),
-			// Property: TokenUrlCustomProperties
-			"token_url_custom_properties": schemaAttributeb6c5f663522441c3b82b3cb7(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3fed107f20129950d08182b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKey
-			"api_key": schemaAttributee506b4f7e36b86913d336973(),
-			// Property: ApplicationKey
-			"application_key": schemaAttribute62f0dd5bf8bd3af006805068(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4856e9893c95b5a5b6fd520() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BasicAuthCredentials
-			"basic_auth_credentials": schemaAttribute9bcfbe155a2e1630218cbcf2(),
-			// Property: OAuthCredentials
-			"o_auth_credentials": schemaAttribute132cf5437a990867a4ff9dbb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5a2e7331b752d39e6846ba1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceUrl
-			"instance_url": schemaAttribute4c42530559f788db9a000323(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed61addee2d4a19a7a6eb7d44() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKey
-			"api_key": schemaAttributee506b4f7e36b86913d336973(),
-			// Property: SecretKey
-			"secret_key": schemaAttribute6603d8498392a23ec2353296(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed743df6b11186928bb3d8e20() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OAuth2Properties
-			"o_auth_2_properties": schemaAttributed3586b81026610c5bd51a1a6(),
-			// Property: ProfileProperties
-			"profile_properties": schemaAttribute930b8b1a0a8c19618fad33ac(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed79ac74853919caefbb6a48a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map for properties for custom authentication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7d9f9e7e43361af2da2e444() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttributec5f026e6860ddc6c0d5182fe(),
-			// Property: ClientCredentialsArn
-			"client_credentials_arn": schemaAttributecac27b5b21545571ab9c8317(),
-			// Property: ConnectorOAuthRequest
-			"connector_o_auth_request": schemaAttribute6d26da4a6d2f5d1da05448af(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute502d8c629a9346c40d5b429a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc8cd35a75339ca3bec07a98() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthCode
-			"auth_code": schemaAttribute8e19213ee2d525e08399c270(),
-			// Property: RedirectUri
-			"redirect_uri": schemaAttributef88a841fa2a4fc0ca5c99130(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee47a11739543781105f0b702() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee506b4f7e36b86913d336973() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee77d855e7f9e786db76b0cbb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the connector profile applies to a demo or production environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebeb39bedd15209f32a80829() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountName
-			"account_name": schemaAttribute94a7eee8cab5599b9521a88b(),
-			// Property: BucketName
-			"bucket_name": schemaAttribute1b331d28722284d3e235f338(),
-			// Property: BucketPrefix
-			"bucket_prefix": schemaAttributecb75770b38ae88cf64600c7b(),
-			// Property: PrivateLinkServiceName
-			"private_link_service_name": schemaAttribute366db8a32aed3714516c2f2d(),
-			// Property: Region
-			"region": schemaAttribute02039e6082e727ddecf4355b(),
-			// Property: Stage
-			"stage": schemaAttributee47a11739543781105f0b702(),
-			// Property: Warehouse
-			"warehouse": schemaAttribute652acf931966e0aafc9c914b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedb72a00cbd7a5fe2db4a611() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Salesforce resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0cab6fe1bbfd432366ccd69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef225457d3e087eddfbfa1c22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon Redshift database that will store the transferred data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6e9e2539d2c190fc5c50a38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Business unit id of Salesforce Pardot instance to be connected",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef88a841fa2a4fc0ca5c99130() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa630b614530f57d63fb73dd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BusinessUnitId
-			"business_unit_id": schemaAttributef6e9e2539d2c190fc5c50a38(),
-			// Property: InstanceUrl
-			"instance_url": schemaAttributecfb99f03c22ebe01c6451555(),
-			// Property: IsSandboxEnvironment
-			"is_sandbox_environment": schemaAttributee77d855e7f9e786db76b0cbb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe121f34c09df3f768868030() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location of the Marketo resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appflow_connector_profile", connectorProfileDataSource)
 }
@@ -1024,7 +34,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"connection_mode": schemaAttributef0cab6fe1bbfd432366ccd69(),
+		"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorLabel
 		// CloudFormation resource type schema:
 		//
@@ -1034,7 +47,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[\\w!@#.-]+",
 		//	  "type": "string"
 		//	}
-		"connector_label": schemaAttribute421954c4dd49776379715052(),
+		"connector_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -1044,7 +60,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"connector_profile_arn": schemaAttribute7e6d96dbd9f7d1ba7efef140(),
+		"connector_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for connector profile resources",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorProfileConfig
 		// CloudFormation resource type schema:
 		//
@@ -2072,7 +1091,864 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connector_profile_config": schemaAttribute8afdf1a47aa1231c0c570ab8(),
+		"connector_profile_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectorProfileCredentials
+				"connector_profile_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Amplitude
+						"amplitude": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretKey
+								"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomConnector
+						"custom_connector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ApiKey
+										"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ApiSecretKey
+										"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AuthenticationType
+								"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Basic
+								"basic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Custom
+								"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CredentialsMap
+										"credentials_map":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A map for properties for custom authentication.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: CustomAuthenticationType
+										"custom_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Oauth2
+								"oauth_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientId
+										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientSecret
+										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: OAuthRequest
+										"o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthCode
+												"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code provided by the connector when it has been authenticated via the connected app.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: RedirectUri
+												"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Datadog
+						"datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ApplicationKey
+								"application_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Dynatrace
+						"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiToken
+								"api_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: GoogleAnalytics
+						"google_analytics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InforNexus
+						"infor_nexus": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessKeyId
+								"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Access Key portion of the credentials.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Datakey
+								"datakey": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The encryption keys used to encrypt data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretAccessKey
+								"secret_access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The secret key used to sign requests.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: UserId
+								"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Marketo
+						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCredentialsArn
+								"client_credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client credentials to fetch access token and refresh token.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Redshift
+						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SAPOData
+						"sapo_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuthCredentials
+								"basic_auth_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthCredentials
+								"o_auth_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientId
+										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientSecret
+										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ConnectorOAuthRequest
+										"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthCode
+												"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code provided by the connector when it has been authenticated via the connected app.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: RedirectUri
+												"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Salesforce
+						"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCredentialsArn
+								"client_credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client credentials to fetch access token and refresh token.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNow
+						"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Singular
+						"singular": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Slack
+						"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Snowflake
+						"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Trendmicro
+						"trendmicro": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiSecretKey
+								"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Secret Access Key portion of the credentials.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Veeva
+						"veeva": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Zendesk
+						"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectorProfileProperties
+				"connector_profile_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomConnector
+						"custom_connector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OAuth2Properties
+								"o_auth_2_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: OAuth2GrantType
+										"o_auth_2_grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrl
+										"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrlCustomProperties
+										"token_url_custom_properties": // Pattern: ""
+										schema.MapAttribute{           /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A map for properties for custom connector Token Url.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ProfileProperties
+								"profile_properties": // Pattern: ""
+								schema.MapAttribute{  /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map for properties for custom connector.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Datadog
+						"datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Datadog resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Dynatrace
+						"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Dynatrace resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InforNexus
+						"infor_nexus": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the InforNexus resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Marketo
+						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Marketo resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BusinessUnitId
+								"business_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Business unit id of Salesforce Pardot instance to be connected",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Salesforce Pardot resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsSandboxEnvironment
+								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether the connector profile applies to a demo or production environment",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Redshift
+						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket associated with Redshift.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BucketPrefix
+								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClusterIdentifier
+								"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The unique identifier of the Amazon Redshift cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataApiRoleArn
+								"data_api_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseName
+								"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon Redshift database that will store the transferred data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseUrl
+								"database_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JDBC URL of the Amazon Redshift cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsRedshiftServerless
+								"is_redshift_serverless": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the IAM role.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: WorkgroupName
+								"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon Redshift serverless workgroup",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SAPOData
+						"sapo_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApplicationHostUrl
+								"application_host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ApplicationServicePath
+								"application_service_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientNumber
+								"client_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogonLanguage
+								"logon_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthProperties
+								"o_auth_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCodeUrl
+										"auth_code_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: OAuthScopes
+										"o_auth_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrl
+										"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: PortNumber
+								"port_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateLinkServiceName
+								"private_link_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Salesforce
+						"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Salesforce resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsSandboxEnvironment
+								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether the connector profile applies to a sandbox or production environment",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNow
+						"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the ServiceNow resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Slack
+						"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Slack resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Snowflake
+						"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountName
+								"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the account.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BucketPrefix
+								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateLinkServiceName
+								"private_link_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Snow?ake Private Link service name to be used for private data transfers.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Region
+								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The region of the Snow?ake account.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Stage
+								"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Warehouse
+								"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Snow?ake warehouse.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Veeva
+						"veeva": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Veeva resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Zendesk
+						"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Zendesk resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Connector specific configurations needed to create connector profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorProfileName
 		// CloudFormation resource type schema:
 		//
@@ -2082,7 +1958,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[\\w/!@#+=.-]+",
 		//	  "type": "string"
 		//	}
-		"connector_profile_name": schemaAttribute77ce9c028493a199355bcf7c(),
+		"connector_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of items to retrieve in a single batch.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorType
 		// CloudFormation resource type schema:
 		//
@@ -2110,7 +1989,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"connector_type": schemaAttribute6139c0031ca965048f6c17c8(),
+		"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "List of Saas providers that need connector profile to be created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialsArn
 		// CloudFormation resource type schema:
 		//
@@ -2120,7 +2002,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"credentials_arn": schemaAttribute14b746a86693bf2b9bfa31ee(),
+		"credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique Arn for Connector-Profile resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KMSArn
 		// CloudFormation resource type schema:
 		//
@@ -2131,7 +2016,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "arn:aws:kms:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"kms_arn": schemaAttributeb53c50df2ad739c1f56fdcc1(),
+		"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

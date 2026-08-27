@@ -15,71 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1f3af8eca0fb24d953dbc9d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The response models for the route response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute573e60c4fa5654c618177794() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The route response key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57c5508f23589cababffca05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The model selection expression for the route response. Supported only for WebSocket APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73d8e72fcf450b4f27d854ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The API identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute836e82d917aa3d882baccfb6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The route ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d898b3c7553fa1c1b758cb9() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Required
-				"required": schemaAttributef058bd0ad37dc4744112b697(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The route response parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9a867a570275c3fd4456c26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef058bd0ad37dc4744112b697() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the parameter is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_route_response", routeResponseDataSource)
 }
@@ -95,7 +30,10 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttribute73d8e72fcf450b4f27d854ef(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The API identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelSelectionExpression
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +41,10 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The model selection expression for the route response. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
-		"model_selection_expression": schemaAttribute57c5508f23589cababffca05(),
+		"model_selection_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The model selection expression for the route response. Supported only for WebSocket APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResponseModels
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +52,11 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The response models for the route response.",
 		//	  "type": "object"
 		//	}
-		"response_models": schemaAttribute1f3af8eca0fb24d953dbc9d0(),
+		"response_models": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The response models for the route response.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResponseParameters
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +80,20 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    }
 		//	  }
 		//	}
-		"response_parameters": schemaAttribute9d898b3c7553fa1c1b758cb9(),
+		"response_parameters":     // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Required
+					"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies whether the parameter is required.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The route response parameters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteId
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +101,10 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The route ID.",
 		//	  "type": "string"
 		//	}
-		"route_id": schemaAttribute836e82d917aa3d882baccfb6(),
+		"route_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The route ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteResponseId
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +112,10 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"route_response_id": schemaAttributea9a867a570275c3fd4456c26(),
+		"route_response_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteResponseKey
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +123,10 @@ func routeResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The route response key.",
 		//	  "type": "string"
 		//	}
-		"route_response_key": schemaAttribute573e60c4fa5654c618177794(),
+		"route_response_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The route response key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

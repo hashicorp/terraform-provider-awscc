@@ -15,156 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute063b8663f2609dbd6b1f1955() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChannelId
-			"channel_id": schemaAttribute46e95531986467df6e36a4be(),
-			// Property: RetryIntervalInMinutes
-			"retry_interval_in_minutes": schemaAttribute464d623bc5e2048cc10a8e57(),
-		}, /*END SCHEMA*/
-		Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cad75271a145ecbdf146fec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1eea4040dcb5b58f11f02bbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20722d3903266a98334aa633() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the contact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23eff85e941e3884ac1f0c63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d62042eb7802a4147e32c2c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContactId
-			"contact_id": schemaAttribute20722d3903266a98334aa633(),
-			// Property: IsEssential
-			"is_essential": schemaAttribute8632071e683265474175899c(),
-		}, /*END SCHEMA*/
-		Description: "The contact that SSM Incident Manager is engaging during an incident.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute464d623bc5e2048cc10a8e57() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46e95531986467df6e36a4be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the contact channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bcd61b190565f1d6df7b4ee() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0cad75271a145ecbdf146fec(),
-				// Property: Value
-				"value": schemaAttributecab6d599bedb5e1077c1ab12(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77794eb5da4eb09bd987cfa1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute799dd69e7fdaec298ec8d40d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of Rotation Ids to associate with Contact",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8632071e683265474175899c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e36f3015242e4771d6f22b6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time to wait until beginning the next stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6d060fcf8fd3e1ad14918b5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DurationInMinutes
-				"duration_in_minutes": schemaAttribute9e36f3015242e4771d6f22b6(),
-				// Property: RotationIds
-				"rotation_ids": schemaAttribute799dd69e7fdaec298ec8d40d(),
-				// Property: Targets
-				"targets": schemaAttributed03621c773c31f29672439c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecab6d599bedb5e1077c1ab12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed03621c773c31f29672439c0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChannelTargetInfo
-				"channel_target_info": schemaAttribute063b8663f2609dbd6b1f1955(),
-				// Property: ContactTargetInfo
-				"contact_target_info": schemaAttribute3d62042eb7802a4147e32c2c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmcontacts_contact", contactDataSource)
 }
@@ -183,7 +33,10 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_\\-\\.]*$",
 		//	  "type": "string"
 		//	}
-		"alias": schemaAttribute77794eb5da4eb09bd987cfa1(),
+		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +44,10 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the contact.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute20722d3903266a98334aa633(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the contact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +58,10 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\s]*$",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute1eea4040dcb5b58f11f02bbf(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Plan
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +161,68 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"plan": schemaAttributec6d060fcf8fd3e1ad14918b5(),
+		"plan": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DurationInMinutes
+					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The time to wait until beginning the next stage.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RotationIds
+					"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "List of Rotation Ids to associate with Contact",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Targets
+					"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ChannelTargetInfo
+								"channel_target_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ChannelId
+										"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the contact channel.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RetryIntervalInMinutes
+										"retry_interval_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContactTargetInfo
+								"contact_target_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ContactId
+										"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the contact.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: IsEssential
+										"is_essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The contact that SSM Incident Manager is engaging during an incident.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +254,23 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute4bcd61b190565f1d6df7b4ee(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -347,7 +283,10 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute23eff85e941e3884ac1f0c63(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

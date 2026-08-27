@@ -15,35 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute45761e0143fa9febd2d1506d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a5e7974bff88ba6bc636f44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d65ce0eb60618d9298f1031() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Physical ID of the resource policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9d45578ab22363ecf875b96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lex_resource_policy", resourcePolicyDataSource)
 }
@@ -59,7 +30,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Physical ID of the resource policy.",
 		//	  "type": "string"
 		//	}
-		"resource_policy_id": schemaAttribute9d65ce0eb60618d9298f1031(),
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Physical ID of the resource policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +41,11 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
 		//	  "type": "object"
 		//	}
-		"policy": schemaAttribute45761e0143fa9febd2d1506d(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -77,7 +55,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttribute6a5e7974bff88ba6bc636f44(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RevisionId
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +69,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"revision_id": schemaAttributeb9d45578ab22363ecf875b96(),
+		"revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

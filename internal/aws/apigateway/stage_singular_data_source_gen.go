@@ -15,172 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0acd191b86b3d884b6d5eb59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``. This parameter is required to enable access logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0dc0af045f0364f9a1703e44() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CacheDataEncrypted
-				"cache_data_encrypted": schemaAttribute49e4d004575168925bd5bb14(),
-				// Property: CacheTtlInSeconds
-				"cache_ttl_in_seconds": schemaAttribute813727af1e051c475c415ca8(),
-				// Property: CachingEnabled
-				"caching_enabled": schemaAttribute49e4d004575168925bd5bb14(),
-				// Property: DataTraceEnabled
-				"data_trace_enabled": schemaAttribute49e4d004575168925bd5bb14(),
-				// Property: HttpMethod
-				"http_method": schemaAttributeb0cdfbe70d232fed3968f6ad(),
-				// Property: LoggingLevel
-				"logging_level": schemaAttributefdfe6eeb312e9bdd3d967058(),
-				// Property: MetricsEnabled
-				"metrics_enabled": schemaAttribute49e4d004575168925bd5bb14(),
-				// Property: ResourcePath
-				"resource_path": schemaAttribute86290795aaec20a50192fd7b(),
-				// Property: ThrottlingBurstLimit
-				"throttling_burst_limit": schemaAttribute813727af1e051c475c415ca8(),
-				// Property: ThrottlingRateLimit
-				"throttling_rate_limit": schemaAttribute6912d17f53b7c8621215c1d8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29046aa732a469a1e04f8687() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb05555a165fb27c7d9687914(),
-				// Property: Value
-				"value": schemaAttributec8ea89fb3133486fda741137(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute380737c51dfc0bdb5f2ee748() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value. Variable names are limited to alphanumeric characters. Values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49e4d004575168925bd5bb14() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53cf7740ee0dd307c49dda47() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6912d17f53b7c8621215c1d8() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73e24a9ef553e53a2f281386() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeploymentId
-			"deployment_id": schemaAttributefdfe6eeb312e9bdd3d967058(),
-			// Property: PercentTraffic
-			"percent_traffic": schemaAttribute6912d17f53b7c8621215c1d8(),
-			// Property: StageVariableOverrides
-			"stage_variable_overrides": schemaAttribute53cf7740ee0dd307c49dda47(),
-			// Property: UseStageCache
-			"use_stage_cache": schemaAttribute49e4d004575168925bd5bb14(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute813727af1e051c475c415ca8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86290795aaec20a50192fd7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``). To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea778f3a60de1a8f980e685f4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationArn
-			"destination_arn": schemaAttribute0acd191b86b3d884b6d5eb59(),
-			// Property: Format
-			"format": schemaAttributed3bc89342f299be4809eb390(),
-		}, /*END SCHEMA*/
-		Description: "The ``AccessLogSetting`` property type specifies settings for logging access in this stage.\n ``AccessLogSetting`` is a property of the [AWS::ApiGateway::Stage](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html) resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb05555a165fb27c7d9687914() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0cdfbe70d232fed3968f6ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP method. To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8ea89fb3133486fda741137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the specified tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3bc89342f299be4809eb390() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A single line format of the access logs of data, as specified by selected [$context variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least ``$context.requestId``. This parameter is required to enable access logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdfe6eeb312e9bdd3d967058() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_stage", stageDataSource)
 }
@@ -207,7 +41,22 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_log_setting": schemaAttributea778f3a60de1a8f980e685f4(),
+		"access_log_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationArn
+				"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``. This parameter is required to enable access logging.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Format
+				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A single line format of the access logs of data, as specified by selected [$context variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least ``$context.requestId``. This parameter is required to enable access logging.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ``AccessLogSetting`` property type specifies settings for logging access in this stage.\n ``AccessLogSetting`` is a property of the [AWS::ApiGateway::Stage](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html) resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheClusterEnabled
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +64,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"cache_cluster_enabled": schemaAttribute49e4d004575168925bd5bb14(),
+		"cache_cluster_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheClusterSize
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +75,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"cache_cluster_size": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"cache_cluster_size": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CanarySetting
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +113,34 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"canary_setting": schemaAttribute73e24a9ef553e53a2f281386(),
+		"canary_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentId
+				"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PercentTraffic
+				"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StageVariableOverrides
+				"stage_variable_overrides": // Pattern: ""
+				schema.MapAttribute{        /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseStageCache
+				"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientCertificateId
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +148,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"client_certificate_id": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +159,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +170,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DocumentationVersion
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +181,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"documentation_version": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MethodSettings
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +243,64 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"method_settings": schemaAttribute0dc0af045f0364f9a1703e44(),
+		"method_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CacheDataEncrypted
+					"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CacheTtlInSeconds
+					"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CachingEnabled
+					"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataTraceEnabled
+					"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HttpMethod
+					"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The HTTP method. To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LoggingLevel
+					"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricsEnabled
+					"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourcePath
+					"resource_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``). To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ThrottlingBurstLimit
+					"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ThrottlingRateLimit
+					"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -357,7 +308,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
@@ -365,7 +319,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"stage_name": schemaAttributefdfe6eeb312e9bdd3d967058(),
+		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -398,7 +355,24 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute29046aa732a469a1e04f8687(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TracingEnabled
 		// CloudFormation resource type schema:
 		//
@@ -406,7 +380,10 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"tracing_enabled": schemaAttribute49e4d004575168925bd5bb14(),
+		"tracing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Variables
 		// CloudFormation resource type schema:
 		//
@@ -420,7 +397,12 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"variables": schemaAttribute380737c51dfc0bdb5f2ee748(),
+		"variables":         // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value. Variable names are limited to alphanumeric characters. Values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,89 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0c1fc1ae39d93366866f9553() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Data Catalog in which the settings are created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b96fba69cae5f1f149e8732() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributeb184f0331d8b0dbbb8d08077(),
-			// Property: ReturnConnectionPasswordEncrypted
-			"return_connection_password_encrypted": schemaAttributec7fb2bfd676f4a5d5c83c068(),
-		}, /*END SCHEMA*/
-		Description: "When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ffe5cf82fed4c2c59281ce8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogEncryptionMode
-			"catalog_encryption_mode": schemaAttributefa83939bccb5c57c5f57a096(),
-			// Property: CatalogEncryptionServiceRole
-			"catalog_encryption_service_role": schemaAttributef0629af87f1ffe4b145ae71b(),
-			// Property: SseAwsKmsKeyId
-			"sse_aws_kms_key_id": schemaAttributef623169941eb6c9523b393f9(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the encryption-at-rest configuration for the Data Catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb184f0331d8b0dbbb8d08077() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An AWS KMS key that is used to encrypt the connection password.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba51bb1ca3f2eecf89daa3b3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectionPasswordEncryption
-			"connection_password_encryption": schemaAttribute2b96fba69cae5f1f149e8732(),
-			// Property: EncryptionAtRest
-			"encryption_at_rest": schemaAttribute7ffe5cf82fed4c2c59281ce8(),
-		}, /*END SCHEMA*/
-		Description: "Contains configuration information for maintaining Data Catalog security.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7fb2bfd676f4a5d5c83c068() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When the ReturnConnectionPasswordEncrypted flag is set to 'true', passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently from catalog encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0629af87f1ffe4b145ae71b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The role that AWS Glue assumes to encrypt and decrypt the Data Catalog objects on the caller's behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef623169941eb6c9523b393f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the AWS KMS key to use for encryption at rest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa83939bccb5c57c5f57a096() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption-at-rest mode for encrypting Data Catalog data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_data_catalog_encryption_settings", dataCatalogEncryptionSettingsDataSource)
 }
@@ -112,7 +29,10 @@ func dataCatalogEncryptionSettingsDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The ID of the Data Catalog in which the settings are created.",
 		//	  "type": "string"
 		//	}
-		"catalog_id": schemaAttribute0c1fc1ae39d93366866f9553(),
+		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Data Catalog in which the settings are created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataCatalogEncryptionSettings
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +77,51 @@ func dataCatalogEncryptionSettingsDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_catalog_encryption_settings": schemaAttributeba51bb1ca3f2eecf89daa3b3(),
+		"data_catalog_encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectionPasswordEncryption
+				"connection_password_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKeyId
+						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An AWS KMS key that is used to encrypt the connection password.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ReturnConnectionPasswordEncrypted
+						"return_connection_password_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When the ReturnConnectionPasswordEncrypted flag is set to 'true', passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently from catalog encryption.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionAtRest
+				"encryption_at_rest": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogEncryptionMode
+						"catalog_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The encryption-at-rest mode for encrypting Data Catalog data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CatalogEncryptionServiceRole
+						"catalog_encryption_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The role that AWS Glue assumes to encrypt and decrypt the Data Catalog objects on the caller's behalf.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SseAwsKmsKeyId
+						"sse_aws_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the AWS KMS key to use for encryption at rest.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the encryption-at-rest configuration for the Data Catalog.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains configuration information for maintaining Data Catalog security.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

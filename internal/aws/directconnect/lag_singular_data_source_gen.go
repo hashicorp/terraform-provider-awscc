@@ -14,98 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute303588175d6f62d5fcea070d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the service provider associated with the requested LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute339b796e736b63c7a6b48c18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The bandwidth of the individual physical dedicated connections bundled by the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c2481e4a17e7a9c19f94225() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebdafc1d8bbd24cd9eaf5416a(),
-				// Property: Value
-				"value": schemaAttributeac215169245a2d732b4f2913(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72a7ada6daaddbf5383b203c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cece0cf587e5722c21e7763() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of physical dedicated connections that must be operational for the LAG itself to be operational.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85b8d3502b613145720f08a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac215169245a2d732b4f2913() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3826095ef112c67faeb1f76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location for the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7d4e73bfd0218fe80a0b377() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdafc1d8bbd24cd9eaf5416a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebff2fecb217ca5cfb16dc5bf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether you want the LAG to support MAC Security (MACsec).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8d56d1e68b5dac22fe92b50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_directconnect_lag", lagDataSource)
 }
@@ -122,7 +30,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[1-9][0-9]*(M|G)bps$",
 		//	  "type": "string"
 		//	}
-		"connections_bandwidth": schemaAttribute339b796e736b63c7a6b48c18(),
+		"connections_bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The bandwidth of the individual physical dedicated connections bundled by the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LagArn
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +42,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:dxlag/dxlag-[a-z0-9]{8,21}$",
 		//	  "type": "string"
 		//	}
-		"lag_arn": schemaAttribute85b8d3502b613145720f08a1(),
+		"lag_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LagId
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +54,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dxlag-[a-z0-9]{8,21}$",
 		//	  "type": "string"
 		//	}
-		"lag_id": schemaAttribute72a7ada6daaddbf5383b203c(),
+		"lag_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LagName
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +66,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w \\-_,\\/]{1,200}$",
 		//	  "type": "string"
 		//	}
-		"lag_name": schemaAttributef8d56d1e68b5dac22fe92b50(),
+		"lag_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LagState
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +78,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(requested|pending|available|down|deleting|deleted|unknown)$",
 		//	  "type": "string"
 		//	}
-		"lag_state": schemaAttributeb7d4e73bfd0218fe80a0b377(),
+		"lag_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +90,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"location": schemaAttributeb3826095ef112c67faeb1f76(),
+		"location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The location for the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinimumLinks
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +101,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The minimum number of physical dedicated connections that must be operational for the LAG itself to be operational.",
 		//	  "type": "integer"
 		//	}
-		"minimum_links": schemaAttribute7cece0cf587e5722c21e7763(),
+		"minimum_links": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum number of physical dedicated connections that must be operational for the LAG itself to be operational.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderName
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +112,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the service provider associated with the requested LAG.",
 		//	  "type": "string"
 		//	}
-		"provider_name": schemaAttribute303588175d6f62d5fcea070d(),
+		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the service provider associated with the requested LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequestMACSec
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +123,10 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether you want the LAG to support MAC Security (MACsec).",
 		//	  "type": "boolean"
 		//	}
-		"request_mac_sec": schemaAttributebff2fecb217ca5cfb16dc5bf(),
+		"request_mac_sec": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether you want the LAG to support MAC Security (MACsec).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +159,24 @@ func lagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute6c2481e4a17e7a9c19f94225(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with the LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

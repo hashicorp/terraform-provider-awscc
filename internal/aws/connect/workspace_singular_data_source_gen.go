@@ -15,300 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0237a7dc79b1d6655ab98973() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The resource ARNs associated with the workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute04aef26fe6a68feff865d59a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Default
-			"default": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0579a97dedcd1a10781082b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Background
-			"background": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: InvertActionsColors
-			"invert_actions_colors": schemaAttributeadbd0c7801ffb878853ddab9(),
-			// Property: Text
-			"text": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: TextActive
-			"text_active": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: TextBackgroundActive
-			"text_background_active": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: TextBackgroundHover
-			"text_background_hover": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: TextHover
-			"text_hover": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20d5835017b61fefaa75415f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute290f17c5558c5722d8595738() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d046ee730608b241d310afb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The title of the workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3900e51c28b38a9a564b36a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The slug for the page.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute479837f52dacae7d8798f304() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Palette
-			"palette": schemaAttributee45efd63b831d7805981379f(),
-			// Property: Typography
-			"typography": schemaAttributec01adbd1e2f78d86fd72bdf5(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60e65c83ac218b5ab88ddf65() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Active
-			"active": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: ContrastText
-			"contrast_text": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: Default
-			"default": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute671c9c6ef3c8ced5b32fde0e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Dark
-			"dark": schemaAttribute479837f52dacae7d8798f304(),
-			// Property: Light
-			"light": schemaAttribute479837f52dacae7d8798f304(),
-		}, /*END SCHEMA*/
-		Description: "The theme configuration for the workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69f6e62df3fb5da817e0039f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b36f3f97b143599d4c67963() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9013f2d8d69c307d735ac9ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The page identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9380c6cd369812a2f207296f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of media",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99fa01030dc8d6d2e6fd2c57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea491d8a08ad738e784939084() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The input data for the page.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea50ec45e6c88712794141f86() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InputData
-				"input_data": schemaAttributea491d8a08ad738e784939084(),
-				// Property: Page
-				"page": schemaAttribute9013f2d8d69c307d735ac9ab(),
-				// Property: ResourceArn
-				"resource_arn": schemaAttributeab120e60a4d82ec201cef3a8(),
-				// Property: Slug
-				"slug": schemaAttribute3900e51c28b38a9a564b36a3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The pages associated with the workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab120e60a4d82ec201cef3a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the resource associated with the page.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadbd0c7801ffb878853ddab9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0626f1aac2ada62bb82aad2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Source
-				"source": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-				// Property: Type
-				"type": schemaAttribute9380c6cd369812a2f207296f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The media items for the workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb98ce598ffc20923ca0e1313() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef11d059c14f7da70b75698dd(),
-				// Property: Value
-				"value": schemaAttribute290f17c5558c5722d8595738(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec01adbd1e2f78d86fd72bdf5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FontFamily
-			"font_family": schemaAttribute04aef26fe6a68feff865d59a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec214618ec9e706fc13e35eb9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The visibility of the workspace. Will always be set to ASSIGNED oninitial creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2f2cfcb92304183da4be4e2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Background
-			"background": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: InvertActionsColors
-			"invert_actions_colors": schemaAttributeadbd0c7801ffb878853ddab9(),
-			// Property: Text
-			"text": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: TextHover
-			"text_hover": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3af7231d5b72216c13f5c00() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActiveBackground
-			"active_background": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: ContainerBackground
-			"container_background": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-			// Property: PageBackground
-			"page_background": schemaAttribute99fa01030dc8d6d2e6fd2c57(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee19abc2792ee71e7c39bace3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee45efd63b831d7805981379f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Canvas
-			"canvas": schemaAttributec3af7231d5b72216c13f5c00(),
-			// Property: Header
-			"header": schemaAttributec2f2cfcb92304183da4be4e2(),
-			// Property: Navigation
-			"navigation": schemaAttribute0579a97dedcd1a10781082b4(),
-			// Property: Primary
-			"primary": schemaAttribute60e65c83ac218b5ab88ddf65(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9fb2460de1b1e4cbf5bdab9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef11d059c14f7da70b75698dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_workspace", workspaceDataSource)
 }
@@ -325,7 +31,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/workspace/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8b36f3f97b143599d4c67963(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Associations
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +47,11 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"associations": schemaAttribute0237a7dc79b1d6655ab98973(),
+		"associations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The resource ARNs associated with the workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +62,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\P{C}\r\n\t]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee9fb2460de1b1e4cbf5bdab9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +74,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.{0,256}$",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schemaAttribute69f6e62df3fb5da817e0039f(),
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +86,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttributee19abc2792ee71e7c39bace3(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Media
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +124,23 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"media": schemaAttributeb0626f1aac2ada62bb82aad2(),
+		"media": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Source
+					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of media",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The media items for the workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -413,7 +151,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute20d5835017b61fefaa75415f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Pages
 		// CloudFormation resource type schema:
 		//
@@ -457,7 +198,34 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"pages": schemaAttributea50ec45e6c88712794141f86(),
+		"pages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InputData
+					"input_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The input data for the page.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Page
+					"page": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The page identifier.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceArn
+					"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the resource associated with the page.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Slug
+					"slug": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The slug for the page.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The pages associated with the workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -491,7 +259,24 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb98ce598ffc20923ca0e1313(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Theme
 		// CloudFormation resource type schema:
 		//
@@ -812,7 +597,252 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"theme": schemaAttribute671c9c6ef3c8ced5b32fde0e(),
+		"theme": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Dark
+				"dark": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Palette
+						"palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Canvas
+								"canvas": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActiveBackground
+										"active_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ContainerBackground
+										"container_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: PageBackground
+										"page_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Header
+								"header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Background
+										"background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: InvertActionsColors
+										"invert_actions_colors": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Text
+										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextHover
+										"text_hover": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Navigation
+								"navigation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Background
+										"background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: InvertActionsColors
+										"invert_actions_colors": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Text
+										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextActive
+										"text_active": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextBackgroundActive
+										"text_background_active": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextBackgroundHover
+										"text_background_hover": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextHover
+										"text_hover": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Primary
+								"primary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Active
+										"active": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ContrastText
+										"contrast_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Default
+										"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Typography
+						"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontFamily
+								"font_family": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Default
+										"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Light
+				"light": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Palette
+						"palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Canvas
+								"canvas": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActiveBackground
+										"active_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ContainerBackground
+										"container_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: PageBackground
+										"page_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Header
+								"header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Background
+										"background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: InvertActionsColors
+										"invert_actions_colors": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Text
+										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextHover
+										"text_hover": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Navigation
+								"navigation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Background
+										"background": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: InvertActionsColors
+										"invert_actions_colors": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Text
+										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextActive
+										"text_active": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextBackgroundActive
+										"text_background_active": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextBackgroundHover
+										"text_background_hover": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TextHover
+										"text_hover": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Primary
+								"primary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Active
+										"active": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ContrastText
+										"contrast_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Default
+										"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Typography
+						"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontFamily
+								"font_family": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Default
+										"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The theme configuration for the workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -823,7 +853,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\P{C}]*$",
 		//	  "type": "string"
 		//	}
-		"title": schemaAttribute2d046ee730608b241d310afb(),
+		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The title of the workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Visibility
 		// CloudFormation resource type schema:
 		//
@@ -836,7 +869,10 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"visibility": schemaAttributec214618ec9e706fc13e35eb9(),
+		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The visibility of the workspace. Will always be set to ASSIGNED oninitial creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

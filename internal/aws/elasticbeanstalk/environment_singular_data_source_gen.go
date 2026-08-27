@@ -14,187 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01445ae609c8ab945c778b24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c9d2d157e6023d93b7b238e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Your description for this environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cde635aafb6a1bea1dd4648() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e3cd6a9c56e2674ab61d236() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38340a619b31efcfc36096be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49a6cf51bf231b7b51ab130d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5888f86bd2128fdb2246447b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of this environment tier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61a17c0e248f82213770a33a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an Elastic Beanstalk solution stack (platform version) to use with the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73d9fe46d042192d8af613c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application version to deploy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute799fffc68c5ce67bd108d9fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current value for the configuration option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute879eb0dd89d5a8f630ab864e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of this environment tier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8880b1678d6e8a394b214b1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique name for the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89ad1083c16e1da57ceb326a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e49e201695c1403cfa3bbbd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Namespace
-				"namespace": schemaAttributeb8664b6c3a06e591184d25d0(),
-				// Property: OptionName
-				"option_name": schemaAttribute49a6cf51bf231b7b51ab130d(),
-				// Property: ResourceName
-				"resource_name": schemaAttributeba7a3235123bb00af56cfc46(),
-				// Property: Value
-				"value": schemaAttribute799fffc68c5ce67bd108d9fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs defining configuration options for this environment, such as the instance type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8bca960fde5cabb9b8edba7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute879eb0dd89d5a8f630ab864e(),
-			// Property: Type
-			"type": schemaAttribute5888f86bd2128fdb2246447b(),
-			// Property: Version
-			"version": schemaAttribute1cde635aafb6a1bea1dd4648(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea944b3cead043876f8c4551b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute89ad1083c16e1da57ceb326a(),
-				// Property: Value
-				"value": schemaAttribute38340a619b31efcfc36096be(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the tags applied to resources in the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8664b6c3a06e591184d25d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique namespace that identifies the option's associated AWS resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba7a3235123bb00af56cfc46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique resource name for the option setting. Use it for a time–based scaling configuration option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee32cfd068d2ffd3234361cac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6c2514c6a44db39a69beada() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Elastic Beanstalk configuration template to use with the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee864564959beb4bdf72e47e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the custom platform to use with the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9e36c2badbaced721baa3a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application that is associated with this environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticbeanstalk_environment", environmentDataSource)
 }
@@ -210,7 +29,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the application that is associated with this environment.",
 		//	  "type": "string"
 		//	}
-		"application_name": schemaAttributef9e36c2badbaced721baa3a5(),
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application that is associated with this environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CNAMEPrefix
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +40,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.",
 		//	  "type": "string"
 		//	}
-		"cname_prefix": schemaAttributee32cfd068d2ffd3234361cac(),
+		"cname_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -226,14 +51,19 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Your description for this environment.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1c9d2d157e6023d93b7b238e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Your description for this environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointURL
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"endpoint_url": schemaAttribute01445ae609c8ab945c778b24(),
+		"endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentName
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +71,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A unique name for the environment.",
 		//	  "type": "string"
 		//	}
-		"environment_name": schemaAttribute8880b1678d6e8a394b214b1d(),
+		"environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique name for the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OperationsRole
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +82,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.",
 		//	  "type": "string"
 		//	}
-		"operations_role": schemaAttribute1e3cd6a9c56e2674ab61d236(),
+		"operations_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OptionSettings
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +121,34 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"option_settings": schemaAttribute9e49e201695c1403cfa3bbbd(),
+		"option_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique namespace that identifies the option's associated AWS resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OptionName
+					"option_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the configuration option.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceName
+					"resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique resource name for the option setting. Use it for a time–based scaling configuration option.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current value for the configuration option.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs defining configuration options for this environment, such as the instance type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PlatformArn
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +156,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the custom platform to use with the environment.",
 		//	  "type": "string"
 		//	}
-		"platform_arn": schemaAttributee864564959beb4bdf72e47e3(),
+		"platform_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the custom platform to use with the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SolutionStackName
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +167,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of an Elastic Beanstalk solution stack (platform version) to use with the environment.",
 		//	  "type": "string"
 		//	}
-		"solution_stack_name": schemaAttribute61a17c0e248f82213770a33a(),
+		"solution_stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an Elastic Beanstalk solution stack (platform version) to use with the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +198,24 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributea944b3cead043876f8c4551b(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the tags applied to resources in the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateName
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +223,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the Elastic Beanstalk configuration template to use with the environment.",
 		//	  "type": "string"
 		//	}
-		"template_name": schemaAttributee6c2514c6a44db39a69beada(),
+		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Elastic Beanstalk configuration template to use with the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +249,27 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tier": schemaAttributea8bca960fde5cabb9b8edba7(),
+		"tier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of this environment tier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of this environment tier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionLabel
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +277,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the application version to deploy.",
 		//	  "type": "string"
 		//	}
-		"version_label": schemaAttribute73d9fe46d042192d8af613c3(),
+		"version_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application version to deploy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

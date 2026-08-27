@@ -14,126 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0c2a28d703004d2887de5f5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33def2d2801881a4ed74739f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the security requirement",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4076dca4ec1b84f467dd1abf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Security domain this requirement belongs to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ec5418910830dd85562d652() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the pack",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7193b8ba5cadc5307f0e6b2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the security requirement pack",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute724333933c447759e1dc0a21() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute33def2d2801881a4ed74739f(),
-				// Property: Domain
-				"domain": schemaAttribute4076dca4ec1b84f467dd1abf(),
-				// Property: Evaluation
-				"evaluation": schemaAttribute9f85a32338a6f16366bac54c(),
-				// Property: Name
-				"name": schemaAttribute92fed1ca37ca280123f9f957(),
-				// Property: Remediation
-				"remediation": schemaAttributec7d7c6690d65e5b0932282e8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Security requirements within this pack",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92fed1ca37ca280123f9f957() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the security requirement",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f85a32338a6f16366bac54c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How to evaluate compliance with this requirement",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6230f6c6f4fd76b854ca611() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb02fcd70d62f343841b68219() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS key for client-side encryption of pack contents",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7d7c6690d65e5b0932282e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How to remediate non-compliance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc0e92b44015492658712aea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier of the security requirement pack",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee22a128451df7d29a7eeb076() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea6230f6c6f4fd76b854ca611(),
-				// Property: Value
-				"value": schemaAttribute0c2a28d703004d2887de5f5c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the security requirement pack",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee471a04c58f9239496b8cbb4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the pack is enabled or disabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityagent_security_requirement_pack", securityRequirementPackDataSource)
 }
@@ -150,7 +30,10 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5ec5418910830dd85562d652(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the pack",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +42,10 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributeb02fcd70d62f343841b68219(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "KMS key for client-side encryption of pack contents",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +55,10 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7193b8ba5cadc5307f0e6b2e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the security requirement pack",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackId
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +69,10 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(srp)-(am|cm)-[a-zA-Z0-9\\-]+$",
 		//	  "type": "string"
 		//	}
-		"pack_id": schemaAttributecc0e92b44015492658712aea(),
+		"pack_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier of the security requirement pack",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityRequirements
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +118,39 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_requirements": schemaAttribute724333933c447759e1dc0a21(),
+		"security_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Description of the security requirement",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Domain
+					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Security domain this requirement belongs to",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Evaluation
+					"evaluation": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "How to evaluate compliance with this requirement",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of the security requirement",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Remediation
+					"remediation": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "How to remediate non-compliance",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Security requirements within this pack",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +162,10 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee471a04c58f9239496b8cbb4(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the pack is enabled or disabled",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +198,24 @@ func securityRequirementPackDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributee22a128451df7d29a7eeb076(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the security requirement pack",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

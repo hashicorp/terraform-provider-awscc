@@ -14,121 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1b5a7439e263836e421b0a6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group LoRaWAN RF region",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ef0f987112e9e14c0250a83() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeaa7da9e2451b86eafed56b42(),
-				// Property: Value
-				"value": schemaAttributeaa7da9e2451b86eafed56b42(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the Multicast group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3495d886ac3d79b15c0a2d1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group LoRaWAN DL Class",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7237638db5bbde9dbe9633f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group status. Returned after successful read.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b6d906dd6f1305b9a2ef755() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group description",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8544a49155646179f1e30722() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DlClass
-			"dl_class": schemaAttribute3495d886ac3d79b15c0a2d1d(),
-			// Property: NumberOfDevicesInGroup
-			"number_of_devices_in_group": schemaAttribute99f2e19863f6b91a135a3b23(),
-			// Property: NumberOfDevicesRequested
-			"number_of_devices_requested": schemaAttributea97913a00bd9eae2a59a034d(),
-			// Property: RfRegion
-			"rf_region": schemaAttribute1b5a7439e263836e421b0a6c(),
-		}, /*END SCHEMA*/
-		Description: "Multicast group LoRaWAN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ca9eb3db0527f2a85f67a82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of Multicast group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93e567533e34d9cd310ba530() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Wireless device to disassociate. Only for update request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99f2e19863f6b91a135a3b23() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group number of devices in group. Returned after successful read.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a1dd8447317b2875aa59138() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group id. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea34f311d952b52d13eabce91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group arn. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea97913a00bd9eae2a59a034d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Multicast group number of devices requested. Returned after successful read.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa7da9e2451b86eafed56b42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb4222dbae75bbea2b1f2ab3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Wireless device to associate. Only for update request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_multicast_group", multicastGroupDataSource)
 }
@@ -144,7 +29,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Multicast group arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea34f311d952b52d13eabce91(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Multicast group arn. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociateWirelessDevice
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +41,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"associate_wireless_device": schemaAttributebb4222dbae75bbea2b1f2ab3(),
+		"associate_wireless_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Wireless device to associate. Only for update request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +53,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7b6d906dd6f1305b9a2ef755(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Multicast group description",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisassociateWirelessDevice
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +65,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"disassociate_wireless_device": schemaAttribute93e567533e34d9cd310ba530(),
+		"disassociate_wireless_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Wireless device to disassociate. Only for update request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +77,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"multicast_group_id": schemaAttribute9a1dd8447317b2875aa59138(),
+		"multicast_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Multicast group id. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoRaWAN
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +115,32 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan": schemaAttribute8544a49155646179f1e30722(),
+		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DlClass
+				"dl_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Multicast group LoRaWAN DL Class",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NumberOfDevicesInGroup
+				"number_of_devices_in_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Multicast group number of devices in group. Returned after successful read.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NumberOfDevicesRequested
+				"number_of_devices_requested": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Multicast group number of devices requested. Returned after successful read.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RfRegion
+				"rf_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Multicast group LoRaWAN RF region",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Multicast group LoRaWAN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +149,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute8ca9eb3db0527f2a85f67a82(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Multicast group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +160,10 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Multicast group status. Returned after successful read.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute7237638db5bbde9dbe9633f6(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Multicast group status. Returned after successful read.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +190,22 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute1ef0f987112e9e14c0250a83(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the Multicast group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

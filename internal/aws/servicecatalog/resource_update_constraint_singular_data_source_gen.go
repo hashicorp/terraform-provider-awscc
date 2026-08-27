@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f01daaa01fa8186576275d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The portfolio identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1994853018a871aae7c8e175() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute407703f497ba600bcecd1dea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e14f1053c75dd50ca8af11c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the constraint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef11d3c8e6e0101a99815d4bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the constraint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef28dd017bca51acec7ecec91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The product identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_resource_update_constraint", resourceUpdateConstraintDataSource)
 }
@@ -71,7 +29,10 @@ func resourceUpdateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The language code",
 		//	  "type": "string"
 		//	}
-		"accept_language": schemaAttribute407703f497ba600bcecd1dea(),
+		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +40,10 @@ func resourceUpdateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The description of the constraint",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef11d3c8e6e0101a99815d4bd(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the constraint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +51,10 @@ func resourceUpdateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Unique identifier for the constraint",
 		//	  "type": "string"
 		//	}
-		"resource_update_constraint_id": schemaAttribute4e14f1053c75dd50ca8af11c(),
+		"resource_update_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for the constraint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +62,10 @@ func resourceUpdateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The portfolio identifier",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schemaAttribute0f01daaa01fa8186576275d0(),
+		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The portfolio identifier",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +73,10 @@ func resourceUpdateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The product identifier",
 		//	  "type": "string"
 		//	}
-		"product_id": schemaAttributef28dd017bca51acec7ecec91(),
+		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The product identifier",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagUpdateOnProvisionedProduct
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +84,10 @@ func resourceUpdateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination",
 		//	  "type": "string"
 		//	}
-		"tag_update_on_provisioned_product": schemaAttribute1994853018a871aae7c8e175(),
+		"tag_update_on_provisioned_product": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

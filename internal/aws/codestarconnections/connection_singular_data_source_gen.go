@@ -14,77 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1aac8fa9861dd2ecd292747d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b5333d5535edf0d0749f316() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection. Connection names must be unique in an AWS user account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ef02f42e909ee603bdc2469() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4315d34a7d6da5db66541f7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute581cb575ad400a26548b1769() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7693a0f98e8d2ddc3f487adc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec20c7a8b8e0b49148e00e081() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee55275de9350ee0341ff50b6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2ef02f42e909ee603bdc2469(),
-				// Property: Value
-				"value": schemaAttribute581cb575ad400a26548b1769(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the tags applied to a connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa3c0c3e747b5ac4dde35d65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codestarconnections_connection", connectionDataSource)
 }
@@ -103,7 +32,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"connection_arn": schemaAttributec20c7a8b8e0b49148e00e081(),
+		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +45,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"connection_name": schemaAttribute2b5333d5535edf0d0749f316(),
+		"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the connection. Connection names must be unique in an AWS user account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionStatus
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +56,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The current status of the connection.",
 		//	  "type": "string"
 		//	}
-		"connection_status": schemaAttribute1aac8fa9861dd2ecd292747d(),
+		"connection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostArn
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +70,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"host_arn": schemaAttribute4315d34a7d6da5db66541f7e(),
+		"host_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +84,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"owner_account_id": schemaAttribute7693a0f98e8d2ddc3f487adc(),
+		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderType
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +95,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
 		//	  "type": "string"
 		//	}
-		"provider_type": schemaAttributefa3c0c3e747b5ac4dde35d65(),
+		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +130,24 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributee55275de9350ee0341ff50b6(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the tags applied to a connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

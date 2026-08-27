@@ -14,77 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5c081b1cac7c8bd5aa2b6e52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier of the case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61ff34681f20f7b5465cac43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier of a template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c020d3f5971a7e108377cb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full customer profile ARN for the case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70926c3deda199a25fd46a58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The title of the case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92effb1917294806fe124d0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec05eac7fdc3a0f76c5ccbe6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec39bfa4a4897330632bfdac5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute92effb1917294806fe124d0d(),
-				// Property: Value
-				"value": schemaAttributed385c2534f8499e9baff4d32(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags for the case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed385c2534f8499e9baff4d32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecc4e4e1ce85ba1fdbd2562a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Cases domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cases_case", caseDataSource)
 }
@@ -102,7 +31,10 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec05eac7fdc3a0f76c5ccbe6d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CaseId
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +44,10 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"case_id": schemaAttribute5c081b1cac7c8bd5aa2b6e52(),
+		"case_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier of the case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomerId
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +56,10 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 4100,
 		//	  "type": "string"
 		//	}
-		"customer_id": schemaAttribute6c020d3f5971a7e108377cb0(),
+		"customer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The full customer profile ARN for the case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +69,10 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributeecc4e4e1ce85ba1fdbd2562a(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the Cases domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +106,24 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributec39bfa4a4897330632bfdac5(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags for the case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateId
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +133,10 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_id": schemaAttribute61ff34681f20f7b5465cac43(),
+		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier of a template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +145,10 @@ func caseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 4100,
 		//	  "type": "string"
 		//	}
-		"title": schemaAttribute70926c3deda199a25fd46a58(),
+		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The title of the case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

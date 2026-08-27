@@ -20,121 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03e83c42eadffac699c68f22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e810877b2eed41477d48150() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38c5349d600e27cde5f16cbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the local gateway route table virtual interface group association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3be409a462812cf625ae7cc8() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3e8def1f26319262bc541556(),
-				// Property: Value
-				"value": schemaAttribute2e810877b2eed41477d48150(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the local gateway route table virtual interface group association.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e8def1f26319262bc541556() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 127),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c66933ede76181ab6ea8d3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway route table virtual interface group.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute882d45450cd06b954497bda3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway route table.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec947d39cb28a07da04e9d352() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway route table virtual interface group association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1c2b6450ecd5d965c4fa387() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the local gateway route table.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea8df4e6dd3251ee42040951() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the local gateway route table virtual interface group association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_local_gateway_route_table_virtual_interface_group_association", localGatewayRouteTableVirtualInterfaceGroupAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_local_gateway_route_table_virtual_interface_group_association", generic.NewListResource(localGatewayRouteTableVirtualInterfaceGroupAssociationResource))
@@ -151,7 +36,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The ID of the local gateway.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttribute03e83c42eadffac699c68f22(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableArn
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +50,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The ARN of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_arn": schemaAttributed1c2b6450ecd5d965c4fa387(),
+		"local_gateway_route_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the local gateway route table.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +64,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The ID of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_id": schemaAttribute882d45450cd06b954497bda3(),
+		"local_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway route table.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableVirtualInterfaceGroupAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +78,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The ID of the local gateway route table virtual interface group association.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_virtual_interface_group_association_id": schemaAttributec947d39cb28a07da04e9d352(),
+		"local_gateway_route_table_virtual_interface_group_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway route table virtual interface group association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceGroupId
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +92,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The ID of the local gateway route table virtual interface group.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_group_id": schemaAttribute7c66933ede76181ab6ea8d3b(),
+		"local_gateway_virtual_interface_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway route table virtual interface group.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +106,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The owner of the local gateway route table virtual interface group association.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttributeea8df4e6dd3251ee42040951(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the local gateway route table virtual interface group association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +120,13 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "description": "The state of the local gateway route table virtual interface group association.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute38c5349d600e27cde5f16cbc(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the local gateway route table virtual interface group association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +154,40 @@ func localGatewayRouteTableVirtualInterfaceGroupAssociationResource(ctx context.
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3be409a462812cf625ae7cc8(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the local gateway route table virtual interface group association.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

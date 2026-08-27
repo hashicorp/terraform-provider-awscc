@@ -15,64 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15218f7b1142b5551c526636() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute65db350d4f00317be6bfad61(),
-				// Property: Value
-				"value": schemaAttribute30126ac06b14e56343e0ddc4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of tags for the cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24ec4dc4bb1b952be94aa0b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d9f92229817d2ec0ece1030() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Must be neptune1 for engine versions prior to 1.2.0.0, or neptune1.2 for engine version 1.2.0.0 and higher.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30126ac06b14e56343e0ddc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65db350d4f00317be6bfad61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute853d3e8a4b95933188ab2a69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides the customer-specified description for this DB cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3d02dfd7df12fca059e20a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides the name of the DB cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_neptune_db_cluster_parameter_group", dBClusterParameterGroupDataSource)
 }
@@ -88,7 +30,10 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Provides the customer-specified description for this DB cluster parameter group.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute853d3e8a4b95933188ab2a69(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provides the customer-specified description for this DB cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Family
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +41,10 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Must be neptune1 for engine versions prior to 1.2.0.0, or neptune1.2 for engine version 1.2.0.0 and higher.",
 		//	  "type": "string"
 		//	}
-		"family": schemaAttribute2d9f92229817d2ec0ece1030(),
+		"family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Must be neptune1 for engine versions prior to 1.2.0.0, or neptune1.2 for engine version 1.2.0.0 and higher.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +52,10 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Provides the name of the DB cluster parameter group.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee3d02dfd7df12fca059e20a5(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provides the name of the DB cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +63,11 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttribute24ec4dc4bb1b952be94aa0b0(),
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +94,24 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute15218f7b1142b5551c526636(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of tags for the cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,1864 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0020d46bff3a94cb985e735f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Prefix
-			"prefix": schemaAttribute55d65f436a1c4ebaf1503954(),
-			// Property: TagFilters
-			"tag_filters": schemaAttribute38434a14e7733cecc2f34321(),
-		}, /*END SCHEMA*/
-		Description: "A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: \n  +  If you specify both a ``Prefix`` and a ``TagFilter``, wrap these filters in an ``And`` tag.\n  +  If you specify a filter based on multiple tags, wrap the ``TagFilter`` elements in an ``And`` tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute02f4e1fb874d1420336dc77a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HostName
-			"host_name": schemaAttribute035e5036593bb0db5c2d2c65(),
-			// Property: Protocol
-			"protocol": schemaAttribute0490873f4f248b3991fb25f4(),
-		}, /*END SCHEMA*/
-		Description: "The redirect behavior for every request to this bucket's website endpoint.\n  If you specify this property, you can't specify any other property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute035e5036593bb0db5c2d2c65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the host where requests are redirected.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0490873f4f248b3991fb25f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute056e03a73151a28a9b3b4319() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the inventory is enabled or disabled. If set to ``True``, an inventory list is generated. If set to ``False``, no inventory list is generated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05f68ee530de8acdf8bf60fc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute067d615ae24ad2c348c6b491() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute07f18d53fbc2602d9371f575() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates How Long an Object Has Been Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute085cd6755ca677967c80825e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a8553ca027ea358b7eaef1a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether Amazon S3 will remove a delete marker without any noncurrent versions. If set to true, the delete marker will be removed if there are no noncurrent versions. This cannot be specified with ``ExpirationInDays``, ``ExpirationDate``, or ``TagFilters``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b27d841832066c5e875b3fa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AbortIncompleteMultipartUpload
-				"abort_incomplete_multipart_upload": schemaAttributef92333436294d5da4d6651c5(),
-				// Property: ExpirationDate
-				"expiration_date": schemaAttribute7cf628e71ee69f3e4b7d1819(),
-				// Property: ExpirationInDays
-				"expiration_in_days": schemaAttribute7f7310ffd4538e9b661fe428(),
-				// Property: ExpiredObjectDeleteMarker
-				"expired_object_delete_marker": schemaAttribute0a8553ca027ea358b7eaef1a(),
-				// Property: Id
-				"id": schemaAttributeceed6ac57fe843d2de092d42(),
-				// Property: NoncurrentVersionExpiration
-				"noncurrent_version_expiration": schemaAttributee8487f1d55f61bad816617e3(),
-				// Property: NoncurrentVersionExpirationInDays
-				"noncurrent_version_expiration_in_days": schemaAttributeda898c04b7f78c21f5b48d4d(),
-				// Property: NoncurrentVersionTransition
-				"noncurrent_version_transition": schemaAttributef5aca37e034a0b9b71895189(),
-				// Property: NoncurrentVersionTransitions
-				"noncurrent_version_transitions": schemaAttribute0b354bc9d4881e6658bc4c99(),
-				// Property: ObjectSizeGreaterThan
-				"object_size_greater_than": schemaAttribute752cfee01a5874564bcff312(),
-				// Property: ObjectSizeLessThan
-				"object_size_less_than": schemaAttributecf7c02ada65b99cb587a6a27(),
-				// Property: Prefix
-				"prefix": schemaAttribute90dd396edf8234339b282abb(),
-				// Property: Status
-				"status": schemaAttribute77af7c603ccce31b04215bdf(),
-				// Property: TagFilters
-				"tag_filters": schemaAttributee4ca3e689d0105a82a00e5e1(),
-				// Property: Transition
-				"transition": schemaAttribute8c2d8270a4cfb4d0f5c4b6be(),
-				// Property: Transitions
-				"transitions": schemaAttribute9ba134e3e51148f39d2bc552(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A lifecycle rule for individual objects in an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b354bc9d4881e6658bc4c99() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NewerNoncurrentVersions
-				"newer_noncurrent_versions": schemaAttribute5133d39a81ab17c69e5e81db(),
-				// Property: StorageClass
-				"storage_class": schemaAttribute7060cbc250ee09d01f0a832d(),
-				// Property: TransitionInDays
-				"transition_in_days": schemaAttribute07f18d53fbc2602d9371f575(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "For buckets with versioning enabled (or suspended), one or more transition rules that specify when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransition`` property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d9ff526750a0ebba289e822() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied.\n Required when parent element ``Condition`` is specified and sibling ``KeyPrefixEquals`` is not specified. If both are specified, then both must be true for the redirect to be applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0df0afa6bd2f31e5ade5a1be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID used to identify the S3 Intelligent-Tiering configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f87d901ab059c29a38a956c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ReplicaKmsKeyID
-			"replica_kms_key_id": schemaAttribute130b5d943e83897f4fcb0c66(),
-		}, /*END SCHEMA*/
-		Description: "Specifies encryption-related information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute114579d3c83bdfaf35ca199e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the transfer acceleration status of the bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11e0f0d490e123bc9d8511cb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PartitionDateSource
-			"partition_date_source": schemaAttribute7c39cedfced1e8620f0a05ad(),
-		}, /*END SCHEMA*/
-		Description: "Amazon S3 keys for log objects are partitioned in the following format:\n  ``[DestinationPrefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`` \n PartitionedPrefix defaults to EventTime delivery when server access logs are delivered.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute130b5d943e83897f4fcb0c66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket. Amazon S3 uses this key to encrypt replica objects. Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14bfc7bd0b97254ea9f85aa2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rules
-			"rules": schemaAttribute87e6be8f3c4b3d5d10cefaef(),
-		}, /*END SCHEMA*/
-		Description: "A container for object key name prefix and suffix filtering rules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute163a617243acf2f0e9a98347() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies an object ownership rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute167d5456ebba40df13d47c15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18d483b882a04b0f160c73fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the status of the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c1eba632ebb507a8e4fd8a2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Destination
-			"destination": schemaAttribute82ad51b43893af8590f0cf95(),
-			// Property: OutputSchemaVersion
-			"output_schema_version": schemaAttribute2c730fc9c9e22165042b2409(),
-		}, /*END SCHEMA*/
-		Description: "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cb49945e02d99832723273d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TableArn
-			"table_arn": schemaAttribute085cd6755ca677967c80825e(),
-			// Property: TableBucketArn
-			"table_bucket_arn": schemaAttributeebf294be14281ae82e76ad25(),
-			// Property: TableName
-			"table_name": schemaAttribute9fa9cde5cad9a2df99ddbf3c(),
-			// Property: TableNamespace
-			"table_namespace": schemaAttribute9ccb55afbde8910419411a17(),
-		}, /*END SCHEMA*/
-		Description: "The destination information for the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2487e726e7ac976a5e77ad06() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Key
-			"s3_key": schemaAttribute14bfc7bd0b97254ea9f85aa2(),
-		}, /*END SCHEMA*/
-		Description: "The filtering rules that determine for which objects to send notifications. For example, you can create a filter so that Amazon S3 sends notifications only when image files with a ``.jpg`` extension are added to the bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25c66e8fc7b4fe08c7204414() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationBucketName
-			"destination_bucket_name": schemaAttributed17e35d094c473ff9d1142d2(),
-			// Property: LogFilePrefix
-			"log_file_prefix": schemaAttribute460c6cfbeb7c43363f5e760d(),
-			// Property: TargetObjectKeyFormat
-			"target_object_key_format": schemaAttribute7cfc9d0fec35ff6228fda7a1(),
-		}, /*END SCHEMA*/
-		Description: "Settings that define where logs are stored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c730fc9c9e22165042b2409() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the output schema to use when exporting data. Must be ``V_1``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ed87b8e93f29bfe43430906() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the rule is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fb068fdef43a2ca7468871a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RedirectRule
-				"redirect_rule": schemaAttribute5b6be14fbd59fe5aac4839d1(),
-				// Property: RoutingRuleCondition
-				"routing_rule_condition": schemaAttribute4bbd53232fdca639a9bf2d50(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Rules that define when a redirect is applied and the redirect behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37e32c0b7b9e802fe03d929d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Role
-			"role": schemaAttributea8d4828362276ae3255cf8bc(),
-			// Property: Rules
-			"rules": schemaAttribute7c6093e2a54b19164e528cb7(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property.\n Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38434a14e7733cecc2f34321() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef1db0b5ef4fcd5ae035e327c(),
-				// Property: Value
-				"value": schemaAttributeb36dadbd8b7b3cb4ea884746(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of tags containing key and value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ccd8dd149fd8fdc5895f50f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the replication metrics are enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dcac456e28335706f52137c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f4e31390624319263cf3e6b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ReplicaModifications
-			"replica_modifications": schemaAttribute4b8bc6a8da5ce68138892d31(),
-			// Property: SseKmsEncryptedObjects
-			"sse_kms_encrypted_objects": schemaAttributef147233026e7ab83991f17b6(),
-		}, /*END SCHEMA*/
-		Description: "A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute404c83d72366eaf74c645022() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.\n For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43020ff4f1f2a7709f721a6d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef1db0b5ef4fcd5ae035e327c(),
-				// Property: Value
-				"value": schemaAttributeb36dadbd8b7b3cb4ea884746(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies a list of tag filters to use as a metrics configuration filter. The metrics configuration includes only objects that meet the filter's criteria.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute460c6cfbeb7c43363f5e760d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A prefix for all log object keys. If you store log files from multiple Amazon S3 buckets in a single bucket, you can use a prefix to distinguish which log files came from which bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4823e17e4ffd7334456cb600() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessTier
-				"access_tier": schemaAttributedf1601e6391db0f0bbd57aed(),
-				// Property: Days
-				"days": schemaAttributeb79fc90776d6a65206c3fad9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ``ARCHIVE_ACCESS`` and ``DEEP_ARCHIVE_ACCESS``.\n  You only need Intelligent Tiering Configuration enabled on a bucket if you want to automatically move objects stored in the Intelligent-Tiering storage class to Archive Access or Deep Archive Access tiers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b8bc6a8da5ce68138892d31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttributeedb95e303cd2b65647a27995(),
-		}, /*END SCHEMA*/
-		Description: "A filter that you can specify for selection for modifications on replicas.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bbd53232fdca639a9bf2d50() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HttpErrorCodeReturnedEquals
-			"http_error_code_returned_equals": schemaAttribute0d9ff526750a0ebba289e822(),
-			// Property: KeyPrefixEquals
-			"key_prefix_equals": schemaAttribute8806f94d58885a5e9ee5962f(),
-		}, /*END SCHEMA*/
-		Description: "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the ``/docs`` folder, redirect to the ``/documents`` folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dbb3e29b89f6bc13b297056() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An object key name prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket, specify an empty string. To filter using a V1 replication configuration, add the ``Prefix`` directly as a child element of the ``Rule`` element.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fe6b67cdad80a7c195cc238() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to ``TRUE`` causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. \n Enabling this setting doesn't affect existing bucket policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5133d39a81ab17c69e5e81db() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how many noncurrent versions S3 will retain. If there are this many more recent noncurrent versions, S3 will take the associated action. For more information about noncurrent versions, see [Lifecycle configuration elements](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5226143b631390dfa7b9f798() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The host name to use in the redirect request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55ad5d34d4759be255587e05() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Minutes
-			"minutes": schemaAttribute87dff785969a9589351bd0da(),
-		}, /*END SCHEMA*/
-		Description: "A container specifying the time by which replication should be complete for all objects and operations on objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55d65f436a1c4ebaf1503954() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5685a558ba31787b1fb94a51() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute581ee753e7e6106553d6d206() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Id
-				"id": schemaAttribute6633500b67313ba0cadb520f(),
-				// Property: Prefix
-				"prefix": schemaAttributece35ef3037f4f85ad37dafdd(),
-				// Property: StorageClassAnalysis
-				"storage_class_analysis": schemaAttributedc3dea015a7121f875e9e8b1(),
-				// Property: TagFilters
-				"tag_filters": schemaAttribute91839dd664b6cb076c44ccc3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a2dca0cf4416403bdbe85d5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time in seconds that your browser is to cache the preflight response for the specified resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b6be14fbd59fe5aac4839d1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HostName
-			"host_name": schemaAttribute5226143b631390dfa7b9f798(),
-			// Property: HttpRedirectCode
-			"http_redirect_code": schemaAttributee58bd7797f8f31f62d1edea7(),
-			// Property: Protocol
-			"protocol": schemaAttribute0490873f4f248b3991fb25f4(),
-			// Property: ReplaceKeyPrefixWith
-			"replace_key_prefix_with": schemaAttributee26a1a0c517d53173ec53ff0(),
-			// Property: ReplaceKeyWith
-			"replace_key_with": schemaAttribute9287a4153e46d8ae8c55ab9c(),
-		}, /*END SCHEMA*/
-		Description: "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c8d2810d69533f9c618a7dd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rules
-			"rules": schemaAttribute6402f143110c4e29f76b3b7d(),
-		}, /*END SCHEMA*/
-		Description: "Configuration that defines how Amazon S3 handles Object Ownership rules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d3f24fc4cee5c91a45a6a45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. \n For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d590217d722bd0f156eba10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ec6b32de03b0d2f3adcdb4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix that an object must have to be included in the metrics results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f9e635940070a2a0d718b28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60b1a05563dce0c17ee23963() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Event
-				"event": schemaAttributee7a48d4adc5df00915d28abf(),
-				// Property: Filter
-				"filter": schemaAttribute2487e726e7ac976a5e77ad06(),
-				// Property: Topic
-				"topic": schemaAttribute3dcac456e28335706f52137c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The topic to which notifications are sent and the events for which notifications are generated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6402f143110c4e29f76b3b7d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ObjectOwnership
-				"object_ownership": schemaAttribute163a617243acf2f0e9a98347(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the container element for Object Ownership rules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64dd190d4663e27b400467cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID used to identify the metrics configuration. This can be any value you choose that helps you identify your metrics configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6633500b67313ba0cadb520f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID that identifies the analytics configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute669550050640679cfa8db4b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID used to identify the inventory configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66ad316e0d9bc6fc613c7409() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the error document for the website.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute678e0ee02884957e919a7662() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the object key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67c8460f9b558c09b63844dc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttributef8b9a8143c8c8725d7b03e2f(),
-				// Property: Enabled
-				"enabled": schemaAttribute056e03a73151a28a9b3b4319(),
-				// Property: Id
-				"id": schemaAttribute669550050640679cfa8db4b9(),
-				// Property: IncludedObjectVersions
-				"included_object_versions": schemaAttributeb7f1c4b5394083e1746521ea(),
-				// Property: OptionalFields
-				"optional_fields": schemaAttribute856c30508f5bac802df7a09e(),
-				// Property: Prefix
-				"prefix": schemaAttributeaad5d9840c0d399b502acac4(),
-				// Property: ScheduleFrequency
-				"schedule_frequency": schemaAttributeb3e27b3c5c2b794defa48074(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute699f9cf7001603ec2755b417() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessControlTranslation
-			"access_control_translation": schemaAttribute8cbe9f960f658a27a92ae7c2(),
-			// Property: Account
-			"account": schemaAttribute77709a9d92dcb867064f72c0(),
-			// Property: Bucket
-			"bucket": schemaAttributed7ba4840b2aaf0cc93f81ff1(),
-			// Property: EncryptionConfiguration
-			"encryption_configuration": schemaAttribute0f87d901ab059c29a38a956c(),
-			// Property: Metrics
-			"metrics": schemaAttributec2770485467b6789e67968e7(),
-			// Property: ReplicationTime
-			"replication_time": schemaAttributeef523b95dd6df7d986b1332c(),
-			// Property: StorageClass
-			"storage_class": schemaAttribute5d3f24fc4cee5c91a45a6a45(),
-		}, /*END SCHEMA*/
-		Description: "A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a472ef813575e9f18747f22() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3TablesDestination
-			"s3_tables_destination": schemaAttribute1cb49945e02d99832723273d(),
-		}, /*END SCHEMA*/
-		Description: "The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ae06f373291003b209ed166() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttributed6dfeeef3310ddc477af4d84(),
-		}, /*END SCHEMA*/
-		Description: "Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.\n  When you enable versioning on a bucket for the first time, it might take a short amount of time for the change to be fully propagated. We recommend that you wait for 15 minutes after enabling versioning before issuing write operations (``PUT`` or ``DELETE``) on objects in the bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b752ddbb2745d0f6cc0260c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of days an object is noncurrent before S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates When an Object Became Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d5c2497da4536b51ef4bac4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of years that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e6d2730f46252c884088bb2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fef6e233d417265d7799b20() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Id
-				"id": schemaAttribute0df0afa6bd2f31e5ade5a1be(),
-				// Property: Prefix
-				"prefix": schemaAttribute55d65f436a1c4ebaf1503954(),
-				// Property: Status
-				"status": schemaAttribute18d483b882a04b0f160c73fd(),
-				// Property: TagFilters
-				"tag_filters": schemaAttributeba31edc75a969b1459e77a96(),
-				// Property: Tierings
-				"tierings": schemaAttribute4823e17e4ffd7334456cb600(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Defines how Amazon S3 handles Intelligent-Tiering storage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7060cbc250ee09d01f0a832d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The class of storage used to store the object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute727e2fd2184281ad348a6972() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more origins you want customers to be able to access the bucket from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73b67435737128e4fcee4313() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute752cfee01a5874564bcff312() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the minimum object size in bytes for this rule to apply to. Objects must be larger than this value in bytes. For more information about size based rules, see [Lifecycle configuration using size-based rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html#lc-size-rules) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75f50a190d4cc8552ce69939() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "the Amazon Resource Name (ARN) of the specified bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77709a9d92dcb867064f72c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Destination bucket owner account ID. In a cross-account scenario, if you direct Amazon S3 to change replica ownership to the AWS-account that owns the destination bucket by specifying the ``AccessControlTranslation`` property, this is the account ID of the destination bucket owner. For more information, see [Cross-Region Replication Additional Configuration: Change Replica Owner](https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-change-owner.html) in the *Amazon S3 User Guide*.\n If you specify the ``AccessControlTranslation`` property, the ``Account`` property is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77af7c603ccce31b04215bdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If ``Enabled``, the rule is currently being applied. If ``Disabled``, the rule is not currently being applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a19ed0d67aa3548b37a5746() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Event
-				"event": schemaAttributef9fce49e67639f2bfd2eed20(),
-				// Property: Filter
-				"filter": schemaAttributee98984e05a17fdc75ad91083(),
-				// Property: Queue
-				"queue": schemaAttribute83124b3b1760364ebf245607(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a988197fe1ba2247022b885() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value that the filter searches for in object key names.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c39cedfced1e8620f0a05ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the partition date source for the partitioned prefix. ``PartitionDateSource`` can be ``EventTime`` or ``DeliveryTime``.\n For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. \n  For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c6093e2a54b19164e528cb7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeleteMarkerReplication
-				"delete_marker_replication": schemaAttributee873bc798748cb70f3859e02(),
-				// Property: Destination
-				"destination": schemaAttribute699f9cf7001603ec2755b417(),
-				// Property: Filter
-				"filter": schemaAttributeeb1bbce574bacf23c32b9c81(),
-				// Property: Id
-				"id": schemaAttribute9bdbc63413cbcfcf32fc6cc0(),
-				// Property: Prefix
-				"prefix": schemaAttribute4dbb3e29b89f6bc13b297056(),
-				// Property: Priority
-				"priority": schemaAttributed56559bcf8d253f36a398f1a(),
-				// Property: SourceSelectionCriteria
-				"source_selection_criteria": schemaAttribute3f4e31390624319263cf3e6b(),
-				// Property: Status
-				"status": schemaAttribute2ed87b8e93f29bfe43430906(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cf628e71ee69f3e4b7d1819() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates when objects are deleted from Amazon S3 and Amazon S3 Glacier. The date value must be in ISO 8601 format. The time is always midnight UTC. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cfc9d0fec35ff6228fda7a1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PartitionedPrefix
-			"partitioned_prefix": schemaAttribute11e0f0d490e123bc9d8511cb(),
-			// Property: SimplePrefix
-			"simple_prefix": schemaAttribute931a090c21bbc5be67059256(),
-		}, /*END SCHEMA*/
-		Description: "Amazon S3 key format for log objects. Only one format, either PartitionedPrefix or SimplePrefix, is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ee8afeb18adba37cb0d2cd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This is a legacy property, and it is not recommended for most use cases. A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you keep ACLs disabled. For more information, see [Controlling object ownership](https://docs.aws.amazon.com//AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.\n  A canned access control list (ACL) that grants predefined permissions to the bucket. For more information about canned ACLs, see [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) in the *Amazon S3 User Guide*.\n  S3 buckets are created with ACLs disabled by default. Therefore, unless you explicitly set the [AWS::S3::OwnershipControls](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ownershipcontrols.html) property to enable ACLs, your resource will fail to deploy with any value other than Private. Use cases requiring ACLs are uncommon.\n  The majority of access control configurations can be successfully and more easily achieved with bucket policies. For more information, see [AWS::S3::BucketPolicy](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html). For examples of common policy configurations, including S3 Server Access Logs buckets and more, see [Bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f7310ffd4538e9b661fe428() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the number of days after creation when objects are deleted from Amazon S3 and Amazon S3 Glacier. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute806d62bf569eafca0c2eb275() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to replicate delete markers. Disabled by default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8125cc13a74484f7f4c9bd5b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultRetention
-			"default_retention": schemaAttributeb4ec662d334f1643a08016f6(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the Object Lock rule for the specified object. Enable this rule when you apply ``ObjectLockConfiguration`` to a bucket. If Object Lock is turned on, bucket settings require both ``Mode`` and a period of either ``Days`` or ``Years``. You cannot specify ``Days`` and ``Years`` at the same time. For more information, see [ObjectLockRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockrule.html) and [DefaultRetention](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82862cf59aec95e3cc352d74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the replica ownership. For default and valid values, see [PUT bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the *Amazon S3 API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute829eaa05916af31553ba584f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The storage class to which you want the object to transition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82ad51b43893af8590f0cf95() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketAccountId
-			"bucket_account_id": schemaAttribute8c22a6ae2119dd5516637215(),
-			// Property: BucketArn
-			"bucket_arn": schemaAttribute73b67435737128e4fcee4313(),
-			// Property: Format
-			"format": schemaAttributee737a2894f2fd4e9d512b092(),
-			// Property: Prefix
-			"prefix": schemaAttributecc2b59f1e5f5f1919806629a(),
-		}, /*END SCHEMA*/
-		Description: "The place to store the data for an analysis.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83124b3b1760364ebf245607() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type. FIFO queues are not allowed when enabling an SQS queue as the event notification destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84914b516931df6896b6c054() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessPointArn
-				"access_point_arn": schemaAttributef8c9ad127e2e7edfe65de55d(),
-				// Property: Id
-				"id": schemaAttribute64dd190d4663e27b400467cb(),
-				// Property: Prefix
-				"prefix": schemaAttribute5ec6b32de03b0d2f3adcdb4c(),
-				// Property: TagFilters
-				"tag_filters": schemaAttribute43020ff4f1f2a7709f721a6d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute856c30508f5bac802df7a09e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Contains the optional fields that are included in the inventory results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87dff785969a9589351bd0da() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Contains an integer specifying time in minutes. \n  Valid value: 15",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87e6be8f3c4b3d5d10cefaef() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute8e447ab629b696e0f4cb8452(),
-				// Property: Value
-				"value": schemaAttribute7a988197fe1ba2247022b885(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8806f94d58885a5e9ee5962f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``/docs``, which identifies all objects in the docs/ folder.\n Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88250c1cabc2af37fe18f1ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 replicates objects created with server-side encryption using an AWS KMS key stored in AWS Key Management Service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b321f75586260a7b3c20719() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedHeaders
-				"allowed_headers": schemaAttributee588d10d6cf9b9c313c6d9f9(),
-				// Property: AllowedMethods
-				"allowed_methods": schemaAttribute067d615ae24ad2c348c6b491(),
-				// Property: AllowedOrigins
-				"allowed_origins": schemaAttribute727e2fd2184281ad348a6972(),
-				// Property: ExposedHeaders
-				"exposed_headers": schemaAttributea2633336ef87a4302e9f9532(),
-				// Property: Id
-				"id": schemaAttributee527e0197c34c8642c02b8b7(),
-				// Property: MaxAge
-				"max_age": schemaAttribute5a2dca0cf4416403bdbe85d5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c22a6ae2119dd5516637215() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account ID that owns the destination S3 bucket. If no account ID is provided, the owner is not validated before exporting data.\n   Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c2d8270a4cfb4d0f5c4b6be() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StorageClass
-			"storage_class": schemaAttribute829eaa05916af31553ba584f(),
-			// Property: TransitionDate
-			"transition_date": schemaAttributeb56c490d6fc000cca067379b(),
-			// Property: TransitionInDays
-			"transition_in_days": schemaAttribute05f68ee530de8acdf8bf60fc(),
-		}, /*END SCHEMA*/
-		Description: "(Deprecated.) Specifies when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transitions`` property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cbe9f960f658a27a92ae7c2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Owner
-			"owner": schemaAttribute82862cf59aec95e3cc352d74(),
-		}, /*END SCHEMA*/
-		Description: "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS-account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS-account that owns the source object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cf40dd9a40caf188818f0f1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Event
-				"event": schemaAttributeb331db171e527fbe4a16373a(),
-				// Property: Filter
-				"filter": schemaAttributed0ea15aacc8b930594d8d97b(),
-				// Property: Function
-				"function": schemaAttributeeb1230683a015f3ddc6264fe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Describes the LAMlong functions to invoke and the events for which to invoke them.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e447ab629b696e0f4cb8452() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90dd396edf8234339b282abb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Object key prefix that identifies one or more objects to which this rule applies.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91839dd664b6cb076c44ccc3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef1db0b5ef4fcd5ae035e327c(),
-				// Property: Value
-				"value": schemaAttributeb36dadbd8b7b3cb4ea884746(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to use when evaluating an analytics filter.\n The analytics only includes objects that meet the filter's criteria. If no filter is specified, all of the contents of the bucket are included in the analysis.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9287a4153e46d8ae8c55ab9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The specific object key to use in the redirect request. For example, redirect request to ``error.html``. Not required if one of the siblings is present. Can be present only if ``ReplaceKeyPrefixWith`` is not provided.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute931a090c21bbc5be67059256() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "This format defaults the prefix to the given log file prefix for delivering server access log file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute938cf08f0e63cddb53f517ca() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to ``TRUE`` causes the following behavior:\n  +  PUT Bucket ACL and PUT Object ACL calls fail if the specified ACL is public.\n  +  PUT Object calls fail if the request includes a public ACL.\n  +  PUT Bucket calls fail if the request includes a public ACL.\n  \n Enabling this setting doesn't affect existing policies or ACLs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95e4e5966d48a19dedd65e1a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EventBridgeEnabled
-			"event_bridge_enabled": schemaAttributeaedba60e8e3e7f2074100e75(),
-		}, /*END SCHEMA*/
-		Description: "Enables delivery of events to Amazon EventBridge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute974b7b0a3a2429c7da962ec8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccelerationStatus
-			"acceleration_status": schemaAttribute114579d3c83bdfaf35ca199e(),
-		}, /*END SCHEMA*/
-		Description: "Configures the transfer acceleration state for an Amazon S3 bucket. For more information, see [Amazon S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a63dd91c519cfeff2cb1016() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. \n   +   *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n  +   *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.\n  \n  You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key Alias: ``alias/alias-name`` \n  \n If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n   +   *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester?s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n  +   *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.\n  \n   Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ba134e3e51148f39d2bc552() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StorageClass
-				"storage_class": schemaAttribute829eaa05916af31553ba584f(),
-				// Property: TransitionDate
-				"transition_date": schemaAttributeb56c490d6fc000cca067379b(),
-				// Property: TransitionInDays
-				"transition_in_days": schemaAttribute05f68ee530de8acdf8bf60fc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more transition rules that specify when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transition`` property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bb28cb74467826580b09e4f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to ``TRUE`` causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\n Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bdbc63413cbcfcf32fc6cc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the rule. The maximum value is 255 characters. If you don't specify a value, AWS CloudFormation generates a random ID. When using a V2 replication configuration this property is capitalized as \"ID\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ccb55afbde8910419411a17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The table bucket namespace for the metadata table in your metadata table configuration. This value is always ``aws_s3_metadata``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ce706936c2007dcbc06fbfe() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BucketKeyEnabled
-				"bucket_key_enabled": schemaAttribute404c83d72366eaf74c645022(),
-				// Property: ServerSideEncryptionByDefault
-				"server_side_encryption_by_default": schemaAttributeee20e77f228de656994f4146(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the default server-side-encryption configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fa9cde5cad9a2df99ddbf3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2633336ef87a4302e9f9532() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript ``XMLHttpRequest`` object).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea638b487fd26c7fd1d129014() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the index document for the website.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8d4828362276ae3255cf8bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAMlong (IAM) role that Amazon S3 assumes when replicating objects. For more information, see [How to Set Up Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaad5d9840c0d399b502acac4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the inventory filter prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaedba60e8e3e7f2074100e75() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables delivery of events to Amazon EventBridge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1281f37189c32862d5a6a95() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Minutes
-			"minutes": schemaAttribute87dff785969a9589351bd0da(),
-		}, /*END SCHEMA*/
-		Description: "A container specifying the time threshold for emitting the ``s3:Replication:OperationMissedThreshold`` event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb331db171e527fbe4a16373a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket event for which to invoke the LAMlong function. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb36dadbd8b7b3cb4ea884746() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3e27b3c5c2b794defa48074() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the schedule for generating inventory results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4ec662d334f1643a08016f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Days
-			"days": schemaAttribute6e6d2730f46252c884088bb2(),
-			// Property: Mode
-			"mode": schemaAttribute167d5456ebba40df13d47c15(),
-			// Property: Years
-			"years": schemaAttribute6d5c2497da4536b51ef4bac4(),
-		}, /*END SCHEMA*/
-		Description: "The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, bucket settings require both ``Mode`` and a period of either ``Days`` or ``Years``. You cannot specify ``Days`` and ``Years`` at the same time. For more information about allowable values for mode and period, see [DefaultRetention](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb56c490d6fc000cca067379b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5d4907f88f3c21858884996() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb654c45bca0648316c5f9846() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CorsRules
-			"cors_rules": schemaAttribute8b321f75586260a7b3c20719(),
-		}, /*END SCHEMA*/
-		Description: "Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb70f3e3d56f288ab693d733e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An object key name prefix that identifies the subset of objects to which the rule applies.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb79fc90776d6a65206c3fad9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7f1c4b5394083e1746521ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Object versions to include in the inventory list. If set to ``All``, the list includes all the object versions, which adds the version-related fields ``VersionId``, ``IsLatest``, and ``DeleteMarker`` to the list. If set to ``Current``, the list does not contain these version-related fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba31edc75a969b1459e77a96() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef1db0b5ef4fcd5ae035e327c(),
-				// Property: Value
-				"value": schemaAttributeb36dadbd8b7b3cb4ea884746(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A container for a key-value pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2770485467b6789e67968e7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EventThreshold
-			"event_threshold": schemaAttributeb1281f37189c32862d5a6a95(),
-			// Property: Status
-			"status": schemaAttribute3ccd8dd149fd8fdc5895f50f(),
-		}, /*END SCHEMA*/
-		Description: "A container specifying replication metrics-related settings enabling replication metrics and events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc2b59f1e5f5f1919806629a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecda82a222247088885c74e46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the replication time is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece35ef3037f4f85ad37dafdd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix that an object must have to be included in the analytics results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeceed6ac57fe843d2de092d42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the rule. The value can't be longer than 255 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf7c02ada65b99cb587a6a27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the maximum object size in bytes for this rule to apply to. Objects must be smaller than this value in bytes. For more information about sized based rules, see [Lifecycle configuration using size-based rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html#lc-size-rules) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfdb4052276c60714ac43ecb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ObjectLockEnabled
-			"object_lock_enabled": schemaAttributee7eeb94fe8a6e43a55b7ac79(),
-			// Property: Rule
-			"rule": schemaAttribute8125cc13a74484f7f4c9bd5b(),
-		}, /*END SCHEMA*/
-		Description: "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed03f955ccbd6aaeae9d385d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Server-side encryption algorithm to use for the default encryption.\n  For directory buckets, there are only two supported values for server-side encryption: ``AES256`` and ``aws:kms``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0ea15aacc8b930594d8d97b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Key
-			"s3_key": schemaAttribute14bfc7bd0b97254ea9f85aa2(),
-		}, /*END SCHEMA*/
-		Description: "The filtering rules that determine which objects invoke the AWS Lambda function. For example, you can create a filter so that only image files with a ``.jpg`` extension invoke the function when they are added to the Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed17e35d094c473ff9d1142d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the bucket where Amazon S3 should store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the ``LoggingConfiguration`` property is defined.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed45aa6c7a545fd1adb67eb3a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed56559bcf8d253f36a398f1a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The priority indicates which rule has precedence whenever two or more replication rules conflict. Amazon S3 will attempt to replicate objects according to all replication rules. However, if there are two or more rules with the same destination bucket, then objects will be replicated according to the rule with the highest priority. The higher the number, the higher the priority. \n For more information, see [Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed62f437ef5ed9b5be36469e8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BlockPublicAcls
-			"block_public_acls": schemaAttribute938cf08f0e63cddb53f517ca(),
-			// Property: BlockPublicPolicy
-			"block_public_policy": schemaAttribute4fe6b67cdad80a7c195cc238(),
-			// Property: IgnorePublicAcls
-			"ignore_public_acls": schemaAttribute9bb28cb74467826580b09e4f(),
-			// Property: RestrictPublicBuckets
-			"restrict_public_buckets": schemaAttributefd662a10938042670dadefac(),
-		}, /*END SCHEMA*/
-		Description: "Configuration that defines how Amazon S3 handles public access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed683928a727f9bc65e87ebb8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ServerSideEncryptionConfiguration
-			"server_side_encryption_configuration": schemaAttribute9ce706936c2007dcbc06fbfe(),
-		}, /*END SCHEMA*/
-		Description: "Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3), AWS KMS-managed keys (SSE-KMS), or dual-layer server-side encryption with KMS-managed keys (DSSE-KMS). For information about the Amazon S3 default encryption feature, see [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6dfeeef3310ddc477af4d84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The versioning state of the bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7ba4840b2aaf0cc93f81ff1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store the results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda898c04b7f78c21f5b48d4d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "(Deprecated.) For buckets with versioning enabled (or suspended), specifies the time, in days, between when a new version of the object is uploaded to the bucket and when old versions of the object expire. When object versions expire, Amazon S3 permanently deletes them. If you specify a transition and expiration time, the expiration time must be later than the transition time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc3dea015a7121f875e9e8b1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataExport
-			"data_export": schemaAttribute1c1eba632ebb507a8e4fd8a2(),
-		}, /*END SCHEMA*/
-		Description: "Contains data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf1601e6391db0f0bbd57aed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 Intelligent-Tiering access tier. See [Storage class for automatically optimizing frequently and infrequently accessed objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access) for a list of access tiers in the S3 Intelligent-Tiering storage class.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee26a1a0c517d53173ec53ff0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix ``docs/`` (objects in the ``docs/`` folder) to ``documents/``, you can set a condition block with ``KeyPrefixEquals`` set to ``docs/`` and in the Redirect set ``ReplaceKeyPrefixWith`` to ``/documents``. Not required if one of the siblings is present. Can be present only if ``ReplaceKeyWith`` is not provided.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4ca3e689d0105a82a00e5e1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef1db0b5ef4fcd5ae035e327c(),
-				// Property: Value
-				"value": schemaAttributeb36dadbd8b7b3cb4ea884746(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to use to identify a subset of objects to which the lifecycle rule applies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee527e0197c34c8642c02b8b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for this rule. The value must be no more than 255 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee588d10d6cf9b9c313c6d9f9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Headers that are specified in the ``Access-Control-Request-Headers`` header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee58bd7797f8f31f62d1edea7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5a81c90a1c20923e4ad17d7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute678e0ee02884957e919a7662(),
-				// Property: Value
-				"value": schemaAttribute5f9e635940070a2a0d718b28(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee66889feaff9ddcb3dd6c976() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Key
-			"key": schemaAttributef1db0b5ef4fcd5ae035e327c(),
-			// Property: Value
-			"value": schemaAttributeb36dadbd8b7b3cb4ea884746(),
-		}, /*END SCHEMA*/
-		Description: "A container for specifying a tag key and value. \n The rule applies only to objects that have the tag in their tag set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee737a2894f2fd4e9d512b092() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7a48d4adc5df00915d28abf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket event about which to send notifications. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7eeb94fe8a6e43a55b7ac79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8487f1d55f61bad816617e3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NewerNoncurrentVersions
-			"newer_noncurrent_versions": schemaAttribute5133d39a81ab17c69e5e81db(),
-			// Property: NoncurrentDays
-			"noncurrent_days": schemaAttribute6b752ddbb2745d0f6cc0260c(),
-		}, /*END SCHEMA*/
-		Description: "Specifies when noncurrent object versions expire. Upon expiration, S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that S3 delete noncurrent object versions at a specific period in the object's lifetime.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee873bc798748cb70f3859e02() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttribute806d62bf569eafca0c2eb275(),
-		}, /*END SCHEMA*/
-		Description: "Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication`` ``Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). \n  If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee922688e49f68eefd04c9e31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rules
-			"rules": schemaAttribute0b27d841832066c5e875b3fa(),
-			// Property: TransitionDefaultMinimumObjectSize
-			"transition_default_minimum_object_size": schemaAttribute5d590217d722bd0f156eba10(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee98984e05a17fdc75ad91083() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Key
-			"s3_key": schemaAttribute14bfc7bd0b97254ea9f85aa2(),
-		}, /*END SCHEMA*/
-		Description: "The filtering rules that determine which objects trigger notifications. For example, you can create a filter so that Amazon S3 sends notifications only when image files with a ``.jpg`` extension are added to the bucket. For more information, see [Configuring event notifications using object key name filtering](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/notification-how-to-filtering.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb1230683a015f3ddc6264fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the LAMlong function that Amazon S3 invokes when the specified event type occurs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb1bbce574bacf23c32b9c81() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: And
-			"and": schemaAttribute0020d46bff3a94cb985e735f(),
-			// Property: Prefix
-			"prefix": schemaAttributeb70f3e3d56f288ab693d733e(),
-			// Property: TagFilter
-			"tag_filter": schemaAttributee66889feaff9ddcb3dd6c976(),
-		}, /*END SCHEMA*/
-		Description: "A filter that identifies the subset of objects to which the replication rule applies. A ``Filter`` must specify exactly one ``Prefix``, ``TagFilter``, or an ``And`` child element. The use of the filter field indicates that this is a V2 replication configuration. This field isn't supported in a V1 replication configuration.\n  V1 replication configuration only supports filtering by key prefix. To filter using a V1 replication configuration, add the ``Prefix`` directly as a child element of the ``Rule`` element.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebf294be14281ae82e76ad25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedb95e303cd2b65647a27995() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee20e77f228de656994f4146() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KMSMasterKeyID
-			"kms_master_key_id": schemaAttribute9a63dd91c519cfeff2cb1016(),
-			// Property: SSEAlgorithm
-			"sse_algorithm": schemaAttributed03f955ccbd6aaeae9d385d2(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef523b95dd6df7d986b1332c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttributecda82a222247088885c74e46(),
-			// Property: Time
-			"time": schemaAttribute55ad5d34d4759be255587e05(),
-		}, /*END SCHEMA*/
-		Description: "A container specifying S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. Must be specified together with a ``Metrics`` block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeefae99aac07e1f33d7da4ade() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EventBridgeConfiguration
-			"event_bridge_configuration": schemaAttribute95e4e5966d48a19dedd65e1a(),
-			// Property: LambdaConfigurations
-			"lambda_configurations": schemaAttribute8cf40dd9a40caf188818f0f1(),
-			// Property: QueueConfigurations
-			"queue_configurations": schemaAttribute7a19ed0d67aa3548b37a5746(),
-			// Property: TopicConfigurations
-			"topic_configurations": schemaAttribute60b1a05563dce0c17ee23963(),
-		}, /*END SCHEMA*/
-		Description: "Configuration that defines how Amazon S3 handles bucket notifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef147233026e7ab83991f17b6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttribute88250c1cabc2af37fe18f1ab(),
-		}, /*END SCHEMA*/
-		Description: "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1db0b5ef4fcd5ae035e327c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5aca37e034a0b9b71895189() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NewerNoncurrentVersions
-			"newer_noncurrent_versions": schemaAttribute5133d39a81ab17c69e5e81db(),
-			// Property: StorageClass
-			"storage_class": schemaAttribute7060cbc250ee09d01f0a832d(),
-			// Property: TransitionInDays
-			"transition_in_days": schemaAttribute07f18d53fbc2602d9371f575(),
-		}, /*END SCHEMA*/
-		Description: "(Deprecated.) For buckets with versioning enabled (or suspended), specifies when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransitions`` property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8b9a8143c8c8725d7b03e2f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketAccountId
-			"bucket_account_id": schemaAttribute8c22a6ae2119dd5516637215(),
-			// Property: BucketArn
-			"bucket_arn": schemaAttribute73b67435737128e4fcee4313(),
-			// Property: Format
-			"format": schemaAttributee737a2894f2fd4e9d512b092(),
-			// Property: Prefix
-			"prefix": schemaAttributecc2b59f1e5f5f1919806629a(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about where to publish the inventory results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8c9ad127e2e7edfe65de55d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The access point that was used while performing operations on the object. The metrics configuration only includes objects that meet the filter's criteria.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef92333436294d5da4d6651c5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DaysAfterInitiation
-			"days_after_initiation": schemaAttributefab14efcad906c45368fc510(),
-		}, /*END SCHEMA*/
-		Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9fce49e67639f2bfd2eed20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefab14efcad906c45368fc510() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of days after which Amazon S3 stops an incomplete multipart upload.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd188968957a07fc63d88a4f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ErrorDocument
-			"error_document": schemaAttribute66ad316e0d9bc6fc613c7409(),
-			// Property: IndexDocument
-			"index_document": schemaAttributea638b487fd26c7fd1d129014(),
-			// Property: RedirectAllRequestsTo
-			"redirect_all_requests_to": schemaAttribute02f4e1fb874d1420336dc77a(),
-			// Property: RoutingRules
-			"routing_rules": schemaAttribute2fb068fdef43a2ca7468871a(),
-		}, /*END SCHEMA*/
-		Description: "Information used to configure the bucket as a static website. For more information, see [Hosting Websites on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd662a10938042670dadefac() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to ``TRUE`` restricts access to this bucket to only AWS-service principals and authorized users within this account if the bucket has a public policy.\n Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_bucket", bucketDataSource)
 }
@@ -1903,7 +45,17 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"accelerate_configuration": schemaAttribute974b7b0a3a2429c7da962ec8(),
+		"accelerate_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccelerationStatus
+				"acceleration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the transfer acceleration status of the bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configures the transfer acceleration state for an Amazon S3 bucket. For more information, see [Amazon S3 Transfer Acceleration](https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in the *Amazon S3 User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessControl
 		// CloudFormation resource type schema:
 		//
@@ -1921,7 +73,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_control": schemaAttribute7ee8afeb18adba37cb0d2cd1(),
+		"access_control": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This is a legacy property, and it is not recommended for most use cases. A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you keep ACLs disabled. For more information, see [Controlling object ownership](https://docs.aws.amazon.com//AmazonS3/latest/userguide/about-object-ownership.html) in the *Amazon S3 User Guide*.\n  A canned access control list (ACL) that grants predefined permissions to the bucket. For more information about canned ACLs, see [Canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) in the *Amazon S3 User Guide*.\n  S3 buckets are created with ACLs disabled by default. Therefore, unless you explicitly set the [AWS::S3::OwnershipControls](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ownershipcontrols.html) property to enable ACLs, your resource will fail to deploy with any value other than Private. Use cases requiring ACLs are uncommon.\n  The majority of access control configurations can be successfully and more easily achieved with bucket policies. For more information, see [AWS::S3::BucketPolicy](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html). For examples of common policy configurations, including S3 Server Access Logs buckets and more, see [Bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html) in the *Amazon S3 User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnalyticsConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -2029,7 +184,89 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"analytics_configurations": schemaAttribute581ee753e7e6106553d6d206(),
+		"analytics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID that identifies the analytics configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix that an object must have to be included in the analytics results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StorageClassAnalysis
+					"storage_class_analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataExport
+							"data_export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BucketAccountId
+											"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The account ID that owns the destination S3 bucket. If no account ID is provided, the owner is not validated before exporting data.\n   Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: BucketArn
+											"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Format
+											"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Prefix
+											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The place to store the data for an analysis.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OutputSchemaVersion
+									"output_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The version of the output schema to use when exporting data. Must be ``V_1``.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagFilters
+					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The tags to use when evaluating an analytics filter.\n The analytics only includes objects that meet the filter's criteria. If no filter is specified, all of the contents of the bucket are included in the analysis.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -2037,7 +274,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "the Amazon Resource Name (ARN) of the specified bucket.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute75f50a190d4cc8552ce69939(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "the Amazon Resource Name (ARN) of the specified bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketEncryption
 		// CloudFormation resource type schema:
 		//
@@ -2091,7 +331,43 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"bucket_encryption": schemaAttributed683928a727f9bc65e87ebb8(),
+		"bucket_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerSideEncryptionConfiguration
+				"server_side_encryption_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketKeyEnabled
+							"bucket_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.\n For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ServerSideEncryptionByDefault
+							"server_side_encryption_by_default": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: KMSMasterKeyID
+									"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. \n   +   *General purpose buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n  +   *Directory buckets* - This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms``.\n  \n  You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key Alias: ``alias/alias-name`` \n  \n If you are using encryption with cross-account or AWS service operations, you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n   +   *General purpose buckets* - If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester?s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner. Also, if you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n  +   *Directory buckets* - When you specify an [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk) for encryption in your directory bucket, only use the key ID or key ARN. The key alias format of the KMS key isn't supported.\n  \n   Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SSEAlgorithm
+									"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Server-side encryption algorithm to use for the default encryption.\n  For directory buckets, there are only two supported values for server-side encryption: ``AES256`` and ``aws:kms``.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies the default server-side-encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3), AWS KMS-managed keys (SSE-KMS), or dual-layer server-side encryption with KMS-managed keys (DSSE-KMS). For information about the Amazon S3 default encryption feature, see [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the *Amazon S3 User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketName
 		// CloudFormation resource type schema:
 		//
@@ -2099,7 +375,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
 		//	  "type": "string"
 		//	}
-		"bucket_name": schemaAttributed45aa6c7a545fd1adb67eb3a(),
+		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CorsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -2183,7 +462,55 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cors_configuration": schemaAttributeb654c45bca0648316c5f9846(),
+		"cors_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CorsRules
+				"cors_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedHeaders
+							"allowed_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Headers that are specified in the ``Access-Control-Request-Headers`` header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AllowedMethods
+							"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AllowedOrigins
+							"allowed_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more origins you want customers to be able to access the bucket from.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExposedHeaders
+							"exposed_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript ``XMLHttpRequest`` object).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for this rule. The value must be no more than 255 characters.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaxAge
+							"max_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The time in seconds that your browser is to cache the preflight response for the specified resource.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -2194,7 +521,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttributeb5d4907f88f3c21858884996(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DualStackDomainName
 		// CloudFormation resource type schema:
 		//
@@ -2205,7 +535,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"dual_stack_domain_name": schemaAttributeb5d4907f88f3c21858884996(),
+		"dual_stack_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntelligentTieringConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -2297,7 +630,67 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"intelligent_tiering_configurations": schemaAttribute6fef6e233d417265d7799b20(),
+		"intelligent_tiering_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the S3 Intelligent-Tiering configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the status of the configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagFilters
+					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A container for a key-value pair.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Tierings
+					"tierings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessTier
+								"access_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "S3 Intelligent-Tiering access tier. See [Storage class for automatically optimizing frequently and infrequently accessed objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access) for a list of access tiers in the S3 Intelligent-Tiering storage class.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Days
+								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ``ARCHIVE_ACCESS`` and ``DEEP_ARCHIVE_ACCESS``.\n  You only need Intelligent Tiering Configuration enabled on a bucket if you want to automatically move objects stored in the Intelligent-Tiering storage class to Archive Access or Deep Archive Access tiers.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Defines how Amazon S3 handles Intelligent-Tiering storage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InventoryConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -2407,7 +800,72 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"inventory_configurations": schemaAttribute67c8460f9b558c09b63844dc(),
+		"inventory_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketAccountId
+							"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The account ID that owns the destination S3 bucket. If no account ID is provided, the owner is not validated before exporting data.\n   Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: BucketArn
+							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Format
+							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains information about where to publish the inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Enabled
+					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies whether the inventory is enabled or disabled. If set to ``True``, an inventory list is generated. If set to ``False``, no inventory list is generated.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the inventory configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IncludedObjectVersions
+					"included_object_versions": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Object versions to include in the inventory list. If set to ``All``, the list includes all the object versions, which adds the version-related fields ``VersionId``, ``IsLatest``, and ``DeleteMarker`` to the list. If set to ``Current``, the list does not contain these version-related fields.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OptionalFields
+					"optional_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Contains the optional fields that are included in the inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the inventory filter prefix.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ScheduleFrequency
+					"schedule_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the schedule for generating inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LifecycleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -2689,7 +1147,211 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lifecycle_configuration": schemaAttributee922688e49f68eefd04c9e31(),
+		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AbortIncompleteMultipartUpload
+							"abort_incomplete_multipart_upload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DaysAfterInitiation
+									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days after which Amazon S3 stops an incomplete multipart upload.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3 bucket.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationDate
+							"expiration_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates when objects are deleted from Amazon S3 and Amazon S3 Glacier. The date value must be in ISO 8601 format. The time is always midnight UTC. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationInDays
+							"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the number of days after creation when objects are deleted from Amazon S3 and Amazon S3 Glacier. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExpiredObjectDeleteMarker
+							"expired_object_delete_marker": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether Amazon S3 will remove a delete marker without any noncurrent versions. If set to true, the delete marker will be removed if there are no noncurrent versions. This cannot be specified with ``ExpirationInDays``, ``ExpirationDate``, or ``TagFilters``.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the rule. The value can't be longer than 255 characters.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionExpiration
+							"noncurrent_version_expiration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NewerNoncurrentVersions
+									"newer_noncurrent_versions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies how many noncurrent versions S3 will retain. If there are this many more recent noncurrent versions, S3 will take the associated action. For more information about noncurrent versions, see [Lifecycle configuration elements](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html) in the *Amazon S3 User Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: NoncurrentDays
+									"noncurrent_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days an object is noncurrent before S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates When an Object Became Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies when noncurrent object versions expire. Upon expiration, S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that S3 delete noncurrent object versions at a specific period in the object's lifetime.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionExpirationInDays
+							"noncurrent_version_expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "(Deprecated.) For buckets with versioning enabled (or suspended), specifies the time, in days, between when a new version of the object is uploaded to the bucket and when old versions of the object expire. When object versions expire, Amazon S3 permanently deletes them. If you specify a transition and expiration time, the expiration time must be later than the transition time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionTransition
+							"noncurrent_version_transition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NewerNoncurrentVersions
+									"newer_noncurrent_versions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies how many noncurrent versions S3 will retain. If there are this many more recent noncurrent versions, S3 will take the associated action. For more information about noncurrent versions, see [Lifecycle configuration elements](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html) in the *Amazon S3 User Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StorageClass
+									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The class of storage used to store the object.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionInDays
+									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates How Long an Object Has Been Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "(Deprecated.) For buckets with versioning enabled (or suspended), specifies when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransitions`` property.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionTransitions
+							"noncurrent_version_transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: NewerNoncurrentVersions
+										"newer_noncurrent_versions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Specifies how many noncurrent versions S3 will retain. If there are this many more recent noncurrent versions, S3 will take the associated action. For more information about noncurrent versions, see [Lifecycle configuration elements](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html) in the *Amazon S3 User Guide*.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StorageClass
+										"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The class of storage used to store the object.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TransitionInDays
+										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see [How Amazon S3 Calculates How Long an Object Has Been Noncurrent](https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations) in the *Amazon S3 User Guide*.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "For buckets with versioning enabled (or suspended), one or more transition rules that specify when non-current objects transition to a specified storage class. If you specify a transition and expiration time, the expiration time must be later than the transition time. If you specify this property, don't specify the ``NoncurrentVersionTransition`` property.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeGreaterThan
+							"object_size_greater_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the minimum object size in bytes for this rule to apply to. Objects must be larger than this value in bytes. For more information about size based rules, see [Lifecycle configuration using size-based rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html#lc-size-rules) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeLessThan
+							"object_size_less_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the maximum object size in bytes for this rule to apply to. Objects must be smaller than this value in bytes. For more information about sized based rules, see [Lifecycle configuration using size-based rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-configuration-examples.html#lc-size-rules) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Object key prefix that identifies one or more objects to which this rule applies.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "If ``Enabled``, the rule is currently being applied. If ``Disabled``, the rule is not currently being applied.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TagFilters
+							"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Tags to use to identify a subset of objects to which the lifecycle rule applies.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Transition
+							"transition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: StorageClass
+									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The storage class to which you want the object to transition.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionDate
+									"transition_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionInDays
+									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "(Deprecated.) Specifies when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transitions`` property.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Transitions
+							"transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: StorageClass
+										"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The storage class to which you want the object to transition.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TransitionDate
+										"transition_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TransitionInDays
+										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Indicates the number of days after creation when objects are transitioned to the specified storage class. If the specified storage class is ``INTELLIGENT_TIERING``, ``GLACIER_IR``, ``GLACIER``, or ``DEEP_ARCHIVE``, valid values are ``0`` or positive integers. If the specified storage class is ``STANDARD_IA`` or ``ONEZONE_IA``, valid values are positive integers greater than ``30``. Be aware that some storage classes have a minimum storage duration and that you're charged for transitioning objects before their minimum storage duration. For more information, see [Constraints and considerations for transitions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-configuration-constraints) in the *Amazon S3 User Guide*.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "One or more transition rules that specify when an object transitions to a specified storage class. If you specify an expiration and transition time, you must use the same time unit for both properties (either in days or by date). The expiration time must also be later than the transition time. If you specify this property, don't specify the ``Transition`` property.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A lifecycle rule for individual objects in an Amazon S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TransitionDefaultMinimumObjectSize
+				"transition_default_minimum_object_size": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates which default minimum object size behavior is applied to the lifecycle configuration.\n  This parameter applies to general purpose buckets only. It isn't supported for directory bucket lifecycle configurations.\n   +   ``all_storage_classes_128K`` - Objects smaller than 128 KB will not transition to any storage class by default.\n  +   ``varies_by_storage_class`` - Objects smaller than 128 KB will transition to Glacier Flexible Retrieval or Glacier Deep Archive storage classes. By default, all other storage classes will prevent transitions smaller than 128 KB. \n  \n To customize the minimum object size for any transition you can add a filter that specifies a custom ``ObjectSizeGreaterThan`` or ``ObjectSizeLessThan`` in the body of your transition rule. Custom filters always take precedence over the default transition behavior.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -2734,7 +1396,47 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schemaAttribute25c66e8fc7b4fe08c7204414(),
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationBucketName
+				"destination_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the bucket where Amazon S3 should store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the ``LoggingConfiguration`` property is defined.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogFilePrefix
+				"log_file_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A prefix for all log object keys. If you store log files from multiple Amazon S3 buckets in a single bucket, you can use a prefix to distinguish which log files came from which bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetObjectKeyFormat
+				"target_object_key_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PartitionedPrefix
+						"partitioned_prefix": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PartitionDateSource
+								"partition_date_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the partition date source for the partitioned prefix. ``PartitionDateSource`` can be ``EventTime`` or ``DeliveryTime``.\n For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. \n  For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Amazon S3 keys for log objects are partitioned in the following format:\n  ``[DestinationPrefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`` \n PartitionedPrefix defaults to EventTime delivery when server access logs are delivered.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SimplePrefix
+						"simple_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "This format defaults the prefix to the given log file prefix for delivering server access log file.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon S3 key format for log objects. Only one format, either PartitionedPrefix or SimplePrefix, is allowed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings that define where logs are stored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetadataTableConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -2775,7 +1477,39 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"metadata_table_configuration": schemaAttribute6a472ef813575e9f18747f22(),
+		"metadata_table_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3TablesDestination
+				"s3_tables_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TableArn
+						"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the metadata table in the metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableBucketArn
+						"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) for the table bucket that's specified as the destination in the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name for the metadata table in your metadata table configuration. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableNamespace
+						"table_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The table bucket namespace for the metadata table in your metadata table configuration. This value is always ``aws_s3_metadata``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The destination information for the metadata table configuration. The destination table bucket must be in the same Region and AWS-account as the general purpose bucket. The specified metadata table name must be unique within the ``aws_s3_metadata`` namespace in the destination table bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The metadata table configuration of an S3 general purpose bucket. For more information, see [Accelerating data discovery with S3 Metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html) and [Setting up permissions for configuring metadata tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -2832,7 +1566,48 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"metrics_configurations": schemaAttribute84914b516931df6896b6c054(),
+		"metrics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessPointArn
+					"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The access point that was used while performing operations on the object. The metrics configuration only includes objects that meet the filter's criteria.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the metrics configuration. This can be any value you choose that helps you identify your metrics configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix that an object must have to be included in the metrics results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagFilters
+					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Specifies a list of tag filters to use as a metrics configuration filter. The metrics configuration includes only objects that meet the filter's criteria.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies a metrics configuration for the CloudWatch request metrics (specified by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics configuration, note that this is a full replacement of the existing metrics configuration. If you don't include the elements you want to keep, they are erased. For more information, see [PutBucketMetricsConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3071,7 +1846,180 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"notification_configuration": schemaAttributeefae99aac07e1f33d7da4ade(),
+		"notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventBridgeConfiguration
+				"event_bridge_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EventBridgeEnabled
+						"event_bridge_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables delivery of events to Amazon EventBridge.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Enables delivery of events to Amazon EventBridge.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaConfigurations
+				"lambda_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Event
+							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 bucket event for which to invoke the LAMlong function. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Key
+									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Rules
+											"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The value that the filter searches for in object key names.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for object key name prefix and suffix filtering rules.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The filtering rules that determine which objects invoke the AWS Lambda function. For example, you can create a filter so that only image files with a ``.jpg`` extension invoke the function when they are added to the Amazon S3 bucket.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Function
+							"function": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the LAMlong function that Amazon S3 invokes when the specified event type occurs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Describes the LAMlong functions to invoke and the events for which to invoke them.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: QueueConfigurations
+				"queue_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Event
+							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Key
+									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Rules
+											"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The value that the filter searches for in object key names.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for object key name prefix and suffix filtering rules.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The filtering rules that determine which objects trigger notifications. For example, you can create a filter so that Amazon S3 sends notifications only when image files with a ``.jpg`` extension are added to the bucket. For more information, see [Configuring event notifications using object key name filtering](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/notification-how-to-filtering.html) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Queue
+							"queue": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type. FIFO queues are not allowed when enabling an SQS queue as the event notification destination.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicConfigurations
+				"topic_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Event
+							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 bucket event about which to send notifications. For more information, see [Supported Event Types](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Key
+									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Rules
+											"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see [Configuring Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon S3 User Guide*.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The value that the filter searches for in object key names.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for object key name prefix and suffix filtering rules.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The filtering rules that determine for which objects to send notifications. For example, you can create a filter so that Amazon S3 sends notifications only when image files with a ``.jpg`` extension are added to the bucket.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Topic
+							"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The topic to which notifications are sent and the events for which notifications are generated.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines how Amazon S3 handles bucket notifications.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectLockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3116,7 +2064,46 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"object_lock_configuration": schemaAttributecfdb4052276c60714ac43ecb(),
+		"object_lock_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ObjectLockEnabled
+				"object_lock_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Rule
+				"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultRetention
+						"default_retention": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Days
+								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of days that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Mode
+								"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Years
+								"years": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of years that you want to specify for the default retention period. If Object Lock is turned on, you must specify ``Mode`` and specify either ``Days`` or ``Years``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. If Object Lock is turned on, bucket settings require both ``Mode`` and a period of either ``Days`` or ``Years``. You cannot specify ``Days`` and ``Years`` at the same time. For more information about allowable values for mode and period, see [DefaultRetention](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the Object Lock rule for the specified object. Enable this rule when you apply ``ObjectLockConfiguration`` to a bucket. If Object Lock is turned on, bucket settings require both ``Mode`` and a period of either ``Days`` or ``Years``. You cannot specify ``Days`` and ``Years`` at the same time. For more information, see [ObjectLockRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockrule.html) and [DefaultRetention](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This operation is not supported for directory buckets.\n  Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket. For more information, see [Locking Objects](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). \n   +  The ``DefaultRetention`` settings require both a mode and a period.\n  +  The ``DefaultRetention`` period can be either ``Days`` or ``Years`` but you must select one. You cannot specify ``Days`` and ``Years`` at the same time.\n  +  You can enable Object Lock for new or existing buckets. For more information, see [Configuring Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectLockEnabled
 		// CloudFormation resource type schema:
 		//
@@ -3124,7 +2111,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
 		//	  "type": "boolean"
 		//	}
-		"object_lock_enabled": schemaAttribute5685a558ba31787b1fb94a51(),
+		"object_lock_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnershipControls
 		// CloudFormation resource type schema:
 		//
@@ -3160,7 +2150,26 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ownership_controls": schemaAttribute5c8d2810d69533f9c618a7dd(),
+		"ownership_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ObjectOwnership
+							"object_ownership": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies an object ownership rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies the container element for Object Ownership rules.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines how Amazon S3 handles Object Ownership rules.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicAccessBlockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3187,7 +2196,32 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"public_access_block_configuration": schemaAttributed62f437ef5ed9b5be36469e8(),
+		"public_access_block_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlockPublicAcls
+				"block_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to ``TRUE`` causes the following behavior:\n  +  PUT Bucket ACL and PUT Object ACL calls fail if the specified ACL is public.\n  +  PUT Object calls fail if the request includes a public ACL.\n  +  PUT Bucket calls fail if the request includes a public ACL.\n  \n Enabling this setting doesn't affect existing policies or ACLs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlockPublicPolicy
+				"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to ``TRUE`` causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. \n Enabling this setting doesn't affect existing bucket policies.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IgnorePublicAcls
+				"ignore_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to ``TRUE`` causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\n Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RestrictPublicBuckets
+				"restrict_public_buckets": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to ``TRUE`` restricts access to this bucket to only AWS-service principals and authorized users within this account if the bucket has a public policy.\n Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines how Amazon S3 handles public access.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalDomainName
 		// CloudFormation resource type schema:
 		//
@@ -3198,7 +2232,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"regional_domain_name": schemaAttributeb5d4907f88f3c21858884996(),
+		"regional_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3505,7 +2542,243 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"replication_configuration": schemaAttribute37e32c0b7b9e802fe03d929d(),
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Role
+				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the IAMlong (IAM) role that Amazon S3 assumes when replicating objects. For more information, see [How to Set Up Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in the *Amazon S3 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteMarkerReplication
+							"delete_marker_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Status
+									"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether to replicate delete markers. Disabled by default.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies whether Amazon S3 replicates delete markers. If you specify a ``Filter`` in your replication configuration, you must also include a ``DeleteMarkerReplication`` element. If your ``Filter`` includes a ``Tag`` element, the ``DeleteMarkerReplication`` ``Status`` must be set to Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example configuration, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config). \n For more information about delete marker replication, see [Basic Rule Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html). \n  If you are using an earlier version of the replication configuration, Amazon S3 handles replication of delete markers differently. For more information, see [Backward Compatibility](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Destination
+							"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccessControlTranslation
+									"access_control_translation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Owner
+											"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the replica ownership. For default and valid values, see [PUT bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) in the *Amazon S3 API Reference*.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS-account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS-account that owns the source object.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Account
+									"account": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Destination bucket owner account ID. In a cross-account scenario, if you direct Amazon S3 to change replica ownership to the AWS-account that owns the destination bucket by specifying the ``AccessControlTranslation`` property, this is the account ID of the destination bucket owner. For more information, see [Cross-Region Replication Additional Configuration: Change Replica Owner](https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-change-owner.html) in the *Amazon S3 User Guide*.\n If you specify the ``AccessControlTranslation`` property, the ``Account`` property is required.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Bucket
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store the results.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EncryptionConfiguration
+									"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ReplicaKmsKeyID
+											"replica_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket. Amazon S3 uses this key to encrypt replica objects. Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies encryption-related information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Metrics
+									"metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EventThreshold
+											"event_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Minutes
+													"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "Contains an integer specifying time in minutes. \n  Valid value: 15",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A container specifying the time threshold for emitting the ``s3:Replication:OperationMissedThreshold`` event.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies whether the replication metrics are enabled.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container specifying replication metrics-related settings enabling replication metrics and events.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReplicationTime
+									"replication_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies whether the replication time is enabled.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Time
+											"time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Minutes
+													"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "Contains an integer specifying time in minutes. \n  Valid value: 15",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A container specifying the time by which replication should be complete for all objects and operations on objects.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container specifying S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated. Must be specified together with a ``Metrics`` block.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StorageClass
+									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica. \n For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A container for information about the replication destination and its configurations including enabling the S3 Replication Time Control (S3 RTC).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: And
+									"and": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Prefix
+											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: TagFilters
+											"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The tag key.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The tag value.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "An array of tags containing key and value pairs.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for specifying rule filters. The filters determine the subset of objects to which the rule applies. This element is required only if you specify more than one filter. For example: \n  +  If you specify both a ``Prefix`` and a ``TagFilter``, wrap these filters in an ``And`` tag.\n  +  If you specify a filter based on multiple tags, wrap the ``TagFilter`` elements in an ``And`` tag.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Prefix
+									"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "An object key name prefix that identifies the subset of objects to which the rule applies.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TagFilter
+									"tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The tag key.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The tag value.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for specifying a tag key and value. \n The rule applies only to objects that have the tag in their tag set.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A filter that identifies the subset of objects to which the replication rule applies. A ``Filter`` must specify exactly one ``Prefix``, ``TagFilter``, or an ``And`` child element. The use of the filter field indicates that this is a V2 replication configuration. This field isn't supported in a V1 replication configuration.\n  V1 replication configuration only supports filtering by key prefix. To filter using a V1 replication configuration, add the ``Prefix`` directly as a child element of the ``Rule`` element.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the rule. The maximum value is 255 characters. If you don't specify a value, AWS CloudFormation generates a random ID. When using a V2 replication configuration this property is capitalized as \"ID\".",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An object key name prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket, specify an empty string. To filter using a V1 replication configuration, add the ``Prefix`` directly as a child element of the ``Rule`` element.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Priority
+							"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The priority indicates which rule has precedence whenever two or more replication rules conflict. Amazon S3 will attempt to replicate objects according to all replication rules. However, if there are two or more rules with the same destination bucket, then objects will be replicated according to the rule with the highest priority. The higher the number, the higher the priority. \n For more information, see [Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the *Amazon S3 User Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceSelectionCriteria
+							"source_selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ReplicaModifications
+									"replica_modifications": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A filter that you can specify for selection for modifications on replicas.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SseKmsEncryptedObjects
+									"sse_kms_encrypted_objects": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies whether Amazon S3 replicates objects created with server-side encryption using an AWS KMS key stored in AWS Key Management Service.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether the rule is enabled.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A container for one or more replication rules. A replication configuration must have at least one rule and can contain a maximum of 1,000 rules.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property.\n Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3536,7 +2809,24 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributee5a81c90a1c20923e4ad17d7(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of the object key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersioningConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3559,7 +2849,17 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"versioning_configuration": schemaAttribute6ae06f373291003b209ed166(),
+		"versioning_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The versioning state of the bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.\n  When you enable versioning on a bucket for the first time, it might take a short amount of time for the change to be fully propagated. We recommend that you wait for 15 minutes after enabling versioning before issuing write operations (``PUT`` or ``DELETE``) on objects in the bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebsiteConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -3661,7 +2961,97 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"website_configuration": schemaAttributefd188968957a07fc63d88a4f(),
+		"website_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ErrorDocument
+				"error_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the error document for the website.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IndexDocument
+				"index_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the index document for the website.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RedirectAllRequestsTo
+				"redirect_all_requests_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HostName
+						"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the host where requests are redirected.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Protocol
+						"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The redirect behavior for every request to this bucket's website endpoint.\n  If you specify this property, you can't specify any other property.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoutingRules
+				"routing_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RedirectRule
+							"redirect_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: HostName
+									"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The host name to use in the redirect request.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: HttpRedirectCode
+									"http_redirect_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Protocol
+									"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReplaceKeyPrefixWith
+									"replace_key_prefix_with": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix ``docs/`` (objects in the ``docs/`` folder) to ``documents/``, you can set a condition block with ``KeyPrefixEquals`` set to ``docs/`` and in the Redirect set ``ReplaceKeyPrefixWith`` to ``/documents``. Not required if one of the siblings is present. Can be present only if ``ReplaceKeyWith`` is not provided.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReplaceKeyWith
+									"replace_key_with": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The specific object key to use in the redirect request. For example, redirect request to ``error.html``. Not required if one of the siblings is present. Can be present only if ``ReplaceKeyPrefixWith`` is not provided.\n  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see [XML related object key constraints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoutingRuleCondition
+							"routing_rule_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: HttpErrorCodeReturnedEquals
+									"http_error_code_returned_equals": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied.\n Required when parent element ``Condition`` is specified and sibling ``KeyPrefixEquals`` is not specified. If both are specified, then both must be true for the redirect to be applied.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: KeyPrefixEquals
+									"key_prefix_equals": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The object key name prefix when the redirect is applied. For example, to redirect requests for ``ExamplePage.html``, the key prefix will be ``ExamplePage.html``. To redirect request for all pages with the prefix ``docs/``, the key prefix will be ``/docs``, which identifies all objects in the docs/ folder.\n Required when the parent element ``Condition`` is specified and sibling ``HttpErrorCodeReturnedEquals`` is not specified. If both conditions are specified, both must be true for the redirect to be applied.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the ``/docs`` folder, redirect to the ``/documents`` folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Rules that define when a redirect is applied and the redirect behavior.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information used to configure the bucket as a static website. For more information, see [Hosting Websites on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebsiteURL
 		// CloudFormation resource type schema:
 		//
@@ -3674,7 +3064,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "uri",
 		//	  "type": "string"
 		//	}
-		"website_url": schemaAttributeb5d4907f88f3c21858884996(),
+		"website_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1347ca2ad6730c884df5bb06() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ID of the account used as the master account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf4605a2decca07233b14246() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value used to validate the master account to the member account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed872aee38547dd73afcc7e13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID of the detector of the GuardDuty member account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_guardduty_master", masterDataSource)
 }
@@ -50,7 +29,10 @@ func masterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Unique ID of the detector of the GuardDuty member account.",
 		//	  "type": "string"
 		//	}
-		"detector_id": schemaAttributed872aee38547dd73afcc7e13(),
+		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID of the detector of the GuardDuty member account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InvitationId
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +40,10 @@ func masterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Value used to validate the master account to the member account.",
 		//	  "type": "string"
 		//	}
-		"invitation_id": schemaAttributecf4605a2decca07233b14246(),
+		"invitation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Value used to validate the master account to the member account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterId
 		// CloudFormation resource type schema:
 		//
@@ -66,7 +51,10 @@ func masterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "ID of the account used as the master account.",
 		//	  "type": "string"
 		//	}
-		"master_id": schemaAttribute1347ca2ad6730c884df5bb06(),
+		"master_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ID of the account used as the master account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

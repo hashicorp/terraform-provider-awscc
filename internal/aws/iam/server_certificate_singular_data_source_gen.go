@@ -14,47 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07e7fa393b4eb276f1566e08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1562005c9d6efc04bdf52ff1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute873f6a5c4696b20ffe914348() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec9ca7d5be865d310d2dcbd0e(),
-				// Property: Value
-				"value": schemaAttribute1562005c9d6efc04bdf52ff1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute875d2f132813d183291a8cd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the server certificate",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9ca7d5be865d310d2dcbd0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iam_server_certificate", serverCertificateDataSource)
 }
@@ -72,7 +31,10 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute875d2f132813d183291a8cd1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the server certificate",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateBody
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +44,9 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"certificate_body": schemaAttribute07e7fa393b4eb276f1566e08(),
+		"certificate_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateChain
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +56,9 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"certificate_chain": schemaAttribute07e7fa393b4eb276f1566e08(),
+		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Path
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +68,9 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"path": schemaAttribute07e7fa393b4eb276f1566e08(),
+		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateKey
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +80,9 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"private_key": schemaAttribute07e7fa393b4eb276f1566e08(),
+		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerCertificateName
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +92,9 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[\\w+=,.@-]+",
 		//	  "type": "string"
 		//	}
-		"server_certificate_name": schemaAttribute07e7fa393b4eb276f1566e08(),
+		"server_certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +126,23 @@ func serverCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute873f6a5c4696b20ffe914348(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -20,27 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05df7a0e907668d25f6b8482() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier representing an alias tied to an account",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e02e9711ee0d1e4e36887ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An account alias associated with a customer's account.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 30),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]+$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_supportapp_account_alias", accountAliasResource)
 	registry.AddListResourceFactory("awscc_supportapp_account_alias", generic.NewListResource(accountAliasResource))
@@ -60,7 +39,14 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[\\w\\- ]+$",
 		//	  "type": "string"
 		//	}
-		"account_alias": schemaAttribute9e02e9711ee0d1e4e36887ad(),
+		"account_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An account alias associated with a customer's account.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 30),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccountAliasResourceId
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +57,13 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[\\w\\- ]+$",
 		//	  "type": "string"
 		//	}
-		"account_alias_resource_id": schemaAttribute05df7a0e907668d25f6b8482(),
+		"account_alias_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier representing an alias tied to an account",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

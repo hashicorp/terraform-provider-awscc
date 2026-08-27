@@ -14,123 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1d27597a6a8d916d138420a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e1ad1e442924606f7a9298e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5449f73f7ddc7346de4c8415() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Last modified region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fd79be493c0e29e7a710b5e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee9e8409870f3612a83d2a39e(),
-				// Property: Value
-				"value": schemaAttributed52bc994b1566ec45088cd0c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8509381f8e6bf11a858de0e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the Data Table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e5c81a7ff04c14eff2a842a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The creation time of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute955d8c5a4f1cd59186bdbc34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f2dab39868741c67be822b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data table for the lock version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed30ddde8ff9c68878071b35e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed52bc994b1566ec45088cd0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfdb0d1816ca11974fb400fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2fafb58640ee0a4cbed8840() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Last modified time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9e8409870f3612a83d2a39e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb7538cbc0733db8e14e54b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value lock level of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7b2fbd070abc0e485e64587() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataTable
-			"data_table": schemaAttribute9f2dab39868741c67be822b8(),
-		}, /*END SCHEMA*/
-		Description: "The lock version of the Data Table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_data_table", dataTableDataSource)
 }
@@ -148,7 +31,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributed30ddde8ff9c68878071b35e(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +42,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The creation time of the Data Table",
 		//	  "type": "number"
 		//	}
-		"created_time": schemaAttribute8e5c81a7ff04c14eff2a842a(),
+		"created_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The creation time of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +56,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\P{C}\r\n\t]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute8509381f8e6bf11a858de0e7(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the Data Table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +70,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute955d8c5a4f1cd59186bdbc34(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +82,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schemaAttribute5449f73f7ddc7346de4c8415(),
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Last modified region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +93,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Last modified time.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schemaAttributee2fafb58640ee0a4cbed8840(),
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Last modified time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LockVersion
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +111,17 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lock_version": schemaAttributef7b2fbd070abc0e485e64587(),
+		"lock_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataTable
+				"data_table": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The data table for the lock version",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The lock version of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +132,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1d27597a6a8d916d138420a8(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +146,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute1e1ad1e442924606f7a9298e(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +183,24 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute6fd79be493c0e29e7a710b5e(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +208,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time zone of the Data Table",
 		//	  "type": "string"
 		//	}
-		"time_zone": schemaAttributedfdb0d1816ca11974fb400fe(),
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ValueLockLevel
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +226,10 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"value_lock_level": schemaAttributeeb7538cbc0733db8e14e54b7(),
+		"value_lock_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value lock level of the Data Table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

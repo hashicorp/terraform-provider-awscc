@@ -14,54 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0de8583107e819cd2b05f2f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute524c51f69b595e7efeff4111() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of transit gateway policy table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb839ded829831e6106eacbc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the transit gateway policy table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba9875f748d67419d3cfd6dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Creation time of the transit gateway policy table",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed194e00d318f98ead0e4ac51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc0fd374ed27a61c353d0d45() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0de8583107e819cd2b05f2f5(),
-				// Property: Value
-				"value": schemaAttribute0de8583107e819cd2b05f2f5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_policy_table", transitGatewayPolicyTableDataSource)
 }
@@ -77,7 +29,10 @@ func transitGatewayPolicyTableDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Creation time of the transit gateway policy table",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributeba9875f748d67419d3cfd6dd(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Creation time of the transit gateway policy table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -85,7 +40,10 @@ func transitGatewayPolicyTableDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "State of the transit gateway policy table",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributeb839ded829831e6106eacbc2(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the transit gateway policy table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +68,21 @@ func transitGatewayPolicyTableDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributefc0fd374ed27a61c353d0d45(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +90,10 @@ func transitGatewayPolicyTableDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The Id of transit gateway",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttributed194e00d318f98ead0e4ac51(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayPolicyTableId
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +101,10 @@ func transitGatewayPolicyTableDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The Id of transit gateway policy table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_policy_table_id": schemaAttribute524c51f69b595e7efeff4111(),
+		"transit_gateway_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of transit gateway policy table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

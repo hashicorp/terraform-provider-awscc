@@ -15,222 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute067a9226e43dd4b31637e570() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute69384247e33257d5134105ad(),
-			// Property: Mtu
-			"mtu": schemaAttributeaeca05dc13b151733da39ea2(),
-			// Property: Name
-			"name": schemaAttributefe885a768b1a611e9458a60c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute125cd6eb27fd2af0b0e64e56() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12fffa0b46ca3a97af5a9136() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IPv4 socket address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15bfaad8139c0020066bde4d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Maximum
-			"maximum": schemaAttribute3f7f980007ae2eef5bd33a80(),
-			// Property: Minimum
-			"minimum": schemaAttributeffcde5e17abf97a8a39aae73(),
-		}, /*END SCHEMA*/
-		Description: "Port range of a socket address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2edba48d12d03fe43ed05ce1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttributefe885a768b1a611e9458a60c(),
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttribute125cd6eb27fd2af0b0e64e56(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute125cd6eb27fd2af0b0e64e56(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f70c9335cf25ad99466c35c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Mtu
-			"mtu": schemaAttribute47b18f6816215de23a446861(),
-			// Property: SocketAddress
-			"socket_address": schemaAttributed8b75fd5bd76c68e265f6972(),
-		}, /*END SCHEMA*/
-		Description: "Ingress address of AgentEndpoint with a port range and an optional mtu.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f7f980007ae2eef5bd33a80() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A maximum value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47b18f6816215de23a446861() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute491e55fa0b6c054701f8f1af() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AwsGroundStationAgentEndpoint
-				"aws_ground_station_agent_endpoint": schemaAttributec0be2edbc0a7cfc229ff8479(),
-				// Property: Endpoint
-				"endpoint": schemaAttribute067a9226e43dd4b31637e570(),
-				// Property: SecurityDetails
-				"security_details": schemaAttribute2edba48d12d03fe43ed05ce1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b0e660c9f6d7c7633dd5eee() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69384247e33257d5134105ad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributefe885a768b1a611e9458a60c(),
-			// Property: Port
-			"port": schemaAttributeaeca05dc13b151733da39ea2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute729dcba83f2e03e35f2e539a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The results of the audit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute951be6cf61d5e75d82276b1e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea20cc7370ec5888302adb69b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of AgentEndpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaaed676721413e34b9d3f47() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefe885a768b1a611e9458a60c(),
-				// Property: Value
-				"value": schemaAttributefe885a768b1a611e9458a60c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeca05dc13b151733da39ea2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0be2edbc0a7cfc229ff8479() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AgentStatus
-			"agent_status": schemaAttributea20cc7370ec5888302adb69b(),
-			// Property: AuditResults
-			"audit_results": schemaAttribute729dcba83f2e03e35f2e539a(),
-			// Property: EgressAddress
-			"egress_address": schemaAttributeff99a0d5e623e0ae91bdb519(),
-			// Property: IngressAddress
-			"ingress_address": schemaAttribute2f70c9335cf25ad99466c35c(),
-			// Property: Name
-			"name": schemaAttributefe885a768b1a611e9458a60c(),
-		}, /*END SCHEMA*/
-		Description: "Information about AwsGroundStationAgentEndpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8b75fd5bd76c68e265f6972() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute12fffa0b46ca3a97af5a9136(),
-			// Property: PortRange
-			"port_range": schemaAttribute15bfaad8139c0020066bde4d(),
-		}, /*END SCHEMA*/
-		Description: "A socket address with a port range.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe885a768b1a611e9458a60c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff99a0d5e623e0ae91bdb519() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Mtu
-			"mtu": schemaAttribute47b18f6816215de23a446861(),
-			// Property: SocketAddress
-			"socket_address": schemaAttribute69384247e33257d5134105ad(),
-		}, /*END SCHEMA*/
-		Description: "Egress address of AgentEndpoint with an optional mtu.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffcde5e17abf97a8a39aae73() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A minimum value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_groundstation_dataflow_endpoint_group", dataflowEndpointGroupDataSource)
 }
@@ -246,7 +30,9 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributefe885a768b1a611e9458a60c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactPostPassDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +40,10 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.",
 		//	  "type": "integer"
 		//	}
-		"contact_post_pass_duration_seconds": schemaAttribute951be6cf61d5e75d82276b1e(),
+		"contact_post_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactPrePassDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +51,10 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.",
 		//	  "type": "integer"
 		//	}
-		"contact_pre_pass_duration_seconds": schemaAttribute4b0e660c9f6d7c7633dd5eee(),
+		"contact_pre_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointDetails
 		// CloudFormation resource type schema:
 		//
@@ -425,14 +217,158 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"endpoint_details": schemaAttribute491e55fa0b6c054701f8f1af(),
+		"endpoint_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsGroundStationAgentEndpoint
+					"aws_ground_station_agent_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AgentStatus
+							"agent_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The status of AgentEndpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AuditResults
+							"audit_results": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The results of the audit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EgressAddress
+							"egress_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Mtu
+									"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SocketAddress
+									"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Egress address of AgentEndpoint with an optional mtu.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IngressAddress
+							"ingress_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Mtu
+									"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SocketAddress
+									"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "IPv4 socket address.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: PortRange
+											"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Maximum
+													"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "A maximum value.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Minimum
+													"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "A minimum value.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Port range of a socket address.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A socket address with a port range.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Ingress address of AgentEndpoint with a port range and an optional mtu.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information about AwsGroundStationAgentEndpoint.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Endpoint
+					"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Address
+							"address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Port
+									"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Mtu
+							"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecurityDetails
+					"security_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SecurityGroupIds
+							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SubnetIds
+							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"dataflow_endpoint_group_id": schemaAttributefe885a768b1a611e9458a60c(),
+		"dataflow_endpoint_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -457,7 +393,21 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeaaaed676721413e34b9d3f47(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

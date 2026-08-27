@@ -16,100 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b3096b4b21cd561f921e596() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3806c8c309495a3b6ce9bf85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a83ab24d118be92a9c3a76d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An eventbridge rule template's ARN (Amazon Resource Name)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f6cd24d9f046e46fe17a6a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of event to match with the rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67f70700ec717acdedfa34b8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributecd1571356fbb426047af4fb5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Placeholder documentation for __listOfEventBridgeRuleTemplateTarget",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99fa4e79ffacf5eee471e7d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Placeholder documentation for __string",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabd27e379153ff474b2749aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An eventbridge rule template group's identifier. Can be either be its id or current name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0e7242c58a3e4e5d8ddadf2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource's optional description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd1571356fbb426047af4fb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Target ARNs must be either an SNS topic or CloudWatch log group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed22526166504329123d853a8() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents the tags associated with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda5c8a82c1cf5875f3c21ca7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Placeholder documentation for __timestampIso8601",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4feef833cccb9cdaa9fe329() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_event_bridge_rule_template", eventBridgeRuleTemplateDataSource)
 }
@@ -126,7 +32,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:.+:medialive:.+:eventbridge-rule-template:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4a83ab24d118be92a9c3a76d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An eventbridge rule template's ARN (Amazon Resource Name)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +44,11 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeda5c8a82c1cf5875f3c21ca7(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Placeholder documentation for __timestampIso8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +58,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeb0e7242c58a3e4e5d8ddadf2(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource's optional description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTargets
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +86,19 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"event_targets": schemaAttribute67f70700ec717acdedfa34b8(),
+		"event_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Arn
+					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Target ARNs must be either an SNS topic or CloudWatch log group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Placeholder documentation for __listOfEventBridgeRuleTemplateTarget",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventType
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +121,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"event_type": schemaAttribute5f6cd24d9f046e46fe17a6a3(),
+		"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of event to match with the rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +135,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttributee4feef833cccb9cdaa9fe329(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +147,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"group_identifier": schemaAttributeabd27e379153ff474b2749aa(),
+		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An eventbridge rule template group's identifier. Can be either be its id or current name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +161,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"event_bridge_rule_template_id": schemaAttribute0b3096b4b21cd561f921e596(),
+		"event_bridge_rule_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +172,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Placeholder documentation for __string",
 		//	  "type": "string"
 		//	}
-		"identifier": schemaAttribute99fa4e79ffacf5eee471e7d4(),
+		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Placeholder documentation for __string",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +184,11 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schemaAttributeda5c8a82c1cf5875f3c21ca7(),
+		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Placeholder documentation for __timestampIso8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +199,10 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3806c8c309495a3b6ce9bf85(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +217,12 @@ func eventBridgeRuleTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributed22526166504329123d853a8(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Represents the tags associated with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

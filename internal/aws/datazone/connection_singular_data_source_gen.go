@@ -16,725 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute008157f838d60511c639614e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute2cb029bb57901ee0bf7beba6(),
-			// Property: Schedule
-			"schedule": schemaAttributeba0b0f9e36ea029dab3aa2a6(),
-		}, /*END SCHEMA*/
-		Description: "Redshift Lineage Sync Configuration Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03cb10511300219a14d0fb72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the project in which the connection should be created. If ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c071cf9f36995a1bbdeb4fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0dda11e9169a4742eb2f5ae3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GlueConnectionInput
-			"glue_connection_input": schemaAttributefcf0856715921d3fa895c04e(),
-		}, /*END SCHEMA*/
-		Description: "Glue Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ebf926723068bc9f9da6652() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f0cfcc5eb9e2af962e828d9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MwaaEnvironmentName
-			"mwaa_environment_name": schemaAttribute964895b692b20b1d3aca47e9(),
-		}, /*END SCHEMA*/
-		Description: "Workflows MWAA Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fecbbaed97400ba9bebdf03() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The token URL parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1669026a941ced64ba3dc2c8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalArgs
-			"additional_args": schemaAttribute2feb9e80c6e8d993a29477aa(),
-			// Property: GlueConnectionName
-			"glue_connection_name": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: GlueVersion
-			"glue_version": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: IdleTimeout
-			"idle_timeout": schemaAttributef96d30022b3c351b9ce3a216(),
-			// Property: JavaVirtualEnv
-			"java_virtual_env": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: NumberOfWorkers
-			"number_of_workers": schemaAttributef96d30022b3c351b9ce3a216(),
-			// Property: PythonVirtualEnv
-			"python_virtual_env": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: WorkerType
-			"worker_type": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Spark Glue Properties Input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b6e3ec3158baba34393e528() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Password
-			"password": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: UserName
-			"user_name": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Basic Authentication Credentials",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c009995d480c6401f3aa6f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The scope of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2653f1ffce42ad09f793e325() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "OAuth2 Grant Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28fc4a238521a931c3520b55() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to register the S3 Access Grant location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute296ec1f8d273d3d0ffe4fe5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29779e33d6c6866e6d093b74() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cb029bb57901ee0bf7beba6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2feb9e80c6e8d993a29477aa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Connection
-			"connection": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Spark Glue Args.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute385b38ca98a64f2e25bae2d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the environment in which the connection is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute498ef8715662e29e728ffbf0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClusterName
-			"cluster_name": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: WorkgroupName
-			"workgroup_name": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b7fe0203ecf3e14f5ba7f68() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Connection Properties",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ff9bd9f11268cfbf5e6f110() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication mode of the connection's AmazonQ properties",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54dfdc163d826bc7cdf993a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the MLflow tracking server",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bb42e872f0c3936e9e45532() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AmazonQProperties
-			"amazon_q_properties": schemaAttribute7f074c44eefa65b470b196c7(),
-			// Property: AthenaProperties
-			"athena_properties": schemaAttributec2695410fed514b36a0b7dd7(),
-			// Property: GlueProperties
-			"glue_properties": schemaAttribute0dda11e9169a4742eb2f5ae3(),
-			// Property: HyperPodProperties
-			"hyper_pod_properties": schemaAttributeeb00d62d28e9adf2be2f27ef(),
-			// Property: IamProperties
-			"iam_properties": schemaAttributeebad5aa8a3d0dfac80ea6767(),
-			// Property: LakehouseProperties
-			"lakehouse_properties": schemaAttributef453cdab09e38453b800050b(),
-			// Property: MlflowProperties
-			"mlflow_properties": schemaAttribute917d53d000781158613df788(),
-			// Property: RedshiftProperties
-			"redshift_properties": schemaAttributeae2cbba9b0277e4af5a06804(),
-			// Property: S3Properties
-			"s3_properties": schemaAttribute7e78c7fe62d5f0f240b6e28a(),
-			// Property: SparkEmrProperties
-			"spark_emr_properties": schemaAttribute9dc4f14ed5d2c6a13f0c6462(),
-			// Property: SparkGlueProperties
-			"spark_glue_properties": schemaAttribute1669026a941ced64ba3dc2c8(),
-			// Property: WorkflowsMwaaProperties
-			"workflows_mwaa_properties": schemaAttribute0f0cfcc5eb9e2af962e828d9(),
-			// Property: WorkflowsServerlessProperties
-			"workflows_serverless_properties": schemaAttributef3cdf90ad89fc28668f9e7b7(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5dfb6b3ace74671f87720076() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: JwtToken
-			"jwt_token": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: UserManagedClientApplicationClientSecret
-			"user_managed_client_application_client_secret": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Glue OAuth2 Credentials",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62abe16c3480a3c215cab0aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the project in which the connection is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute656134939f71e07ad6631b5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e78c7fe62d5f0f240b6e28a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RegisterS3AccessGrantLocation
-			"register_s3_access_grant_location": schemaAttribute28fc4a238521a931c3520b55(),
-			// Property: S3AccessGrantLocationId
-			"s3_access_grant_location_id": schemaAttribute296ec1f8d273d3d0ffe4fe5f(),
-			// Property: S3Uri
-			"s3_uri": schemaAttributed1ffd26718d88ee3e200860f(),
-		}, /*END SCHEMA*/
-		Description: "S3 Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f074c44eefa65b470b196c7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthMode
-			"auth_mode": schemaAttribute4ff9bd9f11268cfbf5e6f110(),
-			// Property: IsEnabled
-			"is_enabled": schemaAttributea85b0a283fabfbde348c01c2(),
-			// Property: ProfileArn
-			"profile_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Amazon Q properties of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute814c48d1b9b5b4cb966c8314() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Password
-			"password": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: Username
-			"username": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "The username and password to be used for authentication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84a1d1f48f2d8142b4fff0cb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationCodeProperties
-			"authorization_code_properties": schemaAttribute8db23055f51286531f488c54(),
-			// Property: OAuth2ClientApplication
-			"o_auth_2_client_application": schemaAttribute9fd352120fe03a2d2e94f37d(),
-			// Property: OAuth2Credentials
-			"o_auth_2_credentials": schemaAttribute5dfb6b3ace74671f87720076(),
-			// Property: OAuth2GrantType
-			"o_auth_2_grant_type": schemaAttribute2653f1ffce42ad09f793e325(),
-			// Property: TokenUrl
-			"token_url": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: TokenUrlParametersMap
-			"token_url_parameters_map": schemaAttribute0fecbbaed97400ba9bebdf03(),
-		}, /*END SCHEMA*/
-		Description: "OAuth2 Properties",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute890522dec5d8c1e12e57b61b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Authentication Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8db23055f51286531f488c54() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationCode
-			"authorization_code": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: RedirectUri
-			"redirect_uri": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Authorization Code Properties",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e10f006efe4053602786898() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationType
-			"authentication_type": schemaAttribute890522dec5d8c1e12e57b61b(),
-			// Property: BasicAuthenticationCredentials
-			"basic_authentication_credentials": schemaAttribute1b6e3ec3158baba34393e528(),
-			// Property: CustomAuthenticationCredentials
-			"custom_authentication_credentials": schemaAttributeaa2d7a9a0908b75bb24d2645(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: OAuth2Properties
-			"o_auth_2_properties": schemaAttribute84a1d1f48f2d8142b4fff0cb(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Authentication Configuration Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute917d53d000781158613df788() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TrackingServerArn
-			"tracking_server_arn": schemaAttribute54dfdc163d826bc7cdf993a3(),
-		}, /*END SCHEMA*/
-		Description: "MLflow Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute964895b692b20b1d3aca47e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the MWAA environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b9f243be06ca797e97e009c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Glue Connection Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dc4f14ed5d2c6a13f0c6462() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComputeArn
-			"compute_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: InstanceProfileArn
-			"instance_profile_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: JavaVirtualEnv
-			"java_virtual_env": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: LogUri
-			"log_uri": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: ManagedEndpointArn
-			"managed_endpoint_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: PythonVirtualEnv
-			"python_virtual_env": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: RuntimeRole
-			"runtime_role": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: TrustedCertificatesS3Uri
-			"trusted_certificates_s3_uri": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Spark EMR Properties Input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fd352120fe03a2d2e94f37d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AWSManagedClientApplicationReference
-			"aws_managed_client_application_reference": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: UserManagedClientApplicationClientId
-			"user_managed_client_application_client_id": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "OAuth2 Client Application",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3ffdb9c79f15379c42a13b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the domain in which the connection is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea617aa107ae5611324c936af() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Classification
-				"classification": schemaAttributeff46f30a121749bd137a7b7e(),
-				// Property: Properties
-				"properties": schemaAttributeba19dc73837ea6b1d6530d4a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The configurations of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6330dafda79f14eaa96b54e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Connection Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea85b0a283fabfbde348c01c2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon Q is enabled for the connection",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa2d7a9a0908b75bb24d2645() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Credential Map",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa363030e8963ac07af55477() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the trusted identity propagation is enabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae2cbba9b0277e4af5a06804() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Credentials
-			"credentials": schemaAttributeb72cc6f28a4f0bd106e37f43(),
-			// Property: DatabaseName
-			"database_name": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: Host
-			"host": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: LineageSync
-			"lineage_sync": schemaAttribute008157f838d60511c639614e(),
-			// Property: Port
-			"port": schemaAttributef96d30022b3c351b9ce3a216(),
-			// Property: Storage
-			"storage": schemaAttribute498ef8715662e29e728ffbf0(),
-		}, /*END SCHEMA*/
-		Description: "Redshift Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2a7c0051cef3c7804203261() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The role of the user in the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb72cc6f28a4f0bd106e37f43() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: UsernamePassword
-			"username_password": schemaAttribute814c48d1b9b5b4cb966c8314(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba0b0f9e36ea029dab3aa2a6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Schedule
-			"schedule": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Lineage Sync Schedule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba19dc73837ea6b1d6530d4a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Property Map",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2605addc71a07ae85937e41() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessRole
-			"access_role": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: AwsAccountId
-			"aws_account_id": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: AwsRegion
-			"aws_region": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: IamConnectionId
-			"iam_connection_id": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "AWS Location of project",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2695410fed514b36a0b7dd7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: WorkgroupName
-			"workgroup_name": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "Athena Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1ffd26718d88ee3e200860f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 URI that's part of the Amazon S3 properties of a connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed596acd24d4b5bad54d1f629() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the domain in which the connection is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7a80d033419ec6b6b6b988a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: SecurityGroupIdList
-			"security_group_id_list": schemaAttribute29779e33d6c6866e6d093b74(),
-			// Property: SubnetId
-			"subnet_id": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: SubnetIdList
-			"subnet_id_list": schemaAttribute29779e33d6c6866e6d093b74(),
-		}, /*END SCHEMA*/
-		Description: "Physical Connection Requirements",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed807daf0be0ed7d73806323e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2e4d145487c61f653a66172() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the domain unit in which the connection is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9a48ab833e6be831eef41e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the environment in which the connection is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb00d62d28e9adf2be2f27ef() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClusterName
-			"cluster_name": schemaAttribute0ebf926723068bc9f9da6652(),
-		}, /*END SCHEMA*/
-		Description: "HyperPod Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebad5aa8a3d0dfac80ea6767() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GlueLineageSyncEnabled
-			"glue_lineage_sync_enabled": schemaAttribute2cb029bb57901ee0bf7beba6(),
-		}, /*END SCHEMA*/
-		Description: "IAM Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3cdf90ad89fc28668f9e7b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Workflows Serverless Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef453cdab09e38453b800050b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GlueLineageSyncEnabled
-			"glue_lineage_sync_enabled": schemaAttributef47ffb6bceda4a3e6c519faa(),
-		}, /*END SCHEMA*/
-		Description: "Lakehouse Properties Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef47ffb6bceda4a3e6c519faa() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Glue lineage sync is enabled for the lakehouse connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef96d30022b3c351b9ce3a216() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcf0856715921d3fa895c04e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AthenaProperties
-			"athena_properties": schemaAttributeba19dc73837ea6b1d6530d4a(),
-			// Property: AuthenticationConfiguration
-			"authentication_configuration": schemaAttribute8e10f006efe4053602786898(),
-			// Property: ConnectionProperties
-			"connection_properties": schemaAttribute4b7fe0203ecf3e14f5ba7f68(),
-			// Property: ConnectionType
-			"connection_type": schemaAttribute9b9f243be06ca797e97e009c(),
-			// Property: Description
-			"description": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: MatchCriteria
-			"match_criteria": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: Name
-			"name": schemaAttribute0ebf926723068bc9f9da6652(),
-			// Property: PhysicalConnectionRequirements
-			"physical_connection_requirements": schemaAttributed7a80d033419ec6b6b6b988a(),
-			// Property: PythonProperties
-			"python_properties": schemaAttributeba19dc73837ea6b1d6530d4a(),
-			// Property: SparkProperties
-			"spark_properties": schemaAttributeba19dc73837ea6b1d6530d4a(),
-			// Property: ValidateCredentials
-			"validate_credentials": schemaAttribute2cb029bb57901ee0bf7beba6(),
-			// Property: ValidateForComputeEnvironments
-			"validate_for_compute_environments": schemaAttribute29779e33d6c6866e6d093b74(),
-		}, /*END SCHEMA*/
-		Description: "Glue Connection Input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff46f30a121749bd137a7b7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The classification of the connection configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_connection", connectionDataSource)
 }
@@ -771,7 +52,28 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"aws_location": schemaAttributec2605addc71a07ae85937e41(),
+		"aws_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessRole
+				"access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AwsAccountId
+				"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AwsRegion
+				"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamConnectionId
+				"iam_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AWS Location of project",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configurations
 		// CloudFormation resource type schema:
 		//
@@ -806,7 +108,26 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"configurations": schemaAttributea617aa107ae5611324c936af(),
+		"configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Classification
+					"classification": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The classification of the connection configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Properties
+					"properties":        // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Property Map",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The configurations of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -816,7 +137,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"connection_id": schemaAttribute656134939f71e07ad6631b5b(),
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -826,7 +150,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\S\\s]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed807daf0be0ed7d73806323e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -835,7 +162,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributed596acd24d4b5bad54d1f629(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the domain in which the connection is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -844,7 +174,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttributea3ffdb9c79f15379c42a13b0(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the domain in which the connection is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainUnitId
 		// CloudFormation resource type schema:
 		//
@@ -855,7 +188,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_\\-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_unit_id": schemaAttributee2e4d145487c61f653a66172(),
+		"domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the domain unit in which the connection is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableTrustedIdentityPropagation
 		// CloudFormation resource type schema:
 		//
@@ -863,7 +199,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the trusted identity propagation is enabled",
 		//	  "type": "boolean"
 		//	}
-		"enable_trusted_identity_propagation": schemaAttributeaa363030e8963ac07af55477(),
+		"enable_trusted_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the trusted identity propagation is enabled",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -872,7 +211,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schemaAttributee9a48ab833e6be831eef41e8(),
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the environment in which the connection is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -880,7 +222,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the environment in which the connection is created.",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schemaAttribute385b38ca98a64f2e25bae2d5(),
+		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment in which the connection is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentUserRole
 		// CloudFormation resource type schema:
 		//
@@ -888,7 +233,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The role of the user in the environment.",
 		//	  "type": "string"
 		//	}
-		"environment_user_role": schemaAttributeb2a7c0051cef3c7804203261(),
+		"environment_user_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The role of the user in the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -898,7 +246,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w][\\w\\.\\-\\_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute0c071cf9f36995a1bbdeb4fb(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -907,7 +258,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_id": schemaAttribute62abe16c3480a3c215cab0aa(),
+		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the project in which the connection is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -915,7 +269,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the project in which the connection should be created. If ",
 		//	  "type": "string"
 		//	}
-		"project_identifier": schemaAttribute03cb10511300219a14d0fb72(),
+		"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the project in which the connection should be created. If ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Props
 		// CloudFormation resource type schema:
 		//
@@ -1531,7 +888,505 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"props": schemaAttribute5bb42e872f0c3936e9e45532(),
+		"props": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonQProperties
+				"amazon_q_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthMode
+						"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authentication mode of the connection's AmazonQ properties",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IsEnabled
+						"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether Amazon Q is enabled for the connection",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProfileArn
+						"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon Q properties of the connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AthenaProperties
+				"athena_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: WorkgroupName
+						"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Athena Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GlueProperties
+				"glue_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GlueConnectionInput
+						"glue_connection_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AthenaProperties
+								"athena_properties": // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Property Map",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AuthenticationConfiguration
+								"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthenticationType
+										"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Authentication Type",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: BasicAuthenticationCredentials
+										"basic_authentication_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Password
+												"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UserName
+												"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Basic Authentication Credentials",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: CustomAuthenticationCredentials
+										"custom_authentication_credentials": // Pattern: ""
+										schema.MapAttribute{                 /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Credential Map",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: KmsKeyArn
+										"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: OAuth2Properties
+										"o_auth_2_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthorizationCodeProperties
+												"authorization_code_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AuthorizationCode
+														"authorization_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: RedirectUri
+														"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Authorization Code Properties",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: OAuth2ClientApplication
+												"o_auth_2_client_application": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AWSManagedClientApplicationReference
+														"aws_managed_client_application_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: UserManagedClientApplicationClientId
+														"user_managed_client_application_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "OAuth2 Client Application",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: OAuth2Credentials
+												"o_auth_2_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AccessToken
+														"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: JwtToken
+														"jwt_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: RefreshToken
+														"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: UserManagedClientApplicationClientSecret
+														"user_managed_client_application_client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Glue OAuth2 Credentials",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: OAuth2GrantType
+												"o_auth_2_grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "OAuth2 Grant Type",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: TokenUrl
+												"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: TokenUrlParametersMap
+												"token_url_parameters_map": // Pattern: ""
+												schema.MapAttribute{        /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Description: "The token URL parameters.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "OAuth2 Properties",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretArn
+										"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Authentication Configuration Input",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectionProperties
+								"connection_properties": // Pattern: ""
+								schema.MapAttribute{     /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Connection Properties",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectionType
+								"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Glue Connection Type",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MatchCriteria
+								"match_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: PhysicalConnectionRequirements
+								"physical_connection_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AvailabilityZone
+										"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroupIdList
+										"security_group_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetId
+										"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetIdList
+										"subnet_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Physical Connection Requirements",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PythonProperties
+								"python_properties": // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Property Map",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SparkProperties
+								"spark_properties":  // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Property Map",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValidateCredentials
+								"validate_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValidateForComputeEnvironments
+								"validate_for_compute_environments": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Glue Connection Input",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Glue Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HyperPodProperties
+				"hyper_pod_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterName
+						"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "HyperPod Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamProperties
+				"iam_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GlueLineageSyncEnabled
+						"glue_lineage_sync_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "IAM Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LakehouseProperties
+				"lakehouse_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GlueLineageSyncEnabled
+						"glue_lineage_sync_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether Glue lineage sync is enabled for the lakehouse connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Lakehouse Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MlflowProperties
+				"mlflow_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrackingServerArn
+						"tracking_server_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the MLflow tracking server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MLflow Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftProperties
+				"redshift_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: UsernamePassword
+								"username_password": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The username and password to be used for authentication.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LineageSync
+						"lineage_sync": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Schedule
+								"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Schedule
+										"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Lineage Sync Schedule",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Redshift Lineage Sync Configuration Input",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Storage
+						"storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ClusterName
+								"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: WorkgroupName
+								"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Redshift Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Properties
+				"s3_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RegisterS3AccessGrantLocation
+						"register_s3_access_grant_location": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether to register the S3 Access Grant location.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3AccessGrantLocationId
+						"s3_access_grant_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 URI that's part of the Amazon S3 properties of a connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SparkEmrProperties
+				"spark_emr_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ComputeArn
+						"compute_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceProfileArn
+						"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: JavaVirtualEnv
+						"java_virtual_env": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogUri
+						"log_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedEndpointArn
+						"managed_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PythonVirtualEnv
+						"python_virtual_env": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RuntimeRole
+						"runtime_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrustedCertificatesS3Uri
+						"trusted_certificates_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Spark EMR Properties Input.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SparkGlueProperties
+				"spark_glue_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalArgs
+						"additional_args": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Connection
+								"connection": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Spark Glue Args.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GlueConnectionName
+						"glue_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: GlueVersion
+						"glue_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: IdleTimeout
+						"idle_timeout": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: JavaVirtualEnv
+						"java_virtual_env": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NumberOfWorkers
+						"number_of_workers": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PythonVirtualEnv
+						"python_virtual_env": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkerType
+						"worker_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Spark Glue Properties Input.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WorkflowsMwaaProperties
+				"workflows_mwaa_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MwaaEnvironmentName
+						"mwaa_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MWAA environment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Workflows MWAA Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WorkflowsServerlessProperties
+				"workflows_serverless_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Workflows Serverless Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -1543,7 +1398,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scope": schemaAttribute1c009995d480c6401f3aa6f7(),
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The scope of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1551,7 +1409,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Connection Type",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributea6330dafda79f14eaa96b54e(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Connection Type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

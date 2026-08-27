@@ -17,36 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute29a25dc376a73a99601f3582() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the link",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d545f74c4a52ac351547aea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the global network.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4ea3c5f22baa7455747493f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the device",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_link_association", linkAssociationResource)
 }
@@ -62,7 +32,13 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the device",
 		//	  "type": "string"
 		//	}
-		"device_id": schemaAttributec4ea3c5f22baa7455747493f(),
+		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the device",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -70,7 +46,13 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schemaAttribute4d545f74c4a52ac351547aea(),
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the global network.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -78,7 +60,13 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the link",
 		//	  "type": "string"
 		//	}
-		"link_id": schemaAttribute29a25dc376a73a99601f3582(),
+		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the link",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

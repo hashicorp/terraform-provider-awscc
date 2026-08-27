@@ -15,49 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute48c97eca5f0a1f694011012d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the recovery group to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute661770f1b654108c95eb0698() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bfb018073f8df1e3795ff25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A collection of tags associated with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e692153c781ea6c532c7f68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff2666b647d69bac068bbbc8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9e692153c781ea6c532c7f68(),
-				// Property: Value
-				"value": schemaAttribute9e692153c781ea6c532c7f68(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of tags associated with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoveryreadiness_recovery_group", recoveryGroupDataSource)
 }
@@ -80,7 +37,11 @@ func recoveryGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"cells": schemaAttribute661770f1b654108c95eb0698(),
+		"cells": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecoveryGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -89,7 +50,10 @@ func recoveryGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"recovery_group_arn": schemaAttribute9bfb018073f8df1e3795ff25(),
+		"recovery_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A collection of tags associated with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecoveryGroupName
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +64,10 @@ func recoveryGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"recovery_group_name": schemaAttribute48c97eca5f0a1f694011012d(),
+		"recovery_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the recovery group to create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +92,22 @@ func recoveryGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeff2666b647d69bac068bbbc8(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

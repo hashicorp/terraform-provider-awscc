@@ -15,42 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute692b6f43f3b2f08f56ee7e7f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Amazon VPC prefixes to advertise to the Direct Connect gateway. This parameter is required when you create an association to a transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7531013bdd1625466cbb413f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Direct Connect gateway association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea73b94c77a0e2f60b105c7df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the role to accept the Direct Connect Gateway association proposal. Needs directconnect:AcceptDirectConnectGatewayAssociationProposal permissions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf469d61a61bfd37297a81c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the Direct Connect gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7cdd283b5abf6509e3318d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the virtual private gateway or transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_directconnect_direct_connect_gateway_association", directConnectGatewayAssociationDataSource)
 }
@@ -67,7 +31,10 @@ func directConnectGatewayAssociationDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^arn:aws[a-z-]*:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"accept_direct_connect_gateway_association_proposal_role_arn": schemaAttributea73b94c77a0e2f60b105c7df(),
+		"accept_direct_connect_gateway_association_proposal_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the role to accept the Direct Connect Gateway association proposal. Needs directconnect:AcceptDirectConnectGatewayAssociationProposal permissions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllowedPrefixesToDirectConnectGateway
 		// CloudFormation resource type schema:
 		//
@@ -83,7 +50,11 @@ func directConnectGatewayAssociationDataSource(ctx context.Context) (datasource.
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allowed_prefixes_to_direct_connect_gateway": schemaAttribute692b6f43f3b2f08f56ee7e7f(),
+		"allowed_prefixes_to_direct_connect_gateway": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Amazon VPC prefixes to advertise to the Direct Connect gateway. This parameter is required when you create an association to a transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -97,7 +68,10 @@ func directConnectGatewayAssociationDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^((arn:aws[a-z-]*:ec2:[a-z0-9-]+:[0-9]{12}:(vpn-gateway/vgw|transit-gateway/tgw))|(vgw|tgw))-[a-zA-Z0-9]{8,32}$",
 		//	  "type": "string"
 		//	}
-		"associated_gateway_id": schemaAttributee7cdd283b5abf6509e3318d0(),
+		"associated_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID or ARN of the virtual private gateway or transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +80,10 @@ func directConnectGatewayAssociationDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute7531013bdd1625466cbb413f(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Direct Connect gateway association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectConnectGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +96,10 @@ func directConnectGatewayAssociationDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^(arn:aws[a-z-]*:directconnect::[0-9]{12}:dx-gateway/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"direct_connect_gateway_id": schemaAttributeaf469d61a61bfd37297a81c8(),
+		"direct_connect_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID or ARN of the Direct Connect gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -21,109 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute026bc9ea0ab5dc97b8feedc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the configuration or the configuration data.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0eac0201945543b48b3cf05a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A user-defined label for an AWS AppConfig hosted configuration version.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 64),
-			stringvalidator.RegexMatches(regexp.MustCompile("^$|.*[^0-9].*"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b7c5c75d5de4dbccbc8e230() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current version number of hosted configuration version.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b7a02c291808e0b990d6ea4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// LatestVersionNumber is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute528cb84499f7c466abad5626() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The application ID.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9]{4,7}"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9df3932b4334c9747c5ab956() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the hosted configuration version.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 1024),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb86e7df25d4e51167c72fa4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration profile ID.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9]{4,7}"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef3bef56b55a2e0b7e1b2ca0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A standard MIME type describing the format of the configuration content.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_appconfig_hosted_configuration_version", hostedConfigurationVersionResource)
 }
@@ -140,7 +37,16 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute528cb84499f7c466abad5626(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The application ID.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9]{4,7}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationProfileId
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +55,16 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"configuration_profile_id": schemaAttributedb86e7df25d4e51167c72fa4(),
+		"configuration_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The configuration profile ID.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9]{4,7}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +72,13 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The content of the configuration or the configuration data.",
 		//	  "type": "string"
 		//	}
-		"content": schemaAttribute026bc9ea0ab5dc97b8feedc1(),
+		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content of the configuration or the configuration data.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ContentType
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +88,16 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"content_type": schemaAttributeef3bef56b55a2e0b7e1b2ca0(),
+		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A standard MIME type describing the format of the configuration content.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +107,18 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9df3932b4334c9747c5ab956(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the hosted configuration version.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 1024),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LatestVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +126,16 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "description": "An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.",
 		//	  "type": "integer"
 		//	}
-		"latest_version_number": schemaAttribute4b7a02c291808e0b990d6ea4(),
+		"latest_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// LatestVersionNumber is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: VersionLabel
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +146,19 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^$|.*[^0-9].*",
 		//	  "type": "string"
 		//	}
-		"version_label": schemaAttribute0eac0201945543b48b3cf05a(),
+		"version_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A user-defined label for an AWS AppConfig hosted configuration version.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|.*[^0-9].*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +166,13 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		//	  "description": "Current version number of hosted configuration version.",
 		//	  "type": "string"
 		//	}
-		"version_number": schemaAttribute2b7c5c75d5de4dbccbc8e230(),
+		"version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current version number of hosted configuration version.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

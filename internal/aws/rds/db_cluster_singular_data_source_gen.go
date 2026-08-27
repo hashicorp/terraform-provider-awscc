@@ -15,644 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01259894cb0bbb0e2563a9fa() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.\n Valid for Cluster Type: Aurora MySQL DB clusters only\n Default: ``0``\n Constraints:\n  +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute060de0ccd231bff042dcbb41() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the AWS Backup policy specifies a point-in-time restore rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b209978db22c29e14245b8d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60``\n Default: ``0``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0bd9f80975ab6cc5f1e71cbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d625aba50d9d101a85963dc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d71b5781e6a34f0852d3cae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the ``StorageEncrypted`` property but don't specify this property, the default KMS key is used. If you specify this property, you must set the ``StorageEncrypted`` property to ``true``.\n If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you create a read replica of an encrypted DB cluster in another AWS Region, make sure to set ``KmsKeyId`` to a KMS key identifier that is valid in the destination AWS Region. This KMS key is used to encrypt the read replica in that AWS Region.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute129838de89a7f190cd600c30() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttributea72d2dc9f82caa40c86aba56(),
-		}, /*END SCHEMA*/
-		Description: "The ``ReadEndpoint`` return value specifies the reader endpoint for the DB cluster.\n The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster.\n If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.\n For more information about Aurora endpoints, see [Amazon Aurora connection management](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html) in the *Amazon Aurora User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute135e703a06fe39166d0561c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version number of the database engine to use.\n  Don't use this property if your DB cluster is a member of a global database cluster. Instead, specify the ``EngineVersion`` property on the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. Major version upgrades aren't supported for individual members of a global cluster. Use ``ModifyGlobalCluster`` to upgrade all members of the global cluster.\n  To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:\n  ``aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"`` \n You can supply either ``5.7`` or ``8.0`` to use the default engine version for Aurora MySQL version 2 or version 3, respectively.\n To list all of the available engine versions for Aurora PostgreSQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"`` \n To list all of the available engine versions for RDS for MySQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"`` \n To list all of the available engine versions for RDS for PostgreSQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"`` \n  *Aurora MySQL* \n For information, see [Database engine updates for Amazon Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html) in the *Amazon Aurora User Guide*.\n  *Aurora PostgreSQL* \n For information, see [Amazon Aurora PostgreSQL releases and engine versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html) in the *Amazon Aurora User Guide*.\n  *MySQL* \n For information, see [Amazon RDS for MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt) in the *Amazon RDS User Guide*.\n  *PostgreSQL* \n For information, see [Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts) in the *Amazon RDS User Guide*.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute185165333e01629e40e6b827() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Reserved for future use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute194ad5f0ad8701f0f8108866() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of restore to be performed. You can specify one of the following values:\n  +  ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +  ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a0fd76ec5f1b109cfc0e055() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27cb2a7fe2d5837343d8a725() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS KMS key identifier that is used to encrypt the secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28a3edc31bdbbf854ad782f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the directory ID of the Active Directory to create the DB cluster.\n For Amazon Aurora DB clusters, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB cluster.\n For more information, see [Kerberos authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html) in the *Amazon Aurora User Guide*.\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a5808b9f14615a0164d92fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see [Naming Constraints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon Aurora User Guide*. \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bab70a6cecc8f2662e7b8f0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the DB instances in the DB cluster accept connections.\n Default:\n  +  RDS for MySQL and Aurora MySQL - ``3306``\n  +  RDS for PostgreSQL and Aurora PostgreSQL - ``5432``\n  \n  The ``No interruption`` on update behavior only applies to DB clusters. If you are updating a DB instance, see [Port](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-port) for the AWS::RDS::DBInstance resource.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c44e182351d3c28dba27bf8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time. \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d4a6914f4a0cb5829dcbc3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e9f637626a0b95800f36c95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example ``db.m6gd.xlarge``. Not all DB instance classes are available in all AWS-Regions, or for all database engines.\n For the full list of DB instance classes and availability for your engine, see [DB instance class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) in the *Amazon RDS User Guide*.\n This setting is required to create a Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3153a6cbe53cced6ef67bc24() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of EC2 VPC security groups to associate with this DB cluster.\n If you plan to update the resource, don't specify VPC security groups in a shared VPC.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34d156a1724f29046b217ec9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d595405eab4ccc265193039() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days for which automated backups are retained.\n Default: 1\n Constraints:\n  +  Must be a value from 1 to 35\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40dabb153e95c554e35b95d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. \n  If you aren't configuring a global database cluster, don't specify this property. \n  To remove the DB cluster from a global database cluster, specify an empty value for the ``GlobalClusterIdentifier`` property.\n  For information about Aurora global databases, see [Working with Amazon Aurora Global Databases](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) in the *Amazon Aurora User Guide*.\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute420061c5d5c7095b37b43374() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DB cluster identifier. This parameter is stored as a lowercase string.\n Constraints:\n  +  Must contain from 1 to 63 letters, numbers, or hyphens.\n  +  First character must be a letter.\n  +  Can't end with a hyphen or contain two consecutive hyphens.\n  \n Example: ``my-cluster1``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a9f40da88b28d45f6f6d352() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxCapacity
-			"max_capacity": schemaAttribute9a6ee34de0bceaad1a234192(),
-			// Property: MinCapacity
-			"min_capacity": schemaAttribute97b76964941c1c98b59bb951(),
-			// Property: SecondsUntilAutoPause
-			"seconds_until_auto_pause": schemaAttribute97aaa204c4220411d724473d(),
-		}, /*END SCHEMA*/
-		Description: "The scaling configuration of an Aurora Serverless V2 DB cluster. \n This property is only supported for Aurora Serverless v2. For Aurora Serverless v1, Use the ``ScalingConfiguration`` property.\n Valid for: Aurora Serverless v2 DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ccffd2fc1fd2109fc6b8190() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the DB cluster is publicly accessible.\n Valid for Cluster Type: Multi-AZ DB clusters only\n When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its domain name system (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is controlled by its security group settings.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n The default behavior when ``PubliclyAccessible`` is not specified depends on whether a ``DBSubnetGroup`` is specified.\n If ``DBSubnetGroup`` isn't specified, ``PubliclyAccessible`` defaults to ``true``.\n If ``DBSubnetGroup`` is specified, ``PubliclyAccessible`` defaults to ``false`` unless the value of ``DBSubnetGroup`` is ``default``, in which case ``PubliclyAccessible`` defaults to ``true``.\n If ``PubliclyAccessible`` is true and the VPC that the ``DBSubnetGroup`` is in doesn't have an internet gateway attached to it, Amazon RDS returns an error.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53093af71311998988d21a9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the DB snapshot or DB cluster snapshot to restore from.\n You can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.\n After you restore a DB cluster with a ``SnapshotIdentifier`` property, you must specify the same ``SnapshotIdentifier`` property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the ``SnapshotIdentifier`` property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB cluster is restored from the specified ``SnapshotIdentifier`` property, and the original DB cluster is deleted.\n If you specify the ``SnapshotIdentifier`` property to restore a DB cluster (as opposed to specifying it for DB cluster updates), then don't specify the following properties:\n  +   ``GlobalClusterIdentifier`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``ReplicationSourceIdentifier`` \n  +   ``RestoreType`` \n  +   ``SourceDBClusterIdentifier`` \n  +   ``SourceRegion`` \n  +  ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``UseLatestRestorableTime`` \n  \n Constraints:\n  +  Must match the identifier of an existing Snapshot.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute551d0298bac517ddc8c6d53e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf. For the list of supported feature names, see the ``SupportedFeatureNames`` description in [DBEngineVersion](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DBEngineVersion.html) in the *Amazon RDS API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55214c83b4e6df5491d5c288() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58c7f44a6cbde965c401a9e7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to manage the master user password with AWS Secrets Manager.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Constraints:\n  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b519dd11f7cf3ea27dce4a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the IAM role to use when making API calls to the Directory Service.\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ca3df57e3462c953b33c56d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttributeb5a703cce3b13ee9e1dbdbf3(),
-			// Property: Port
-			"port": schemaAttribute6c998005c0f89047b1ee0e35(),
-		}, /*END SCHEMA*/
-		Description: "The ``Endpoint`` return value specifies the connection endpoint for the primary instance of the DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ef15b04d29a3ca105be6bb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.\n *Important:* Automated backup retention isn't supported with Aurora Limitless Database clusters. If you set this property to ``limitless``, you cannot set ``DeleteAutomatedBackups`` to ``false``. To create a backup, use manual snapshots instead.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61d4d1003f06c127446abbed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute27cb2a7fe2d5837343d8a725(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute1a0fd76ec5f1b109cfc0e055(),
-		}, /*END SCHEMA*/
-		Description: "The secret managed by RDS in AWS Secrets Manager for the master user password.\n  When you restore a DB cluster from a snapshot, Amazon RDS generates a new secret instead of reusing the secret specified in the ``SecretArn`` property. This ensures that the restored DB cluster is securely managed with a dedicated secret. To maintain consistent integration with your application, you might need to update resource configurations to reference the newly created secret.\n  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68eb894441eb91f5ef38ee2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time to restore the DB cluster to.\n Valid Values: Value must be a time in Universal Coordinated Time (UTC) format\n Constraints:\n  +  Must be before the latest restorable time for the DB instance\n  +  Must be specified if ``UseLatestRestorableTime`` parameter isn't provided\n  +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled\n  +  Can't be specified if the ``RestoreType`` parameter is ``copy-on-write``\n  \n This property must be used with ``SourceDBClusterIdentifier`` property. The resulting cluster will have the identifier that matches the value of the ``DBclusterIdentifier`` property.\n Example: ``2015-03-07T23:45:00Z``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b572ce708b71a930648cbf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c998005c0f89047b1ee0e35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the port that the database engine is listening on.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6daa4c4cc725eb786e67d65a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A DB subnet group that you want to associate with this DB cluster. \n If you are restoring a DB cluster to a point in time with ``RestoreType`` set to ``copy-on-write``, and don't specify a DB subnet group name, then the DB cluster is restored with a default DB subnet group.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6eb7f1589ba7f8db1764188e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FeatureName
-				"feature_name": schemaAttribute551d0298bac517ddc8c6d53e(),
-				// Property: RoleArn
-				"role_arn": schemaAttribute90d4926456d82b6cf099bab8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other Amazon Web Services on your behalf.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70bff4b27480e213238cab52() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute965355a713d5aa44dc9958b0(),
-				// Property: Value
-				"value": schemaAttributed039b1c4b5480dcefdf01cf9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the DB cluster.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73b164a3ce9d2a0d02af44f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action to take when the timeout is reached, either ``ForceApplyCapacityChange`` or ``RollbackCapacityChange``.\n ``ForceApplyCapacityChange`` sets the capacity to the specified value as soon as possible.\n ``RollbackCapacityChange``, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n  If you specify ``ForceApplyCapacityChange``, connections that prevent Aurora Serverless v1 from finding a scaling point might be dropped.\n  For more information, see [Autoscaling for Aurora Serverless v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling) in the *Amazon Aurora User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a1fa0f40b392e62f7121c10() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only\n This setting is required to create a Multi-AZ DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7de63111ce9b7ce9060fc404() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The lifecycle type for this DB cluster.\n  By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.\n  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:\n  +  Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*\n  +  Amazon RDS - [Amazon RDS Extended Support with Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*\n  \n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled``\n Default: ``open-source-rds-extended-support``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7eeba5fb4f36ed21343462f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network type of the DB cluster.\n Valid values:\n  +   ``IPV4`` \n  +   ``DUAL`` \n  \n The network type is determined by the ``DBSubnetGroup`` specified for the DB cluster. A ``DBSubnetGroup`` can support only the IPv4 protocol or the IPv4 and IPv6 protocols (``DUAL``).\n For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon Aurora User Guide.*\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83bcbaf57a4bc3e17edfcdaa() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87da40c02d5ec5d0544314cc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89ae3f2c51b7c54f7706100d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.\n You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter enabled, a secondary cluster can forward writes to the current primary cluster, and the resulting changes are replicated back to this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is demoted by a global cluster API operation, but it does nothing until then.\n Valid for Cluster Type: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90d4926456d82b6cf099bab8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93d7f9b21cf32abe46041616() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum capacity for an Aurora DB cluster in ``serverless`` DB engine mode.\n For Aurora MySQL, valid capacity values are ``1``, ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``128``, and ``256``.\n For Aurora PostgreSQL, valid capacity values are ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``192``, and ``384``.\n The maximum capacity must be greater than or equal to the minimum capacity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute965355a713d5aa44dc9958b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97aaa204c4220411d724473d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of seconds an Aurora Serverless v2 DB instance must be idle before Aurora attempts to automatically pause it. \n Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97b76964941c1c98b59bb951() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. For Aurora versions that support the Aurora Serverless v2 auto-pause feature, the smallest value that you can use is 0. For versions that don't support Aurora Serverless v2 auto-pause, the smallest value that you can use is 0.5.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a6ee34de0bceaad1a234192() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.\n The maximum capacity must be higher than 0.5 ACUs. For more information, see [Choosing the maximum Aurora Serverless v2 capacity setting for a cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.setting-capacity.html#aurora-serverless-v2.max_capacity_considerations) in the *Amazon Aurora User Guide*.\n Aurora automatically sets certain parameters for Aurora Serverless V2 DB instances to values that depend on the maximum ACU value in the capacity range. When you update the maximum capacity value, the ``ParameterApplyStatus`` value for the DB instance changes to ``pending-reboot``. You can update the parameter values by rebooting the DB instance after changing the capacity range.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b16a509b3ffc1685b40e2d4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time, in seconds, before an Aurora DB cluster in ``serverless`` mode is paused.\n Specify a value between 300 and 86,400 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e71504df8757428af8d9ead() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3edcdb7ddd8747d82c98990() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).\n Format: ``ddd:hh24:mi-ddd:hh24:mi``\n The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see [Maintaining an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora) in the *Amazon Aurora User Guide.*\n Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.\n Constraints: Minimum 30-minute window.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea72d2dc9f82caa40c86aba56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The host address of the reader endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaaa91075453ac80c8d4c4dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, ``us-east-1``. \n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafcc2a75f355332c8f99e9dd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action. The default is 300.\n Specify a value between 60 and 600 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5a703cce3b13ee9e1dbdbf3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the connection endpoint for the primary instance of the DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb88431f9ccc87697c87d4de8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum capacity for an Aurora DB cluster in ``serverless`` DB engine mode.\n For Aurora MySQL, valid capacity values are ``1``, ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``128``, and ``256``.\n For Aurora PostgreSQL, valid capacity values are ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``192``, and ``384``.\n The minimum capacity must be less than or equal to the maximum capacity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9d17d34a0ed1c239bf9e75d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The master password for the DB instance.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb5f74081a42256480a6f887() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.\n For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd3511f58faa50511f0a34ec() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Aurora User Guide*.\n  *Aurora MySQL* \n Valid values: ``audit``, ``error``, ``general``, ``slowquery``\n  *Aurora PostgreSQL* \n Valid values: ``postgresql``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd949d46263593bfffae3f46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the master user for the DB cluster.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfbba660bff170ab835e8de3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec20fb91b4e2906951b43eafe() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +  *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4a2e890920607347d6e2733() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DB cluster parameter group to associate with this DB cluster.\n  If you apply a parameter group to an existing DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.\n If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.\n  To list all of the available DB cluster parameter group names, use the following command:\n  ``aws rds describe-db-cluster-parameter-groups --query \"DBClusterParameterGroups[].DBClusterParameterGroupName\" --output text`` \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6a70a4fa83e45d6e13f5d11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a read replica.\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed039b1c4b5480dcefdf01cf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6bba3dc21a4f7ddbf7ba7a6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see [Choosing the Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html) in the *Amazon Aurora User Guide*. \n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda9de48803412d473ed38400() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database engine to be used for this DB cluster.\n Valid Values:\n  +   ``aurora-mysql`` \n  +   ``aurora-postgresql`` \n  +   ``mysql`` \n  +   ``postgres`` \n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfc329b152f8050b7e027366() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The storage type to associate with the DB cluster.\n For information on storage types for Aurora DB clusters, see [Storage configurations for Amazon Aurora DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type). For information on storage types for Multi-AZ DB clusters, see [Settings for creating Multi-AZ DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings).\n This setting is required to create a Multi-AZ DB cluster.\n When specified for a Multi-AZ DB cluster, a value for the ``Iops`` parameter is required.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +  Aurora DB clusters - ``aurora | aurora-iopt1``\n  +  Multi-AZ DB clusters - ``io1 | io2 | gp3``\n  \n Default:\n  +  Aurora DB clusters - ``aurora``\n  +  Multi-AZ DB clusters - ``io1``\n  \n  When you create an Aurora DB cluster with the storage type set to ``aurora-iopt1``, the storage type is returned in the response. The storage type isn't returned when you set it to ``aurora``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee05466ebe7520f18de827a4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The daily time range during which automated backups are created. For more information, see [Backup Window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow) in the *Amazon Aurora User Guide.*\n Constraints:\n  +  Must be in the format ``hh24:mi-hh24:mi``.\n  +  Must be in Universal Coordinated Time (UTC).\n  +  Must not conflict with the preferred maintenance window.\n  +  Must be at least 30 minutes.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2030a5a408352f11585fb4e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to allow or disallow automatic pause for an Aurora DB cluster in ``serverless`` DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).\n  If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea823612c3d16d8bb53a76fe() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb6e96df666a852b81dfebd8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.\n For more information, see [IAM Database Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide.*\n Valid for: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef39a830e21c94af315dabb91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoPause
-			"auto_pause": schemaAttributee2030a5a408352f11585fb4e(),
-			// Property: MaxCapacity
-			"max_capacity": schemaAttribute93d7f9b21cf32abe46041616(),
-			// Property: MinCapacity
-			"min_capacity": schemaAttributeb88431f9ccc87697c87d4de8(),
-			// Property: SecondsBeforeTimeout
-			"seconds_before_timeout": schemaAttributeafcc2a75f355332c8f99e9dd(),
-			// Property: SecondsUntilAutoPause
-			"seconds_until_auto_pause": schemaAttribute9b16a509b3ffc1685b40e2d4(),
-			// Property: TimeoutAction
-			"timeout_action": schemaAttribute73b164a3ce9d2a0d02af44f2(),
-		}, /*END SCHEMA*/
-		Description: "The scaling configuration of an Aurora Serverless v1 DB cluster.\n This property is only supported for Aurora Serverless v1. For Aurora Serverless v2, Use the ``ServerlessV2ScalingConfiguration`` property.\n Valid for: Aurora Serverless v1 DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6e2953550b5d2fb8aee70d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.\n You can specify one of the following values:\n  +  ``password`` - Use standard database authentication with a password.\n  +  ``iam-db-auth`` - Use IAM database authentication for the master user.\n  \n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n This option is only valid for RDS for MySQL, RDS for MariaDB, RDS for PostgreSQL, Aurora MySQL, and Aurora PostgreSQL engines.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef914277dd097da47f369041d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DB parameter group to apply to all instances of the DB cluster.\n  When you apply a parameter group using the ``DBInstanceParameterGroupName`` parameter, the DB cluster isn't rebooted automatically. Also, parameter changes are applied immediately rather than during the next maintenance window.\n  Valid for Cluster Type: Aurora DB clusters only\n Default: The existing name setting\n Constraints:\n  +  The DB parameter group must be in the same DB parameter group family as this DB cluster.\n  +  The ``DBInstanceParameterGroupName`` parameter is valid in combination with the ``AllowMajorVersionUpgrade`` parameter for a major version upgrade only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9a935a41bb576508f7e1fe0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.\n For information about valid IOPS values, see [Provisioned IOPS storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS) in the *Amazon RDS User Guide*.\n This setting is required to create a Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Constraints:\n  +  Must be a multiple between .5 and 50 of the storage amount for the DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcf20c49d48ee37655e886c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource ID of the source DB cluster from which to restore.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe4c341e63d5b3d6083ee31e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DB engine mode of the DB cluster, either ``provisioned`` or ``serverless``.\n The ``serverless`` engine mode only applies for Aurora Serverless v1 DB clusters. Aurora Serverless v2 DB clusters use the ``provisioned`` engine mode.\n For information about limitations and requirements for Serverless DB clusters, see the following sections in the *Amazon Aurora User Guide*:\n  +   [Limitations of Aurora Serverless v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations) \n  +   [Requirements for Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html) \n  \n Valid for Cluster Type: Aurora DB clusters only",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffc1af5d9b6d8d220c5188ea() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the DB cluster is encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``SnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used.\n If you specify the ``SnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB cluster is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB cluster to be encrypted, then don't set this property or set it to ``false``.\n  If you specify both the ``StorageEncrypted`` and ``SnapshotIdentifier`` properties without specifying the ``KmsKeyId`` property, then the restored DB cluster inherits the encryption settings from the DB snapshot that provide.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_cluster", dBClusterDataSource)
 }
@@ -668,7 +30,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only\n This setting is required to create a Multi-AZ DB cluster.",
 		//	  "type": "integer"
 		//	}
-		"allocated_storage": schemaAttribute7a1fa0f40b392e62f7121c10(),
+		"allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only\n This setting is required to create a Multi-AZ DB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedRoles
 		// CloudFormation resource type schema:
 		//
@@ -695,7 +60,24 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"associated_roles": schemaAttribute6eb7f1589ba7f8db1764188e(),
+		"associated_roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FeatureName
+					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf. For the list of supported feature names, see the ``SupportedFeatureNames`` description in [DBEngineVersion](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DBEngineVersion.html) in the *Amazon RDS API Reference*.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other Amazon Web Services on your behalf.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -703,7 +85,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.\n For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades).",
 		//	  "type": "boolean"
 		//	}
-		"auto_minor_version_upgrade": schemaAttributebb5f74081a42256480a6f887(),
+		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB cluster.\n For more information about automatic minor version upgrades, see [Automatically upgrading the minor engine version](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -715,7 +100,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"availability_zones": schemaAttributed6bba3dc21a4f7ddbf7ba7a6(),
+		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see [Choosing the Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html) in the *Amazon Aurora User Guide*. \n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BacktrackWindow
 		// CloudFormation resource type schema:
 		//
@@ -724,7 +113,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"backtrack_window": schemaAttribute01259894cb0bbb0e2563a9fa(),
+		"backtrack_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.\n Valid for Cluster Type: Aurora MySQL DB clusters only\n Default: ``0``\n Constraints:\n  +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -734,7 +126,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"backup_retention_period": schemaAttribute3d595405eab4ccc265193039(),
+		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days for which automated backups are retained.\n Default: 1\n Constraints:\n  +  Must be a value from 1 to 35\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterScalabilityType
 		// CloudFormation resource type schema:
 		//
@@ -742,7 +137,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.\n *Important:* Automated backup retention isn't supported with Aurora Limitless Database clusters. If you set this property to ``limitless``, you cannot set ``DeleteAutomatedBackups`` to ``false``. To create a backup, use manual snapshots instead.",
 		//	  "type": "string"
 		//	}
-		"cluster_scalability_type": schemaAttribute5ef15b04d29a3ca105be6bb0(),
+		"cluster_scalability_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.\n *Important:* Automated backup retention isn't supported with Aurora Limitless Database clusters. If you set this property to ``limitless``, you cannot set ``DeleteAutomatedBackups`` to ``false``. To create a backup, use manual snapshots instead.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CopyTagsToSnapshot
 		// CloudFormation resource type schema:
 		//
@@ -750,7 +148,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "boolean"
 		//	}
-		"copy_tags_to_snapshot": schemaAttributeea823612c3d16d8bb53a76fe(),
+		"copy_tags_to_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -758,7 +159,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"db_cluster_arn": schemaAttribute0bd9f80975ab6cc5f1e71cbc(),
+		"db_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -769,7 +173,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schemaAttribute420061c5d5c7095b37b43374(),
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DB cluster identifier. This parameter is stored as a lowercase string.\n Constraints:\n  +  Must contain from 1 to 63 letters, numbers, or hyphens.\n  +  First character must be a letter.\n  +  Can't end with a hyphen or contain two consecutive hyphens.\n  \n Example: ``my-cluster1``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterInstanceClass
 		// CloudFormation resource type schema:
 		//
@@ -777,7 +184,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example ``db.m6gd.xlarge``. Not all DB instance classes are available in all AWS-Regions, or for all database engines.\n For the full list of DB instance classes and availability for your engine, see [DB instance class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) in the *Amazon RDS User Guide*.\n This setting is required to create a Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only",
 		//	  "type": "string"
 		//	}
-		"db_cluster_instance_class": schemaAttribute2e9f637626a0b95800f36c95(),
+		"db_cluster_instance_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example ``db.m6gd.xlarge``. Not all DB instance classes are available in all AWS-Regions, or for all database engines.\n For the full list of DB instance classes and availability for your engine, see [DB instance class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) in the *Amazon RDS User Guide*.\n This setting is required to create a Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -785,7 +195,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the DB cluster parameter group to associate with this DB cluster.\n  If you apply a parameter group to an existing DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.\n If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.\n  To list all of the available DB cluster parameter group names, use the following command:\n  ``aws rds describe-db-cluster-parameter-groups --query \"DBClusterParameterGroups[].DBClusterParameterGroupName\" --output text`` \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"db_cluster_parameter_group_name": schemaAttributec4a2e890920607347d6e2733(),
+		"db_cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the DB cluster parameter group to associate with this DB cluster.\n  If you apply a parameter group to an existing DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.\n If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.\n  To list all of the available DB cluster parameter group names, use the following command:\n  ``aws rds describe-db-cluster-parameter-groups --query \"DBClusterParameterGroups[].DBClusterParameterGroupName\" --output text`` \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -793,7 +206,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"db_cluster_resource_id": schemaAttribute0bd9f80975ab6cc5f1e71cbc(),
+		"db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBInstanceParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -801,7 +217,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the DB parameter group to apply to all instances of the DB cluster.\n  When you apply a parameter group using the ``DBInstanceParameterGroupName`` parameter, the DB cluster isn't rebooted automatically. Also, parameter changes are applied immediately rather than during the next maintenance window.\n  Valid for Cluster Type: Aurora DB clusters only\n Default: The existing name setting\n Constraints:\n  +  The DB parameter group must be in the same DB parameter group family as this DB cluster.\n  +  The ``DBInstanceParameterGroupName`` parameter is valid in combination with the ``AllowMajorVersionUpgrade`` parameter for a major version upgrade only.",
 		//	  "type": "string"
 		//	}
-		"db_instance_parameter_group_name": schemaAttributef914277dd097da47f369041d(),
+		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the DB parameter group to apply to all instances of the DB cluster.\n  When you apply a parameter group using the ``DBInstanceParameterGroupName`` parameter, the DB cluster isn't rebooted automatically. Also, parameter changes are applied immediately rather than during the next maintenance window.\n  Valid for Cluster Type: Aurora DB clusters only\n Default: The existing name setting\n Constraints:\n  +  The DB parameter group must be in the same DB parameter group family as this DB cluster.\n  +  The ``DBInstanceParameterGroupName`` parameter is valid in combination with the ``AllowMajorVersionUpgrade`` parameter for a major version upgrade only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -809,7 +228,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A DB subnet group that you want to associate with this DB cluster. \n If you are restoring a DB cluster to a point in time with ``RestoreType`` set to ``copy-on-write``, and don't specify a DB subnet group name, then the DB cluster is restored with a default DB subnet group.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_name": schemaAttribute6daa4c4cc725eb786e67d65a(),
+		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A DB subnet group that you want to associate with this DB cluster. \n If you are restoring a DB cluster to a point in time with ``RestoreType`` set to ``copy-on-write``, and don't specify a DB subnet group name, then the DB cluster is restored with a default DB subnet group.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSystemId
 		// CloudFormation resource type schema:
 		//
@@ -817,7 +239,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Reserved for future use.",
 		//	  "type": "string"
 		//	}
-		"db_system_id": schemaAttribute185165333e01629e40e6b827(),
+		"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Reserved for future use.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseInsightsMode
 		// CloudFormation resource type schema:
 		//
@@ -825,7 +250,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"database_insights_mode": schemaAttribute55214c83b4e6df5491d5c288(),
+		"database_insights_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode of Database Insights to enable for the DB cluster.\n If you set this value to ``advanced``, you must also set the ``PerformanceInsightsEnabled`` parameter to ``true`` and the ``PerformanceInsightsRetentionPeriod`` parameter to 465.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -833,7 +261,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see [Naming Constraints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon Aurora User Guide*. \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"database_name": schemaAttribute2a5808b9f14615a0164d92fa(),
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see [Naming Constraints](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon Aurora User Guide*. \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteAutomatedBackups
 		// CloudFormation resource type schema:
 		//
@@ -841,7 +272,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the AWS Backup policy specifies a point-in-time restore rule.",
 		//	  "type": "boolean"
 		//	}
-		"delete_automated_backups": schemaAttribute060de0ccd231bff042dcbb41(),
+		"delete_automated_backups": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the AWS Backup policy specifies a point-in-time restore rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -849,7 +283,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schemaAttributebfbba660bff170ab835e8de3(),
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -857,7 +294,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates the directory ID of the Active Directory to create the DB cluster.\n For Amazon Aurora DB clusters, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB cluster.\n For more information, see [Kerberos authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html) in the *Amazon Aurora User Guide*.\n Valid for: Aurora DB clusters only",
 		//	  "type": "string"
 		//	}
-		"domain": schemaAttribute28a3edc31bdbbf854ad782f7(),
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the directory ID of the Active Directory to create the DB cluster.\n For Amazon Aurora DB clusters, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB cluster.\n For more information, see [Kerberos authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html) in the *Amazon Aurora User Guide*.\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIAMRoleName
 		// CloudFormation resource type schema:
 		//
@@ -865,7 +305,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the name of the IAM role to use when making API calls to the Directory Service.\n Valid for: Aurora DB clusters only",
 		//	  "type": "string"
 		//	}
-		"domain_iam_role_name": schemaAttribute5b519dd11f7cf3ea27dce4a5(),
+		"domain_iam_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the IAM role to use when making API calls to the Directory Service.\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableCloudwatchLogsExports
 		// CloudFormation resource type schema:
 		//
@@ -877,7 +320,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"enable_cloudwatch_logs_exports": schemaAttributebd3511f58faa50511f0a34ec(),
+		"enable_cloudwatch_logs_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see [Publishing Database Logs to Amazon CloudWatch Logs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch) in the *Amazon Aurora User Guide*.\n  *Aurora MySQL* \n Valid values: ``audit``, ``error``, ``general``, ``slowquery``\n  *Aurora PostgreSQL* \n Valid values: ``postgresql``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableGlobalWriteForwarding
 		// CloudFormation resource type schema:
 		//
@@ -885,7 +332,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.\n You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter enabled, a secondary cluster can forward writes to the current primary cluster, and the resulting changes are replicated back to this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is demoted by a global cluster API operation, but it does nothing until then.\n Valid for Cluster Type: Aurora DB clusters only",
 		//	  "type": "boolean"
 		//	}
-		"enable_global_write_forwarding": schemaAttribute89ae3f2c51b7c54f7706100d(),
+		"enable_global_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.\n You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter enabled, a secondary cluster can forward writes to the current primary cluster, and the resulting changes are replicated back to this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is demoted by a global cluster API operation, but it does nothing until then.\n Valid for Cluster Type: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableHttpEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -893,7 +343,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
 		//	  "type": "boolean"
 		//	}
-		"enable_http_endpoint": schemaAttribute0d625aba50d9d101a85963dc(),
+		"enable_http_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enable the HTTP endpoint for the DB cluster. By default, the HTTP endpoint isn't enabled.\n When enabled, the HTTP endpoint provides a connectionless web service API (RDS Data API) for running SQL queries on the DB cluster. You can also query your database from inside the RDS console with the RDS query editor.\n For more information, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.\n Valid for Cluster Type: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableIAMDatabaseAuthentication
 		// CloudFormation resource type schema:
 		//
@@ -901,7 +354,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.\n For more information, see [IAM Database Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide.*\n Valid for: Aurora DB clusters only",
 		//	  "type": "boolean"
 		//	}
-		"enable_iam_database_authentication": schemaAttributeeb6e96df666a852b81dfebd8(),
+		"enable_iam_database_authentication": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.\n For more information, see [IAM Database Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) in the *Amazon Aurora User Guide.*\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableLocalWriteForwarding
 		// CloudFormation resource type schema:
 		//
@@ -909,7 +365,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.\n Valid for: Aurora DB clusters only",
 		//	  "type": "boolean"
 		//	}
-		"enable_local_write_forwarding": schemaAttribute9e71504df8757428af8d9ead(),
+		"enable_local_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -928,7 +387,22 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint": schemaAttribute5ca3df57e3462c953b33c56d(),
+		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the connection endpoint for the primary instance of the DB cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the port that the database engine is listening on.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ``Endpoint`` return value specifies the connection endpoint for the primary instance of the DB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -936,7 +410,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the database engine to be used for this DB cluster.\n Valid Values:\n  +   ``aurora-mysql`` \n  +   ``aurora-postgresql`` \n  +   ``mysql`` \n  +   ``postgres`` \n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttributeda9de48803412d473ed38400(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database engine to be used for this DB cluster.\n Valid Values:\n  +   ``aurora-mysql`` \n  +   ``aurora-postgresql`` \n  +   ``mysql`` \n  +   ``postgres`` \n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineLifecycleSupport
 		// CloudFormation resource type schema:
 		//
@@ -944,7 +421,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The lifecycle type for this DB cluster.\n  By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.\n  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:\n  +  Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*\n  +  Amazon RDS - [Amazon RDS Extended Support with Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*\n  \n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled``\n Default: ``open-source-rds-extended-support``",
 		//	  "type": "string"
 		//	}
-		"engine_lifecycle_support": schemaAttribute7de63111ce9b7ce9060fc404(),
+		"engine_lifecycle_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The lifecycle type for this DB cluster.\n  By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.\n  You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:\n  +  Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*\n  +  Amazon RDS - [Amazon RDS Extended Support with Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*\n  \n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled``\n Default: ``open-source-rds-extended-support``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineMode
 		// CloudFormation resource type schema:
 		//
@@ -952,7 +432,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The DB engine mode of the DB cluster, either ``provisioned`` or ``serverless``.\n The ``serverless`` engine mode only applies for Aurora Serverless v1 DB clusters. Aurora Serverless v2 DB clusters use the ``provisioned`` engine mode.\n For information about limitations and requirements for Serverless DB clusters, see the following sections in the *Amazon Aurora User Guide*:\n  +   [Limitations of Aurora Serverless v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations) \n  +   [Requirements for Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html) \n  \n Valid for Cluster Type: Aurora DB clusters only",
 		//	  "type": "string"
 		//	}
-		"engine_mode": schemaAttributefe4c341e63d5b3d6083ee31e(),
+		"engine_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DB engine mode of the DB cluster, either ``provisioned`` or ``serverless``.\n The ``serverless`` engine mode only applies for Aurora Serverless v1 DB clusters. Aurora Serverless v2 DB clusters use the ``provisioned`` engine mode.\n For information about limitations and requirements for Serverless DB clusters, see the following sections in the *Amazon Aurora User Guide*:\n  +   [Limitations of Aurora Serverless v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations) \n  +   [Requirements for Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html) \n  \n Valid for Cluster Type: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -960,7 +443,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version number of the database engine to use.\n  Don't use this property if your DB cluster is a member of a global database cluster. Instead, specify the ``EngineVersion`` property on the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. Major version upgrades aren't supported for individual members of a global cluster. Use ``ModifyGlobalCluster`` to upgrade all members of the global cluster.\n  To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:\n  ``aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"`` \n You can supply either ``5.7`` or ``8.0`` to use the default engine version for Aurora MySQL version 2 or version 3, respectively.\n To list all of the available engine versions for Aurora PostgreSQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"`` \n To list all of the available engine versions for RDS for MySQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"`` \n To list all of the available engine versions for RDS for PostgreSQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"`` \n  *Aurora MySQL* \n For information, see [Database engine updates for Amazon Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html) in the *Amazon Aurora User Guide*.\n  *Aurora PostgreSQL* \n For information, see [Amazon Aurora PostgreSQL releases and engine versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html) in the *Amazon Aurora User Guide*.\n  *MySQL* \n For information, see [Amazon RDS for MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt) in the *Amazon RDS User Guide*.\n  *PostgreSQL* \n For information, see [Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts) in the *Amazon RDS User Guide*.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute135e703a06fe39166d0561c5(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the database engine to use.\n  Don't use this property if your DB cluster is a member of a global database cluster. Instead, specify the ``EngineVersion`` property on the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. Major version upgrades aren't supported for individual members of a global cluster. Use ``ModifyGlobalCluster`` to upgrade all members of the global cluster.\n  To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:\n  ``aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"`` \n You can supply either ``5.7`` or ``8.0`` to use the default engine version for Aurora MySQL version 2 or version 3, respectively.\n To list all of the available engine versions for Aurora PostgreSQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"`` \n To list all of the available engine versions for RDS for MySQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"`` \n To list all of the available engine versions for RDS for PostgreSQL, use the following command:\n  ``aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"`` \n  *Aurora MySQL* \n For information, see [Database engine updates for Amazon Aurora MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html) in the *Amazon Aurora User Guide*.\n  *Aurora PostgreSQL* \n For information, see [Amazon Aurora PostgreSQL releases and engine versions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html) in the *Amazon Aurora User Guide*.\n  *MySQL* \n For information, see [Amazon RDS for MySQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt) in the *Amazon RDS User Guide*.\n  *PostgreSQL* \n For information, see [Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts) in the *Amazon RDS User Guide*.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -971,7 +457,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"global_cluster_identifier": schemaAttribute40dabb153e95c554e35b95d4(),
+		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. \n  If you aren't configuring a global database cluster, don't specify this property. \n  To remove the DB cluster from a global database cluster, specify an empty value for the ``GlobalClusterIdentifier`` property.\n  For information about Aurora global databases, see [Working with Amazon Aurora Global Databases](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) in the *Amazon Aurora User Guide*.\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
@@ -979,7 +468,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.\n For information about valid IOPS values, see [Provisioned IOPS storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS) in the *Amazon RDS User Guide*.\n This setting is required to create a Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Constraints:\n  +  Must be a multiple between .5 and 50 of the storage amount for the DB cluster.",
 		//	  "type": "integer"
 		//	}
-		"iops": schemaAttributef9a935a41bb576508f7e1fe0(),
+		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.\n For information about valid IOPS values, see [Provisioned IOPS storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS) in the *Amazon RDS User Guide*.\n This setting is required to create a Multi-AZ DB cluster.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Constraints:\n  +  Must be a multiple between .5 and 50 of the storage amount for the DB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -987,7 +479,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the ``StorageEncrypted`` property but don't specify this property, the default KMS key is used. If you specify this property, you must set the ``StorageEncrypted`` property to ``true``.\n If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you create a read replica of an encrypted DB cluster in another AWS Region, make sure to set ``KmsKeyId`` to a KMS key identifier that is valid in the destination AWS Region. This KMS key is used to encrypt the read replica in that AWS Region.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute0d71b5781e6a34f0852d3cae(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the ``StorageEncrypted`` property but don't specify this property, the default KMS key is used. If you specify this property, you must set the ``StorageEncrypted`` property to ``true``.\n If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you create a read replica of an encrypted DB cluster in another AWS Region, make sure to set ``KmsKeyId`` to a KMS key identifier that is valid in the destination AWS Region. This KMS key is used to encrypt the read replica in that AWS Region.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManageMasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -995,7 +490,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to manage the master user password with AWS Secrets Manager.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Constraints:\n  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.",
 		//	  "type": "boolean"
 		//	}
-		"manage_master_user_password": schemaAttribute58c7f44a6cbde965c401a9e7(),
+		"manage_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to manage the master user password with AWS Secrets Manager.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Constraints:\n  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserAuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -1003,7 +501,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.\n You can specify one of the following values:\n  +  ``password`` - Use standard database authentication with a password.\n  +  ``iam-db-auth`` - Use IAM database authentication for the master user.\n  \n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n This option is only valid for RDS for MySQL, RDS for MariaDB, RDS for PostgreSQL, Aurora MySQL, and Aurora PostgreSQL engines.",
 		//	  "type": "string"
 		//	}
-		"master_user_authentication_type": schemaAttributef6e2953550b5d2fb8aee70d8(),
+		"master_user_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.\n You can specify one of the following values:\n  +  ``password`` - Use standard database authentication with a password.\n  +  ``iam-db-auth`` - Use IAM database authentication for the master user.\n  \n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n This option is only valid for RDS for MySQL, RDS for MariaDB, RDS for PostgreSQL, Aurora MySQL, and Aurora PostgreSQL engines.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -1011,7 +512,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The master password for the DB instance.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"master_user_password": schemaAttributeb9d17d34a0ed1c239bf9e75d(),
+		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The master password for the DB instance.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserSecret
 		// CloudFormation resource type schema:
 		//
@@ -1030,7 +534,22 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"master_user_secret": schemaAttribute61d4d1003f06c127446abbed(),
+		"master_user_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS key identifier that is used to encrypt the secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The secret managed by RDS in AWS Secrets Manager for the master user password.\n  When you restore a DB cluster from a snapshot, Amazon RDS generates a new secret instead of reusing the secret specified in the ``SecretArn`` property. This ensures that the restored DB cluster is securely managed with a dedicated secret. To maintain consistent integration with your application, you might need to update resource configurations to reference the newly created secret.\n  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide* and [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html) in the *Amazon Aurora User Guide.*",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -1040,7 +559,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9_]*$",
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttributebd949d46263593bfffae3f46(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the master user for the DB cluster.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitoringInterval
 		// CloudFormation resource type schema:
 		//
@@ -1048,7 +570,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60``\n Default: ``0``",
 		//	  "type": "integer"
 		//	}
-		"monitoring_interval": schemaAttribute0b209978db22c29e14245b8d(),
+		"monitoring_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, also set ``MonitoringInterval`` to a value other than ``0``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60``\n Default: ``0``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitoringRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1056,7 +581,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"monitoring_role_arn": schemaAttribute34d156a1724f29046b217ec9(),
+		"monitoring_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is ``arn:aws:iam:123456789012:role/emaccess``. For information on creating a monitoring role, see [Setting up and enabling Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling) in the *Amazon RDS User Guide*.\n If ``MonitoringInterval`` is set to a value other than ``0``, supply a ``MonitoringRoleArn`` value.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -1064,7 +592,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The network type of the DB cluster.\n Valid values:\n  +   ``IPV4`` \n  +   ``DUAL`` \n  \n The network type is determined by the ``DBSubnetGroup`` specified for the DB cluster. A ``DBSubnetGroup`` can support only the IPv4 protocol or the IPv4 and IPv6 protocols (``DUAL``).\n For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon Aurora User Guide.*\n Valid for: Aurora DB clusters only",
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttribute7eeba5fb4f36ed21343462f7(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB cluster.\n Valid values:\n  +   ``IPV4`` \n  +   ``DUAL`` \n  \n The network type is determined by the ``DBSubnetGroup`` specified for the DB cluster. A ``DBSubnetGroup`` can support only the IPv4 protocol or the IPv4 and IPv6 protocols (``DUAL``).\n For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon Aurora User Guide.*\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformanceInsightsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -1072,7 +603,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "boolean"
 		//	}
-		"performance_insights_enabled": schemaAttribute83bcbaf57a4bc3e17edfcdaa(),
+		"performance_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to turn on Performance Insights for the DB cluster.\n For more information, see [Using Amazon Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html) in the *Amazon RDS User Guide*.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformanceInsightsKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -1080,7 +614,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"performance_insights_kms_key_id": schemaAttribute2d4a6914f4a0cb5829dcbc3b(),
+		"performance_insights_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS key identifier for encryption of Performance Insights data.\n The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you don't specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS-account. Your AWS-account has a different default KMS key for each AWS-Region.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformanceInsightsRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -1088,7 +625,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +  *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
 		//	  "type": "integer"
 		//	}
-		"performance_insights_retention_period": schemaAttributec20fb91b4e2906951b43eafe(),
+		"performance_insights_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to retain Performance Insights data. When creating a DB cluster without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +   ``7`` \n  +  *month* * 31, where *month* is a number of months from 1-23. Examples: ``93`` (3 months * 31), ``341`` (11 months * 31), ``589`` (19 months * 31)\n  +   ``731`` \n  \n Default: ``7`` days\n If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -1096,7 +636,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port number on which the DB instances in the DB cluster accept connections.\n Default:\n  +  RDS for MySQL and Aurora MySQL - ``3306``\n  +  RDS for PostgreSQL and Aurora PostgreSQL - ``5432``\n  \n  The ``No interruption`` on update behavior only applies to DB clusters. If you are updating a DB instance, see [Port](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-port) for the AWS::RDS::DBInstance resource.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute2bab70a6cecc8f2662e7b8f0(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the DB instances in the DB cluster accept connections.\n Default:\n  +  RDS for MySQL and Aurora MySQL - ``3306``\n  +  RDS for PostgreSQL and Aurora PostgreSQL - ``5432``\n  \n  The ``No interruption`` on update behavior only applies to DB clusters. If you are updating a DB instance, see [Port](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-port) for the AWS::RDS::DBInstance resource.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredBackupWindow
 		// CloudFormation resource type schema:
 		//
@@ -1104,7 +647,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The daily time range during which automated backups are created. For more information, see [Backup Window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow) in the *Amazon Aurora User Guide.*\n Constraints:\n  +  Must be in the format ``hh24:mi-hh24:mi``.\n  +  Must be in Universal Coordinated Time (UTC).\n  +  Must not conflict with the preferred maintenance window.\n  +  Must be at least 30 minutes.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"preferred_backup_window": schemaAttributee05466ebe7520f18de827a4a(),
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The daily time range during which automated backups are created. For more information, see [Backup Window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow) in the *Amazon Aurora User Guide.*\n Constraints:\n  +  Must be in the format ``hh24:mi-hh24:mi``.\n  +  Must be in Universal Coordinated Time (UTC).\n  +  Must not conflict with the preferred maintenance window.\n  +  Must be at least 30 minutes.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -1112,7 +658,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).\n Format: ``ddd:hh24:mi-ddd:hh24:mi``\n The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see [Maintaining an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora) in the *Amazon Aurora User Guide.*\n Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.\n Constraints: Minimum 30-minute window.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttributea3edcdb7ddd8747d82c98990(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).\n Format: ``ddd:hh24:mi-ddd:hh24:mi``\n The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see [Maintaining an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora) in the *Amazon Aurora User Guide.*\n Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.\n Constraints: Minimum 30-minute window.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -1120,7 +669,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the DB cluster is publicly accessible.\n Valid for Cluster Type: Multi-AZ DB clusters only\n When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its domain name system (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is controlled by its security group settings.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n The default behavior when ``PubliclyAccessible`` is not specified depends on whether a ``DBSubnetGroup`` is specified.\n If ``DBSubnetGroup`` isn't specified, ``PubliclyAccessible`` defaults to ``true``.\n If ``DBSubnetGroup`` is specified, ``PubliclyAccessible`` defaults to ``false`` unless the value of ``DBSubnetGroup`` is ``default``, in which case ``PubliclyAccessible`` defaults to ``true``.\n If ``PubliclyAccessible`` is true and the VPC that the ``DBSubnetGroup`` is in doesn't have an internet gateway attached to it, Amazon RDS returns an error.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttribute4ccffd2fc1fd2109fc6b8190(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the DB cluster is publicly accessible.\n Valid for Cluster Type: Multi-AZ DB clusters only\n When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its domain name system (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is controlled by its security group settings.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n The default behavior when ``PubliclyAccessible`` is not specified depends on whether a ``DBSubnetGroup`` is specified.\n If ``DBSubnetGroup`` isn't specified, ``PubliclyAccessible`` defaults to ``true``.\n If ``DBSubnetGroup`` is specified, ``PubliclyAccessible`` defaults to ``false`` unless the value of ``DBSubnetGroup`` is ``default``, in which case ``PubliclyAccessible`` defaults to ``true``.\n If ``PubliclyAccessible`` is true and the VPC that the ``DBSubnetGroup`` is in doesn't have an internet gateway attached to it, Amazon RDS returns an error.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReadEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -1135,7 +687,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"read_endpoint": schemaAttribute129838de89a7f190cd600c30(),
+		"read_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The host address of the reader endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ``ReadEndpoint`` return value specifies the reader endpoint for the DB cluster.\n The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster.\n If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.\n For more information about Aurora endpoints, see [Amazon Aurora connection management](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html) in the *Amazon Aurora User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationSourceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1143,7 +705,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a read replica.\n Valid for: Aurora DB clusters only",
 		//	  "type": "string"
 		//	}
-		"replication_source_identifier": schemaAttributec6a70a4fa83e45d6e13f5d11(),
+		"replication_source_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a read replica.\n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestoreToTime
 		// CloudFormation resource type schema:
 		//
@@ -1151,7 +716,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time to restore the DB cluster to.\n Valid Values: Value must be a time in Universal Coordinated Time (UTC) format\n Constraints:\n  +  Must be before the latest restorable time for the DB instance\n  +  Must be specified if ``UseLatestRestorableTime`` parameter isn't provided\n  +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled\n  +  Can't be specified if the ``RestoreType`` parameter is ``copy-on-write``\n  \n This property must be used with ``SourceDBClusterIdentifier`` property. The resulting cluster will have the identifier that matches the value of the ``DBclusterIdentifier`` property.\n Example: ``2015-03-07T23:45:00Z``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"restore_to_time": schemaAttribute68eb894441eb91f5ef38ee2b(),
+		"restore_to_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time to restore the DB cluster to.\n Valid Values: Value must be a time in Universal Coordinated Time (UTC) format\n Constraints:\n  +  Must be before the latest restorable time for the DB instance\n  +  Must be specified if ``UseLatestRestorableTime`` parameter isn't provided\n  +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled\n  +  Can't be specified if the ``RestoreType`` parameter is ``copy-on-write``\n  \n This property must be used with ``SourceDBClusterIdentifier`` property. The resulting cluster will have the identifier that matches the value of the ``DBclusterIdentifier`` property.\n Example: ``2015-03-07T23:45:00Z``\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestoreType
 		// CloudFormation resource type schema:
 		//
@@ -1159,7 +727,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of restore to be performed. You can specify one of the following values:\n  +  ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +  ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"restore_type": schemaAttribute194ad5f0ad8701f0f8108866(),
+		"restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of restore to be performed. You can specify one of the following values:\n  +  ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +  ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1194,7 +765,42 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scaling_configuration": schemaAttributef39a830e21c94af315dabb91(),
+		"scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoPause
+				"auto_pause": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to allow or disallow automatic pause for an Aurora DB cluster in ``serverless`` DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).\n  If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum capacity for an Aurora DB cluster in ``serverless`` DB engine mode.\n For Aurora MySQL, valid capacity values are ``1``, ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``128``, and ``256``.\n For Aurora PostgreSQL, valid capacity values are ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``192``, and ``384``.\n The maximum capacity must be greater than or equal to the minimum capacity.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacity
+				"min_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum capacity for an Aurora DB cluster in ``serverless`` DB engine mode.\n For Aurora MySQL, valid capacity values are ``1``, ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``128``, and ``256``.\n For Aurora PostgreSQL, valid capacity values are ``2``, ``4``, ``8``, ``16``, ``32``, ``64``, ``192``, and ``384``.\n The minimum capacity must be less than or equal to the maximum capacity.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecondsBeforeTimeout
+				"seconds_before_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action. The default is 300.\n Specify a value between 60 and 600 seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecondsUntilAutoPause
+				"seconds_until_auto_pause": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time, in seconds, before an Aurora DB cluster in ``serverless`` mode is paused.\n Specify a value between 300 and 86,400 seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutAction
+				"timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The action to take when the timeout is reached, either ``ForceApplyCapacityChange`` or ``RollbackCapacityChange``.\n ``ForceApplyCapacityChange`` sets the capacity to the specified value as soon as possible.\n ``RollbackCapacityChange``, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n  If you specify ``ForceApplyCapacityChange``, connections that prevent Aurora Serverless v1 from finding a scaling point might be dropped.\n  For more information, see [Autoscaling for Aurora Serverless v1](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling) in the *Amazon Aurora User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scaling configuration of an Aurora Serverless v1 DB cluster.\n This property is only supported for Aurora Serverless v1. For Aurora Serverless v2, Use the ``ServerlessV2ScalingConfiguration`` property.\n Valid for: Aurora Serverless v1 DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerlessV2ScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1217,7 +823,27 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"serverless_v2_scaling_configuration": schemaAttribute4a9f40da88b28d45f6f6d352(),
+		"serverless_v2_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.\n The maximum capacity must be higher than 0.5 ACUs. For more information, see [Choosing the maximum Aurora Serverless v2 capacity setting for a cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.setting-capacity.html#aurora-serverless-v2.max_capacity_considerations) in the *Amazon Aurora User Guide*.\n Aurora automatically sets certain parameters for Aurora Serverless V2 DB instances to values that depend on the maximum ACU value in the capacity range. When you update the maximum capacity value, the ``ParameterApplyStatus`` value for the DB instance changes to ``pending-reboot``. You can update the parameter values by rebooting the DB instance after changing the capacity range.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacity
+				"min_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. For Aurora versions that support the Aurora Serverless v2 auto-pause feature, the smallest value that you can use is 0. For versions that don't support Aurora Serverless v2 auto-pause, the smallest value that you can use is 0.5.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecondsUntilAutoPause
+				"seconds_until_auto_pause": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the number of seconds an Aurora Serverless v2 DB instance must be idle before Aurora attempts to automatically pause it. \n Specify a value between 300 seconds (five minutes) and 86,400 seconds (one day). The default is 300 seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scaling configuration of an Aurora Serverless V2 DB cluster. \n This property is only supported for Aurora Serverless v2. For Aurora Serverless v1, Use the ``ScalingConfiguration`` property.\n Valid for: Aurora Serverless v2 DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1225,7 +851,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier for the DB snapshot or DB cluster snapshot to restore from.\n You can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.\n After you restore a DB cluster with a ``SnapshotIdentifier`` property, you must specify the same ``SnapshotIdentifier`` property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the ``SnapshotIdentifier`` property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB cluster is restored from the specified ``SnapshotIdentifier`` property, and the original DB cluster is deleted.\n If you specify the ``SnapshotIdentifier`` property to restore a DB cluster (as opposed to specifying it for DB cluster updates), then don't specify the following properties:\n  +   ``GlobalClusterIdentifier`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``ReplicationSourceIdentifier`` \n  +   ``RestoreType`` \n  +   ``SourceDBClusterIdentifier`` \n  +   ``SourceRegion`` \n  +  ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``UseLatestRestorableTime`` \n  \n Constraints:\n  +  Must match the identifier of an existing Snapshot.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"snapshot_identifier": schemaAttribute53093af71311998988d21a9f(),
+		"snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the DB snapshot or DB cluster snapshot to restore from.\n You can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.\n After you restore a DB cluster with a ``SnapshotIdentifier`` property, you must specify the same ``SnapshotIdentifier`` property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the ``SnapshotIdentifier`` property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB cluster is restored from the specified ``SnapshotIdentifier`` property, and the original DB cluster is deleted.\n If you specify the ``SnapshotIdentifier`` property to restore a DB cluster (as opposed to specifying it for DB cluster updates), then don't specify the following properties:\n  +   ``GlobalClusterIdentifier`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``ReplicationSourceIdentifier`` \n  +   ``RestoreType`` \n  +   ``SourceDBClusterIdentifier`` \n  +   ``SourceRegion`` \n  +  ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``UseLatestRestorableTime`` \n  \n Constraints:\n  +  Must match the identifier of an existing Snapshot.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1233,7 +862,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_identifier": schemaAttribute6b572ce708b71a930648cbf7(),
+		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDbClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -1241,7 +873,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource ID of the source DB cluster from which to restore.",
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_resource_id": schemaAttributefcf20c49d48ee37655e886c4(),
+		"source_db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource ID of the source DB cluster from which to restore.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceRegion
 		// CloudFormation resource type schema:
 		//
@@ -1249,7 +884,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, ``us-east-1``. \n Valid for: Aurora DB clusters only",
 		//	  "type": "string"
 		//	}
-		"source_region": schemaAttributeaaaa91075453ac80c8d4c4dd(),
+		"source_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, ``us-east-1``. \n Valid for: Aurora DB clusters only",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -1257,7 +895,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the DB cluster is encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``SnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used.\n If you specify the ``SnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB cluster is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB cluster to be encrypted, then don't set this property or set it to ``false``.\n  If you specify both the ``StorageEncrypted`` and ``SnapshotIdentifier`` properties without specifying the ``KmsKeyId`` property, then the restored DB cluster inherits the encryption settings from the DB snapshot that provide.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schemaAttributeffc1af5d9b6d8d220c5188ea(),
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB cluster is encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``SnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used.\n If you specify the ``SnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB cluster is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB cluster to be encrypted, then don't set this property or set it to ``false``.\n  If you specify both the ``StorageEncrypted`` and ``SnapshotIdentifier`` properties without specifying the ``KmsKeyId`` property, then the restored DB cluster inherits the encryption settings from the DB snapshot that provide.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageEncryptionType
 		// CloudFormation resource type schema:
 		//
@@ -1265,7 +906,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"storage_encryption_type": schemaAttribute0bd9f80975ab6cc5f1e71cbc(),
+		"storage_encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageThroughput
 		// CloudFormation resource type schema:
 		//
@@ -1273,7 +917,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "integer"
 		//	}
-		"storage_throughput": schemaAttribute87da40c02d5ec5d0544314cc(),
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageType
 		// CloudFormation resource type schema:
 		//
@@ -1281,7 +928,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The storage type to associate with the DB cluster.\n For information on storage types for Aurora DB clusters, see [Storage configurations for Amazon Aurora DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type). For information on storage types for Multi-AZ DB clusters, see [Settings for creating Multi-AZ DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings).\n This setting is required to create a Multi-AZ DB cluster.\n When specified for a Multi-AZ DB cluster, a value for the ``Iops`` parameter is required.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +  Aurora DB clusters - ``aurora | aurora-iopt1``\n  +  Multi-AZ DB clusters - ``io1 | io2 | gp3``\n  \n Default:\n  +  Aurora DB clusters - ``aurora``\n  +  Multi-AZ DB clusters - ``io1``\n  \n  When you create an Aurora DB cluster with the storage type set to ``aurora-iopt1``, the storage type is returned in the response. The storage type isn't returned when you set it to ``aurora``.",
 		//	  "type": "string"
 		//	}
-		"storage_type": schemaAttributedfc329b152f8050b7e027366(),
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The storage type to associate with the DB cluster.\n For information on storage types for Aurora DB clusters, see [Storage configurations for Amazon Aurora DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type). For information on storage types for Multi-AZ DB clusters, see [Settings for creating Multi-AZ DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings).\n This setting is required to create a Multi-AZ DB cluster.\n When specified for a Multi-AZ DB cluster, a value for the ``Iops`` parameter is required.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters\n Valid Values:\n  +  Aurora DB clusters - ``aurora | aurora-iopt1``\n  +  Multi-AZ DB clusters - ``io1 | io2 | gp3``\n  \n Default:\n  +  Aurora DB clusters - ``aurora``\n  +  Multi-AZ DB clusters - ``io1``\n  \n  When you create an Aurora DB cluster with the storage type set to ``aurora-iopt1``, the storage type is returned in the response. The storage type isn't returned when you set it to ``aurora``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1314,7 +964,24 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute70bff4b27480e213238cab52(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the DB cluster.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UseLatestRestorableTime
 		// CloudFormation resource type schema:
 		//
@@ -1322,7 +989,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time. \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "boolean"
 		//	}
-		"use_latest_restorable_time": schemaAttribute2c44e182351d3c28dba27bf8(),
+		"use_latest_restorable_time": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time. \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -1334,7 +1004,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"vpc_security_group_ids": schemaAttribute3153a6cbe53cced6ef67bc24(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of EC2 VPC security groups to associate with this DB cluster.\n If you plan to update the resource, don't specify VPC security groups in a shared VPC.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

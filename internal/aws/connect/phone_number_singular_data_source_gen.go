@@ -14,91 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute12653e954493b93ff50b01e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29e9182ef62d8b344835f953() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source phone number arn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute381d5fc50b50c81ee44e5c25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the target the phone number is claimed to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e032bf017f0895c2cff5c2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number e164 address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a3edea57331cd0460a5328a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute560960e0e6342e7f8848a537() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70a516daf92f9280dba19357() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute883576b2d367d20da4258d38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb079260554b59d45d78f9e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccd61842ee561ac95bf1dcef() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute12653e954493b93ff50b01e5(),
-				// Property: Value
-				"value": schemaAttributecb079260554b59d45d78f9e1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee09929c76801b34e006a706e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number country code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_phone_number", phoneNumberDataSource)
 }
@@ -115,7 +30,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\+[0-9]{2,15}",
 		//	  "type": "string"
 		//	}
-		"address": schemaAttribute3e032bf017f0895c2cff5c2e(),
+		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The phone number e164 address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CountryCode
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +42,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Z]{2}",
 		//	  "type": "string"
 		//	}
-		"country_code": schemaAttributee09929c76801b34e006a706e(),
+		"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The phone number country code.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +55,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute883576b2d367d20da4258d38(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the phone number.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PhoneNumberArn
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +67,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:phone-number/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"phone_number_arn": schemaAttribute4a3edea57331cd0460a5328a(),
+		"phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The phone number ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Prefix
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +79,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\+[0-9]{1,15}",
 		//	  "type": "string"
 		//	}
-		"prefix": schemaAttribute70a516daf92f9280dba19357(),
+		"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The phone number prefix.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourcePhoneNumberArn
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +90,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The source phone number arn.",
 		//	  "type": "string"
 		//	}
-		"source_phone_number_arn": schemaAttribute29e9182ef62d8b344835f953(),
+		"source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source phone number arn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +127,24 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeccd61842ee561ac95bf1dcef(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetArn
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +153,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:(instance|traffic-distribution-group)/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"target_arn": schemaAttribute381d5fc50b50c81ee44e5c25(),
+		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the target the phone number is claimed to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +165,10 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF|SHORT_CODE",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute560960e0e6342e7f8848a537(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The phone number type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,126 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0593078e92de9daf3644bf24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the VPC connection.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1419faeba5f9bffbb4099fb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fc0ed3f9a6cd6eed9920c28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>An error message.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90aa4386bac6331c6bdb22a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The time that the VPC connection was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94b5bdcd858b81cbb2f91ebb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6fc7c85fc6733a1b31666d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb8bfd90a0cefc62eb3c6a069(),
-				// Property: Value
-				"value": schemaAttribute1419faeba5f9bffbb4099fb2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab1c48126e9a48e2f931eea7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8bfd90a0cefc62eb3c6a069() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec06af6810a7a94ca663261c5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schemaAttributedef86f283d47fe70020dfc7f(),
-				// Property: ErrorMessage
-				"error_message": schemaAttribute8fc0ed3f9a6cd6eed9920c28(),
-				// Property: NetworkInterfaceId
-				"network_interface_id": schemaAttributee64f6e4e2a53747c5b8286c7(),
-				// Property: Status
-				"status": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
-				// Property: SubnetId
-				"subnet_id": schemaAttributecbdf3bc0dc70e0b1efc76354(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>A list of network interfaces.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbdf3bc0dc70e0b1efc76354() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The subnet ID associated with the network interface.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedef86f283d47fe70020dfc7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The availability zone that the network interface resides in.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1bacc84bdf3aebc601bc92d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon EC2 VPC ID associated with the VPC connection.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee64f6e4e2a53747c5b8286c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The network interface ID.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee92e2ba6c256f625576dbdbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The time that the VPC connection was last updated.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_vpc_connection", vPCConnectionDataSource)
 }
@@ -151,7 +31,10 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the VPC connection.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute0593078e92de9daf3644bf24(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the VPC connection.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityStatus
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +46,9 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"availability_status": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
+		"availability_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +58,9 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +69,11 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute90aa4386bac6331c6bdb22a8(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that the VPC connection was created.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DnsResolvers
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +84,10 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"dns_resolvers": schemaAttributeab1c48126e9a48e2f931eea7(),
+		"dns_resolvers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +96,11 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributee92e2ba6c256f625576dbdbd(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that the VPC connection was last updated.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +109,9 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -266,14 +166,47 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"network_interfaces": schemaAttributec06af6810a7a94ca663261c5(),
+		"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AvailabilityZone
+					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The availability zone that the network interface resides in.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ErrorMessage
+					"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>An error message.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NetworkInterfaceId
+					"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The network interface ID.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubnetId
+					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The subnet ID associated with the network interface.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>A list of network interfaces.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +222,10 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schemaAttributeab1c48126e9a48e2f931eea7(),
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +243,9 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -323,7 +261,10 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schemaAttributeab1c48126e9a48e2f931eea7(),
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +297,23 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute9b6fc7c85fc6733a1b31666d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VPCConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -366,7 +323,9 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[\\w\\-]+",
 		//	  "type": "string"
 		//	}
-		"vpc_connection_id": schemaAttribute94b5bdcd858b81cbb2f91ebb(),
+		"vpc_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VPCId
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +333,10 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "\u003cp\u003eThe Amazon EC2 VPC ID associated with the VPC connection.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributee1bacc84bdf3aebc601bc92d(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon EC2 VPC ID associated with the VPC connection.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4e185a88a092e11acccd4d08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the carrier gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute583387514cc6667a5fa92e1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the owner.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80463a18e877903d9ef59303() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8e1b5d345895db813bffc595(),
-				// Property: Value
-				"value": schemaAttribute8e1b5d345895db813bffc595(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the carrier gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c556983426dc9785372bd2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e1b5d345895db813bffc595() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97da0c7daac587cbd3b35dd3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the carrier gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_carrier_gateway", carrierGatewayDataSource)
 }
@@ -78,7 +29,10 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of the carrier gateway.",
 		//	  "type": "string"
 		//	}
-		"carrier_gateway_id": schemaAttribute4e185a88a092e11acccd4d08(),
+		"carrier_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the carrier gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -86,7 +40,10 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of the owner.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute583387514cc6667a5fa92e1f(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the owner.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +51,10 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The state of the carrier gateway.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute97da0c7daac587cbd3b35dd3(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the carrier gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +82,22 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute80463a18e877903d9ef59303(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the carrier gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +105,10 @@ func carrierGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute8c556983426dc9785372bd2c(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

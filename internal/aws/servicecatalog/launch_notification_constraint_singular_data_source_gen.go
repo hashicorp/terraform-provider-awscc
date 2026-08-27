@@ -15,26 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute52071c885d3534e6a9067d45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the constraint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8134b4b7c7232b7a36a0ad43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc40de87535c9582e183969a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_launch_notification_constraint", launchNotificationConstraintDataSource)
 }
@@ -49,14 +29,18 @@ func launchNotificationConstraintDataSource(ctx context.Context) (datasource.Dat
 		//	{
 		//	  "type": "string"
 		//	}
-		"accept_language": schemaAttribute8134b4b7c7232b7a36a0ad43(),
+		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute8134b4b7c7232b7a36a0ad43(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -64,7 +48,10 @@ func launchNotificationConstraintDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Unique identifier for the constraint",
 		//	  "type": "string"
 		//	}
-		"launch_notification_constraint_id": schemaAttribute52071c885d3534e6a9067d45(),
+		"launch_notification_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for the constraint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationArns
 		// CloudFormation resource type schema:
 		//
@@ -75,21 +62,28 @@ func launchNotificationConstraintDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"notification_arns": schemaAttributecc40de87535c9582e183969a(),
+		"notification_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schemaAttribute8134b4b7c7232b7a36a0ad43(),
+		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"product_id": schemaAttribute8134b4b7c7232b7a36a0ad43(),
+		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

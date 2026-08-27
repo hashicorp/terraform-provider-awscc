@@ -14,125 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2120c71ba83dfa8d902af031() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Verified Access policy document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e06e637515ed9ce77d5d34e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the AWS Verified Access group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e0b49ce2a9e3e249461d40d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute469f10792148f3427c2b1e53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the AWS Verified Access group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c42da94bbd15cbec2f0868a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cde364a3a9c183f720b1a1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS Key Arn used to encrypt the group policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute662df8bff82ca9468be0f726() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomerManagedKeyEnabled
-			"customer_managed_key_enabled": schemaAttribute9ed1f1103931319355698ecf(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute5cde364a3a9c183f720b1a1b(),
-		}, /*END SCHEMA*/
-		Description: "The configuration options for customer provided KMS encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute712fc2e0e0411d29cdab872b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Verified Access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72be2dd8325b4415d275778e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Time this Verified Access Group was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ed1f1103931319355698ecf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to encrypt the policy with the provided key or disable encryption",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdb76cdaf9457318b1e4e6a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Verified Access group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed157c01b21c692f516d79c38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Time this Verified Access Group was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed88bca9e3b52cf631271feca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the AWS Verified Access instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0a448e3753efecfb2074297() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account number that owns the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef24def06f5d2b52c94fcdf71() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4c42da94bbd15cbec2f0868a(),
-				// Property: Value
-				"value": schemaAttribute3e0b49ce2a9e3e249461d40d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_verified_access_group", verifiedAccessGroupDataSource)
 }
@@ -148,7 +29,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Time this Verified Access Group was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributed157c01b21c692f516d79c38(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Time this Verified Access Group was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +40,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "A description for the AWS Verified Access group.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute469f10792148f3427c2b1e53(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the AWS Verified Access group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +51,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Time this Verified Access Group was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute72be2dd8325b4415d275778e(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Time this Verified Access Group was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +62,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The AWS account number that owns the group.",
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttributef0a448e3753efecfb2074297(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account number that owns the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +73,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The AWS Verified Access policy document.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schemaAttribute2120c71ba83dfa8d902af031(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Verified Access policy document.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyEnabled
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +84,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The status of the Verified Access policy.",
 		//	  "type": "boolean"
 		//	}
-		"policy_enabled": schemaAttribute712fc2e0e0411d29cdab872b(),
+		"policy_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the Verified Access policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SseSpecification
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +106,22 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sse_specification": schemaAttribute662df8bff82ca9468be0f726(),
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +154,24 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef24def06f5d2b52c94fcdf71(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VerifiedAccessGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +179,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ARN of the Verified Access group.",
 		//	  "type": "string"
 		//	}
-		"verified_access_group_arn": schemaAttributecdb76cdaf9457318b1e4e6a6(),
+		"verified_access_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Verified Access group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VerifiedAccessGroupId
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +190,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the AWS Verified Access group.",
 		//	  "type": "string"
 		//	}
-		"verified_access_group_id": schemaAttribute3e06e637515ed9ce77d5d34e(),
+		"verified_access_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS Verified Access group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VerifiedAccessInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +201,10 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the AWS Verified Access instance.",
 		//	  "type": "string"
 		//	}
-		"verified_access_instance_id": schemaAttributed88bca9e3b52cf631271feca(),
+		"verified_access_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS Verified Access instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

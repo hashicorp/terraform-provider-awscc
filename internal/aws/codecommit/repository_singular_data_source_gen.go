@@ -15,205 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07e68eaa551a6edd5f2ff4db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the new repository to be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0aa94e56010bb7616046cfc3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the AWS Key Management Service encryption key used to encrypt and decrypt the repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13c60e36960785bd358d9c64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d7d817db3bae9276b8ff1f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional. Specifies a branch name to be used as the default branch when importing code into a repository on initial creation. If this property is not set, the name main will be used for the default branch for the repository. Changes to this property are ignored after initial resource creation. We recommend using this parameter to set the name to main to align with the default behavior of CodeCommit unless another name is needed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47b4a5da3885c522cac1c1c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Any custom data associated with the trigger to be included in the information sent to the target of the trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c1c809512e3fbe3c31c7ced() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The repository events that cause the trigger to run actions in another service, such as sending a notification through Amazon SNS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute642b34802b0e8e35e589e4c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The repository's name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e67f85969138da38c7d2f25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the resource that is the target for a trigger (for example, the ARN of a topic in Amazon SNS).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute748bec765090e62bf5c5ce68() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Branches
-				"branches": schemaAttribute8bb86daeeeb596d22395d740(),
-				// Property: CustomData
-				"custom_data": schemaAttribute47b4a5da3885c522cac1c1c1(),
-				// Property: DestinationArn
-				"destination_arn": schemaAttribute6e67f85969138da38c7d2f25(),
-				// Property: Events
-				"events": schemaAttribute5c1c809512e3fbe3c31c7ced(),
-				// Property: Name
-				"name": schemaAttributeb7461005f89fd6f410bd20fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about a trigger for a repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e0abcacc9cf4a0de35dffea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8728d9e791d2f26cf3fe88ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A comment or description about the new repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8af36bdfa1a9d60feeddee40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL to use for cloning the repository over HTTPS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bb86daeeeb596d22395d740() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The branches to be included in the trigger configuration. If you specify an empty array, the trigger applies to all branches.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c715f37447592b56b995db5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute13c60e36960785bd358d9c64(),
-				// Property: Value
-				"value": schemaAttributea3de90a30b0faf75ee331e27(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tag key-value pairs to use when tagging this repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90c4e331f92cfd00c2a4cd4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key to use for accessing the Amazon S3 bucket. Changes to this property are ignored after initial resource creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea10d26cdebf9d660e4e9cd2b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BranchName
-			"branch_name": schemaAttribute3d7d817db3bae9276b8ff1f5(),
-			// Property: S3
-			"s3": schemaAttributebd5c498d53d89c526621b624(),
-		}, /*END SCHEMA*/
-		Description: "Information about code to be committed to a repository after it is created in an AWS CloudFormation stack. Information about code is only used in resource creation. Updates to a stack will not reflect changes made to code properties after initial resource creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3de90a30b0faf75ee331e27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea86851b536cf4820be4bc0ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7461005f89fd6f410bd20fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb76152df3a23cc6c1d83d898() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The object version of the ZIP file, if versioning is enabled for the Amazon S3 bucket. Changes to this property are ignored after initial resource creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd5c498d53d89c526621b624() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttributee5a66cb6a486448762ee062d(),
-			// Property: Key
-			"key": schemaAttribute90c4e331f92cfd00c2a4cd4c(),
-			// Property: ObjectVersion
-			"object_version": schemaAttributeb76152df3a23cc6c1d83d898(),
-		}, /*END SCHEMA*/
-		Description: "Information about the Amazon S3 bucket that contains a ZIP file of code to be committed to the repository. Changes to this property are ignored after initial resource creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeceef342a87b8dd5aa7b98c34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL to use for cloning the repository over SSH.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5a66cb6a486448762ee062d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket that contains the ZIP file with the content that will be committed to the new repository. This can be specified using the name of the bucket in the AWS account. Changes to this property are ignored after initial resource creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codecommit_repository", repositoryDataSource)
 }
@@ -229,7 +30,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the repository.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7e0abcacc9cf4a0de35dffea(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloneUrlHttp
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +41,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The URL to use for cloning the repository over HTTPS.",
 		//	  "type": "string"
 		//	}
-		"clone_url_http": schemaAttribute8af36bdfa1a9d60feeddee40(),
+		"clone_url_http": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL to use for cloning the repository over HTTPS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloneUrlSsh
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +52,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The URL to use for cloning the repository over SSH.",
 		//	  "type": "string"
 		//	}
-		"clone_url_ssh": schemaAttributeceef342a87b8dd5aa7b98c34(),
+		"clone_url_ssh": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL to use for cloning the repository over SSH.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +104,39 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"code": schemaAttributea10d26cdebf9d660e4e9cd2b(),
+		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BranchName
+				"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Optional. Specifies a branch name to be used as the default branch when importing code into a repository on initial creation. If this property is not set, the name main will be used for the default branch for the repository. Changes to this property are ignored after initial resource creation. We recommend using this parameter to set the name to main to align with the default behavior of CodeCommit unless another name is needed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3
+				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the Amazon S3 bucket that contains the ZIP file with the content that will be committed to the new repository. This can be specified using the name of the bucket in the AWS account. Changes to this property are ignored after initial resource creation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The key to use for accessing the Amazon S3 bucket. Changes to this property are ignored after initial resource creation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ObjectVersion
+						"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The object version of the ZIP file, if versioning is enabled for the Amazon S3 bucket. Changes to this property are ignored after initial resource creation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about the Amazon S3 bucket that contains a ZIP file of code to be committed to the repository. Changes to this property are ignored after initial resource creation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about code to be committed to a repository after it is created in an AWS CloudFormation stack. Information about code is only used in resource creation. Updates to a stack will not reflect changes made to code properties after initial resource creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -304,7 +146,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute0aa94e56010bb7616046cfc3(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS Key Management Service encryption key used to encrypt and decrypt the repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +157,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The repository's name.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute642b34802b0e8e35e589e4c3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The repository's name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryDescription
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +170,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"repository_description": schemaAttribute8728d9e791d2f26cf3fe88ef(),
+		"repository_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A comment or description about the new repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryId
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +181,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the repository.",
 		//	  "type": "string"
 		//	}
-		"repository_id": schemaAttributea86851b536cf4820be4bc0ef(),
+		"repository_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryName
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +194,10 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"repository_name": schemaAttribute07e68eaa551a6edd5f2ff4db(),
+		"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the new repository to be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +225,24 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute8c715f37447592b56b995db5(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tag key-value pairs to use when tagging this repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Triggers
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +291,41 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"triggers": schemaAttribute748bec765090e62bf5c5ce68(),
+		"triggers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Branches
+					"branches": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The branches to be included in the trigger configuration. If you specify an empty array, the trigger applies to all branches.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CustomData
+					"custom_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Any custom data associated with the trigger to be included in the information sent to the target of the trigger.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DestinationArn
+					"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the resource that is the target for a trigger (for example, the ARN of a topic in Amazon SNS).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Events
+					"events": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The repository events that cause the trigger to run actions in another service, such as sending a notification through Amazon SNS.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the trigger.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about a trigger for a repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

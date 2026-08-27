@@ -15,154 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute071db07d7e22ce79916d4188() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the AFI was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e1f36c81f05d1dd9b652c14() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute60686e6f938164fe6be8b2a1(),
-				// Property: Value
-				"value": schemaAttribute6f9fdb128848638ba34915ce(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the FPGA image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41305fdfe9eea9b740bc4aaf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the AWS account that owns the AFI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46d0a351711194ab976e7ae5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the AFI is public.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4859bc36c7dca78a7a2ce389() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The FPGA image identifier (AFI ID).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a95a69016100f190469dd04() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether data retention support is enabled for the AFI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5760cbc17be7d832333267f9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttributefa5656096588e393937710c6(),
-			// Property: Key
-			"key": schemaAttributeec90cd53ae3dd29ad8c40fc8(),
-		}, /*END SCHEMA*/
-		Description: "The location in Amazon S3 for the output logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60686e6f938164fe6be8b2a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f9fdb128848638ba34915ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute833be56559dc0b59e1c97d65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the FPGA image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97fa05f753b8e68871bd396f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the AFI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute983066d8f9ec5738507f9e47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The global FPGA image identifier (AGFI ID).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4f08d9bf1b5dc163c0a3995() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the AFI (pending | available | failed | unavailable).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2bc517380163f418b471307() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttributefa5656096588e393937710c6(),
-			// Property: Key
-			"key": schemaAttributeec90cd53ae3dd29ad8c40fc8(),
-		}, /*END SCHEMA*/
-		Description: "The location of the encrypted design checkpoint in Amazon S3. The input must be a tarball.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee40f07515a8828b176e8fc1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the AFI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec90cd53ae3dd29ad8c40fc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2963b7283791f96e3c97420() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time of the most recent update to the AFI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa5656096588e393937710c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_fpga_image", fpgaImageDataSource)
 }
@@ -178,7 +30,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the FPGA image.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute833be56559dc0b59e1c97d65(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the FPGA image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +42,11 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"create_time": schemaAttribute071db07d7e22ce79916d4188(),
+		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the AFI was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataRetentionSupport
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +54,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether data retention support is enabled for the AFI.",
 		//	  "type": "boolean"
 		//	}
-		"data_retention_support": schemaAttribute4a95a69016100f190469dd04(),
+		"data_retention_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether data retention support is enabled for the AFI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +65,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the AFI.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee40f07515a8828b176e8fc1f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the AFI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FpgaImageGlobalId
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +76,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The global FPGA image identifier (AGFI ID).",
 		//	  "type": "string"
 		//	}
-		"fpga_image_global_id": schemaAttribute983066d8f9ec5738507f9e47(),
+		"fpga_image_global_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The global FPGA image identifier (AGFI ID).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FpgaImageId
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +87,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The FPGA image identifier (AFI ID).",
 		//	  "type": "string"
 		//	}
-		"fpga_image_id": schemaAttribute4859bc36c7dca78a7a2ce389(),
+		"fpga_image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The FPGA image identifier (AFI ID).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputStorageLocation
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +109,22 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"input_storage_location": schemaAttributee2bc517380163f418b471307(),
+		"input_storage_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The key.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The location of the encrypted design checkpoint in Amazon S3. The input must be a tarball.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogsStorageLocation
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +143,22 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logs_storage_location": schemaAttribute5760cbc17be7d832333267f9(),
+		"logs_storage_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The key.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The location in Amazon S3 for the output logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +166,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name for the AFI.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute97fa05f753b8e68871bd396f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the AFI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +177,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the AWS account that owns the AFI.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute41305fdfe9eea9b740bc4aaf(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS account that owns the AFI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Public
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +188,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the AFI is public.",
 		//	  "type": "boolean"
 		//	}
-		"public": schemaAttribute46d0a351711194ab976e7ae5(),
+		"public": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the AFI is public.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +199,10 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The state of the AFI (pending | available | failed | unavailable).",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributed4f08d9bf1b5dc163c0a3995(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the AFI (pending | available | failed | unavailable).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +229,24 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute1e1f36c81f05d1dd9b652c14(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the FPGA image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +255,11 @@ func fpgaImageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"update_time": schemaAttributef2963b7283791f96e3c97420(),
+		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time of the most recent update to the AFI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

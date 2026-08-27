@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2e0c5cb26f0689d0a2789ed2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59e7b4380bea4b94ae0bc6eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute841e016f2b25a62f011d6a87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Wallet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bcb096bac52f48ee8c5a5a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Pem",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_certificate", certificateDataSource)
 }
@@ -58,7 +30,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):dms:[\\w-]+:[0-9]+:cert:[A-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schemaAttribute59e7b4380bea4b94ae0bc6eb(),
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -66,7 +41,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The certificate Identifier",
 		//	  "type": "string"
 		//	}
-		"certificate_identifier": schemaAttribute2e0c5cb26f0689d0a2789ed2(),
+		"certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Identifier",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificatePem
 		// CloudFormation resource type schema:
 		//
@@ -74,7 +52,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The certificate Pem",
 		//	  "type": "string"
 		//	}
-		"certificate_pem": schemaAttribute9bcb096bac52f48ee8c5a5a8(),
+		"certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Pem",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateWallet
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +63,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The certificate Wallet",
 		//	  "type": "string"
 		//	}
-		"certificate_wallet": schemaAttribute841e016f2b25a62f011d6a87(),
+		"certificate_wallet": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Wallet",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

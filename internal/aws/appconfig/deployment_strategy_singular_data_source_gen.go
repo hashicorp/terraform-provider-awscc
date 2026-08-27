@@ -14,91 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute018e06b238d5a32241f5bc69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Save the deployment strategy to a Systems Manager (SSM) document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31e84429709968004cff8aef() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the amount of time AWS AppConfig monitors for Amazon CloudWatch alarms after the configuration has been deployed to 100% of its targets, before considering the deployment to be complete. If an alarm is triggered during this time, AWS AppConfig rolls back the deployment. You must configure permissions for AWS AppConfig to roll back based on CloudWatch alarms. For more information, see Configuring permissions for rollback based on Amazon CloudWatch alarms in the AWS AppConfig User Guide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e19bbdfff7ff8eeb233b3cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:\n\nLinear: For this type, AWS AppConfig processes the deployment by dividing the total number of targets by the value specified for Step percentage. For example, a linear deployment that uses a Step percentage of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.\n\nExponential: For this type, AWS AppConfig processes the deployment exponentially using the following formula: G*(2^N). In this formula, G is the growth factor specified by the user and N is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:\n\n2*(2^0)\n\n2*(2^1)\n\n2*(2^2)\n\nExpressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84803b650c44d36f170bf877() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deployment strategy ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ff7950fb2d89843aea489e2() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Total amount of time for a deployment to last.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0f3c682e6f21ac222249ca9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the deployment strategy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec346ba2a703d5ffcbde4aeb7() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef435ac6706ae3f686b41f097(),
-				// Property: Value
-				"value": schemaAttributecff7fdc4bd35e1b4ca913385(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Assigns metadata to an AWS AppConfig resource. Tags help organize and categorize your AWS AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecff7fdc4bd35e1b4ca913385() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb0f530c31b0effd47c3492e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the deployment strategy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec5e7f8bc2c989fefb288d03() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of targets to receive a deployed configuration during each interval.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef435ac6706ae3f686b41f097() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appconfig_deployment_strategy", deploymentStrategyDataSource)
 }
@@ -114,7 +29,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Total amount of time for a deployment to last.",
 		//	  "type": "number"
 		//	}
-		"deployment_duration_in_minutes": schemaAttribute9ff7950fb2d89843aea489e2(),
+		"deployment_duration_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Total amount of time for a deployment to last.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +40,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A description of the deployment strategy.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeeb0f530c31b0effd47c3492e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the deployment strategy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FinalBakeTimeInMinutes
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +51,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Specifies the amount of time AWS AppConfig monitors for Amazon CloudWatch alarms after the configuration has been deployed to 100% of its targets, before considering the deployment to be complete. If an alarm is triggered during this time, AWS AppConfig rolls back the deployment. You must configure permissions for AWS AppConfig to roll back based on CloudWatch alarms. For more information, see Configuring permissions for rollback based on Amazon CloudWatch alarms in the AWS AppConfig User Guide.",
 		//	  "type": "number"
 		//	}
-		"final_bake_time_in_minutes": schemaAttribute31e84429709968004cff8aef(),
+		"final_bake_time_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the amount of time AWS AppConfig monitors for Amazon CloudWatch alarms after the configuration has been deployed to 100% of its targets, before considering the deployment to be complete. If an alarm is triggered during this time, AWS AppConfig rolls back the deployment. You must configure permissions for AWS AppConfig to roll back based on CloudWatch alarms. For more information, see Configuring permissions for rollback based on Amazon CloudWatch alarms in the AWS AppConfig User Guide.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GrowthFactor
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +62,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The percentage of targets to receive a deployed configuration during each interval.",
 		//	  "type": "number"
 		//	}
-		"growth_factor": schemaAttributeec5e7f8bc2c989fefb288d03(),
+		"growth_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The percentage of targets to receive a deployed configuration during each interval.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GrowthType
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +77,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"growth_type": schemaAttribute6e19bbdfff7ff8eeb233b3cc(),
+		"growth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:\n\nLinear: For this type, AWS AppConfig processes the deployment by dividing the total number of targets by the value specified for Step percentage. For example, a linear deployment that uses a Step percentage of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.\n\nExponential: For this type, AWS AppConfig processes the deployment exponentially using the following formula: G*(2^N). In this formula, G is the growth factor specified by the user and N is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:\n\n2*(2^0)\n\n2*(2^1)\n\n2*(2^2)\n\nExpressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +88,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The deployment strategy ID.",
 		//	  "type": "string"
 		//	}
-		"deployment_strategy_id": schemaAttribute84803b650c44d36f170bf877(),
+		"deployment_strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deployment strategy ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +99,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A name for the deployment strategy.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec0f3c682e6f21ac222249ca9(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the deployment strategy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicateTo
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +114,10 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"replicate_to": schemaAttribute018e06b238d5a32241f5bc69(),
+		"replicate_to": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Save the deployment strategy to a Systems Manager (SSM) document.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +142,24 @@ func deploymentStrategyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributec346ba2a703d5ffcbde4aeb7(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Assigns metadata to an AWS AppConfig resource. Tags help organize and categorize your AWS AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

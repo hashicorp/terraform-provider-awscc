@@ -14,79 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute166e0850bc953da8d48c35c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2406957adc15449c3736cdb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify this tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute331089f2ad802899d2d802ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of kendra ranking rescore execution plan",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39634edf85f00b3a0e44326c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b25614c2774c49d9332bb07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e2e5dcc991870e1410edc54() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2406957adc15449c3736cdb5(),
-				// Property: Value
-				"value": schemaAttribute166e0850bc953da8d48c35c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for labeling the execution plan",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab1f3ffae997698b36213344() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RescoreCapacityUnits
-			"rescore_capacity_units": schemaAttribute39634edf85f00b3a0e44326c(),
-		}, /*END SCHEMA*/
-		Description: "Capacity units",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf46b9dc2867b42d3d2f19f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the execution plan",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee288c99f74c77d894ca5530e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID of rescore execution plan",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kendraranking_execution_plan", executionPlanDataSource)
 }
@@ -102,7 +29,9 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6b25614c2774c49d9332bb07(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CapacityUnits
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +49,16 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"capacity_units": schemaAttributeab1f3ffae997698b36213344(),
+		"capacity_units": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RescoreCapacityUnits
+				"rescore_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Capacity units",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +67,10 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebf46b9dc2867b42d3d2f19f8(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the execution plan",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +80,10 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 36,
 		//	  "type": "string"
 		//	}
-		"execution_plan_id": schemaAttributee288c99f74c77d894ca5530e(),
+		"execution_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID of rescore execution plan",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +93,10 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute331089f2ad802899d2d802ac(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of kendra ranking rescore execution plan",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +129,24 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute7e2e5dcc991870e1410edc54(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string used to identify this tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string containing the value for the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for labeling the execution plan",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -25,498 +25,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute00bc088ee76814ec0cc54028() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Coinbase CDP wallet secret",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03c92d400b5b14d73c578889() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute053c03912413bc163ce5097b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The app ID provided by Privy",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 512),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute066439b6a43c6bb43a237db6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the credential provider was last updated",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute079c9586014f931f1f40472e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the credential provider was created",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b4db2a26a4661cebdb8ff9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the credential value",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bedab2552dc29759cd0490a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The app secret provided by Privy",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ed5ca855e857efa0b753658() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"MANAGED",
-				"EXTERNAL",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute297830329f4272e473ffb557() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute03c92d400b5b14d73c578889(),
-				// Property: Value
-				"value": schemaAttributef308ff011db2a31397d374f5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the payment credential provider",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(50),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute356c70bc928fe21695237a23() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppId
-			"app_id": schemaAttributefe42dd75b9975bd8f6220ea9(),
-			// Property: AppSecretArn
-			"app_secret_arn": schemaAttributed655ddf565193115dbb0505c(),
-			// Property: AppSecretJsonKey
-			"app_secret_json_key": schemaAttribute61f9381782b338c49be5ba5a(),
-			// Property: AppSecretSource
-			"app_secret_source": schemaAttributeddd495a5c0bfbb13223dd344(),
-			// Property: AuthorizationId
-			"authorization_id": schemaAttribute5c020d90fa4b7077cf2f18e5(),
-			// Property: AuthorizationPrivateKeyArn
-			"authorization_private_key_arn": schemaAttributed655ddf565193115dbb0505c(),
-			// Property: AuthorizationPrivateKeyJsonKey
-			"authorization_private_key_json_key": schemaAttributebd507fddd33cc959e8c3cdf3(),
-			// Property: AuthorizationPrivateKeySource
-			"authorization_private_key_source": schemaAttributeddd495a5c0bfbb13223dd344(),
-		}, /*END SCHEMA*/
-		Description: "Stripe Privy configuration output with secret ARNs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35aac79d6a8484c25e19e66a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name for the payment credential provider",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute381bbbae2583e7b3ecb16911() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the API key secret value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute410f397b25c24cec71714371() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppId
-			"app_id": schemaAttribute053c03912413bc163ce5097b(),
-			// Property: AppSecret
-			"app_secret": schemaAttribute1bedab2552dc29759cd0490a(),
-			// Property: AppSecretConfig
-			"app_secret_config": schemaAttributedd3ae5a1478d60c0f3e906d2(),
-			// Property: AppSecretSource
-			"app_secret_source": schemaAttribute1ed5ca855e857efa0b753658(),
-			// Property: AuthorizationId
-			"authorization_id": schemaAttributed3dcd3e1f13d6e4f6460aec9(),
-			// Property: AuthorizationPrivateKey
-			"authorization_private_key": schemaAttributeabadc5ca7442b9e9a210e740(),
-			// Property: AuthorizationPrivateKeyConfig
-			"authorization_private_key_config": schemaAttributedd3ae5a1478d60c0f3e906d2(),
-			// Property: AuthorizationPrivateKeySource
-			"authorization_private_key_source": schemaAttribute1ed5ca855e857efa0b753658(),
-		}, /*END SCHEMA*/
-		Description: "Stripe Privy configuration with credentials",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c020d90fa4b7077cf2f18e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization ID for the Stripe Privy integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61f9381782b338c49be5ba5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the app secret value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6299f7a541b7fce3fe570b4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Coinbase CDP API key secret",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute739c7e850cd638bba0f3c34a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the wallet secret value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7481291ddca7ff683a9d0dc1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKeyId
-			"api_key_id": schemaAttribute7fa0dca359d483f8fd1c6332(),
-			// Property: ApiKeySecret
-			"api_key_secret": schemaAttribute6299f7a541b7fce3fe570b4c(),
-			// Property: ApiKeySecretConfig
-			"api_key_secret_config": schemaAttributedd3ae5a1478d60c0f3e906d2(),
-			// Property: ApiKeySecretSource
-			"api_key_secret_source": schemaAttribute1ed5ca855e857efa0b753658(),
-			// Property: WalletSecret
-			"wallet_secret": schemaAttribute00bc088ee76814ec0cc54028(),
-			// Property: WalletSecretConfig
-			"wallet_secret_config": schemaAttributedd3ae5a1478d60c0f3e906d2(),
-			// Property: WalletSecretSource
-			"wallet_secret_source": schemaAttribute1ed5ca855e857efa0b753658(),
-		}, /*END SCHEMA*/
-		Description: "Coinbase CDP configuration with API credentials",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76ff5c9b6bb843be06998a9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Coinbase CDP API key ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fa0dca359d483f8fd1c6332() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Coinbase CDP API key ID",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 512),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97dc47e2a991d2e288f461a3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CoinbaseCdpConfiguration
-			"coinbase_cdp_configuration": schemaAttribute7481291ddca7ff683a9d0dc1(),
-			// Property: StripePrivyConfiguration
-			"stripe_privy_configuration": schemaAttribute410f397b25c24cec71714371(),
-		}, /*END SCHEMA*/
-		Description: "Provider configuration input containing secrets for creation/update",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// ProviderConfigurationInput is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7dec30f308b24a5e327a1b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the secret in AWS Secrets Manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabadc5ca7442b9e9a210e740() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization private key for the Stripe Privy integration",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 4096),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb47af893c6491ebe3ccebc52() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CoinbaseCdpConfiguration
-			"coinbase_cdp_configuration": schemaAttributecdd8e1508443a30610928349(),
-			// Property: StripePrivyConfiguration
-			"stripe_privy_configuration": schemaAttribute356c70bc928fe21695237a23(),
-		}, /*END SCHEMA*/
-		Description: "Provider configuration output containing secret ARNs (no raw secrets)",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd507fddd33cc959e8c3cdf3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the authorization private key value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe51722094cb5fa4615c0cf6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Supported vendor types for payment providers",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"CoinbaseCDP",
-				"StripePrivy",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfbcb9bc3ce04697d8b684e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the payment credential provider",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdd8e1508443a30610928349() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApiKeyId
-			"api_key_id": schemaAttribute76ff5c9b6bb843be06998a9d(),
-			// Property: ApiKeySecretArn
-			"api_key_secret_arn": schemaAttributed655ddf565193115dbb0505c(),
-			// Property: ApiKeySecretJsonKey
-			"api_key_secret_json_key": schemaAttribute381bbbae2583e7b3ecb16911(),
-			// Property: ApiKeySecretSource
-			"api_key_secret_source": schemaAttributeddd495a5c0bfbb13223dd344(),
-			// Property: WalletSecretArn
-			"wallet_secret_arn": schemaAttributed655ddf565193115dbb0505c(),
-			// Property: WalletSecretJsonKey
-			"wallet_secret_json_key": schemaAttribute739c7e850cd638bba0f3c34a(),
-			// Property: WalletSecretSource
-			"wallet_secret_source": schemaAttributeddd495a5c0bfbb13223dd344(),
-		}, /*END SCHEMA*/
-		Description: "Coinbase CDP configuration output with secret ARNs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed121e9a9686ca94b6edbf6f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the secret in AWS Secrets Manager",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3dcd3e1f13d6e4f6460aec9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization ID for the Stripe Privy integration",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 512),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed655ddf565193115dbb0505c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttributea7dec30f308b24a5e327a1b7(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about a secret in AWS Secrets Manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd3ae5a1478d60c0f3e906d2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: JsonKey
-			"json_key": schemaAttribute1b4db2a26a4661cebdb8ff9f(),
-			// Property: SecretId
-			"secret_id": schemaAttributed121e9a9686ca94b6edbf6f5(),
-		}, /*END SCHEMA*/
-		Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddd495a5c0bfbb13223dd344() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef308ff011db2a31397d374f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe42dd75b9975bd8f6220ea9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The app ID provided by Privy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_bedrockagentcore_payment_credential_provider", paymentCredentialProviderResource)
 	registry.AddListResourceFactory("awscc_bedrockagentcore_payment_credential_provider", generic.NewListResource(paymentCredentialProviderResource))
@@ -534,7 +42,14 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute079c9586014f931f1f40472e(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the credential provider was created",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialProviderArn
 		// CloudFormation resource type schema:
 		//
@@ -543,7 +58,13 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b|aws-iso-e|aws-iso-f|aws-eusc):(acps|bedrock-agentcore):[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/paymentcredentialprovider/[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"credential_provider_arn": schemaAttributebfbcb9bc3ce04697d8b684e4(),
+		"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the payment credential provider",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialProviderVendor
 		// CloudFormation resource type schema:
 		//
@@ -555,7 +76,19 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"credential_provider_vendor": schemaAttributebe51722094cb5fa4615c0cf6(),
+		"credential_provider_vendor": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Supported vendor types for payment providers",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CoinbaseCDP",
+					"StripePrivy",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -564,7 +97,14 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute066439b6a43c6bb43a237db6(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the credential provider was last updated",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -575,7 +115,17 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[a-zA-Z0-9\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute35aac79d6a8484c25e19e66a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique name for the payment credential provider",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderConfigurationInput
 		// CloudFormation resource type schema:
 		//
@@ -773,7 +323,334 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_configuration_input": schemaAttribute97dc47e2a991d2e288f461a3(),
+		"provider_configuration_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CoinbaseCdpConfiguration
+				"coinbase_cdp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ApiKeyId
+						"api_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Coinbase CDP API key ID",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecret
+						"api_key_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Coinbase CDP API key secret",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretConfig
+						"api_key_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretSource
+						"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecret
+						"wallet_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Coinbase CDP wallet secret",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretConfig
+						"wallet_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretSource
+						"wallet_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Coinbase CDP configuration with API credentials",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StripePrivyConfiguration
+				"stripe_privy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppId
+						"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The app ID provided by Privy",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecret
+						"app_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The app secret provided by Privy",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretConfig
+						"app_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretSource
+						"app_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationId
+						"authorization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authorization ID for the Stripe Privy integration",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKey
+						"authorization_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authorization private key for the Stripe Privy integration",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 4096),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeyConfig
+						"authorization_private_key_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeySource
+						"authorization_private_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Stripe Privy configuration with credentials",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provider configuration input containing secrets for creation/update",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ProviderConfigurationInput is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderConfigurationOutput
 		// CloudFormation resource type schema:
 		//
@@ -942,7 +819,132 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_configuration_output": schemaAttributeb47af893c6491ebe3ccebc52(),
+		"provider_configuration_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CoinbaseCdpConfiguration
+				"coinbase_cdp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ApiKeyId
+						"api_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Coinbase CDP API key ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretArn
+						"api_key_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretJsonKey
+						"api_key_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the API key secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretSource
+						"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretArn
+						"wallet_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretJsonKey
+						"wallet_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the wallet secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretSource
+						"wallet_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Coinbase CDP configuration output with secret ARNs",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StripePrivyConfiguration
+				"stripe_privy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppId
+						"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The app ID provided by Privy",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretArn
+						"app_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretJsonKey
+						"app_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the app secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretSource
+						"app_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationId
+						"authorization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authorization ID for the Stripe Privy integration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeyArn
+						"authorization_private_key_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeyJsonKey
+						"authorization_private_key_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the authorization private key value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeySource
+						"authorization_private_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Stripe Privy configuration output with secret ARNs",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provider configuration output containing secret ARNs (no raw secrets)",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -974,7 +976,48 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute297830329f4272e473ffb557(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the payment credential provider",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

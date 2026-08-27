@@ -15,175 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1bf024973397750f573880c4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The card number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36f4b19a2ea3437249a7a236() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logical name for this interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49f84e8f9de6dad0b66f62b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The role of the Node in the Cluster. ACTIVE means the Node is available for encoding. BACKUP means the Node is a redundant Node and might get used if an ACTIVE Node fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79cbf09b08daa473eb15dff3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network interface mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bdfc6e3ebb06e9328b668f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the Node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c2e19ce2ea211439e1c4be4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID of the Node. Unique in the Cluster. The ID is the resource-id portion of the ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92347b22778b76b3816eef14() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An array of IDs. Each ID is one ChannelPlacementGroup that is associated with this Node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98c666b9360d5f7b6b7737b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current connection state of the Node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec06848918b0bd8c83feedda7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefd7fa188c7e23339b0b7bbc2(),
-				// Property: Value
-				"value": schemaAttributef0c1c22803c3b0aadc1bceec(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec356856bd2cfaca6b944ea4c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CardNumber
-				"card_number": schemaAttribute1bf024973397750f573880c4(),
-				// Property: ChannelNumber
-				"channel_number": schemaAttributef6f6b740f902937275c419d7(),
-				// Property: SdiSource
-				"sdi_source": schemaAttributef14f20699d9dd5734ad2a29d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of SDI source mappings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4bbea64916828b5afa6302d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Cluster that the Node belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5560f788eca4ede488c60ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Node. It is automatically assigned when the Node is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed48fa013631c3a5a185304a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the EC2 instance hosting the Node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3a5eb971892c80601096bb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user-specified name of the Node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee491213a335f6c1c57743500() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogicalInterfaceName
-				"logical_interface_name": schemaAttribute36f4b19a2ea3437249a7a236(),
-				// Property: NetworkInterfaceMode
-				"network_interface_mode": schemaAttribute79cbf09b08daa473eb15dff3(),
-				// Property: PhysicalInterfaceName
-				"physical_interface_name": schemaAttributee8b4c52ac774924aba8b4ae7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of interface mappings for the Node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8b4c52ac774924aba8b4ae7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The physical interface name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0c1c22803c3b0aadc1bceec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef14f20699d9dd5734ad2a29d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SDI source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6f6b740f902937275c419d7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The channel number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd7fa188c7e23339b0b7bbc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_node", nodeDataSource)
 }
@@ -199,7 +30,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the Node. It is automatically assigned when the Node is created.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec5560f788eca4ede488c60ec(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Node. It is automatically assigned when the Node is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelPlacementGroups
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +45,11 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"channel_placement_groups": schemaAttribute92347b22778b76b3816eef14(),
+		"channel_placement_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "An array of IDs. Each ID is one ChannelPlacementGroup that is associated with this Node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterId
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +57,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the Cluster that the Node belongs to.",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schemaAttributec4bbea64916828b5afa6302d(),
+		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Cluster that the Node belongs to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionState
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +72,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"connection_state": schemaAttribute98c666b9360d5f7b6b7737b2(),
+		"connection_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current connection state of the Node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +83,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique ID of the Node. Unique in the Cluster. The ID is the resource-id portion of the ARN.",
 		//	  "type": "string"
 		//	}
-		"node_id": schemaAttribute8c2e19ce2ea211439e1c4be4(),
+		"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID of the Node. Unique in the Cluster. The ID is the resource-id portion of the ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +94,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the EC2 instance hosting the Node.",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttributed48fa013631c3a5a185304a9(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the EC2 instance hosting the Node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +105,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user-specified name of the Node.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee3a5eb971892c80601096bb2(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user-specified name of the Node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeInterfaceMappings
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +140,29 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"node_interface_mappings": schemaAttributee491213a335f6c1c57743500(),
+		"node_interface_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LogicalInterfaceName
+					"logical_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The logical name for this interface.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NetworkInterfaceMode
+					"network_interface_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The network interface mode.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PhysicalInterfaceName
+					"physical_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The physical interface name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of interface mappings for the Node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +174,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"role": schemaAttribute49f84e8f9de6dad0b66f62b4(),
+		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The role of the Node in the Cluster. ACTIVE means the Node is available for encoding. BACKUP means the Node is a redundant Node and might get used if an ACTIVE Node fails.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SdiSourceMappings
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +205,29 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"sdi_source_mappings": schemaAttributec356856bd2cfaca6b944ea4c(),
+		"sdi_source_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CardNumber
+					"card_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The card number.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ChannelNumber
+					"channel_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The channel number.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SdiSource
+					"sdi_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The SDI source.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of SDI source mappings.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +249,10 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute8bdfc6e3ebb06e9328b668f9(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the Node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -377,7 +280,24 @@ func nodeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributec06848918b0bd8c83feedda7(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of key-value pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

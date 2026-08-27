@@ -14,103 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0ce8a7dbcb0d21be99174aec() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e1ee5b4904cf4e371df69c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The kind of extension",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e73e533f08579b2cbb2db22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Major Version of the type you want to enable",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute140f970bb26cbda1882d0c35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute170d29dc21353ad545175411() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a211ef85bc557c3d51e94d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52f009bb3261e08ca20c4c78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cc221b3aa9e24adc86fd630() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the extension.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68e16c820e1c9e03cf7f7f59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An alias to assign to the public extension in this account and region. If you specify an alias for the extension, you must then use the alias to refer to the extension in your templates.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8164045bdd3948c9300cd6eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8411db5eff465703ae8a7789() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogGroupName
-			"log_group_name": schemaAttribute8164045bdd3948c9300cd6eb(),
-			// Property: LogRoleArn
-			"log_role_arn": schemaAttributeff0e42045d5b223eeae95258(),
-		}, /*END SCHEMA*/
-		Description: "Specifies logging configuration information for a type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6682941172f5545531164ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff0e42045d5b223eeae95258() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_type_activation", typeActivationDataSource)
 }
@@ -127,7 +30,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5cc221b3aa9e24adc86fd630(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the extension.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoUpdate
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +41,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated.",
 		//	  "type": "boolean"
 		//	}
-		"auto_update": schemaAttribute0ce8a7dbcb0d21be99174aec(),
+		"auto_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +52,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttribute2a211ef85bc557c3d51e94d5(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfig
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +79,22 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_config": schemaAttribute8411db5eff465703ae8a7789(),
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupName
+				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogRoleArn
+				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies logging configuration information for a type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MajorVersion
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +104,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"major_version": schemaAttribute0e73e533f08579b2cbb2db22(),
+		"major_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Major Version of the type you want to enable",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicTypeArn
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +117,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 		//	  "type": "string"
 		//	}
-		"public_type_arn": schemaAttribute140f970bb26cbda1882d0c35(),
+		"public_type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublisherId
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +131,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[0-9a-zA-Z-]{1,40}",
 		//	  "type": "string"
 		//	}
-		"publisher_id": schemaAttributed6682941172f5545531164ae(),
+		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +147,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute0e1ee5b4904cf4e371df69c9(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The kind of extension",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +159,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 		//	  "type": "string"
 		//	}
-		"type_name": schemaAttribute52f009bb3261e08ca20c4c78(),
+		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TypeNameAlias
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +173,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 		//	  "type": "string"
 		//	}
-		"type_name_alias": schemaAttribute68e16c820e1c9e03cf7f7f59(),
+		"type_name_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An alias to assign to the public extension in this account and region. If you specify an alias for the extension, you must then use the alias to refer to the extension in your templates.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionBump
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +188,10 @@ func typeActivationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"version_bump": schemaAttribute170d29dc21353ad545175411(),
+		"version_bump": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

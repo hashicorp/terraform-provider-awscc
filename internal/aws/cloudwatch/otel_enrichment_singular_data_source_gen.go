@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5c3319f14081729e2db7c0b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID. This is the primary identifier for this singleton resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaed497722668c71c45fc5108() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of OTel enrichment (RUNNING or STOPPED).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudwatch_otel_enrichment", oTelEnrichmentDataSource)
 }
@@ -43,7 +29,10 @@ func oTelEnrichmentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The AWS account ID. This is the primary identifier for this singleton resource.",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute5c3319f14081729e2db7c0b2(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID. This is the primary identifier for this singleton resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -55,7 +44,10 @@ func oTelEnrichmentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeaed497722668c71c45fc5108(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current status of OTel enrichment (RUNNING or STOPPED).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5ed4626aa6ba66682118210e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Primary
-			"primary": schemaAttributeb6886c506ae53f724d515b59(),
-			// Property: Secondary
-			"secondary": schemaAttribute6f84a4e6ee99e37067e1ed14(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f84a4e6ee99e37067e1ed14() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Route
-			"route": schemaAttributea985adaec4e1507d8f28046d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70444f0f9e09bfedb48a5526() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FailoverConfig
-			"failover_config": schemaAttribute5ed4626aa6ba66682118210e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c8528a2b4442110cb52cfa6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: State
-			"state": schemaAttributea985adaec4e1507d8f28046d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea985adaec4e1507d8f28046d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6886c506ae53f724d515b59() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HealthCheck
-			"health_check": schemaAttributea985adaec4e1507d8f28046d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee84a5b14f877fa2cbfbec8ca() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventBusArn
-				"event_bus_arn": schemaAttributea985adaec4e1507d8f28046d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_events_endpoint", endpointDataSource)
 }
@@ -101,7 +31,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:endpoint\\/[/\\.\\-_A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea985adaec4e1507d8f28046d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +42,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributea985adaec4e1507d8f28046d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointId
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +54,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
 		//	  "type": "string"
 		//	}
-		"endpoint_id": schemaAttributea985adaec4e1507d8f28046d(),
+		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointUrl
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +66,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(https://)?[\\.\\-a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"endpoint_url": schemaAttributea985adaec4e1507d8f28046d(),
+		"endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBuses
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +93,17 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
-		"event_buses": schemaAttributee84a5b14f877fa2cbfbec8ca(),
+		"event_buses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventBusArn
+					"event_bus_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +113,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea985adaec4e1507d8f28046d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfig
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +135,15 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"replication_config": schemaAttribute9c8528a2b4442110cb52cfa6(),
+		"replication_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: State
+				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +153,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:iam::\\d{12}:role\\/[\\w+=,.@/-]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributea985adaec4e1507d8f28046d(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingConfig
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +208,37 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"routing_config": schemaAttribute70444f0f9e09bfedb48a5526(),
+		"routing_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailoverConfig
+				"failover_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Primary
+						"primary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HealthCheck
+								"health_check": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Secondary
+						"secondary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Route
+								"route": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +253,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributea985adaec4e1507d8f28046d(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StateReason
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +265,9 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"state_reason": schemaAttributea985adaec4e1507d8f28046d(),
+		"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

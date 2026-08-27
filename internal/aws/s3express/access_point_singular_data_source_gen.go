@@ -16,161 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00436373d8799475ceeb72c3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "You can specify any amount of pre?xes, but the total length of characters of all pre?xes must be less than 256 bytes in size.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01290c6513743f3ded695fdf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1798a8f8b490533cae851329() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the bucket that you want to associate this Access Point with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e0dd1df204008e6b1f4d9d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcId
-			"vpc_id": schemaAttribute681b9abd55254e242e42d821(),
-		}, /*END SCHEMA*/
-		Description: "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bea8c0b40be68f2f75b20b3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "You can include one or more API operations as permissions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute495007e8e9283f3521a83a0f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53cd2650c7a3b85dcea6ecbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID associated with the S3 bucket associated with this access point.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute590ba71e7e577936157b5e87() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Permissions
-			"permissions": schemaAttribute3bea8c0b40be68f2f75b20b3(),
-			// Property: Prefixes
-			"prefixes": schemaAttribute00436373d8799475ceeb72c3(),
-		}, /*END SCHEMA*/
-		Description: "For directory buckets, you can ?lter access control to speci?c pre?xes, API operations, or a combination of both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bb6aaf5b6b6ff7bea05cf10() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedf7dfd22599369b429a3990d(),
-				// Property: Value
-				"value": schemaAttributedf7dfd22599369b429a3990d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute681b9abd55254e242e42d821() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If this field is specified, this access point will only allow connections from the specified VPC ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ef9fe0227065dfb64f89c04() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6289de5c153d3a36f8fae75() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeace2b29ad00774d2bea30929() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified accesspoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec30f473fc20608841ab0ac29() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BlockPublicAcls
-			"block_public_acls": schemaAttributea6289de5c153d3a36f8fae75(),
-			// Property: BlockPublicPolicy
-			"block_public_policy": schemaAttribute495007e8e9283f3521a83a0f(),
-			// Property: IgnorePublicAcls
-			"ignore_public_acls": schemaAttribute01290c6513743f3ded695fdf(),
-			// Property: RestrictPublicBuckets
-			"restrict_public_buckets": schemaAttribute7ef9fe0227065dfb64f89c04(),
-		}, /*END SCHEMA*/
-		Description: "The PublicAccessBlock configuration that you want to apply to this Access Point.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9f1ef5c2ab314ea4f26c36c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name. For directory buckets, the access point name must consist of a base name that you provide and su?x that includes the ZoneID (AWS Availability Zone or Local Zone) of your bucket location, followed by --xa-s3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf7dfd22599369b429a3990d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee10ee6c3276fa0cebc487653() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether this Access Point allows access from the public Internet. If VpcConfiguration is specified for this Access Point, then NetworkOrigin is VPC, and the Access Point doesn't allow access from the public Internet. Otherwise, NetworkOrigin is Internet, and the Access Point allows access from the public Internet, subject to the Access Point and bucket access policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb68202bab817689c39ac412() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The Access Point Policy you want to apply to this access point.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3express_access_point", accessPointDataSource)
 }
@@ -186,7 +31,10 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the specified accesspoint.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeace2b29ad00774d2bea30929(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified accesspoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Bucket
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +44,10 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"bucket": schemaAttribute1798a8f8b490533cae851329(),
+		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the bucket that you want to associate this Access Point with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketAccountId
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +57,10 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"bucket_account_id": schemaAttribute53cd2650c7a3b85dcea6ecbf(),
+		"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID associated with the S3 bucket associated with this access point.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +71,10 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec9f1ef5c2ab314ea4f26c36c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name. For directory buckets, the access point name must consist of a base name that you provide and su?x that includes the ZoneID (AWS Availability Zone or Local Zone) of your bucket location, followed by --xa-s3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkOrigin
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +86,10 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_origin": schemaAttributee10ee6c3276fa0cebc487653(),
+		"network_origin": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether this Access Point allows access from the public Internet. If VpcConfiguration is specified for this Access Point, then NetworkOrigin is VPC, and the Access Point doesn't allow access from the public Internet. Otherwise, NetworkOrigin is Internet, and the Access Point allows access from the public Internet, subject to the Access Point and bucket access policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +97,11 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Access Point Policy you want to apply to this access point.",
 		//	  "type": "object"
 		//	}
-		"policy": schemaAttributeeb68202bab817689c39ac412(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The Access Point Policy you want to apply to this access point.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicAccessBlockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +127,32 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"public_access_block_configuration": schemaAttributec30f473fc20608841ab0ac29(),
+		"public_access_block_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlockPublicAcls
+				"block_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlockPublicPolicy
+				"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IgnorePublicAcls
+				"ignore_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RestrictPublicBuckets
+				"restrict_public_buckets": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The PublicAccessBlock configuration that you want to apply to this Access Point.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +190,24 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scope": schemaAttribute590ba71e7e577936157b5e87(),
+		"scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Permissions
+				"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "You can include one or more API operations as permissions",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Prefixes
+				"prefixes": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "You can specify any amount of pre?xes, but the total length of characters of all pre?xes must be less than 256 bytes in size.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "For directory buckets, you can ?lter access control to speci?c pre?xes, API operations, or a combination of both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +238,21 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5bb6aaf5b6b6ff7bea05cf10(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +268,17 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vpc_configuration": schemaAttribute1e0dd1df204008e6b1f4d9d5(),
+		"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If this field is specified, this access point will only allow connections from the specified VPC ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

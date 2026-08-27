@@ -16,190 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03621ae9368a18237b362e44() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedb85595617c27e7bfe7721bd(),
-				// Property: Value
-				"value": schemaAttribute0fe9f5a89b4948e262c2dca0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the global network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fe9f5a89b4948e262c2dca0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49f6260cd80c6cb2bacc3b77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of segment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54fa6dc6fda3629b515c0016() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ASN of a core network edge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77f7c69f46529753122d3c97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The creation time of core network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fb1ccf5c0d6eb08b1372ec5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of core network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94128f91c0b444593cb16ab1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN (Amazon resource name) of core network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99bf3bc1cd33320d16c2997e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fa86eb6999a87faa666e7b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the global network that your core network is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7247825e41570d6c37f8aac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SendTo
-			"send_to": schemaAttributed96e42453197b78ce1fce4dc(),
-			// Property: SendVia
-			"send_via": schemaAttributed96e42453197b78ce1fce4dc(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa0f24eeee7e3cd1e5a5b410() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EdgeLocations
-				"edge_locations": schemaAttributed96e42453197b78ce1fce4dc(),
-				// Property: Name
-				"name": schemaAttributeb4632f80afb7dc1e941e72e7(),
-				// Property: Segments
-				"segments": schemaAttributea7247825e41570d6c37f8aac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The network function groups within a core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead14375db9d9d42516982a46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Owner of the core network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4632f80afb7dc1e941e72e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of network function group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec783472ef264649e9f931e60() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EdgeLocations
-				"edge_locations": schemaAttributed96e42453197b78ce1fce4dc(),
-				// Property: Name
-				"name": schemaAttribute49f6260cd80c6cb2bacc3b77(),
-				// Property: SharedSegments
-				"shared_segments": schemaAttributed96e42453197b78ce1fce4dc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The segments within a core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed96e42453197b78ce1fce4dc() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb080f319dd80bd279372974() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Asn
-				"asn": schemaAttribute54fa6dc6fda3629b515c0016(),
-				// Property: EdgeLocation
-				"edge_location": schemaAttributedf55a60b0f1e19902665b412(),
-				// Property: InsideCidrBlocks
-				"inside_cidr_blocks": schemaAttributed96e42453197b78ce1fce4dc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The edges within a core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb85595617c27e7bfe7721bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf55a60b0f1e19902665b412() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Region where a core network edge is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee63ac8374daba43e3752405e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of core network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef86fe29fd70e59c21a4d902b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of core network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_core_network", coreNetworkDataSource)
 }
@@ -215,7 +31,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN (Amazon resource name) of core network",
 		//	  "type": "string"
 		//	}
-		"core_network_arn": schemaAttribute94128f91c0b444593cb16ab1(),
+		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN (Amazon resource name) of core network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +42,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of core network",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schemaAttribute7fb1ccf5c0d6eb08b1372ec5(),
+		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of core network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +53,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The creation time of core network",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute77f7c69f46529753122d3c97(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The creation time of core network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +64,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of core network",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee63ac8374daba43e3752405e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of core network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Edges
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +98,29 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"edges": schemaAttributedb080f319dd80bd279372974(),
+		"edges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Asn
+					"asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The ASN of a core network edge.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EdgeLocation
+					"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Region where a core network edge is located.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InsideCidrBlocks
+					"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The edges within a core network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +128,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the global network that your core network is a part of.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schemaAttribute9fa86eb6999a87faa666e7b3(),
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the global network that your core network is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroups
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +180,40 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"network_function_groups": schemaAttributeaa0f24eeee7e3cd1e5a5b410(),
+		"network_function_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EdgeLocations
+					"edge_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of network function group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Segments
+					"segments": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SendTo
+							"send_to": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SendVia
+							"send_via": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The network function groups within a core network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -335,7 +221,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Owner of the core network",
 		//	  "type": "string"
 		//	}
-		"owner_account": schemaAttributead14375db9d9d42516982a46(),
+		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Owner of the core network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +232,11 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Live policy document for the core network, you must provide PolicyDocument in Json Format",
 		//	  "type": "object"
 		//	}
-		"policy_document": schemaAttribute99bf3bc1cd33320d16c2997e(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Segments
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +271,29 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"segments": schemaAttributec783472ef264649e9f931e60(),
+		"segments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EdgeLocations
+					"edge_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of segment",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SharedSegments
+					"shared_segments": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The segments within a core network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +301,10 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The state of core network",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributef86fe29fd70e59c21a4d902b(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of core network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -415,7 +333,24 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute03621ae9368a18237b362e44(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the global network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

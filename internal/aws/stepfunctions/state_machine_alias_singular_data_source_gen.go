@@ -15,110 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0eb135e66e54c03ce37b5e68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute126f44bf718fe9338cf218d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description of the alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d451f2cc268c0396324983d() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of CloudWatch alarm names that will be monitored during the deployment. The deployment will fail and rollback if any alarms go into ALARM state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute319cfd074b36dedafe7441d4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of traffic you want to route to the state machine version. The sum of the weights in the routing configuration must be equal to 100.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute411c9c40094ec4437ae44a5d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Alarms
-			"alarms": schemaAttribute2d451f2cc268c0396324983d(),
-			// Property: Interval
-			"interval": schemaAttribute788027029ffc0030a7fe0bc2(),
-			// Property: Percentage
-			"percentage": schemaAttribute6abecf23243dda333768551a(),
-			// Property: StateMachineVersionArn
-			"state_machine_version_arn": schemaAttribute590651a346afb7fb91b45a09(),
-			// Property: Type
-			"type": schemaAttribute9bb5de1ca36ed334648b4d14(),
-		}, /*END SCHEMA*/
-		Description: "The settings to enable gradual state machine deployments.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4229400e72b47cdeb3301ff6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The alias name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute590651a346afb7fb91b45a09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6abecf23243dda333768551a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of traffic to shift to the new version in each increment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute788027029ffc0030a7fe0bc2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time in minutes between each traffic shifting increment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bb5de1ca36ed334648b4d14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of deployment to perform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea42d97dd60adca5ac9da8c15() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StateMachineVersionArn
-				"state_machine_version_arn": schemaAttribute0eb135e66e54c03ce37b5e68(),
-				// Property: Weight
-				"weight": schemaAttribute319cfd074b36dedafe7441d4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The routing configuration of the alias. One or two versions can be mapped to an alias to split StartExecution requests of the same state machine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb92be5087ea13c1bc9bd6ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_stepfunctions_state_machine_alias", stateMachineAliasDataSource)
 }
@@ -136,7 +32,10 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributecb92be5087ea13c1bc9bd6ab(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentPreference
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +89,37 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"deployment_preference": schemaAttribute411c9c40094ec4437ae44a5d(),
+		"deployment_preference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Alarms
+				"alarms": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of CloudWatch alarm names that will be monitored during the deployment. The deployment will fail and rollback if any alarms go into ALARM state.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Interval
+				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time in minutes between each traffic shifting increment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Percentage
+				"percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The percentage of traffic to shift to the new version in each increment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StateMachineVersionArn
+				"state_machine_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of deployment to perform.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The settings to enable gradual state machine deployments.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +129,10 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute126f44bf718fe9338cf218d3(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description of the alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +142,10 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute4229400e72b47cdeb3301ff6(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The alias name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +179,24 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"routing_configuration": schemaAttributea42d97dd60adca5ac9da8c15(),
+		"routing_configuration": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: StateMachineVersionArn
+					"state_machine_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Weight
+					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The percentage of traffic you want to route to the state machine version. The sum of the weights in the routing configuration must be equal to 100.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The routing configuration of the alias. One or two versions can be mapped to an alias to split StartExecution requests of the same state machine.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StateMachineArn
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +205,9 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"state_machine_arn": schemaAttribute590651a346afb7fb91b45a09(),
+		"state_machine_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,371 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f56b2710e2a3f8ea1b01ae1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the notification target to which alerts are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10a05044846765007a90c37d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The topic for metrics export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13b839f5ddf9d7c28af2fc79() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExportMetric
-				"export_metric": schemaAttribute905525300221fd9eb8d867f3(),
-				// Property: Metric
-				"metric": schemaAttributeb2f18fc8e87ad1e13188cb11(),
-				// Property: MetricDimension
-				"metric_dimension": schemaAttributea7984f3457106066e0c4a4c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute167e9dec2e01c8ca4c4c7932() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cidrs
-			"cidrs": schemaAttributed00571ead543a11ff8e7c329(),
-			// Property: Count
-			"count": schemaAttributec9b3b48ac23f663422524e4a(),
-			// Property: Number
-			"number": schemaAttributea21a74eaedb4015f820c773c(),
-			// Property: Numbers
-			"numbers": schemaAttribute609687ff554b0505608cd130(),
-			// Property: Ports
-			"ports": schemaAttributeb84dce11ba9327193d1b20ed(),
-			// Property: Strings
-			"strings": schemaAttributed386ea70e96c5dba457a70e7(),
-		}, /*END SCHEMA*/
-		Description: "The value to be compared with the metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2519ef79ace2215820d30d3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the security profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b8de3a965dcb815c2ad35f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines how the dimensionValues of a dimension are interpreted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46bd78308bcafe6f33db28f5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Statistic
-			"statistic": schemaAttribute5f6b692166b7606b8f580c4d(),
-		}, /*END SCHEMA*/
-		Description: "A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bbd20cce86ae53d0c88254e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Manage Detect alarm SNS notifications by setting behavior notification to on or suppressed. Detect will continue to performing device behavior evaluations. However, suppressed alarms wouldn't be forwarded for SNS notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5258b509a20e2271f0c2479b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that grants permission to publish to mqtt topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52b326c510aac06ff5db0f9a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52f674100d46355996e5547e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f6b692166b7606b8f580c4d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The percentile which resolves to a threshold value by which compliance with a behavior is determined",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60948c5d83f493d7de2c01bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that grants permission to send alerts to the notification target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute609687ff554b0505608cd130() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Float64Type,
-		Description: "The numeral values of a metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute666d06b3a48fe2ef8e99a2c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a6ad84c48760b77a35c2bef() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConfidenceLevel
-			"confidence_level": schemaAttributeefa15659de23b10b23f694e4(),
-		}, /*END SCHEMA*/
-		Description: "The configuration of an ML Detect Security Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute905525300221fd9eb8d867f3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Flag to enable/disable metrics export for metric to be retained.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute927eea9bc744a44db8dd8de6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98daba666799bdef72ecdb8d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComparisonOperator
-			"comparison_operator": schemaAttribute927eea9bc744a44db8dd8de6(),
-			// Property: ConsecutiveDatapointsToAlarm
-			"consecutive_datapoints_to_alarm": schemaAttribute52f674100d46355996e5547e(),
-			// Property: ConsecutiveDatapointsToClear
-			"consecutive_datapoints_to_clear": schemaAttribute52b326c510aac06ff5db0f9a(),
-			// Property: DurationSeconds
-			"duration_seconds": schemaAttributee498484b7d733b3f1f5b3438(),
-			// Property: MlDetectionConfig
-			"ml_detection_config": schemaAttribute6a6ad84c48760b77a35c2bef(),
-			// Property: StatisticalThreshold
-			"statistical_threshold": schemaAttribute46bd78308bcafe6f33db28f5(),
-			// Property: Value
-			"value": schemaAttribute167e9dec2e01c8ca4c4c7932(),
-		}, /*END SCHEMA*/
-		Description: "The criteria by which the behavior is determined to be normal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cac0c2f6b789cc55fd8ff34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea00215dd7dae0ef4be62c760() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AlertTargetArn
-				"alert_target_arn": schemaAttribute0f56b2710e2a3f8ea1b01ae1(),
-				// Property: RoleArn
-				"role_arn": schemaAttribute60948c5d83f493d7de2c01bf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the destinations to which alerts are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea21a74eaedb4015f820c773c() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The numeral value of a metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7984f3457106066e0c4a4c2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DimensionName
-			"dimension_name": schemaAttributed6adaccea54285f638265210(),
-			// Property: Operator
-			"operator": schemaAttribute3b8de3a965dcb815c2ad35f1(),
-		}, /*END SCHEMA*/
-		Description: "The dimension of a metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7e2a49749a92277ea66d430() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Criteria
-				"criteria": schemaAttribute98daba666799bdef72ecdb8d(),
-				// Property: ExportMetric
-				"export_metric": schemaAttribute905525300221fd9eb8d867f3(),
-				// Property: Metric
-				"metric": schemaAttributeb2f18fc8e87ad1e13188cb11(),
-				// Property: MetricDimension
-				"metric_dimension": schemaAttributea7984f3457106066e0c4a4c2(),
-				// Property: Name
-				"name": schemaAttribute9cac0c2f6b789cc55fd8ff34(),
-				// Property: SuppressAlerts
-				"suppress_alerts": schemaAttribute4bbd20cce86ae53d0c88254e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the behaviors that, when violated by a device (thing), cause an alert.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2f18fc8e87ad1e13188cb11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "What is measured by the behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb84dce11ba9327193d1b20ed() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec15d774ab4c88f24c4d7e2f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the security profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9b3b48ac23f663422524e4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If the ComparisonOperator calls for a numeric value, use this to specify that (integer) numeric value to be compared with the metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfa17277677084c5c884c77e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MqttTopic
-			"mqtt_topic": schemaAttribute10a05044846765007a90c37d(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute5258b509a20e2271f0c2479b(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing the mqtt topic for metrics export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed00571ead543a11ff8e7c329() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "If the ComparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed386ea70e96c5dba457a70e7() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The string values of a metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed646e168d1f9f870e75b0d55() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed946eedd2667d2e35480976a(),
-				// Property: Value
-				"value": schemaAttribute666d06b3a48fe2ef8e99a2c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Metadata that can be used to manage the security profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6adaccea54285f638265210() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the dimension.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8d5c507ceac71dbd9949888() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN (Amazon resource name) of the created security profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed946eedd2667d2e35480976a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddb2de7d266c7dca5667401e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A set of target ARNs that the security profile is attached to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee498484b7d733b3f1f5b3438() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Use this to specify the time duration over which the behavior is evaluated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeefa15659de23b10b23f694e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_security_profile", securityProfileDataSource)
 }
@@ -443,7 +78,41 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"additional_metrics_to_retain_v2": schemaAttribute13b839f5ddf9d7c28af2fc79(),
+		"additional_metrics_to_retain_v2": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ExportMetric
+					"export_metric": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Flag to enable/disable metrics export for metric to be retained.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Metric
+					"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "What is measured by the behavior.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricDimension
+					"metric_dimension": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DimensionName
+							"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the dimension.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Operator
+							"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Defines how the dimensionValues of a dimension are interpreted.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The dimension of a metric.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlertTargets
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +145,25 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"alert_targets": schemaAttributea00215dd7dae0ef4be62c760(),
+		"alert_targets":           // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AlertTargetArn
+					"alert_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the notification target to which alerts are sent.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the role that grants permission to send alerts to the notification target.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the destinations to which alerts are sent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Behaviors
 		// CloudFormation resource type schema:
 		//
@@ -678,7 +365,143 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"behaviors": schemaAttributea7e2a49749a92277ea66d430(),
+		"behaviors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Criteria
+					"criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ComparisonOperator
+							"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ConsecutiveDatapointsToAlarm
+							"consecutive_datapoints_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ConsecutiveDatapointsToClear
+							"consecutive_datapoints_to_clear": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DurationSeconds
+							"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Use this to specify the time duration over which the behavior is evaluated.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MlDetectionConfig
+							"ml_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConfidenceLevel
+									"confidence_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration of an ML Detect Security Profile.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatisticalThreshold
+							"statistical_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Statistic
+									"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The percentile which resolves to a threshold value by which compliance with a behavior is determined",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Cidrs
+									"cidrs": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "If the ComparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Count
+									"count": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "If the ComparisonOperator calls for a numeric value, use this to specify that (integer) numeric value to be compared with the metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Number
+									"number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Description: "The numeral value of a metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Numbers
+									"numbers": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.Float64Type,
+										Description: "The numeral values of a metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Ports
+									"ports": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.Int64Type,
+										Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Strings
+									"strings": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The string values of a metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The value to be compared with the metric.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The criteria by which the behavior is determined to be normal.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExportMetric
+					"export_metric": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Flag to enable/disable metrics export for metric to be retained.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Metric
+					"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "What is measured by the behavior.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricDimension
+					"metric_dimension": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DimensionName
+							"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the dimension.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Operator
+							"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Defines how the dimensionValues of a dimension are interpreted.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The dimension of a metric.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name for the behavior.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SuppressAlerts
+					"suppress_alerts": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Manage Detect alarm SNS notifications by setting behavior notification to on or suppressed. Detect will continue to performing device behavior evaluations. However, suppressed alarms wouldn't be forwarded for SNS notification.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the behaviors that, when violated by a device (thing), cause an alert.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsExportConfig
 		// CloudFormation resource type schema:
 		//
@@ -705,7 +528,22 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"metrics_export_config": schemaAttributecfa17277677084c5c884c77e(),
+		"metrics_export_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MqttTopic
+				"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The topic for metrics export.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that grants permission to publish to mqtt topic.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure containing the mqtt topic for metrics export.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -713,7 +551,10 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ARN (Amazon resource name) of the created security profile.",
 		//	  "type": "string"
 		//	}
-		"security_profile_arn": schemaAttributed8d5c507ceac71dbd9949888(),
+		"security_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN (Amazon resource name) of the created security profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityProfileDescription
 		// CloudFormation resource type schema:
 		//
@@ -722,7 +563,10 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"security_profile_description": schemaAttributec15d774ab4c88f24c4d7e2f0(),
+		"security_profile_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the security profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityProfileName
 		// CloudFormation resource type schema:
 		//
@@ -733,7 +577,10 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[a-zA-Z0-9:_-]+",
 		//	  "type": "string"
 		//	}
-		"security_profile_name": schemaAttribute2519ef79ace2215820d30d3e(),
+		"security_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the security profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -767,7 +614,24 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed646e168d1f9f870e75b0d55(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Metadata that can be used to manage the security profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetArns
 		// CloudFormation resource type schema:
 		//
@@ -782,7 +646,11 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_arns": schemaAttributeddb2de7d266c7dca5667401e(),
+		"target_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A set of target ARNs that the security profile is attached to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

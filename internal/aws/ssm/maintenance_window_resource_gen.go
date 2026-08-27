@@ -21,154 +21,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute106ee387344321fbfa48b542() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19959175af907a5115791678() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute57be3d04b3c60d00fae4ade8(),
-				// Property: Value
-				"value": schemaAttribute470762f7f71fcb9e1de444e5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute368e23e0112e2cbf2cdc2d78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute470762f7f71fcb9e1de444e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cfd7c6059079b2a0b7584f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the maintenance window.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57be3d04b3c60d00fae4ade8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67cb3e38cdf74e63062a9cb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the maintenance window.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70d2730d476e3a980b251889() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the maintenance window.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute946e4fd20a7c082f9b719e4f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7211eafaf68c8e521ea118b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to wait to run a maintenance window after the scheduled cron expression date and time.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc46559d9109bd6fe9fc8966() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbf3468ae7a767d479b1533f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The duration of the maintenance window in hours.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee55829245b62e1151f07f57f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The schedule of the maintenance window in the form of a cron or rate expression.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee5c42b40a5c80ec585fc4e0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of hours before the end of the maintenance window that AWS Systems Manager stops scheduling new tasks for execution.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ssm_maintenance_window", maintenanceWindowResource)
 	registry.AddListResourceFactory("awscc_ssm_maintenance_window", generic.NewListResource(maintenanceWindowResource))
@@ -185,7 +37,10 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.",
 		//	  "type": "boolean"
 		//	}
-		"allow_unassociated_targets": schemaAttribute946e4fd20a7c082f9b719e4f(),
+		"allow_unassociated_targets": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Cutoff
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +48,10 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of hours before the end of the maintenance window that AWS Systems Manager stops scheduling new tasks for execution.",
 		//	  "type": "integer"
 		//	}
-		"cutoff": schemaAttributeee5c42b40a5c80ec585fc4e0(),
+		"cutoff": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of hours before the end of the maintenance window that AWS Systems Manager stops scheduling new tasks for execution.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +59,14 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description of the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute4cfd7c6059079b2a0b7584f6(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the maintenance window.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Duration
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +74,10 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The duration of the maintenance window in hours.",
 		//	  "type": "integer"
 		//	}
-		"duration": schemaAttributedbf3468ae7a767d479b1533f(),
+		"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The duration of the maintenance window in hours.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndDate
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +85,14 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.",
 		//	  "type": "string"
 		//	}
-		"end_date": schemaAttribute368e23e0112e2cbf2cdc2d78(),
+		"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +100,10 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute70d2730d476e3a980b251889(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the maintenance window.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +111,10 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The schedule of the maintenance window in the form of a cron or rate expression.",
 		//	  "type": "string"
 		//	}
-		"schedule": schemaAttributee55829245b62e1151f07f57f(),
+		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The schedule of the maintenance window in the form of a cron or rate expression.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleOffset
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +122,14 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of days to wait to run a maintenance window after the scheduled cron expression date and time.",
 		//	  "type": "integer"
 		//	}
-		"schedule_offset": schemaAttributec7211eafaf68c8e521ea118b(),
+		"schedule_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to wait to run a maintenance window after the scheduled cron expression date and time.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleTimezone
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +137,14 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.",
 		//	  "type": "string"
 		//	}
-		"schedule_timezone": schemaAttribute106ee387344321fbfa48b542(),
+		"schedule_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StartDate
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +152,14 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.",
 		//	  "type": "string"
 		//	}
-		"start_date": schemaAttributecc46559d9109bd6fe9fc8966(),
+		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +187,43 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute19959175af907a5115791678(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WindowId
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +231,13 @@ func maintenanceWindowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"window_id": schemaAttribute67cb3e38cdf74e63062a9cb1(),
+		"window_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the maintenance window.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

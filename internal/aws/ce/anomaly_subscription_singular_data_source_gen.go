@@ -15,108 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute089031b5dcff409e07146417() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the subscription.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1004ad1ea7637e294315d505() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Subscription ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12ceca209591aa509aa02113() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The frequency at which anomaly reports are sent over email. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e948606ba7f244d8550b063() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The dollar value that triggers a notification if the threshold is exceeded. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35fd99086dcc0627b73ba329() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a47e50a28a4ac81bf30e1e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute515cdd4ea9d54bdd7d26c648() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute730c3d4f1bfc625c1c201215() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schemaAttribute3a47e50a28a4ac81bf30e1e9(),
-				// Property: Status
-				"status": schemaAttribute3a47e50a28a4ac81bf30e1e9(),
-				// Property: Type
-				"type": schemaAttribute3a47e50a28a4ac81bf30e1e9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of subscriber",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89a0cb24dbd80f5a8da6245f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7ab15d4816449e64c178317() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The accountId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01b39cd3d43f00d064eff93() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of cost anomaly monitors.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef353af603bbd85d1de03c437() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute515cdd4ea9d54bdd7d26c648(),
-				// Property: Value
-				"value": schemaAttribute35fd99086dcc0627b73ba329(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to subscription.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ce_anomaly_subscription", anomalySubscriptionDataSource)
 }
@@ -134,7 +32,10 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributed7ab15d4816449e64c178317(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The accountId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Frequency
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +48,10 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"frequency": schemaAttribute12ceca209591aa509aa02113(),
+		"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The frequency at which anomaly reports are sent over email. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorArnList
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +65,11 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"monitor_arn_list": schemaAttributee01b39cd3d43f00d064eff93(),
+		"monitor_arn_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of cost anomaly monitors.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +104,24 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"resource_tags": schemaAttributef353af603bbd85d1de03c437(),
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to subscription.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subscribers
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +158,26 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subscribers": schemaAttribute730c3d4f1bfc625c1c201215(),
+		"subscribers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Address
+					"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of subscriber",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubscriptionArn
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +186,10 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
-		"subscription_arn": schemaAttribute1004ad1ea7637e294315d505(),
+		"subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Subscription ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubscriptionName
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +200,10 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "[\\S\\s]*",
 		//	  "type": "string"
 		//	}
-		"subscription_name": schemaAttribute089031b5dcff409e07146417(),
+		"subscription_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the subscription.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +212,10 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"threshold": schemaAttribute1e948606ba7f244d8550b063(),
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The dollar value that triggers a notification if the threshold is exceeded. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ThresholdExpression
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +223,10 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
 		//	  "type": "string"
 		//	}
-		"threshold_expression": schemaAttribute89a0cb24dbd80f5a8da6245f(),
+		"threshold_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

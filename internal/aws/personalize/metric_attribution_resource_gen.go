@@ -24,180 +24,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute01270297999ec7dafa295439() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The attribute's expression.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute012901f93f6252c8a5ccdf22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metric's name.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1805e03c6769f037ccf40b66() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventType
-				"event_type": schemaAttribute25f49cb87b4e42fab130700e(),
-				// Property: Expression
-				"expression": schemaAttribute01270297999ec7dafa295439(),
-				// Property: MetricName
-				"metric_name": schemaAttribute012901f93f6252c8a5ccdf22(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of metric attributes for the metric attribution.",
-		Required:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(10),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25f49cb87b4e42fab130700e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metric's event type.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2af306d43223bcef7e0c610f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttribute44834460bdf104d49c19af13(),
-			// Property: S3DataDestination
-			"s3_data_destination": schemaAttributef3f65e412c9aa152e1ce68f8(),
-		}, /*END SCHEMA*/
-		Description: "The output configuration details for the metric attribution.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3358594cdfe327d3758104fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the metric attribution.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44834460bdf104d49c19af13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role for the metric attribution.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45f664a24231b5dea54ba425() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the metric attribution.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d8dd88e5bfe7eaeffd21a53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the destination dataset group.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\d-]+):personalize:.*:.*:.+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8294eca4a4b33f690d93cb0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws.*:kms:.*:[0-9]{12}:key/"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5f939b2b385ac99f63f9744() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file path of the Amazon S3 bucket.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^(s3|http|https)://.+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed14fafb3ddd49dc00c0216b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric attribution.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 63),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3f65e412c9aa152e1ce68f8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute8294eca4a4b33f690d93cb0c(),
-			// Property: Path
-			"path": schemaAttributec5f939b2b385ac99f63f9744(),
-		}, /*END SCHEMA*/
-		Description: "The configuration details of an Amazon S3 output bucket.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_personalize_metric_attribution", metricAttributionResource)
 	registry.AddListResourceFactory("awscc_personalize_metric_attribution", generic.NewListResource(metricAttributionResource))
@@ -216,7 +42,17 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schemaAttribute6d8dd88e5bfe7eaeffd21a53(),
+		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the destination dataset group.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\d-]+):personalize:.*:.*:.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MetricAttributionArn
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +62,13 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"metric_attribution_arn": schemaAttribute45f664a24231b5dea54ba425(),
+		"metric_attribution_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the metric attribution.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Metrics
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +105,45 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"metrics": schemaAttribute1805e03c6769f037ccf40b66(),
+		"metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventType
+					"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The metric's event type.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Expression
+					"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The attribute's expression.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricName
+					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The metric's name.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of metric attributes for the metric attribution.",
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsOutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +185,59 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"metrics_output_config": schemaAttribute2af306d43223bcef7e0c610f(),
+		"metrics_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role for the metric attribution.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3DataDestination
+				"s3_data_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the KMS key.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws.*:kms:.*:[0-9]{12}:key/"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Path
+						"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The file path of the Amazon S3 bucket.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(256),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(s3|http|https)://.+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration details of an Amazon S3 output bucket.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The output configuration details for the metric attribution.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +248,17 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed14fafb3ddd49dc00c0216b9(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the metric attribution.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -324,7 +266,13 @@ func metricAttributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the metric attribution.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute3358594cdfe327d3758104fc(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the metric attribution.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

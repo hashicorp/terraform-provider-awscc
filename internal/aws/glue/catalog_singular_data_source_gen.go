@@ -15,299 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute12af6015df0d458ce60ab416() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowFullTableExternalDataAccess
-			"allow_full_table_external_data_access": schemaAttribute5222fc656cf150c1cc5c1049(),
-			// Property: CatalogType
-			"catalog_type": schemaAttributea180a57661bb64bdde8a0b98(),
-			// Property: DataLakeAccess
-			"data_lake_access": schemaAttributef3f8c88248195becbb9835c9(),
-			// Property: DataTransferRole
-			"data_transfer_role": schemaAttributee686f41fba827453fe9d2fdf(),
-			// Property: KmsKey
-			"kms_key": schemaAttribute40eb462385dc278b043769db(),
-			// Property: ManagedWorkgroupName
-			"managed_workgroup_name": schemaAttribute2389498f5290b2a7e3f44a95(),
-			// Property: ManagedWorkgroupStatus
-			"managed_workgroup_status": schemaAttribute627071b9ef1cfe46bfbb44f0(),
-			// Property: RedshiftDatabaseName
-			"redshift_database_name": schemaAttributea956d3db6b0bb87a8eab4458(),
-		}, /*END SCHEMA*/
-		Description: "Data lake access properties for the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2389498f5290b2a7e3f44a95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the managed workgroup associated with the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23f6c5c9136dbb96e895334f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataLakePrincipalIdentifier
-			"data_lake_principal_identifier": schemaAttributeab28595e6c56b24c3c7ebfa4(),
-		}, /*END SCHEMA*/
-		Description: "The Lake Formation principal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute251038efa4c158751e93b2ac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogArn
-			"catalog_arn": schemaAttribute35c250b73705b68abc25e06a(),
-		}, /*END SCHEMA*/
-		Description: "A structure that describes a target catalog for resource linking.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ad0300a972cd23f686a962e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time at which the catalog was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35c250b73705b68abc25e06a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the catalog resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e79ba7893bdcbf015ab2cd9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40eb462385dc278b043769db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An encryption key that will be used for the staging bucket that will be created along with the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4de47997a3a1567cb601b88f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50bb1ab1fef0f4200b6e5bd1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4de47997a3a1567cb601b88f(),
-				// Property: Value
-				"value": schemaAttribute7fc5ea64321a03b69fb56a8d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5222fc656cf150c1cc5c1049() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute627071b9ef1cfe46bfbb44f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the managed workgroup.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute656bc14f0ee279a40b899d5d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomProperties
-			"custom_properties": schemaAttributef54eb98046d2f771c6e972b7(),
-			// Property: DataLakeAccessProperties
-			"data_lake_access_properties": schemaAttribute12af6015df0d458ce60ab416(),
-		}, /*END SCHEMA*/
-		Description: "A structure that specifies data lake access properties and other custom properties.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6585e2255b67c48bc1a38dc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to an external data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66a467cdae3cbc9be68d4b50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6be50a8ecdc3f0791e14f1ae() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectionName
-			"connection_name": schemaAttribute6585e2255b67c48bc1a38dc7(),
-			// Property: Identifier
-			"identifier": schemaAttribute86bca7da5c9fdbd69fd4f2ef(),
-		}, /*END SCHEMA*/
-		Description: "A FederatedCatalog structure that references an entity outside the Glue Data Catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d8951c884933070a16d774b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The permissions that are granted to the principal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fc5ea64321a03b69fb56a8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84f3e66dc1934e6134ffc8f7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time at which the catalog was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86bca7da5c9fdbd69fd4f2ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the federated catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute951d8638664300052482a873() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c7198a809352bcceec1f6d8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Permissions
-				"permissions": schemaAttribute6d8951c884933070a16d774b(),
-				// Property: Principal
-				"principal": schemaAttribute23f6c5c9136dbb96e895334f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of PrincipalPermissions objects for default database permissions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f6905222dd9ffa8cc873f22() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of key-value pairs that define parameters and properties of the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea180a57661bb64bdde8a0b98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a federated catalog type for the native catalog resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea956d3db6b0bb87a8eab4458() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Redshift database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab28595e6c56b24c3c7ebfa4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier for the Lake Formation principal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7f3b7499295fdc71ede758b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to overwrite child resource permissions with the default permissions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee686f41fba827453fe9d2fdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A role that will be assumed by Glue for transferring data into/out of the staging bucket during a query.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeae30da5154a9279f06799bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the catalog to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3f8c88248195becbb9835c9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Turns on or off data lake access for Apache Spark applications that access Amazon Redshift databases in the Data Catalog from any non-Redshift engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef54eb98046d2f771c6e972b7() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Additional key-value properties for the catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd95d0cfb350dd7c4a77eadc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Permissions
-				"permissions": schemaAttribute6d8951c884933070a16d774b(),
-				// Property: Principal
-				"principal": schemaAttribute23f6c5c9136dbb96e895334f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of PrincipalPermissions objects for default table permissions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_catalog", catalogDataSource)
 }
@@ -327,7 +34,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"allow_full_table_external_data_access": schemaAttribute5222fc656cf150c1cc5c1049(),
+		"allow_full_table_external_data_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CatalogId
 		// CloudFormation resource type schema:
 		//
@@ -335,7 +45,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the catalog.",
 		//	  "type": "string"
 		//	}
-		"catalog_id": schemaAttribute951d8638664300052482a873(),
+		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the catalog.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CatalogProperties
 		// CloudFormation resource type schema:
 		//
@@ -399,7 +112,66 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"catalog_properties": schemaAttribute656bc14f0ee279a40b899d5d(),
+		"catalog_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomProperties
+				"custom_properties": // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Additional key-value properties for the catalog.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataLakeAccessProperties
+				"data_lake_access_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowFullTableExternalDataAccess
+						"allow_full_table_external_data_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CatalogType
+						"catalog_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies a federated catalog type for the native catalog resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataLakeAccess
+						"data_lake_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Turns on or off data lake access for Apache Spark applications that access Amazon Redshift databases in the Data Catalog from any non-Redshift engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataTransferRole
+						"data_transfer_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A role that will be assumed by Glue for transferring data into/out of the staging bucket during a query.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKey
+						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An encryption key that will be used for the staging bucket that will be created along with the catalog.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedWorkgroupName
+						"managed_workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the managed workgroup associated with the catalog.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedWorkgroupStatus
+						"managed_workgroup_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the managed workgroup.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RedshiftDatabaseName
+						"redshift_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the Redshift database.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Data lake access properties for the catalog.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that specifies data lake access properties and other custom properties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateDatabaseDefaultPermissions
 		// CloudFormation resource type schema:
 		//
@@ -445,7 +217,32 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"create_database_default_permissions": schemaAttribute9c7198a809352bcceec1f6d8(),
+		"create_database_default_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Permissions
+					"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The permissions that are granted to the principal.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataLakePrincipalIdentifier
+							"data_lake_principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An identifier for the Lake Formation principal.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The Lake Formation principal.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of PrincipalPermissions objects for default database permissions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateTableDefaultPermissions
 		// CloudFormation resource type schema:
 		//
@@ -491,7 +288,32 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"create_table_default_permissions": schemaAttributefd95d0cfb350dd7c4a77eadc(),
+		"create_table_default_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Permissions
+					"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The permissions that are granted to the principal.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataLakePrincipalIdentifier
+							"data_lake_principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An identifier for the Lake Formation principal.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The Lake Formation principal.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of PrincipalPermissions objects for default table permissions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -499,7 +321,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the catalog was created.",
 		//	  "type": "integer"
 		//	}
-		"create_time": schemaAttribute2ad0300a972cd23f686a962e(),
+		"create_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The time at which the catalog was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -508,7 +333,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3e79ba7893bdcbf015ab2cd9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the catalog.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FederatedCatalog
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +355,22 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"federated_catalog": schemaAttribute6be50a8ecdc3f0791e14f1ae(),
+		"federated_catalog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectionName
+				"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the connection to an external data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Identifier
+				"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for the federated catalog.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A FederatedCatalog structure that references an entity outside the Glue Data Catalog.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -537,7 +380,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeeae30da5154a9279f06799bf(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the catalog to create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OverwriteChildResourcePermissionsWithDefault
 		// CloudFormation resource type schema:
 		//
@@ -549,7 +395,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"overwrite_child_resource_permissions_with_default": schemaAttributeb7f3b7499295fdc71ede758b(),
+		"overwrite_child_resource_permissions_with_default": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to overwrite child resource permissions with the default permissions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -563,7 +412,12 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttribute9f6905222dd9ffa8cc873f22(),
+		"parameters":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of key-value pairs that define parameters and properties of the catalog.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -571,7 +425,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the catalog.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttribute66a467cdae3cbc9be68d4b50(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the catalog.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -603,7 +460,24 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute50bb1ab1fef0f4200b6e5bd1(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetRedshiftCatalog
 		// CloudFormation resource type schema:
 		//
@@ -621,7 +495,17 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_redshift_catalog": schemaAttribute251038efa4c158751e93b2ac(),
+		"target_redshift_catalog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CatalogArn
+				"catalog_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the catalog resource.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that describes a target catalog for resource linking.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// CloudFormation resource type schema:
 		//
@@ -629,7 +513,10 @@ func catalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the catalog was last updated.",
 		//	  "type": "integer"
 		//	}
-		"update_time": schemaAttribute84f3e66dc1934e6134ffc8f7(),
+		"update_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The time at which the catalog was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

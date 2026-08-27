@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute447f69423f01db82aff8b709() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The entity type description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76c5c8b95be8e677b57c2c6b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedb53872ee42c99d619ad2c11(),
-				// Property: Value
-				"value": schemaAttributedb53872ee42c99d619ad2c11(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this entity type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88615250acc7e2d75fa7812d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the entity type was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead17a859151b6a6aead7405a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The entity type ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb4547a455cf8f9b12183856() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the entity type was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0f2b96d0fd2e58957ed21e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the entity type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb53872ee42c99d619ad2c11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_entity_type", entityTypeDataSource)
 }
@@ -85,7 +29,10 @@ func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The entity type ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributead17a859151b6a6aead7405a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The entity type ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +40,10 @@ func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the entity type was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributebb4547a455cf8f9b12183856(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the entity type was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +53,10 @@ func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute447f69423f01db82aff8b709(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The entity type description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +64,10 @@ func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the entity type was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute88615250acc7e2d75fa7812d(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the entity type was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +78,10 @@ func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed0f2b96d0fd2e58957ed21e8(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the entity type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +112,22 @@ func entityTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute76c5c8b95be8e677b57c2c6b(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with this entity type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

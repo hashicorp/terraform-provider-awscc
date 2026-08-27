@@ -15,75 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute002c48347cf0329db1c2af76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute018d37c248fda0cf77c5d175() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute248846f01d8102f3e7894ccb(),
-				// Property: Value
-				"value": schemaAttribute002c48347cf0329db1c2af76(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs that contain metadata to help you categorize and organize a human review workflow user interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14e5904d646a39616f3094e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the Liquid template for the worker user interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute248846f01d8102f3e7894ccb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute800f7e33855717f6d42be034() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the human task user interface was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91a8c435d73b766896bb32bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the human task user interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7b81f0f102608a610f534d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the human task user interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb27a9b95ac60df3ef90b3ca5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Content
-			"content": schemaAttribute14e5904d646a39616f3094e6(),
-		}, /*END SCHEMA*/
-		Description: "The Liquid template for the worker user interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_human_task_ui", humanTaskUiDataSource)
 }
@@ -100,7 +31,11 @@ func humanTaskUiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute800f7e33855717f6d42be034(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the human task user interface was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HumanTaskUiArn
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +46,10 @@ func humanTaskUiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]+:[0-9]{12}:human-task-ui/",
 		//	  "type": "string"
 		//	}
-		"human_task_ui_arn": schemaAttributea7b81f0f102608a610f534d2(),
+		"human_task_ui_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the human task user interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HumanTaskUiName
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +60,10 @@ func humanTaskUiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9](-*[a-z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"human_task_ui_name": schemaAttribute91a8c435d73b766896bb32bc(),
+		"human_task_ui_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the human task user interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +97,24 @@ func humanTaskUiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute018d37c248fda0cf77c5d175(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs that contain metadata to help you categorize and organize a human review workflow user interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UiTemplate
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +134,17 @@ func humanTaskUiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ui_template": schemaAttributeb27a9b95ac60df3ef90b3ca5(),
+		"ui_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The content of the Liquid template for the worker user interface.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Liquid template for the worker user interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

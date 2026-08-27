@@ -19,51 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute273277d874ac366420b15f32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResourceId",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2955e5d72eeafe487cd37e84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50e15d79cf16f9f06ab9002c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3993d9acb2194fe6d619564() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AccountId",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_dnssec_config", resolverDNSSECConfigResource)
 	registry.AddListResourceFactory("awscc_route53resolver_resolver_dnssec_config", generic.NewListResource(resolverDNSSECConfigResource))
@@ -82,7 +37,13 @@ func resolverDNSSECConfigResource(ctx context.Context) (resource.Resource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_dnssec_config_id": schemaAttribute2955e5d72eeafe487cd37e84(),
+		"resolver_dnssec_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +53,13 @@ func resolverDNSSECConfigResource(ctx context.Context) (resource.Resource, error
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttributed3993d9acb2194fe6d619564(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AccountId",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +69,18 @@ func resolverDNSSECConfigResource(ctx context.Context) (resource.Resource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttribute273277d874ac366420b15f32(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ValidationStatus
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +94,13 @@ func resolverDNSSECConfigResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"validation_status": schemaAttribute50e15d79cf16f9f06ab9002c(),
+		"validation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

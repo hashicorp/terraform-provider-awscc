@@ -21,84 +21,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute32244df0783c2ed4b3c1db3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The amazon resource name (ARN) of the domain name resource.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute468b0408b5b47b81ab38a9e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f0a4292ed4424078a8aaffe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of the domain name access association resource.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68469a9b2ca63dabab61af1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source type of the domain name access association resource.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"VPCE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf8ae8e3ca6af5fa2fb339c6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute468b0408b5b47b81ab38a9e1(),
-				// Property: Value
-				"value": schemaAttribute468b0408b5b47b81ab38a9e1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of arbitrary tags (key-value pairs) to associate with the domainname access association.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-			listplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef9ab91510882fc63762af53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The amazon resource name (ARN) of the domain name access association resource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_domain_name_access_association", domainNameAccessAssociationResource)
 	registry.AddListResourceFactory("awscc_apigateway_domain_name_access_association", generic.NewListResource(domainNameAccessAssociationResource))
@@ -115,7 +37,13 @@ func domainNameAccessAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The source of the domain name access association resource.",
 		//	  "type": "string"
 		//	}
-		"access_association_source": schemaAttribute5f0a4292ed4424078a8aaffe(),
+		"access_association_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source of the domain name access association resource.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccessAssociationSourceType
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +54,18 @@ func domainNameAccessAssociationResource(ctx context.Context) (resource.Resource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_association_source_type": schemaAttribute68469a9b2ca63dabab61af1c(),
+		"access_association_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source type of the domain name access association resource.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"VPCE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameAccessAssociationArn
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +73,13 @@ func domainNameAccessAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The amazon resource name (ARN) of the domain name access association resource.",
 		//	  "type": "string"
 		//	}
-		"domain_name_access_association_arn": schemaAttributeef9ab91510882fc63762af53(),
+		"domain_name_access_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The amazon resource name (ARN) of the domain name access association resource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +87,13 @@ func domainNameAccessAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The amazon resource name (ARN) of the domain name resource.",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schemaAttribute32244df0783c2ed4b3c1db3f(),
+		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The amazon resource name (ARN) of the domain name resource.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +118,41 @@ func domainNameAccessAssociationResource(ctx context.Context) (resource.Resource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributedf8ae8e3ca6af5fa2fb339c6(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of arbitrary tags (key-value pairs) to associate with the domainname access association.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -22,164 +22,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute2b5490d7c76eb40755ccbeaa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the pod identity association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35a73219373e763321f96728() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb0be714208d22e5d31a00dde(),
-				// Property: Value
-				"value": schemaAttributead427b7caecbe3e76475b628(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b1d425dc5521beafdff57d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Target Role Arn of the pod identity association.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtLeast(1),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute465c2c25978412ece60566b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Kubernetes service account that the pod identity association is created for.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute547e8c39e78b943e0697f888() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM role ARN that the pod identity association is created for.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83d105d178992d4e0570837e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The policy of the pod identity association.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtLeast(1),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute873ecfe1229876d6f1202428() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External Id of the pod identity association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cd5ff4657c6c79441ba7168() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Kubernetes namespace that the pod identity association is created for.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92c245249d1e5b5e00770636() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The Disable Session Tags of the pod identity association.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead427b7caecbe3e76475b628() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0be714208d22e5d31a00dde() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca3929bc8f9ee486422ac082() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the pod identity association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1a1c2d3451bee6935b49e4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster that the pod identity association is created for.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtLeast(1),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_eks_pod_identity_association", podIdentityAssociationResource)
 }
@@ -195,7 +37,13 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ARN of the pod identity association.",
 		//	  "type": "string"
 		//	}
-		"association_arn": schemaAttributeca3929bc8f9ee486422ac082(),
+		"association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the pod identity association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +52,13 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute2b5490d7c76eb40755ccbeaa(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the pod identity association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +67,16 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttributed1a1c2d3451bee6935b49e4e(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster that the pod identity association is created for.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DisableSessionTags
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +85,14 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "boolean"
 		//	}
-		"disable_session_tags": schemaAttribute92c245249d1e5b5e00770636(),
+		"disable_session_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The Disable Session Tags of the pod identity association.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExternalId
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +101,13 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"external_id": schemaAttribute873ecfe1229876d6f1202428(),
+		"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External Id of the pod identity association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +115,13 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The Kubernetes namespace that the pod identity association is created for.",
 		//	  "type": "string"
 		//	}
-		"namespace": schemaAttribute8cd5ff4657c6c79441ba7168(),
+		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Kubernetes namespace that the pod identity association is created for.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +130,17 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"policy": schemaAttribute83d105d178992d4e0570837e(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The policy of the pod identity association.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +148,10 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The IAM role ARN that the pod identity association is created for.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute547e8c39e78b943e0697f888(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM role ARN that the pod identity association is created for.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccount
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +159,13 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The Kubernetes service account that the pod identity association is created for.",
 		//	  "type": "string"
 		//	}
-		"service_account": schemaAttribute465c2c25978412ece60566b6(),
+		"service_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Kubernetes service account that the pod identity association is created for.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +198,44 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute35a73219373e763321f96728(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TargetRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -306,7 +244,17 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"target_role_arn": schemaAttribute3b1d425dc5521beafdff57d5(),
+		"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Target Role Arn of the pod identity association.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

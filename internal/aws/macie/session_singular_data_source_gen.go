@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute20ba8775225046073cb87a07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS account ID of customer",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4444f7fd7d764a5124f43151() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A enumeration value that specifies how frequently finding updates are published.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64b3ad362ea79389c988dedc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A enumeration value that specifies the status of the Macie Session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84293125b812b0d0b3ffb6e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of automated sensitive data discovery for the Macie session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7d23e6ffd3dc43238128583() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service role used by Macie",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_macie_session", sessionDataSource)
 }
@@ -68,7 +33,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"automated_discovery_status": schemaAttribute84293125b812b0d0b3ffb6e4(),
+		"automated_discovery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of automated sensitive data discovery for the Macie session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -76,7 +44,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AWS account ID of customer",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute20ba8775225046073cb87a07(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AWS account ID of customer",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FindingPublishingFrequency
 		// CloudFormation resource type schema:
 		//
@@ -90,7 +61,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"finding_publishing_frequency": schemaAttribute4444f7fd7d764a5124f43151(),
+		"finding_publishing_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A enumeration value that specifies how frequently finding updates are published.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +72,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Service role used by Macie",
 		//	  "type": "string"
 		//	}
-		"service_role": schemaAttributee7d23e6ffd3dc43238128583(),
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service role used by Macie",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +88,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute64b3ad362ea79389c988dedc(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A enumeration value that specifies the status of the Macie Session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

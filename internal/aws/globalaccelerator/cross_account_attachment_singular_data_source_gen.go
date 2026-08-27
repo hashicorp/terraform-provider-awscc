@@ -15,79 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5fda96ff443b0fcc565fea52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value for the tag. Value can be 1 to 255 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ecf229d3d87def8532d8b54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cd4a6f8073bf29a8fedbe78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Friendly identifier of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d2cb3140ecfb07c018c8054() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeeaf7b0e9dcf555e3861f42e8(),
-				// Property: Value
-				"value": schemaAttribute5fda96ff443b0fcc565fea52(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93e7d649c4b8d33fae7ec3a2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Principals to share the resources with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaf7b0e9dcf555e3861f42e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Key of the tag. Value can be 1 to 127 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0552377d33af01ebad78710() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd1f9e621f1d221a937f6dea() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Cidr
-				"cidr": schemaAttribute6ecf229d3d87def8532d8b54(),
-				// Property: EndpointId
-				"endpoint_id": schemaAttribute6ecf229d3d87def8532d8b54(),
-				// Property: Region
-				"region": schemaAttribute6ecf229d3d87def8532d8b54(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Resources shared using the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_globalaccelerator_cross_account_attachment", crossAccountAttachmentDataSource)
 }
@@ -103,7 +30,10 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The Amazon Resource Name (ARN) of the attachment.",
 		//	  "type": "string"
 		//	}
-		"attachment_arn": schemaAttributef0552377d33af01ebad78710(),
+		"attachment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +44,10 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7cd4a6f8073bf29a8fedbe78(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Friendly identifier of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Principals
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +58,11 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"principals": schemaAttribute93e7d649c4b8d33fae7ec3a2(),
+		"principals": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Principals to share the resources with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Resources
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +86,26 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resources": schemaAttributefd1f9e621f1d221a937f6dea(),
+		"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EndpointId
+					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Resources shared using the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +135,23 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute7d2cb3140ecfb07c018c8054(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Key of the tag. Value can be 1 to 127 characters.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Value for the tag. Value can be 1 to 255 characters.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

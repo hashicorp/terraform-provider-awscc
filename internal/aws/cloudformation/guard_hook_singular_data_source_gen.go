@@ -16,260 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute067926112531b69ffd2e2d2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the activated hook",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute090bda67a5734811ac7a9c74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The execution role ARN assumed by hooks to read Guard rules from S3 and write Guard outputs to S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09f2b7b38f43a683a92c0263() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Exclude
-			"exclude": schemaAttribute8e5bff2258a9ab475952240e(),
-			// Property: Include
-			"include": schemaAttributee898de243aa9bc96f22f42d3(),
-		}, /*END SCHEMA*/
-		Description: "List of stack roles that are performing the stack operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12ace0cbd5246e6ddfa8fe31() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of type names that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12f90da4ab0c012d9d8b5de4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FilteringCriteria
-			"filtering_criteria": schemaAttribute88b56daf567dc404bda6e4e6(),
-			// Property: StackNames
-			"stack_names": schemaAttributec7e87b9d40b274db995468f6(),
-			// Property: StackRoles
-			"stack_roles": schemaAttribute09f2b7b38f43a683a92c0263(),
-		}, /*END SCHEMA*/
-		Description: "Filters to allow hooks to target specific stack attributes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d34a04b7908ae9009f50c5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Invocation points are the point in provisioning workflow where hooks will be executed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26e423b9281b734d48b08e26() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Uri
-			"uri": schemaAttribute35e872af6f2a00aa6cfafd55(),
-			// Property: VersionId
-			"version_id": schemaAttribute9b5bcd58def0388e3f6587a5(),
-		}, /*END SCHEMA*/
-		Description: "S3 Source Location for the Guard files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35e872af6f2a00aa6cfafd55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 uri of Guard files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f791c04f7368adef4d42e7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attribute to specify CloudFormation behavior on hook failure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d453aaa897bae0882f9898f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Target actions are the type of operation hooks will be executed at.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d9415a3736cc93ee17e6cd3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Which operations should this Hook run against? Resource changes, stacks or change sets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute737bd2b012a9d91c77565def() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InputParams
-			"input_params": schemaAttributeaaec478af1e9d3177cd9c008(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7be12e402c12b44b64534962() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The typename alias for the hook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88b56daf567dc404bda6e4e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attribute to specify the filtering behavior. ANY will make the Hook pass if one filter matches. ALL will make the Hook pass if all filters match",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e5bff2258a9ab475952240e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack roles that the hook is going to be excluded from",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9572857e2066278f40e6068f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type name of hook target. Hook targets are the destination where hooks will be invoked against.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b5bcd58def0388e3f6587a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 object version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1d85f4e23a8438db19ac6c0() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of actions that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea826bc21889812803f39fb5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 Bucket where the guard validate report will be uploaded to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaec478af1e9d3177cd9c008() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Specifies the S3 location of input parameter files for your Guard rules. You can specify either a single S3 location or an array of up to 10 S3 locations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2481d420695945e36cfc823() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack names that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5319e64f6660f5ef96bde48() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute6d453aaa897bae0882f9898f(),
-				// Property: InvocationPoint
-				"invocation_point": schemaAttribute1d34a04b7908ae9009f50c5a(),
-				// Property: TargetName
-				"target_name": schemaAttribute9572857e2066278f40e6068f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of hook targets",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb29b0c72b909a7b7bcb07a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attribute to specify which stacks this hook applies to or should get invoked for",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7e87b9d40b274db995468f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Exclude
-			"exclude": schemaAttributef08ab0b544f6d8001766f880(),
-			// Property: Include
-			"include": schemaAttributeb2481d420695945e36cfc823(),
-		}, /*END SCHEMA*/
-		Description: "List of stack names as filters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece44ff425420b5e31b74b13f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Actions
-			"actions": schemaAttributea1d85f4e23a8438db19ac6c0(),
-			// Property: InvocationPoints
-			"invocation_points": schemaAttributee794aaf94837fdbe0b40745e(),
-			// Property: TargetNames
-			"target_names": schemaAttribute12ace0cbd5246e6ddfa8fe31(),
-			// Property: Targets
-			"targets": schemaAttributeb5319e64f6660f5ef96bde48(),
-		}, /*END SCHEMA*/
-		Description: "Attribute to specify which targets should invoke the hook",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee794aaf94837fdbe0b40745e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of invocation points that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee898de243aa9bc96f22f42d3() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack roles that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef08ab0b544f6d8001766f880() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack names that the hook is going to be excluded from",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_guard_hook", guardHookDataSource)
 }
@@ -286,7 +32,10 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"alias": schemaAttribute7be12e402c12b44b64534962(),
+		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The typename alias for the hook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +45,10 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"execution_role": schemaAttribute090bda67a5734811ac7a9c74(),
+		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role ARN assumed by hooks to read Guard rules from S3 and write Guard outputs to S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureMode
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +61,10 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"failure_mode": schemaAttribute3f791c04f7368adef4d42e7b(),
+		"failure_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Attribute to specify CloudFormation behavior on hook failure.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HookArn
 		// CloudFormation resource type schema:
 		//
@@ -318,7 +73,10 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"hook_arn": schemaAttribute067926112531b69ffd2e2d2e(),
+		"hook_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the activated hook",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HookStatus
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +89,10 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"hook_status": schemaAttributebb29b0c72b909a7b7bcb07a7(),
+		"hook_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Attribute to specify which stacks this hook applies to or should get invoked for",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogBucket
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +100,10 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "S3 Bucket where the guard validate report will be uploaded to",
 		//	  "type": "string"
 		//	}
-		"log_bucket": schemaAttributea826bc21889812803f39fb5b(),
+		"log_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "S3 Bucket where the guard validate report will be uploaded to",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Options
 		// CloudFormation resource type schema:
 		//
@@ -352,7 +116,17 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  }
 		//	}
-		"options": schemaAttribute737bd2b012a9d91c77565def(),
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InputParams
+				"input_params": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Specifies the S3 location of input parameter files for your Guard rules. You can specify either a single S3 location or an array of up to 10 S3 locations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleLocation
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +148,22 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule_location": schemaAttribute26e423b9281b734d48b08e26(),
+		"rule_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Uri
+				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "S3 uri of Guard files.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VersionId
+				"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "S3 object version",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "S3 Source Location for the Guard files.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackFilters
 		// CloudFormation resource type schema:
 		//
@@ -473,7 +262,55 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stack_filters": schemaAttribute12f90da4ab0c012d9d8b5de4(),
+		"stack_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FilteringCriteria
+				"filtering_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Attribute to specify the filtering behavior. ANY will make the Hook pass if one filter matches. ALL will make the Hook pass if all filters match",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StackNames
+				"stack_names": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack names that the hook is going to be excluded from",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack names that the hook is going to target",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "List of stack names as filters",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StackRoles
+				"stack_roles": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack roles that the hook is going to be excluded from",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack roles that the hook is going to target",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "List of stack roles that are performing the stack operations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Filters to allow hooks to target specific stack attributes",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetFilters
 		// CloudFormation resource type schema:
 		//
@@ -572,7 +409,54 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"target_filters": schemaAttributece44ff425420b5e31b74b13f(),
+		"target_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of actions that the hook is going to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InvocationPoints
+				"invocation_points": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of invocation points that the hook is going to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetNames
+				"target_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of type names that the hook is going to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Targets
+				"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Action
+							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Target actions are the type of operation hooks will be executed at.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InvocationPoint
+							"invocation_point": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Invocation points are the point in provisioning workflow where hooks will be executed.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetName
+							"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type name of hook target. Hook targets are the destination where hooks will be invoked against.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of hook targets",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Attribute to specify which targets should invoke the hook",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetOperations
 		// CloudFormation resource type schema:
 		//
@@ -591,7 +475,11 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_operations": schemaAttribute6d9415a3736cc93ee17e6cd3(),
+		"target_operations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Which operations should this Hook run against? Resource changes, stacks or change sets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

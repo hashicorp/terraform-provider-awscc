@@ -14,31 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15cde12a16273210c8cd3ccd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Comment
-			"comment": schemaAttribute4b019eb21edd5546085d744e(),
-		}, /*END SCHEMA*/
-		Description: "The current configuration information for the identity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b019eb21edd5546085d744e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute700be40ba5c915c7d8bc31ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_cloudfront_origin_access_identity", cloudFrontOriginAccessIdentityDataSource)
 }
@@ -64,7 +39,17 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cloudfront_origin_access_identity_config": schemaAttribute15cde12a16273210c8cd3ccd(),
+		"cloudfront_origin_access_identity_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comment
+				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The current configuration information for the identity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -72,7 +57,10 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"cloudfront_origin_access_identity_id": schemaAttribute700be40ba5c915c7d8bc31ac(),
+		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3CanonicalUserId
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +68,10 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"s3_canonical_user_id": schemaAttribute700be40ba5c915c7d8bc31ac(),
+		"s3_canonical_user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

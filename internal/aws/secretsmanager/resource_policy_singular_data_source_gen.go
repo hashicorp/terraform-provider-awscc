@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3d59bb800729dad2d8672ebe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A JSON-formatted string for an AWS resource-based policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4450e5f6b146a16112c1b4fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Arn of the secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63ffafeb988182d7c7826c56() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to block resource-based policies that allow broad access to the secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88176de9c3ce3190d5d40194() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN or name of the secret to attach the resource-based policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_secretsmanager_resource_policy", resourcePolicyDataSource)
 }
@@ -57,7 +29,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Specifies whether to block resource-based policies that allow broad access to the secret.",
 		//	  "type": "boolean"
 		//	}
-		"block_public_policy": schemaAttribute63ffafeb988182d7c7826c56(),
+		"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to block resource-based policies that allow broad access to the secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Arn of the secret.",
 		//	  "type": "string"
 		//	}
-		"resource_policy_id": schemaAttribute4450e5f6b146a16112c1b4fa(),
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Arn of the secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A JSON-formatted string for an AWS resource-based policy.",
 		//	  "type": "string"
 		//	}
-		"resource_policy": schemaAttribute3d59bb800729dad2d8672ebe(),
+		"resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A JSON-formatted string for an AWS resource-based policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecretId
 		// CloudFormation resource type schema:
 		//
@@ -83,7 +64,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"secret_id": schemaAttribute88176de9c3ce3190d5d40194(),
+		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN or name of the secret to attach the resource-based policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

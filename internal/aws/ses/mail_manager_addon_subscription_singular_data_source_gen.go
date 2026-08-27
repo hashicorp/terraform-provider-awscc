@@ -14,26 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributea8e7144ce618cf7b62642127() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcbf7ba6a38d37d135341347() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea8e7144ce618cf7b62642127(),
-				// Property: Value
-				"value": schemaAttributea8e7144ce618cf7b62642127(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_mail_manager_addon_subscription", mailManagerAddonSubscriptionDataSource)
 }
@@ -48,14 +28,18 @@ func mailManagerAddonSubscriptionDataSource(ctx context.Context) (datasource.Dat
 		//	{
 		//	  "type": "string"
 		//	}
-		"addon_name": schemaAttributea8e7144ce618cf7b62642127(),
+		"addon_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AddonSubscriptionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"addon_subscription_arn": schemaAttributea8e7144ce618cf7b62642127(),
+		"addon_subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AddonSubscriptionId
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +49,9 @@ func mailManagerAddonSubscriptionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^as-[a-zA-Z0-9]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"addon_subscription_id": schemaAttributea8e7144ce618cf7b62642127(),
+		"addon_subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +82,21 @@ func mailManagerAddonSubscriptionDataSource(ctx context.Context) (datasource.Dat
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributefcbf7ba6a38d37d135341347(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

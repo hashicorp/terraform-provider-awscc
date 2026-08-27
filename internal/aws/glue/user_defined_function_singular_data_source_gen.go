@@ -14,84 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute534efa66322375e6b1e50dac() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttribute875bcd8a9a4c62e0130a9d40(),
-				// Property: Uri
-				"uri": schemaAttribute7ec8435d5adfe21b8b18b70a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The resource URIs for the function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65ffb227360f19cca7f3213b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73f1bf47aabbb85d9d9a8792() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c09f61638046bf6e2b95987() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the user-defined function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ec8435d5adfe21b8b18b70a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URI for accessing the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute824fa83861c792c48914bbfc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the catalog database in which the function is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute875bcd8a9a4c62e0130a9d40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbfe63a667c0772a26cce907() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Java class that contains the function code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1183bae7c04e3cf1596c82e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefee3dc475a4b15ca3e4feeee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_user_defined_function", userDefinedFunctionDataSource)
 }
@@ -107,7 +29,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The Amazon Resource Name (ARN) of the user-defined function.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7c09f61638046bf6e2b95987(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the user-defined function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClassName
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +43,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"class_name": schemaAttributebbfe63a667c0772a26cce907(),
+		"class_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Java class that contains the function code.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +57,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"database_name": schemaAttribute824fa83861c792c48914bbfc(),
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the catalog database in which the function is located.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FunctionName
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +71,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"function_name": schemaAttributefee3dc475a4b15ca3e4feeee(),
+		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FunctionType
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +87,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"function_type": schemaAttributef1183bae7c04e3cf1596c82e(),
+		"function_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerName
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +101,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"owner_name": schemaAttribute65ffb227360f19cca7f3213b(),
+		"owner_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerType
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +117,10 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"owner_type": schemaAttribute73f1bf47aabbb85d9d9a8792(),
+		"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceUris
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +152,24 @@ func userDefinedFunctionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxItems": 1000,
 		//	  "type": "array"
 		//	}
-		"resource_uris": schemaAttribute534efa66322375e6b1e50dac(),
+		"resource_uris": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of the resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Uri
+					"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The URI for accessing the resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The resource URIs for the function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

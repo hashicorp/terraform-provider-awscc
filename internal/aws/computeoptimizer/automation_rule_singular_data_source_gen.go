@@ -16,282 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05895105119ed263e45e9781() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the automation rule was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c2344357526c688eb69a6e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExecutionWindowInMinutes
-			"execution_window_in_minutes": schemaAttribute96b70062241a679bbfa2cc8a(),
-			// Property: ScheduleExpression
-			"schedule_expression": schemaAttribute47bf34e686f60934bc2de989(),
-			// Property: ScheduleExpressionTimezone
-			"schedule_expression_timezone": schemaAttribute86ea7f21a60c46f4a4ce83d6(),
-		}, /*END SCHEMA*/
-		Description: "The schedule configuration for when the rule runs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute112821413f00900c8def1280() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EbsVolumeSizeInGib
-			"ebs_volume_size_in_gib": schemaAttribute6c16da33be5a2aea65fd8c8c(),
-			// Property: EbsVolumeType
-			"ebs_volume_type": schemaAttributec01f2f52a9656eaa5df7db08(),
-			// Property: EstimatedMonthlySavings
-			"estimated_monthly_savings": schemaAttributed7eb9b1951a25fe944513f2d(),
-			// Property: LookBackPeriodInDays
-			"look_back_period_in_days": schemaAttribute6c16da33be5a2aea65fd8c8c(),
-			// Property: Region
-			"region": schemaAttributec01f2f52a9656eaa5df7db08(),
-			// Property: ResourceArn
-			"resource_arn": schemaAttributec01f2f52a9656eaa5df7db08(),
-			// Property: ResourceTag
-			"resource_tag": schemaAttribute777f9f0b63bbd8f401c1594b(),
-			// Property: RestartNeeded
-			"restart_needed": schemaAttributec01f2f52a9656eaa5df7db08(),
-		}, /*END SCHEMA*/
-		Description: "Filter criteria that specify which recommended actions qualify for implementation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1615f993b2fb55e26759c2d9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Float64Type,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47bf34e686f60934bc2de989() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Schedule expression (e.g., cron or rate expression)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute586fe75f38d59d25ebe11114() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountIds
-			"account_ids": schemaAttributee9bc64a422b7e88f4eec4b53(),
-			// Property: RuleApplyOrder
-			"rule_apply_order": schemaAttribute84ce26efe89d30b0cc7ad07f(),
-		}, /*END SCHEMA*/
-		Description: "Organization configuration for organization rules, including rule apply order and account scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ca7f31c0e7e4b0546967303() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute682d545ef7e4d25b312e7f02() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c16da33be5a2aea65fd8c8c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comparison
-				"comparison": schemaAttributed6ab83001bf876500321327a(),
-				// Property: Values
-				"values": schemaAttribute682d545ef7e4d25b312e7f02(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute751c5d6825f22222530dc77f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The revision number of the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute777f9f0b63bbd8f401c1594b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comparison
-				"comparison": schemaAttributed6ab83001bf876500321327a(),
-				// Property: Key
-				"key": schemaAttributed6ab83001bf876500321327a(),
-				// Property: Values
-				"values": schemaAttribute90d155af7d86c5955b37fcde(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82673f112fbe25e75d280332() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84ce26efe89d30b0cc7ad07f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When the rule should be applied relative to account rules",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86ea7f21a60c46f4a4ce83d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IANA timezone identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90d155af7d86c5955b37fcde() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute929dbd9734d8823b5c5a977b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID that owns the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96b70062241a679bbfa2cc8a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Execution window duration in minutes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99bcad3953aad2bdb755601e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec01f2f52a9656eaa5df7db08() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comparison
-				"comparison": schemaAttributed6ab83001bf876500321327a(),
-				// Property: Values
-				"values": schemaAttribute90d155af7d86c5955b37fcde(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb0423a7774f28f506f2dfcf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6ab83001bf876500321327a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7eb9b1951a25fe944513f2d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comparison
-				"comparison": schemaAttributed6ab83001bf876500321327a(),
-				// Property: Values
-				"values": schemaAttribute1615f993b2fb55e26759c2d9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddbc9df1fd887dfd8a7cca10() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed6ab83001bf876500321327a(),
-				// Property: Value
-				"value": schemaAttributed6ab83001bf876500321327a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee205fb52aa6fd139a50ce411() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the automation rule was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8cd6dfd3fb0251de0dfa789() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rule priority within its group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8dc2e572e179b3c4e78b427() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The types of recommended actions this rule will implement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9bc64a422b7e88f4eec4b53() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of account IDs where the organization rule applies",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2dd0eaa3e105967eb60153e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef70c7f64c5040dab06626ff6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of automation rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_computeoptimizer_automation_rule", automationRuleDataSource)
 }
@@ -308,7 +32,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute929dbd9734d8823b5c5a977b(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID that owns the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +44,11 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schemaAttributee205fb52aa6fd139a50ce411(),
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the automation rule was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Criteria
 		// CloudFormation resource type schema:
 		//
@@ -621,7 +352,152 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"criteria": schemaAttribute112821413f00900c8def1280(),
+		"criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EbsVolumeSizeInGib
+				"ebs_volume_size_in_gib": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.Int64Type,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EbsVolumeType
+				"ebs_volume_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EstimatedMonthlySavings
+				"estimated_monthly_savings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.Float64Type,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LookBackPeriodInDays
+				"look_back_period_in_days": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.Int64Type,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceArn
+				"resource_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceTag
+				"resource_tag": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RestartNeeded
+				"restart_needed": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Filter criteria that specify which recommended actions qualify for implementation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -632,7 +508,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\s@\\.]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5ca7f31c0e7e4b0546967303(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -641,7 +520,11 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schemaAttribute05895105119ed263e45e9781(),
+		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the automation rule was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -652,7 +535,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecb0423a7774f28f506f2dfcf(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -682,7 +568,23 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"organization_configuration": schemaAttribute586fe75f38d59d25ebe11114(),
+		"organization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountIds
+				"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of account IDs where the organization rule applies",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RuleApplyOrder
+				"rule_apply_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "When the rule should be applied relative to account rules",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Organization configuration for organization rules, including rule apply order and account scope.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -690,7 +592,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Rule priority within its group",
 		//	  "type": "string"
 		//	}
-		"priority": schemaAttributee8cd6dfd3fb0251de0dfa789(),
+		"priority": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rule priority within its group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecommendedActionTypes
 		// CloudFormation resource type schema:
 		//
@@ -707,7 +612,11 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"recommended_action_types": schemaAttributee8dc2e572e179b3c4e78b427(),
+		"recommended_action_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The types of recommended actions this rule will implement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleArn
 		// CloudFormation resource type schema:
 		//
@@ -715,7 +624,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon Resource Name (ARN) of the automation rule.",
 		//	  "type": "string"
 		//	}
-		"rule_arn": schemaAttributef2dd0eaa3e105967eb60153e(),
+		"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleId
 		// CloudFormation resource type schema:
 		//
@@ -724,7 +636,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9A-Za-z]{16}$",
 		//	  "type": "string"
 		//	}
-		"rule_id": schemaAttribute99bcad3953aad2bdb755601e(),
+		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleRevision
 		// CloudFormation resource type schema:
 		//
@@ -732,7 +647,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The revision number of the automation rule.",
 		//	  "type": "string"
 		//	}
-		"rule_revision": schemaAttribute751c5d6825f22222530dc77f(),
+		"rule_revision": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The revision number of the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleType
 		// CloudFormation resource type schema:
 		//
@@ -744,7 +662,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"rule_type": schemaAttributef70c7f64c5040dab06626ff6(),
+		"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -769,7 +690,27 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schemaAttribute0c2344357526c688eb69a6e4(),
+		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionWindowInMinutes
+				"execution_window_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Execution window duration in minutes",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduleExpression
+				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Schedule expression (e.g., cron or rate expression)",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduleExpressionTimezone
+				"schedule_expression_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IANA timezone identifier",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The schedule configuration for when the rule runs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -781,7 +722,10 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute82673f112fbe25e75d280332(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -812,7 +756,22 @@ func automationRuleDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeddbc9df1fd887dfd8a7cca10(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with the automation rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

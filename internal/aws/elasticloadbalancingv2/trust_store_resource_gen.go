@@ -21,117 +21,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute1900d19c561a08cdf5340f47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the trust store.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30bf7f621b3e8a582dc91092() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute421cda1102d758eb07f45972() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 object to fetch the CA certificate bundle from.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// CaCertificatesBundleS3Key is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute499d0e02bd823c9019b6d08f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of certificates associated with the trust store.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute860e3de1a06b741ae851f9de() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute30bf7f621b3e8a582dc91092(),
-				// Property: Value
-				"value": schemaAttribute30bf7f621b3e8a582dc91092(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to assign to the trust store.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea209379ec5230bcb9684e50b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the trust store, could be either of ACTIVE or CREATING.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe14776b00565de90f478045() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the trust store.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec346992c9a60b590cb80f4bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the S3 bucket that contains the CA certificate bundle.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// CaCertificatesBundleS3ObjectVersion is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee967b9a8db16aa73d4171bb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket to fetch the CA certificate bundle from.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// CaCertificatesBundleS3Bucket is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_elasticloadbalancingv2_trust_store", trustStoreResource)
 	registry.AddListResourceFactory("awscc_elasticloadbalancingv2_trust_store", generic.NewListResource(trustStoreResource))
@@ -148,7 +37,15 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the S3 bucket to fetch the CA certificate bundle from.",
 		//	  "type": "string"
 		//	}
-		"ca_certificates_bundle_s3_bucket": schemaAttributee967b9a8db16aa73d4171bb1(),
+		"ca_certificates_bundle_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the S3 bucket to fetch the CA certificate bundle from.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// CaCertificatesBundleS3Bucket is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CaCertificatesBundleS3Key
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +53,15 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the S3 object to fetch the CA certificate bundle from.",
 		//	  "type": "string"
 		//	}
-		"ca_certificates_bundle_s3_key": schemaAttribute421cda1102d758eb07f45972(),
+		"ca_certificates_bundle_s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the S3 object to fetch the CA certificate bundle from.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// CaCertificatesBundleS3Key is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CaCertificatesBundleS3ObjectVersion
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +69,15 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of the S3 bucket that contains the CA certificate bundle.",
 		//	  "type": "string"
 		//	}
-		"ca_certificates_bundle_s3_object_version": schemaAttributec346992c9a60b590cb80f4bb(),
+		"ca_certificates_bundle_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the S3 bucket that contains the CA certificate bundle.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// CaCertificatesBundleS3ObjectVersion is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +85,15 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the trust store.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1900d19c561a08cdf5340f47(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the trust store.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NumberOfCaCertificates
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +101,13 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of certificates associated with the trust store.",
 		//	  "type": "integer"
 		//	}
-		"number_of_ca_certificates": schemaAttribute499d0e02bd823c9019b6d08f(),
+		"number_of_ca_certificates": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of certificates associated with the trust store.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +115,13 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the trust store, could be either of ACTIVE or CREATING.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributea209379ec5230bcb9684e50b(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the trust store, could be either of ACTIVE or CREATING.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +147,41 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute860e3de1a06b741ae851f9de(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to assign to the trust store.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TrustStoreArn
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +189,13 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the trust store.",
 		//	  "type": "string"
 		//	}
-		"trust_store_arn": schemaAttributebe14776b00565de90f478045(),
+		"trust_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the trust store.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

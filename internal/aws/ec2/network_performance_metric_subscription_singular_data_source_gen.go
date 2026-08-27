@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3f9a5b1bd67ef093118f284e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metric type to subscribe to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed19942d0338032b1a7c2b3ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The target Region or Availability Zone for the metric to subscribe to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed209b2c7d188b6593bb8ea42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The statistic to subscribe to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede993135d6e767a540788d23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The starting Region or Availability Zone for metric to subscribe to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_network_performance_metric_subscription", networkPerformanceMetricSubscriptionDataSource)
 }
@@ -57,7 +29,10 @@ func networkPerformanceMetricSubscriptionDataSource(ctx context.Context) (dataso
 		//	  "description": "The target Region or Availability Zone for the metric to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"destination": schemaAttributed19942d0338032b1a7c2b3ec(),
+		"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The target Region or Availability Zone for the metric to subscribe to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Metric
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func networkPerformanceMetricSubscriptionDataSource(ctx context.Context) (dataso
 		//	  "description": "The metric type to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"metric": schemaAttribute3f9a5b1bd67ef093118f284e(),
+		"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The metric type to subscribe to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func networkPerformanceMetricSubscriptionDataSource(ctx context.Context) (dataso
 		//	  "description": "The starting Region or Availability Zone for metric to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"source": schemaAttributede993135d6e767a540788d23(),
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The starting Region or Availability Zone for metric to subscribe to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func networkPerformanceMetricSubscriptionDataSource(ctx context.Context) (dataso
 		//	  "description": "The statistic to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"statistic": schemaAttributed209b2c7d188b6593bb8ea42(),
+		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The statistic to subscribe to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

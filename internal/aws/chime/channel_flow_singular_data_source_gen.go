@@ -15,164 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute157ed980f858b62cae4f2878() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The sequence in which processors run.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2260efed3b8051106c746fae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the app instance, extracted from the channel flow ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute306f93fda3db7b9a32f38eb6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Lambda
-			"lambda": schemaAttributef5a227f43752666aa0bbb454(),
-		}, /*END SCHEMA*/
-		Description: "A processor's metadata.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute330e9b34ebaa9aad7e4d6363() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether to continue or stop processing when communication with a processor fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3aa5ad147aa8968b209ffc2f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Configuration
-				"configuration": schemaAttribute306f93fda3db7b9a32f38eb6(),
-				// Property: ExecutionOrder
-				"execution_order": schemaAttribute157ed980f858b62cae4f2878(),
-				// Property: FallbackAction
-				"fallback_action": schemaAttribute330e9b34ebaa9aad7e4d6363(),
-				// Property: Name
-				"name": schemaAttribute5485eb1b0a28135a76681fab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the processor Lambda functions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b9b0c8c1082f933ab8a8572() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the channel flow was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a8b185da07cc8d4de9dd9ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the channel flow was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b1eda10333103f6e6043380() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the channel flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53d23b6cd2dec11b0eed421c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Controls how the Lambda function is invoked.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5485eb1b0a28135a76681fab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the processor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69ba7c8e088e0afcdff5df00() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute80a8455fee1d9416ac168365(),
-				// Property: Value
-				"value": schemaAttributec28f3119f8c1eb2c81cda641(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the channel flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80a8455fee1d9416ac168365() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key in a tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87c68f94d7edf25233597e34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the channel flow, extracted from the channel flow ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a379fbf5127825688809e99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Lambda message processing function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec28f3119f8c1eb2c81cda641() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value in a tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7622783607bd04d64316bfb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the channel flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed44c358b84a89cea03165f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the app instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5a227f43752666aa0bbb454() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InvocationType
-			"invocation_type": schemaAttribute53d23b6cd2dec11b0eed421c(),
-			// Property: ResourceArn
-			"resource_arn": schemaAttribute8a379fbf5127825688809e99(),
-		}, /*END SCHEMA*/
-		Description: "Stores metadata about a Lambda processor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_chime_channel_flow", channelFlowDataSource)
 }
@@ -191,7 +33,10 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_instance_arn": schemaAttributeed44c358b84a89cea03165f1(),
+		"app_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the app instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AppInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +44,10 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the app instance, extracted from the channel flow ARN.",
 		//	  "type": "string"
 		//	}
-		"app_instance_id": schemaAttribute2260efed3b8051106c746fae(),
+		"app_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the app instance, extracted from the channel flow ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +58,10 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4b1eda10333103f6e6043380(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the channel flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelFlowId
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +69,10 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the channel flow, extracted from the channel flow ARN.",
 		//	  "type": "string"
 		//	}
-		"channel_flow_id": schemaAttribute87c68f94d7edf25233597e34(),
+		"channel_flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the channel flow, extracted from the channel flow ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +81,11 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schemaAttribute4a8b185da07cc8d4de9dd9ab(),
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the channel flow was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +94,11 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schemaAttribute3b9b0c8c1082f933ab8a8572(),
+		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the channel flow was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +108,10 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee7622783607bd04d64316bfb(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the channel flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Processors
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +190,53 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"processors": schemaAttribute3aa5ad147aa8968b209ffc2f(),
+		"processors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Configuration
+					"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Lambda
+							"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: InvocationType
+									"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Controls how the Lambda function is invoked.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceArn
+									"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ARN of the Lambda message processing function.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Stores metadata about a Lambda processor.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "A processor's metadata.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExecutionOrder
+					"execution_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The sequence in which processors run.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FallbackAction
+					"fallback_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Determines whether to continue or stop processing when communication with a processor fails.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the processor.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about the processor Lambda functions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -357,7 +268,24 @@ func channelFlowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute69ba7c8e088e0afcdff5df00(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key in a tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value in a tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the channel flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

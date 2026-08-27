@@ -18,56 +18,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute7f9b2f244e1395107b4892a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97bc300933a37c06ea6a0b91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The static IP address.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6a46c942ada65dc04a75fc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the static IP address.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede5197bfcaf3eeb129d86db5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value indicating whether the static IP is attached.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef90c833752f0046e4df95a72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The instance where the static IP is attached.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_static_ip", staticIpResource)
 	registry.AddListResourceFactory("awscc_lightsail_static_ip", generic.NewListResource(staticIpResource))
@@ -84,7 +34,14 @@ func staticIpResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The instance where the static IP is attached.",
 		//	  "type": "string"
 		//	}
-		"attached_to": schemaAttributef90c833752f0046e4df95a72(),
+		"attached_to": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The instance where the static IP is attached.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +49,13 @@ func staticIpResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The static IP address.",
 		//	  "type": "string"
 		//	}
-		"ip_address": schemaAttribute97bc300933a37c06ea6a0b91(),
+		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The static IP address.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IsAttached
 		// CloudFormation resource type schema:
 		//
@@ -100,14 +63,25 @@ func staticIpResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A Boolean value indicating whether the static IP is attached.",
 		//	  "type": "boolean"
 		//	}
-		"is_attached": schemaAttributede5197bfcaf3eeb129d86db5(),
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean value indicating whether the static IP is attached.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StaticIpArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"static_ip_arn": schemaAttribute7f9b2f244e1395107b4892a7(),
+		"static_ip_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StaticIpName
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +89,13 @@ func staticIpResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the static IP address.",
 		//	  "type": "string"
 		//	}
-		"static_ip_name": schemaAttributed6a46c942ada65dc04a75fc4(),
+		"static_ip_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the static IP address.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

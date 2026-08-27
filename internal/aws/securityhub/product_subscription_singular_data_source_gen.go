@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute8c927f306e48101ca29270cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the product subscription for the account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f6b5ada0153053b7069a2f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The generic ARN of the product being subscribed to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_product_subscription", productSubscriptionDataSource)
 }
@@ -44,7 +30,10 @@ func productSubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"product_arn": schemaAttribute9f6b5ada0153053b7069a2f9(),
+		"product_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The generic ARN of the product being subscribed to",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductSubscriptionArn
 		// CloudFormation resource type schema:
 		//
@@ -53,7 +42,10 @@ func productSubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"product_subscription_arn": schemaAttribute8c927f306e48101ca29270cd(),
+		"product_subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the product subscription for the account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,113 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute043a3df6cda95d201b3a4e32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e1c54b504cbea45bc61e84f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2da51cd9c66e1cff11e94fff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowCredentials
-			"allow_credentials": schemaAttribute2ed2b4ec408ad4c0c2fcd714(),
-			// Property: AllowHeaders
-			"allow_headers": schemaAttributeddb8678f87dbc13b8baae06d(),
-			// Property: AllowMethods
-			"allow_methods": schemaAttribute87c3aef9b1a261e3adf3e561(),
-			// Property: AllowOrigins
-			"allow_origins": schemaAttribute91d2fdf5a1c0a24b63e3006f(),
-			// Property: ExposeHeaders
-			"expose_headers": schemaAttributeaa0412367bb62ef4e327f40c(),
-			// Property: MaxAge
-			"max_age": schemaAttribute0e1c54b504cbea45bc61e84f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ed2b4ec408ad4c0c2fcd714() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether credentials are included in the CORS request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36ee711748e28760f7bae93f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c2924fe44ef6858378fc4e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The generated url for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7433753ea100414067bb271f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87c3aef9b1a261e3adf3e561() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents a collection of allowed HTTP methods.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91d2fdf5a1c0a24b63e3006f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents a collection of allowed origins.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa0412367bb62ef4e327f40c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents a collection of exposed headers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1be78c3a45a64c633c9af15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddb8678f87dbc13b8baae06d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents a collection of allowed headers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee44e9e94337e112da71d2113() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The invocation mode for the function's URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_url", urlDataSource)
 }
@@ -141,7 +34,10 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auth_type": schemaAttribute7433753ea100414067bb271f(),
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Cors
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +111,44 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cors": schemaAttribute2da51cd9c66e1cff11e94fff(),
+		"cors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowCredentials
+				"allow_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether credentials are included in the CORS request.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowHeaders
+				"allow_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of allowed headers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowMethods
+				"allow_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of allowed HTTP methods.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowOrigins
+				"allow_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of allowed origins.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExposeHeaders
+				"expose_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of exposed headers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxAge
+				"max_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FunctionArn
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +157,10 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"function_arn": schemaAttribute043a3df6cda95d201b3a4e32(),
+		"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FunctionUrl
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +168,10 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The generated url for this resource.",
 		//	  "type": "string"
 		//	}
-		"function_url": schemaAttribute4c2924fe44ef6858378fc4e5(),
+		"function_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The generated url for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InvokeMode
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +183,10 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"invoke_mode": schemaAttributee44e9e94337e112da71d2113(),
+		"invoke_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The invocation mode for the function's URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Qualifier
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +197,10 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"qualifier": schemaAttribute36ee711748e28760f7bae93f(),
+		"qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetFunctionArn
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +209,10 @@ func urlDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"target_function_arn": schemaAttributed1be78c3a45a64c633c9af15(),
+		"target_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

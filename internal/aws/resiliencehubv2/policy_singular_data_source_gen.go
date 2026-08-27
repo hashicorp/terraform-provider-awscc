@@ -15,176 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04819563a8834dc7c86d7515() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time between backups in minutes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56b66dfa5c38fdf2fc7a57ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multi-Region disaster recovery approach.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5993b46996375165a21766c9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DisasterRecoveryApproach
-			"disaster_recovery_approach": schemaAttribute56b66dfa5c38fdf2fc7a57ca(),
-			// Property: RpoInMinutes
-			"rpo_in_minutes": schemaAttribute833f934a80dc9b46f8ab39d2(),
-			// Property: RtoInMinutes
-			"rto_in_minutes": schemaAttributeb20a3ee82541ae4845032eb3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62c09619a6a00251b3a9e450() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Target
-			"target": schemaAttributed3747e195646deea2e3a3ce6(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6744976cb5be597ecd54d2f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key ID for encrypting policy data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79d5c3cc8761f8660ccbbcae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute833f934a80dc9b46f8ab39d2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Recovery Point Objective in minutes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute851574f365112d058c45819a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99a08128f67ae447a3f08e29() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of services associated with this policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7f46d96336efcda0c58c54f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DisasterRecoveryApproach
-			"disaster_recovery_approach": schemaAttributedab835c00f906cb55a77628c(),
-			// Property: RpoInMinutes
-			"rpo_in_minutes": schemaAttribute833f934a80dc9b46f8ab39d2(),
-			// Property: RtoInMinutes
-			"rto_in_minutes": schemaAttributeb20a3ee82541ae4845032eb3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb20a3ee82541ae4845032eb3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Recovery Time Objective in minutes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6b1618f74ae78570ffc2115() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccafb28f64f85b9e96a1b743() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1e5fd9668439dc6cb5854a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the policy was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3747e195646deea2e3a3ce6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Availability target percentage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed916c3f3fdd7cdd7871d178a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute851574f365112d058c45819a(),
-				// Property: Value
-				"value": schemaAttributeccafb28f64f85b9e96a1b743(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags assigned to the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedab835c00f906cb55a77628c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Multi-AZ disaster recovery approach.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0376652c625a52bcc21db9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the policy was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef37d37c73f6d851d7a89888f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TimeBetweenBackupsInMinutes
-			"time_between_backups_in_minutes": schemaAttribute04819563a8834dc7c86d7515(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef985ce3bc9c64e0d218cd3c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_resiliencehubv2_policy", policyDataSource)
 }
@@ -200,7 +30,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of services associated with this policy.",
 		//	  "type": "integer"
 		//	}
-		"associated_service_count": schemaAttribute99a08128f67ae447a3f08e29(),
+		"associated_service_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of services associated with this policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilitySlo
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +49,16 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"availability_slo": schemaAttribute62c09619a6a00251b3a9e450(),
+		"availability_slo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Target
+				"target": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Availability target percentage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +67,11 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributee0376652c625a52bcc21db9f(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the policy was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataRecovery
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +86,16 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_recovery": schemaAttributef37d37c73f6d851d7a89888f(),
+		"data_recovery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TimeBetweenBackupsInMinutes
+				"time_between_backups_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Time between backups in minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +104,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 615,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef985ce3bc9c64e0d218cd3c3(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +118,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute6744976cb5be597ecd54d2f8(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key ID for encrypting policy data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiAz
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +154,26 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"multi_az": schemaAttributea7f46d96336efcda0c58c54f(),
+		"multi_az": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisasterRecoveryApproach
+				"disaster_recovery_approach": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Multi-AZ disaster recovery approach.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RpoInMinutes
+				"rpo_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Recovery Point Objective in minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RtoInMinutes
+				"rto_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Recovery Time Objective in minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiRegion
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +206,26 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"multi_region": schemaAttribute5993b46996375165a21766c9(),
+		"multi_region": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisasterRecoveryApproach
+				"disaster_recovery_approach": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Multi-Region disaster recovery approach.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RpoInMinutes
+				"rpo_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Recovery Point Objective in minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RtoInMinutes
+				"rto_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Recovery Time Objective in minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -335,7 +234,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute79d5c3cc8761f8660ccbbcae(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -344,7 +246,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schemaAttributec6b1618f74ae78570ffc2115(),
+		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +281,24 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributed916c3f3fdd7cdd7871d178a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags assigned to the policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -385,7 +307,11 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributed1e5fd9668439dc6cb5854a8(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the policy was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

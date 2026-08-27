@@ -14,125 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute163551657708a27876cbae3a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2073d413d845be33f8c895aa(),
-				// Property: Value
-				"value": schemaAttribute6712b16b574c55d18e4b82a6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the conformance pack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2073d413d845be33f8c895aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f66e5bedae5f701c74c781d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS Config stores intermediate files while processing conformance pack template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48ae44fbaec3217c606a5012() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the conformance pack which will be assigned as the unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49ac65eb714c0e35702f9eea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6102f69d0787edb37cac6c70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value part of key-value pair with key being parameter Name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6712b16b574c55d18e4b82a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fb0396eb430874ec4c09698() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ParameterName
-				"parameter_name": schemaAttributec37a23d78025e4a100c412f1(),
-				// Property: ParameterValue
-				"parameter_value": schemaAttribute6102f69d0787edb37cac6c70(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of ConformancePackInputParameter objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cb6dd5739c52e0f4628e70d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the conformance pack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ef522bd40758312c7e32990() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix for delivery S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec37a23d78025e4a100c412f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Key part of key-value pair with value being parameter value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef151ad7791dd5c6a65cbd459() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefda79b9e4915f937317a31d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefeb1a3f9fb89606f937c85d6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DocumentName
-			"document_name": schemaAttributefda79b9e4915f937317a31d7(),
-			// Property: DocumentVersion
-			"document_version": schemaAttributefda79b9e4915f937317a31d7(),
-		}, /*END SCHEMA*/
-		Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_config_conformance_pack", conformancePackDataSource)
 }
@@ -148,7 +29,10 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Amazon Resource Name (ARN) of the conformance pack.",
 		//	  "type": "string"
 		//	}
-		"conformance_pack_arn": schemaAttribute9cb6dd5739c52e0f4628e70d(),
+		"conformance_pack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the conformance pack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConformancePackInputParameters
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +65,24 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"conformance_pack_input_parameters": schemaAttribute7fb0396eb430874ec4c09698(),
+		"conformance_pack_input_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ParameterName
+					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Key part of key-value pair with value being parameter value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterValue
+					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Value part of key-value pair with key being parameter Name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of ConformancePackInputParameter objects.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConformancePackName
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +93,10 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
 		//	  "type": "string"
 		//	}
-		"conformance_pack_name": schemaAttribute48ae44fbaec3217c606a5012(),
+		"conformance_pack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the conformance pack which will be assigned as the unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryS3Bucket
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +106,10 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"delivery_s3_bucket": schemaAttribute2f66e5bedae5f701c74c781d(),
+		"delivery_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AWS Config stores intermediate files while processing conformance pack template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryS3KeyPrefix
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +119,10 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"delivery_s3_key_prefix": schemaAttribute9ef522bd40758312c7e32990(),
+		"delivery_s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The prefix for delivery S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +155,24 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute163551657708a27876cbae3a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the conformance pack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +182,10 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_body": schemaAttributef151ad7791dd5c6a65cbd459(),
+		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateS3Uri
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +196,10 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "s3://.*",
 		//	  "type": "string"
 		//	}
-		"template_s3_uri": schemaAttribute49ac65eb714c0e35702f9eea(),
+		"template_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateSSMDocumentDetails
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +220,20 @@ func conformancePackDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"template_ssm_document_details": schemaAttributefeb1a3f9fb89606f937c85d6(),
+		"template_ssm_document_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DocumentName
+				"document_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentVersion
+				"document_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

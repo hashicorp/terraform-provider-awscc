@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0be6286c6c7c175d7bf0b140() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value. Resources tagged with this tag key-value pair will be added to the application. If a resource with this tag is later untagged, the tag-sync task removes the resource from the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b19202125ec754fc0d77806() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key. Resources tagged with this tag key-value pair will be added to the application. If a resource with this tag is later untagged, the tag-sync task removes the resource from the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a2a7136252bcb696f0bf74d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) of the ApplicationGroup for which the TagSyncTask is created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b856e5e69131c5ba02647eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1cb86334de7491029372d99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the TagSyncTask resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea98944aee16b6237f15b3f47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Name of the application group for which the TagSyncTask is created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee794c4b8eb1251b6cd224a83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the TagSyncTask",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeadfba0e491e968b1df11a1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_resourcegroups_tag_sync_task", tagSyncTaskDataSource)
 }
@@ -88,7 +32,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "([a-zA-Z0-9_\\\\.-]{1,150}/[a-z0-9]{26})|(arn:aws(-[a-z]+)*:resource-groups(-(test|beta|gamma))?:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\\\.-]{1,150}/[a-z0-9]{26})",
 		//	  "type": "string"
 		//	}
-		"group": schemaAttributeeadfba0e491e968b1df11a1e(),
+		"group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupArn
 		// CloudFormation resource type schema:
 		//
@@ -99,7 +46,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[a-z]+)*:resource-groups(-(test|beta|gamma))?:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}",
 		//	  "type": "string"
 		//	}
-		"group_arn": schemaAttribute6a2a7136252bcb696f0bf74d(),
+		"group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon resource name (ARN) of the ApplicationGroup for which the TagSyncTask is created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +60,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}",
 		//	  "type": "string"
 		//	}
-		"group_name": schemaAttributea98944aee16b6237f15b3f47(),
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Name of the application group for which the TagSyncTask is created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +74,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute9b856e5e69131c5ba02647eb(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +89,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee794c4b8eb1251b6cd224a83(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the TagSyncTask",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagKey
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +103,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	  "type": "string"
 		//	}
-		"tag_key": schemaAttribute3b19202125ec754fc0d77806(),
+		"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tag key. Resources tagged with this tag key-value pair will be added to the application. If a resource with this tag is later untagged, the tag-sync task removes the resource from the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagValue
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +117,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	  "type": "string"
 		//	}
-		"tag_value": schemaAttribute0be6286c6c7c175d7bf0b140(),
+		"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tag value. Resources tagged with this tag key-value pair will be added to the application. If a resource with this tag is later untagged, the tag-sync task removes the resource from the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TaskArn
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +131,10 @@ func tagSyncTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[a-z]+)*:resource-groups(-(test|beta|gamma))?:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}/tag-sync-task/[a-z0-9]{26}",
 		//	  "type": "string"
 		//	}
-		"task_arn": schemaAttributea1cb86334de7491029372d99(),
+		"task_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the TagSyncTask resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

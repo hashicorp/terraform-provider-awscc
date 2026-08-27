@@ -14,44 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute199543bd39bfd600166c06bf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExpirationCriterion
-			"expiration_criterion": schemaAttributeae00a3a1762e60f05a95c4a0(),
-			// Property: ExpirationDays
-			"expiration_days": schemaAttributed34584296a29734856d36957(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead13283b440a50b50d9353f7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeae00a3a1762e60f05a95c4a0(),
-				// Property: Value
-				"value": schemaAttributeae00a3a1762e60f05a95c4a0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae00a3a1762e60f05a95c4a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed34584296a29734856d36957() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_chime_app_instance_user", appInstanceUserDataSource)
 }
@@ -69,7 +31,9 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_instance_arn": schemaAttributeae00a3a1762e60f05a95c4a0(),
+		"app_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AppInstanceUserArn
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +43,9 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_instance_user_arn": schemaAttributeae00a3a1762e60f05a95c4a0(),
+		"app_instance_user_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AppInstanceUserId
 		// CloudFormation resource type schema:
 		//
@@ -89,7 +55,9 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"app_instance_user_id": schemaAttributeae00a3a1762e60f05a95c4a0(),
+		"app_instance_user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExpirationSettings
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +82,19 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"expiration_settings": schemaAttribute199543bd39bfd600166c06bf(),
+		"expiration_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExpirationCriterion
+				"expiration_criterion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExpirationDays
+				"expiration_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Metadata
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +104,9 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"metadata": schemaAttributeae00a3a1762e60f05a95c4a0(),
+		"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +116,9 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeae00a3a1762e60f05a95c4a0(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +148,21 @@ func appInstanceUserDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributead13283b440a50b50d9353f7(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

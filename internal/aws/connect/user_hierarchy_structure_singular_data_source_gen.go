@@ -14,135 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute001d1114311a8ed53e68e90a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HierarchyLevelArn
-			"hierarchy_level_arn": schemaAttributec60bba23e83f6e64364a26d2(),
-			// Property: HierarchyLevelId
-			"hierarchy_level_id": schemaAttributef465b886303c537aacdabb40(),
-			// Property: Name
-			"name": schemaAttribute5be8213f30e558a34925e24b(),
-		}, /*END SCHEMA*/
-		Description: "Information about level five.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e210339b0d8e013dd23f6d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the User Hierarchy Structure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28991628cd1f8451d0552c2c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HierarchyLevelArn
-			"hierarchy_level_arn": schemaAttributec60bba23e83f6e64364a26d2(),
-			// Property: HierarchyLevelId
-			"hierarchy_level_id": schemaAttributef465b886303c537aacdabb40(),
-			// Property: Name
-			"name": schemaAttribute5be8213f30e558a34925e24b(),
-		}, /*END SCHEMA*/
-		Description: "Information about level four.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5be8213f30e558a34925e24b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the hierarchy level.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6962c288775c757448e9fcc5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LevelFive
-			"level_five": schemaAttribute001d1114311a8ed53e68e90a(),
-			// Property: LevelFour
-			"level_four": schemaAttribute28991628cd1f8451d0552c2c(),
-			// Property: LevelOne
-			"level_one": schemaAttributeb35b2429cdcf69f21aee18fd(),
-			// Property: LevelThree
-			"level_three": schemaAttributef5cb6f2b0b618690215bf762(),
-			// Property: LevelTwo
-			"level_two": schemaAttribute95cf1cc59beb9c85c0288495(),
-		}, /*END SCHEMA*/
-		Description: "Information about the hierarchy structure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95cf1cc59beb9c85c0288495() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HierarchyLevelArn
-			"hierarchy_level_arn": schemaAttributec60bba23e83f6e64364a26d2(),
-			// Property: HierarchyLevelId
-			"hierarchy_level_id": schemaAttributef465b886303c537aacdabb40(),
-			// Property: Name
-			"name": schemaAttribute5be8213f30e558a34925e24b(),
-		}, /*END SCHEMA*/
-		Description: "Information about level two.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dd24fe3495b3707bf51f66b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb35b2429cdcf69f21aee18fd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HierarchyLevelArn
-			"hierarchy_level_arn": schemaAttributec60bba23e83f6e64364a26d2(),
-			// Property: HierarchyLevelId
-			"hierarchy_level_id": schemaAttributef465b886303c537aacdabb40(),
-			// Property: Name
-			"name": schemaAttribute5be8213f30e558a34925e24b(),
-		}, /*END SCHEMA*/
-		Description: "Information about level one.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec60bba23e83f6e64364a26d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the hierarchy level.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef465b886303c537aacdabb40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the hierarchy level.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5cb6f2b0b618690215bf762() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HierarchyLevelArn
-			"hierarchy_level_arn": schemaAttributec60bba23e83f6e64364a26d2(),
-			// Property: HierarchyLevelId
-			"hierarchy_level_id": schemaAttributef465b886303c537aacdabb40(),
-			// Property: Name
-			"name": schemaAttribute5be8213f30e558a34925e24b(),
-		}, /*END SCHEMA*/
-		Description: "Information about level three.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_user_hierarchy_structure", userHierarchyStructureDataSource)
 }
@@ -159,7 +30,10 @@ func userHierarchyStructureDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute9dd24fe3495b3707bf51f66b(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserHierarchyStructure
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +159,122 @@ func userHierarchyStructureDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"user_hierarchy_structure": schemaAttribute6962c288775c757448e9fcc5(),
+		"user_hierarchy_structure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LevelFive
+				"level_five": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HierarchyLevelArn
+						"hierarchy_level_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchyLevelId
+						"hierarchy_level_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about level five.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LevelFour
+				"level_four": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HierarchyLevelArn
+						"hierarchy_level_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchyLevelId
+						"hierarchy_level_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about level four.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LevelOne
+				"level_one": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HierarchyLevelArn
+						"hierarchy_level_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchyLevelId
+						"hierarchy_level_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about level one.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LevelThree
+				"level_three": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HierarchyLevelArn
+						"hierarchy_level_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchyLevelId
+						"hierarchy_level_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about level three.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LevelTwo
+				"level_two": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HierarchyLevelArn
+						"hierarchy_level_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HierarchyLevelId
+						"hierarchy_level_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the hierarchy level.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about level two.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the hierarchy structure.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserHierarchyStructureArn
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +283,10 @@ func userHierarchyStructureDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/user-hierarchy-structure",
 		//	  "type": "string"
 		//	}
-		"user_hierarchy_structure_arn": schemaAttribute1e210339b0d8e013dd23f6d2(),
+		"user_hierarchy_structure_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the User Hierarchy Structure.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

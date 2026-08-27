@@ -14,88 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute28cb79856410f3c37a09c3d6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppServerPrivateKey
-			"app_server_private_key": schemaAttributedecef98ceb22cff6df8cd1fa(),
-		}, /*END SCHEMA*/
-		Description: "The Sidewalk account credentials.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute323d23d2d7eb2a1a41086094() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the partner account is linked to the AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute468af58d4616da63eea21c44() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedecef98ceb22cff6df8cd1fa(),
-				// Property: Value
-				"value": schemaAttributedecef98ceb22cff6df8cd1fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46a908e18f009adfcda5e81e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "PartnerAccount arn. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ab6324eb57d404e9690bc5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The partner account ID to disassociate from the AWS account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74fe8f3511b79b99c1d644f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AmazonId
-			"amazon_id": schemaAttributedecef98ceb22cff6df8cd1fa(),
-			// Property: Arn
-			"arn": schemaAttributedecef98ceb22cff6df8cd1fa(),
-			// Property: Fingerprint
-			"fingerprint": schemaAttributedecef98ceb22cff6df8cd1fa(),
-		}, /*END SCHEMA*/
-		Description: "The Sidewalk account credentials.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedecef98ceb22cff6df8cd1fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0ed3146a88415d903488791() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fingerprint of the Sidewalk application server private key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff03f15b58118754199ee569() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The partner type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_partner_account", partnerAccountDataSource)
 }
@@ -111,7 +29,10 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Whether the partner account is linked to the AWS account.",
 		//	  "type": "boolean"
 		//	}
-		"account_linked": schemaAttribute323d23d2d7eb2a1a41086094(),
+		"account_linked": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the partner account is linked to the AWS account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +40,10 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "PartnerAccount arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute46a908e18f009adfcda5e81e(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "PartnerAccount arn. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Fingerprint
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +51,10 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The fingerprint of the Sidewalk application server private key.",
 		//	  "type": "string"
 		//	}
-		"fingerprint": schemaAttributee0ed3146a88415d903488791(),
+		"fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The fingerprint of the Sidewalk application server private key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PartnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +63,10 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"partner_account_id": schemaAttribute5ab6324eb57d404e9690bc5a(),
+		"partner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The partner account ID to disassociate from the AWS account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PartnerType
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +77,10 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"partner_type": schemaAttributeff03f15b58118754199ee569(),
+		"partner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The partner type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Sidewalk
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +100,16 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sidewalk": schemaAttribute28cb79856410f3c37a09c3d6(),
+		"sidewalk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppServerPrivateKey
+				"app_server_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Sidewalk account credentials.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SidewalkResponse
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +133,24 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sidewalk_response": schemaAttribute74fe8f3511b79b99c1d644f6(),
+		"sidewalk_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonId
+				"amazon_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Fingerprint
+				"fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Sidewalk account credentials.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SidewalkUpdate
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +167,16 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sidewalk_update": schemaAttribute28cb79856410f3c37a09c3d6(),
+		"sidewalk_update": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppServerPrivateKey
+				"app_server_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Sidewalk account credentials.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +203,22 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute468af58d4616da63eea21c44(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

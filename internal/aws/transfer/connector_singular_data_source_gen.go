@@ -15,314 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0110e43d05afe42636c01b9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute013a78830d188e93d6719a3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the partner profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01a07b4d4c72a15fb793d329() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the unique Amazon Resource Name (ARN) for the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06acf0b4e0df0d313e7a71e7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1081705d64512489570f63c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute142b2bfefcd2a991e5bca0b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute185000b0dc44c4b2488c99c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Signing algorithm for this AS2 connector configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b29d4dbf4682e7a255a2343() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IP address type for Connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b3bdff5b72b8a35ccdd50d3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Port to connect to on the target VPC Lattice resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2619d290bc51f2147fcb24f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the egress type for the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27486c4779fd780958061426() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the VPC Lattice resource configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f5c9b132bee8150bfa1e8d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Security policy for SFTP Connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30e8a5bc594a2e903c973cb6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AsyncMdnConfig
-			"async_mdn_config": schemaAttribute95a2b0812ab402ea4be600ed(),
-			// Property: BasicAuthSecretId
-			"basic_auth_secret_id": schemaAttribute4ef5dac8330b4f06ac810a34(),
-			// Property: Compression
-			"compression": schemaAttribute5005333c1391c22c0c705a83(),
-			// Property: EncryptionAlgorithm
-			"encryption_algorithm": schemaAttribute56515eecfef7770f29055e81(),
-			// Property: LocalProfileId
-			"local_profile_id": schemaAttributed20b0d751eb175f1e3fef745(),
-			// Property: MdnResponse
-			"mdn_response": schemaAttribute3865d88206ea0194f76b2b93(),
-			// Property: MdnSigningAlgorithm
-			"mdn_signing_algorithm": schemaAttributebd97810883db720b68dd64b1(),
-			// Property: MessageSubject
-			"message_subject": schemaAttribute77d8bf0a34d592563f7de8ec(),
-			// Property: PartnerProfileId
-			"partner_profile_id": schemaAttribute013a78830d188e93d6719a3d(),
-			// Property: PreserveContentType
-			"preserve_content_type": schemaAttribute0110e43d05afe42636c01b9f(),
-			// Property: SigningAlgorithm
-			"signing_algorithm": schemaAttribute185000b0dc44c4b2488c99c9(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an AS2 connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3865d88206ea0194f76b2b93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "MDN Response setting for this AS2 connector configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43c0d4ee075f9d2ae0785684() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PortNumber
-			"port_number": schemaAttribute1b3bdff5b72b8a35ccdd50d3(),
-			// Property: ResourceConfigurationArn
-			"resource_configuration_arn": schemaAttribute27486c4779fd780958061426(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ef5dac8330b4f06ac810a34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5005333c1391c22c0c705a83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Compression setting for this AS2 connector configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56515eecfef7770f29055e81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Encryption algorithm for this AS2 connector configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e31105ccc9144bc75c66506() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8c686a4dc3477f68e7e00090(),
-				// Property: Value
-				"value": schemaAttributea1a408e089084f646f722f86(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute634c907fa6e6f6a38311dfcf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcLattice
-			"vpc_lattice": schemaAttribute43c0d4ee075f9d2ae0785684(),
-		}, /*END SCHEMA*/
-		Description: "Egress configuration for the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63e6154f1deea5ff35d2bdf4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the access role for the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77d8bf0a34d592563f7de8ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The message subject for this AS2 connector configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c686a4dc3477f68e7e00090() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name assigned to the tag that you create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94109cfff5bbdb1b8c4f1de2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94aa5266d8cbcb4023416774() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95a2b0812ab402ea4be600ed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ServerIds
-			"server_ids": schemaAttribute94aa5266d8cbcb4023416774(),
-			// Property: Url
-			"url": schemaAttributefb923d67665243c7a01792c6(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an AS2 connector with ASYNC MDN Response",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1a408e089084f646f722f86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains one or more values that you assigned to the key name you create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf061243321e728cc3b4a007() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Detailed error message when Connector in ERRORED status",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb531329cc2bcaf0b3dd9dd88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the logging role for the connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd97810883db720b68dd64b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "MDN Signing algorithm for this AS2 connector configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0451e2bbc9e388f79bc1fec() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of public host keys, for the external server to which you are connecting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed20b0d751eb175f1e3fef745() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the local profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2bad03cb8888d8dde8769d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL for Connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed51f6c9be3789716c34a4567() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee45fef3c35e78250b316ae22() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxConcurrentConnections
-			"max_concurrent_connections": schemaAttributed51f6c9be3789716c34a4567(),
-			// Property: TrustedHostKeys
-			"trusted_host_keys": schemaAttributed0451e2bbc9e388f79bc1fec(),
-			// Property: UserSecretId
-			"user_secret_id": schemaAttribute94109cfff5bbdb1b8c4f1de2(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an SFTP connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb923d67665243c7a01792c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL of the server to receive the MDN response on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_connector", connectorDataSource)
 }
@@ -341,7 +33,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*role/.*",
 		//	  "type": "string"
 		//	}
-		"access_role": schemaAttribute63e6154f1deea5ff35d2bdf4(),
+		"access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the access role for the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -352,7 +47,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute01a07b4d4c72a15fb793d329(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the unique Amazon Resource Name (ARN) for the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: As2Config
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +176,79 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"as_2_config": schemaAttribute30e8a5bc594a2e903c973cb6(),
+		"as_2_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AsyncMdnConfig
+				"async_mdn_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ServerIds
+						"server_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Url
+						"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "URL of the server to receive the MDN response on",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for an AS2 connector with ASYNC MDN Response",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BasicAuthSecretId
+				"basic_auth_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Compression
+				"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Compression setting for this AS2 connector configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionAlgorithm
+				"encryption_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Encryption algorithm for this AS2 connector configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LocalProfileId
+				"local_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for the local profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MdnResponse
+				"mdn_response": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "MDN Response setting for this AS2 connector configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MdnSigningAlgorithm
+				"mdn_signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "MDN Signing algorithm for this AS2 connector configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageSubject
+				"message_subject": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The message subject for this AS2 connector configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PartnerProfileId
+				"partner_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for the partner profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveContentType
+				"preserve_content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SigningAlgorithm
+				"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Signing algorithm for this AS2 connector configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for an AS2 connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorId
 		// CloudFormation resource type schema:
 		//
@@ -489,7 +259,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^c-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"connector_id": schemaAttribute1081705d64512489570f63c0(),
+		"connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EgressConfig
 		// CloudFormation resource type schema:
 		//
@@ -525,7 +298,28 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"egress_config": schemaAttribute634c907fa6e6f6a38311dfcf(),
+		"egress_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcLattice
+				"vpc_lattice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PortNumber
+						"port_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Port to connect to on the target VPC Lattice resource",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ResourceConfigurationArn
+						"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of the VPC Lattice resource configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Egress configuration for the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EgressType
 		// CloudFormation resource type schema:
 		//
@@ -537,7 +331,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"egress_type": schemaAttribute2619d290bc51f2147fcb24f9(),
+		"egress_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the egress type for the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ErrorMessage
 		// CloudFormation resource type schema:
 		//
@@ -546,7 +343,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"error_message": schemaAttributeaf061243321e728cc3b4a007(),
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Detailed error message when Connector in ERRORED status",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -558,7 +358,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schemaAttribute1b29d4dbf4682e7a255a2343(),
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IP address type for Connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -569,7 +372,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*role/.*",
 		//	  "type": "string"
 		//	}
-		"logging_role": schemaAttributeb531329cc2bcaf0b3dd9dd88(),
+		"logging_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the logging role for the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicyName
 		// CloudFormation resource type schema:
 		//
@@ -579,7 +385,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+",
 		//	  "type": "string"
 		//	}
-		"security_policy_name": schemaAttribute2f5c9b132bee8150bfa1e8d5(),
+		"security_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Security policy for SFTP Connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceManagedEgressIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -592,7 +401,11 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"service_managed_egress_ip_addresses": schemaAttribute06acf0b4e0df0d313e7a71e7(),
+		"service_managed_egress_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SftpConfig
 		// CloudFormation resource type schema:
 		//
@@ -629,7 +442,28 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sftp_config": schemaAttributee45fef3c35e78250b316ae22(),
+		"sftp_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxConcurrentConnections
+				"max_concurrent_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrustedHostKeys
+				"trusted_host_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of public host keys, for the external server to which you are connecting.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserSecretId
+				"user_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for an SFTP connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -641,7 +475,9 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute142b2bfefcd2a991e5bca0b7(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -675,7 +511,24 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5e31105ccc9144bc75c66506(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name assigned to the tag that you create.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Contains one or more values that you assigned to the key name you create.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -684,7 +537,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"url": schemaAttributed2bad03cb8888d8dde8769d2(),
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "URL for Connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

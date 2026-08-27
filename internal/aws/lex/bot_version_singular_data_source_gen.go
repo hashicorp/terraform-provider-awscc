@@ -14,60 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute544ae17003d63d16410c63f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the language and locale that the bot will be used in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6037d40f33a89c718d2cc6bb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BotVersionLocaleDetails
-				"bot_version_locale_details": schemaAttributed3c315eb515c428add666e24(),
-				// Property: LocaleId
-				"locale_id": schemaAttribute544ae17003d63d16410c63f6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c24f14bb33470e29bfac206() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the version. Use the description to help identify the version in lists.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4a62600f5e5fd69b9cab141() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of a bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca617b03b145df0a6f70f103() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID of resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3c315eb515c428add666e24() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SourceBotVersion
-			"source_bot_version": schemaAttributea4a62600f5e5fd69b9cab141(),
-		}, /*END SCHEMA*/
-		Description: "The version of a bot used for a bot locale.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lex_bot_version", botVersionDataSource)
 }
@@ -86,7 +32,10 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"bot_id": schemaAttributeca617b03b145df0a6f70f103(),
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID of resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BotVersion
 		// CloudFormation resource type schema:
 		//
@@ -97,7 +46,10 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(DRAFT|[0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"bot_version": schemaAttributea4a62600f5e5fd69b9cab141(),
+		"bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of a bot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BotVersionLocaleSpecification
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +90,31 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"bot_version_locale_specification": schemaAttribute6037d40f33a89c718d2cc6bb(),
+		"bot_version_locale_specification": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BotVersionLocaleDetails
+					"bot_version_locale_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SourceBotVersion
+							"source_bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The version of a bot.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The version of a bot used for a bot locale.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LocaleId
+					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the language and locale that the bot will be used in.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +123,10 @@ func botVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7c24f14bb33470e29bfac206(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the version. Use the description to help identify the version in lists.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

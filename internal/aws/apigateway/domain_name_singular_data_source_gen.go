@@ -15,83 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b2eb4d9eb6511ffea9afa8e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute17160855073ea6390f43f48d(),
-				// Property: Value
-				"value": schemaAttributefe1baba0b08acbf93521c93c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17160855073ea6390f43f48d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a6e0e3c412aa30fb3c4ded1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IpAddressType
-			"ip_address_type": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
-			// Property: Types
-			"types": schemaAttributed03c5d0ce4a6e6383ac095a2(),
-		}, /*END SCHEMA*/
-		Description: "The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46f74de1ad7dcd0f7bf9189b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6df834386b3eb48feae0f730() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TruststoreUri
-			"truststore_uri": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
-			// Property: TruststoreVersion
-			"truststore_version": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed03c5d0ce4a6e6383ac095a2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef4fe04434662614aeca928e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe1baba0b08acbf93521c93c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the specified tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_domain_name", domainNameDataSource)
 }
@@ -107,7 +30,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DistributionDomainName
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +41,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"distribution_domain_name": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"distribution_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DistributionHostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +52,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"distribution_hosted_zone_id": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"distribution_hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +63,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +74,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointAccessMode
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +85,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"endpoint_access_mode": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +110,23 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint_configuration": schemaAttribute1a6e0e3c412aa30fb3c4ded1(),
+		"endpoint_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Types
+				"types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MutualTlsAuthentication
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +145,22 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"mutual_tls_authentication": schemaAttribute6df834386b3eb48feae0f730(),
+		"mutual_tls_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TruststoreUri
+				"truststore_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TruststoreVersion
+				"truststore_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnershipVerificationCertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +168,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.",
 		//	  "type": "string"
 		//	}
-		"ownership_verification_certificate_arn": schemaAttributeef4fe04434662614aeca928e(),
+		"ownership_verification_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalCertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +179,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"regional_certificate_arn": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"regional_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalDomainName
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +190,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"regional_domain_name": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"regional_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalHostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +201,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"regional_hosted_zone_id": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"regional_hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingMode
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +218,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"routing_mode": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicy
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +229,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"security_policy": schemaAttribute46f74de1ad7dcd0f7bf9189b(),
+		"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +255,24 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute0b2eb4d9eb6511ffea9afa8e(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

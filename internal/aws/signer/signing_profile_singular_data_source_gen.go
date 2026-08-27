@@ -14,81 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute10ae7820368155bd908f65ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute421e5a44a06ebc23d7e4bbae() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebe2469e6550be241640ea263(),
-				// Property: Value
-				"value": schemaAttributebe2469e6550be241640ea263(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags associated with the signing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49cb249d7f4ba644cb4b0559() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the signing profile. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea444eda5db7c16a62dd20170() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttributebe2469e6550be241640ea263(),
-			// Property: Value
-			"value": schemaAttributef042bf9d3f4b3bbf76fcefec(),
-		}, /*END SCHEMA*/
-		Description: "Signature validity period of the profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab9443a7d6f679c2ef232a77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the target signing platform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe2469e6550be241640ea263() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecec6a8c9958ebe9a5ac136a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified signing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee40521352fb6372e4aa6f95d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified signing profile version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef042bf9d3f4b3bbf76fcefec() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_signer_signing_profile", signingProfileDataSource)
 }
@@ -105,7 +30,10 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-[a-z]{1,4}){0,2}:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributecec6a8c9958ebe9a5ac136a8(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified signing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PlatformId
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +45,10 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"platform_id": schemaAttributeab9443a7d6f679c2ef232a77(),
+		"platform_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the target signing platform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileName
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +59,10 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-zA-Z_]{2,64}$",
 		//	  "type": "string"
 		//	}
-		"profile_name": schemaAttribute49cb249d7f4ba644cb4b0559(),
+		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the signing profile. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileVersion
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +71,10 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"profile_version": schemaAttribute10ae7820368155bd908f65ce(),
+		"profile_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +83,10 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-[a-z]{1,4}){0,2}:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"profile_version_arn": schemaAttributee40521352fb6372e4aa6f95d(),
+		"profile_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified signing profile version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SignatureValidityPeriod
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +108,20 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"signature_validity_period": schemaAttributea444eda5db7c16a62dd20170(),
+		"signature_validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Signature validity period of the profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +146,22 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute421e5a44a06ebc23d7e4bbae(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags associated with the signing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

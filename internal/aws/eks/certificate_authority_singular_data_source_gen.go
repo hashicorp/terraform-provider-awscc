@@ -14,130 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0016fe427c9e7d8d0725ea99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The signing status of the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute307489b15f367667d2f3824d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Base64 encoded certificate authority data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3afbc0dcc9c36623ab27767a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FinalAutoActivation
-			"final_auto_activation": schemaAttribute70a3b92943fb9efc2dad4c79(),
-			// Property: FirstAutoActivation
-			"first_auto_activation": schemaAttribute6cdf92842b6c0959b86ed275(),
-		}, /*END SCHEMA*/
-		Description: "The scheduled auto-activation events for the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute428897dc9879c098cb0496d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The entity that activated the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute495bc12b75fb38bc7092883e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the EKS cluster that the certificate authority belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b5fe510fdc776d85ac0afc3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The distribution status of the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cdf92842b6c0959b86ed275() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The earliest date EKS may auto-activate this certificate authority (notAfter minus 6 months).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70a3b92943fb9efc2dad4c79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deadline by which EKS will auto-activate this certificate authority (notAfter minus 45 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute740f9d78210d36ae4bdee093() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the certificate authority was activated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7571fc6775717d0edefa05d0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether activation of this certificate authority can still be rolled back.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c51cfc52b5b0c9e6b008634() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The start of the validity period for the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9983614c03e17d38a5706f7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NotAfter
-			"not_after": schemaAttributeddae604de31e15901eefc730(),
-			// Property: NotBefore
-			"not_before": schemaAttribute9c51cfc52b5b0c9e6b008634(),
-		}, /*END SCHEMA*/
-		Description: "The validity period of the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca01d8393bd5d9c8778036fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The entity that created the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddae604de31e15901eefc730() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The end of the validity period for the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee848614bd7acccaddb56cd66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5b9bf3458209f7cf5f86088() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the certificate authority was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_eks_certificate_authority", certificateAuthorityDataSource)
 }
@@ -153,7 +29,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The timestamp when the certificate authority was activated.",
 		//	  "type": "string"
 		//	}
-		"activated_at": schemaAttribute740f9d78210d36ae4bdee093(),
+		"activated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the certificate authority was activated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ActivatedBy
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +40,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The entity that activated the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"activated_by": schemaAttribute428897dc9879c098cb0496d1(),
+		"activated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The entity that activated the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +53,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttribute495bc12b75fb38bc7092883e(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the EKS cluster that the certificate authority belongs to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +64,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The timestamp when the certificate authority was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributef5b9bf3458209f7cf5f86088(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the certificate authority was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +75,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The entity that created the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttributeca01d8393bd5d9c8778036fd(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The entity that created the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +86,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Base64 encoded certificate authority data.",
 		//	  "type": "string"
 		//	}
-		"data": schemaAttribute307489b15f367667d2f3824d(),
+		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Base64 encoded certificate authority data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DistributionStatus
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +97,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The distribution status of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"distribution_status": schemaAttribute6b5fe510fdc776d85ac0afc3(),
+		"distribution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The distribution status of the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +108,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The unique identifier of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_id": schemaAttributee848614bd7acccaddb56cd66(),
+		"certificate_authority_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RollbackAvailable
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +119,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Whether activation of this certificate authority can still be rolled back.",
 		//	  "type": "boolean"
 		//	}
-		"rollback_available": schemaAttribute7571fc6775717d0edefa05d0(),
+		"rollback_available": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether activation of this certificate authority can still be rolled back.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledEvents
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +141,22 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scheduled_events": schemaAttribute3afbc0dcc9c36623ab27767a(),
+		"scheduled_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FinalAutoActivation
+				"final_auto_activation": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The deadline by which EKS will auto-activate this certificate authority (notAfter minus 45 days).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FirstAutoActivation
+				"first_auto_activation": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The earliest date EKS may auto-activate this certificate authority (notAfter minus 6 months).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scheduled auto-activation events for the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SigningStatus
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +164,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The signing status of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"signing_status": schemaAttribute0016fe427c9e7d8d0725ea99(),
+		"signing_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The signing status of the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Validity
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +186,22 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"validity": schemaAttributeb9983614c03e17d38a5706f7(),
+		"validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NotAfter
+				"not_after": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The end of the validity period for the certificate authority.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NotBefore
+				"not_before": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The start of the validity period for the certificate authority.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The validity period of the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,309 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0436a6e56d49bf7794e227e6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4434d85dc8f6ea3e6638076e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute475cd76a4c206a6ac9d67b2b() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map that defines the stage variables. Variable names must consist of alphanumeric characters, and the values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4eb36a016aea1375a4b884ed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PercentTraffic
-			"percent_traffic": schemaAttribute0436a6e56d49bf7794e227e6(),
-			// Property: StageVariableOverrides
-			"stage_variable_overrides": schemaAttribute836e4dc1bee8546203809503(),
-			// Property: UseStageCache
-			"use_stage_cache": schemaAttribute9c313b58178befa13a1b344d(),
-		}, /*END SCHEMA*/
-		Description: "The ``DeploymentCanarySettings`` property type specifies settings for the canary deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50d1aff61b8398d28895c1d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61c81e65b493ab7ccf718c06() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The target request steady-state rate limit. For more information, see [Manage API Request Throttling](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in the *API Gateway Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62237670770cfab0f2cf2844() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CacheDataEncrypted
-				"cache_data_encrypted": schemaAttribute9c313b58178befa13a1b344d(),
-				// Property: CacheTtlInSeconds
-				"cache_ttl_in_seconds": schemaAttribute943522c3683abffc1616e419(),
-				// Property: CachingEnabled
-				"caching_enabled": schemaAttribute9c313b58178befa13a1b344d(),
-				// Property: DataTraceEnabled
-				"data_trace_enabled": schemaAttribute9c313b58178befa13a1b344d(),
-				// Property: HttpMethod
-				"http_method": schemaAttributeba1e78a00d485c62325c0c63(),
-				// Property: LoggingLevel
-				"logging_level": schemaAttribute50d1aff61b8398d28895c1d8(),
-				// Property: MetricsEnabled
-				"metrics_enabled": schemaAttribute9c313b58178befa13a1b344d(),
-				// Property: ResourcePath
-				"resource_path": schemaAttributec732a1436c7f99bbfc3f4872(),
-				// Property: ThrottlingBurstLimit
-				"throttling_burst_limit": schemaAttribute943522c3683abffc1616e419(),
-				// Property: ThrottlingRateLimit
-				"throttling_rate_limit": schemaAttribute0436a6e56d49bf7794e227e6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Configures settings for all of the stage's methods.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64f95475cd559b738c0612f3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b820c28d4d278a54fe67980() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessLogSetting
-			"access_log_setting": schemaAttribute8b2db3348d017e5762616a85(),
-			// Property: CacheClusterEnabled
-			"cache_cluster_enabled": schemaAttribute9c313b58178befa13a1b344d(),
-			// Property: CacheClusterSize
-			"cache_cluster_size": schemaAttribute7aa8c3097f37898748787e17(),
-			// Property: CacheDataEncrypted
-			"cache_data_encrypted": schemaAttributed88063ae32a8e1380fd1a106(),
-			// Property: CacheTtlInSeconds
-			"cache_ttl_in_seconds": schemaAttribute8b5a4ce31c861d74272f8c1f(),
-			// Property: CachingEnabled
-			"caching_enabled": schemaAttribute7874f9d970ef16558e02bc3f(),
-			// Property: CanarySetting
-			"canary_setting": schemaAttributee78eede9f163a22afd67776a(),
-			// Property: ClientCertificateId
-			"client_certificate_id": schemaAttributef87d047771b96dcbdf2d3b97(),
-			// Property: DataTraceEnabled
-			"data_trace_enabled": schemaAttribute4434d85dc8f6ea3e6638076e(),
-			// Property: Description
-			"description": schemaAttributed8311d13948028bcbd77b365(),
-			// Property: DocumentationVersion
-			"documentation_version": schemaAttribute886c507a2c2b50fdee325b91(),
-			// Property: LoggingLevel
-			"logging_level": schemaAttributec1b31f2700d9d85873b13d2d(),
-			// Property: MethodSettings
-			"method_settings": schemaAttribute62237670770cfab0f2cf2844(),
-			// Property: MetricsEnabled
-			"metrics_enabled": schemaAttribute64f95475cd559b738c0612f3(),
-			// Property: Tags
-			"tags": schemaAttribute7b86e1cefcb0996f3ed7af96(),
-			// Property: ThrottlingBurstLimit
-			"throttling_burst_limit": schemaAttributef5b735114b3b3102eec26939(),
-			// Property: ThrottlingRateLimit
-			"throttling_rate_limit": schemaAttribute61c81e65b493ab7ccf718c06(),
-			// Property: TracingEnabled
-			"tracing_enabled": schemaAttributec3762eba6b7e3340e0e36091(),
-			// Property: Variables
-			"variables": schemaAttribute475cd76a4c206a6ac9d67b2b(),
-		}, /*END SCHEMA*/
-		Description: "The description of the Stage resource for the Deployment resource to create. To specify a stage description, you must also provide a stage name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7874f9d970ef16558e02bc3f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses. For more information, see [Enable API Gateway Caching in a Stage to Enhance API Performance](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html) in the *API Gateway Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aa8c3097f37898748787e17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The size of the stage's cache cluster. For more information, see [cacheClusterSize](https://docs.aws.amazon.com/apigateway/latest/api/API_CreateStage.html#apigw-CreateStage-request-cacheClusterSize) in the *API Gateway API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b86e1cefcb0996f3ed7af96() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7dfbc0ca67054c7cea922194(),
-				// Property: Value
-				"value": schemaAttributea439fd6a0a6ab2d6f411c740(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dfbc0ca67054c7cea922194() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute836e4dc1bee8546203809503() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute886c507a2c2b50fdee325b91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version identifier of the API documentation snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b2db3348d017e5762616a85() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationArn
-			"destination_arn": schemaAttribute50d1aff61b8398d28895c1d8(),
-			// Property: Format
-			"format": schemaAttribute50d1aff61b8398d28895c1d8(),
-		}, /*END SCHEMA*/
-		Description: "Specifies settings for logging access in this stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b5a4ce31c861d74272f8c1f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute943522c3683abffc1616e419() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c313b58178befa13a1b344d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea439fd6a0a6ab2d6f411c740() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the specified tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba1e78a00d485c62325c0c63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP method.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1b31f2700d9d85873b13d2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logging level for this method. For valid values, see the ``loggingLevel`` property of the [MethodSetting](https://docs.aws.amazon.com/apigateway/latest/api/API_MethodSetting.html) resource in the *Amazon API Gateway API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3762eba6b7e3340e0e36091() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether active tracing with X-ray is enabled for this stage.\n For more information, see [Trace API Gateway API Execution with X-Ray](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html) in the *API Gateway Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec732a1436c7f99bbfc3f4872() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8311d13948028bcbd77b365() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the purpose of the stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed88063ae32a8e1380fd1a106() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the cached responses are encrypted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee78eede9f163a22afd67776a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PercentTraffic
-			"percent_traffic": schemaAttribute0436a6e56d49bf7794e227e6(),
-			// Property: StageVariableOverrides
-			"stage_variable_overrides": schemaAttribute836e4dc1bee8546203809503(),
-			// Property: UseStageCache
-			"use_stage_cache": schemaAttribute9c313b58178befa13a1b344d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies settings for the canary deployment in this stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5b735114b3b3102eec26939() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The target request burst rate limit. This allows more requests through for a period of time than the target rate limit. For more information, see [Manage API Request Throttling](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in the *API Gateway Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef87d047771b96dcbdf2d3b97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the client certificate that API Gateway uses to call your integration endpoints in the stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_deployment", deploymentDataSource)
 }
@@ -354,7 +51,29 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_canary_settings": schemaAttribute4eb36a016aea1375a4b884ed(),
+		"deployment_canary_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PercentTraffic
+				"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StageVariableOverrides
+				"stage_variable_overrides": // Pattern: ""
+				schema.MapAttribute{        /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseStageCache
+				"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ``DeploymentCanarySettings`` property type specifies settings for the canary deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +81,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schemaAttribute50d1aff61b8398d28895c1d8(),
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +92,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute50d1aff61b8398d28895c1d8(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +103,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schemaAttribute50d1aff61b8398d28895c1d8(),
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StageDescription
 		// CloudFormation resource type schema:
 		//
@@ -573,7 +301,208 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"stage_description": schemaAttribute6b820c28d4d278a54fe67980(),
+		"stage_description": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessLogSetting
+				"access_log_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DestinationArn
+						"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Format
+						"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies settings for logging access in this stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CacheClusterEnabled
+				"cache_cluster_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CacheClusterSize
+				"cache_cluster_size": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The size of the stage's cache cluster. For more information, see [cacheClusterSize](https://docs.aws.amazon.com/apigateway/latest/api/API_CreateStage.html#apigw-CreateStage-request-cacheClusterSize) in the *API Gateway API Reference*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CacheDataEncrypted
+				"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether the cached responses are encrypted.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CacheTtlInSeconds
+				"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CachingEnabled
+				"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses. For more information, see [Enable API Gateway Caching in a Stage to Enhance API Performance](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html) in the *API Gateway Developer Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CanarySetting
+				"canary_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PercentTraffic
+						"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StageVariableOverrides
+						"stage_variable_overrides": // Pattern: ""
+						schema.MapAttribute{        /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UseStageCache
+						"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies settings for the canary deployment in this stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientCertificateId
+				"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier of the client certificate that API Gateway uses to call your integration endpoints in the stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataTraceEnabled
+				"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the purpose of the stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentationVersion
+				"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version identifier of the API documentation snapshot.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LoggingLevel
+				"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The logging level for this method. For valid values, see the ``loggingLevel`` property of the [MethodSetting](https://docs.aws.amazon.com/apigateway/latest/api/API_MethodSetting.html) resource in the *Amazon API Gateway API Reference*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MethodSettings
+				"method_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CacheDataEncrypted
+							"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CacheTtlInSeconds
+							"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CachingEnabled
+							"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataTraceEnabled
+							"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: HttpMethod
+							"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTP method.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LoggingLevel
+							"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MetricsEnabled
+							"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResourcePath
+							"resource_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ThrottlingBurstLimit
+							"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ThrottlingRateLimit
+							"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Configures settings for all of the stage's methods.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricsEnabled
+				"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the specified tag key.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThrottlingBurstLimit
+				"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The target request burst rate limit. This allows more requests through for a period of time than the target rate limit. For more information, see [Manage API Request Throttling](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in the *API Gateway Developer Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThrottlingRateLimit
+				"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The target request steady-state rate limit. For more information, see [Manage API Request Throttling](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in the *API Gateway Developer Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TracingEnabled
+				"tracing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether active tracing with X-ray is enabled for this stage.\n For more information, see [Trace API Gateway API Execution with X-Ray](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-xray.html) in the *API Gateway Developer Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Variables
+				"variables":         // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A map that defines the stage variables. Variable names must consist of alphanumeric characters, and the values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The description of the Stage resource for the Deployment resource to create. To specify a stage description, you must also provide a stage name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
@@ -581,7 +510,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"stage_name": schemaAttribute50d1aff61b8398d28895c1d8(),
+		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

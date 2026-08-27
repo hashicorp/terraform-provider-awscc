@@ -15,98 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute17d88c266ac9747fed6ace4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute251d976db859207f3c6cd2cc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute256dbd1308dc0f7c01806501() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute302d2c181ed1244447649fd2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cb3aec739ebf80a564945a3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountIds
-				"account_ids": schemaAttribute302d2c181ed1244447649fd2(),
-				// Property: AllAwsRegions
-				"all_aws_regions": schemaAttribute251d976db859207f3c6cd2cc(),
-				// Property: AwsRegions
-				"aws_regions": schemaAttribute302d2c181ed1244447649fd2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cbc7b2c656fbe5acb797cc3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65852ade0df6a5c8c088dd30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the aggregator.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute773f7303267a14a588e614bd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute256dbd1308dc0f7c01806501(),
-				// Property: Value
-				"value": schemaAttribute4cbc7b2c656fbe5acb797cc3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the configuration aggregator.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bf85c1fa456b5c8de70fad6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the aggregator.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8786c420243d2a0fb10881f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllAwsRegions
-			"all_aws_regions": schemaAttribute251d976db859207f3c6cd2cc(),
-			// Property: AwsRegions
-			"aws_regions": schemaAttribute302d2c181ed1244447649fd2(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute17d88c266ac9747fed6ace4a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_config_configuration_aggregator", configurationAggregatorDataSource)
 }
@@ -148,7 +56,27 @@ func configurationAggregatorDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"account_aggregation_sources": schemaAttribute3cb3aec739ebf80a564945a3(),
+		"account_aggregation_sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccountIds
+					"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AllAwsRegions
+					"all_aws_regions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: AwsRegions
+					"aws_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationAggregatorArn
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +84,10 @@ func configurationAggregatorDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The Amazon Resource Name (ARN) of the aggregator.",
 		//	  "type": "string"
 		//	}
-		"configuration_aggregator_arn": schemaAttribute65852ade0df6a5c8c088dd30(),
+		"configuration_aggregator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the aggregator.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationAggregatorName
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +98,10 @@ func configurationAggregatorDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "[\\w\\-]+",
 		//	  "type": "string"
 		//	}
-		"configuration_aggregator_name": schemaAttribute9bf85c1fa456b5c8de70fad6(),
+		"configuration_aggregator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the aggregator.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationAggregationSource
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +127,24 @@ func configurationAggregatorDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"organization_aggregation_source": schemaAttributed8786c420243d2a0fb10881f(),
+		"organization_aggregation_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllAwsRegions
+				"all_aws_regions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AwsRegions
+				"aws_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +177,24 @@ func configurationAggregatorDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute773f7303267a14a588e614bd(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the configuration aggregator.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

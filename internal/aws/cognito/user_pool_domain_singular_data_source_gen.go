@@ -14,52 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08ff2aafa5c326cc703850d2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PrimaryRoute53HealthCheckId
-			"primary_route_53_health_check_id": schemaAttribute43dc0c51d151e83d29c95f3d(),
-			// Property: SecondaryRegion
-			"secondary_region": schemaAttribute43dc0c51d151e83d29c95f3d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43dc0c51d151e83d29c95f3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90d7cc985d6ed63ee775986f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Failover
-			"failover": schemaAttribute08ff2aafa5c326cc703850d2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96a0c7dbb423ba74dddbaade() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b4d1f9cf693ab8ab57fb696() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertificateArn
-			"certificate_arn": schemaAttribute43dc0c51d151e83d29c95f3d(),
-			// Property: SecurityPolicy
-			"security_policy": schemaAttribute43dc0c51d151e83d29c95f3d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_domain", userPoolDomainDataSource)
 }
@@ -74,7 +28,9 @@ func userPoolDomainDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"cloudfront_distribution": schemaAttribute43dc0c51d151e83d29c95f3d(),
+		"cloudfront_distribution": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomDomainConfig
 		// CloudFormation resource type schema:
 		//
@@ -90,21 +46,37 @@ func userPoolDomainDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"custom_domain_config": schemaAttribute9b4d1f9cf693ab8ab57fb696(),
+		"custom_domain_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateArn
+				"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityPolicy
+				"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"domain": schemaAttribute43dc0c51d151e83d29c95f3d(),
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedLoginVersion
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"managed_login_version": schemaAttribute96a0c7dbb423ba74dddbaade(),
+		"managed_login_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Routing
 		// CloudFormation resource type schema:
 		//
@@ -130,14 +102,34 @@ func userPoolDomainDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"routing": schemaAttribute90d7cc985d6ed63ee775986f(),
+		"routing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Failover
+				"failover": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrimaryRoute53HealthCheckId
+						"primary_route_53_health_check_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryRegion
+						"secondary_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttribute43dc0c51d151e83d29c95f3d(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

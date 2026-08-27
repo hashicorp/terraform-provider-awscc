@@ -16,427 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04317423bda6faa5557c8abc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EmailOverviewAIPromptId
-			"email_overview_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08a469892bf71860e49367b8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AndConditions
-				"and_conditions": schemaAttribute39574cae15612a74e48eb1c8(),
-				// Property: TagCondition
-				"tag_condition": schemaAttribute2500aea1961f887967b39bd4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1541271e77e7bc363436859a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ff0c87f05d23913afa5aef5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AndConditions
-			"and_conditions": schemaAttribute39574cae15612a74e48eb1c8(),
-			// Property: OrConditions
-			"or_conditions": schemaAttribute08a469892bf71860e49367b8(),
-			// Property: TagCondition
-			"tag_condition": schemaAttribute2500aea1961f887967b39bd4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2500aea1961f887967b39bd4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Key
-			"key": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Value
-			"value": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e27c1f71bf9b8f46fee29dc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AssociationConfigurationData
-				"association_configuration_data": schemaAttribute79aa2ff41430a86f06eef24c(),
-				// Property: AssociationId
-				"association_id": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: AssociationType
-				"association_type": schemaAttributec6bd7d957b12369ced8299b3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39574cae15612a74e48eb1c8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: Value
-				"value": schemaAttributec6bd7d957b12369ced8299b3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d4bfafd6747d548bcb82e8a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AnswerGenerationAIGuardrailId
-			"answer_generation_ai_guardrail_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: AnswerGenerationAIPromptId
-			"answer_generation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: AssociationConfigurations
-			"association_configurations": schemaAttribute2e27c1f71bf9b8f46fee29dc(),
-			// Property: IntentLabelingGenerationAIPromptId
-			"intent_labeling_generation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: QueryReformulationAIPromptId
-			"query_reformulation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3debd3c20a69fd292d8e620f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentTagFilter
-			"content_tag_filter": schemaAttribute1ff0c87f05d23913afa5aef5(),
-			// Property: MaxResults
-			"max_results": schemaAttributeb2a04c6cc98c1e09a0d226e2(),
-			// Property: OverrideKnowledgeBaseSearchType
-			"override_knowledge_base_search_type": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44525056688c4e7ded88b75d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AssociationConfigurations
-			"association_configurations": schemaAttribute2e27c1f71bf9b8f46fee29dc(),
-			// Property: EmailGenerativeAnswerAIPromptId
-			"email_generative_answer_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: EmailQueryReformulationAIPromptId
-			"email_query_reformulation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute478b0711d23a2309a756d870() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AnswerGenerationAIGuardrailId
-			"answer_generation_ai_guardrail_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: AnswerGenerationAIPromptId
-			"answer_generation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: AssociationConfigurations
-			"association_configurations": schemaAttribute2e27c1f71bf9b8f46fee29dc(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57f23c81166331aead4f7ea1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Constant
-			"constant": schemaAttributed7149d94334756f06efbb174(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute662567852958d2016a02f1b2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AnswerRecommendationAIAgentConfiguration
-			"answer_recommendation_ai_agent_configuration": schemaAttribute3d4bfafd6747d548bcb82e8a(),
-			// Property: CaseSummarizationAIAgentConfiguration
-			"case_summarization_ai_agent_configuration": schemaAttributef458ad3aae25d1d5cbda0b22(),
-			// Property: EmailGenerativeAnswerAIAgentConfiguration
-			"email_generative_answer_ai_agent_configuration": schemaAttribute44525056688c4e7ded88b75d(),
-			// Property: EmailOverviewAIAgentConfiguration
-			"email_overview_ai_agent_configuration": schemaAttribute04317423bda6faa5557c8abc(),
-			// Property: EmailResponseAIAgentConfiguration
-			"email_response_ai_agent_configuration": schemaAttribute7eec74d0f27e28edd5a0bd94(),
-			// Property: ManualSearchAIAgentConfiguration
-			"manual_search_ai_agent_configuration": schemaAttribute478b0711d23a2309a756d870(),
-			// Property: NoteTakingAIAgentConfiguration
-			"note_taking_ai_agent_configuration": schemaAttributec4663aa810e593b60c1b2dd8(),
-			// Property: OrchestrationAIAgentConfiguration
-			"orchestration_ai_agent_configuration": schemaAttributef3dd9f716f5767a2c2eeaaab(),
-			// Property: SelfServiceAIAgentConfiguration
-			"self_service_ai_agent_configuration": schemaAttributeb86e4b36525f855883132657(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cdcbc0eebc4439d1cd3a64f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JsonPath
-				"json_path": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: OutputConfiguration
-				"output_configuration": schemaAttribute6e7e7d74f76cb93ffe2ea3b2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e7e7d74f76cb93ffe2ea3b2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OutputVariableNameOverride
-			"output_variable_name_override": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: SessionDataNamespace
-			"session_data_namespace": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79aa2ff41430a86f06eef24c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KnowledgeBaseAssociationConfigurationData
-			"knowledge_base_association_configuration_data": schemaAttribute3debd3c20a69fd292d8e620f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ae55c7945747283d1ae7092() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsUserConfirmationRequired
-			"is_user_confirmation_required": schemaAttributecbe045e2d53041593abb6261(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7eec74d0f27e28edd5a0bd94() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AssociationConfigurations
-			"association_configurations": schemaAttribute2e27c1f71bf9b8f46fee29dc(),
-			// Property: EmailQueryReformulationAIPromptId
-			"email_query_reformulation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: EmailResponseAIPromptId
-			"email_response_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bcb909c8ccc6f8bdd41fe3a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ea96d7bf189b913edf8122f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Annotations
-				"annotations": schemaAttribute1541271e77e7bc363436859a(),
-				// Property: Description
-				"description": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: InputSchema
-				"input_schema": schemaAttribute1541271e77e7bc363436859a(),
-				// Property: Instruction
-				"instruction": schemaAttributec30c6d2890d209efb213d6cc(),
-				// Property: OutputFilters
-				"output_filters": schemaAttribute6cdcbc0eebc4439d1cd3a64f(),
-				// Property: OutputSchema
-				"output_schema": schemaAttribute1541271e77e7bc363436859a(),
-				// Property: OverrideInputValues
-				"override_input_values": schemaAttributec497b09c88ccc9780c4880d2(),
-				// Property: Title
-				"title": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: ToolId
-				"tool_id": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: ToolName
-				"tool_name": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: ToolType
-				"tool_type": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: UserInteractionConfiguration
-				"user_interaction_configuration": schemaAttribute7ae55c7945747283d1ae7092(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2a04c6cc98c1e09a0d226e2() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb65780de3c9614491f0ec641() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb86e4b36525f855883132657() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AssociationConfigurations
-			"association_configurations": schemaAttribute2e27c1f71bf9b8f46fee29dc(),
-			// Property: SelfServiceAIGuardrailId
-			"self_service_ai_guardrail_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: SelfServiceAnswerGenerationAIPromptId
-			"self_service_answer_generation_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: SelfServicePreProcessingAIPromptId
-			"self_service_pre_processing_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec30c6d2890d209efb213d6cc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Examples
-			"examples": schemaAttribute9bcb909c8ccc6f8bdd41fe3a(),
-			// Property: Instruction
-			"instruction": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4663aa810e593b60c1b2dd8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: NoteTakingAIGuardrailId
-			"note_taking_ai_guardrail_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: NoteTakingAIPromptId
-			"note_taking_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec497b09c88ccc9780c4880d2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JsonPath
-				"json_path": schemaAttributec6bd7d957b12369ced8299b3(),
-				// Property: Value
-				"value": schemaAttribute57f23c81166331aead4f7ea1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6bd7d957b12369ced8299b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbe045e2d53041593abb6261() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7149d94334756f06efbb174() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Value
-			"value": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3dd9f716f5767a2c2eeaaab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectInstanceArn
-			"connect_instance_arn": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: OrchestrationAIGuardrailId
-			"orchestration_ai_guardrail_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: OrchestrationAIPromptId
-			"orchestration_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: ToolConfigurations
-			"tool_configurations": schemaAttribute9ea96d7bf189b913edf8122f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef458ad3aae25d1d5cbda0b22() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CaseSummarizationAIGuardrailId
-			"case_summarization_ai_guardrail_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: CaseSummarizationAIPromptId
-			"case_summarization_ai_prompt_id": schemaAttributec6bd7d957b12369ced8299b3(),
-			// Property: Locale
-			"locale": schemaAttributec6bd7d957b12369ced8299b3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_ai_agent", aIAgentDataSource)
 }
@@ -452,7 +31,9 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_agent_arn": schemaAttributec6bd7d957b12369ced8299b3(),
+		"ai_agent_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AIAgentId
 		// CloudFormation resource type schema:
 		//
@@ -460,7 +41,9 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_agent_id": schemaAttributec6bd7d957b12369ced8299b3(),
+		"ai_agent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssistantArn
 		// CloudFormation resource type schema:
 		//
@@ -468,7 +51,9 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
 		//	  "type": "string"
 		//	}
-		"assistant_arn": schemaAttributec6bd7d957b12369ced8299b3(),
+		"assistant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssistantId
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +61,9 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
 		//	  "type": "string"
 		//	}
-		"assistant_id": schemaAttributec6bd7d957b12369ced8299b3(),
+		"assistant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -1510,7 +1097,857 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttribute662567852958d2016a02f1b2(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AnswerRecommendationAIAgentConfiguration
+				"answer_recommendation_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AnswerGenerationAIGuardrailId
+						"answer_generation_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AnswerGenerationAIPromptId
+						"answer_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: IntentLabelingGenerationAIPromptId
+						"intent_labeling_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueryReformulationAIPromptId
+						"query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CaseSummarizationAIAgentConfiguration
+				"case_summarization_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CaseSummarizationAIGuardrailId
+						"case_summarization_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CaseSummarizationAIPromptId
+						"case_summarization_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmailGenerativeAnswerAIAgentConfiguration
+				"email_generative_answer_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailGenerativeAnswerAIPromptId
+						"email_generative_answer_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailQueryReformulationAIPromptId
+						"email_query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmailOverviewAIAgentConfiguration
+				"email_overview_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EmailOverviewAIPromptId
+						"email_overview_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmailResponseAIAgentConfiguration
+				"email_response_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailQueryReformulationAIPromptId
+						"email_query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailResponseAIPromptId
+						"email_response_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManualSearchAIAgentConfiguration
+				"manual_search_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AnswerGenerationAIGuardrailId
+						"answer_generation_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AnswerGenerationAIPromptId
+						"answer_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NoteTakingAIAgentConfiguration
+				"note_taking_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NoteTakingAIGuardrailId
+						"note_taking_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NoteTakingAIPromptId
+						"note_taking_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OrchestrationAIAgentConfiguration
+				"orchestration_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConnectInstanceArn
+						"connect_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OrchestrationAIGuardrailId
+						"orchestration_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OrchestrationAIPromptId
+						"orchestration_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ToolConfigurations
+						"tool_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Annotations
+									"annotations": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Computed:   true,
+									}, /*END ATTRIBUTE*/
+									// Property: Description
+									"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: InputSchema
+									"input_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Computed:   true,
+									}, /*END ATTRIBUTE*/
+									// Property: Instruction
+									"instruction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Examples
+											"examples": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Instruction
+											"instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OutputFilters
+									"output_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: JsonPath
+												"json_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: OutputConfiguration
+												"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: OutputVariableNameOverride
+														"output_variable_name_override": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: SessionDataNamespace
+														"session_data_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OutputSchema
+									"output_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Computed:   true,
+									}, /*END ATTRIBUTE*/
+									// Property: OverrideInputValues
+									"override_input_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: JsonPath
+												"json_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Constant
+														"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Type
+																"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Title
+									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ToolId
+									"tool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ToolName
+									"tool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ToolType
+									"tool_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserInteractionConfiguration
+									"user_interaction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsUserConfirmationRequired
+											"is_user_confirmation_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SelfServiceAIAgentConfiguration
+				"self_service_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelfServiceAIGuardrailId
+						"self_service_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelfServiceAnswerGenerationAIPromptId
+						"self_service_answer_generation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelfServicePreProcessingAIPromptId
+						"self_service_pre_processing_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1520,14 +1957,18 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s_.,-]+",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec6bd7d957b12369ced8299b3(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedTimeSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"modified_time_seconds": schemaAttributeb2a04c6cc98c1e09a0d226e2(),
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1537,7 +1978,9 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s_.,-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec6bd7d957b12369ced8299b3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1552,7 +1995,11 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributeb65780de3c9614491f0ec641(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1570,7 +2017,9 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributec6bd7d957b12369ced8299b3(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

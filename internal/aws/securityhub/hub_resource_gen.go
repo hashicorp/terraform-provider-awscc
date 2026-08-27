@@ -23,77 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5e5b7433a1d32312719898c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to SECURITY_CONTROL, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.  If the value for this field is set to STANDARD_CONTROL, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^(SECURITY_CONTROL|STANDARD_CONTROL)$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb92c01c725a6a8386d5e518b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time when Security Hub was enabled in the account.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc92e72da48435fc3478a893() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to enable the security standards that Security Hub has designated as automatically enabled.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// EnableDefaultStandards is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec12700a31bb6f3fa9b367a6c() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec704862e108447e6994d9ab3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An ARN is automatically created for the customer.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed576e0a4b5ad461c27a10179() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to automatically enable new controls when they are added to standards that are enabled",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_hub", hubResource)
 	registry.AddListResourceFactory("awscc_securityhub_hub", generic.NewListResource(hubResource))
@@ -111,7 +40,13 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec704862e108447e6994d9ab3(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An ARN is automatically created for the customer.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AutoEnableControls
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +54,14 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Whether to automatically enable new controls when they are added to standards that are enabled",
 		//	  "type": "boolean"
 		//	}
-		"auto_enable_controls": schemaAttributed576e0a4b5ad461c27a10179(),
+		"auto_enable_controls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically enable new controls when they are added to standards that are enabled",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ControlFindingGenerator
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +70,17 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(SECURITY_CONTROL|STANDARD_CONTROL)$",
 		//	  "type": "string"
 		//	}
-		"control_finding_generator": schemaAttribute5e5b7433a1d32312719898c1(),
+		"control_finding_generator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to SECURITY_CONTROL, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards.  If the value for this field is set to STANDARD_CONTROL, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(SECURITY_CONTROL|STANDARD_CONTROL)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EnableDefaultStandards
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +88,15 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Whether to enable the security standards that Security Hub has designated as automatically enabled.",
 		//	  "type": "boolean"
 		//	}
-		"enable_default_standards": schemaAttributebc92e72da48435fc3478a893(),
+		"enable_default_standards": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to enable the security standards that Security Hub has designated as automatically enabled.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EnableDefaultStandards is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SubscribedAt
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +104,13 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The date and time when Security Hub was enabled in the account.",
 		//	  "type": "string"
 		//	}
-		"subscribed_at": schemaAttributeb92c01c725a6a8386d5e518b(),
+		"subscribed_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time when Security Hub was enabled in the account.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +127,16 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributec12700a31bb6f3fa9b367a6c(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

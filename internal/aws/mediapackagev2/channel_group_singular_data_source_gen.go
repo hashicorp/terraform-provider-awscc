@@ -15,63 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5ed933370a28abb662dad7c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time the channel group was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6331b8ede108ea6100476fdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute970a6829c4638c888f558630() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time the channel group was modified.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb60cd2307f050572f75c99cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed78646b4adf6155210e809e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Enter any descriptive text that helps you to identify the channel group.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9e1b2644fc4af6b2fba425d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1788d3ec648d960af862c2a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6331b8ede108ea6100476fdf(),
-				// Property: Value
-				"value": schemaAttribute6331b8ede108ea6100476fdf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackagev2_channel_group", channelGroupDataSource)
 }
@@ -87,7 +30,10 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) associated with the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb60cd2307f050572f75c99cd(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -97,7 +43,9 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_group_name": schemaAttribute6331b8ede108ea6100476fdf(),
+		"channel_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +54,11 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute5ed933370a28abb662dad7c7(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time the channel group was created.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +68,10 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed78646b4adf6155210e809e8(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>Enter any descriptive text that helps you to identify the channel group.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EgressDomain
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +79,10 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "\u003cp\u003eThe output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"egress_domain": schemaAttributed9e1b2644fc4af6b2fba425d(),
+		"egress_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +91,11 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schemaAttribute970a6829c4638c888f558630(),
+		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time the channel group was modified.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +115,21 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributef1788d3ec648d960af862c2a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

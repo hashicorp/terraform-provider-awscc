@@ -16,219 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05ea86523728c2aed61c4506() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source environment type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e85c485bc30ba256508607b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for inspection traffic in the target network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40ac00db977405d1d86e963e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket for target artifacts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50e89bdf066eb78d917edf23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the network migration definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ec56030df0a13e5fd2692df() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute761656f5e74473cce1c11426(),
-				// Property: Value
-				"value": schemaAttributef6e2ac6074474e9e0a86b20e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the network migration definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f6edceadde61bea6fc6c87b() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Scope tags for the network migration definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute761656f5e74473cce1c11426() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fe49725fab6b9c9bec73039() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for outbound traffic in the target network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84b1dbcb015f1e3e98d13287() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the network migration definition was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute968fc417ac36b9f6c9e46862() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket containing source data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96c85e77f4b3029e8fb54be5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the network migration definition was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98658488ef188bea29d355e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network topology type for the target environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9892fa2f710daf511a1c7af5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute40ac00db977405d1d86e963e(),
-			// Property: S3BucketOwner
-			"s3_bucket_owner": schemaAttribute9f1aa026e66641666691473f(),
-		}, /*END SCHEMA*/
-		Description: "The S3 configuration for storing the target network artifacts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99af67e6a68f74bd911faccb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for inbound traffic in the target network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f1aa026e66641666691473f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the S3 bucket owner.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea748d1d07c94f24956b83657() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the network migration definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab2fe007bcd078909a5b28b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The target deployment configuration for the migrated network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb19fe7bfc4c3f2755f4c230b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute968fc417ac36b9f6c9e46862(),
-			// Property: S3BucketOwner
-			"s3_bucket_owner": schemaAttribute9f1aa026e66641666691473f(),
-			// Property: S3Key
-			"s3_key": schemaAttributeb47c2f00474ee2a56141cbcc(),
-		}, /*END SCHEMA*/
-		Description: "S3 configuration for source network data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb47c2f00474ee2a56141cbcc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 key (path) for the source data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf8119ea735ef7f938274dba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the network migration definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1d45cc6a5503fb5b7e2ebe5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InboundCidr
-			"inbound_cidr": schemaAttribute99af67e6a68f74bd911faccb(),
-			// Property: InspectionCidr
-			"inspection_cidr": schemaAttribute2e85c485bc30ba256508607b(),
-			// Property: OutboundCidr
-			"outbound_cidr": schemaAttribute7fe49725fab6b9c9bec73039(),
-			// Property: Topology
-			"topology": schemaAttribute98658488ef188bea29d355e3(),
-		}, /*END SCHEMA*/
-		Description: "The target network configuration including topology and CIDR ranges.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed039277ac8dbead2a9df47aa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceEnvironment
-				"source_environment": schemaAttribute05ea86523728c2aed61c4506(),
-				// Property: SourceS3Configuration
-				"source_s3_configuration": schemaAttributeb19fe7bfc4c3f2755f4c230b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of source configurations for the network migration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbe7541e87ad02c69e997ef4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the network migration definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6e2ac6074474e9e0a86b20e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mgn_network_migration_definition", networkMigrationDefinitionDataSource)
 }
@@ -246,7 +33,10 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute50e89bdf066eb78d917edf23(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the network migration definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +45,11 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute96c85e77f4b3029e8fb54be5(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the network migration definition was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +60,10 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^[^\\x00]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebf8119ea735ef7f938274dba(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the network migration definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +74,10 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributedbe7541e87ad02c69e997ef4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the network migration definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkMigrationDefinitionID
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +88,10 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^nmd-[0-9a-zA-Z]{17}$",
 		//	  "type": "string"
 		//	}
-		"network_migration_definition_id": schemaAttributea748d1d07c94f24956b83657(),
+		"network_migration_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the network migration definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScopeTags
 		// CloudFormation resource type schema:
 		//
@@ -304,7 +107,12 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scope_tags": schemaAttribute5f6edceadde61bea6fc6c87b(),
+		"scope_tags":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Scope tags for the network migration definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +175,41 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"source_configurations": schemaAttributed039277ac8dbead2a9df47aa(),
+		"source_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SourceEnvironment
+					"source_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The source environment type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SourceS3Configuration
+					"source_s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: S3Bucket
+							"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the S3 bucket containing source data.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3BucketOwner
+							"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS account ID of the S3 bucket owner.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3Key
+							"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The S3 key (path) for the source data.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "S3 configuration for source network data.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of source configurations for the network migration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -400,7 +242,24 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5ec56030df0a13e5fd2692df(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the network migration definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetDeployment
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +271,10 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_deployment": schemaAttributeab2fe007bcd078909a5b28b9(),
+		"target_deployment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The target deployment configuration for the migrated network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetNetwork
 		// CloudFormation resource type schema:
 		//
@@ -455,7 +317,32 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_network": schemaAttributec1d45cc6a5503fb5b7e2ebe5(),
+		"target_network": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InboundCidr
+				"inbound_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR block for inbound traffic in the target network.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InspectionCidr
+				"inspection_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR block for inspection traffic in the target network.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OutboundCidr
+				"outbound_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR block for outbound traffic in the target network.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Topology
+				"topology": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network topology type for the target environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The target network configuration including topology and CIDR ranges.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetS3Configuration
 		// CloudFormation resource type schema:
 		//
@@ -482,7 +369,22 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_s3_configuration": schemaAttribute9892fa2f710daf511a1c7af5(),
+		"target_s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket for target artifacts.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3BucketOwner
+				"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS account ID of the S3 bucket owner.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The S3 configuration for storing the target network artifacts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -491,7 +393,11 @@ func networkMigrationDefinitionDataSource(ctx context.Context) (datasource.DataS
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute84b1dbcb015f1e3e98d13287(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the network migration definition was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

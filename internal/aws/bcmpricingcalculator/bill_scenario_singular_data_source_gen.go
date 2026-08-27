@@ -15,112 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute034c209ffa3da11ccdf99917() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the cost category group sharing preference",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13e3bf0b133b3950687d58ad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: End
-			"end": schemaAttributef77b66089f71125fe419630b(),
-			// Property: Start
-			"start": schemaAttributef77b66089f71125fe419630b(),
-		}, /*END SCHEMA*/
-		Description: "The time period covered by the bill scenario",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20cb7dd78b1927e8e94590b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the bill scenario",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute439b213a4c3f5c71942eabe7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the bill scenario",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute491f0bf5a8c124f1e0e365ba() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute5da8bea4bce7fa3ca09f1d60(),
-				// Property: Value
-				"value": schemaAttribute5da8bea4bce7fa3ca09f1d60(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cd472fc879c15e33c245762() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The group sharing preference for the bill scenario",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5da8bea4bce7fa3ca09f1d60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa19c171e8a424d0d917f48d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the bill scenario was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe16872688cefe19fd86054b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the bill scenario",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8f5c1b66406fdf2eee2db67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The failure message if the bill scenario failed",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3d226eff10f145da381cb76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the bill scenario.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef63b7cd91a0d5c990cf2d5a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the bill scenario expires",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef77b66089f71125fe419630b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bcmpricingcalculator_bill_scenario", billScenarioDataSource)
 }
@@ -137,7 +31,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z]*:bcm-pricing-calculator::[0-9]{12}:bill-scenario/[a-f0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee3d226eff10f145da381cb76(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the bill scenario.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BillInterval
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +53,22 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"bill_interval": schemaAttribute13e3bf0b133b3950687d58ad(),
+		"bill_interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: End
+				"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: timetypes.RFC3339Type{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: Start
+				"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: timetypes.RFC3339Type{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The time period covered by the bill scenario",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CostCategoryGroupSharingPreferenceArn
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +77,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[a-z-]*:ce::[0-9]{12}:costcategory/[a-f0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"cost_category_group_sharing_preference_arn": schemaAttribute034c209ffa3da11ccdf99917(),
+		"cost_category_group_sharing_preference_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the cost category group sharing preference",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +89,11 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeaa19c171e8a424d0d917f48d(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the bill scenario was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExpiresAt
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +102,11 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"expires_at": schemaAttributef63b7cd91a0d5c990cf2d5a7(),
+		"expires_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the bill scenario expires",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureMessage
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +114,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The failure message if the bill scenario failed",
 		//	  "type": "string"
 		//	}
-		"failure_message": schemaAttributed8f5c1b66406fdf2eee2db67(),
+		"failure_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The failure message if the bill scenario failed",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupSharingPreference
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +130,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"group_sharing_preference": schemaAttribute4cd472fc879c15e33c245762(),
+		"group_sharing_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The group sharing preference for the bill scenario",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +141,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The unique identifier of the bill scenario",
 		//	  "type": "string"
 		//	}
-		"bill_scenario_id": schemaAttribute20cb7dd78b1927e8e94590b2(),
+		"bill_scenario_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the bill scenario",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +154,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributebe16872688cefe19fd86054b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the bill scenario",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +170,10 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute439b213a4c3f5c71942eabe7(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the bill scenario",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +203,22 @@ func billScenarioDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute491f0bf5a8c124f1e0e365ba(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

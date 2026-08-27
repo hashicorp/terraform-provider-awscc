@@ -14,109 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02b0b4bf3866f78e030447a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the contact flow module.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0399b80789f5da1e72c2a2aa() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the flow module resource is enabled for external invocation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute119490423967d1349e757f7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11c4e4d40d2c5f567eab3421() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The schema of the settings for contact flow module in JSON Schema V4 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute156e152e3d484f52395c4fad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute0399b80789f5da1e72c2a2aa(),
-		}, /*END SCHEMA*/
-		Description: "Defines the external invocation configuration of the flow module resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31173835f61e96f192c4e18e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute357061c280181d1f1f9bad3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49996ea07aaaddb202dad27d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the contact flow module.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5495aa4f121b4c9441220b4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow module (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute619c69b13be894a9aa67c3e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the contact flow module.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f055071050f2a13c132da63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the contact flow module in JSON format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea231ae37ee2f3237fc328d95() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute119490423967d1349e757f7c(),
-				// Property: Value
-				"value": schemaAttribute357061c280181d1f1f9bad3c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef66ba18201a1c8ec1237a6d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the contact flow module.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_contact_flow_module", contactFlowModuleDataSource)
 }
@@ -135,7 +32,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/flow-module/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_arn": schemaAttribute5495aa4f121b4c9441220b4c(),
+		"contact_flow_module_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow module (ARN).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +45,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"content": schemaAttribute9f055071050f2a13c132da63(),
+		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content of the contact flow module in JSON format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +58,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef66ba18201a1c8ec1237a6d5(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the contact flow module.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExternalInvocationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +76,17 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"external_invocation_configuration": schemaAttribute156e152e3d484f52395c4fad(),
+		"external_invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the flow module resource is enabled for external invocation",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the external invocation configuration of the flow module resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +97,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute31173835f61e96f192c4e18e(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance (ARN).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +111,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute619c69b13be894a9aa67c3e6(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the contact flow module.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Settings
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +123,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxLength": 256000,
 		//	  "type": "string"
 		//	}
-		"settings": schemaAttribute11c4e4d40d2c5f567eab3421(),
+		"settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The schema of the settings for contact flow module in JSON Schema V4 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +135,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute02b0b4bf3866f78e030447a6(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the contact flow module.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +147,10 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute49996ea07aaaddb202dad27d(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the contact flow module.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +184,24 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea231ae37ee2f3237fc328d95(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

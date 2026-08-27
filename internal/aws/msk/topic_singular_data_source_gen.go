@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute28ec8596654837f61d7f657b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Base64 encoded configuration properties of the topic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute523ec4af3f4fa3412bb4cae6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the topic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c123456f95152d36f4096cb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The replication factor for the topic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77f1d2c74e446426017ddbca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the MSK cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute782fa46c9019f1e7d4165d39() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of partitions for the topic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca07a70b0df5796b15d8be1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the topic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_msk_topic", topicDataSource)
 }
@@ -71,7 +29,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the MSK cluster",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schemaAttribute77f1d2c74e446426017ddbca(),
+		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the MSK cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configs
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +40,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Base64 encoded configuration properties of the topic",
 		//	  "type": "string"
 		//	}
-		"configs": schemaAttribute28ec8596654837f61d7f657b(),
+		"configs": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Base64 encoded configuration properties of the topic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PartitionCount
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +52,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"partition_count": schemaAttribute782fa46c9019f1e7d4165d39(),
+		"partition_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of partitions for the topic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationFactor
 		// CloudFormation resource type schema:
 		//
@@ -97,7 +64,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"replication_factor": schemaAttribute5c123456f95152d36f4096cb(),
+		"replication_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The replication factor for the topic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TopicArn
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +75,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the topic",
 		//	  "type": "string"
 		//	}
-		"topic_arn": schemaAttribute523ec4af3f4fa3412bb4cae6(),
+		"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the topic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TopicName
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +86,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the topic",
 		//	  "type": "string"
 		//	}
-		"topic_name": schemaAttributeca07a70b0df5796b15d8be1e(),
+		"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the topic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

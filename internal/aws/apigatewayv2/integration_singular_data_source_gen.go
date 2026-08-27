@@ -15,178 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute377e810e5e1ff326c0336e2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, don't specify this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3eb38512e49a8a7a76476d50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The API identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43b8d514428bfde077310885() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52c688d3d692dff6e4d07388() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a9d01084b8e3585c89cc013() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6798f4a1f2750c2c698f40f5() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79b0d315c17db120e3cc76b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95758da3290a2a9f2e1e3464() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ServerNameToVerify
-			"server_name_to_verify": schemaAttributea29797db4cb0647029b0017a(),
-		}, /*END SCHEMA*/
-		Description: "The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute976f82464b0e6bfc6240cf73() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value map specifying parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98872e2358e6d884e5392c71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the format of the payload sent to an integration. Required for HTTP APIs. For HTTP APIs, supported values for Lambda proxy integrations are 1.0 and 2.0 For all other integrations, 1.0 is the only supported value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0d276528e35210d63813003() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Custom timeout between 50 and 29000 milliseconds for WebSocket APIs and between 50 and 30000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea29797db4cb0647029b0017a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3dbc5925f9cd9613fdf15dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC link for a private integration. Supported only for HTTP APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7eea78edb878f96236f6b21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service action to invoke.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe8145b33d487797ebe7b5e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The template selection expression for the integration. Supported only for WebSocket APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfb0d101216b15c5c8857637() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The integration ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3fd74b562f0f27385b96b03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the integration's HTTP method type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed518069181e723f14080c2ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6c648b716ecdbdf9a4cc1e7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttributea29797db4cb0647029b0017a(),
-				// Property: Source
-				"source": schemaAttributea29797db4cb0647029b0017a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "list of response parameters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd1a0b75c60ff0cd8a0e15be() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResponseParameters
-				"response_parameters": schemaAttributed6c648b716ecdbdf9a4cc1e7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Parameters that transform the HTTP response from a backend integration before returning the response to clients. Supported only for HTTP APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffc92f63194c169c543927a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The integration type of an integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_integration", integrationDataSource)
 }
@@ -202,7 +30,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttribute3eb38512e49a8a7a76476d50(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The API identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +41,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the VPC link for a private integration. Supported only for HTTP APIs.",
 		//	  "type": "string"
 		//	}
-		"connection_id": schemaAttributea3dbc5925f9cd9613fdf15dc(),
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC link for a private integration. Supported only for HTTP APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionType
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +52,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.",
 		//	  "type": "string"
 		//	}
-		"connection_type": schemaAttribute52c688d3d692dff6e4d07388(),
+		"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContentHandlingStrategy
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +63,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.",
 		//	  "type": "string"
 		//	}
-		"content_handling_strategy": schemaAttribute5a9d01084b8e3585c89cc013(),
+		"content_handling_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialsArn
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +75,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role|user|group)\\/.*",
 		//	  "type": "string"
 		//	}
-		"credentials_arn": schemaAttribute377e810e5e1ff326c0336e2f(),
+		"credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, don't specify this parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +86,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the integration.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed518069181e723f14080c2ad(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationId
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +97,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The integration ID.",
 		//	  "type": "string"
 		//	}
-		"integration_id": schemaAttributecfb0d101216b15c5c8857637(),
+		"integration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The integration ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationMethod
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +108,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the integration's HTTP method type.",
 		//	  "type": "string"
 		//	}
-		"integration_method": schemaAttributed3fd74b562f0f27385b96b03(),
+		"integration_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the integration's HTTP method type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationSubtype
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +119,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service action to invoke.",
 		//	  "type": "string"
 		//	}
-		"integration_subtype": schemaAttributea7eea78edb878f96236f6b21(),
+		"integration_subtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service action to invoke.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationType
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +130,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The integration type of an integration.",
 		//	  "type": "string"
 		//	}
-		"integration_type": schemaAttributeffc92f63194c169c543927a4(),
+		"integration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The integration type of an integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationUri
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +141,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.",
 		//	  "type": "string"
 		//	}
-		"integration_uri": schemaAttribute79b0d315c17db120e3cc76b3(),
+		"integration_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For a Lambda integration, specify the URI of a Lambda function. For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PassthroughBehavior
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +152,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
-		"passthrough_behavior": schemaAttribute43b8d514428bfde077310885(),
+		"passthrough_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PayloadFormatVersion
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +163,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the format of the payload sent to an integration. Required for HTTP APIs. For HTTP APIs, supported values for Lambda proxy integrations are 1.0 and 2.0 For all other integrations, 1.0 is the only supported value.",
 		//	  "type": "string"
 		//	}
-		"payload_format_version": schemaAttribute98872e2358e6d884e5392c71(),
+		"payload_format_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the format of the payload sent to an integration. Required for HTTP APIs. For HTTP APIs, supported values for Lambda proxy integrations are 1.0 and 2.0 For all other integrations, 1.0 is the only supported value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequestParameters
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +180,12 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_parameters": schemaAttribute976f82464b0e6bfc6240cf73(),
+		"request_parameters": // Pattern: ""
+		schema.MapAttribute{  /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value map specifying parameters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequestTemplates
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +199,12 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_templates": schemaAttribute6798f4a1f2750c2c698f40f5(),
+		"request_templates": // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResponseParameters
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +239,32 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"response_parameters": schemaAttributefd1a0b75c60ff0cd8a0e15be(),
+		"response_parameters":     // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResponseParameters
+					"response_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Destination
+								"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Source
+								"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "list of response parameters",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Parameters that transform the HTTP response from a backend integration before returning the response to clients. Supported only for HTTP APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateSelectionExpression
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +272,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The template selection expression for the integration. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
-		"template_selection_expression": schemaAttributebe8145b33d487797ebe7b5e4(),
+		"template_selection_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The template selection expression for the integration. Supported only for WebSocket APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeoutInMillis
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +283,10 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Custom timeout between 50 and 29000 milliseconds for WebSocket APIs and between 50 and 30000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.",
 		//	  "type": "integer"
 		//	}
-		"timeout_in_millis": schemaAttributea0d276528e35210d63813003(),
+		"timeout_in_millis": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Custom timeout between 50 and 29000 milliseconds for WebSocket APIs and between 50 and 30000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TlsConfig
 		// CloudFormation resource type schema:
 		//
@@ -392,7 +300,16 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tls_config": schemaAttribute95758da3290a2a9f2e1e3464(),
+		"tls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerNameToVerify
+				"server_name_to_verify": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

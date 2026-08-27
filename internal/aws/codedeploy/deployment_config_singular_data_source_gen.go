@@ -14,111 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute086c541a7a87b0a41efb996f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute173d355757f8bddd9dbc2601() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute70fca5ba52e16a84bcb63ee1(),
-			// Property: Value
-			"value": schemaAttribute086c541a7a87b0a41efb996f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute263425d31f2d434953880753() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination platform type for the deployment (Lambda, Server, or ECS).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3832daef613254821b903863() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70fca5ba52e16a84bcb63ee1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82ce3291df5e29b76dc2996b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute70fca5ba52e16a84bcb63ee1(),
-			// Property: Value
-			"value": schemaAttribute086c541a7a87b0a41efb996f(),
-		}, /*END SCHEMA*/
-		Description: "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f8dc0b5641462bc5e44fd8c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TimeBasedCanary
-			"time_based_canary": schemaAttributea4d59a6dc4cb569e81168e1f(),
-			// Property: TimeBasedLinear
-			"time_based_linear": schemaAttributed7eed33b473be2432e35f86e(),
-			// Property: Type
-			"type": schemaAttribute70fca5ba52e16a84bcb63ee1(),
-		}, /*END SCHEMA*/
-		Description: "The configuration that specifies how the deployment traffic is routed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4d59a6dc4cb569e81168e1f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CanaryInterval
-			"canary_interval": schemaAttribute086c541a7a87b0a41efb996f(),
-			// Property: CanaryPercentage
-			"canary_percentage": schemaAttribute086c541a7a87b0a41efb996f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3b2a5bfe892299980e9ef5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirstZoneMonitorDurationInSeconds
-			"first_zone_monitor_duration_in_seconds": schemaAttribute086c541a7a87b0a41efb996f(),
-			// Property: MinimumHealthyHostsPerZone
-			"minimum_healthy_hosts_per_zone": schemaAttribute173d355757f8bddd9dbc2601(),
-			// Property: MonitorDurationInSeconds
-			"monitor_duration_in_seconds": schemaAttribute086c541a7a87b0a41efb996f(),
-		}, /*END SCHEMA*/
-		Description: "The zonal deployment config that specifies how the zonal deployment behaves",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7eed33b473be2432e35f86e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LinearInterval
-			"linear_interval": schemaAttribute086c541a7a87b0a41efb996f(),
-			// Property: LinearPercentage
-			"linear_percentage": schemaAttribute086c541a7a87b0a41efb996f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codedeploy_deployment_config", deploymentConfigDataSource)
 }
@@ -134,7 +29,10 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The destination platform type for the deployment (Lambda, Server, or ECS).",
 		//	  "type": "string"
 		//	}
-		"compute_platform": schemaAttribute263425d31f2d434953880753(),
+		"compute_platform": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The destination platform type for the deployment (Lambda, Server, or ECS).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentConfigName
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +40,10 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
 		//	  "type": "string"
 		//	}
-		"deployment_config_name": schemaAttribute3832daef613254821b903863(),
+		"deployment_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinimumHealthyHosts
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +64,20 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"minimum_healthy_hosts": schemaAttribute82ce3291df5e29b76dc2996b(),
+		"minimum_healthy_hosts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrafficRoutingConfig
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +126,44 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"traffic_routing_config": schemaAttribute9f8dc0b5641462bc5e44fd8c(),
+		"traffic_routing_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TimeBasedCanary
+				"time_based_canary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CanaryInterval
+						"canary_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CanaryPercentage
+						"canary_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeBasedLinear
+				"time_based_linear": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LinearInterval
+						"linear_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LinearPercentage
+						"linear_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration that specifies how the deployment traffic is routed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ZonalConfig
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +198,34 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"zonal_config": schemaAttributeb3b2a5bfe892299980e9ef5f(),
+		"zonal_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FirstZoneMonitorDurationInSeconds
+				"first_zone_monitor_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinimumHealthyHostsPerZone
+				"minimum_healthy_hosts_per_zone": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitorDurationInSeconds
+				"monitor_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The zonal deployment config that specifies how the zonal deployment behaves",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

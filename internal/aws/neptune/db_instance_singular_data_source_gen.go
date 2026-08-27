@@ -14,126 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1612c07871a97d058d515a53() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that minor version patches are applied automatically.\n\nWhen updating this property, some interruptions may occur.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute202f0fb7d58411b483adc88b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute205fbf7f6e5acd3c3aea17e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute296be923a34026888238a618() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection endpoint for the database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46c1dc0d6da0a597c4076c75() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d1e5fb2315b3b11c2ce9cf9() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute202f0fb7d58411b483adc88b(),
-				// Property: Value
-				"value": schemaAttribute8f7f4135543e27d1b1c1924a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this DB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73e95e0b8a57d28c14f4dd7a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b88cdddabaa9610584ef4f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new virtual private cloud (VPC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88efd94a107da8afd2cacc74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an existing DB parameter group or a reference to an AWS::Neptune::DBParameterGroup resource created in the template. If any of the data members of the referenced parameter group are changed during an update, the DB instance might need to be restarted, which causes some interruption. If the parameter group contains static parameters, whether they were changed or not, an update triggers a reboot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f7f4135543e27d1b1c1924a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute917d936c53c7160277b8a0c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the Availability Zone the DB instance is located in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8a07cbbb6da6b1300701137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter is not supported.\n\n`AWS::Neptune::DBInstance` does not support restoring from snapshots.\n\n`AWS::Neptune::DBCluster` does support restoring from snapshots.\n\n",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2fb88d129acfddb2ae75000() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3adf6b2c21ab69773cd6317() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the database accepts connections. For example: `8182`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee785491c610a1f47b142789a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the DB instance's current version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeeebc515eb7a50cc2486f7f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains the name of the compute and memory capacity class of the DB instance.\n\nIf you update this property, some interruptions may occur.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_neptune_db_instance", dBInstanceDataSource)
 }
@@ -149,7 +29,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the DB instance's current version.",
 		//	  "type": "boolean"
 		//	}
-		"allow_major_version_upgrade": schemaAttributee785491c610a1f47b142789a(),
+		"allow_major_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the DB instance's current version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +40,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates that minor version patches are applied automatically.\n\nWhen updating this property, some interruptions may occur.",
 		//	  "type": "boolean"
 		//	}
-		"auto_minor_version_upgrade": schemaAttribute1612c07871a97d058d515a53(),
+		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that minor version patches are applied automatically.\n\nWhen updating this property, some interruptions may occur.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +51,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the name of the Availability Zone the DB instance is located in.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute917d936c53c7160277b8a0c3(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the Availability Zone the DB instance is located in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +62,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schemaAttributeb2fb88d129acfddb2ae75000(),
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If the DB instance is a member of a DB cluster, contains the name of the DB cluster that the DB instance is a member of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBInstanceClass
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +73,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contains the name of the compute and memory capacity class of the DB instance.\n\nIf you update this property, some interruptions may occur.",
 		//	  "type": "string"
 		//	}
-		"db_instance_class": schemaAttributeeeebc515eb7a50cc2486f7f9(),
+		"db_instance_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Contains the name of the compute and memory capacity class of the DB instance.\n\nIf you update this property, some interruptions may occur.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBInstanceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +84,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.",
 		//	  "type": "string"
 		//	}
-		"db_instance_identifier": schemaAttribute46c1dc0d6da0a597c4076c75(),
+		"db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Contains a user-supplied database identifier. This identifier is the unique key that identifies a DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +95,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of an existing DB parameter group or a reference to an AWS::Neptune::DBParameterGroup resource created in the template. If any of the data members of the referenced parameter group are changed during an update, the DB instance might need to be restarted, which causes some interruption. If the parameter group contains static parameters, whether they were changed or not, an update triggers a reboot.",
 		//	  "type": "string"
 		//	}
-		"db_parameter_group_name": schemaAttribute88efd94a107da8afd2cacc74(),
+		"db_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an existing DB parameter group or a reference to an AWS::Neptune::DBParameterGroup resource created in the template. If any of the data members of the referenced parameter group are changed during an update, the DB instance might need to be restarted, which causes some interruption. If the parameter group contains static parameters, whether they were changed or not, an update triggers a reboot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +106,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "This parameter is not supported.\n\n`AWS::Neptune::DBInstance` does not support restoring from snapshots.\n\n`AWS::Neptune::DBCluster` does support restoring from snapshots.\n\n",
 		//	  "type": "string"
 		//	}
-		"db_snapshot_identifier": schemaAttributea8a07cbbb6da6b1300701137(),
+		"db_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter is not supported.\n\n`AWS::Neptune::DBInstance` does not support restoring from snapshots.\n\n`AWS::Neptune::DBCluster` does support restoring from snapshots.\n\n",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +117,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new virtual private cloud (VPC).",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_name": schemaAttribute7b88cdddabaa9610584ef4f1(),
+		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new virtual private cloud (VPC).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +128,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The connection endpoint for the database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttribute296be923a34026888238a618(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection endpoint for the database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +139,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port number on which the database accepts connections. For example: `8182`.",
 		//	  "type": "string"
 		//	}
-		"port": schemaAttributeb3adf6b2c21ab69773cd6317(),
+		"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the database accepts connections. For example: `8182`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +150,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttribute205fbf7f6e5acd3c3aea17e0(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +161,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttribute73e95e0b8a57d28c14f4dd7a(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +193,24 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5d1e5fb2315b3b11c2ce9cf9(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

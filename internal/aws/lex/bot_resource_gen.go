@@ -32,2711 +32,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute01263ef9fb99e459c5ddeb7f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute6710f1f6e5e2de7a46d794f3(),
-		}, /*END SCHEMA*/
-		Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01ce0f04d20c512196423438() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Message
-				"message": schemaAttribute18a665f050fce7125202fb63(),
-				// Property: Variations
-				"variations": schemaAttribute7880e57366884622954fa9dc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 5),
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute048edc902ede3548cadde052() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 key of the deployment package.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1024),
-			stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute077ff88bc6067a62978cc2ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(32, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0797ac17749095e93d1959e6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowAudioInput
-			"allow_audio_input": schemaAttributea9fe726cbe269332c7575483(),
-			// Property: AllowDTMFInput
-			"allow_dtmf_input": schemaAttributebfe1f928e22f1d80f3b00bce(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the allowed input types.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute07eb3396b30b94352c34b960() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute62ad6603edd5a2ef9a54251e(),
-			// Property: FulfillmentUpdatesSpecification
-			"fulfillment_updates_specification": schemaAttribute51f68ba99aa21464a5de43e8(),
-			// Property: PostFulfillmentStatusSpecification
-			"post_fulfillment_status_specification": schemaAttributebcc70aa195ccff344a008f54(),
-		}, /*END SCHEMA*/
-		Description: "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute095e965f049303deb81d43ad() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(0, 5),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09e8bdd45a83594713b55389() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the Lambda code hook is enabled",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0acae993cec8335d69216a48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 5),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b3ddc434d008540d1591e44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c967f6b88743c9ff46c8604() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-		}, /*END SCHEMA*/
-		Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f18f4716338fc90f4895879() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaCodeHook
-			"lambda_code_hook": schemaAttributecf2726750fa857745f0cac05(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10a13eab44e39d9e0920199f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KendraIndex
-			"kendra_index": schemaAttribute077ff88bc6067a62978cc2ed(),
-			// Property: QueryFilterString
-			"query_filter_string": schemaAttributeb592661f18a505e73d96f2d0(),
-			// Property: QueryFilterStringEnabled
-			"query_filter_string_enabled": schemaAttribute5f74e2cbc87a5c0afed590a0(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for searching a Amazon Kendra index specified for the intent.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18a665f050fce7125202fb63() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomPayload
-			"custom_payload": schemaAttributebb19225b6397089c6f60628a(),
-			// Property: ImageResponseCard
-			"image_response_card": schemaAttributee7b919872837d7fa3672a392(),
-			// Property: PlainTextMessage
-			"plain_text_message": schemaAttribute29116a762a4386829cae52ab(),
-			// Property: SSMLMessage
-			"ssml_message": schemaAttributeb312d99263484fe96a2bf640(),
-		}, /*END SCHEMA*/
-		Description: "The primary message that Amazon Lex should send to the user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bf0a7df077dff836b3f158a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Phrase that should be recognized.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e256f1ea52170289f85d2e8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How often a message should be sent to the user in seconds.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 300),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e6141385ec7940e11790b41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The message to send to the user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1000),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f97864506bbb478c0dccfbb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StartTimeoutMs
-			"start_timeout_ms": schemaAttribute3de1b5b62a6a1a43c84f4b3c(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the text input specifications.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2157b04f455d51726581a23b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value returned to Amazon Lex when the user chooses this button.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 50),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22befaa35dca9b828669b1dc() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute7ab8f175cc55e02d6ce43039(),
-				// Property: MultipleValuesSetting
-				"multiple_values_setting": schemaAttributed500c11dac569df6e1ffb37d(),
-				// Property: Name
-				"name": schemaAttribute3c0528d6babd34da9e01157d(),
-				// Property: ObfuscationSetting
-				"obfuscation_setting": schemaAttributef8bcdedf735b5e74c89d44ab(),
-				// Property: SlotTypeName
-				"slot_type_name": schemaAttribute8f00752a89502c90c54b2836(),
-				// Property: ValueElicitationSetting
-				"value_elicitation_setting": schemaAttribute90ebff97d22cc25f8e0f161d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of slots",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(100),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24fbf3f16c3220a55e720c8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29116a762a4386829cae52ab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttribute1e6141385ec7940e11790b41(),
-		}, /*END SCHEMA*/
-		Description: "A message in plain text format.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bb405f0e1fb96f9637b4e7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2dc7457e476c1b502cb8bf25() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute62ad6603edd5a2ef9a54251e(),
-		}, /*END SCHEMA*/
-		Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f2b130951b065f0fb71dd2b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "IdleSessionTTLInSeconds of the resource",
-		Required:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(60, 86400),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fd0c29302f32bd8cc7a2fee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioLogSettings
-			"audio_log_settings": schemaAttribute5a8560dd291bffa0c7518d8a(),
-			// Property: TextLogSettings
-			"text_log_settings": schemaAttribute432fd3abe5683af3e8969e31(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute305553b275c4d306d4e71f03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default value to use when a user doesn't provide a value for a slot.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 202),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30c13a4f8453ba96d48bd4a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31ea1b67b798af59a2fd8f76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1024),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32a29ef676bb7db2ce1ed18a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ORIGINAL_VALUE",
-				"TOP_RESOLUTION",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3397822cd429a5e5798ec5a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for the Log Prefix",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 1024),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33ea442858cdcf4c6491eb22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the slot is required or optional.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"Required",
-				"Optional",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute340fc9fcccefa2fed543da77() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4dd8b4eabf9058ab3ff8a3b6(),
-				// Property: Value
-				"value": schemaAttribute24fbf3f16c3220a55e720c8f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// TestBotAliasTags is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34e86637fb965c913545af81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Regex pattern",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 300),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute377ddec746e1f480e2b702d8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute397fb07ebb5d69d13f9af185() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttributece5bd88fc0c7ec2e11f0163e(),
-			// Property: S3BucketName
-			"s3_bucket_name": schemaAttributef9ee5611d43fbfd1377778d8(),
-			// Property: S3ObjectKey
-			"s3_object_key": schemaAttributee2954ece28a7bd8f32410df2(),
-		}, /*END SCHEMA*/
-		Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ae25654dbeaa0add07797ea() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.AtLeast(1),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b2dae0b0ed00c8177dd742a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 900),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ba7e4e8b6549aa65cca7111() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(32, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c0528d6babd34da9e01157d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name for a resource.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ddb6f95c1402ed616f345cf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: MaxRetries
-			"max_retries": schemaAttribute095e965f049303deb81d43ad(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-			// Property: MessageSelectionStrategy
-			"message_selection_strategy": schemaAttribute513fa938cc59e4b92e70af97(),
-			// Property: PromptAttemptsSpecification
-			"prompt_attempts_specification": schemaAttributed33ec0a8a1dbcd50ccc33a1f(),
-		}, /*END SCHEMA*/
-		Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3de1b5b62a6a1a43c84f4b3c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for which a bot waits before re-prompting a customer for text input.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.AtLeast(1),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3de3bfabae35288c7664b1a8() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomVocabulary
-				"custom_vocabulary": schemaAttribute650c9f79c400e33aeabdf730(),
-				// Property: Description
-				"description": schemaAttribute7ab8f175cc55e02d6ce43039(),
-				// Property: Intents
-				"intents": schemaAttributed5eae2ea18d2a96c0ca2b355(),
-				// Property: LocaleId
-				"locale_id": schemaAttributea26235ac19b90def7dcbe951(),
-				// Property: NluConfidenceThreshold
-				"nlu_confidence_threshold": schemaAttributeb299f3713d28e4ff41cda2fe(),
-				// Property: SlotTypes
-				"slot_types": schemaAttribute542de183a34464a2d895aa34(),
-				// Property: VoiceSettings
-				"voice_settings": schemaAttributee4d6d054c5b326fe35baabb2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of bot locales",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// BotLocales is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute418b4781a031dc1f34d3d457() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: FrequencyInSeconds
-			"frequency_in_seconds": schemaAttribute1e256f1ea52170289f85d2e8(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-			// Property: TimeoutInSeconds
-			"timeout_in_seconds": schemaAttribute87a27f2c6284848b0e0613ba(),
-		}, /*END SCHEMA*/
-		Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4273d57c7cda4dd7b661e391() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the context.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute432fd3abe5683af3e8969e31() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttributec3940fe90cf991daba637432(),
-				// Property: Enabled
-				"enabled": schemaAttribute7d0a5ebbde383c840e6e7fcb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(1),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44fde7108a6aab2002b97ce3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdvancedRecognitionSetting
-			"advanced_recognition_setting": schemaAttributeab77f08c5de8658d842fee1e(),
-			// Property: RegexFilter
-			"regex_filter": schemaAttributec61fa90c98d3b9500b2bdcdf(),
-			// Property: ResolutionStrategy
-			"resolution_strategy": schemaAttribute32a29ef676bb7db2ce1ed18a(),
-		}, /*END SCHEMA*/
-		Description: "Contains settings used by Amazon Lex to select a slot value.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute461e6624956cc97b137e04db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Lambda function.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute480867623f60dcb3dc5bad52() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Utterance
-				"utterance": schemaAttributedea8357a12ed7cf666a3e3d2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of sample utterances",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b344586c2d1ec044faa84eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The string that is sent to your application.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1000),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c77b42ee739c1a5a738874f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the slot.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dd8b4eabf9058ab3ff8a3b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute513fa938cc59e4b92e70af97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates how a message is selected from a message group among retries.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"Random",
-				"Ordered",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51f68ba99aa21464a5de43e8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Active
-			"active": schemaAttribute76f01b5690345cfda3b9b381(),
-			// Property: StartResponse
-			"start_response": schemaAttributef610759246bf76f0de58996b(),
-			// Property: TimeoutInSeconds
-			"timeout_in_seconds": schemaAttribute647fe8ccf39866a69dbb8602(),
-			// Property: UpdateResponse
-			"update_response": schemaAttributed4c999646fab9e4524ad7021(),
-		}, /*END SCHEMA*/
-		Description: "Provides information for updating the user on the progress of fulfilling an intent.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute542de183a34464a2d895aa34() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute7ab8f175cc55e02d6ce43039(),
-				// Property: ExternalSourceSetting
-				"external_source_setting": schemaAttribute7585ffb741459c8ebd4779a0(),
-				// Property: Name
-				"name": schemaAttribute3c0528d6babd34da9e01157d(),
-				// Property: ParentSlotTypeSignature
-				"parent_slot_type_signature": schemaAttribute6b4a7625b09fb2d3d20b88e1(),
-				// Property: SlotTypeValues
-				"slot_type_values": schemaAttribute86cfbf96ce8531ee50e4815d(),
-				// Property: ValueSelectionSetting
-				"value_selection_setting": schemaAttribute44fde7108a6aab2002b97ce3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of SlotTypes",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(250),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55a57bcf7f43aa75b10eafb1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BotAliasLocaleSetting
-				"bot_alias_locale_setting": schemaAttributeecefe510712ef13aaedd95b7(),
-				// Property: LocaleId
-				"locale_id": schemaAttributea4afadfaac56fff9050d6d7e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of bot alias locale settings to add to the bot alias.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(50),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57e169efb23afd73ae0bc38f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"standard",
-				"neural",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58ebcd5555d32ad415de42df() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChildDirected
-			"child_directed": schemaAttribute71d6ae2a2f88d271c67f2688(),
-		}, /*END SCHEMA*/
-		Description: "Data privacy setting of the Bot.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a8560dd291bffa0c7518d8a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttribute01263ef9fb99e459c5ddeb7f(),
-				// Property: Enabled
-				"enabled": schemaAttribute7d0a5ebbde383c840e6e7fcb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(1),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f74e2cbc87a5c0afed590a0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61b7c525810299c7b4697551() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the built-in intent to base this intent on.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute624d8c401ff8be65fea65330() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Source
-			"source": schemaAttribute397fb07ebb5d69d13f9af185(),
-		}, /*END SCHEMA*/
-		Description: "Settings required for a slot type based on a grammar that you provide.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62ad6603edd5a2ef9a54251e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute647fe8ccf39866a69dbb8602() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The length of time that the fulfillment Lambda function should run before it times out.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 900),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute650c9f79c400e33aeabdf730() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomVocabularyItems
-			"custom_vocabulary_items": schemaAttributeba4f99e9462775e23ba21adc(),
-		}, /*END SCHEMA*/
-		Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6710f1f6e5e2de7a46d794f3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute677099c33faf1cf7079f9515(),
-			// Property: LogPrefix
-			"log_prefix": schemaAttribute714eed1743ddfbed017de8b0(),
-			// Property: S3BucketArn
-			"s3_bucket_arn": schemaAttribute93fb62e1ebe2a5b5ad9460f3(),
-		}, /*END SCHEMA*/
-		Description: "Specifies an Amazon S3 bucket for logging audio conversations",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute677099c33faf1cf7079f9515() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68f675520dd5bd1bacc59147() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the user can interrupt an update message while it is playing.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69d01b3b2cf2692467b3b979() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Priority
-				"priority": schemaAttribute743a44f798ed16a69e181382(),
-				// Property: SlotName
-				"slot_name": schemaAttribute4c77b42ee739c1a5a738874f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List for slot priorities",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a385fbb43b2a62e61a85ced() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.AtLeast(1),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b4a7625b09fb2d3d20b88e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The built-in slot type used as a parent of this slot type.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6eeafe9276d534f1dd839451() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to build the bot locales after bot creation completes.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// AutoBuildBotLocales is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute714eed1743ddfbed017de8b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 key of the deployment package.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 1024),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71d6ae2a2f88d271c67f2688() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71df4737bc7f40e70aaf1204() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value that can be used for a slot type.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 140),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7421c08951b2b53c5a351284() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeclinationResponse
-			"declination_response": schemaAttributed6e0b5df58325b022f742722(),
-			// Property: IsActive
-			"is_active": schemaAttribute7ccc2cab6278055a0719b5d9(),
-			// Property: PromptSpecification
-			"prompt_specification": schemaAttributef7ea5c81b971b42006bad231(),
-		}, /*END SCHEMA*/
-		Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute743a44f798ed16a69e181382() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The priority that a slot should be elicited.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(0, 100),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7585ffb741459c8ebd4779a0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GrammarSlotTypeSetting
-			"grammar_slot_type_setting": schemaAttribute624d8c401ff8be65fea65330(),
-		}, /*END SCHEMA*/
-		Description: "Provides information about the external source of the slot type's definition.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute769dbc9dae461801bf4246f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"None",
-				"DefaultObfuscation",
-			),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76f01b5690345cfda3b9b381() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7880e57366884622954fa9dc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomPayload
-				"custom_payload": schemaAttributebb19225b6397089c6f60628a(),
-				// Property: ImageResponseCard
-				"image_response_card": schemaAttributee7b919872837d7fa3672a392(),
-				// Property: PlainTextMessage
-				"plain_text_message": schemaAttribute29116a762a4386829cae52ab(),
-				// Property: SSMLMessage
-				"ssml_message": schemaAttributeb312d99263484fe96a2bf640(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Message variations to send to the user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(2),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ab8f175cc55e02d6ce43039() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the resource",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ccc2cab6278055a0719b5d9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d0a5ebbde383c840e6e7fcb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute804097174be1c2a0be40b878() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClosingResponse
-			"closing_response": schemaAttributed6e0b5df58325b022f742722(),
-			// Property: IsActive
-			"is_active": schemaAttribute7ccc2cab6278055a0719b5d9(),
-		}, /*END SCHEMA*/
-		Description: "Response that Amazon Lex sends to the user when the intent is closed.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86cfbf96ce8531ee50e4815d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SampleValue
-				"sample_value": schemaAttributefaeae0950fab9eb7c0b765e7(),
-				// Property: Synonyms
-				"synonyms": schemaAttributeec5ecd8a89856566c5594530(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A List of slot type values",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(10000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87a27f2c6284848b0e0613ba() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 900),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88287f04494bc0739f5cb18a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"UseSlotValuesAsCustomVocabulary",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88639999009f9f0541f9e922() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Text
-				"text": schemaAttributebf8b72fe72311b7845dcb32d(),
-				// Property: Value
-				"value": schemaAttribute2157b04f455d51726581a23b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of buttons that should be displayed on the response card.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(5),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a69332182fb4001b6888bca() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f00752a89502c90c54b2836() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90ebff97d22cc25f8e0f161d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultValueSpecification
-			"default_value_specification": schemaAttributeacedd7906a5bb3cb18fcbabf(),
-			// Property: PromptSpecification
-			"prompt_specification": schemaAttribute3ddb6f95c1402ed616f345cf(),
-			// Property: SampleUtterances
-			"sample_utterances": schemaAttributec9ae350bad30fd918a0ce1e9(),
-			// Property: SlotConstraint
-			"slot_constraint": schemaAttribute33ea442858cdcf4c6491eb22(),
-			// Property: WaitAndContinueSpecification
-			"wait_and_continue_specification": schemaAttributedabb84eebdfa5c2f124f3cc8(),
-		}, /*END SCHEMA*/
-		Description: "Settings that you can use for eliciting a slot value.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93fb62e1ebe2a5b5ad9460f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute953ef359d27439bb0c2a8d4d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of conversation turns that the output context should remain active.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 20),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute990ff5b7be7d9ea0a17bd339() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndTimeoutMs
-			"end_timeout_ms": schemaAttributec9d35f2c5fcaad0d859cd15d(),
-			// Property: MaxLengthMs
-			"max_length_ms": schemaAttributedacd26373af58d282794d5c4(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the audio input specifications.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99c450a2451945cc22a41843() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-		}, /*END SCHEMA*/
-		Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cacfeed66cb5efaf0d9b4a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DetectSentiment
-			"detect_sentiment": schemaAttribute377ddec746e1f480e2b702d8(),
-		}, /*END SCHEMA*/
-		Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea26235ac19b90def7dcbe951() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the language and locale that the bot will be used in.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4afadfaac56fff9050d6d7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify the locale",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7a0f1c84156cd38404e813a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SSML text that defines the prompt.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1000),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9fe726cbe269332c7575483() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether audio input is allowed.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab77f08c5de8658d842fee1e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioRecognitionStrategy
-			"audio_recognition_strategy": schemaAttribute88287f04494bc0739f5cb18a(),
-		}, /*END SCHEMA*/
-		Description: "Provides settings that enable advanced recognition settings for slot values.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacedd7906a5bb3cb18fcbabf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultValueList
-			"default_value_list": schemaAttributebd395482d4e5c4e9d79066fa(),
-		}, /*END SCHEMA*/
-		Description: "A list of default values for a slot.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb299f3713d28e4ff41cda2fe() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(0.000000, 1.000000),
-			fwvalidators.NotNullFloat64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2e4fa2f650af59957f79874() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute4273d57c7cda4dd7b661e391(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of input contexts specified for the intent.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(5),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb30c97d44c7cf56fed52d75c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 63),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb312d99263484fe96a2bf640() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttributea7a0f1c84156cd38404e813a(),
-		}, /*END SCHEMA*/
-		Description: "A message in Speech Synthesis Markup Language (SSML).",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb592661f18a505e73d96f2d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 5000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb71d59465ebdebae3d5b2b7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subtitle to display on the response card.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 250),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7df49b9d32f50657b5dedde() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BotAliasLocaleSettings
-			"bot_alias_locale_settings": schemaAttribute55a57bcf7f43aa75b10eafb1(),
-			// Property: ConversationLogSettings
-			"conversation_log_settings": schemaAttribute2fd0c29302f32bd8cc7a2fee(),
-			// Property: Description
-			"description": schemaAttribute7ab8f175cc55e02d6ce43039(),
-			// Property: SentimentAnalysisSettings
-			"sentiment_analysis_settings": schemaAttribute9cacfeed66cb5efaf0d9b4a7(),
-		}, /*END SCHEMA*/
-		Description: "Configuring the test bot alias settings for a given bot",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba060352603c8053b26753d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of an image to display on the response card.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 250),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba4f99e9462775e23ba21adc() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Phrase
-				"phrase": schemaAttribute1bf0a7df077dff836b3f158a(),
-				// Property: Weight
-				"weight": schemaAttributefcd224a383607576d56cefc6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(500),
-			fwvalidators.NotNullSet(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb19225b6397089c6f60628a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttribute4b344586c2d1ec044faa84eb(),
-		}, /*END SCHEMA*/
-		Description: "A message in a custom format defined by the client application.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcc70aa195ccff344a008f54() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FailureResponse
-			"failure_response": schemaAttribute0c967f6b88743c9ff46c8604(),
-			// Property: SuccessResponse
-			"success_response": schemaAttribute0c967f6b88743c9ff46c8604(),
-			// Property: TimeoutResponse
-			"timeout_response": schemaAttribute0c967f6b88743c9ff46c8604(),
-		}, /*END SCHEMA*/
-		Description: "Provides information for updating the user on the progress of fulfilling an intent.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd395482d4e5c4e9d79066fa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultValue
-				"default_value": schemaAttribute305553b275c4d306d4e71f03(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of slot default values",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(10),
-			fwvalidators.NotNullList(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf8b72fe72311b7845dcb32d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The text that appears on the button.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 50),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfe1f928e22f1d80f3b00bce() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether DTMF input is allowed.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Bool{ /*START VALIDATORS*/
-			fwvalidators.NotNullBool(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3940fe90cf991daba637432() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatch
-			"cloudwatch": schemaAttributecb54d966a6c2b69fd6993b9b(),
-		}, /*END SCHEMA*/
-		Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec575421a094957a9202c44ba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeletionCharacter
-			"deletion_character": schemaAttributefcdcd078cce507beaf5d3766(),
-			// Property: EndCharacter
-			"end_character": schemaAttributef0821576f9bc636db3a4b87c(),
-			// Property: EndTimeoutMs
-			"end_timeout_ms": schemaAttribute6a385fbb43b2a62e61a85ced(),
-			// Property: MaxLength
-			"max_length": schemaAttributecb609ab6c7c7abe16ebdf07d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the settings on DTMF input.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec61fa90c98d3b9500b2bdcdf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Pattern
-			"pattern": schemaAttribute34e86637fb965c913545af81(),
-		}, /*END SCHEMA*/
-		Description: "A regular expression used to validate the value of a slot.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9ae350bad30fd918a0ce1e9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Utterance
-				"utterance": schemaAttributedea8357a12ed7cf666a3e3d2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9d35f2c5fcaad0d859cd15d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.AtLeast(1),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb54d966a6c2b69fd6993b9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogGroupArn
-			"cloudwatch_log_group_arn": schemaAttribute2bb405f0e1fb96f9637b4e7e(),
-			// Property: LogPrefix
-			"log_prefix": schemaAttribute3397822cd429a5e5798ec5a7(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb609ab6c7c7abe16ebdf07d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of DTMF digits allowed in an utterance.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 1024),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbccd196b3712b6ac562a0a6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time, in seconds, that the output context should remain active.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(5, 86400),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecce6b9d512136107aaf2b6e0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioSpecification
-			"audio_specification": schemaAttribute990ff5b7be7d9ea0a17bd339(),
-			// Property: DTMFSpecification
-			"dtmf_specification": schemaAttributec575421a094957a9202c44ba(),
-			// Property: StartTimeoutMs
-			"start_timeout_ms": schemaAttribute3ae25654dbeaa0add07797ea(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the audio and DTMF input specification.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece5bd88fc0c7ec2e11f0163e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf2726750fa857745f0cac05() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeHookInterfaceVersion
-			"code_hook_interface_version": schemaAttribute0acae993cec8335d69216a48(),
-			// Property: LambdaArn
-			"lambda_arn": schemaAttribute461e6624956cc97b137e04db(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf3a45d1c7c7a7315783fc55() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-		}, /*END SCHEMA*/
-		Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed310d05d22568baf5d0024c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The title to display on the response card.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 250),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed33ec0a8a1dbcd50ccc33a1f() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowInterrupt
-				"allow_interrupt": schemaAttribute8a69332182fb4001b6888bca(),
-				// Property: AllowedInputTypes
-				"allowed_input_types": schemaAttribute0797ac17749095e93d1959e6(),
-				// Property: AudioAndDTMFInputSpecification
-				"audio_and_dtmf_input_specification": schemaAttributecce6b9d512136107aaf2b6e0(),
-				// Property: TextInputSpecification
-				"text_input_specification": schemaAttribute1f97864506bbb478c0dccfbb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the advanced settings on each attempt of the prompt.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4c999646fab9e4524ad7021() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttribute68f675520dd5bd1bacc59147(),
-			// Property: FrequencyInSeconds
-			"frequency_in_seconds": schemaAttributee6ccdd5537f389dad04173ab(),
-			// Property: MessageGroups
-			"message_groups": schemaAttribute01ce0f04d20c512196423438(),
-		}, /*END SCHEMA*/
-		Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed500c11dac569df6e1ffb37d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowMultipleValues
-			"allow_multiple_values": schemaAttribute7ccc2cab6278055a0719b5d9(),
-		}, /*END SCHEMA*/
-		Description: "Indicates whether a slot can return multiple values.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5eae2ea18d2a96c0ca2b355() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute7ab8f175cc55e02d6ce43039(),
-				// Property: DialogCodeHook
-				"dialog_code_hook": schemaAttribute2dc7457e476c1b502cb8bf25(),
-				// Property: FulfillmentCodeHook
-				"fulfillment_code_hook": schemaAttribute07eb3396b30b94352c34b960(),
-				// Property: InputContexts
-				"input_contexts": schemaAttributeb2e4fa2f650af59957f79874(),
-				// Property: IntentClosingSetting
-				"intent_closing_setting": schemaAttribute804097174be1c2a0be40b878(),
-				// Property: IntentConfirmationSetting
-				"intent_confirmation_setting": schemaAttribute7421c08951b2b53c5a351284(),
-				// Property: KendraConfiguration
-				"kendra_configuration": schemaAttribute10a13eab44e39d9e0920199f(),
-				// Property: Name
-				"name": schemaAttribute3c0528d6babd34da9e01157d(),
-				// Property: OutputContexts
-				"output_contexts": schemaAttributee7f7121a7ae7a47805bc1476(),
-				// Property: ParentIntentSignature
-				"parent_intent_signature": schemaAttribute61b7c525810299c7b4697551(),
-				// Property: SampleUtterances
-				"sample_utterances": schemaAttribute480867623f60dcb3dc5bad52(),
-				// Property: SlotPriorities
-				"slot_priorities": schemaAttribute69d01b3b2cf2692467b3b979(),
-				// Property: Slots
-				"slots": schemaAttribute22befaa35dca9b828669b1dc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of intents",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(1000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6e0b5df58325b022f742722() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-		}, /*END SCHEMA*/
-		Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6ff95d5909bd8e4a6a0dbcd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID of resource",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedabb84eebdfa5c2f124f3cc8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContinueResponse
-			"continue_response": schemaAttribute99c450a2451945cc22a41843(),
-			// Property: IsActive
-			"is_active": schemaAttributee3cd1e6a09a892188105603d(),
-			// Property: StillWaitingResponse
-			"still_waiting_response": schemaAttribute418b4781a031dc1f34d3d457(),
-			// Property: WaitingResponse
-			"waiting_response": schemaAttributecf3a45d1c7c7a7315783fc55(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedacd26373af58d282794d5c4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.AtLeast(1),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedea8357a12ed7cf666a3e3d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2954ece28a7bd8f32410df2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path to the grammar in the S3 bucket.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1024),
-			stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3cd1e6a09a892188105603d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the bot will wait for a user to respond.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4d6d054c5b326fe35baabb2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Engine
-			"engine": schemaAttribute57e169efb23afd73ae0bc38f(),
-			// Property: VoiceId
-			"voice_id": schemaAttribute30c13a4f8453ba96d48bd4a5(),
-		}, /*END SCHEMA*/
-		Description: "Settings for using an Amazon Polly voice to communicate with a user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5fcc1c797cca3cacdd96308() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttributeb30c97d44c7cf56fed52d75c(),
-			// Property: S3ObjectKey
-			"s3_object_key": schemaAttribute048edc902ede3548cadde052(),
-			// Property: S3ObjectVersion
-			"s3_object_version": schemaAttribute31ea1b67b798af59a2fd8f76(),
-		}, /*END SCHEMA*/
-		Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// BotFileS3Location is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6ccdd5537f389dad04173ab() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 900),
-			fwvalidators.NotNullInt64(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7b919872837d7fa3672a392() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Buttons
-			"buttons": schemaAttribute88639999009f9f0541f9e922(),
-			// Property: ImageUrl
-			"image_url": schemaAttributeba060352603c8053b26753d3(),
-			// Property: Subtitle
-			"subtitle": schemaAttributeb71d59465ebdebae3d5b2b7d(),
-			// Property: Title
-			"title": schemaAttributed310d05d22568baf5d0024c6(),
-		}, /*END SCHEMA*/
-		Description: "A message that defines a response card that the client application can show to the user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7f7121a7ae7a47805bc1476() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute3c0528d6babd34da9e01157d(),
-				// Property: TimeToLiveInSeconds
-				"time_to_live_in_seconds": schemaAttributecbccd196b3712b6ac562a0a6(),
-				// Property: TurnsToLive
-				"turns_to_live": schemaAttribute953ef359d27439bb0c2a8d4d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of contexts that the intent activates when it is fulfilled.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(10),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec5ecd8a89856566c5594530() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Value
-				"value": schemaAttribute71df4737bc7f40e70aaf1204(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Additional values related to the slot type entry.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(10000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec723d9106c368609a9fc0ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name for a resource.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecefe510712ef13aaedd95b7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeHookSpecification
-			"code_hook_specification": schemaAttribute0f18f4716338fc90f4895879(),
-			// Property: Enabled
-			"enabled": schemaAttribute09e8bdd45a83594713b55389(),
-		}, /*END SCHEMA*/
-		Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0821576f9bc636db3a4b87c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef254ddddc1b0e21efce1c777() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the user can interrupt the start message while it is playing.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef610759246bf76f0de58996b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributef254ddddc1b0e21efce1c777(),
-			// Property: DelayInSeconds
-			"delay_in_seconds": schemaAttribute3b2dae0b0ed00c8177dd742a(),
-			// Property: MessageGroups
-			"message_groups": schemaAttribute01ce0f04d20c512196423438(),
-		}, /*END SCHEMA*/
-		Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7ea5c81b971b42006bad231() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributefe424a963259f270add5f477(),
-			// Property: MaxRetries
-			"max_retries": schemaAttribute095e965f049303deb81d43ad(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttribute01ce0f04d20c512196423438(),
-			// Property: MessageSelectionStrategy
-			"message_selection_strategy": schemaAttribute513fa938cc59e4b92e70af97(),
-			// Property: PromptAttemptsSpecification
-			"prompt_attempts_specification": schemaAttributed33ec0a8a1dbcd50ccc33a1f(),
-		}, /*END SCHEMA*/
-		Description: "Prompts the user to confirm the intent.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8bcdedf735b5e74c89d44ab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ObfuscationSettingType
-			"obfuscation_setting_type": schemaAttribute769dbc9dae461801bf4246f1(),
-		}, /*END SCHEMA*/
-		Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9ee5611d43fbfd1377778d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket that contains the grammar source.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 63),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefaeae0950fab9eb7c0b765e7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttribute71df4737bc7f40e70aaf1204(),
-		}, /*END SCHEMA*/
-		Description: "Defines one of the values for a slot type.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Object{ /*START VALIDATORS*/
-			fwvalidators.NotNullObject(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcd224a383607576d56cefc6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The degree to which the phrase recognition is boosted.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(1, 3),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcdcd078cce507beaf5d3766() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe424a963259f270add5f477() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff405a2ad2624b19b332c349() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4dd8b4eabf9058ab3ff8a3b6(),
-				// Property: Value
-				"value": schemaAttribute24fbf3f16c3220a55e720c8f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to add to the bot, which can only be added at bot creation.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// BotTags is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_lex_bot", botResource)
 	registry.AddListResourceFactory("awscc_lex_bot", generic.NewListResource(botResource))
@@ -2755,7 +50,12 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute0b3ddc434d008540d1591e44(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AutoBuildBotLocales
 		// CloudFormation resource type schema:
 		//
@@ -2763,7 +63,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies whether to build the bot locales after bot creation completes.",
 		//	  "type": "boolean"
 		//	}
-		"auto_build_bot_locales": schemaAttribute6eeafe9276d534f1dd839451(),
+		"auto_build_bot_locales": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to build the bot locales after bot creation completes.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AutoBuildBotLocales is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: BotFileS3Location
 		// CloudFormation resource type schema:
 		//
@@ -2798,7 +106,57 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"bot_file_s3_location": schemaAttributee5fcc1c797cca3cacdd96308(),
+		"bot_file_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(3, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectKey
+				"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 key of the deployment package.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 1024),
+						stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectVersion
+				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 1024),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BotFileS3Location is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: BotLocales
 		// CloudFormation resource type schema:
 		//
@@ -6909,7 +4267,6293 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bot_locales": schemaAttribute3de3bfabae35288c7664b1a8(),
+		"bot_locales": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CustomVocabulary
+					"custom_vocabulary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomVocabularyItems
+							"custom_vocabulary_items": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Phrase
+										"phrase": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Phrase that should be recognized.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 100),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Weight
+										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The degree to which the phrase recognition is boosted.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 3),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.SizeAtMost(500),
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description of the resource",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(200),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Intents
+					"intents": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A description of the resource",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(200),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DialogCodeHook
+								"dialog_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Enabled
+										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: FulfillmentCodeHook
+								"fulfillment_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Enabled
+										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Bool{ /*START VALIDATORS*/
+												fwvalidators.NotNullBool(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: FulfillmentUpdatesSpecification
+										"fulfillment_updates_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Active
+												"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Bool{ /*START VALIDATORS*/
+														fwvalidators.NotNullBool(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: StartResponse
+												"start_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Determines whether the user can interrupt the start message while it is playing.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: DelayInSeconds
+														"delay_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.Int64{ /*START VALIDATORS*/
+																int64validator.Between(1, 900),
+																fwvalidators.NotNullInt64(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroups
+														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.List{ /*START VALIDATORS*/
+																							listvalidator.SizeAtMost(5),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																							generic.Multiset(),
+																							listplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.List{ /*START VALIDATORS*/
+																								listvalidator.SizeAtMost(5),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																								generic.Multiset(),
+																								listplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeAtMost(2),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: TimeoutInSeconds
+												"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The length of time that the fulfillment Lambda function should run before it times out.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(1, 900),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: UpdateResponse
+												"update_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Determines whether the user can interrupt an update message while it is playing.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: FrequencyInSeconds
+														"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.Int64{ /*START VALIDATORS*/
+																int64validator.Between(1, 900),
+																fwvalidators.NotNullInt64(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroups
+														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.List{ /*START VALIDATORS*/
+																							listvalidator.SizeAtMost(5),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																							generic.Multiset(),
+																							listplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.List{ /*START VALIDATORS*/
+																								listvalidator.SizeAtMost(5),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																								generic.Multiset(),
+																								listplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeAtMost(2),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PostFulfillmentStatusSpecification
+										"post_fulfillment_status_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FailureResponse
+												"failure_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.List{ /*START VALIDATORS*/
+																							listvalidator.SizeAtMost(5),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																							generic.Multiset(),
+																							listplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.List{ /*START VALIDATORS*/
+																								listvalidator.SizeAtMost(5),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																								generic.Multiset(),
+																								listplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeAtMost(2),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: SuccessResponse
+												"success_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.List{ /*START VALIDATORS*/
+																							listvalidator.SizeAtMost(5),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																							generic.Multiset(),
+																							listplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.List{ /*START VALIDATORS*/
+																								listvalidator.SizeAtMost(5),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																								generic.Multiset(),
+																								listplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeAtMost(2),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: TimeoutResponse
+												"timeout_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 50),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.List{ /*START VALIDATORS*/
+																							listvalidator.SizeAtMost(5),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																							generic.Multiset(),
+																							listplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 250),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Optional:    true,
+																						Computed:    true,
+																						Validators: []validator.String{ /*START VALIDATORS*/
+																							stringvalidator.LengthBetween(1, 1000),
+																							fwvalidators.NotNullString(),
+																						}, /*END VALIDATORS*/
+																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																							stringplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Optional:    true,
+																				Computed:    true,
+																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																					objectplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Object{ /*START VALIDATORS*/
+																			fwvalidators.NotNullObject(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.List{ /*START VALIDATORS*/
+																								listvalidator.SizeAtMost(5),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																								generic.Multiset(),
+																								listplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeAtMost(2),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.List{ /*START VALIDATORS*/
+																listvalidator.SizeBetween(1, 5),
+																fwvalidators.NotNullList(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InputContexts
+								"input_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the context.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The list of input contexts specified for the intent.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeAtMost(5),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IntentClosingSetting
+								"intent_closing_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ClosingResponse
+										"closing_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.List{ /*START VALIDATORS*/
+																					listvalidator.SizeAtMost(5),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																					generic.Multiset(),
+																					listplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.List{ /*START VALIDATORS*/
+																						listvalidator.SizeAtMost(5),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																						generic.Multiset(),
+																						listplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeAtMost(2),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 5),
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: IsActive
+										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Response that Amazon Lex sends to the user when the intent is closed.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IntentConfirmationSetting
+								"intent_confirmation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DeclinationResponse
+										"declination_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.List{ /*START VALIDATORS*/
+																					listvalidator.SizeAtMost(5),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																					generic.Multiset(),
+																					listplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.List{ /*START VALIDATORS*/
+																						listvalidator.SizeAtMost(5),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																						generic.Multiset(),
+																						listplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeAtMost(2),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 5),
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: IsActive
+										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PromptSpecification
+										"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MaxRetries
+												"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(0, 5),
+														fwvalidators.NotNullInt64(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 50),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.List{ /*START VALIDATORS*/
+																					listvalidator.SizeAtMost(5),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																					generic.Multiset(),
+																					listplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 250),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.LengthBetween(1, 1000),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 50),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.List{ /*START VALIDATORS*/
+																						listvalidator.SizeAtMost(5),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																						generic.Multiset(),
+																						listplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 250),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.String{ /*START VALIDATORS*/
+																						stringvalidator.LengthBetween(1, 1000),
+																						fwvalidators.NotNullString(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																						stringplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeAtMost(2),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 5),
+														fwvalidators.NotNullList(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MessageSelectionStrategy
+												"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates how a message is selected from a message group among retries.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"Random",
+															"Ordered",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: PromptAttemptsSpecification
+												"prompt_attempts_specification": // Pattern: ""
+												schema.MapNestedAttribute{       /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AllowInterrupt
+															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																	boolplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: AllowedInputTypes
+															"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowAudioInput
+																	"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether audio input is allowed.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Bool{ /*START VALIDATORS*/
+																			fwvalidators.NotNullBool(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: AllowDTMFInput
+																	"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether DTMF input is allowed.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Bool{ /*START VALIDATORS*/
+																			fwvalidators.NotNullBool(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the allowed input types.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: AudioAndDTMFInputSpecification
+															"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AudioSpecification
+																	"audio_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: EndTimeoutMs
+																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Int64{ /*START VALIDATORS*/
+																					int64validator.AtLeast(1),
+																					fwvalidators.NotNullInt64(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: MaxLengthMs
+																			"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Int64{ /*START VALIDATORS*/
+																					int64validator.AtLeast(1),
+																					fwvalidators.NotNullInt64(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Specifies the audio input specifications.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: DTMFSpecification
+																	"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: DeletionCharacter
+																			"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: EndCharacter
+																			"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.String{ /*START VALIDATORS*/
+																					stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																					fwvalidators.NotNullString(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																					stringplanmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: EndTimeoutMs
+																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Int64{ /*START VALIDATORS*/
+																					int64validator.AtLeast(1),
+																					fwvalidators.NotNullInt64(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																			// Property: MaxLength
+																			"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "The maximum number of DTMF digits allowed in an utterance.",
+																				Optional:    true,
+																				Computed:    true,
+																				Validators: []validator.Int64{ /*START VALIDATORS*/
+																					int64validator.Between(1, 1024),
+																					fwvalidators.NotNullInt64(),
+																				}, /*END VALIDATORS*/
+																				PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																					int64planmodifier.UseStateForUnknown(),
+																				}, /*END PLAN MODIFIERS*/
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Specifies the settings on DTMF input.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																			objectplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: StartTimeoutMs
+																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Int64{ /*START VALIDATORS*/
+																			int64validator.AtLeast(1),
+																			fwvalidators.NotNullInt64(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the audio and DTMF input specification.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: TextInputSpecification
+															"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: StartTimeoutMs
+																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Int64{ /*START VALIDATORS*/
+																			int64validator.AtLeast(1),
+																			fwvalidators.NotNullInt64(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the text input specifications.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "Specifies the advanced settings on each attempt of the prompt.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+														mapplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Prompts the user to confirm the intent.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: KendraConfiguration
+								"kendra_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KendraIndex
+										"kendra_index": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(32, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: QueryFilterString
+										"query_filter_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 5000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: QueryFilterStringEnabled
+										"query_filter_string_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for searching a Amazon Kendra index specified for the intent.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Unique name for a resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 100),
+										stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OutputContexts
+								"output_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Unique name for a resource.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TimeToLiveInSeconds
+											"time_to_live_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The amount of time, in seconds, that the output context should remain active.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(5, 86400),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TurnsToLive
+											"turns_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of conversation turns that the output context should remain active.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(1, 20),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of contexts that the intent activates when it is fulfilled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeAtMost(10),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ParentIntentSignature
+								"parent_intent_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique identifier for the built-in intent to base this intent on.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SampleUtterances
+								"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Utterance
+											"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "An array of sample utterances",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SlotPriorities
+								"slot_priorities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Priority
+											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The priority that a slot should be elicited.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(0, 100),
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SlotName
+											"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the slot.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List for slot priorities",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Slots
+								"slots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Description
+											"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A description of the resource",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(200),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MultipleValuesSetting
+											"multiple_values_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AllowMultipleValues
+													"allow_multiple_values": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Indicates whether a slot can return multiple values.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Unique name for a resource.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 100),
+													stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ObfuscationSetting
+											"obfuscation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ObfuscationSettingType
+													"obfuscation_setting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"None",
+																"DefaultObfuscation",
+															),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SlotTypeName
+											"slot_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ValueElicitationSetting
+											"value_elicitation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DefaultValueSpecification
+													"default_value_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: DefaultValueList
+															"default_value_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: DefaultValue
+																		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The default value to use when a user doesn't provide a value for a slot.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 202),
+																				fwvalidators.NotNullString(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "A list of slot default values",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeAtMost(10),
+																	fwvalidators.NotNullList(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "A list of default values for a slot.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: PromptSpecification
+													"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AllowInterrupt
+															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																	boolplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MaxRetries
+															"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 5),
+																	fwvalidators.NotNullInt64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MessageGroupsList
+															"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Message
+																		"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 50),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.List{ /*START VALIDATORS*/
+																								listvalidator.SizeAtMost(5),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																								generic.Multiset(),
+																								listplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 250),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.LengthBetween(1, 1000),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "The primary message that Amazon Lex should send to the user.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.Object{ /*START VALIDATORS*/
+																				fwvalidators.NotNullObject(),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Variations
+																		"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: CustomPayload
+																					"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The string that is sent to your application.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 1000),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in a custom format defined by the client application.",
+																						Optional:    true,
+																						Computed:    true,
+																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																							objectplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageResponseCard
+																					"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Buttons
+																							"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: Text
+																										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																											Description: "The text that appears on the button.",
+																											Optional:    true,
+																											Computed:    true,
+																											Validators: []validator.String{ /*START VALIDATORS*/
+																												stringvalidator.LengthBetween(1, 50),
+																												fwvalidators.NotNullString(),
+																											}, /*END VALIDATORS*/
+																											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																												stringplanmodifier.UseStateForUnknown(),
+																											}, /*END PLAN MODIFIERS*/
+																										}, /*END ATTRIBUTE*/
+																										// Property: Value
+																										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																											Description: "The value returned to Amazon Lex when the user chooses this button.",
+																											Optional:    true,
+																											Computed:    true,
+																											Validators: []validator.String{ /*START VALIDATORS*/
+																												stringvalidator.LengthBetween(1, 50),
+																												fwvalidators.NotNullString(),
+																											}, /*END VALIDATORS*/
+																											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																												stringplanmodifier.UseStateForUnknown(),
+																											}, /*END PLAN MODIFIERS*/
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																								}, /*END NESTED OBJECT*/
+																								Description: "A list of buttons that should be displayed on the response card.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.List{ /*START VALIDATORS*/
+																									listvalidator.SizeAtMost(5),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																									generic.Multiset(),
+																									listplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageUrl
+																							"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The URL of an image to display on the response card.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 250),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: Subtitle
+																							"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The subtitle to display on the response card.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 250),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: Title
+																							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The title to display on the response card.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 250),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message that defines a response card that the client application can show to the user.",
+																						Optional:    true,
+																						Computed:    true,
+																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																							objectplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: PlainTextMessage
+																					"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The message to send to the user.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 1000),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in plain text format.",
+																						Optional:    true,
+																						Computed:    true,
+																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																							objectplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																					// Property: SSMLMessage
+																					"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The SSML text that defines the prompt.",
+																								Optional:    true,
+																								Computed:    true,
+																								Validators: []validator.String{ /*START VALIDATORS*/
+																									stringvalidator.LengthBetween(1, 1000),
+																									fwvalidators.NotNullString(),
+																								}, /*END VALIDATORS*/
+																								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																									stringplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in Speech Synthesis Markup Language (SSML).",
+																						Optional:    true,
+																						Computed:    true,
+																						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																							objectplanmodifier.UseStateForUnknown(),
+																						}, /*END PLAN MODIFIERS*/
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Description: "Message variations to send to the user.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.List{ /*START VALIDATORS*/
+																				listvalidator.SizeAtMost(2),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																				generic.Multiset(),
+																				listplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 5),
+																	fwvalidators.NotNullList(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MessageSelectionStrategy
+															"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates how a message is selected from a message group among retries.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.OneOf(
+																		"Random",
+																		"Ordered",
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: PromptAttemptsSpecification
+															"prompt_attempts_specification": // Pattern: ""
+															schema.MapNestedAttribute{       /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AllowInterrupt
+																		"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																			Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																				boolplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: AllowedInputTypes
+																		"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowAudioInput
+																				"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																					Description: "Indicates whether audio input is allowed.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Bool{ /*START VALIDATORS*/
+																						fwvalidators.NotNullBool(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																						boolplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: AllowDTMFInput
+																				"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																					Description: "Indicates whether DTMF input is allowed.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Bool{ /*START VALIDATORS*/
+																						fwvalidators.NotNullBool(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																						boolplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the allowed input types.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: AudioAndDTMFInputSpecification
+																		"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AudioSpecification
+																				"audio_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: EndTimeoutMs
+																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.Int64{ /*START VALIDATORS*/
+																								int64validator.AtLeast(1),
+																								fwvalidators.NotNullInt64(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxLengthMs
+																						"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.Int64{ /*START VALIDATORS*/
+																								int64validator.AtLeast(1),
+																								fwvalidators.NotNullInt64(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "Specifies the audio input specifications.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: DTMFSpecification
+																				"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: DeletionCharacter
+																						"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: EndCharacter
+																						"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.String{ /*START VALIDATORS*/
+																								stringvalidator.RegexMatches(regexp.MustCompile("^[A-D0-9#*]{1}$"), ""),
+																								fwvalidators.NotNullString(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																								stringplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: EndTimeoutMs
+																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.Int64{ /*START VALIDATORS*/
+																								int64validator.AtLeast(1),
+																								fwvalidators.NotNullInt64(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxLength
+																						"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "The maximum number of DTMF digits allowed in an utterance.",
+																							Optional:    true,
+																							Computed:    true,
+																							Validators: []validator.Int64{ /*START VALIDATORS*/
+																								int64validator.Between(1, 1024),
+																								fwvalidators.NotNullInt64(),
+																							}, /*END VALIDATORS*/
+																							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																								int64planmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "Specifies the settings on DTMF input.",
+																					Optional:    true,
+																					Computed:    true,
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: StartTimeoutMs
+																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Int64{ /*START VALIDATORS*/
+																						int64validator.AtLeast(1),
+																						fwvalidators.NotNullInt64(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																						int64planmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the audio and DTMF input specification.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: TextInputSpecification
+																		"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: StartTimeoutMs
+																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Int64{ /*START VALIDATORS*/
+																						int64validator.AtLeast(1),
+																						fwvalidators.NotNullInt64(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																						int64planmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the text input specifications.",
+																			Optional:    true,
+																			Computed:    true,
+																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Specifies the advanced settings on each attempt of the prompt.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+																	mapplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: SampleUtterances
+													"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Utterance
+																"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+																	Optional:    true,
+																	Computed:    true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: SlotConstraint
+													"slot_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether the slot is required or optional.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"Required",
+																"Optional",
+															),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: WaitAndContinueSpecification
+													"wait_and_continue_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ContinueResponse
+															"continue_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Optional:    true,
+																												Computed:    true,
+																												Validators: []validator.String{ /*START VALIDATORS*/
+																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
+																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Optional:    true,
+																												Computed:    true,
+																												Validators: []validator.String{ /*START VALIDATORS*/
+																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
+																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.List{ /*START VALIDATORS*/
+																										listvalidator.SizeAtMost(5),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																										generic.Multiset(),
+																										listplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Object{ /*START VALIDATORS*/
+																						fwvalidators.NotNullObject(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Optional:    true,
+																													Computed:    true,
+																													Validators: []validator.String{ /*START VALIDATORS*/
+																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
+																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Optional:    true,
+																													Computed:    true,
+																													Validators: []validator.String{ /*START VALIDATORS*/
+																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
+																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.List{ /*START VALIDATORS*/
+																											listvalidator.SizeAtMost(5),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																											generic.Multiset(),
+																											listplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.List{ /*START VALIDATORS*/
+																						listvalidator.SizeAtMost(2),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																						generic.Multiset(),
+																						listplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeBetween(1, 5),
+																			fwvalidators.NotNullList(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: IsActive
+															"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Specifies whether the bot will wait for a user to respond.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																	boolplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: StillWaitingResponse
+															"still_waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: FrequencyInSeconds
+																	"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "How often a message should be sent to the user in seconds.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Int64{ /*START VALIDATORS*/
+																			int64validator.Between(1, 300),
+																			fwvalidators.NotNullInt64(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Optional:    true,
+																												Computed:    true,
+																												Validators: []validator.String{ /*START VALIDATORS*/
+																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
+																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Optional:    true,
+																												Computed:    true,
+																												Validators: []validator.String{ /*START VALIDATORS*/
+																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
+																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.List{ /*START VALIDATORS*/
+																										listvalidator.SizeAtMost(5),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																										generic.Multiset(),
+																										listplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Object{ /*START VALIDATORS*/
+																						fwvalidators.NotNullObject(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Optional:    true,
+																													Computed:    true,
+																													Validators: []validator.String{ /*START VALIDATORS*/
+																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
+																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Optional:    true,
+																													Computed:    true,
+																													Validators: []validator.String{ /*START VALIDATORS*/
+																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
+																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.List{ /*START VALIDATORS*/
+																											listvalidator.SizeAtMost(5),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																											generic.Multiset(),
+																											listplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.List{ /*START VALIDATORS*/
+																						listvalidator.SizeAtMost(2),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																						generic.Multiset(),
+																						listplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeBetween(1, 5),
+																			fwvalidators.NotNullList(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimeoutInSeconds
+																	"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.Int64{ /*START VALIDATORS*/
+																			int64validator.Between(1, 900),
+																			fwvalidators.NotNullInt64(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: WaitingResponse
+															"waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																			boolplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Optional:    true,
+																												Computed:    true,
+																												Validators: []validator.String{ /*START VALIDATORS*/
+																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
+																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Optional:    true,
+																												Computed:    true,
+																												Validators: []validator.String{ /*START VALIDATORS*/
+																													stringvalidator.LengthBetween(1, 50),
+																													fwvalidators.NotNullString(),
+																												}, /*END VALIDATORS*/
+																												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																													stringplanmodifier.UseStateForUnknown(),
+																												}, /*END PLAN MODIFIERS*/
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.List{ /*START VALIDATORS*/
+																										listvalidator.SizeAtMost(5),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																										generic.Multiset(),
+																										listplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 250),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Optional:    true,
+																									Computed:    true,
+																									Validators: []validator.String{ /*START VALIDATORS*/
+																										stringvalidator.LengthBetween(1, 1000),
+																										fwvalidators.NotNullString(),
+																									}, /*END VALIDATORS*/
+																									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																										stringplanmodifier.UseStateForUnknown(),
+																									}, /*END PLAN MODIFIERS*/
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Optional:    true,
+																							Computed:    true,
+																							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																								objectplanmodifier.UseStateForUnknown(),
+																							}, /*END PLAN MODIFIERS*/
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.Object{ /*START VALIDATORS*/
+																						fwvalidators.NotNullObject(),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																						objectplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Optional:    true,
+																													Computed:    true,
+																													Validators: []validator.String{ /*START VALIDATORS*/
+																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
+																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Optional:    true,
+																													Computed:    true,
+																													Validators: []validator.String{ /*START VALIDATORS*/
+																														stringvalidator.LengthBetween(1, 50),
+																														fwvalidators.NotNullString(),
+																													}, /*END VALIDATORS*/
+																													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																														stringplanmodifier.UseStateForUnknown(),
+																													}, /*END PLAN MODIFIERS*/
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.List{ /*START VALIDATORS*/
+																											listvalidator.SizeAtMost(5),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																											generic.Multiset(),
+																											listplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 250),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Optional:    true,
+																										Computed:    true,
+																										Validators: []validator.String{ /*START VALIDATORS*/
+																											stringvalidator.LengthBetween(1, 1000),
+																											fwvalidators.NotNullString(),
+																										}, /*END VALIDATORS*/
+																										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																											stringplanmodifier.UseStateForUnknown(),
+																										}, /*END PLAN MODIFIERS*/
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Optional:    true,
+																								Computed:    true,
+																								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																									objectplanmodifier.UseStateForUnknown(),
+																								}, /*END PLAN MODIFIERS*/
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Optional:    true,
+																					Computed:    true,
+																					Validators: []validator.List{ /*START VALIDATORS*/
+																						listvalidator.SizeAtMost(2),
+																					}, /*END VALIDATORS*/
+																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																						generic.Multiset(),
+																						listplanmodifier.UseStateForUnknown(),
+																					}, /*END PLAN MODIFIERS*/
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.List{ /*START VALIDATORS*/
+																			listvalidator.SizeBetween(1, 5),
+																			fwvalidators.NotNullList(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			generic.Multiset(),
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Object{ /*START VALIDATORS*/
+																	fwvalidators.NotNullObject(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Settings that you can use for eliciting a slot value.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of slots",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										setvalidator.SizeAtMost(100),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of intents",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtMost(1000),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: LocaleId
+					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the language and locale that the bot will be used in.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: NluConfidenceThreshold
+					"nlu_confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Float64{ /*START VALIDATORS*/
+							float64validator.Between(0.000000, 1.000000),
+							fwvalidators.NotNullFloat64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+							float64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SlotTypes
+					"slot_types": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A description of the resource",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(200),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExternalSourceSetting
+								"external_source_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: GrammarSlotTypeSetting
+										"grammar_slot_type_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Source
+												"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: KmsKeyArn
+														"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(20, 2048),
+																stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: S3BucketName
+														"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The name of the S3 bucket that contains the grammar source.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(3, 63),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: S3ObjectKey
+														"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The path to the grammar in the S3 bucket.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 1024),
+																stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Settings required for a slot type based on a grammar that you provide.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Provides information about the external source of the slot type's definition.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Unique name for a resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 100),
+										stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ParentSlotTypeSignature
+								"parent_slot_type_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The built-in slot type used as a parent of this slot type.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SlotTypeValues
+								"slot_type_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SampleValue
+											"sample_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The value that can be used for a slot type.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 140),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Defines one of the values for a slot type.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Synonyms
+											"synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The value that can be used for a slot type.",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 140),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Additional values related to the slot type entry.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtMost(10000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A List of slot type values",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeAtMost(10000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ValueSelectionSetting
+								"value_selection_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AdvancedRecognitionSetting
+										"advanced_recognition_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AudioRecognitionStrategy
+												"audio_recognition_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"UseSlotValuesAsCustomVocabulary",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides settings that enable advanced recognition settings for slot values.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RegexFilter
+										"regex_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Pattern
+												"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Regex pattern",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 300),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A regular expression used to validate the value of a slot.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ResolutionStrategy
+										"resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ORIGINAL_VALUE",
+													"TOP_RESOLUTION",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Contains settings used by Amazon Lex to select a slot value.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of SlotTypes",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtMost(250),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VoiceSettings
+					"voice_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Engine
+							"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"standard",
+										"neural",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: VoiceId
+							"voice_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Settings for using an Amazon Polly voice to communicate with a user.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of bot locales",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BotLocales is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: BotTags
 		// CloudFormation resource type schema:
 		//
@@ -6943,7 +10587,48 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bot_tags": schemaAttributeff405a2ad2624b19b332c349(),
+		"bot_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to add to the bot, which can only be added at bot creation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BotTags is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DataPrivacy
 		// CloudFormation resource type schema:
 		//
@@ -6961,7 +10646,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_privacy": schemaAttribute58ebcd5555d32ad415de42df(),
+		"data_privacy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChildDirected
+				"child_directed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Data privacy setting of the Bot.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -6970,7 +10665,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7ab8f175cc55e02d6ce43039(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the resource",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -6981,7 +10686,13 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"bot_id": schemaAttributed6ff95d5909bd8e4a6a0dbcd(),
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID of resource",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IdleSessionTTLInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -6991,7 +10702,13 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 60,
 		//	  "type": "integer"
 		//	}
-		"idle_session_ttl_in_seconds": schemaAttribute2f2b130951b065f0fb71dd2b(),
+		"idle_session_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "IdleSessionTTLInSeconds of the resource",
+			Required:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(60, 86400),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -7002,7 +10719,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?)+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeec723d9106c368609a9fc0ea(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique name for a resource.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -7013,7 +10737,14 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute3ba7e4e8b6549aa65cca7111(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(32, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TestBotAliasSettings
 		// CloudFormation resource type schema:
 		//
@@ -7238,7 +10969,345 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"test_bot_alias_settings": schemaAttributeb7df49b9d32f50657b5dedde(),
+		"test_bot_alias_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BotAliasLocaleSettings
+				"bot_alias_locale_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BotAliasLocaleSetting
+							"bot_alias_locale_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CodeHookSpecification
+									"code_hook_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: LambdaCodeHook
+											"lambda_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CodeHookInterfaceVersion
+													"code_hook_interface_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 5),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: LambdaArn
+													"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of the Lambda function.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(20, 2048),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the Lambda code hook is enabled",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: LocaleId
+							"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A string used to identify the locale",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of bot alias locale settings to add to the bot alias.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeAtMost(50),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConversationLogSettings
+				"conversation_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AudioLogSettings
+						"audio_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: S3Bucket
+											"s3_bucket": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: KmsKeyArn
+													"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(20, 2048),
+															stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: LogPrefix
+													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon S3 key of the deployment package.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(0, 1024),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: S3BucketArn
+													"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+															stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Specifies an Amazon S3 bucket for logging audio conversations",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeAtMost(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TextLogSettings
+						"text_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CloudWatch
+											"cloudwatch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CloudWatchLogGroupArn
+													"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 2048),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: LogPrefix
+													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string containing the value for the Log Prefix",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(0, 1024),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeAtMost(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the resource",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(200),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SentimentAnalysisSettings
+				"sentiment_analysis_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetectSentiment
+						"detect_sentiment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Bool{ /*START VALIDATORS*/
+								fwvalidators.NotNullBool(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuring the test bot alias settings for a given bot",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TestBotAliasTags
 		// CloudFormation resource type schema:
 		//
@@ -7272,7 +11341,48 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"test_bot_alias_tags": schemaAttribute340fc9fcccefa2fed543da77(),
+		"test_bot_alias_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// TestBotAliasTags is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

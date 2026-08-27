@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute75266178b59fb8fadd4d9c66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CloudformationProduct or Portfolio identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute927b56ffba25f711c95e82a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The TagOption identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_tag_option_association", tagOptionAssociationDataSource)
 }
@@ -43,7 +29,10 @@ func tagOptionAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The CloudformationProduct or Portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttribute75266178b59fb8fadd4d9c66(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The CloudformationProduct or Portfolio identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagOptionId
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,10 @@ func tagOptionAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The TagOption identifier.",
 		//	  "type": "string"
 		//	}
-		"tag_option_id": schemaAttribute927b56ffba25f711c95e82a2(),
+		"tag_option_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The TagOption identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

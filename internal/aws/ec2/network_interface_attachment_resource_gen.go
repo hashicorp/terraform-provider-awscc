@@ -21,122 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute29933122231f11fa68dd79a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the instance to which you will attach the ENI.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a4c55ae29ff9f449182200c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of ENA queues created with the instance.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62b9cd997bd35110636c3a3b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnaSrdUdpEnabled
-			"ena_srd_udp_enabled": schemaAttribute8f57f95c0bb93f976ba77ff3(),
-		}, /*END SCHEMA*/
-		Description: "Configures ENA Express for UDP network traffic.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6459cb0cbcbda3e661cf14de() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether ENA Express is enabled for the network interface.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute809d39144a26cc7a87a4eefc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the ENI that you want to attach.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f57f95c0bb93f976ba77ff3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90b985bd8b26e700177573a2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
-		Optional:    true,
-		Computed:    true,
-		Default:     booldefault.StaticBool(true),
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacf054c52a8d3d4a0beabe15() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnaSrdEnabled
-			"ena_srd_enabled": schemaAttribute6459cb0cbcbda3e661cf14de(),
-			// Property: EnaSrdUdpSpecification
-			"ena_srd_udp_specification": schemaAttribute62b9cd997bd35110636c3a3b(),
-		}, /*END SCHEMA*/
-		Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec284d32fd653e5b95435004f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee680447cb991782532a6606c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_interface_attachment", networkInterfaceAttachmentResource)
 	registry.AddListResourceFactory("awscc_ec2_network_interface_attachment", generic.NewListResource(networkInterfaceAttachmentResource))
@@ -153,7 +37,13 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"attachment_id": schemaAttributec284d32fd653e5b95435004f(),
+		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteOnTermination
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +52,15 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
 		//	  "type": "boolean"
 		//	}
-		"delete_on_termination": schemaAttribute90b985bd8b26e700177573a2(),
+		"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(true),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceIndex
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +68,13 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
 		//	  "type": "string"
 		//	}
-		"device_index": schemaAttributee680447cb991782532a6606c(),
+		"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EnaQueueCount
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +82,14 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The number of ENA queues created with the instance.",
 		//	  "type": "integer"
 		//	}
-		"ena_queue_count": schemaAttribute3a4c55ae29ff9f449182200c(),
+		"ena_queue_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of ENA queues created with the instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EnaSrdSpecification
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +114,44 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ena_srd_specification": schemaAttributeacf054c52a8d3d4a0beabe15(),
+		"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnaSrdEnabled
+				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether ENA Express is enabled for the network interface.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnaSrdUdpSpecification
+				"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnaSrdUdpEnabled
+						"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configures ENA Express for UDP network traffic.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +159,13 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the instance to which you will attach the ENI.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute29933122231f11fa68dd79a3(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the instance to which you will attach the ENI.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +173,13 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the ENI that you want to attach.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttribute809d39144a26cc7a87a4eefc(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the ENI that you want to attach.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

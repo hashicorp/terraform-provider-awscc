@@ -17,194 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute24ada24886818658174cb683() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the route table for the route.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ff27db17a747b507a3c9b62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31b415fb279f58f33cb4e7b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b7626563eb59c62cd891d9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute423c5d77fb78b5610f39d663() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a prefix list used for the destination match.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6057db8c9ecca56992d62db0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the carrier gateway.\n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67ffe6220ed58ec0817d3ee5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[IPv6 traffic only] The ID of an egress-only internet gateway.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute869834f95636e5617415e310() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an internet gateway or virtual private gateway attached to your VPC.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute892d2490a8d0b424d00c2606() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[IPv4 traffic only] The ID of a NAT gateway.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c78d674d02d1ab8c02c080d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb00eee6b2888c8c5016635d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a network interface.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0060c490d5728e7b0c5ea05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed077976365aaadc5202e615e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the core network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed73e50c974b9a23228fa8d95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a VPC peering connection.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9741b09ac05c792350ba13d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a transit gateway.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee055bc6d4890989a7228f510() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc9aaaac546e37c714c1db1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_route", routeResource)
 }
@@ -220,7 +32,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the carrier gateway.\n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
 		//	  "type": "string"
 		//	}
-		"carrier_gateway_id": schemaAttribute6057db8c9ecca56992d62db0(),
+		"carrier_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the carrier gateway.\n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +47,13 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"cidr_block": schemaAttributed0060c490d5728e7b0c5ea05(),
+		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +61,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_arn": schemaAttributed077976365aaadc5202e615e(),
+		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the core network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +76,15 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schemaAttributefc9aaaac546e37c714c1db1a(),
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationIpv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +92,15 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
 		//	  "type": "string"
 		//	}
-		"destination_ipv_6_cidr_block": schemaAttributee055bc6d4890989a7228f510(),
+		"destination_ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationPrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +108,15 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of a prefix list used for the destination match.",
 		//	  "type": "string"
 		//	}
-		"destination_prefix_list_id": schemaAttribute423c5d77fb78b5610f39d663(),
+		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a prefix list used for the destination match.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EgressOnlyInternetGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +124,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "[IPv6 traffic only] The ID of an egress-only internet gateway.",
 		//	  "type": "string"
 		//	}
-		"egress_only_internet_gateway_id": schemaAttribute67ffe6220ed58ec0817d3ee5(),
+		"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[IPv6 traffic only] The ID of an egress-only internet gateway.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +139,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of an internet gateway or virtual private gateway attached to your VPC.",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schemaAttribute869834f95636e5617415e310(),
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an internet gateway or virtual private gateway attached to your VPC.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +154,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute31b415fb279f58f33cb4e7b7(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +169,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the local gateway.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttribute2ff27db17a747b507a3c9b62(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +184,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "[IPv4 traffic only] The ID of a NAT gateway.",
 		//	  "type": "string"
 		//	}
-		"nat_gateway_id": schemaAttribute892d2490a8d0b424d00c2606(),
+		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[IPv4 traffic only] The ID of a NAT gateway.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -308,7 +199,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of a network interface.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttributeb00eee6b2888c8c5016635d2(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a network interface.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +214,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the ODB network.",
 		//	  "type": "string"
 		//	}
-		"odb_network_arn": schemaAttribute9c78d674d02d1ab8c02c080d(),
+		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -324,7 +229,13 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the route table for the route.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schemaAttribute24ada24886818658174cb683(),
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the route table for the route.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +243,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of a transit gateway.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttributed9741b09ac05c792350ba13d(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a transit gateway.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +258,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_id": schemaAttribute3b7626563eb59c62cd891d9c(),
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcPeeringConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +273,14 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of a VPC peering connection.",
 		//	  "type": "string"
 		//	}
-		"vpc_peering_connection_id": schemaAttributed73e50c974b9a23228fa8d95(),
+		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a VPC peering connection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

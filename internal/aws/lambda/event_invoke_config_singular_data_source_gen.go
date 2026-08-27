@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute324e68a3fe79c8442d1061d0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of times to retry when the function returns an error.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34f668026bac607e349c2d88() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Destination
-			"destination": schemaAttribute99abf607e29056e384e16f45(),
-		}, /*END SCHEMA*/
-		Description: "The destination configuration for failed invocations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d6518f734ad3ae9250485fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute662bdfaa6b1bfcf7174d233f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum age of a request that Lambda sends to a function for processing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99abf607e29056e384e16f45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the destination resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ec83670b9ed361f70ba852e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of a version or alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6d0f2e549867eb2f7e453cb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OnFailure
-			"on_failure": schemaAttribute34f668026bac607e349c2d88(),
-			// Property: OnSuccess
-			"on_success": schemaAttributefd1e62bc8cfb1bea1dfc0799(),
-		}, /*END SCHEMA*/
-		Description: "A destination for events after they have been sent to a function for processing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd1e62bc8cfb1bea1dfc0799() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Destination
-			"destination": schemaAttribute99abf607e29056e384e16f45(),
-		}, /*END SCHEMA*/
-		Description: "The destination configuration for successful invocations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_event_invoke_config", eventInvokeConfigDataSource)
 }
@@ -136,7 +66,36 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination_config": schemaAttributef6d0f2e549867eb2f7e453cb(),
+		"destination_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnFailure
+				"on_failure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Destination
+						"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the destination resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The destination configuration for failed invocations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OnSuccess
+				"on_success": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Destination
+						"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the destination resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The destination configuration for successful invocations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A destination for events after they have been sent to a function for processing.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FunctionName
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +104,10 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
-		"function_name": schemaAttribute3d6518f734ad3ae9250485fb(),
+		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Lambda function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumEventAgeInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +117,10 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minimum": 60,
 		//	  "type": "integer"
 		//	}
-		"maximum_event_age_in_seconds": schemaAttribute662bdfaa6b1bfcf7174d233f(),
+		"maximum_event_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum age of a request that Lambda sends to a function for processing.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumRetryAttempts
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +130,10 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"maximum_retry_attempts": schemaAttribute324e68a3fe79c8442d1061d0(),
+		"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of times to retry when the function returns an error.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Qualifier
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +142,10 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^\\$(LATEST(\\.PUBLISHED)?)|[a-zA-Z0-9$_-]{1,129}$",
 		//	  "type": "string"
 		//	}
-		"qualifier": schemaAttribute9ec83670b9ed361f70ba852e(),
+		"qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of a version or alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

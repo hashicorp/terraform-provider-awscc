@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute6c9fc74c118ce1f05fc68f12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a5eeb77426ce42c5b8fd8ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the subnet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed12c686701dbbbb0f5d2baff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_subnet_route_table_association", subnetRouteTableAssociationDataSource)
 }
@@ -50,7 +29,10 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"subnet_route_table_association_id": schemaAttribute6c9fc74c118ce1f05fc68f12(),
+		"subnet_route_table_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -58,7 +40,10 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schemaAttributed12c686701dbbbb0f5d2baff(),
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -66,7 +51,10 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the subnet.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schemaAttribute8a5eeb77426ce42c5b8fd8ae(),
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the subnet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

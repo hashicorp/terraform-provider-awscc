@@ -15,162 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0df0f5a2bc6c337ac9e1f361() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The target processor architecture for the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1aff11892fad98ff5fa95f28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the simulation software suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d2c8cc6ad875b65215fce6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the simulation software suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ea13e93178330dfc7ad30db() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Architecture
-				"architecture": schemaAttribute0df0f5a2bc6c337ac9e1f361(),
-				// Property: S3Bucket
-				"s3_bucket": schemaAttribute8c731285eccee0bd8cf33339(),
-				// Property: S3Key
-				"s3_key": schemaAttribute579a75a232ebcf6b6b017b6b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The sources of the simulation application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d8eb98d532c390bf6a96e5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current revision id.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38f94990ca5c43c8c3adea75() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the simulation application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fd8f29268ee7e23678e5a1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the rendering engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4597929797a7122a6090bc75() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the robot software suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute572f13aabea2dc6b05c8062a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute6fba5acb27663adef59399de(),
-			// Property: Version
-			"version": schemaAttribute3fd8f29268ee7e23678e5a1d(),
-		}, /*END SCHEMA*/
-		Description: "The rendering engine for the simulation application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute579a75a232ebcf6b6b017b6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The s3 object key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65240df160f59d0d612b2c25() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute1aff11892fad98ff5fa95f28(),
-			// Property: Version
-			"version": schemaAttribute1d2c8cc6ad875b65215fce6a(),
-		}, /*END SCHEMA*/
-		Description: "The simulation software suite used by the simulation application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fba5acb27663adef59399de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the rendering engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fcf29fd3c97509e00af4342() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75663c5c3f4cd2b531752317() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f88c4506c04327556ed1dc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URI of the Docker image for the robot application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89b69066a6309aa0cb0b192f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute4597929797a7122a6090bc75(),
-			// Property: Version
-			"version": schemaAttributee6aff7b364616d128dd522c8(),
-		}, /*END SCHEMA*/
-		Description: "The robot software suite used by the simulation application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c731285eccee0bd8cf33339() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6aff7b364616d128dd522c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the robot software suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_robomaker_simulation_application", simulationApplicationDataSource)
 }
@@ -186,7 +30,9 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute75663c5c3f4cd2b531752317(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CurrentRevisionId
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +40,10 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The current revision id.",
 		//	  "type": "string"
 		//	}
-		"current_revision_id": schemaAttribute2d8eb98d532c390bf6a96e5f(),
+		"current_revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current revision id.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Environment
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +51,10 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The URI of the Docker image for the robot application.",
 		//	  "type": "string"
 		//	}
-		"environment": schemaAttribute7f88c4506c04327556ed1dc0(),
+		"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URI of the Docker image for the robot application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +65,10 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "[a-zA-Z0-9_\\-]*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute38f94990ca5c43c8c3adea75(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the simulation application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RenderingEngine
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +95,22 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rendering_engine": schemaAttribute572f13aabea2dc6b05c8062a(),
+		"rendering_engine": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the rendering engine.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the rendering engine.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The rendering engine for the simulation application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RobotSoftwareSuite
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +143,22 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"robot_software_suite": schemaAttribute89b69066a6309aa0cb0b192f(),
+		"robot_software_suite": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the robot software suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the robot software suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The robot software suite used by the simulation application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SimulationSoftwareSuite
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +194,22 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"simulation_software_suite": schemaAttribute65240df160f59d0d612b2c25(),
+		"simulation_software_suite": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the simulation software suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the simulation software suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The simulation software suite used by the simulation application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Sources
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +250,29 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"sources": schemaAttribute1ea13e93178330dfc7ad30db(),
+		"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Architecture
+					"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The target processor architecture for the application.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Bucket
+					"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon S3 bucket name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Key
+					"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The s3 object key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The sources of the simulation application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +289,12 @@ func simulationApplicationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute6fcf29fd3c97509e00af4342(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

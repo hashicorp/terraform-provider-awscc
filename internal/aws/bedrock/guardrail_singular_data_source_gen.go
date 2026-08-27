@@ -16,553 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06f652228f72f9ae983698c4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConfidenceThreshold
-			"confidence_threshold": schemaAttribute2fdd49573d4b848105ba2bc6(),
-			// Property: Policies
-			"policies": schemaAttribute0d8cff14bb46316db5507429(),
-		}, /*END SCHEMA*/
-		Description: "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c7c2a6d97a40cb387ba39af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d8cff14bb46316db5507429() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute129002fae0e6f5a15887ef3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Definition of topic in topic policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12bf995b5229334bec35d812() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e8a4d21e04a695fa16931cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The regex pattern.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1efdb050c2ccec234f5dd69c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentFiltersTierConfig
-			"content_filters_tier_config": schemaAttributef6b52a1cc225f9ade4b99469(),
-			// Property: FiltersConfig
-			"filters_config": schemaAttributef0cf1d195d0cf80ca6b9c2ff(),
-		}, /*END SCHEMA*/
-		Description: "Content policy config for a guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2592472d663b515cac7da7fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the guardrail or its version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26f064031cd47fc0050f5cfe() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of failure recommendations",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2849966d7cef436ee800bac0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique id for the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c97019d946fc1d9b38563c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of contextual grounding filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2dc4e48154000c6058adb502() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GuardrailProfileArn
-			"guardrail_profile_arn": schemaAttribute87d6872650e7691e291eb5dd(),
-		}, /*END SCHEMA*/
-		Description: "The system-defined guardrail profile that you?re using with your guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fdd49573d4b848105ba2bc6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32095c94b948dc7cb8377b05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Strength for filters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute364f0d8dae22f5778af88f6f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute9cd1266c7c87ca7ec377b212(),
-				// Property: Description
-				"description": schemaAttributec107ac9b51fa5d44fd4dc67a(),
-				// Property: InputAction
-				"input_action": schemaAttribute9cd1266c7c87ca7ec377b212(),
-				// Property: InputEnabled
-				"input_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Name
-				"name": schemaAttributec4dbe1f4218bea4aef5724fb(),
-				// Property: OutputAction
-				"output_action": schemaAttribute9cd1266c7c87ca7ec377b212(),
-				// Property: OutputEnabled
-				"output_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Pattern
-				"pattern": schemaAttribute1e8a4d21e04a695fa16931cc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of regex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute368715070099d42a8a200b07() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TopicsConfig
-			"topics_config": schemaAttribute48263d46057084af025c5cfa(),
-			// Property: TopicsTierConfig
-			"topics_tier_config": schemaAttribute4a7690ac59694d612517ce63(),
-		}, /*END SCHEMA*/
-		Description: "Topic policy config for a guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute383594523c4411602024cf7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Guardrail version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cfc0ba1fdda213cd36b207e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute9cd1266c7c87ca7ec377b212(),
-				// Property: InputAction
-				"input_action": schemaAttribute9cd1266c7c87ca7ec377b212(),
-				// Property: InputEnabled
-				"input_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: OutputAction
-				"output_action": schemaAttribute9cd1266c7c87ca7ec377b212(),
-				// Property: OutputEnabled
-				"output_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Type
-				"type": schemaAttribute67f4d8f4d2bd6471992065d2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of entities.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4420f5215c6ba5e3dcc484b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time Stamp",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48132b192d193ee5d8a3ca57() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of modalities",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48263d46057084af025c5cfa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Definition
-				"definition": schemaAttribute129002fae0e6f5a15887ef3c(),
-				// Property: Examples
-				"examples": schemaAttribute73cc66c5963b672bf08f2c99(),
-				// Property: InputAction
-				"input_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: InputEnabled
-				"input_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Name
-				"name": schemaAttributedc855a8ff06864866aa47ec5(),
-				// Property: OutputAction
-				"output_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: OutputEnabled
-				"output_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Type
-				"type": schemaAttribute6197a4ccef767d82606584e8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of topic configs in topic policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a7690ac59694d612517ce63() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TierName
-			"tier_name": schemaAttributefeeda46ab3661ffc87153ab0(),
-		}, /*END SCHEMA*/
-		Description: "Guardrail tier config for topic policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5533a0535a6a569963855f9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55bfe380e95d2b0f4d918e5a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0c7c2a6d97a40cb387ba39af(),
-				// Property: Value
-				"value": schemaAttribute6a22054243bf19ecc5791a9a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b4aeb7b8ba4dcbbe87c2b37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tier name for tier configuration in content filters policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6197a4ccef767d82606584e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of topic in a policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67f4d8f4d2bd6471992065d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The currently supported PII entities",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a22054243bf19ecc5791a9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b3b70df7f64c142e8e60fdf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FiltersConfig
-			"filters_config": schemaAttributea89a0163c45943209bdb1188(),
-		}, /*END SCHEMA*/
-		Description: "Contextual grounding policy config for a guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6decd4eddcf0d7b2a52f61a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Messaging for when violations are detected in text",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ea56afc0c80e1c0a83d5599() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Options for managed words.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73cc66c5963b672bf08f2c99() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of text examples",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87d6872650e7691e291eb5dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the guardrail profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cd1266c7c87ca7ec377b212() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Options for sensitive information action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea89a0163c45943209bdb1188() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: Enabled
-				"enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Threshold
-				"threshold": schemaAttributeeaf221b3fa11f1a0e16201e6(),
-				// Property: Type
-				"type": schemaAttribute2c97019d946fc1d9b38563c6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of contextual grounding filter configs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab0071f6a80c559ef7eb93cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key with which the guardrail was encrypted at rest",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacd9312ada890b232b6059e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn representation for the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe364b1c642ea735349b234f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of filter in content policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec107ac9b51fa5d44fd4dc67a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The regex description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4dbe1f4218bea4aef5724fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The regex name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec74e96753bb496b893358546() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InputAction
-				"input_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: InputEnabled
-				"input_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: OutputAction
-				"output_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: OutputEnabled
-				"output_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Text
-				"text": schemaAttributed9dc1f550c5204786560cc79(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of custom word configs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8d0f9eabcbff34f1d7127df() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of status reasons",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9dc1f550c5204786560cc79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The custom word text.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc855a8ff06864866aa47ec5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of topic in topic policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee67bce60a1991c3410e70cb1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PiiEntitiesConfig
-			"pii_entities_config": schemaAttribute3cfc0ba1fdda213cd36b207e(),
-			// Property: RegexesConfig
-			"regexes_config": schemaAttribute364f0d8dae22f5778af88f6f(),
-		}, /*END SCHEMA*/
-		Description: "Sensitive information policy config for a guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaf221b3fa11f1a0e16201e6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The threshold for this filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0cf1d195d0cf80ca6b9c2ff() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InputAction
-				"input_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: InputEnabled
-				"input_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: InputModalities
-				"input_modalities": schemaAttribute48132b192d193ee5d8a3ca57(),
-				// Property: InputStrength
-				"input_strength": schemaAttribute32095c94b948dc7cb8377b05(),
-				// Property: OutputAction
-				"output_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: OutputEnabled
-				"output_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: OutputModalities
-				"output_modalities": schemaAttribute48132b192d193ee5d8a3ca57(),
-				// Property: OutputStrength
-				"output_strength": schemaAttribute32095c94b948dc7cb8377b05(),
-				// Property: Type
-				"type": schemaAttributebe364b1c642ea735349b234f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of content filter configs in content policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5bfdeb23401c70caba4aa12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6b52a1cc225f9ade4b99469() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TierName
-			"tier_name": schemaAttribute5b4aeb7b8ba4dcbbe87c2b37(),
-		}, /*END SCHEMA*/
-		Description: "Guardrail tier config for content policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7e0baba228f391dc3ca5fbf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef80ce0e4e4328d9e20941605() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InputAction
-				"input_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: InputEnabled
-				"input_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: OutputAction
-				"output_action": schemaAttributef5bfdeb23401c70caba4aa12(),
-				// Property: OutputEnabled
-				"output_enabled": schemaAttributef7e0baba228f391dc3ca5fbf(),
-				// Property: Type
-				"type": schemaAttribute6ea56afc0c80e1c0a83d5599(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A config for the list of managed words.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbf025ef09529dfde90d849c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ManagedWordListsConfig
-			"managed_word_lists_config": schemaAttributef80ce0e4e4328d9e20941605(),
-			// Property: WordsConfig
-			"words_config": schemaAttributec74e96753bb496b893358546(),
-		}, /*END SCHEMA*/
-		Description: "Word policy config for a guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefeeda46ab3661ffc87153ab0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tier name for tier configuration in topic policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_guardrail", guardrailDataSource)
 }
@@ -604,7 +57,23 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"automated_reasoning_policy_config": schemaAttribute06f652228f72f9ae983698c4(),
+		"automated_reasoning_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfidenceThreshold
+				"confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Policies
+				"policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockedInputMessaging
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +83,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"blocked_input_messaging": schemaAttribute6decd4eddcf0d7b2a52f61a2(),
+		"blocked_input_messaging": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Messaging for when violations are detected in text",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockedOutputsMessaging
 		// CloudFormation resource type schema:
 		//
@@ -624,7 +96,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"blocked_outputs_messaging": schemaAttribute6decd4eddcf0d7b2a52f61a2(),
+		"blocked_outputs_messaging": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Messaging for when violations are detected in text",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContentPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -752,7 +227,76 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"content_policy_config": schemaAttribute1efdb050c2ccec234f5dd69c(),
+		"content_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContentFiltersTierConfig
+				"content_filters_tier_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TierName
+						"tier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Tier name for tier configuration in content filters policy",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Guardrail tier config for content policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FiltersConfig
+				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputModalities
+							"input_modalities": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of modalities",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputStrength
+							"input_strength": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Strength for filters",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputModalities
+							"output_modalities": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of modalities",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputStrength
+							"output_strength": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Strength for filters",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of filter in content policy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of content filter configs in content policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Content policy config for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContextualGroundingPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -805,7 +349,39 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"contextual_grounding_policy_config": schemaAttribute6b3b70df7f64c142e8e60fdf(),
+		"contextual_grounding_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FiltersConfig
+				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Action
+							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Enabled
+							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Threshold
+							"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The threshold for this filter.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of contextual grounding filter",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of contextual grounding filter configs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contextual grounding policy config for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -814,7 +390,11 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute4420f5215c6ba5e3dcc484b8(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CrossRegionConfig
 		// CloudFormation resource type schema:
 		//
@@ -835,7 +415,17 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cross_region_config": schemaAttribute2dc4e48154000c6058adb502(),
+		"cross_region_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GuardrailProfileArn
+				"guardrail_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the guardrail profile",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The system-defined guardrail profile that you?re using with your guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -845,7 +435,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2592472d663b515cac7da7fa(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the guardrail or its version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureRecommendations
 		// CloudFormation resource type schema:
 		//
@@ -860,7 +453,11 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 100,
 		//	  "type": "array"
 		//	}
-		"failure_recommendations": schemaAttribute26f064031cd47fc0050f5cfe(),
+		"failure_recommendations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of failure recommendations",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailArn
 		// CloudFormation resource type schema:
 		//
@@ -870,7 +467,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_arn": schemaAttributeacd9312ada890b232b6059e3(),
+		"guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn representation for the guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailId
 		// CloudFormation resource type schema:
 		//
@@ -880,7 +480,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_id": schemaAttribute2849966d7cef436ee800bac0(),
+		"guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique id for the guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -891,7 +494,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schemaAttributeab0071f6a80c559ef7eb93cb(),
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key with which the guardrail was encrypted at rest",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -902,7 +508,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute12bf995b5229334bec35d812(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SensitiveInformationPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -1067,7 +676,96 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sensitive_information_policy_config": schemaAttributee67bce60a1991c3410e70cb1(),
+		"sensitive_information_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PiiEntitiesConfig
+				"pii_entities_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Action
+							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The currently supported PII entities",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of entities.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegexesConfig
+				"regexes_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Action
+							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The regex description.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The regex name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for sensitive information action.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Pattern
+							"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The regex pattern.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of regex.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Sensitive information policy config for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1083,7 +781,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute5533a0535a6a569963855f9a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of the guardrail",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReasons
 		// CloudFormation resource type schema:
 		//
@@ -1098,7 +799,11 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 100,
 		//	  "type": "array"
 		//	}
-		"status_reasons": schemaAttributec8d0f9eabcbff34f1d7127df(),
+		"status_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of status reasons",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1133,7 +838,24 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute55bfe380e95d2b0f4d918e5a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TopicPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -1233,7 +955,70 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"topic_policy_config": schemaAttribute368715070099d42a8a200b07(),
+		"topic_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TopicsConfig
+				"topics_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Definition
+							"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Definition of topic in topic policy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Examples
+							"examples": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of text examples",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of topic in topic policy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of topic in a policy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of topic configs in topic policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicsTierConfig
+				"topics_tier_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TierName
+						"tier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Tier name for tier configuration in topic policy",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Guardrail tier config for topic policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Topic policy config for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1242,7 +1027,11 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute4420f5215c6ba5e3dcc484b8(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -1251,7 +1040,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(([1-9][0-9]{0,7})|(DRAFT))$",
 		//	  "type": "string"
 		//	}
-		"version": schemaAttribute383594523c4411602024cf7e(),
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Guardrail version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WordPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -1343,7 +1135,72 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"word_policy_config": schemaAttributefbf025ef09529dfde90d849c(),
+		"word_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ManagedWordListsConfig
+				"managed_word_lists_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Options for managed words.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A config for the list of managed words.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WordsConfig
+				"words_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InputAction
+							"input_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputEnabled
+							"input_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputAction
+							"output_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OutputEnabled
+							"output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Text
+							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The custom word text.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of custom word configs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Word policy config for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,112 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02f696192fb64f10c084f1a6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Code
-			"code": schemaAttribute92732e54413d330ce9503369(),
-			// Property: Message
-			"message": schemaAttribute29c2bb387cbe0333c6d9d84d(),
-		}, /*END SCHEMA*/
-		Description: "The status of the transit gateway peering attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1560b5b2e8e0d106d9c8670e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21498b85ebc2058b4897c7ac() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1560b5b2e8e0d106d9c8670e(),
-				// Property: Value
-				"value": schemaAttribute49d65dae46735d7de6a771b5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the transit gateway peering attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29c2bb387cbe0333c6d9d84d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status message, if applicable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49d65dae46735d7de6a771b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bc566de3ea4790d6a88b830() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the peer account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d516009ddf46fce514d0d76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the transit gateway peering attachment was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute888887a607d43688dc7f2274() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Peer Region",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92732e54413d330ce9503369() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94a2fd6fd407b2eeff42aa49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway peering attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea596f0e2a9f4831a0bc495e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed816302cac00d146275ff1f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeabf60ffc8b29707d41ebb48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the peer transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentDataSource)
 }
@@ -137,7 +31,11 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute6d516009ddf46fce514d0d76(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the transit gateway peering attachment was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +43,10 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "description": "The ID of the peer account",
 		//	  "type": "string"
 		//	}
-		"peer_account_id": schemaAttribute5bc566de3ea4790d6a88b830(),
+		"peer_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the peer account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerRegion
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +54,10 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "description": "Peer Region",
 		//	  "type": "string"
 		//	}
-		"peer_region": schemaAttribute888887a607d43688dc7f2274(),
+		"peer_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Peer Region",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerTransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +65,10 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "description": "The ID of the peer transit gateway.",
 		//	  "type": "string"
 		//	}
-		"peer_transit_gateway_id": schemaAttributeeabf60ffc8b29707d41ebb48(),
+		"peer_transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the peer transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +76,10 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "description": "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributed816302cac00d146275ff1f4(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +98,22 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  },
 		//	  "type": "object"
 		//	}
-		"status": schemaAttribute02f696192fb64f10c084f1a6(),
+		"status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Code
+				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status code.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status message, if applicable.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The status of the transit gateway peering attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +135,24 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute21498b85ebc2058b4897c7ac(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the transit gateway peering attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +160,10 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "description": "The ID of the transit gateway peering attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schemaAttribute94a2fd6fd407b2eeff42aa49(),
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway peering attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +171,10 @@ func transitGatewayPeeringAttachmentDataSource(ctx context.Context) (datasource.
 		//	  "description": "The ID of the transit gateway.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttributea596f0e2a9f4831a0bc495e6(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

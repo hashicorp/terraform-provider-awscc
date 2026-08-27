@@ -15,43 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5605e0ce07a34bda36e8c2ca() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertificateAuthorityArn
-			"certificate_authority_arn": schemaAttribute6b56c4e9892885543c0c64e2(),
-			// Property: Status
-			"status": schemaAttribute6b56c4e9892885543c0c64e2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute598d6c228ada265400e18dfe() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b5617b0b4f40313b0fd9c33() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountName
-			"account_name": schemaAttribute6b56c4e9892885543c0c64e2(),
-			// Property: AccountPassword
-			"account_password": schemaAttribute6b56c4e9892885543c0c64e2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b56c4e9892885543c0c64e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_directory_config", directoryConfigDataSource)
 }
@@ -75,14 +38,28 @@ func directoryConfigDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"certificate_based_auth_properties": schemaAttribute5605e0ce07a34bda36e8c2ca(),
+		"certificate_based_auth_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateAuthorityArn
+				"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectoryName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"directory_name": schemaAttribute6b56c4e9892885543c0c64e2(),
+		"directory_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationalUnitDistinguishedNames
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +70,10 @@ func directoryConfigDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"organizational_unit_distinguished_names": schemaAttribute598d6c228ada265400e18dfe(),
+		"organizational_unit_distinguished_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccountCredentials
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +93,19 @@ func directoryConfigDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"service_account_credentials": schemaAttribute6b5617b0b4f40313b0fd9c33(),
+		"service_account_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountName
+				"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AccountPassword
+				"account_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

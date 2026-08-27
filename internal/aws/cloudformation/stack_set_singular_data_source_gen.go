@@ -15,327 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0327da1466e6826d217c60a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06eca3a16feb53077ca4b9be() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ParameterKey
-				"parameter_key": schemaAttribute0327da1466e6826d217c60a6(),
-				// Property: ParameterValue
-				"parameter_value": schemaAttributefd5624a94cb94bbe431ba5ca(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The input parameters for the stack set template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b6f5495b84030d8366073f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DependsOn
-			"depends_on": schemaAttribute746907d57e7d171ba5d59f13(),
-			// Property: Enabled
-			"enabled": schemaAttribute966b55f87570a0630bc3847c(),
-			// Property: RetainStacksOnAccountRemoval
-			"retain_stacks_on_account_removal": schemaAttributed1f87308e3e55383609cc2d0(),
-		}, /*END SCHEMA*/
-		Description: "Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute152e4bc939b41c722f52ed41() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConcurrencyMode
-			"concurrency_mode": schemaAttributebcb864ab666e2757fb41147f(),
-			// Property: FailureToleranceCount
-			"failure_tolerance_count": schemaAttributeb44c198678a64e00d38e9a90(),
-			// Property: FailureTolerancePercentage
-			"failure_tolerance_percentage": schemaAttributeb44c198678a64e00d38e9a90(),
-			// Property: MaxConcurrentCount
-			"max_concurrent_count": schemaAttributeb44c198678a64e00d38e9a90(),
-			// Property: MaxConcurrentPercentage
-			"max_concurrent_percentage": schemaAttributeb44c198678a64e00d38e9a90(),
-			// Property: RegionConcurrencyType
-			"region_concurrency_type": schemaAttribute9d196da75f3d9977714909ed(),
-			// Property: RegionOrder
-			"region_order": schemaAttributea3e6e24823e4efbdfc394b1c(),
-		}, /*END SCHEMA*/
-		Description: "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ad300543c20e85ac751b660() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute231d8c7808902f4ca3986eb9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2491b6c4583f3bee759f3af6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37c22c4d082adb060710d12d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeploymentTargets
-				"deployment_targets": schemaAttribute931e0bedaee0fe3761e7d356(),
-				// Property: ParameterOverrides
-				"parameter_overrides": schemaAttribute548351d32fccdab2b417fab8(),
-				// Property: Regions
-				"regions": schemaAttributeba579297f037daabc69a2687(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A group of stack instances with parameters in some specific accounts and regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute384ed8aca2e533ae83beaa79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute399eef77db5d103aebae195c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b9c514f01285d8e3371fb6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c40e274df2a84254eda3824() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Active
-			"active": schemaAttribute231d8c7808902f4ca3986eb9(),
-		}, /*END SCHEMA*/
-		Description: "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute548351d32fccdab2b417fab8() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ParameterKey
-				"parameter_key": schemaAttribute0327da1466e6826d217c60a6(),
-				// Property: ParameterValue
-				"parameter_value": schemaAttributefd5624a94cb94bbe431ba5ca(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute746907d57e7d171ba5d59f13() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b1f0d524db298091ae2cd80() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Returns the value of the AccountsUrl property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82be49f41019e013073329ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84ef26a683214d94ad9b351f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute931e0bedaee0fe3761e7d356() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountFilterType
-			"account_filter_type": schemaAttributecb59f27c189121699b679880(),
-			// Property: Accounts
-			"accounts": schemaAttribute1ad300543c20e85ac751b660(),
-			// Property: AccountsUrl
-			"accounts_url": schemaAttribute7b1f0d524db298091ae2cd80(),
-			// Property: OrganizationalUnitIds
-			"organizational_unit_ids": schemaAttribute84ef26a683214d94ad9b351f(),
-		}, /*END SCHEMA*/
-		Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute943784405722b2c73386d4ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute966b55f87570a0630bc3847c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d196da75f3d9977714909ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3e6e24823e4efbdfc394b1c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaddafa4d64303ddea39f05b4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee6a05f44f7f65fea16b6b7e9(),
-				// Property: Value
-				"value": schemaAttributed6abf06b565384e644a1efe8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae4e07dd955581744342be5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb44c198678a64e00d38e9a90() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba579297f037daabc69a2687() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcb864ab666e2757fb41147f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how the concurrency level behaves during the operation execution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec949f900e2a7eded85507eda() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb59f27c189121699b679880() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter type you want to apply on organizational units and accounts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1f87308e3e55383609cc2d0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6abf06b565384e644a1efe8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6a05f44f7f65fea16b6b7e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeff1df223b25c2010b833f7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef075804e49d48ee071002adc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the stack set that you're creating.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd5624a94cb94bbe431ba5ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The input value associated with the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_stack_set", stackSetDataSource)
 }
@@ -353,7 +32,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"administration_role_arn": schemaAttribute2491b6c4583f3bee759f3af6(),
+		"administration_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoDeployment
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +64,28 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"auto_deployment": schemaAttribute0b6f5495b84030d8366073f1(),
+		"auto_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DependsOn
+				"depends_on": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetainStacksOnAccountRemoval
+				"retain_stacks_on_account_removal": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CallAs
 		// CloudFormation resource type schema:
 		//
@@ -394,7 +97,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"call_as": schemaAttribute3b9c514f01285d8e3371fb6b(),
+		"call_as": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Capabilities
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +118,11 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"capabilities": schemaAttributec949f900e2a7eded85507eda(),
+		"capabilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -422,7 +132,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeeff1df223b25c2010b833f7d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleName
 		// CloudFormation resource type schema:
 		//
@@ -432,7 +145,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"execution_role_name": schemaAttribute943784405722b2c73386d4ae(),
+		"execution_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedExecution
 		// CloudFormation resource type schema:
 		//
@@ -447,7 +163,17 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"managed_execution": schemaAttribute4c40e274df2a84254eda3824(),
+		"managed_execution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Active
+				"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OperationPreferences
 		// CloudFormation resource type schema:
 		//
@@ -499,7 +225,43 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"operation_preferences": schemaAttribute152e4bc939b41c722f52ed41(),
+		"operation_preferences": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConcurrencyMode
+				"concurrency_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies how the concurrency level behaves during the operation execution.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailureToleranceCount
+				"failure_tolerance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailureTolerancePercentage
+				"failure_tolerance_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxConcurrentCount
+				"max_concurrent_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxConcurrentPercentage
+				"max_concurrent_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegionConcurrencyType
+				"region_concurrency_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegionOrder
+				"region_order": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +289,24 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"parameters": schemaAttribute06eca3a16feb53077ca4b9be(),
+		"parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ParameterKey
+					"parameter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterValue
+					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The input value associated with the parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The input parameters for the stack set template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionModel
 		// CloudFormation resource type schema:
 		//
@@ -539,7 +318,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"permission_model": schemaAttribute384ed8aca2e533ae83beaa79(),
+		"permission_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackInstancesGroup
 		// CloudFormation resource type schema:
 		//
@@ -642,7 +424,68 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"stack_instances_group": schemaAttribute37c22c4d082adb060710d12d(),
+		"stack_instances_group": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DeploymentTargets
+					"deployment_targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccountFilterType
+							"account_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The filter type you want to apply on organizational units and accounts.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Accounts
+							"accounts": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AccountsUrl
+							"accounts_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Returns the value of the AccountsUrl property.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OrganizationalUnitIds
+							"organizational_unit_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterOverrides
+					"parameter_overrides": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ParameterKey
+								"parameter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParameterValue
+								"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The input value associated with the parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Regions
+					"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A group of stack instances with parameters in some specific accounts and regions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackSetId
 		// CloudFormation resource type schema:
 		//
@@ -650,7 +493,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the stack set that you're creating.",
 		//	  "type": "string"
 		//	}
-		"stack_set_id": schemaAttributef075804e49d48ee071002adc(),
+		"stack_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the stack set that you're creating.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackSetName
 		// CloudFormation resource type schema:
 		//
@@ -660,7 +506,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,127}$",
 		//	  "type": "string"
 		//	}
-		"stack_set_name": schemaAttributeae4e07dd955581744342be5d(),
+		"stack_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -695,7 +544,24 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeaddafa4d64303ddea39f05b4(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
 		// CloudFormation resource type schema:
 		//
@@ -705,7 +571,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_body": schemaAttribute82be49f41019e013073329ac(),
+		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateURL
 		// CloudFormation resource type schema:
 		//
@@ -715,7 +584,10 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_url": schemaAttribute399eef77db5d103aebae195c(),
+		"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

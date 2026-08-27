@@ -15,112 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute13d0c8e26cd2ec7b6132ec9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the parent image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21b60725060bf7d6f995f2b3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates Horovod compatibility.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36f94b89f7233839b050416f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48907f5e74c187239716e760() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the image this version belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c33ddd0933274b9c428c986() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of aliases for the image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute594f37df4f9b8e3c96dd5181() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates SageMaker job type compatibility.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60a4a0d65200ac585a1bf742() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The version number of the image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6689c72505072d4dfde2c2da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The alias of the image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute750574863e1490e0e6386c29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The registry path of the container image that contains this image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75e7b25f3fcc77780a5ea537() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The supported programming language and its version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d22f7437a71c0cadf387f17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The availability of the image version specified by the maintainer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac172f30f72528cd9f3e2ce8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The registry path of the container image on which this image version is based.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf4ee81974866e5ad324dae7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates CPU or GPU compatibility.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfd3be81487462234f380278() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The machine learning framework vended in the image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2fe881da647810d3a7e39e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maintainer description of the image version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_image_version", imageVersionDataSource)
 }
@@ -139,7 +33,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"alias": schemaAttribute6689c72505072d4dfde2c2da(),
+		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The alias of the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Aliases
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +51,11 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"aliases": schemaAttribute4c33ddd0933274b9c428c986(),
+		"aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of aliases for the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BaseImage
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +66,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": ".+",
 		//	  "type": "string"
 		//	}
-		"base_image": schemaAttributeac172f30f72528cd9f3e2ce8(),
+		"base_image": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The registry path of the container image on which this image version is based.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContainerImage
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +80,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": ".+",
 		//	  "type": "string"
 		//	}
-		"container_image": schemaAttribute750574863e1490e0e6386c29(),
+		"container_image": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The registry path of the container image that contains this image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Horovod
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +91,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Indicates Horovod compatibility.",
 		//	  "type": "boolean"
 		//	}
-		"horovod": schemaAttribute21b60725060bf7d6f995f2b3(),
+		"horovod": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates Horovod compatibility.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageArn
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +105,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"image_arn": schemaAttribute13d0c8e26cd2ec7b6132ec9c(),
+		"image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the parent image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageName
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +119,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"image_name": schemaAttribute48907f5e74c187239716e760(),
+		"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the image this version belongs to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +133,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*\\/[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"image_version_arn": schemaAttribute36f94b89f7233839b050416f(),
+		"image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobType
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +149,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"job_type": schemaAttribute594f37df4f9b8e3c96dd5181(),
+		"job_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates SageMaker job type compatibility.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MLFramework
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +163,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$",
 		//	  "type": "string"
 		//	}
-		"ml_framework": schemaAttributebfd3be81487462234f380278(),
+		"ml_framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The machine learning framework vended in the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Processor
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +178,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"processor": schemaAttributeaf4ee81974866e5ad324dae7(),
+		"processor": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates CPU or GPU compatibility.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProgrammingLang
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +192,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$",
 		//	  "type": "string"
 		//	}
-		"programming_lang": schemaAttribute75e7b25f3fcc77780a5ea537(),
+		"programming_lang": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The supported programming language and its version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReleaseNotes
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +206,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"release_notes": schemaAttributed2fe881da647810d3a7e39e4(),
+		"release_notes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maintainer description of the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VendorGuidance
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +223,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vendor_guidance": schemaAttribute9d22f7437a71c0cadf387f17(),
+		"vendor_guidance": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The availability of the image version specified by the maintainer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +235,10 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"version": schemaAttribute60a4a0d65200ac585a1bf742(),
+		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

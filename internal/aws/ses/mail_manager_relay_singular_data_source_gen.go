@@ -15,51 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4835b47bc0909839cac419a9() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7d82a3203d27fe51cd3cea3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfaa8c6ec2f82f2826345bfb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee43bbb9f6c86b1e6f8bc2d90() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebfaa8c6ec2f82f2826345bfb(),
-				// Property: Value
-				"value": schemaAttributebfaa8c6ec2f82f2826345bfb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb643990442bc45063fc18bd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NoAuthentication
-			"no_authentication": schemaAttributeb7d82a3203d27fe51cd3cea3(),
-			// Property: SecretArn
-			"secret_arn": schemaAttributebfaa8c6ec2f82f2826345bfb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_mail_manager_relay", mailManagerRelayDataSource)
 }
@@ -84,14 +39,29 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"authentication": schemaAttributefb643990442bc45063fc18bd(),
+		"authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NoAuthentication
+				"no_authentication": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelayArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"relay_arn": schemaAttributebfaa8c6ec2f82f2826345bfb(),
+		"relay_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelayId
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +71,9 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"relay_id": schemaAttributebfaa8c6ec2f82f2826345bfb(),
+		"relay_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelayName
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +83,9 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"relay_name": schemaAttributebfaa8c6ec2f82f2826345bfb(),
+		"relay_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerName
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +95,9 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9-\\.]+$",
 		//	  "type": "string"
 		//	}
-		"server_name": schemaAttributebfaa8c6ec2f82f2826345bfb(),
+		"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerPort
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +106,9 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"server_port": schemaAttribute4835b47bc0909839cac419a9(),
+		"server_port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +139,21 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributee43bbb9f6c86b1e6f8bc2d90(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

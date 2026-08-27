@@ -15,28 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2091d72f4e9180a82a61e3d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaafaf709e73daa683ba21931() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeee4cb750c721d417379ae05() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_authorizer", authorizerDataSource)
 }
@@ -52,7 +30,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"auth_type": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerCredentials
 		// CloudFormation resource type schema:
 		//
@@ -60,7 +41,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_credentials": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"authorizer_credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerId
 		// CloudFormation resource type schema:
 		//
@@ -68,7 +52,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_id": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerResultTtlInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -76,7 +63,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "integer"
 		//	}
-		"authorizer_result_ttl_in_seconds": schemaAttributeeee4cb750c721d417379ae05(),
+		"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerUri
 		// CloudFormation resource type schema:
 		//
@@ -84,7 +74,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_uri": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentitySource
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +85,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"identity_source": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"identity_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityValidationExpression
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +96,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"identity_validation_expression": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +107,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderARNs
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +123,11 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"provider_ar_ns": schemaAttributeaafaf709e73daa683ba21931(),
+		"provider_ar_ns": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +135,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +146,10 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute2091d72f4e9180a82a61e3d4(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

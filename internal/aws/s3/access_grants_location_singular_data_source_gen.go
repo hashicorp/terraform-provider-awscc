@@ -14,54 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute41d94e27f9f9d5c36f811454() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee0a43c5b7df2b51186d7f9ac(),
-				// Property: Value
-				"value": schemaAttributee0a43c5b7df2b51186d7f9ac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b24b5ff68eafc4f54c3cd03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Descriptor for where the location actually points",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d0198dd63d52e17adf76f4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified Access Grants location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabc6bdcb056f90d81799942a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the access grant location's associated IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3d538e64cfadc2e527abd9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the specified Access Grants location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0a43c5b7df2b51186d7f9ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_access_grants_location", accessGrantsLocationDataSource)
 }
@@ -80,7 +32,10 @@ func accessGrantsLocationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_grants_location_arn": schemaAttribute6d0198dd63d52e17adf76f4f(),
+		"access_grants_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified Access Grants location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantsLocationId
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +43,10 @@ func accessGrantsLocationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The unique identifier for the specified Access Grants location.",
 		//	  "type": "string"
 		//	}
-		"access_grants_location_id": schemaAttributed3d538e64cfadc2e527abd9d(),
+		"access_grants_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the specified Access Grants location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -99,7 +57,10 @@ func accessGrantsLocationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"iam_role_arn": schemaAttributeabc6bdcb056f90d81799942a(),
+		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the access grant location's associated IAM role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationScope
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +71,10 @@ func accessGrantsLocationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"location_scope": schemaAttribute6b24b5ff68eafc4f54c3cd03(),
+		"location_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Descriptor for where the location actually points",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +99,21 @@ func accessGrantsLocationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute41d94e27f9f9d5c36f811454(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

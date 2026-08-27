@@ -15,72 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2dbcf65db28c27f0a428400a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute59afcee5cc391b963669da2b(),
-			// Property: State
-			"state": schemaAttribute59afcee5cc391b963669da2b(),
-			// Property: Type
-			"type": schemaAttribute59afcee5cc391b963669da2b(),
-			// Property: Value
-			"value": schemaAttribute59afcee5cc391b963669da2b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39ed15f3528c5040e0621fbe() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59afcee5cc391b963669da2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea78af798cab7607f7bfb8e57() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute59afcee5cc391b963669da2b(),
-				// Property: Value
-				"value": schemaAttribute59afcee5cc391b963669da2b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to add to the VPC endpoint service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf709b1fe2b2a960afdbbc30() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Regions from which service consumers can access the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5ac9d4f03a36af5671c9ad3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Specify which Ip Address types are supported for VPC endpoint service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6bd2ed301238c3122dd8012() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpc_endpoint_service", vPCEndpointServiceDataSource)
 }
@@ -95,14 +29,18 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"acceptance_required": schemaAttributee6bd2ed301238c3122dd8012(),
+		"acceptance_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContributorInsightsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"contributor_insights_enabled": schemaAttributee6bd2ed301238c3122dd8012(),
+		"contributor_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayLoadBalancerArns
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +51,10 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"gateway_load_balancer_arns": schemaAttribute39ed15f3528c5040e0621fbe(),
+		"gateway_load_balancer_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkLoadBalancerArns
 		// CloudFormation resource type schema:
 		//
@@ -128,21 +69,28 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"network_load_balancer_arns": schemaAttribute39ed15f3528c5040e0621fbe(),
+		"network_load_balancer_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PayerResponsibility
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"payer_responsibility": schemaAttribute59afcee5cc391b963669da2b(),
+		"payer_responsibility": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateDnsName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"private_dns_name": schemaAttribute59afcee5cc391b963669da2b(),
+		"private_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateDnsNameConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -164,14 +112,36 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"private_dns_name_configuration": schemaAttribute2dbcf65db28c27f0a428400a(),
+		"private_dns_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: State
+				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"service_id": schemaAttribute59afcee5cc391b963669da2b(),
+		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportedIpAddressTypes
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +158,11 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"supported_ip_address_types": schemaAttributed5ac9d4f03a36af5671c9ad3(),
+		"supported_ip_address_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specify which Ip Address types are supported for VPC endpoint service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportedRegions
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +175,11 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"supported_regions": schemaAttributecf709b1fe2b2a960afdbbc30(),
+		"supported_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Regions from which service consumers can access the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +205,22 @@ func vPCEndpointServiceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributea78af798cab7607f7bfb8e57(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to add to the VPC endpoint service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

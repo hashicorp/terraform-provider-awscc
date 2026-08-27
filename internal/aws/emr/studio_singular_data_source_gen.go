@@ -15,169 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01c0f5de3933825918933e80() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the EMR Studio.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute035928bf4b0ab37551f1b7e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12ac43b79ae35db587ff7a7b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute148d43cfef19bc5bff7fb42b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive name for the Amazon EMR Studio.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b6cd19eb1a658a2e36126fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ea8eb0b9a71e07bc1c94d2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a548746950955c8c88b50e1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e46f7cb5b9275a3a08529ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute489333218237d636e94f9a7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5121fea1f07e6585922c41d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5168d20f3cc8eed03d059c05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A detailed description of the Studio.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c440c1ec0b988c97392aa97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute615d8788a312b8786dfd2a10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of relay state parameter for external Identity Provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61b104b5fa489211e857c285() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique Studio access URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute879ac2675ddb48368be6e781() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM Identity Center instance to create the Studio application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9743585a794c98f81b582b74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c35c647f34abdbc59476ce1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8e0c375a0b4ffaa75c98655() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9743585a794c98f81b582b74(),
-				// Property: Value
-				"value": schemaAttributeccbb185b6b196c589998d788(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccbb185b6b196c589998d788() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede3124b0c5a294193e837bc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1f4bcb019681cfacfefe60e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the EMR Studio.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4c73d802fa588f1cbd5364f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_emr_studio", studioDataSource)
 }
@@ -194,7 +31,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-(cn|us-gov|iso-f|iso-e))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute01c0f5de3933825918933e80(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the EMR Studio.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthMode
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +46,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auth_mode": schemaAttribute9c35c647f34abdbc59476ce1(),
+		"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultS3Location
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +60,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^s3://.*",
 		//	  "type": "string"
 		//	}
-		"default_s3_location": schemaAttribute2ea8eb0b9a71e07bc1c94d2c(),
+		"default_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +73,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5168d20f3cc8eed03d059c05(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A detailed description of the Studio.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +85,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-(cn|us-gov|iso-f|iso-e))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"encryption_key_arn": schemaAttribute1b6cd19eb1a658a2e36126fb(),
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +99,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
 		//	  "type": "string"
 		//	}
-		"engine_security_group_id": schemaAttribute5121fea1f07e6585922c41d0(),
+		"engine_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdcInstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +112,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"idc_instance_arn": schemaAttribute879ac2675ddb48368be6e781(),
+		"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM Identity Center instance to create the Studio application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdcUserAssignment
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +127,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"idc_user_assignment": schemaAttribute5c440c1ec0b988c97392aa97(),
+		"idc_user_assignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdpAuthUrl
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +140,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
 		//	  "type": "string"
 		//	}
-		"idp_auth_url": schemaAttribute035928bf4b0ab37551f1b7e1(),
+		"idp_auth_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdpRelayStateParameterName
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +153,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"idp_relay_state_parameter_name": schemaAttribute615d8788a312b8786dfd2a10(),
+		"idp_relay_state_parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of relay state parameter for external Identity Provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +167,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute148d43cfef19bc5bff7fb42b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A descriptive name for the Amazon EMR Studio.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +179,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-(cn|us-gov|iso-f|iso-e))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"service_role": schemaAttribute489333218237d636e94f9a7d(),
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StudioId
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +193,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^es-[0-9A-Z]+",
 		//	  "type": "string"
 		//	}
-		"studio_id": schemaAttributee1f4bcb019681cfacfefe60e(),
+		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the EMR Studio.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +210,11 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schemaAttribute3a548746950955c8c88b50e1(),
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -369,7 +249,24 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb8e0c375a0b4ffaa75c98655(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrustedIdentityPropagationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -377,7 +274,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
 		//	  "type": "boolean"
 		//	}
-		"trusted_identity_propagation_enabled": schemaAttribute12ac43b79ae35db587ff7a7b(),
+		"trusted_identity_propagation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -387,7 +287,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
 		//	  "type": "string"
 		//	}
-		"url": schemaAttribute61b104b5fa489211e857c285(),
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique Studio access URL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserRole
 		// CloudFormation resource type schema:
 		//
@@ -396,7 +299,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-(cn|us-gov|iso-f|iso-e))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"user_role": schemaAttribute3e46f7cb5b9275a3a08529ad(),
+		"user_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -405,7 +311,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributede3124b0c5a294193e837bc1(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkspaceSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -414,7 +323,10 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
 		//	  "type": "string"
 		//	}
-		"workspace_security_group_id": schemaAttributee4c73d802fa588f1cbd5364f(),
+		"workspace_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

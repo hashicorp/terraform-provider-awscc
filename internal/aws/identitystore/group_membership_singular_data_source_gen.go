@@ -14,45 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute575256a9441c7443bf9e0f1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for a user in the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute682c1392ce5430a1916a5c1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The globally unique identifier for the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0727a0570be2615a83690b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for a GroupMembership in the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec062e80689a0e440810978f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for a group in the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeefc2c330864e5c496cbda76e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: UserId
-			"user_id": schemaAttribute575256a9441c7443bf9e0f1b(),
-		}, /*END SCHEMA*/
-		Description: "An object containing the identifier of a group member.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_identitystore_group_membership", groupMembershipDataSource)
 }
@@ -71,7 +32,10 @@ func groupMembershipDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttributec062e80689a0e440810978f5(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for a group in the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityStoreId
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +46,10 @@ func groupMembershipDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"identity_store_id": schemaAttribute682c1392ce5430a1916a5c1f(),
+		"identity_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The globally unique identifier for the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemberId
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +70,17 @@ func groupMembershipDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"member_id": schemaAttributeefc2c330864e5c496cbda76e(),
+		"member_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: UserId
+				"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier for a user in the identity store.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object containing the identifier of a group member.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MembershipId
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +91,10 @@ func groupMembershipDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"membership_id": schemaAttributea0727a0570be2615a83690b2(),
+		"membership_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for a GroupMembership in the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

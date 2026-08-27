@@ -24,243 +24,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute160490f909f8c1258ed52e69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ADOBE_ANALYTICS",
-				"AMAZON_ELASTICSEARCH",
-				"AMAZON_OPENSEARCH",
-				"ATHENA",
-				"AURORA",
-				"AURORA_POSTGRESQL",
-				"AWS_IOT_ANALYTICS",
-				"BIGQUERY",
-				"CONFLUENCE",
-				"DATABRICKS",
-				"EXASOL",
-				"GITHUB",
-				"GOOGLESHEETS",
-				"GOOGLE_DRIVE",
-				"JIRA",
-				"MARIADB",
-				"MYSQL",
-				"ONE_DRIVE",
-				"ORACLE",
-				"POSTGRESQL",
-				"PRESTO",
-				"QBUSINESS",
-				"REDSHIFT",
-				"S3",
-				"S3_KNOWLEDGE_BASE",
-				"S3_TABLES",
-				"SALESFORCE",
-				"SERVICENOW",
-				"SHAREPOINT",
-				"SNOWFLAKE",
-				"SPARK",
-				"SQLSERVER",
-				"STARBURST",
-				"TERADATA",
-				"TIMESTREAM",
-				"TRINO",
-				"TWITTER",
-				"WEB_CRAWLER",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e9de6997b72046d04bed164() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"TOKEN",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute215fb6d27b268ef13ba29c5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// ClientSecret is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute283df4611cbfa35b8f609bea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// ClientId is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e7662b2267d123efe56e6a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32ba23e435db67824bffa7f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32c8b6cb3269574325f80d44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c002a6d91a8876310072c95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute518293049fee11befe0e2e5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c5d9028952dc6518a736933() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2e7662b2267d123efe56e6a2(),
-				// Property: Value
-				"value": schemaAttribute32ba23e435db67824bffa7f4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute801b374fe25b8cab88fc4e02() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcConnectionArn
-			"vpc_connection_arn": schemaAttributeecdede55aafac4b1e0847787(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f9a5c8710e6beed6be264bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute958ce7d5579c1dbf0ece9b91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 2048),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4bfe403ad164f99f5935e02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 4096),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecdede55aafac4b1e0847787() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_o_auth_client_application", oAuthClientApplicationResource)
 	registry.AddListResourceFactory("awscc_quicksight_o_auth_client_application", generic.NewListResource(oAuthClientApplicationResource))
@@ -277,7 +40,12 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:oauthclientapplication/.+",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3c002a6d91a8876310072c95(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClientId
 		// CloudFormation resource type schema:
 		//
@@ -286,7 +54,17 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_id": schemaAttribute283df4611cbfa35b8f609bea(),
+		"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ClientId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSecret
 		// CloudFormation resource type schema:
 		//
@@ -295,7 +73,17 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_secret": schemaAttribute215fb6d27b268ef13ba29c5b(),
+		"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ClientSecret is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +91,13 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute8f9a5c8710e6beed6be264bb(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataSourceType
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +144,55 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_source_type": schemaAttribute160490f909f8c1258ed52e69(),
+		"data_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ADOBE_ANALYTICS",
+					"AMAZON_ELASTICSEARCH",
+					"AMAZON_OPENSEARCH",
+					"ATHENA",
+					"AURORA",
+					"AURORA_POSTGRESQL",
+					"AWS_IOT_ANALYTICS",
+					"BIGQUERY",
+					"CONFLUENCE",
+					"DATABRICKS",
+					"EXASOL",
+					"GITHUB",
+					"GOOGLESHEETS",
+					"GOOGLE_DRIVE",
+					"JIRA",
+					"MARIADB",
+					"MYSQL",
+					"ONE_DRIVE",
+					"ORACLE",
+					"POSTGRESQL",
+					"PRESTO",
+					"QBUSINESS",
+					"REDSHIFT",
+					"S3",
+					"S3_KNOWLEDGE_BASE",
+					"S3_TABLES",
+					"SALESFORCE",
+					"SERVICENOW",
+					"SHAREPOINT",
+					"SNOWFLAKE",
+					"SPARK",
+					"SQLSERVER",
+					"STARBURST",
+					"TERADATA",
+					"TIMESTREAM",
+					"TRINO",
+					"TWITTER",
+					"WEB_CRAWLER",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityProviderVpcConnectionProperties
 		// CloudFormation resource type schema:
 		//
@@ -366,7 +208,26 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"identity_provider_vpc_connection_properties": schemaAttribute801b374fe25b8cab88fc4e02(),
+		"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcConnectionArn
+				"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +235,13 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute8f9a5c8710e6beed6be264bb(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -383,7 +250,12 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute518293049fee11befe0e2e5e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OAuthAuthorizationEndpointUrl
 		// CloudFormation resource type schema:
 		//
@@ -392,7 +264,16 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"o_auth_authorization_endpoint_url": schemaAttribute958ce7d5579c1dbf0ece9b91(),
+		"o_auth_authorization_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OAuthClientApplicationId
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +283,15 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"o_auth_client_application_id": schemaAttribute32c8b6cb3269574325f80d44(),
+		"o_auth_client_application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OAuthClientAuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +301,17 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"o_auth_client_authentication_type": schemaAttribute1e9de6997b72046d04bed164(),
+		"o_auth_client_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"TOKEN",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OAuthScopes
 		// CloudFormation resource type schema:
 		//
@@ -421,7 +320,16 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"o_auth_scopes": schemaAttributed4bfe403ad164f99f5935e02(),
+		"o_auth_scopes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 4096),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OAuthTokenEndpointUrl
 		// CloudFormation resource type schema:
 		//
@@ -430,7 +338,12 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"o_auth_token_endpoint_url": schemaAttribute518293049fee11befe0e2e5e(),
+		"o_auth_token_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -459,7 +372,45 @@ func oAuthClientApplicationResource(ctx context.Context) (resource.Resource, err
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute6c5d9028952dc6518a736933(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

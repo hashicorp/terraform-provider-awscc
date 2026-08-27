@@ -15,1704 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0356babaf3d6b5a59c05332c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationPreference
-			"capacity_reservation_preference": schemaAttributece7a1c189187eb33b2417ca8(),
-			// Property: CapacityReservationTarget
-			"capacity_reservation_target": schemaAttributef514937aac99e0269c61cba9(),
-		}, /*END SCHEMA*/
-		Description: "The Capacity Reservation targeting option. If you do not specify this parameter, the instance's Capacity Reservation preference defaults to ``open``, which enables it to run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0478d76491a345c54e49a1c8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute04cf1ae303c0ed4fc0ed6876() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The instance types to exclude.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types.\n  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.\n  Default: No excluded instance types",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06b36e8a9ee4971f28e1515d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable the instance for stop protection. For more information, see [Enable stop protection for your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute082100947ae4e29478da8482() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0bffd8044f2ee6fc0e5776e9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BlockDurationMinutes
-			"block_duration_minutes": schemaAttributeca8f9fb5658dad80d4ebf098(),
-			// Property: InstanceInterruptionBehavior
-			"instance_interruption_behavior": schemaAttributecc83af54960a11d5dd8a4622(),
-			// Property: MaxPrice
-			"max_price": schemaAttributef1ceded516ebf33c613b0b38(),
-			// Property: SpotInstanceType
-			"spot_instance_type": schemaAttributec56741bac2b9b23df805081b(),
-			// Property: ValidUntil
-			"valid_until": schemaAttribute6f0f787679203ee2d6381d17(),
-		}, /*END SCHEMA*/
-		Description: "The options for Spot Instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c2c4f6c7efd457e81027019() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the symmetric KMSlong (KMS) CMK used for encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cd114d5dc2e2192986ad4c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The instance family to refer. Ensure that you specify the correct family name. For example, C6i and C6g are valid values, but C6 is not.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e1475d0ff72b0ee8e3c32fb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e304934e211b28bb3a52761() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv4 prefix. For information, see [Assigning prefixes to network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0efa487a0179f1ffca9963a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Dedicated Host for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f33051b0a429f6c4bde967d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).\n Default: ``stop``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1019d4c0384c330b16c8db84() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10400195901b08433c7d4d31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AmdSevSnp
-			"amd_sev_snp": schemaAttributecbc6a059f2ebac71d17bd906(),
-			// Property: CoreCount
-			"core_count": schemaAttributeebed58317cd804b48797e3cc(),
-			// Property: ThreadsPerCore
-			"threads_per_core": schemaAttributebf7c4199cc3be935bcb1805a(),
-		}, /*END SCHEMA*/
-		Description: "The CPU options for the instance. For more information, see [Optimize CPU options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13e6fe4c8cd32ce8224d2648() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoRecovery
-			"auto_recovery": schemaAttribute9419109a0baaf17138c9b56b(),
-		}, /*END SCHEMA*/
-		Description: "The maintenance options of your instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1401107047b677c865ff2836() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the subnet for the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute145bbde55de057ee779f5496() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute185190fa167ffad48e3097a5() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of total local storage, in GB. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1867c512411cf5cf6ac2b434() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18f0859368a12c3a03042e20() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will allow all the M5a instance types, but not the M5n instance types.\n  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.\n  Default: All instance types",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c9061df88cf1cf7dbb7c2f5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d743349707e7a7a98e8c4a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n  +  To include instance types with instance store volumes, specify ``included``.\n  +  To require only instance types with instance store volumes, specify ``required``.\n  +  To exclude instance types with instance store volumes, specify ``excluded``.\n  \n Default: ``included``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e3116b3aace99768aa27e23() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttribute76b60fd294eff81e6728fcb2(),
-				// Property: Tags
-				"tags": schemaAttribute7fc5264ffc54c5da8b43d7b0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22d536a42b667687572e8d59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23e88a71fd0335d5b28470ea() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. The following are the supported volumes sizes for each volume type:\n  +   ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +   ``io1``: 4 - 16,384 GiB\n  +   ``io2``: 4 - 65,536 GiB\n  +   ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +   ``standard``: 1 - 1024 GiB",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26b33f4b74a7e48d18667012() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of vCPUs. To specify no minimum limit, specify ``0``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2796f46c287c4012c7d1e4ce() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of the partition the instance should launch in. Valid only if the placement group strategy is set to ``partition``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute279bfaba908b451c02c12590() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Capacity Reservation resource group in which to run the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2995a2162161a7638b1df75c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a922da3e54ea0907fb6e6d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the first version of the launch template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b6d43aa7ce6563507de22f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the launch template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c69eb97db17cc14b28b0681() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Reserved for future use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cc11e26e871412f716f1b17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d453b5fc505ba71fe689133() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of vCPUs. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31da41835ba469f4954d05b3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributefa9dde1631f7eb6b5104699f(),
-		}, /*END SCHEMA*/
-		Description: "The monitoring for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32dd00da019857345095136e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: References
-			"references": schemaAttribute93929c6f42309f1f231d463b(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35943c1ab2fdcda52be11840() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of one or more security groups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3641e8b7165c478007a6728b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MarketType
-			"market_type": schemaAttribute659342eb24725828de2700dc(),
-			// Property: SpotOptions
-			"spot_options": schemaAttribute0bffd8044f2ee6fc0e5776e9(),
-		}, /*END SCHEMA*/
-		Description: "The market (purchasing) option for the instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute372de459c91c4e2515d562f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37a3609aaec2f3a33f344cd1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributec5ca25a05c9796dc8ec7d9e4(),
-		}, /*END SCHEMA*/
-		Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see [What is Nitro Enclaves?](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the *Nitro Enclaves User Guide*.\n You can't enable AWS Nitro Enclaves and hibernation on the same instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39b40e152b456191b643fe04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see [Run commands on your Amazon EC2 instance at launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) in the *Amazon EC2 User Guide*.\n If you are creating the launch template for use with BATCH, the user data must be provided in the [MIME multi-part archive format](https://docs.aws.amazon.com/https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive). For more information, see [Amazon EC2 user data in launch templates](https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in the *User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c8101b8619916a0750a47b0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv4Prefix`` option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dad41e527eb5494da03a6bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "To omit the device from the block device mapping, specify an empty string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3df7b15e311ebe2705acbd94() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CpuCredits
-			"cpu_credits": schemaAttribute483c37d8d60ac20b96893af4(),
-		}, /*END SCHEMA*/
-		Description: "The credit option for CPU usage of the instance. Valid only for T instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e866c60fa11752ea3082371() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum amount of network bandwidth, in Gbps. If this parameter is not specified, there is no minimum limit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40aa5eceda1f8300070a7b1b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Indicates whether instance types must have accelerators by specific manufacturers.\n  +  For instance types with AWS devices, specify ``amazon-web-services``.\n  +  For instance types with AMD devices, specify ``amd``.\n  +  For instance types with Habana devices, specify ``habana``.\n  +  For instance types with NVIDIA devices, specify ``nvidia``.\n  +  For instance types with Xilinx devices, specify ``xilinx``.\n  \n Default: Any manufacturer",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40dbcabf908b520d546ec286() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AcceleratorCount
-			"accelerator_count": schemaAttributea2973d2c51ee0eec47745dea(),
-			// Property: AcceleratorManufacturers
-			"accelerator_manufacturers": schemaAttribute40aa5eceda1f8300070a7b1b(),
-			// Property: AcceleratorNames
-			"accelerator_names": schemaAttributed09fe8e041b67c7b91d19743(),
-			// Property: AcceleratorTotalMemoryMiB
-			"accelerator_total_memory_mi_b": schemaAttributeca7b892ae841e92805c6b011(),
-			// Property: AcceleratorTypes
-			"accelerator_types": schemaAttributea6f4663d1393bd6d5081486e(),
-			// Property: AllowedInstanceTypes
-			"allowed_instance_types": schemaAttribute18f0859368a12c3a03042e20(),
-			// Property: BareMetal
-			"bare_metal": schemaAttribute5b60e7c841684a17f9453404(),
-			// Property: BaselineEbsBandwidthMbps
-			"baseline_ebs_bandwidth_mbps": schemaAttributefd043b59b78d3e71c6b03167(),
-			// Property: BaselinePerformanceFactors
-			"baseline_performance_factors": schemaAttributee2c23109b9fe30baab6d4f79(),
-			// Property: BurstablePerformance
-			"burstable_performance": schemaAttributeb8e8a915996f18a912365c45(),
-			// Property: CpuManufacturers
-			"cpu_manufacturers": schemaAttributeb5c8800da70bf98051e6bc38(),
-			// Property: ExcludedInstanceTypes
-			"excluded_instance_types": schemaAttribute04cf1ae303c0ed4fc0ed6876(),
-			// Property: InstanceGenerations
-			"instance_generations": schemaAttribute8c9bf2ab2e9975b9a967fbac(),
-			// Property: LocalStorage
-			"local_storage": schemaAttribute1d743349707e7a7a98e8c4a4(),
-			// Property: LocalStorageTypes
-			"local_storage_types": schemaAttributeaf2487eece52fde7b84e451d(),
-			// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
-			"max_spot_price_as_percentage_of_optimal_on_demand_price": schemaAttribute7cd05845221117e80140581d(),
-			// Property: MemoryGiBPerVCpu
-			"memory_gi_b_per_v_cpu": schemaAttribute620f32d6fac66ba01d58ab58(),
-			// Property: MemoryMiB
-			"memory_mi_b": schemaAttributef87644c0ef79fc06508ef63e(),
-			// Property: NetworkBandwidthGbps
-			"network_bandwidth_gbps": schemaAttributea8934738c7f4e81eb80da253(),
-			// Property: NetworkInterfaceCount
-			"network_interface_count": schemaAttribute6db2cd35b11273f231d5a2a9(),
-			// Property: OnDemandMaxPricePercentageOverLowestPrice
-			"on_demand_max_price_percentage_over_lowest_price": schemaAttribute5d9b3b16bbd7a6aa8cfdbe86(),
-			// Property: RequireHibernateSupport
-			"require_hibernate_support": schemaAttribute4f48eda634e0063b9b24889b(),
-			// Property: SpotMaxPricePercentageOverLowestPrice
-			"spot_max_price_percentage_over_lowest_price": schemaAttributef6a3763c0d3bf043012de21d(),
-			// Property: TotalLocalStorageGB
-			"total_local_storage_gb": schemaAttribute55aae95e6b063a9bd5840a39(),
-			// Property: VCpuCount
-			"v_cpu_count": schemaAttribute5a451f019eab2a24805d59ee(),
-		}, /*END SCHEMA*/
-		Description: "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute425edc3ecfca57395e3c542a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether ENA Express is enabled for the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42addedf9ebf10686f265fc9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv6Prefix`` option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43e2b5b434c255fd8ba81d52() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnaSrdUdpEnabled
-			"ena_srd_udp_enabled": schemaAttribute92de1aafc7b226c646dbff25(),
-		}, /*END SCHEMA*/
-		Description: "Configures ENA Express for UDP network traffic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute445ca4488d161652ad3277fe() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of network interfaces. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47d8d3179d6daf16d419e246() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device name (for example, /dev/sdh or xvdh).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute483c37d8d60ac20b96893af4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The credit option for CPU usage of a T instance.\n Valid values: ``standard`` | ``unlimited``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4abe3d2d7903919c02987ce3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tenancy of the instance. An instance with a tenancy of dedicated runs on single-tenant hardware.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c21a4b3e96a5ea268301c38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c980c12bae6ad91e0d00683() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv6Prefix
-				"ipv_6_prefix": schemaAttribute958b6865ff95f04ac598368e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv6PrefixCount`` option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c987de5f8da8a5ceba91777() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Associates a public IPv4 address with eth0 for a new network interface.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f48eda634e0063b9b24889b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether instance types must support hibernation for On-Demand Instances.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html).\n Default: ``false``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4faec0749d8a4fe30b3d353e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables or disables the IPv6 endpoint for the instance metadata service.\n Default: ``disabled``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute539bc878f888af0dccd4c37c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of accelerators. To specify no maximum limit, omit this parameter. To exclude accelerator-enabled instance types, set ``Max`` to ``0``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53dfca1939408c2297740ce9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Affinity
-			"affinity": schemaAttributeab68a151b69bf856885fcb66(),
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute2cc11e26e871412f716f1b17(),
-			// Property: GroupId
-			"group_id": schemaAttributed43047c5dd96cba8761b9f9c(),
-			// Property: GroupName
-			"group_name": schemaAttribute88d2bc3e4a660696144f37e5(),
-			// Property: HostId
-			"host_id": schemaAttribute0efa487a0179f1ffca9963a0(),
-			// Property: HostResourceGroupArn
-			"host_resource_group_arn": schemaAttribute850447f6960ccc913d0e2d8c(),
-			// Property: PartitionNumber
-			"partition_number": schemaAttribute2796f46c287c4012c7d1e4ce(),
-			// Property: SpreadDomain
-			"spread_domain": schemaAttribute2c69eb97db17cc14b28b0681(),
-			// Property: Tenancy
-			"tenancy": schemaAttribute4abe3d2d7903919c02987ce3(),
-		}, /*END SCHEMA*/
-		Description: "The placement for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute549cd9fd818897b9dc8c85f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is ``enabled``.\n  If you specify a value of ``disabled``, you will not be able to access your instance metadata.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55aae95e6b063a9bd5840a39() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute185190fa167ffad48e3097a5(),
-			// Property: Min
-			"min": schemaAttributeeb5d23ee52ad54bf8577bbb7(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum amount of total local storage, in GB.\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57c378252ad65f6687f39805() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HttpEndpoint
-			"http_endpoint": schemaAttribute549cd9fd818897b9dc8c85f9(),
-			// Property: HttpProtocolIpv6
-			"http_protocol_ipv_6": schemaAttribute4faec0749d8a4fe30b3d353e(),
-			// Property: HttpPutResponseHopLimit
-			"http_put_response_hop_limit": schemaAttributed1103edc047d46ed53213621(),
-			// Property: HttpTokens
-			"http_tokens": schemaAttributea8984c2fdc387ba75c2ad65a(),
-			// Property: InstanceMetadataTags
-			"instance_metadata_tags": schemaAttributeabd49bac0fc708c1c93a523e(),
-		}, /*END SCHEMA*/
-		Description: "The metadata options for the instance. For more information, see [Instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a451f019eab2a24805d59ee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute2d453b5fc505ba71fe689133(),
-			// Property: Min
-			"min": schemaAttribute26b33f4b74a7e48d18667012(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum number of vCPUs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b60e7c841684a17f9453404() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether bare metal instance types must be included, excluded, or required.\n  +  To include bare metal instance types, specify ``included``.\n  +  To require only bare metal instance types, specify ``required``.\n  +  To exclude bare metal instance types, specify ``excluded``.\n  \n Default: ``excluded``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bca7c2c69f1bda5a24d11ea() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute66a7408b632c07603e0fc036(),
-				// Property: Value
-				"value": schemaAttributecd50ac3e04f4af297ce8b230(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d9b3b16bbd7a6aa8cfdbe86() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n  Default: ``20``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60384f4961d75af72a340e18() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the EBS volume is deleted on instance termination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute620f32d6fac66ba01d58ab58() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute1867c512411cf5cf6ac2b434(),
-			// Property: Min
-			"min": schemaAttributeacfa23298ce2721340990a9d(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum amount of memory per vCPU, in GiB.\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64e79c663a4e7d897afb1935() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The primary private IPv4 address of the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute659342eb24725828de2700dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The market type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66a7408b632c07603e0fc036() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6809163d5c8beb2b17b41529() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource to tag. You can specify tags for the following resource types only: ``instance`` | ``volume`` | ``network-interface`` | ``spot-instances-request``. If the instance does not include the resource type that you specify, the instance launch fails. For example, not all instance types include a volume.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69bfacc136bc51a2f7f812a1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of memory, in MiB. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a3914cb9ebe106d0225ae38() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeleteOnTermination
-			"delete_on_termination": schemaAttribute60384f4961d75af72a340e18(),
-			// Property: Encrypted
-			"encrypted": schemaAttribute082100947ae4e29478da8482(),
-			// Property: Iops
-			"iops": schemaAttributec528d89f4a2965ed6330d4e2(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute0c2c4f6c7efd457e81027019(),
-			// Property: SnapshotId
-			"snapshot_id": schemaAttribute145bbde55de057ee779f5496(),
-			// Property: Throughput
-			"throughput": schemaAttributed343d7c8a8bf2ddd0f9f95d0(),
-			// Property: VolumeSize
-			"volume_size": schemaAttribute23e88a71fd0335d5b28470ea(),
-			// Property: VolumeType
-			"volume_type": schemaAttribute9062eb973321931f8ed8f2ce(),
-		}, /*END SCHEMA*/
-		Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6db2cd35b11273f231d5a2a9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute445ca4488d161652ad3277fe(),
-			// Property: Min
-			"min": schemaAttributeb8ce33411f627a7de724b154(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum number of network interfaces.\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f0f787679203ee2d6381d17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The end date of the request, in UTC format (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for persistent requests.\n  +  For a persistent request, the request remains active until the ``ValidUntil`` date and time is reached. Otherwise, the request remains active until you cancel it.\n  +  For a one-time request, ``ValidUntil`` is not supported. The request remains active until all instances launch or you cancel the request.\n  \n Default: 7 days from the current date",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f7f91f865fedbdde9da2946() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76b60fd294eff81e6728fcb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource. To tag a launch template, ``ResourceType`` must be ``launch-template``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute781feae897046f1dbe91a075() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cd05845221117e80140581d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fc5264ffc54c5da8b43d7b0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute66a7408b632c07603e0fc036(),
-				// Property: Value
-				"value": schemaAttributecd50ac3e04f4af297ce8b230(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8216ba1198dfcc86ce837528() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Type
-				"type": schemaAttributee04b100e1a7d162c30218a49(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Deprecated.\n  Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82d698f0d50a647045d84466() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeviceName
-				"device_name": schemaAttribute47d8d3179d6daf16d419e246(),
-				// Property: Ebs
-				"ebs": schemaAttribute6a3914cb9ebe106d0225ae38(),
-				// Property: NoDevice
-				"no_device": schemaAttribute3dad41e527eb5494da03a6bf(),
-				// Property: VirtualName
-				"virtual_name": schemaAttributea07518618b92ab7ecbb6362c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The block device mapping.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82f38b863bd63e9288382845() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute850447f6960ccc913d0e2d8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the *Tenancy* parameter or set it to ``host``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88d2bc3e4a660696144f37e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the placement group for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bdf179728ea7b4ef398b002() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableResourceNameDnsAAAARecord
-			"enable_resource_name_dns_aaaa_record": schemaAttribute0478d76491a345c54e49a1c8(),
-			// Property: EnableResourceNameDnsARecord
-			"enable_resource_name_dns_a_record": schemaAttributecc3feb0768fec62cf74af407(),
-			// Property: HostnameType
-			"hostname_type": schemaAttributea623d625c8716cc5a3d82539(),
-		}, /*END SCHEMA*/
-		Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c9bf2ab2e9975b9a967fbac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n For current generation instance types, specify ``current``.\n For previous generation instance types, specify ``previous``.\n Default: Current and previous generation instance types",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dbf340572d96c85ba9ac91c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The instance type. For more information, see [Amazon EC2 instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n If you specify ``InstanceType``, you can't specify ``InstanceRequirements``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e0b01c2167dbb94871bbe04() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The primary IPv6 address of the network interface. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information about primary IPv6 addresses, see [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute902cbbd9e678470ec53ed80f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9062eb973321931f8ed8f2ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The volume type. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92de1aafc7b226c646dbff25() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93929c6f42309f1f231d463b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InstanceFamily
-				"instance_family": schemaAttribute0cd114d5dc2e2192986ad4c6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of references to be used as baseline for the CPU performance. Currently, you can only specify a single reference across different instance type variations such as CPU manufacturers, architectures etc.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93c184de95c8c968123accb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the kernel.\n We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User Provided Kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9419109a0baaf17138c9b56b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Disables the automatic recovery behavior of your instance or sets it to default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94a2dd5489bfeefbc2e4a7fc() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of network bandwidth, in Gbps. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute958b6865ff95f04ac598368e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv6 prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e50c5ca9f9eba6537c91a9f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TcpEstablishedTimeout
-			"tcp_established_timeout": schemaAttribute2995a2162161a7638b1df75c(),
-			// Property: UdpStreamTimeout
-			"udp_stream_timeout": schemaAttributea2bec5365f5b8361dcf65b97(),
-			// Property: UdpTimeout
-			"udp_timeout": schemaAttribute781feae897046f1dbe91a075(),
-		}, /*END SCHEMA*/
-		Description: "A connection tracking specification for the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea07518618b92ab7ecbb6362c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2973d2c51ee0eec47745dea() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute539bc878f888af0dccd4c37c(),
-			// Property: Min
-			"min": schemaAttributed228ffa4fdd2724149a2da30(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) on an instance.\n To exclude accelerator-enabled instance types, set ``Max`` to ``0``.\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2bec5365f5b8361dcf65b97() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea623d625c8716cc5a3d82539() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6f4663d1393bd6d5081486e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The accelerator types that must be on the instance type.\n  +  For instance types with GPU accelerators, specify ``gpu``.\n  +  For instance types with FPGA accelerators, specify ``fpga``.\n  +  For instance types with inference accelerators, specify ``inference``.\n  \n Default: Any accelerator type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8934738c7f4e81eb80da253() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute94a2dd5489bfeefbc2e4a7fc(),
-			// Property: Min
-			"min": schemaAttribute3e866c60fa11752ea3082371(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8984c2fdc387ba75c2ad65a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether IMDSv2 is required.\n  +   ``optional`` - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.\n  +   ``required`` - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.\n  \n Default: If the value of ``ImdsSupport`` for the Amazon Machine Image (AMI) for your instance is ``v2.0``, the default is ``required``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea92390e99085dbc015ae3c78() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnaSrdEnabled
-			"ena_srd_enabled": schemaAttribute425edc3ecfca57395e3c542a(),
-			// Property: EnaSrdUdpSpecification
-			"ena_srd_udp_specification": schemaAttribute43e2b5b434c255fd8ba81d52(),
-		}, /*END SCHEMA*/
-		Description: "The ENA Express configuration for the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9f5b55bd311edaa891ba321() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Capacity Reservation in which to run the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab68a151b69bf856885fcb66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The affinity setting for an instance on a Dedicated Host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabd49bac0fc708c1c93a523e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Set to ``enabled`` to allow access to instance tags from the instance metadata. Set to ``disabled`` to turn off access to instance tags from the instance metadata. For more information, see [Work with instance tags using the instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).\n Default: ``disabled``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacfa23298ce2721340990a9d() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf2487eece52fde7b84e451d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The type of local storage that is required.\n  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.\n  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.\n  \n Default: ``hdd`` and ``ssd``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafa53dbf9c6c6999ab663fb8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Associates a Carrier IP address with eth0 for a new network interface.\n Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see [Carrier IP addresses](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0513561b19c8ce5cc770a9a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Count
-				"count": schemaAttributed0a53f3e235a378b472de934(),
-				// Property: Type
-				"type": schemaAttribute4c21a4b3e96a5ea268301c38(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5c8800da70bf98051e6bc38() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.\n  Default: Any manufacturer",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8ce33411f627a7de724b154() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of network interfaces. To specify no minimum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8e8a915996f18a912365c45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb972eab12dbbb45e5d273aec() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv4Prefix
-				"ipv_4_prefix": schemaAttribute0e304934e211b28bb3a52761(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv4PrefixCount`` option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbe60d81627a643cf1a8023d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the key pair. You can create a key pair using [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) or [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).\n  If you do not specify a key pair, you can't connect to the instance unless you choose an AMI that is configured to allow users another way to log in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc7bbafa6b6dbd5b5b4c0804() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The names of the security groups. For a nondefault VPC, you must use security group IDs instead.\n If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf7c4199cc3be935bcb1805a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of threads per CPU core. To disable multithreading for the instance, specify a value of ``1``. Otherwise, specify the default value of ``2``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0d19bdb45f3b04b5df33b8e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Primary
-				"primary": schemaAttribute1c9061df88cf1cf7dbb7c2f5(),
-				// Property: PrivateIpAddress
-				"private_ip_address": schemaAttributeed6388c77ace5a4ab67c89a6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more private IPv4 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec115a9836cea206e6ede0f11() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BlockDeviceMappings
-			"block_device_mappings": schemaAttribute82d698f0d50a647045d84466(),
-			// Property: CapacityReservationSpecification
-			"capacity_reservation_specification": schemaAttribute0356babaf3d6b5a59c05332c(),
-			// Property: CpuOptions
-			"cpu_options": schemaAttribute10400195901b08433c7d4d31(),
-			// Property: CreditSpecification
-			"credit_specification": schemaAttribute3df7b15e311ebe2705acbd94(),
-			// Property: DisableApiStop
-			"disable_api_stop": schemaAttribute06b36e8a9ee4971f28e1515d(),
-			// Property: DisableApiTermination
-			"disable_api_termination": schemaAttributedfb493c2cb6c223d2274580f(),
-			// Property: EbsOptimized
-			"ebs_optimized": schemaAttributef155c6b69608c6a9aa017510(),
-			// Property: ElasticGpuSpecifications
-			"elastic_gpu_specifications": schemaAttribute8216ba1198dfcc86ce837528(),
-			// Property: ElasticInferenceAccelerators
-			"elastic_inference_accelerators": schemaAttributeb0513561b19c8ce5cc770a9a(),
-			// Property: EnclaveOptions
-			"enclave_options": schemaAttribute37a3609aaec2f3a33f344cd1(),
-			// Property: HibernationOptions
-			"hibernation_options": schemaAttributec5fc2845e4c01bd36386d8af(),
-			// Property: IamInstanceProfile
-			"iam_instance_profile": schemaAttributecee3d2e532c1038d9c6e4d44(),
-			// Property: ImageId
-			"image_id": schemaAttributed97c7e67f633d047a43cd778(),
-			// Property: InstanceInitiatedShutdownBehavior
-			"instance_initiated_shutdown_behavior": schemaAttribute0f33051b0a429f6c4bde967d(),
-			// Property: InstanceMarketOptions
-			"instance_market_options": schemaAttribute3641e8b7165c478007a6728b(),
-			// Property: InstanceRequirements
-			"instance_requirements": schemaAttribute40dbcabf908b520d546ec286(),
-			// Property: InstanceType
-			"instance_type": schemaAttribute8dbf340572d96c85ba9ac91c(),
-			// Property: KernelId
-			"kernel_id": schemaAttribute93c184de95c8c968123accb1(),
-			// Property: KeyName
-			"key_name": schemaAttributebbe60d81627a643cf1a8023d(),
-			// Property: LicenseSpecifications
-			"license_specifications": schemaAttributedef7e4869c14039443671e2d(),
-			// Property: MaintenanceOptions
-			"maintenance_options": schemaAttribute13e6fe4c8cd32ce8224d2648(),
-			// Property: MetadataOptions
-			"metadata_options": schemaAttribute57c378252ad65f6687f39805(),
-			// Property: Monitoring
-			"monitoring": schemaAttribute31da41835ba469f4954d05b3(),
-			// Property: NetworkInterfaces
-			"network_interfaces": schemaAttributed956b8ea238f8aad28d7427e(),
-			// Property: Placement
-			"placement": schemaAttribute53dfca1939408c2297740ce9(),
-			// Property: PrivateDnsNameOptions
-			"private_dns_name_options": schemaAttribute8bdf179728ea7b4ef398b002(),
-			// Property: RamDiskId
-			"ram_disk_id": schemaAttributef4211477715ce189e534b449(),
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributefbdf8f97daccb235b84cce96(),
-			// Property: SecurityGroups
-			"security_groups": schemaAttributebc7bbafa6b6dbd5b5b4c0804(),
-			// Property: TagSpecifications
-			"tag_specifications": schemaAttributed0e51357951bc871886788a7(),
-			// Property: UserData
-			"user_data": schemaAttribute39b40e152b456191b643fe04(),
-		}, /*END SCHEMA*/
-		Description: "The information for the launch template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec528d89f4a2965ed6330d4e2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is supported for ``io1``, ``io2``, and ``gp3`` volumes only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec55115f5cd4a0cb6d3537171() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon EC2 User Guide*.\n If you are not creating an EFA, specify ``interface`` or omit this parameter.\n Valid values: ``interface`` | ``efa``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec56741bac2b9b23df805081b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Spot Instance request type.\n If you are using Spot Instances with an Auto Scaling group, use ``one-time`` requests, as the ASlong service handles requesting new Spot Instances whenever the group is below its desired capacity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5ca25a05c9796dc8ec7d9e4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If this parameter is set to ``true``, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5fc2845e4c01bd36386d8af() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Configured
-			"configured": schemaAttributee3902066c2b87a4762a81a72(),
-		}, /*END SCHEMA*/
-		Description: "Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the [hibernation prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html). For more information, see [Hibernate your Amazon EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec632b079db780815ff472c7f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the network interface is deleted when the instance is terminated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca7b892ae841e92805c6b011() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute6f7f91f865fedbdde9da2946(),
-			// Property: Min
-			"min": schemaAttribute1019d4c0384c330b16c8db84(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum amount of total accelerator memory, in MiB.\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca8f9fb5658dad80d4ebf098() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Deprecated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbc6a059f2ebac71d17bd906() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. For more information, see [AMD SEV-SNP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc3feb0768fec62cf74af407() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS A records.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc83af54960a11d5dd8a4622() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The behavior when a Spot Instance is interrupted. The default is ``terminate``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd50ac3e04f4af297ce8b230() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece7a1c189187eb33b2417ca8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the instance's Capacity Reservation preferences. Possible preferences include:\n  +   ``open`` - The instance can run in any ``open`` Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).\n  +   ``none`` - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecee3d2e532c1038d9c6e4d44() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute372de459c91c4e2515d562f5(),
-			// Property: Name
-			"name": schemaAttributeec572a6d9ff8ff0478879761(),
-		}, /*END SCHEMA*/
-		Description: "The name or Amazon Resource Name (ARN) of an IAM instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed09fe8e041b67c7b91d19743() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The accelerators that must be on the instance type.\n  +  For instance types with NVIDIA A10G GPUs, specify ``a10g``.\n  +  For instance types with NVIDIA A100 GPUs, specify ``a100``.\n  +  For instance types with NVIDIA H100 GPUs, specify ``h100``.\n  +  For instance types with AWS Inferentia chips, specify ``inferentia``.\n  +  For instance types with NVIDIA GRID K520 GPUs, specify ``k520``.\n  +  For instance types with NVIDIA K80 GPUs, specify ``k80``.\n  +  For instance types with NVIDIA M60 GPUs, specify ``m60``.\n  +  For instance types with AMD Radeon Pro V520 GPUs, specify ``radeon-pro-v520``.\n  +  For instance types with NVIDIA T4 GPUs, specify ``t4``.\n  +  For instance types with NVIDIA T4G GPUs, specify ``t4g``.\n  +  For instance types with Xilinx VU9P FPGAs, specify ``vu9p``.\n  +  For instance types with NVIDIA V100 GPUs, specify ``v100``.\n  \n Default: Any accelerator",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0a53f3e235a378b472de934() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of elastic inference accelerators to attach to the instance. \n Default: 1",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0e51357951bc871886788a7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttribute6809163d5c8beb2b17b41529(),
-				// Property: Tags
-				"tags": schemaAttribute5bca7c2c69f1bda5a24d11ea(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the resources that are created during instance launch.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1103edc047d46ed53213621() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.\n Default: ``1`` \n Possible values: Integers from 1 to 64",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed228ffa4fdd2724149a2da30() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of accelerators. To specify no minimum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed343d7c8a8bf2ddd0f9f95d0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput to provision for a ``gp3`` volume, with a maximum of 1,000 MiB/s.\n Valid Range: Minimum value of 125. Maximum value of 1000.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed43047c5dd96cba8761b9f9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Group Id of a placement group. You must specify the Placement Group *Group Id* to launch an instance in a shared placement group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed545d725201e4819b43f63d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the license configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed956b8ea238f8aad28d7427e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AssociateCarrierIpAddress
-				"associate_carrier_ip_address": schemaAttributeafa53dbf9c6c6999ab663fb8(),
-				// Property: AssociatePublicIpAddress
-				"associate_public_ip_address": schemaAttribute4c987de5f8da8a5ceba91777(),
-				// Property: ConnectionTrackingSpecification
-				"connection_tracking_specification": schemaAttribute9e50c5ca9f9eba6537c91a9f(),
-				// Property: DeleteOnTermination
-				"delete_on_termination": schemaAttributec632b079db780815ff472c7f(),
-				// Property: Description
-				"description": schemaAttribute902cbbd9e678470ec53ed80f(),
-				// Property: DeviceIndex
-				"device_index": schemaAttribute0e1475d0ff72b0ee8e3c32fb(),
-				// Property: EnaSrdSpecification
-				"ena_srd_specification": schemaAttributea92390e99085dbc015ae3c78(),
-				// Property: Groups
-				"groups": schemaAttribute35943c1ab2fdcda52be11840(),
-				// Property: InterfaceType
-				"interface_type": schemaAttributec55115f5cd4a0cb6d3537171(),
-				// Property: Ipv4PrefixCount
-				"ipv_4_prefix_count": schemaAttribute3c8101b8619916a0750a47b0(),
-				// Property: Ipv4Prefixes
-				"ipv_4_prefixes": schemaAttributeb972eab12dbbb45e5d273aec(),
-				// Property: Ipv6AddressCount
-				"ipv_6_address_count": schemaAttributef2b7373ec211556aa8e00552(),
-				// Property: Ipv6Addresses
-				"ipv_6_addresses": schemaAttributee2d244c405d891bc85fa1f6a(),
-				// Property: Ipv6PrefixCount
-				"ipv_6_prefix_count": schemaAttribute42addedf9ebf10686f265fc9(),
-				// Property: Ipv6Prefixes
-				"ipv_6_prefixes": schemaAttribute4c980c12bae6ad91e0d00683(),
-				// Property: NetworkCardIndex
-				"network_card_index": schemaAttributeda7c24c6ef3b5269777cad6d(),
-				// Property: NetworkInterfaceId
-				"network_interface_id": schemaAttributee960c1fefbcd47d0d775ecc0(),
-				// Property: PrimaryIpv6
-				"primary_ipv_6": schemaAttribute8e0b01c2167dbb94871bbe04(),
-				// Property: PrivateIpAddress
-				"private_ip_address": schemaAttribute64e79c663a4e7d897afb1935(),
-				// Property: PrivateIpAddresses
-				"private_ip_addresses": schemaAttributec0d19bdb45f3b04b5df33b8e(),
-				// Property: SecondaryPrivateIpAddressCount
-				"secondary_private_ip_address_count": schemaAttributee5ba832548b8d80db1f9503c(),
-				// Property: SubnetId
-				"subnet_id": schemaAttribute1401107047b677c865ff2836(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The network interfaces for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed97c7e67f633d047a43cd778() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-0ac394d6a3example`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9e42bb94cc47aadb6172716() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda7c24c6ef3b5269777cad6d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedef7e4869c14039443671e2d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LicenseConfigurationArn
-				"license_configuration_arn": schemaAttributed545d725201e4819b43f63d5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The license configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfb493c2cb6c223d2274580f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you set this parameter to ``true``, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute after launch, use [ModifyInstanceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html). Alternatively, if you set ``InstanceInitiatedShutdownBehavior`` to ``terminate``, you can terminate the instance by running the shutdown command from the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee04b100e1a7d162c30218a49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of Elastic Graphics accelerator.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2c23109b9fe30baab6d4f79() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cpu
-			"cpu": schemaAttribute32dd00da019857345095136e(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2d244c405d891bc85fa1f6a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv6Address
-				"ipv_6_address": schemaAttributefd345beef8e774dacc956d62(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3902066c2b87a4762a81a72() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you set this parameter to ``true``, the instance is enabled for hibernation.\n Default: ``false``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5ba832548b8d80db1f9503c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of secondary private IPv4 addresses to assign to a network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee960c1fefbcd47d0d775ecc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb5d23ee52ad54bf8577bbb7() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum amount of total local storage, in GB. To specify no minimum limit, omit this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebed58317cd804b48797e3cc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec572a6d9ff8ff0478879761() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed6388c77ace5a4ab67c89a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The private IPv4 address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef155c6b69608c6a9aa017510() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1ceded516ebf33c613b0b38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.\n  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2b7373ec211556aa8e00552() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4211477715ce189e534b449() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the RAM disk.\n  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User provided kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef514937aac99e0269c61cba9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationId
-			"capacity_reservation_id": schemaAttributea9f5b55bd311edaa891ba321(),
-			// Property: CapacityReservationResourceGroupArn
-			"capacity_reservation_resource_group_arn": schemaAttribute279bfaba908b451c02c12590(),
-		}, /*END SCHEMA*/
-		Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6a3763c0d3bf043012de21d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the Spot price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified Spot price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose Spot price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.\n  Default: ``100``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef87644c0ef79fc06508ef63e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute69bfacc136bc51a2f7f812a1(),
-			// Property: Min
-			"min": schemaAttributefda5b043ce0bea280bdbec22(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum amount of memory, in MiB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa9dde1631f7eb6b5104699f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specify ``true`` to enable detailed monitoring. Otherwise, basic monitoring is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbdf8f97daccb235b84cce96() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.\n If you specify a network interface, you must specify any security groups as part of the network interface instead.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd043b59b78d3e71c6b03167() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttributed9e42bb94cc47aadb6172716(),
-			// Property: Min
-			"min": schemaAttribute82f38b863bd63e9288382845(),
-		}, /*END SCHEMA*/
-		Description: "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd345beef8e774dacc956d62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefda5b043ce0bea280bdbec22() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum amount of memory, in MiB. To specify no minimum limit, specify ``0``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_launch_template", launchTemplateDataSource)
 }
@@ -1728,7 +30,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"default_version_number": schemaAttribute22d536a42b667687572e8d59(),
+		"default_version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatestVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -1736,7 +41,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"latest_version_number": schemaAttribute22d536a42b667687572e8d59(),
+		"latest_version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LaunchTemplateData
 		// CloudFormation resource type schema:
 		//
@@ -2659,7 +967,971 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"launch_template_data": schemaAttributec115a9836cea206e6ede0f11(),
+		"launch_template_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlockDeviceMappings
+				"block_device_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeviceName
+							"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The device name (for example, /dev/sdh or xvdh).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ebs
+							"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DeleteOnTermination
+									"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether the EBS volume is deleted on instance termination.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Encrypted
+									"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Iops
+									"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is supported for ``io1``, ``io2``, and ``gp3`` volumes only.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: KmsKeyId
+									"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ARN of the symmetric KMSlong (KMS) CMK used for encryption.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SnapshotId
+									"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ID of the snapshot.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Throughput
+									"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The throughput to provision for a ``gp3`` volume, with a maximum of 1,000 MiB/s.\n Valid Range: Minimum value of 125. Maximum value of 1000.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: VolumeSize
+									"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. The following are the supported volumes sizes for each volume type:\n  +   ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +   ``io1``: 4 - 16,384 GiB\n  +   ``io2``: 4 - 65,536 GiB\n  +   ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +   ``standard``: 1 - 1024 GiB",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: VolumeType
+									"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The volume type. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NoDevice
+							"no_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "To omit the device from the block device mapping, specify an empty string.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VirtualName
+							"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The block device mapping.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CapacityReservationSpecification
+				"capacity_reservation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityReservationPreference
+						"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates the instance's Capacity Reservation preferences. Possible preferences include:\n  +   ``open`` - The instance can run in any ``open`` Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).\n  +   ``none`` - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CapacityReservationTarget
+						"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CapacityReservationId
+								"capacity_reservation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID of the Capacity Reservation in which to run the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CapacityReservationResourceGroupArn
+								"capacity_reservation_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the Capacity Reservation resource group in which to run the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Capacity Reservation targeting option. If you do not specify this parameter, the instance's Capacity Reservation preference defaults to ``open``, which enables it to run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CpuOptions
+				"cpu_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AmdSevSnp
+						"amd_sev_snp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. For more information, see [AMD SEV-SNP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CoreCount
+						"core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of CPU cores for the instance.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ThreadsPerCore
+						"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of threads per CPU core. To disable multithreading for the instance, specify a value of ``1``. Otherwise, specify the default value of ``2``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The CPU options for the instance. For more information, see [Optimize CPU options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreditSpecification
+				"credit_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CpuCredits
+						"cpu_credits": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The credit option for CPU usage of a T instance.\n Valid values: ``standard`` | ``unlimited``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The credit option for CPU usage of the instance. Valid only for T instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DisableApiStop
+				"disable_api_stop": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable the instance for stop protection. For more information, see [Enable stop protection for your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DisableApiTermination
+				"disable_api_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If you set this parameter to ``true``, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute after launch, use [ModifyInstanceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html). Alternatively, if you set ``InstanceInitiatedShutdownBehavior`` to ``terminate``, you can terminate the instance by running the shutdown command from the instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EbsOptimized
+				"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ElasticGpuSpecifications
+				"elastic_gpu_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of Elastic Graphics accelerator.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Deprecated.\n  Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ElasticInferenceAccelerators
+				"elastic_inference_accelerators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Count
+							"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of elastic inference accelerators to attach to the instance. \n Default: 1",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnclaveOptions
+				"enclave_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "If this parameter is set to ``true``, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see [What is Nitro Enclaves?](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the *Nitro Enclaves User Guide*.\n You can't enable AWS Nitro Enclaves and hibernation on the same instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HibernationOptions
+				"hibernation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Configured
+						"configured": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "If you set this parameter to ``true``, the instance is enabled for hibernation.\n Default: ``false``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the [hibernation prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html). For more information, see [Hibernate your Amazon EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamInstanceProfile
+				"iam_instance_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the instance profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the instance profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The name or Amazon Resource Name (ARN) of an IAM instance profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageId
+				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-0ac394d6a3example`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceInitiatedShutdownBehavior
+				"instance_initiated_shutdown_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).\n Default: ``stop``",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceMarketOptions
+				"instance_market_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MarketType
+						"market_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The market type.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpotOptions
+						"spot_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BlockDurationMinutes
+								"block_duration_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Deprecated.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceInterruptionBehavior
+								"instance_interruption_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The behavior when a Spot Instance is interrupted. The default is ``terminate``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxPrice
+								"max_price": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.\n  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SpotInstanceType
+								"spot_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Spot Instance request type.\n If you are using Spot Instances with an Auto Scaling group, use ``one-time`` requests, as the ASlong service handles requesting new Spot Instances whenever the group is below its desired capacity.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValidUntil
+								"valid_until": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The end date of the request, in UTC format (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for persistent requests.\n  +  For a persistent request, the request remains active until the ``ValidUntil`` date and time is reached. Otherwise, the request remains active until you cancel it.\n  +  For a one-time request, ``ValidUntil`` is not supported. The request remains active until all instances launch or you cancel the request.\n  \n Default: 7 days from the current date",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The options for Spot Instances.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The market (purchasing) option for the instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceRequirements
+				"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AcceleratorCount
+						"accelerator_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of accelerators. To specify no maximum limit, omit this parameter. To exclude accelerator-enabled instance types, set ``Max`` to ``0``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum number of accelerators. To specify no minimum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) on an instance.\n To exclude accelerator-enabled instance types, set ``Max`` to ``0``.\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AcceleratorManufacturers
+						"accelerator_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Indicates whether instance types must have accelerators by specific manufacturers.\n  +  For instance types with AWS devices, specify ``amazon-web-services``.\n  +  For instance types with AMD devices, specify ``amd``.\n  +  For instance types with Habana devices, specify ``habana``.\n  +  For instance types with NVIDIA devices, specify ``nvidia``.\n  +  For instance types with Xilinx devices, specify ``xilinx``.\n  \n Default: Any manufacturer",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AcceleratorNames
+						"accelerator_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The accelerators that must be on the instance type.\n  +  For instance types with NVIDIA A10G GPUs, specify ``a10g``.\n  +  For instance types with NVIDIA A100 GPUs, specify ``a100``.\n  +  For instance types with NVIDIA H100 GPUs, specify ``h100``.\n  +  For instance types with AWS Inferentia chips, specify ``inferentia``.\n  +  For instance types with NVIDIA GRID K520 GPUs, specify ``k520``.\n  +  For instance types with NVIDIA K80 GPUs, specify ``k80``.\n  +  For instance types with NVIDIA M60 GPUs, specify ``m60``.\n  +  For instance types with AMD Radeon Pro V520 GPUs, specify ``radeon-pro-v520``.\n  +  For instance types with NVIDIA T4 GPUs, specify ``t4``.\n  +  For instance types with NVIDIA T4G GPUs, specify ``t4g``.\n  +  For instance types with Xilinx VU9P FPGAs, specify ``vu9p``.\n  +  For instance types with NVIDIA V100 GPUs, specify ``v100``.\n  \n Default: Any accelerator",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AcceleratorTotalMemoryMiB
+						"accelerator_total_memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum amount of total accelerator memory, in MiB.\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AcceleratorTypes
+						"accelerator_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The accelerator types that must be on the instance type.\n  +  For instance types with GPU accelerators, specify ``gpu``.\n  +  For instance types with FPGA accelerators, specify ``fpga``.\n  +  For instance types with inference accelerators, specify ``inference``.\n  \n Default: Any accelerator type",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AllowedInstanceTypes
+						"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will allow all the M5a instance types, but not the M5n instance types.\n  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.\n  Default: All instance types",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BareMetal
+						"bare_metal": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether bare metal instance types must be included, excluded, or required.\n  +  To include bare metal instance types, specify ``included``.\n  +  To require only bare metal instance types, specify ``required``.\n  +  To exclude bare metal instance types, specify ``excluded``.\n  \n Default: ``excluded``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BaselineEbsBandwidthMbps
+						"baseline_ebs_bandwidth_mbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BaselinePerformanceFactors
+						"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Cpu
+								"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: References
+										"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: InstanceFamily
+													"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The instance family to refer. Ensure that you specify the correct family name. For example, C6i and C6g are valid values, but C6 is not.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A list of references to be used as baseline for the CPU performance. Currently, you can only specify a single reference across different instance type variations such as CPU manufacturers, architectures etc.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BurstablePerformance
+						"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CpuManufacturers
+						"cpu_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.\n  Default: Any manufacturer",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludedInstanceTypes
+						"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The instance types to exclude.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types.\n  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.\n  Default: No excluded instance types",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceGenerations
+						"instance_generations": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n For current generation instance types, specify ``current``.\n For previous generation instance types, specify ``previous``.\n Default: Current and previous generation instance types",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocalStorage
+						"local_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n  +  To include instance types with instance store volumes, specify ``included``.\n  +  To require only instance types with instance store volumes, specify ``required``.\n  +  To exclude instance types with instance store volumes, specify ``excluded``.\n  \n Default: ``included``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocalStorageTypes
+						"local_storage_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The type of local storage that is required.\n  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.\n  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.\n  \n Default: ``hdd`` and ``ssd``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+						"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MemoryGiBPerVCpu
+						"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum amount of memory per vCPU, in GiB.\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MemoryMiB
+						"memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum amount of memory, in MiB. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum amount of memory, in MiB. To specify no minimum limit, specify ``0``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum amount of memory, in MiB.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkBandwidthGbps
+						"network_bandwidth_gbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum amount of network bandwidth, in Gbps. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum amount of network bandwidth, in Gbps. If this parameter is not specified, there is no minimum limit.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkInterfaceCount
+						"network_interface_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of network interfaces. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum number of network interfaces. To specify no minimum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum number of network interfaces.\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OnDemandMaxPricePercentageOverLowestPrice
+						"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n  Default: ``20``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RequireHibernateSupport
+						"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether instance types must support hibernation for On-Demand Instances.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html).\n Default: ``false``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpotMaxPricePercentageOverLowestPrice
+						"spot_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the Spot price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified Spot price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose Spot price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.\n  Default: ``100``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TotalLocalStorageGB
+						"total_local_storage_gb": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum amount of total local storage, in GB. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum amount of total local storage, in GB. To specify no minimum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum amount of total local storage, in GB.\n Default: No minimum or maximum limits",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VCpuCount
+						"v_cpu_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Max
+								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of vCPUs. To specify no maximum limit, omit this parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Min
+								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The minimum number of vCPUs. To specify no minimum limit, specify ``0``.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The minimum and maximum number of vCPUs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceType
+				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The instance type. For more information, see [Amazon EC2 instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n If you specify ``InstanceType``, you can't specify ``InstanceRequirements``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KernelId
+				"kernel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the kernel.\n We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User Provided Kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyName
+				"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the key pair. You can create a key pair using [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) or [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).\n  If you do not specify a key pair, you can't connect to the instance unless you choose an AMI that is configured to allow users another way to log in.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LicenseSpecifications
+				"license_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LicenseConfigurationArn
+							"license_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the license configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The license configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaintenanceOptions
+				"maintenance_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoRecovery
+						"auto_recovery": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Disables the automatic recovery behavior of your instance or sets it to default.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The maintenance options of your instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetadataOptions
+				"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HttpEndpoint
+						"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is ``enabled``.\n  If you specify a value of ``disabled``, you will not be able to access your instance metadata.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HttpProtocolIpv6
+						"http_protocol_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables or disables the IPv6 endpoint for the instance metadata service.\n Default: ``disabled``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HttpPutResponseHopLimit
+						"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.\n Default: ``1`` \n Possible values: Integers from 1 to 64",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HttpTokens
+						"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether IMDSv2 is required.\n  +   ``optional`` - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.\n  +   ``required`` - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.\n  \n Default: If the value of ``ImdsSupport`` for the Amazon Machine Image (AMI) for your instance is ``v2.0``, the default is ``required``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceMetadataTags
+						"instance_metadata_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Set to ``enabled`` to allow access to instance tags from the instance metadata. Set to ``disabled`` to turn off access to instance tags from the instance metadata. For more information, see [Work with instance tags using the instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).\n Default: ``disabled``",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The metadata options for the instance. For more information, see [Instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Monitoring
+				"monitoring": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specify ``true`` to enable detailed monitoring. Otherwise, basic monitoring is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The monitoring for the instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkInterfaces
+				"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AssociateCarrierIpAddress
+							"associate_carrier_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Associates a Carrier IP address with eth0 for a new network interface.\n Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see [Carrier IP addresses](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Developer Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AssociatePublicIpAddress
+							"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Associates a public IPv4 address with eth0 for a new network interface.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ConnectionTrackingSpecification
+							"connection_tracking_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TcpEstablishedTimeout
+									"tcp_established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UdpStreamTimeout
+									"udp_stream_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UdpTimeout
+									"udp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A connection tracking specification for the network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DeleteOnTermination
+							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether the network interface is deleted when the instance is terminated.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A description for the network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DeviceIndex
+							"device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EnaSrdSpecification
+							"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnaSrdEnabled
+									"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether ENA Express is enabled for the network interface.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EnaSrdUdpSpecification
+									"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EnaSrdUdpEnabled
+											"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configures ENA Express for UDP network traffic.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The ENA Express configuration for the network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Groups
+							"groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The IDs of one or more security groups.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InterfaceType
+							"interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon EC2 User Guide*.\n If you are not creating an EFA, specify ``interface`` or omit this parameter.\n Valid values: ``interface`` | ``efa``",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ipv4PrefixCount
+							"ipv_4_prefix_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv4Prefix`` option.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ipv4Prefixes
+							"ipv_4_prefixes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Ipv4Prefix
+										"ipv_4_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The IPv4 prefix. For information, see [Assigning prefixes to network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon EC2 User Guide*.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv4PrefixCount`` option.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ipv6AddressCount
+							"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ipv6Addresses
+							"ipv_6_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Ipv6Address
+										"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ipv6PrefixCount
+							"ipv_6_prefix_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv6Prefix`` option.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ipv6Prefixes
+							"ipv_6_prefixes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Ipv6Prefix
+										"ipv_6_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The IPv6 prefix.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv6PrefixCount`` option.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NetworkCardIndex
+							"network_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NetworkInterfaceId
+							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PrimaryIpv6
+							"primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "The primary IPv6 address of the network interface. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information about primary IPv6 addresses, see [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PrivateIpAddress
+							"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The primary private IPv4 address of the network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PrivateIpAddresses
+							"private_ip_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Primary
+										"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PrivateIpAddress
+										"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The private IPv4 address.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "One or more private IPv4 addresses.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SecondaryPrivateIpAddressCount
+							"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of secondary private IPv4 addresses to assign to a network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SubnetId
+							"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the subnet for the network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The network interfaces for the instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Placement
+				"placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Affinity
+						"affinity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The affinity setting for an instance on a Dedicated Host.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AvailabilityZone
+						"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Availability Zone for the instance.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GroupId
+						"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Group Id of a placement group. You must specify the Placement Group *Group Id* to launch an instance in a shared placement group.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GroupName
+						"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the placement group for the instance.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostId
+						"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the Dedicated Host for the instance.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostResourceGroupArn
+						"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the *Tenancy* parameter or set it to ``host``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PartitionNumber
+						"partition_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of the partition the instance should launch in. Valid only if the placement group strategy is set to ``partition``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpreadDomain
+						"spread_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Reserved for future use.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tenancy
+						"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The tenancy of the instance. An instance with a tenancy of dedicated runs on single-tenant hardware.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The placement for the instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsNameOptions
+				"private_dns_name_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableResourceNameDnsAAAARecord
+						"enable_resource_name_dns_aaaa_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableResourceNameDnsARecord
+						"enable_resource_name_dns_a_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS A records.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostnameType
+						"hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RamDiskId
+				"ram_disk_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the RAM disk.\n  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User provided kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.\n If you specify a network interface, you must specify any security groups as part of the network interface instead.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The names of the security groups. For a nondefault VPC, you must use security group IDs instead.\n If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TagSpecifications
+				"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ResourceType
+							"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of resource to tag. You can specify tags for the following resource types only: ``instance`` | ``volume`` | ``network-interface`` | ``spot-instances-request``. If the instance does not include the resource type that you specify, the instance launch fails. For example, not all instance types include a volume.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "The tags to apply to the resource.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The tags to apply to the resources that are created during instance launch.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserData
+				"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see [Run commands on your Amazon EC2 instance at launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) in the *Amazon EC2 User Guide*.\n If you are creating the launch template for use with BATCH, the user data must be provided in the [MIME multi-part archive format](https://docs.aws.amazon.com/https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive). For more information, see [Amazon EC2 user data in launch templates](https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in the *User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The information for the launch template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LaunchTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -2667,7 +1939,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"launch_template_id": schemaAttribute22d536a42b667687572e8d59(),
+		"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LaunchTemplateName
 		// CloudFormation resource type schema:
 		//
@@ -2675,7 +1950,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A name for the launch template.",
 		//	  "type": "string"
 		//	}
-		"launch_template_name": schemaAttribute2b6d43aa7ce6563507de22f9(),
+		"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the launch template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -2719,7 +1997,38 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tag_specifications": schemaAttribute1e3116b3aace99768aa27e23(),
+		"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of resource. To tag a launch template, ``ResourceType`` must be ``launch-template``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The tag value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The tags for the resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionDescription
 		// CloudFormation resource type schema:
 		//
@@ -2727,7 +2036,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A description for the first version of the launch template.",
 		//	  "type": "string"
 		//	}
-		"version_description": schemaAttribute2a922da3e54ea0907fb6e6d6(),
+		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the first version of the launch template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

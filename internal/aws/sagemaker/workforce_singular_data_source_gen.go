@@ -15,249 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a6f4945ccc3c807e104cc4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP client secret used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10573caafc0a174321f23383() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of one to ten Classless Inter-Domain Routing (CIDR) values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute150dd0ac0f03cc54f977bc9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19d512147bfc438f49f0669c() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A string to string map of identifiers specific to the custom identity provider (IdP) being used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ce35df6992696506ba9c64d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f65624e89685ece0420c147() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP logout endpoint used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f90775a5580e0a2daa69651() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subdomain for your OIDC Identity Provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32da2eb261a77e4c695fbfab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36550be8ffe3fe9584e8b062() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client ID for your Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cd4af5d9ac8daa96444ec3e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The VPC security group IDs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d2bba7246c53b104c3237c0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttribute3cd4af5d9ac8daa96444ec3e(),
-			// Property: Subnets
-			"subnets": schemaAttribute6099f76eecee17a8fa08718d(),
-			// Property: VpcId
-			"vpc_id": schemaAttributef152b798951c1277b151b8c8(),
-		}, /*END SCHEMA*/
-		Description: "The VPC configuration for the workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6099f76eecee17a8fa08718d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The VPC subnets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c8cf5e80278f7ffe4018e3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute762006395e895f546074a7f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81586c5cbd7dbc77c25b0a53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address type for the workforce. IPv4 only or dualstack (IPv4 and IPv6).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94a84933082496abbfe13315() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cidrs
-			"cidrs": schemaAttribute10573caafc0a174321f23383(),
-		}, /*END SCHEMA*/
-		Description: "A list of IP address ranges used to access your training data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98ef7f88479064dfe4ac8aac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationRequestExtraParams
-			"authentication_request_extra_params": schemaAttribute19d512147bfc438f49f0669c(),
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttributed5152a0950be0e8f63203bae(),
-			// Property: ClientId
-			"client_id": schemaAttributec52931a071fb978b158902a0(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute0a6f4945ccc3c807e104cc4b(),
-			// Property: Issuer
-			"issuer": schemaAttributed7d2cee4327eb9493155ed83(),
-			// Property: JwksUri
-			"jwks_uri": schemaAttribute6c8cf5e80278f7ffe4018e3f(),
-			// Property: LogoutEndpoint
-			"logout_endpoint": schemaAttribute1f65624e89685ece0420c147(),
-			// Property: Scope
-			"scope": schemaAttributecbee16b32d1b91e71a001b14(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttributea4878778b0217761ae9375b7(),
-			// Property: UserInfoEndpoint
-			"user_info_endpoint": schemaAttributed80bfcbfabb5cbf4ff970eca(),
-		}, /*END SCHEMA*/
-		Description: "The configuration of an OIDC Identity Provider (IdP) private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4878778b0217761ae9375b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP token endpoint used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab890a521703fb04c3861520() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute762006395e895f546074a7f1(),
-				// Property: Value
-				"value": schemaAttribute32da2eb261a77e4c695fbfab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2efdf511549ced7d20bda51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID for your Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec52931a071fb978b158902a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP client ID used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbee16b32d1b91e71a001b14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5152a0950be0e8f63203bae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP authorization endpoint used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7d2cee4327eb9493155ed83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP issuer used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed80bfcbfabb5cbf4ff970eca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC IdP user info endpoint used to configure your private workforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb26bd999e5b65a8351d2cd7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute36550be8ffe3fe9584e8b062(),
-			// Property: UserPool
-			"user_pool": schemaAttributeb2efdf511549ced7d20bda51(),
-		}, /*END SCHEMA*/
-		Description: "The configuration of an Amazon Cognito workforce. A single Cognito workforce is created using and corresponds to a single Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef152b798951c1277b151b8c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_workforce", workforceDataSource)
 }
@@ -288,7 +45,22 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cognito_config": schemaAttributedb26bd999e5b65a8351d2cd7(),
+		"cognito_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientId
+				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client ID for your Amazon Cognito user pool.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserPool
+				"user_pool": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID for your Amazon Cognito user pool.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration of an Amazon Cognito workforce. A single Cognito workforce is created using and corresponds to a single Amazon Cognito user pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +72,10 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schemaAttribute81586c5cbd7dbc77c25b0a53(),
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address type for the workforce. IPv4 only or dualstack (IPv4 and IPv6).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OidcConfig
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +161,64 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"oidc_config": schemaAttribute98ef7f88479064dfe4ac8aac(),
+		"oidc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationRequestExtraParams
+				"authentication_request_extra_params": // Pattern: ""
+				schema.MapAttribute{                   /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A string to string map of identifiers specific to the custom identity provider (IdP) being used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthorizationEndpoint
+				"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP authorization endpoint used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientId
+				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP client ID used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientSecret
+				"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP client secret used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Issuer
+				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP issuer used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JwksUri
+				"jwks_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogoutEndpoint
+				"logout_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP logout endpoint used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Scope
+				"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TokenEndpoint
+				"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP token endpoint used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserInfoEndpoint
+				"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC IdP user info endpoint used to configure your private workforce.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration of an OIDC Identity Provider (IdP) private workforce.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceIpConfig
 		// CloudFormation resource type schema:
 		//
@@ -408,7 +240,18 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_ip_config": schemaAttribute94a84933082496abbfe13315(),
+		"source_ip_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidrs
+				"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of one to ten Classless Inter-Domain Routing (CIDR) values.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A list of IP address ranges used to access your training data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubDomain
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +259,10 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The subdomain for your OIDC Identity Provider.",
 		//	  "type": "string"
 		//	}
-		"sub_domain": schemaAttribute1f90775a5580e0a2daa69651(),
+		"sub_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subdomain for your OIDC Identity Provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -449,7 +295,24 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeab890a521703fb04c3861520(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkforceArn
 		// CloudFormation resource type schema:
 		//
@@ -459,7 +322,10 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workforce/.*$",
 		//	  "type": "string"
 		//	}
-		"workforce_arn": schemaAttribute150dd0ac0f03cc54f977bc9d(),
+		"workforce_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the private workforce.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkforceName
 		// CloudFormation resource type schema:
 		//
@@ -470,7 +336,10 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"workforce_name": schemaAttribute1ce35df6992696506ba9c64d(),
+		"workforce_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the private workforce.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkforceVpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -503,7 +372,29 @@ func workforceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"workforce_vpc_config": schemaAttribute4d2bba7246c53b104c3237c0(),
+		"workforce_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The VPC security group IDs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Subnets
+				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The VPC subnets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC configuration for the workforce.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,77 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute56d20458f3c35751e1339b83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subject line of the custom verification email.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69f3d3775002142dcc68b0f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address that the custom verification email is sent from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77d4aed973eee9cb27d8828c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef43456eeddd87d9a9de80feb(),
-				// Property: Value
-				"value": schemaAttributed8d27b1b4e35a96440c22693(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags (keys and values) associated with the tenant.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86a3f06e00539a04a10598b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebccb5a4f1d5b368412d6c614() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed75ee72ea550f7b6450494d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the custom verification email template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed86da3df764dfc2acb538050() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8d27b1b4e35a96440c22693() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the key-value tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef43456eeddd87d9a9de80feb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the key-value tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_custom_verification_email_template", customVerificationEmailTemplateDataSource)
 }
@@ -100,7 +29,10 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "description": "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
 		//	  "type": "string"
 		//	}
-		"failure_redirection_url": schemaAttributebccb5a4f1d5b368412d6c614(),
+		"failure_redirection_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromEmailAddress
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +40,10 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "description": "The email address that the custom verification email is sent from.",
 		//	  "type": "string"
 		//	}
-		"from_email_address": schemaAttribute69f3d3775002142dcc68b0f8(),
+		"from_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address that the custom verification email is sent from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SuccessRedirectionURL
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +51,10 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "description": "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
 		//	  "type": "string"
 		//	}
-		"success_redirection_url": schemaAttribute86a3f06e00539a04a10598b9(),
+		"success_redirection_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +88,24 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute77d4aed973eee9cb27d8828c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the key-value tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the key-value tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the tenant.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateContent
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +113,10 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "description": "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
 		//	  "type": "string"
 		//	}
-		"template_content": schemaAttributed86da3df764dfc2acb538050(),
+		"template_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateName
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +126,10 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_name": schemaAttributed75ee72ea550f7b6450494d6(),
+		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the custom verification email template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateSubject
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +137,10 @@ func customVerificationEmailTemplateDataSource(ctx context.Context) (datasource.
 		//	  "description": "The subject line of the custom verification email.",
 		//	  "type": "string"
 		//	}
-		"template_subject": schemaAttribute56d20458f3c35751e1339b83(),
+		"template_subject": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subject line of the custom verification email.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,723 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute003dc9060fa23d5036e359ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Displays whether this is a period-based SLO or a request-based SLO.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cf09e599f4d407106e59e87() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d4e0bf49d45f20bcbeb685e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Expression
-			"expression": schemaAttribute9357ae0a06ce6ba255b00348(),
-		}, /*END SCHEMA*/
-		Description: "This object defines how often to repeat a time exclusion window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fb080efe62e0c44f272da4b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LookBackWindowMinutes
-				"look_back_window_minutes": schemaAttribute1c16b327c02d6b4281e8ebe5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute152ae97b94a2859a1fd082ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute171e77f029fd5bdcabb745ad() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb3dca8eb6e3d51668da60663(),
-				// Property: Value
-				"value": schemaAttribute1f9b9d2acda5ea14936bfdee(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of tag keys and values associated with the resource you specified",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute197b2e150807ac158316ae2f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DependencyKeyAttributes
-			"dependency_key_attributes": schemaAttributea2ee1dab8040681b0388d0df(),
-			// Property: DependencyOperationName
-			"dependency_operation_name": schemaAttribute152ae97b94a2859a1fd082ef(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for identifying a dependency and its operation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1acfa9ee5a0545410e065ec5() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value that the SLI metric is compared to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bcbc767285ee4cada25fca5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Duration
-			"duration": schemaAttribute4c120c65f745c424c9b5a3b0(),
-			// Property: DurationUnit
-			"duration_unit": schemaAttribute757f5bdf6979b996c035e3d0(),
-			// Property: StartTime
-			"start_time": schemaAttribute942a39ba72a9daedab96034a(),
-		}, /*END SCHEMA*/
-		Description: "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c16b327c02d6b4281e8ebe5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes to use as the look-back window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f9b9d2acda5ea14936bfdee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the specified tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute242404cdb31c12e3fb6d11f7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Epoch time in seconds of the time that this SLO was most recently updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute263f63885361a836ba827227() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a852d12041848cf57126344() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComparisonOperator
-			"comparison_operator": schemaAttribute74d0705a985d385e2f8b9ad5(),
-			// Property: MetricThreshold
-			"metric_threshold": schemaAttribute1acfa9ee5a0545410e065ec5(),
-			// Property: SliMetric
-			"sli_metric": schemaAttributeef10517f53196639d03c6a53(),
-		}, /*END SCHEMA*/
-		Description: "This structure contains information about the performance metric that an SLO monitors.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b681814cc2855e2f8ea81a4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Duration
-			"duration": schemaAttribute4c120c65f745c424c9b5a3b0(),
-			// Property: DurationUnit
-			"duration_unit": schemaAttribute757f5bdf6979b996c035e3d0(),
-		}, /*END SCHEMA*/
-		Description: "If the interval is a calendar interval, this structure contains the interval specifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c211197479264820b859895() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d695a6f3557b39dae6ad4da() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OperationName
-				"operation_name": schemaAttribute60fad15a45adaabea9bf40b2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute303851c46186d800fae4cebc() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Optional additional attributes for the metric source",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3106af05e0a5ff39557812bf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Duration
-			"duration": schemaAttribute4c120c65f745c424c9b5a3b0(),
-			// Property: DurationUnit
-			"duration_unit": schemaAttribute757f5bdf6979b996c035e3d0(),
-		}, /*END SCHEMA*/
-		Description: "This object defines the length of time an exclusion window should span.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute373498e3f1502c7aca04f709() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of this SLO.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43cba979fbbb6af8ec2cc1d2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Epoch time in seconds of the time that this SLO was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute449caeee7be4a4f95668b2a4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Reason
-				"reason": schemaAttribute58f1d4129cb6c763d887b2a2(),
-				// Property: RecurrenceRule
-				"recurrence_rule": schemaAttribute0d4e0bf49d45f20bcbeb685e(),
-				// Property: StartTime
-				"start_time": schemaAttribute8ebefcb1c9a33087b9fc3dda(),
-				// Property: Window
-				"window": schemaAttribute3106af05e0a5ff39557812bf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4621f89009be8dceacd51509() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric for non-Application Signals services",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute487da19421c401722606adea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a4a3b46dc7378a7a45420c3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComparisonOperator
-			"comparison_operator": schemaAttribute74d0705a985d385e2f8b9ad5(),
-			// Property: MetricThreshold
-			"metric_threshold": schemaAttribute1acfa9ee5a0545410e065ec5(),
-			// Property: RequestBasedSliMetric
-			"request_based_sli_metric": schemaAttributebc4ec83c4b13e3ce60eda59a(),
-		}, /*END SCHEMA*/
-		Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b9a2949c864b10f66642b20() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Required attributes that identify the metric source",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c120c65f745c424c9b5a3b0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute565543d61c451b7b89c24167() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AttainmentGoal
-			"attainment_goal": schemaAttributeae2ac724cf102cd9e342b9b2(),
-			// Property: Interval
-			"interval": schemaAttribute9c5f2c8919ec7ca5cb4fc668(),
-			// Property: WarningThreshold
-			"warning_threshold": schemaAttribute0cf09e599f4d407106e59e87(),
-		}, /*END SCHEMA*/
-		Description: "A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5673127dcf4ea0bfd924e839() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The math expression to be performed on the returned data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58f1d4129cb6c763d887b2a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional reason for scheduling this time exclusion window. Default is 'No reason'.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e72a14dcb8cb4f9f2475392() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60fad15a45adaabea9bf40b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute663e62c367670f3c56c3ca41() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttributebbf3eb49a8b857fe50c3ec3f(),
-				// Property: Expression
-				"expression": schemaAttribute5673127dcf4ea0bfd924e839(),
-				// Property: Id
-				"id": schemaAttribute990db2f8c8509a3a36fbbabf(),
-				// Property: MetricStat
-				"metric_stat": schemaAttributefca3d91121e5746219493ed9(),
-				// Property: ReturnData
-				"return_data": schemaAttribute2c211197479264820b859895(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67837e966ca449caa6cdfb64() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The granularity, in seconds, to be used for the metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a80546eb9aad1e2f464e473() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributed38aeb3dc465339b0c0e5be7(),
-				// Property: Value
-				"value": schemaAttribute5e72a14dcb8cb4f9f2475392(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of one or more dimensions to use to define the metric that you want to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d4239ec5693a5f1a2b8cd8c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CompositeSliComponents
-			"composite_sli_components": schemaAttribute2d695a6f3557b39dae6ad4da(),
-			// Property: SelectionConfig
-			"selection_config": schemaAttributef4cd96936dc19d8f67ff3eb4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70fb30253adb17b01cd577ae() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BadCountMetric
-			"bad_count_metric": schemaAttributeffba45f55d2bbedc3480756f(),
-			// Property: GoodCountMetric
-			"good_count_metric": schemaAttributea0e4812f7a0f67210807fd31(),
-		}, /*END SCHEMA*/
-		Description: "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74d0705a985d385e2f8b9ad5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute757f5bdf6979b996c035e3d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the interval unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88f6b7d28ca0435b0f2998ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cdfbae99a7884115bbadbd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ebefcb1c9a33087b9fc3dda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9357ae0a06ce6ba255b00348() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cron or rate expression denoting how often to repeat this exclusion window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute942a39ba72a9daedab96034a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.\nAs soon as one calendar interval ends, another automatically begins.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute990db2f8c8509a3a36fbbabf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A short name used to tie this object to the results in the response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c5f2c8919ec7ca5cb4fc668() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CalendarInterval
-			"calendar_interval": schemaAttribute1bcbc767285ee4cada25fca5(),
-			// Property: RollingInterval
-			"rolling_interval": schemaAttribute2b681814cc2855e2f8ea81a4(),
-		}, /*END SCHEMA*/
-		Description: "The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.\nIf you omit this parameter, a rolling interval of 7 days is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0e4812f7a0f67210807fd31() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttributebbf3eb49a8b857fe50c3ec3f(),
-				// Property: Expression
-				"expression": schemaAttribute5673127dcf4ea0bfd924e839(),
-				// Property: Id
-				"id": schemaAttribute990db2f8c8509a3a36fbbabf(),
-				// Property: MetricStat
-				"metric_stat": schemaAttributefca3d91121e5746219493ed9(),
-				// Property: ReturnData
-				"return_data": schemaAttribute2c211197479264820b859895(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2ee1dab8040681b0388d0df() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6640384116743924f99c170() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace of the metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8c31f4299c289b0f207da98() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae2ac724cf102cd9e342b9b2() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state.\nIf you omit this parameter, 99 is used to represent 99% as the attainment goal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3dca8eb6e3d51668da60663() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4231017c53b7143c2194819() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5d8b8564e799c7fb19bd853() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MetricSourceAttributes
-			"metric_source_attributes": schemaAttribute303851c46186d800fae4cebc(),
-			// Property: MetricSourceKeyAttributes
-			"metric_source_key_attributes": schemaAttribute4b9a2949c864b10f66642b20(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for identifying the source of metrics for non-Application Signals services",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6d557b8166ad3213081e1f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbf3eb49a8b857fe50c3ec3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc4ec83c4b13e3ce60eda59a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CompositeSliConfig
-			"composite_sli_config": schemaAttribute6d4239ec5693a5f1a2b8cd8c(),
-			// Property: DependencyConfig
-			"dependency_config": schemaAttribute197b2e150807ac158316ae2f(),
-			// Property: KeyAttributes
-			"key_attributes": schemaAttribute263f63885361a836ba827227(),
-			// Property: MetricName
-			"metric_name": schemaAttribute4621f89009be8dceacd51509(),
-			// Property: MetricSource
-			"metric_source": schemaAttributeb5d8b8564e799c7fb19bd853(),
-			// Property: MetricType
-			"metric_type": schemaAttributec3a0455d0c6ddfe6e49ef654(),
-			// Property: MonitoredRequestCountMetric
-			"monitored_request_count_metric": schemaAttribute70fb30253adb17b01cd577ae(),
-			// Property: OperationName
-			"operation_name": schemaAttribute8cdfbae99a7884115bbadbd6(),
-			// Property: TotalRequestCountMetric
-			"total_request_count_metric": schemaAttribute663e62c367670f3c56c3ca41(),
-		}, /*END SCHEMA*/
-		Description: "This structure contains the information about the metric that is used for a request-based SLO.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebec5df540981493bf42f949f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttributebbf3eb49a8b857fe50c3ec3f(),
-				// Property: Expression
-				"expression": schemaAttribute5673127dcf4ea0bfd924e839(),
-				// Property: Id
-				"id": schemaAttribute990db2f8c8509a3a36fbbabf(),
-				// Property: MetricStat
-				"metric_stat": schemaAttributefca3d91121e5746219493ed9(),
-				// Property: ReturnData
-				"return_data": schemaAttribute2c211197479264820b859895(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3a0455d0c6ddfe6e49ef654() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed38aeb3dc465339b0c0e5be7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd4f7062da60021cc670b310() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Dimensions
-			"dimensions": schemaAttribute6a80546eb9aad1e2f464e473(),
-			// Property: MetricName
-			"metric_name": schemaAttributeb4231017c53b7143c2194819(),
-			// Property: Namespace
-			"namespace": schemaAttributea6640384116743924f99c170(),
-		}, /*END SCHEMA*/
-		Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2d61372d5878a5db406704c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of this SLO.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef10517f53196639d03c6a53() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CompositeSliConfig
-			"composite_sli_config": schemaAttribute6d4239ec5693a5f1a2b8cd8c(),
-			// Property: DependencyConfig
-			"dependency_config": schemaAttribute197b2e150807ac158316ae2f(),
-			// Property: KeyAttributes
-			"key_attributes": schemaAttribute263f63885361a836ba827227(),
-			// Property: MetricDataQueries
-			"metric_data_queries": schemaAttributebec5df540981493bf42f949f(),
-			// Property: MetricName
-			"metric_name": schemaAttribute4621f89009be8dceacd51509(),
-			// Property: MetricSource
-			"metric_source": schemaAttributeb5d8b8564e799c7fb19bd853(),
-			// Property: MetricType
-			"metric_type": schemaAttributec3a0455d0c6ddfe6e49ef654(),
-			// Property: OperationName
-			"operation_name": schemaAttribute8cdfbae99a7884115bbadbd6(),
-			// Property: PeriodSeconds
-			"period_seconds": schemaAttributea8c31f4299c289b0f207da98(),
-			// Property: Statistic
-			"statistic": schemaAttribute88f6b7d28ca0435b0f2998ae(),
-		}, /*END SCHEMA*/
-		Description: "A structure that contains information about the metric that the SLO monitors.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4cd96936dc19d8f67ff3eb4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Pattern
-			"pattern": schemaAttribute60fad15a45adaabea9bf40b2(),
-			// Property: Type
-			"type": schemaAttribute60fad15a45adaabea9bf40b2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefca3d91121e5746219493ed9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Metric
-			"metric": schemaAttributedd4f7062da60021cc670b310(),
-			// Property: Period
-			"period": schemaAttribute67837e966ca449caa6cdfb64(),
-			// Property: Stat
-			"stat": schemaAttribute487da19421c401722606adea(),
-			// Property: Unit
-			"unit": schemaAttributeb6d557b8166ad3213081e1f6(),
-		}, /*END SCHEMA*/
-		Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff9ada0ea5c9615e09fed51f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description for this SLO. Default is 'No description'",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffba45f55d2bbedc3480756f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttributebbf3eb49a8b857fe50c3ec3f(),
-				// Property: Expression
-				"expression": schemaAttribute5673127dcf4ea0bfd924e839(),
-				// Property: Id
-				"id": schemaAttribute990db2f8c8509a3a36fbbabf(),
-				// Property: MetricStat
-				"metric_stat": schemaAttributefca3d91121e5746219493ed9(),
-				// Property: ReturnData
-				"return_data": schemaAttribute2c211197479264820b859895(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_applicationsignals_service_level_objective", serviceLevelObjectiveDataSource)
 }
@@ -748,7 +31,10 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:[^:]*:application-signals:[^:]*:[^:]*:slo\\/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute373498e3f1502c7aca04f709(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of this SLO.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BurnRateConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -776,7 +62,19 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"burn_rate_configurations": schemaAttribute0fb080efe62e0c44f272da4b(),
+		"burn_rate_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LookBackWindowMinutes
+					"look_back_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of minutes to use as the look-back window.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -785,7 +83,10 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minimum": 946684800,
 		//	  "type": "integer"
 		//	}
-		"created_time": schemaAttribute43cba979fbbb6af8ec2cc1d2(),
+		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Epoch time in seconds of the time that this SLO was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -796,7 +97,10 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeff9ada0ea5c9615e09fed51f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description for this SLO. Default is 'No description'",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationType
 		// CloudFormation resource type schema:
 		//
@@ -808,7 +112,10 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"evaluation_type": schemaAttribute003dc9060fa23d5036e359ba(),
+		"evaluation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Displays whether this is a period-based SLO or a request-based SLO.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExclusionWindows
 		// CloudFormation resource type schema:
 		//
@@ -883,7 +190,53 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"exclusion_windows": schemaAttribute449caeee7be4a4f95668b2a4(),
+		"exclusion_windows": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Reason
+					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An optional reason for scheduling this time exclusion window. Default is 'No reason'.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RecurrenceRule
+					"recurrence_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Expression
+							"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A cron or rate expression denoting how often to repeat this exclusion window.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "This object defines how often to repeat a time exclusion window.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartTime
+					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Window
+					"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Duration
+							"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DurationUnit
+							"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the interval unit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "This object defines the length of time an exclusion window should span.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Goal
 		// CloudFormation resource type schema:
 		//
@@ -967,7 +320,68 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"goal": schemaAttribute565543d61c451b7b89c24167(),
+		"goal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttainmentGoal
+				"attainment_goal": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state.\nIf you omit this parameter, 99 is used to represent 99% as the attainment goal.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Interval
+				"interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CalendarInterval
+						"calendar_interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Duration
+								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DurationUnit
+								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the interval unit.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StartTime
+								"start_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.\nAs soon as one calendar interval ends, another automatically begins.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RollingInterval
+						"rolling_interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Duration
+								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DurationUnit
+								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the interval unit.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "If the interval is a calendar interval, this structure contains the interval specifications.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.\nIf you omit this parameter, a rolling interval of 7 days is used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WarningThreshold
+				"warning_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -976,7 +390,10 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minimum": 946684800,
 		//	  "type": "integer"
 		//	}
-		"last_updated_time": schemaAttribute242404cdb31c12e3fb6d11f7(),
+		"last_updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Epoch time in seconds of the time that this SLO was most recently updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -985,7 +402,10 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee2d61372d5878a5db406704c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of this SLO.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequestBasedSli
 		// CloudFormation resource type schema:
 		//
@@ -1445,7 +865,391 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"request_based_sli": schemaAttribute4a4a3b46dc7378a7a45420c3(),
+		"request_based_sli": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComparisonOperator
+				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricThreshold
+				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The value that the SLI metric is compared to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RequestBasedSliMetric
+				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeSliConfig
+						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompositeSliComponents
+								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperationName
+											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionConfig
+								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Pattern
+										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DependencyConfig
+						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DependencyKeyAttributes
+								"dependency_key_attributes": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DependencyOperationName
+								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying a dependency and its operation",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyAttributes
+						"key_attributes":    // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the metric for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricSource
+						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricSourceAttributes
+								"metric_source_attributes": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Optional additional attributes for the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MetricSourceKeyAttributes
+								"metric_source_key_attributes": // Pattern: ""
+								schema.MapAttribute{            /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Required attributes that identify the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricType
+						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MonitoredRequestCountMetric
+						"monitored_request_count_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BadCountMetric
+								"bad_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountId
+											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The math expression to be performed on the returned data.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Id
+											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A short name used to tie this object to the results in the response.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MetricStat
+											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Metric
+													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MetricName
+															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Namespace
+															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The namespace of the metric.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Period
+													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "The granularity, in seconds, to be used for the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Stat
+													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Unit
+													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ReturnData
+											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: GoodCountMetric
+								"good_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccountId
+											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The math expression to be performed on the returned data.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Id
+											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A short name used to tie this object to the results in the response.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MetricStat
+											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Metric
+													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MetricName
+															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to use.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Namespace
+															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The namespace of the metric.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Period
+													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "The granularity, in seconds, to be used for the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Stat
+													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Unit
+													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ReturnData
+											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OperationName
+						"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TotalRequestCountMetric
+						"total_request_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccountId
+									"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The math expression to be performed on the returned data.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A short name used to tie this object to the results in the response.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MetricStat
+									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Dimensions
+													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MetricName
+													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the metric to use.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The namespace of the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Period
+											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The granularity, in seconds, to be used for the metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Stat
+											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReturnData
+									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "This structure contains the information about the metric that is used for a request-based SLO.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Sli
 		// CloudFormation resource type schema:
 		//
@@ -1720,7 +1524,220 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sli": schemaAttribute2a852d12041848cf57126344(),
+		"sli": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComparisonOperator
+				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricThreshold
+				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The value that the SLI metric is compared to.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SliMetric
+				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeSliConfig
+						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompositeSliComponents
+								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperationName
+											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionConfig
+								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Pattern
+										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DependencyConfig
+						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DependencyKeyAttributes
+								"dependency_key_attributes": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DependencyOperationName
+								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying a dependency and its operation",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyAttributes
+						"key_attributes":    // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricDataQueries
+						"metric_data_queries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccountId
+									"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The math expression to be performed on the returned data.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A short name used to tie this object to the results in the response.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MetricStat
+									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Dimensions
+													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MetricName
+													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the metric to use.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The namespace of the metric.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Period
+											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The granularity, in seconds, to be used for the metric.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Stat
+											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReturnData
+									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the metric for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricSource
+						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricSourceAttributes
+								"metric_source_attributes": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Optional additional attributes for the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MetricSourceKeyAttributes
+								"metric_source_key_attributes": // Pattern: ""
+								schema.MapAttribute{            /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Required attributes that identify the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricType
+						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OperationName
+						"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PeriodSeconds
+						"period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Statistic
+						"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A structure that contains information about the metric that the SLO monitors.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This structure contains information about the performance metric that an SLO monitors.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1755,7 +1772,24 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute171e77f029fd5bdcabb745ad(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of tag keys and values associated with the resource you specified",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

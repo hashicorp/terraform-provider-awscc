@@ -14,123 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3eefa6febcc50bd14fad5320() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the tests are intended for qualification in a suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53d7151ffe9ad59699fc5c19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59118d6f03edd53dad0ea605() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateArn
-				"certificate_arn": schemaAttributeff7463a5abd2ab31a085d0c8(),
-				// Property: ThingArn
-				"thing_arn": schemaAttributeff7463a5abd2ab31a085d0c8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The devices being tested in the test suite",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87229a3b9b9fb10eddbcdf35() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DevicePermissionRoleArn
-			"device_permission_role_arn": schemaAttributeecfbf2471ef58199814ee02a(),
-			// Property: Devices
-			"devices": schemaAttribute59118d6f03edd53dad0ea605(),
-			// Property: IntendedForQualification
-			"intended_for_qualification": schemaAttribute3eefa6febcc50bd14fad5320(),
-			// Property: RootGroup
-			"root_group": schemaAttributec450a486d763ca84ef0bed3e(),
-			// Property: SuiteDefinitionName
-			"suite_definition_name": schemaAttributecaf2b91c18ff0cfc86476ea7(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute906e45fd8c5492919711bd68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb750069dcaf5d5a94b257b72() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute906e45fd8c5492919711bd68(),
-				// Property: Value
-				"value": schemaAttribute53d7151ffe9ad59699fc5c19(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9a1913aef6347a430ca97d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource name for the suite definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec450a486d763ca84ef0bed3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The root group of the test suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaf2b91c18ff0cfc86476ea7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Name of the suite definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd275faf775ba67356a79eb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The suite definition version of a test suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf8074de8ba5261ff3022786() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the suite definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecfbf2471ef58199814ee02a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device permission role arn of the test suite.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff7463a5abd2ab31a085d0c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotcoredeviceadvisor_suite_definition", suiteDefinitionDataSource)
 }
@@ -148,7 +31,10 @@ func suiteDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"suite_definition_arn": schemaAttributeb9a1913aef6347a430ca97d8(),
+		"suite_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource name for the suite definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SuiteDefinitionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +92,48 @@ func suiteDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"suite_definition_configuration": schemaAttribute87229a3b9b9fb10eddbcdf35(),
+		"suite_definition_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DevicePermissionRoleArn
+				"device_permission_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The device permission role arn of the test suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Devices
+				"devices": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CertificateArn
+							"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ThingArn
+							"thing_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The devices being tested in the test suite",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IntendedForQualification
+				"intended_for_qualification": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether the tests are intended for qualification in a suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RootGroup
+				"root_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The root group of the test suite.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SuiteDefinitionName
+				"suite_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Name of the suite definition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SuiteDefinitionId
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +143,10 @@ func suiteDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"suite_definition_id": schemaAttributedf8074de8ba5261ff3022786(),
+		"suite_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the suite definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SuiteDefinitionVersion
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +156,10 @@ func suiteDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"suite_definition_version": schemaAttributedd275faf775ba67356a79eb7(),
+		"suite_definition_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The suite definition version of a test suite.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +192,24 @@ func suiteDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb750069dcaf5d5a94b257b72(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,97 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute18443e03c0d3c937e58657ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute213461e2e1e89252738c50d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the event stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute403fd376b08d596d106fd68c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of enabling the Kinesis stream as a destination for export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute459c4c2162a36eeff9fb5a25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a01382e549b09799f60835a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0e32a6c332c50037b9a7087() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8bb7a219fe9356c828f0c1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the export was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea923839aedbdc71ec79a5ea2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the event stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3e77517c8ec28579ae32a3a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttribute403fd376b08d596d106fd68c(),
-			// Property: Uri
-			"uri": schemaAttributea0e32a6c332c50037b9a7087(),
-		}, /*END SCHEMA*/
-		Description: "Details regarding the Kinesis stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd15c71ffa2657b6b5f14950() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute459c4c2162a36eeff9fb5a25(),
-				// Property: Value
-				"value": schemaAttribute6a01382e549b09799f60835a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags used to organize, track, or control access for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0607e42716858f7cca60b06() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operational state of destination stream for export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_event_stream", eventStreamDataSource)
 }
@@ -120,7 +29,10 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp of when the export was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributea8bb7a219fe9356c828f0c1f(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the export was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationDetails
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +61,22 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"destination_details": schemaAttributeb3e77517c8ec28579ae32a3a(),
+		"destination_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status of enabling the Kinesis stream as a destination for export.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Uri
+				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Details regarding the Kinesis stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +87,10 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute18443e03c0d3c937e58657ca(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventStreamArn
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +100,10 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"event_stream_arn": schemaAttributea923839aedbdc71ec79a5ea2(),
+		"event_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the event stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventStreamName
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +114,10 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"event_stream_name": schemaAttribute213461e2e1e89252738c50d1(),
+		"event_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the event stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +129,10 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributef0607e42716858f7cca60b06(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The operational state of destination stream for export.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +168,24 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributecd15c71ffa2657b6b5f14950(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Uri
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +195,10 @@ func eventStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"uri": schemaAttributea0e32a6c332c50037b9a7087(),
+		"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

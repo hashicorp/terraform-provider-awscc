@@ -15,209 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a850d72104555add20268f3() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1020e3750424db3f202a3b80() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InstanceType
-				"instance_type": schemaAttribute6dbcaca2e2af98921b39be2c(),
-				// Property: WeightedCapacity
-				"weighted_capacity": schemaAttribute5f6c3d37325bafe727d21708(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A set of EC2 instance types to use when creating instances in the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1876c1e8b47f7e5409cb0822() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier for the new game server group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a58ac363b5a5b433e0a7e24() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LaunchTemplateId
-			"launch_template_id": schemaAttributef31e1735ad0383c3ba964993(),
-			// Property: LaunchTemplateName
-			"launch_template_name": schemaAttribute849eac4edee6986536e44859(),
-			// Property: Version
-			"version": schemaAttribute88cbb40b4e9c943ec62a2d85(),
-		}, /*END SCHEMA*/
-		Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20ec18768258e2607c9057bf() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f5e95d1cac4b9684202af54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41184fa9662fadac16948871() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for a developer-defined key:value pair for tagging an AWS resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42d16cb9f3c82cbb2663accb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A generated unique ID for the game server group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42f4f54a6b22fbf2ce412a01() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EstimatedInstanceWarmup
-			"estimated_instance_warmup": schemaAttribute20ec18768258e2607c9057bf(),
-			// Property: TargetTrackingConfiguration
-			"target_tracking_configuration": schemaAttribute7a433063883cc4be42103f9a(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f6c3d37325bafe727d21708() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6dbcaca2e2af98921b39be2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An EC2 instance type designation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6de8a555acfd7b264caf4df7() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Desired value to use with a game server group target-based scaling policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute786a678ee22eabbdbe9c6769() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag that indicates whether instances in the game server group are protected from early termination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a433063883cc4be42103f9a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TargetValue
-			"target_value": schemaAttribute6de8a555acfd7b264caf4df7(),
-		}, /*END SCHEMA*/
-		Description: "Settings for a target-based scaling policy applied to Auto Scaling group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cd91b1748fa7cb81db23b82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute849eac4edee6986536e44859() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A readable identifier for an existing EC2 launch template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88cbb40b4e9c943ec62a2d85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the EC2 launch template to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f46194be198d7f8178fdf2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of delete to perform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea62cba83bdb0b280c24a39d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for a developer-defined key:value pair for tagging an AWS resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb337ded7b4c2bad9bde357e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb462f3637e7eab42c4373011() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef04a7d82d9858bd8ed0a5d2c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute41184fa9662fadac16948871(),
-				// Property: Value
-				"value": schemaAttributea62cba83bdb0b280c24a39d8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef31e1735ad0383c3ba964993() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for an existing EC2 launch template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff586a2104bdebbae6905f67() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_game_server_group", gameServerGroupDataSource)
 }
@@ -236,7 +33,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[ -퟿-�𐀀-􏿿\r\n\t]*",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_group_arn": schemaAttribute2f5e95d1cac4b9684202af54(),
+		"auto_scaling_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoScalingPolicy
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +68,29 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"auto_scaling_policy": schemaAttribute42f4f54a6b22fbf2ce412a01(),
+		"auto_scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EstimatedInstanceWarmup
+				"estimated_instance_warmup": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetTrackingConfiguration
+				"target_tracking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TargetValue
+						"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Desired value to use with a game server group target-based scaling policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for a target-based scaling policy applied to Auto Scaling group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BalancingStrategy
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +103,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"balancing_strategy": schemaAttribute7cd91b1748fa7cb81db23b82(),
+		"balancing_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteOption
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +119,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"delete_option": schemaAttribute9f46194be198d7f8178fdf2d(),
+		"delete_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of delete to perform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GameServerGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +133,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"game_server_group_arn": schemaAttribute42d16cb9f3c82cbb2663accb(),
+		"game_server_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A generated unique ID for the game server group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GameServerGroupName
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +147,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[a-zA-Z0-9-\\.]+",
 		//	  "type": "string"
 		//	}
-		"game_server_group_name": schemaAttribute1876c1e8b47f7e5409cb0822(),
+		"game_server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An identifier for the new game server group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GameServerProtectionPolicy
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +162,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"game_server_protection_policy": schemaAttribute786a678ee22eabbdbe9c6769(),
+		"game_server_protection_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag that indicates whether instances in the game server group are protected from early termination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceDefinitions
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +195,24 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
-		"instance_definitions": schemaAttribute1020e3750424db3f202a3b80(),
+		"instance_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An EC2 instance type designation.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: WeightedCapacity
+					"weighted_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of EC2 instance types to use when creating instances in the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LaunchTemplate
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +235,27 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"launch_template": schemaAttribute1a58ac363b5a5b433e0a7e24(),
+		"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LaunchTemplateId
+				"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for an existing EC2 launch template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LaunchTemplateName
+				"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A readable identifier for an existing EC2 launch template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the EC2 launch template to use.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
 		//
@@ -390,7 +264,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"max_size": schemaAttribute0a850d72104555add20268f3(),
+		"max_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
 		//
@@ -399,7 +276,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"min_size": schemaAttributeff586a2104bdebbae6905f67(),
+		"min_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -410,7 +290,10 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:.*:role\\/[\\w+=,.@-]+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributeb337ded7b4c2bad9bde357e8(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -435,7 +318,24 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributef04a7d82d9858bd8ed0a5d2c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for a developer-defined key:value pair for tagging an AWS resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for a developer-defined key:value pair for tagging an AWS resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSubnets
 		// CloudFormation resource type schema:
 		//
@@ -452,7 +352,11 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"vpc_subnets": schemaAttributeb462f3637e7eab42c4373011(),
+		"vpc_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,97 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute22b6f9ab8b2699200ec47108() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the VPC associated CIDR Block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute267c2d207ca776db5ad5c2e8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ef88a009bbfc5820f335f88() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65370f5f220313830bd363b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c2b40daf981c96c412d1785() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea470a541aac4b8cfd6a9c042() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5ae5a3262bebe47df25f028() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the location from which we advertise the IPV6 CIDR block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8befec59ec5673b3151d80f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An IPv6 CIDR block from the IPv6 address pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf5344aaa5fea866010db580() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3594d316dd32fb8484b5d3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP Source of an IPv6 VPC CIDR Block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3b914e09f9639a2d3d925c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee60b2b329ff5739bd2a82012() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa1f817d6dfe1a39c9702fb3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An IPv4 CIDR block to associate with the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpc_cidr_block", vPCCidrBlockDataSource)
 }
@@ -120,7 +29,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.",
 		//	  "type": "boolean"
 		//	}
-		"amazon_provided_ipv_6_cidr_block": schemaAttribute267c2d207ca776db5ad5c2e8(),
+		"amazon_provided_ipv_6_cidr_block": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +40,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "An IPv4 CIDR block to associate with the VPC.",
 		//	  "type": "string"
 		//	}
-		"cidr_block": schemaAttributefa1f817d6dfe1a39c9702fb3(),
+		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An IPv4 CIDR block to associate with the VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +51,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Id of the VPC associated CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"vpc_cidr_block_id": schemaAttribute22b6f9ab8b2699200ec47108(),
+		"vpc_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the VPC associated CIDR Block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpSource
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +62,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The IP Source of an IPv6 VPC CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"ip_source": schemaAttributed3594d316dd32fb8484b5d3b(),
+		"ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP Source of an IPv6 VPC CIDR Block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +73,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.",
 		//	  "type": "string"
 		//	}
-		"ipv_4_ipam_pool_id": schemaAttributea470a541aac4b8cfd6a9c042(),
+		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +84,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
 		//	  "type": "integer"
 		//	}
-		"ipv_4_netmask_length": schemaAttribute3ef88a009bbfc5820f335f88(),
+		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6AddressAttribute
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +95,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_address_attribute": schemaAttributecf5344aaa5fea866010db580(),
+		"ipv_6_address_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +106,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "An IPv6 CIDR block from the IPv6 address pool.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block": schemaAttributec8befec59ec5673b3151d80f(),
+		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An IPv6 CIDR block from the IPv6 address pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlockNetworkBorderGroup
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +117,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the location from which we advertise the IPV6 CIDR block.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block_network_border_group": schemaAttributeb5ae5a3262bebe47df25f028(),
+		"ipv_6_cidr_block_network_border_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the location from which we advertise the IPV6 CIDR block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +128,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_ipam_pool_id": schemaAttribute6c2b40daf981c96c412d1785(),
+		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +139,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_netmask_length": schemaAttributee60b2b329ff5739bd2a82012(),
+		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Pool
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +150,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_pool": schemaAttributee3b914e09f9639a2d3d925c3(),
+		"ipv_6_pool": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +161,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute65370f5f220313830bd363b6(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

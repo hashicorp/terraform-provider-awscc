@@ -15,56 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute14036ad8b4d41cbf477fe341() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c375426338a56fe9700fa50() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedUrls
-			"allowed_urls": schemaAttribute14036ad8b4d41cbf477fe341(),
-			// Property: BlockedCategories
-			"blocked_categories": schemaAttribute14036ad8b4d41cbf477fe341(),
-			// Property: BlockedUrls
-			"blocked_urls": schemaAttribute14036ad8b4d41cbf477fe341(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute301e4c6d0a3ef963dc450a55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a1d9ef404773d940b36b6be() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute301e4c6d0a3ef963dc450a55(),
-				// Property: Value
-				"value": schemaAttribute301e4c6d0a3ef963dc450a55(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7a6bc21e9175811a26ffc51() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesweb_browser_settings", browserSettingsDataSource)
 }
@@ -88,7 +38,11 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": schemaAttributed7a6bc21e9175811a26ffc51(),
+		"additional_encryption_context": // Pattern: ""
+		schema.MapAttribute{             /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedPortalArns
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +56,10 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"associated_portal_arns": schemaAttribute14036ad8b4d41cbf477fe341(),
+		"associated_portal_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BrowserPolicy
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +69,9 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^\\{[\\S\\s]*\\}\\s*$",
 		//	  "type": "string"
 		//	}
-		"browser_policy": schemaAttribute301e4c6d0a3ef963dc450a55(),
+		"browser_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BrowserSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +81,9 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"browser_settings_arn": schemaAttribute301e4c6d0a3ef963dc450a55(),
+		"browser_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomerManagedKey
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +93,9 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"customer_managed_key": schemaAttribute301e4c6d0a3ef963dc450a55(),
+		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +127,21 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute4a1d9ef404773d940b36b6be(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebContentFilteringPolicy
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +207,26 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"web_content_filtering_policy": schemaAttribute1c375426338a56fe9700fa50(),
+		"web_content_filtering_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowedUrls
+				"allowed_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlockedCategories
+				"blocked_categories": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlockedUrls
+				"blocked_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

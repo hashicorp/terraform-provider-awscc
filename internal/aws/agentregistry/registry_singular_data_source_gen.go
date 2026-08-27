@@ -16,240 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute062fbf9510aa205cd65f0050() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MatchValueString
-			"match_value_string": schemaAttribute0a89f65aa5a5aa03fce859d4(),
-			// Property: MatchValueStringList
-			"match_value_string_list": schemaAttribute15a5637313ba35d706c713a2(),
-		}, /*END SCHEMA*/
-		Description: "The expected value used to match a claim. Exactly one member is set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a89f65aa5a5aa03fce859d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b341cb257419c697be21363() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the registry was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute127967e98b4a8875840a31fb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizerConfiguration
-			"authorizer_configuration": schemaAttributebd57b14f533ebe697cb91312(),
-		}, /*END SCHEMA*/
-		Description: "Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15a5637313ba35d706c713a2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e9036fe1431780a3bfb38a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43b08a7c79cd435d8e81627d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthorizingClaimMatchValue
-				"authorizing_claim_match_value": schemaAttribute691c66fdb64b9e5e012def89(),
-				// Property: InboundTokenClaimName
-				"inbound_token_claim_name": schemaAttribute0a89f65aa5a5aa03fce859d4(),
-				// Property: InboundTokenClaimValueType
-				"inbound_token_claim_value_type": schemaAttribute0a89f65aa5a5aa03fce859d4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Additional custom claim validations applied to the inbound JWT.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45496ee8a70995fe0441cbe6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute691c66fdb64b9e5e012def89() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClaimMatchOperator
-			"claim_match_operator": schemaAttribute0a89f65aa5a5aa03fce859d4(),
-			// Property: ClaimMatchValue
-			"claim_match_value": schemaAttribute062fbf9510aa205cd65f0050(),
-		}, /*END SCHEMA*/
-		Description: "The value and match operator used to authorize a claim during JWT validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69ffe17b42004ff514d63f52() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedAudience
-			"allowed_audience": schemaAttributedc96df7dd99ffa0f92de85aa(),
-			// Property: AllowedClients
-			"allowed_clients": schemaAttributeca4f7f71e9e25856c271f3d6(),
-			// Property: AllowedScopes
-			"allowed_scopes": schemaAttributecbe1c203cd24b2cb7014c42d(),
-			// Property: CustomClaims
-			"custom_claims": schemaAttribute43b08a7c79cd435d8e81627d(),
-			// Property: DiscoveryUrl
-			"discovery_url": schemaAttribute6ec573fd351e0ee608ffacdf(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a custom JWT authorizer that validates inbound bearer tokens against an OpenID Connect identity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ec573fd351e0ee608ffacdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87b39d92f543e44aef326cd0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95da9a308f07c5f0e06bfdc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea21627a6d79f6f68bf019658() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd57b14f533ebe697cb91312() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomJWTAuthorizer
-			"custom_jwt_authorizer": schemaAttribute69ffe17b42004ff514d63f52(),
-		}, /*END SCHEMA*/
-		Description: "The authorizer configuration for the registry. This is a union - specify exactly one member.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6b42998fe12012be13e6e2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the registry was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca4f7f71e9e25856c271f3d6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The client identifiers accepted during JWT validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbe1c203cd24b2cb7014c42d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The scopes accepted during JWT validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed31b49939c59926e54604716() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed72357bd24a594b84c45fb7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of authorizer that controls how consumers access the registry's search and MCP invoke operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc96df7dd99ffa0f92de85aa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The audience values accepted during JWT validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedeed8bd029016e3be3b27c0a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoApprovalRules
-			"auto_approval_rules": schemaAttributef3f585ce97e0f5caa6ac668c(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for the registry's record approval workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6f697aee9b2efac5829220e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed3279b926b08385efa56ade() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3e9036fe1431780a3bfb38a1(),
-				// Property: Value
-				"value": schemaAttribute45496ee8a70995fe0441cbe6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3f585ce97e0f5caa6ac668c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The rules that determine which registry records are automatically approved on submission. When omitted or empty, submitted records require manual review.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_agentregistry_registry", registryDataSource)
 }
@@ -281,7 +47,18 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"approval_configuration": schemaAttributedeed8bd029016e3be3b27c0a(),
+		"approval_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoApprovalRules
+				"auto_approval_rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The rules that determine which registry records are automatically approved on submission. When omitted or empty, submitted records require manual review.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for the registry's record approval workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerType
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +70,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authorizer_type": schemaAttributed72357bd24a594b84c45fb7c(),
+		"authorizer_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of authorizer that controls how consumers access the registry's search and MCP invoke operations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +82,11 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributec6b42998fe12012be13e6e2c(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the registry was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +96,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute95da9a308f07c5f0e06bfdc7(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DiscoveryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -465,7 +252,93 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"discovery_configuration": schemaAttribute127967e98b4a8875840a31fb(),
+		"discovery_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizerConfiguration
+				"authorizer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomJWTAuthorizer
+						"custom_jwt_authorizer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AllowedAudience
+								"allowed_audience": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The audience values accepted during JWT validation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AllowedClients
+								"allowed_clients": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The client identifiers accepted during JWT validation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AllowedScopes
+								"allowed_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The scopes accepted during JWT validation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CustomClaims
+								"custom_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AuthorizingClaimMatchValue
+											"authorizing_claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ClaimMatchOperator
+													"claim_match_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: ClaimMatchValue
+													"claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: MatchValueString
+															"match_value_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: MatchValueStringList
+															"match_value_string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The expected value used to match a claim. Exactly one member is set.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The value and match operator used to authorize a claim during JWT validation.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: InboundTokenClaimName
+											"inbound_token_claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: InboundTokenClaimValueType
+											"inbound_token_claim_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Additional custom claim validations applied to the inbound JWT.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DiscoveryUrl
+								"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for a custom JWT authorizer that validates inbound bearer tokens against an OpenID Connect identity provider.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The authorizer configuration for the registry. This is a union - specify exactly one member.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +349,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee6f697aee9b2efac5829220e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistryArn
 		// CloudFormation resource type schema:
 		//
@@ -487,7 +363,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
-		"registry_arn": schemaAttributed31b49939c59926e54604716(),
+		"registry_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistryId
 		// CloudFormation resource type schema:
 		//
@@ -498,7 +377,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schemaAttributea21627a6d79f6f68bf019658(),
+		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -515,7 +397,10 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute87b39d92f543e44aef326cd0(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -550,7 +435,24 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeed3279b926b08385efa56ade(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -559,7 +461,11 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute0b341cb257419c697be21363(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the registry was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

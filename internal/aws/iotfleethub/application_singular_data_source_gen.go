@@ -14,112 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute007b9695e7dfb0f98e6a7803() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "When the Application was last updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute017ed5324b61898a6f12ba5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Application Name, should be between 1 and 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0633933f8b07d72ab1feda43() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "When the Application was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23f76e3713fec72c4dbfe40e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute306f69c71d2c0e3c7ec27b1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e9ef4f7e19a5d1fc4066e42() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute23f76e3713fec72c4dbfe40e(),
-				// Property: Value
-				"value": schemaAttributef86fa14654cac062d8fea42b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93f11fc67c0e3987d403575f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea53a3399fb14010e87c8e7ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A message indicating why Create or Delete Application failed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9dd3bd2cd851ce5eedac484() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb825b5a274d4317335c5edda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1b3009a9353da7251cde2ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Application Description, should be between 1 and 2048 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1cce77e3b113900533a3bcb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef86fa14654cac062d8fea42b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8a85897052dd7e1223e2385() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotfleethub_application", applicationDataSource)
 }
@@ -138,7 +32,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[!-~]+$",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttributec1cce77e3b113900533a3bcb(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationCreationDate
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +43,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When the Application was created",
 		//	  "type": "integer"
 		//	}
-		"application_creation_date": schemaAttribute0633933f8b07d72ab1feda43(),
+		"application_creation_date": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "When the Application was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationDescription
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +57,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[ -~]*$",
 		//	  "type": "string"
 		//	}
-		"application_description": schemaAttributec1b3009a9353da7251cde2ec(),
+		"application_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Application Description, should be between 1 and 2048 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationId
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +71,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute93f11fc67c0e3987d403575f(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationLastUpdateDate
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +82,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When the Application was last updated",
 		//	  "type": "integer"
 		//	}
-		"application_last_update_date": schemaAttribute007b9695e7dfb0f98e6a7803(),
+		"application_last_update_date": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "When the Application was last updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationName
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +96,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[ -~]*$",
 		//	  "type": "string"
 		//	}
-		"application_name": schemaAttribute017ed5324b61898a6f12ba5f(),
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Application Name, should be between 1 and 256 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationState
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +107,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The current state of the application.",
 		//	  "type": "string"
 		//	}
-		"application_state": schemaAttribute306f69c71d2c0e3c7ec27b1f(),
+		"application_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationUrl
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +118,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The URL of the application.",
 		//	  "type": "string"
 		//	}
-		"application_url": schemaAttributef8a85897052dd7e1223e2385(),
+		"application_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ErrorMessage
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +129,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A message indicating why Create or Delete Application failed.",
 		//	  "type": "string"
 		//	}
-		"error_message": schemaAttributea53a3399fb14010e87c8e7ad(),
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A message indicating why Create or Delete Application failed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +143,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[!-~]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributea9dd3bd2cd851ce5eedac484(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SsoClientId
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +154,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS SSO application generated client ID (used with AWS SSO APIs).",
 		//	  "type": "string"
 		//	}
-		"sso_client_id": schemaAttributeb825b5a274d4317335c5edda(),
+		"sso_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +192,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3e9ef4f7e19a5d1fc4066e42(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

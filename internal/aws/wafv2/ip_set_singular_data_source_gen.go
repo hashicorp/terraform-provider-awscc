@@ -15,76 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4987cbea3615c25b9433038d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute634977047b71fce4c7359d92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e294155052bc44b14030953() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPSet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fe41cdf0d9696a96db8812d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the WAF entity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fd999f37f3faf70edc6f52b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca58973410d1e52a4afb5b1f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of IPAddresses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef51765a8d8ae6035c63cabef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the IPSet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6c6e4fa67014b4f0ba0428d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the entity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd848fea9a1b3ab3fff6edfd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8fd999f37f3faf70edc6f52b(),
-				// Property: Value
-				"value": schemaAttribute8fd999f37f3faf70edc6f52b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wafv2_ip_set", iPSetDataSource)
 }
@@ -106,7 +36,11 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"addresses": schemaAttributeca58973410d1e52a4afb5b1f(),
+		"addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of IPAddresses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +48,10 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "ARN of the WAF entity.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6fe41cdf0d9696a96db8812d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the WAF entity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +60,10 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef6c6e4fa67014b4f0ba0428d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the entity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IPAddressVersion
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +75,10 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_version": schemaAttribute634977047b71fce4c7359d92(),
+		"ip_address_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +87,10 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"ip_set_id": schemaAttribute6e294155052bc44b14030953(),
+		"ip_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPSet",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +99,10 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9A-Za-z_-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef51765a8d8ae6035c63cabef(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the IPSet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +114,10 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scope": schemaAttribute4987cbea3615c25b9433038d(),
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +141,21 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributefd848fea9a1b3ab3fff6edfd(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

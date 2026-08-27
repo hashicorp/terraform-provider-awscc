@@ -14,97 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0eedb9676c3bc3a4debb2865() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv4 ranges",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c4e822388f9aace71c8ed07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[EC2-Classic, default VPC] The name of the source security group.\n\nYou must specify the GroupName property or the GroupId property. For security groups that are in a VPC, you must use the GroupId property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22f1b55e3e77b088ca88acad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[nondefault VPC] The AWS account ID that owns the source security group. You can't specify this property with an IP address range.\n\nIf you specify SourceSecurityGroupName or SourceSecurityGroupId and that security group is owned by a different account than the account creating the stack, you must specify the SourceSecurityGroupOwnerId; otherwise, this property is optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f03b43c2d3fd0944733a0bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers).\n\n[VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f4fcc2da4d46a3e030c04f8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.\n\nUse this for ICMP and any protocol that uses ports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute688212145773516e8cc0639c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the security group. You must specify either the security group ID or the security group name. For security groups in a nondefault VPC, you must specify the security group ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute698391714e9eb481d2091cc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea43b45bb7b3be94f83ce7712() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.\n\nYou must specify the GroupName property or the GroupId property. For security groups that are in a VPC, you must use the GroupId property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca3fb7606675cabc37df7b8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[VPC only] The IPv6 ranges",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfda4f59c2621827dafaec91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed29624999948417d8fbc443d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[EC2-VPC only] The ID of a prefix list.\n\n",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01d35400c89f45f8bd5f975() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Security Group Rule Id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7ff5c3f94559800c5bb8e82() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.\n\nUse this for ICMP and any protocol that uses ports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_security_group_ingress", securityGroupIngressDataSource)
 }
@@ -120,7 +29,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The IPv4 ranges",
 		//	  "type": "string"
 		//	}
-		"cidr_ip": schemaAttribute0eedb9676c3bc3a4debb2865(),
+		"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv4 ranges",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CidrIpv6
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +40,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "[VPC only] The IPv6 ranges",
 		//	  "type": "string"
 		//	}
-		"cidr_ipv_6": schemaAttributeca3fb7606675cabc37df7b8d(),
+		"cidr_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[VPC only] The IPv6 ranges",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +51,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributecfda4f59c2621827dafaec91(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromPort
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +62,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.\n\nUse this for ICMP and any protocol that uses ports.",
 		//	  "type": "integer"
 		//	}
-		"from_port": schemaAttribute5f4fcc2da4d46a3e030c04f8(),
+		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.\n\nUse this for ICMP and any protocol that uses ports.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +73,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.\n\nYou must specify the GroupName property or the GroupId property. For security groups that are in a VPC, you must use the GroupId property.",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttributea43b45bb7b3be94f83ce7712(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.\n\nYou must specify the GroupName property or the GroupId property. For security groups that are in a VPC, you must use the GroupId property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +84,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The name of the security group.",
 		//	  "type": "string"
 		//	}
-		"group_name": schemaAttribute698391714e9eb481d2091cc6(),
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +95,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Security Group Rule Id",
 		//	  "type": "string"
 		//	}
-		"security_group_ingress_id": schemaAttributee01d35400c89f45f8bd5f975(),
+		"security_group_ingress_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Security Group Rule Id",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpProtocol
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +106,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers).\n\n[VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
 		//	  "type": "string"
 		//	}
-		"ip_protocol": schemaAttribute5f03b43c2d3fd0944733a0bd(),
+		"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers).\n\n[VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourcePrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +117,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "[EC2-VPC only] The ID of a prefix list.\n\n",
 		//	  "type": "string"
 		//	}
-		"source_prefix_list_id": schemaAttributed29624999948417d8fbc443d(),
+		"source_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[EC2-VPC only] The ID of a prefix list.\n\n",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +128,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the security group. You must specify either the security group ID or the security group name. For security groups in a nondefault VPC, you must specify the security group ID.",
 		//	  "type": "string"
 		//	}
-		"source_security_group_id": schemaAttribute688212145773516e8cc0639c(),
+		"source_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the security group. You must specify either the security group ID or the security group name. For security groups in a nondefault VPC, you must specify the security group ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceSecurityGroupName
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +139,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "[EC2-Classic, default VPC] The name of the source security group.\n\nYou must specify the GroupName property or the GroupId property. For security groups that are in a VPC, you must use the GroupId property.",
 		//	  "type": "string"
 		//	}
-		"source_security_group_name": schemaAttribute1c4e822388f9aace71c8ed07(),
+		"source_security_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[EC2-Classic, default VPC] The name of the source security group.\n\nYou must specify the GroupName property or the GroupId property. For security groups that are in a VPC, you must use the GroupId property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceSecurityGroupOwnerId
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +150,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "[nondefault VPC] The AWS account ID that owns the source security group. You can't specify this property with an IP address range.\n\nIf you specify SourceSecurityGroupName or SourceSecurityGroupId and that security group is owned by a different account than the account creating the stack, you must specify the SourceSecurityGroupOwnerId; otherwise, this property is optional.",
 		//	  "type": "string"
 		//	}
-		"source_security_group_owner_id": schemaAttribute22f1b55e3e77b088ca88acad(),
+		"source_security_group_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[nondefault VPC] The AWS account ID that owns the source security group. You can't specify this property with an IP address range.\n\nIf you specify SourceSecurityGroupName or SourceSecurityGroupId and that security group is owned by a different account than the account creating the stack, you must specify the SourceSecurityGroupOwnerId; otherwise, this property is optional.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ToPort
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +161,10 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.\n\nUse this for ICMP and any protocol that uses ports.",
 		//	  "type": "integer"
 		//	}
-		"to_port": schemaAttributee7ff5c3f94559800c5bb8e82(),
+		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.\n\nUse this for ICMP and any protocol that uses ports.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

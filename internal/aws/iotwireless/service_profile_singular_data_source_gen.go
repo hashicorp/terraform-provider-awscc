@@ -14,107 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1ac84cad0df87075c9648356() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute85eef07d23145a0b717be350(),
-				// Property: Value
-				"value": schemaAttribute85eef07d23145a0b717be350(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the service profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6da3fe55de104c2797c89a9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of service profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e420387d71c27febe620624() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AddGwMetadata
-			"add_gw_metadata": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: ChannelMask
-			"channel_mask": schemaAttribute85eef07d23145a0b717be350(),
-			// Property: DevStatusReqFreq
-			"dev_status_req_freq": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: DlBucketSize
-			"dl_bucket_size": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: DlRate
-			"dl_rate": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: DlRatePolicy
-			"dl_rate_policy": schemaAttribute85eef07d23145a0b717be350(),
-			// Property: DrMax
-			"dr_max": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: DrMin
-			"dr_min": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: HrAllowed
-			"hr_allowed": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: MinGwDiversity
-			"min_gw_diversity": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: NwkGeoLoc
-			"nwk_geo_loc": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: PrAllowed
-			"pr_allowed": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: RaAllowed
-			"ra_allowed": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: ReportDevStatusBattery
-			"report_dev_status_battery": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: ReportDevStatusMargin
-			"report_dev_status_margin": schemaAttributeeb27b1aa3534adac7bc841b8(),
-			// Property: TargetPer
-			"target_per": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: UlBucketSize
-			"ul_bucket_size": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: UlRate
-			"ul_rate": schemaAttribute9b2b7e1b2c4592ffbc4e5838(),
-			// Property: UlRatePolicy
-			"ul_rate_policy": schemaAttribute85eef07d23145a0b717be350(),
-		}, /*END SCHEMA*/
-		Description: "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute840402f08e39f57e2fd7d2cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service profile Arn. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85eef07d23145a0b717be350() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b2b7e1b2c4592ffbc4e5838() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4761a847e5ab775f931b1c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service profile Id. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb27b1aa3534adac7bc841b8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_service_profile", serviceProfileDataSource)
 }
@@ -130,7 +29,10 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Service profile Arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute840402f08e39f57e2fd7d2cc(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service profile Arn. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +41,10 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"service_profile_id": schemaAttributee4761a847e5ab775f931b1c4(),
+		"service_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service profile Id. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoRaWAN
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +112,88 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan": schemaAttribute6e420387d71c27febe620624(),
+		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AddGwMetadata
+				"add_gw_metadata": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ChannelMask
+				"channel_mask": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DevStatusReqFreq
+				"dev_status_req_freq": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DlBucketSize
+				"dl_bucket_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DlRate
+				"dl_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DlRatePolicy
+				"dl_rate_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DrMax
+				"dr_max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DrMin
+				"dr_min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HrAllowed
+				"hr_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinGwDiversity
+				"min_gw_diversity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NwkGeoLoc
+				"nwk_geo_loc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrAllowed
+				"pr_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RaAllowed
+				"ra_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReportDevStatusBattery
+				"report_dev_status_battery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReportDevStatusMargin
+				"report_dev_status_margin": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetPer
+				"target_per": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UlBucketSize
+				"ul_bucket_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UlRate
+				"ul_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UlRatePolicy
+				"ul_rate_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +202,10 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6da3fe55de104c2797c89a9b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of service profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +232,22 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute1ac84cad0df87075c9648356(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the service profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,118 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute032dfe67373e629fa8f31323() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource sharing strategy for the quota share. The `RESERVE` strategy allows a quota share to reserve idle capacity for itself. `LEND` configures the share to lend its idle capacity to another share in need of capacity. The `LEND_AND_BORROW` strategy configures the share to borrow idle capacity from an underutilized share, as well as lend to another share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0946d47f9630f3356c963828() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29c5a5f7b840c2fead124eb3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InSharePreemption
-			"in_share_preemption": schemaAttribute7948f5b4a2f9abbb09059a99(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the preemption behavior for jobs in a quota share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d15966a59541b86945ecec0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum percentage of additional capacity that the quota share can borrow from other shares. `BorrowLimit` can only be applied to quota shares with a strategy of `LEND_AND_BORROW`. This value is expressed as a percentage of the quota share's configured CapacityLimits. The `BorrowLimit` is applied uniformly across all capacity units. For example, if the `BorrowLimit` is 200, the quota share can borrow up to 200% of its configured `maxCapacity` for each capacity unit. The default `BorrowLimit` is -1, which indicates unlimited borrowing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e9b5450666ceabe48af9613() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Batch job queue associated with the quota share. This can be the job queue name or ARN. A job queue must be in the `VALID` state before you can associate it with a quota share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute600061270a6406d6f3f3e2de() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags that you apply to the quota share to help you categorize and organize your resources. Each tag consists of a key and an optional value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7948f5b4a2f9abbb09059a99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether jobs within a quota share can be preempted by another, higher priority job in the same quota share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86fae850989eead048ddfdd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the quota share. If the quota share is `ENABLED`, it is able to accept jobs. If the quota share is `DISABLED`, new jobs won't be accepted but jobs already submitted can finish. The default state is `ENABLED`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a6c270bd73eaaadeb1d2e83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unit of compute capacity for the capacityLimit. For example, `ml.m5.large`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec23e9dada4362789766d6f4d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum capacity available for the quota share. This value represents the maximum quantity of a resource that can be allocated to jobs in the quota share without borrowing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec772416a17cd781c1f6a3d1f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CapacityUnit
-				"capacity_unit": schemaAttribute8a6c270bd73eaaadeb1d2e83(),
-				// Property: MaxCapacity
-				"max_capacity": schemaAttributec23e9dada4362789766d6f4d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list that specifies the quantity and type of compute capacity allocated to the quota share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee6d630300ea4e5cff6c2f0c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BorrowLimit
-			"borrow_limit": schemaAttribute2d15966a59541b86945ecec0(),
-			// Property: Strategy
-			"strategy": schemaAttribute032dfe67373e629fa8f31323(),
-		}, /*END SCHEMA*/
-		Description: "Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef023c8d7ab730eed76478ad8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the quota share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_batch_quota_share", quotaShareDataSource)
 }
@@ -163,7 +51,24 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"capacity_limits": schemaAttributec772416a17cd781c1f6a3d1f(),
+		"capacity_limits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CapacityUnit
+					"capacity_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unit of compute capacity for the capacityLimit. For example, `ml.m5.large`.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MaxCapacity
+					"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The maximum capacity available for the quota share. This value represents the maximum quantity of a resource that can be allocated to jobs in the quota share without borrowing.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list that specifies the quantity and type of compute capacity allocated to the quota share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobQueue
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +76,10 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Batch job queue associated with the quota share. This can be the job queue name or ARN. A job queue must be in the `VALID` state before you can associate it with a quota share.",
 		//	  "type": "string"
 		//	}
-		"job_queue": schemaAttribute5e9b5450666ceabe48af9613(),
+		"job_queue": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Batch job queue associated with the quota share. This can be the job queue name or ARN. A job queue must be in the `VALID` state before you can associate it with a quota share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreemptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +101,17 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"preemption_configuration": schemaAttribute29c5a5f7b840c2fead124eb3(),
+		"preemption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InSharePreemption
+				"in_share_preemption": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether jobs within a quota share can be preempted by another, higher priority job in the same quota share.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the preemption behavior for jobs in a quota share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuotaShareArn
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +120,10 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:batch:[a-z0-9\\-]+:[0-9]{12}:job-queue/[a-zA-Z0-9_\\-]{1,128}/quota-share/[a-zA-Z0-9_\\-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"quota_share_arn": schemaAttributef023c8d7ab730eed76478ad8(),
+		"quota_share_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the quota share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuotaShareName
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +133,10 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"quota_share_name": schemaAttribute0946d47f9630f3356c963828(),
+		"quota_share_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceSharingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +164,22 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"resource_sharing_configuration": schemaAttributeee6d630300ea4e5cff6c2f0c(),
+		"resource_sharing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BorrowLimit
+				"borrow_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum percentage of additional capacity that the quota share can borrow from other shares. `BorrowLimit` can only be applied to quota shares with a strategy of `LEND_AND_BORROW`. This value is expressed as a percentage of the quota share's configured CapacityLimits. The `BorrowLimit` is applied uniformly across all capacity units. For example, if the `BorrowLimit` is 200, the quota share can borrow up to 200% of its configured `maxCapacity` for each capacity unit. The default `BorrowLimit` is -1, which indicates unlimited borrowing.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Strategy
+				"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The resource sharing strategy for the quota share. The `RESERVE` strategy allows a quota share to reserve idle capacity for itself. `LEND` configures the share to lend its idle capacity to another share in need of capacity. The `LEND_AND_BORROW` strategy configures the share to borrow idle capacity from an underutilized share, as well as lend to another share.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +191,10 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute86fae850989eead048ddfdd7(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the quota share. If the quota share is `ENABLED`, it is able to accept jobs. If the quota share is `DISABLED`, new jobs won't be accepted but jobs already submitted can finish. The default state is `ENABLED`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +208,12 @@ func quotaShareDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute600061270a6406d6f3f3e2de(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags that you apply to the quota share to help you categorize and organize your resources. Each tag consists of a key and an optional value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

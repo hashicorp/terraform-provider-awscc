@@ -14,145 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute075bad491ca62364f1a740e4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute91c7ae607b9d3b0fda879264(),
-				// Property: Value
-				"value": schemaAttribute91c7ae607b9d3b0fda879264(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute106b552c7e682f091402bc4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Pricing rule description",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute230ab6519f0a3a3388d3bbdc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Creation timestamp in UNIX epoch time format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4be3191c3316c381e37bba4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Pricing rule ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute565b64e3904d8947032f8904() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c761caedd4853e4e50173af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The UsageType which a SKU pricing rule is modifying",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fa646c0037052ae6ef100d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Pricing rule name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute697b21922d6e06e331aa7a10() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of pricing plans associated with pricing rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84957fcbb1fb3d0b1f8525b1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FreeTier
-			"free_tier": schemaAttributed726ec2fe25d34233c5af914(),
-		}, /*END SCHEMA*/
-		Description: "The set of tiering configurations for the pricing rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b3a4eba30e8a48350d6d529() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Pricing rule modifier percentage",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91c7ae607b9d3b0fda879264() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98243899e58d0edca7e25c3f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Latest modified timestamp in UNIX epoch time format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b2f906974b25e0b76869e52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae4359e54a2f59033a94a89d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Operation which a SKU pricing rule is modifying",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaee7caf93371e088475e07cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A term used to categorize the granularity of a Pricing Rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccc046ecea29bdc037d1ad5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service which a pricing rule is applied on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed726ec2fe25d34233c5af914() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Activated
-			"activated": schemaAttribute565b64e3904d8947032f8904(),
-		}, /*END SCHEMA*/
-		Description: "The possible customizable free tier configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed743907b409fb99a793d118d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_billingconductor_pricing_rule", pricingRuleDataSource)
 }
@@ -169,7 +30,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4be3191c3316c381e37bba4c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Pricing rule ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedPricingPlanCount
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +42,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"associated_pricing_plan_count": schemaAttribute697b21922d6e06e331aa7a10(),
+		"associated_pricing_plan_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of pricing plans associated with pricing rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BillingEntity
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +58,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"billing_entity": schemaAttribute9b2f906974b25e0b76869e52(),
+		"billing_entity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +69,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creation timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"creation_time": schemaAttribute230ab6519f0a3a3388d3bbdc(),
+		"creation_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Creation timestamp in UNIX epoch time format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +81,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute106b552c7e682f091402bc4c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Pricing rule description",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +92,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Latest modified timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"last_modified_time": schemaAttribute98243899e58d0edca7e25c3f(),
+		"last_modified_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Latest modified timestamp in UNIX epoch time format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifierPercentage
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +104,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"modifier_percentage": schemaAttribute8b3a4eba30e8a48350d6d529(),
+		"modifier_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Pricing rule modifier percentage",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +118,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute5fa646c0037052ae6ef100d7(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Pricing rule name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Operation
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +132,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"operation": schemaAttributeae4359e54a2f59033a94a89d(),
+		"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Operation which a SKU pricing rule is modifying",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +149,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scope": schemaAttributeaee7caf93371e088475e07cf(),
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A term used to categorize the granularity of a Pricing Rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Service
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +163,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9\\.\\-]+",
 		//	  "type": "string"
 		//	}
-		"service": schemaAttributeccc046ecea29bdc037d1ad5c(),
+		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service which a pricing rule is applied on",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +195,21 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute075bad491ca62364f1a740e4(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tiering
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +233,23 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tiering": schemaAttribute84957fcbb1fb3d0b1f8525b1(),
+		"tiering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FreeTier
+				"free_tier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Activated
+						"activated": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The possible customizable free tier configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The set of tiering configurations for the pricing rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +262,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributed743907b409fb99a793d118d(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UsageType
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +276,10 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"usage_type": schemaAttribute5c761caedd4853e4e50173af(),
+		"usage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The UsageType which a SKU pricing rule is modifying",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

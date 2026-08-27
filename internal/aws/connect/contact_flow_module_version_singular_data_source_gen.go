@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute42b8929f0c0f630f51a9705f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow module version (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42fa8684090dc599a2ecaa11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56ab09e589b0736a45a5c584() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the checksum value of the latest published flow module content",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute825174b429653721102b46d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow module (ARN) this version is tied to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebced22be07373f192c3da539() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The version number of this revision",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_contact_flow_module_version", contactFlowModuleVersionDataSource)
 }
@@ -67,7 +32,10 @@ func contactFlowModuleVersionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_id": schemaAttribute825174b429653721102b46d7(),
+		"contact_flow_module_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow module (ARN) this version is tied to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactFlowModuleVersionARN
 		// CloudFormation resource type schema:
 		//
@@ -78,7 +46,10 @@ func contactFlowModuleVersionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+:[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_version_arn": schemaAttribute42b8929f0c0f630f51a9705f(),
+		"contact_flow_module_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the contact flow module version (ARN).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +58,10 @@ func contactFlowModuleVersionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute42fa8684090dc599a2ecaa11(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowModuleContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +72,10 @@ func contactFlowModuleVersionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-zA-Z0-9]{64}$",
 		//	  "type": "string"
 		//	}
-		"flow_module_content_sha_256": schemaAttribute56ab09e589b0736a45a5c584(),
+		"flow_module_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the checksum value of the latest published flow module content",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +83,10 @@ func contactFlowModuleVersionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The version number of this revision",
 		//	  "type": "integer"
 		//	}
-		"version": schemaAttributebced22be07373f192c3da539(),
+		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of this revision",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

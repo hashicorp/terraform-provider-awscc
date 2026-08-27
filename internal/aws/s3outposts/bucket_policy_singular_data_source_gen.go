@@ -15,21 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute47fc0e8151bf4cf2c5ed5043() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2043f8529a15dbf0cac1203() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A policy document containing permissions to add to the specified bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3outposts_bucket_policy", bucketPolicyDataSource)
 }
@@ -48,7 +33,10 @@ func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
 		//	  "type": "string"
 		//	}
-		"bucket": schemaAttribute47fc0e8151bf4cf2c5ed5043(),
+		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -56,7 +44,11 @@ func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "A policy document containing permissions to add to the specified bucket.",
 		//	  "type": "object"
 		//	}
-		"policy_document": schemaAttributeb2043f8529a15dbf0cac1203(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "A policy document containing permissions to add to the specified bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

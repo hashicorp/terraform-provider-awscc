@@ -14,82 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute226ab18f1415d4db3f06287d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the owner of the accepter VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42951fd0500a57657c241aa7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute499ae055191bc74c038665cf(),
-				// Property: Value
-				"value": schemaAttributeb71034ea1778d2ebf9ae3bac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47528a575df2c545fcbabe8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute499ae055191bc74c038665cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70bdf5500f56dcaf114ab1f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea974e98240c819ceed6461ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb71034ea1778d2ebf9ae3bac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb838c55c1e4f13125fd5793a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf22cba571768e55c4c2c859() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9f0f96694859caa01f6ef40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpc_peering_connection", vPCPeeringConnectionDataSource)
 }
@@ -105,14 +29,19 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
 		//	  "type": "string"
 		//	}
-		"assume_role_region": schemaAttributeb838c55c1e4f13125fd5793a(),
+		"assume_role_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"vpc_peering_connection_id": schemaAttributed9f0f96694859caa01f6ef40(),
+		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerOwnerId
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +49,10 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The AWS account ID of the owner of the accepter VPC.",
 		//	  "type": "string"
 		//	}
-		"peer_owner_id": schemaAttribute226ab18f1415d4db3f06287d(),
+		"peer_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID of the owner of the accepter VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerRegion
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +60,10 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.",
 		//	  "type": "string"
 		//	}
-		"peer_region": schemaAttributea974e98240c819ceed6461ff(),
+		"peer_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +71,10 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
 		//	  "type": "string"
 		//	}
-		"peer_role_arn": schemaAttributebf22cba571768e55c4c2c859(),
+		"peer_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the VPC peer role for the peering connection in another AWS account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerVpcId
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +82,10 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
 		//	  "type": "string"
 		//	}
-		"peer_vpc_id": schemaAttribute70bdf5500f56dcaf114ab1f1(),
+		"peer_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +113,23 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute42951fd0500a57657c241aa7(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +137,10 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute47528a575df2c545fcbabe8f(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

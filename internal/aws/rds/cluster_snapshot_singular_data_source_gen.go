@@ -16,178 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03c08bfd1a3b190aab893db7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the DB cluster snapshot. Must contain from 1 to 63 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute064cd60a3fb4925f3bfe8dda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09f6158e2d8a72205771659f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1379ca7848e4714ff64da4b9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The allocated storage size of the DB cluster snapshot in gibibytes (GiB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15a9ac57925f3f810215f0a8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port that the DB cluster was listening on at the time of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a2451e287b923845badffdb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d2825796a64587f52d4aca4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the database engine for this DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38e7afc2a1980ab96467f283() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource ID of the DB cluster that this DB cluster snapshot was created from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d96a290eca9703dc2779716() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of this DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute413a6d4db70d0ea2625327a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The engine mode of the database engine for this DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute465446f107ef5b0573cd146e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the DB cluster was created, in Universal Coordinated Time (UTC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ae18f2d2e1fa53490fb785c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a9f7e4dbe993a0baccfd4c8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefa13cddf2145031546498111(),
-				// Property: Value
-				"value": schemaAttribute064cd60a3fb4925f3bfe8dda(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to be assigned to the DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8895d08f21104b08d7bcc90() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Availability Zones where instances in the DB cluster snapshot can be restored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb04249d222b9a9b0e81c2912() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The license model information for this DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec63a653f18e3f54d8e1e3790() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC ID associated with the DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9fac9a8b077346fd317845e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the snapshot was taken, in Universal Coordinated Time (UTC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbdba1d5dfb118b02a3b7f0c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the DB cluster snapshot is encrypted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed568a2981f18b1e56fcb353a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database engine for this DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb9127b5849246199ee09d8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the DB cluster to create a snapshot for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc55d04cf5de01757295bcd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9e638b13751a473f37822e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The master username for this DB cluster snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa13cddf2145031546498111() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_cluster_snapshot", clusterSnapshotDataSource)
 }
@@ -203,7 +31,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The allocated storage size of the DB cluster snapshot in gibibytes (GiB).",
 		//	  "type": "integer"
 		//	}
-		"allocated_storage": schemaAttribute1379ca7848e4714ff64da4b9(),
+		"allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The allocated storage size of the DB cluster snapshot in gibibytes (GiB).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +46,11 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"availability_zones": schemaAttributea8895d08f21104b08d7bcc90(),
+		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of Availability Zones where instances in the DB cluster snapshot can be restored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +59,11 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"cluster_create_time": schemaAttribute465446f107ef5b0573cd146e(),
+		"cluster_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the DB cluster was created, in Universal Coordinated Time (UTC).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +71,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The identifier of the DB cluster to create a snapshot for.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schemaAttributedb9127b5849246199ee09d8c(),
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the DB cluster to create a snapshot for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterSnapshotArn
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +82,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The Amazon Resource Name (ARN) for the DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_snapshot_arn": schemaAttribute09f6158e2d8a72205771659f(),
+		"db_cluster_snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterSnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +96,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"db_cluster_snapshot_identifier": schemaAttribute03c08bfd1a3b190aab893db7(),
+		"db_cluster_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the DB cluster snapshot. Must contain from 1 to 63 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +107,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The resource ID of the DB cluster that this DB cluster snapshot was created from.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_resource_id": schemaAttribute38e7afc2a1980ab96467f283(),
+		"db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource ID of the DB cluster that this DB cluster snapshot was created from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +118,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the database engine for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttributed568a2981f18b1e56fcb353a(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database engine for this DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineMode
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +129,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The engine mode of the database engine for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"engine_mode": schemaAttribute413a6d4db70d0ea2625327a5(),
+		"engine_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine mode of the database engine for this DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +140,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The version of the database engine for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute2d2825796a64587f52d4aca4(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the database engine for this DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IAMDatabaseAuthenticationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +151,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"iam_database_authentication_enabled": schemaAttribute4ae18f2d2e1fa53490fb785c(),
+		"iam_database_authentication_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +162,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute2a2451e287b923845badffdb(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +173,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The license model information for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"license_model": schemaAttributeb04249d222b9a9b0e81c2912(),
+		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The license model information for this DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +184,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The master username for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttributef9e638b13751a473f37822e8(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The master username for this DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -323,7 +195,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The port that the DB cluster was listening on at the time of the snapshot.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute15a9ac57925f3f810215f0a8(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the DB cluster was listening on at the time of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +207,11 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"snapshot_create_time": schemaAttributec9fac9a8b077346fd317845e(),
+		"snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the snapshot was taken, in Universal Coordinated Time (UTC).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotType
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +219,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The type of the DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"snapshot_type": schemaAttributedc55d04cf5de01757295bcd6(),
+		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +230,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The status of this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute3d96a290eca9703dc2779716(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +241,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Indicates whether the DB cluster snapshot is encrypted.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schemaAttributecbdba1d5dfb118b02a3b7f0c(),
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB cluster snapshot is encrypted.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -387,7 +275,24 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute6a9f7e4dbe993a0baccfd4c8(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to be assigned to the DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -395,7 +300,10 @@ func clusterSnapshotDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The VPC ID associated with the DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributec63a653f18e3f54d8e1e3790(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC ID associated with the DB cluster snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

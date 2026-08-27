@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute7ebf547a2140ef1d29cd4328() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier (ID) for the root.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5f8d731dfcd0ef0bbd134f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address that is associated with the AWS account that is designated as the management account for the organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea793562efb1477e01bfae3f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier (ID) of an organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1574ebff52ec7995c72d25a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier (ID) of the management account of an organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1256aef2b5ee002286c4190() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef11ca2519dbb84e77ad9c8a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef21d19545ed39e85855b6e4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_organizations_organization", organizationDataSource)
 }
@@ -79,7 +30,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:organization\\/o-[a-z0-9]{10,32}",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef11ca2519dbb84e77ad9c8a1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FeatureSet
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +46,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"feature_set": schemaAttributef21d19545ed39e85855b6e4f(),
+		"feature_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +58,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^o-[a-z0-9]{10,32}$",
 		//	  "type": "string"
 		//	}
-		"organization_id": schemaAttributea793562efb1477e01bfae3f7(),
+		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier (ID) of an organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountArn
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +70,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:account\\/o-[a-z0-9]{10,32}\\/\\d{12}",
 		//	  "type": "string"
 		//	}
-		"management_account_arn": schemaAttributee1256aef2b5ee002286c4190(),
+		"management_account_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountEmail
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +84,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+",
 		//	  "type": "string"
 		//	}
-		"management_account_email": schemaAttributea5f8d731dfcd0ef0bbd134f6(),
+		"management_account_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address that is associated with the AWS account that is designated as the management account for the organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountId
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +96,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"management_account_id": schemaAttributec1574ebff52ec7995c72d25a(),
+		"management_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier (ID) of the management account of an organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RootId
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +109,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^r-[0-9a-z]{4,32}$",
 		//	  "type": "string"
 		//	}
-		"root_id": schemaAttribute7ebf547a2140ef1d29cd4328(),
+		"root_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier (ID) for the root.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

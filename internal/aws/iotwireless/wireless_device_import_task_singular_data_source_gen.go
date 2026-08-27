@@ -15,143 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04edeaee07f7fb6a440f8dee() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea7cf9aaa70c4eee92980f93d(),
-				// Property: Value
-				"value": schemaAttribute5b9f432a9a6909578719d6c4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b4778411a01a403aaccf06c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Destination Name for import task",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2122da28661b725f8689c758() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn for Wireless Device Import Task, Returned upon successful start.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute224f74c2aa8bfcde6c049b14() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Failed Imported Devices Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23d2623c1a56254c3bbc494a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "sidewalk create device's file path",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33bc698708b134df6fdbb977() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "CreationDate for import task",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute544e520d24b01df2a615d35c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeviceCreationFile
-			"device_creation_file": schemaAttribute743d2143883f7a387869366e(),
-			// Property: DeviceCreationFileList
-			"device_creation_file_list": schemaAttribute23d2623c1a56254c3bbc494a(),
-			// Property: Role
-			"role": schemaAttribute688c08696d9d3841efd9252a(),
-			// Property: SidewalkManufacturingSn
-			"sidewalk_manufacturing_sn": schemaAttribute743d2143883f7a387869366e(),
-		}, /*END SCHEMA*/
-		Description: "sidewalk contain file for created device and role",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b9f432a9a6909578719d6c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64e61f81b5c019e873189cbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "StatusReason for import task",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute688c08696d9d3841efd9252a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "sidewalk role",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute743d2143883f7a387869366e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dda5b6fc12bc9969093637c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Initialized Imported Devices Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d39799cf4a7856d02324851() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status for import task",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9133fb9bfb0a8265ca8413da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id for Wireless Device Import Task, Returned upon successful start.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7cf9aaa70c4eee92980f93d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0b704eff09be68a98c9afa0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Onboarded Imported Devices Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee054824a5a4c854908856122() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Pending Imported Devices Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_wireless_device_import_task", wirelessDeviceImportTaskDataSource)
 }
@@ -168,7 +31,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute2122da28661b725f8689c758(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn for Wireless Device Import Task, Returned upon successful start.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +42,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "CreationDate for import task",
 		//	  "type": "string"
 		//	}
-		"creation_date": schemaAttribute33bc698708b134df6fdbb977(),
+		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "CreationDate for import task",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationName
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +55,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "[a-zA-Z0-9-_]+",
 		//	  "type": "string"
 		//	}
-		"destination_name": schemaAttribute0b4778411a01a403aaccf06c(),
+		"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Destination Name for import task",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailedImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +66,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Failed Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"failed_imported_devices_count": schemaAttribute224f74c2aa8bfcde6c049b14(),
+		"failed_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Failed Imported Devices Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +78,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"wireless_device_import_task_id": schemaAttribute9133fb9bfb0a8265ca8413da(),
+		"wireless_device_import_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id for Wireless Device Import Task, Returned upon successful start.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InitializedImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +89,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Initialized Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"initialized_imported_devices_count": schemaAttribute7dda5b6fc12bc9969093637c(),
+		"initialized_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Initialized Imported Devices Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OnboardedImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +100,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Onboarded Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"onboarded_imported_devices_count": schemaAttributec0b704eff09be68a98c9afa0(),
+		"onboarded_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Onboarded Imported Devices Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PendingImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +111,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Pending Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"pending_imported_devices_count": schemaAttributee054824a5a4c854908856122(),
+		"pending_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Pending Imported Devices Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Sidewalk
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +146,31 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sidewalk": schemaAttribute544e520d24b01df2a615d35c(),
+		"sidewalk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeviceCreationFile
+				"device_creation_file": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceCreationFileList
+				"device_creation_file_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "sidewalk create device's file path",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Role
+				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "sidewalk role",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SidewalkManufacturingSn
+				"sidewalk_manufacturing_sn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "sidewalk contain file for created device and role",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +186,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute8d39799cf4a7856d02324851(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status for import task",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +197,10 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "StatusReason for import task",
 		//	  "type": "string"
 		//	}
-		"status_reason": schemaAttribute64e61f81b5c019e873189cbf(),
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "StatusReason for import task",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +233,24 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute04edeaee07f7fb6a440f8dee(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

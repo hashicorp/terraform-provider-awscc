@@ -14,106 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1c5bac7f0e9da31f6b8a4d40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon VPC that you want to associate the namespace with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ea0319129b809be6fed94b0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DnsProperties
-			"dns_properties": schemaAttribute35660a9c698218cfc0bb9807(),
-		}, /*END SCHEMA*/
-		Description: "Properties of the private DNS namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute200d1734caf024d78ee6cb17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the private namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35660a9c698218cfc0bb9807() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SOA
-			"soa": schemaAttribute79cd3b9a4bd1bc4afc917f62(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5495ee18eb081246a70443d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the private namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76a95b4663da70b4a905d63c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79cd3b9a4bd1bc4afc917f62() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TTL
-			"ttl": schemaAttributee4a3359578cf9fae69fb29c2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7ab7fc43c2645fea06b5a9f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea8033be84b858ddc1cfcc4c0(),
-				// Property: Value
-				"value": schemaAttributea8033be84b858ddc1cfcc4c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8033be84b858ddc1cfcc4c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb10d789e42ecbf172463a7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda0f35eb4d978cff09e8ff49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4a3359578cf9fae69fb29c2() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicediscovery_private_dns_namespace", privateDnsNamespaceDataSource)
 }
@@ -130,7 +30,10 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws[-a-z]*:servicediscovery:[a-z0-9-]+:[0-9]{12}:namespace/ns-[a-z0-9]{16}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute200d1734caf024d78ee6cb17(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the private namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +42,10 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeda0f35eb4d978cff09e8ff49(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +53,10 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.",
 		//	  "type": "string"
 		//	}
-		"hosted_zone_id": schemaAttribute76a95b4663da70b4a905d63c(),
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +64,10 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the private namespace.",
 		//	  "type": "string"
 		//	}
-		"private_dns_namespace_id": schemaAttribute5495ee18eb081246a70443d5(),
+		"private_dns_namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the private namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +77,10 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecb10d789e42ecbf172463a7e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Properties
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +108,28 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"properties": schemaAttribute1ea0319129b809be6fed94b0(),
+		"properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsProperties
+				"dns_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SOA
+						"soa": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TTL
+								"ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Properties of the private DNS namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +155,22 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributea7ab7fc43c2645fea06b5a9f(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Vpc
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +178,10 @@ func privateDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the Amazon VPC that you want to associate the namespace with.",
 		//	  "type": "string"
 		//	}
-		"vpc": schemaAttribute1c5bac7f0e9da31f6b8a4d40(),
+		"vpc": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon VPC that you want to associate the namespace with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

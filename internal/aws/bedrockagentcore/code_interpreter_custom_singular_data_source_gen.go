@@ -16,161 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04531cc792395bbf8ae972c5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Subnets for VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10497cb1159acc1ea9298ea8() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18fedcadf2aa6bf0a705e365() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a CodeInterpreter resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24471e315f3bc69d6579c6d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Secrets Manager secret ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute268614dd802b81bf966d2b51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that the code interpreter uses to access resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4693619c4e889421097020ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the code interpreter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e6e61c14dfbfdc6b38804cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the code interpreter was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65821d1d6cc8fc9d246a9dc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reason for failure if the code interpreter creation or operation failed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute681ec005603988eb619580f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroups
-			"security_groups": schemaAttributeba8da226fcd9dfe56dd54471(),
-			// Property: Subnets
-			"subnets": schemaAttribute04531cc792395bbf8ae972c5(),
-		}, /*END SCHEMA*/
-		Description: "Network mode configuration for VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fecb80455341d40bdafbc16() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttribute24471e315f3bc69d6579c6d6(),
-		}, /*END SCHEMA*/
-		Description: "Certificate location in Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78d34fd7cf774e6bd3e65f20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the code interpreter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8768bfcf6da48444f866b6fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of code interpreter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea93c0b3cfed64b917296cfbd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateLocation
-				"certificate_location": schemaAttribute6fecb80455341d40bdafbc16(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of root CA certificates in PEM format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba8da226fcd9dfe56dd54471() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Security groups for VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2ec749f265f52b99e3bc354() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NetworkMode
-			"network_mode": schemaAttributeca05435434dc3f8434d3e163(),
-			// Property: VpcConfig
-			"vpc_config": schemaAttribute681ec005603988eb619580f6(),
-		}, /*END SCHEMA*/
-		Description: "Network configuration for code interpreter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca05435434dc3f8434d3e163() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Network modes supported by code interpreter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee432666834ce9df0c202ff98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the code interpreter was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8462639e5cf7f1dac1cd864() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the code interpreter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_code_interpreter_custom", codeInterpreterCustomDataSource)
 }
@@ -214,7 +59,26 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"certificates": schemaAttributea93c0b3cfed64b917296cfbd(),
+		"certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateLocation
+					"certificate_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecretArn
+							"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Secrets Manager secret ARN.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Certificate location in Secrets Manager.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of root CA certificates in PEM format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CodeInterpreterArn
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +87,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?\\/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"code_interpreter_arn": schemaAttribute18fedcadf2aa6bf0a705e365(),
+		"code_interpreter_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a CodeInterpreter resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CodeInterpreterId
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +99,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"code_interpreter_id": schemaAttribute4693619c4e889421097020ae(),
+		"code_interpreter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the code interpreter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +111,11 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributee432666834ce9df0c202ff98(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the code interpreter was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +123,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The description of the code interpreter.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee8462639e5cf7f1dac1cd864(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the code interpreter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +135,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttribute268614dd802b81bf966d2b51(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that the code interpreter uses to access resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +146,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The reason for failure if the code interpreter creation or operation failed.",
 		//	  "type": "string"
 		//	}
-		"failure_reason": schemaAttribute65821d1d6cc8fc9d246a9dc4(),
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for failure if the code interpreter creation or operation failed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +158,11 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute5e6e61c14dfbfdc6b38804cb(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the code interpreter was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +170,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the code interpreter.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute78d34fd7cf774e6bd3e65f20(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the code interpreter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +232,36 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"network_configuration": schemaAttributec2ec749f265f52b99e3bc354(),
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NetworkMode
+				"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Network modes supported by code interpreter",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfig
+				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroups
+						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network mode configuration for VPC",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Network configuration for code interpreter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +277,10 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute8768bfcf6da48444f866b6fb(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of code interpreter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +298,12 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute10497cb1159acc1ea9298ea8(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

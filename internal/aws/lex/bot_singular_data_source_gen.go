@@ -14,1642 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00ea033fe2240747038c44e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01db66f1166105ee841d7d85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path to the grammar in the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03251df5bf838429b7cda0bf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttributed960679fdffc53ccc8094390(),
-			// Property: S3BucketName
-			"s3_bucket_name": schemaAttribute07de5cf5efe048a4f53134f1(),
-			// Property: S3ObjectKey
-			"s3_object_key": schemaAttribute01db66f1166105ee841d7d85(),
-		}, /*END SCHEMA*/
-		Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0652fee50fd4c51866723339() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute07de5cf5efe048a4f53134f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket that contains the grammar source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute095092b1c0fcc04757be5575() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0accce867d12d769fa64eda0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0bb98c734eb03ee102664924() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Pattern
-			"pattern": schemaAttribute7c306d7a945b122bb62ab67f(),
-		}, /*END SCHEMA*/
-		Description: "A regular expression used to validate the value of a slot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c759c5b308ae37b12a4b84f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomVocabularyItems
-			"custom_vocabulary_items": schemaAttribute5eb027bbbf6d1cfb269f29a2(),
-		}, /*END SCHEMA*/
-		Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ccf3ec6c1b92add034018a3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ddc528b7f08ab56ba336a57() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioRecognitionStrategy
-			"audio_recognition_strategy": schemaAttribute1dd387a78e61af839276847e(),
-		}, /*END SCHEMA*/
-		Description: "Provides settings that enable advanced recognition settings for slot values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11079ca7727d31b7f50fe0ef() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether DTMF input is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13108c6ac9bb6a2e43a1a5a0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributea4bc4f7e79b6d19b2bf0a1d2(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttributebe7dd1f1f636248451d63f08(),
-		}, /*END SCHEMA*/
-		Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1574293d90ec4f5ea1291c20() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The degree to which the phrase recognition is boosted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1743f3ea0555213920d23f14() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1825d00e7a626286031b3484() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value that can be used for a slot type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a5c633c4c65c480ecae0301() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Priority
-				"priority": schemaAttribute8e8790deba73f2472781db9a(),
-				// Property: SlotName
-				"slot_name": schemaAttributec5ff432597b11257549c7afb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List for slot priorities",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bb8ede34d3fef380f535a6b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KendraIndex
-			"kendra_index": schemaAttribute0accce867d12d769fa64eda0(),
-			// Property: QueryFilterString
-			"query_filter_string": schemaAttribute6de40d0f81ec2d27a113acc0(),
-			// Property: QueryFilterStringEnabled
-			"query_filter_string_enabled": schemaAttribute0ccf3ec6c1b92add034018a3(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for searching a Amazon Kendra index specified for the intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d7c75da4fe95ec297d37e3f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultValueList
-			"default_value_list": schemaAttribute2630bb51b827199e0df71619(),
-		}, /*END SCHEMA*/
-		Description: "A list of default values for a slot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d8ea5fc065fc911ee6638eb() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttributebcf61b8106cd1660ee66852a(),
-				// Property: MultipleValuesSetting
-				"multiple_values_setting": schemaAttributeafbe3f5c19e78d23e9412384(),
-				// Property: Name
-				"name": schemaAttribute3276f14ec25bcffe241de3d3(),
-				// Property: ObfuscationSetting
-				"obfuscation_setting": schemaAttribute696423640d99b95d2d38805f(),
-				// Property: SlotTypeName
-				"slot_type_name": schemaAttribute714aaae35bbba94c1501fc60(),
-				// Property: ValueElicitationSetting
-				"value_elicitation_setting": schemaAttribute49ab9c53e4ad07815b4b5e2f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of slots",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1dd387a78e61af839276847e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute235e71773f4a1a86be2fddbb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Engine
-			"engine": schemaAttributedcd2fe56f6f834e884b1bb0d(),
-			// Property: VoiceId
-			"voice_id": schemaAttributeb624fd32253f9cd8e5ed06da(),
-		}, /*END SCHEMA*/
-		Description: "Settings for using an Amazon Polly voice to communicate with a user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute243a641bdc19f97c06dbdd20() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "IdleSessionTTLInSeconds of the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2630bb51b827199e0df71619() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultValue
-				"default_value": schemaAttribute4c7785bf31d7e37465e30496(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of slot default values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ab411316c28bd10eb5da48d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute60635c08959f6a8cbda4b3a7(),
-			// Property: LogPrefix
-			"log_prefix": schemaAttribute7fe35aec3525194a7ceefde0(),
-			// Property: S3BucketArn
-			"s3_bucket_arn": schemaAttributeb05477251bedb627cebd9fc6(),
-		}, /*END SCHEMA*/
-		Description: "Specifies an Amazon S3 bucket for logging audio conversations",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b734195b0b5d76618d87d51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2da72b916065550b459b9248() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2eb14bd3effd9183a1f63857() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute3276f14ec25bcffe241de3d3(),
-				// Property: TimeToLiveInSeconds
-				"time_to_live_in_seconds": schemaAttributedd23c9d0608909693a158223(),
-				// Property: TurnsToLive
-				"turns_to_live": schemaAttributeac6a3e3332d19699eb5f691d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of contexts that the intent activates when it is fulfilled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f1fc50a8087abae915afdea() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FailureResponse
-			"failure_response": schemaAttribute815cfbe4cd226c9ba7dfeed4(),
-			// Property: SuccessResponse
-			"success_response": schemaAttribute815cfbe4cd226c9ba7dfeed4(),
-			// Property: TimeoutResponse
-			"timeout_response": schemaAttribute815cfbe4cd226c9ba7dfeed4(),
-		}, /*END SCHEMA*/
-		Description: "Provides information for updating the user on the progress of fulfilling an intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f299d794b84a52248183f07() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3276f14ec25bcffe241de3d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute331304038b313af818f19bae() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClosingResponse
-			"closing_response": schemaAttribute815cfbe4cd226c9ba7dfeed4(),
-			// Property: IsActive
-			"is_active": schemaAttribute8609a249718b8971dace6dca(),
-		}, /*END SCHEMA*/
-		Description: "Response that Amazon Lex sends to the user when the intent is closed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33561eb4d02e3d0531de7ace() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioSpecification
-			"audio_specification": schemaAttribute7f669f5df513930916358cd4(),
-			// Property: DTMFSpecification
-			"dtmf_specification": schemaAttributeb2568036881df144851f7bec(),
-			// Property: StartTimeoutMs
-			"start_timeout_ms": schemaAttribute449bb1de1a4b0d77982a898a(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the audio and DTMF input specification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3523ffb2580e6c0326d72668() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute354083ca43c8536c96782f0e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The length of time that the fulfillment Lambda function should run before it times out.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute390cd423aaaa0e8d066aa07f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomPayload
-				"custom_payload": schemaAttribute721bd5fc3b8221da180a8811(),
-				// Property: ImageResponseCard
-				"image_response_card": schemaAttribute8b7816590455eef67010c38a(),
-				// Property: PlainTextMessage
-				"plain_text_message": schemaAttribute72a871cff3f899ad5ea2784c(),
-				// Property: SSMLMessage
-				"ssml_message": schemaAttribute67c54ebac98839b49b1037e2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Message variations to send to the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3944660df36d11ceaae36357() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39ba5825cac6c83b2f8d5112() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ea69ec742ff768a377b0905() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The text that appears on the button.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ef0bb7860313bbedef6a71d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DetectSentiment
-			"detect_sentiment": schemaAttribute59dbefa13dbce9b868dcdbaf(),
-		}, /*END SCHEMA*/
-		Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40c8cda0f3a985c1ef8ee23f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify the locale",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute412e9163de08005c2938048e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributea4bc4f7e79b6d19b2bf0a1d2(),
-			// Property: MaxRetries
-			"max_retries": schemaAttribute1743f3ea0555213920d23f14(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttributebe7dd1f1f636248451d63f08(),
-			// Property: MessageSelectionStrategy
-			"message_selection_strategy": schemaAttributef4ecaf16e6f5f34798820ab8(),
-			// Property: PromptAttemptsSpecification
-			"prompt_attempts_specification": schemaAttribute8fb768b7482d2f00b06eefe6(),
-		}, /*END SCHEMA*/
-		Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4320e1e05599e23c709f8f73() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute449bb1de1a4b0d77982a898a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44d07f52053bae7e63a011a8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContinueResponse
-			"continue_response": schemaAttribute7e34bc7dc7961f717df2cd98(),
-			// Property: IsActive
-			"is_active": schemaAttributec3ef0c6d4c186ba6b3917f08(),
-			// Property: StillWaitingResponse
-			"still_waiting_response": schemaAttributed37eef9a5dfb6b7dd544e9dd(),
-			// Property: WaitingResponse
-			"waiting_response": schemaAttribute13108c6ac9bb6a2e43a1a5a0(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute473efcdc0f73d4bfc5919f50() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttribute811d65d4689dd06c88cb6dbf(),
-				// Property: Enabled
-				"enabled": schemaAttributea1a7ce9775fb346d50bdc200(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4887fefb8743563bf6c5c442() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Utterance
-				"utterance": schemaAttribute530075132d4597bae73fa02f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49ab9c53e4ad07815b4b5e2f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultValueSpecification
-			"default_value_specification": schemaAttribute1d7c75da4fe95ec297d37e3f(),
-			// Property: PromptSpecification
-			"prompt_specification": schemaAttribute412e9163de08005c2938048e(),
-			// Property: SampleUtterances
-			"sample_utterances": schemaAttribute4887fefb8743563bf6c5c442(),
-			// Property: SlotConstraint
-			"slot_constraint": schemaAttribute98c2d275ec5f6820ad3422f0(),
-			// Property: WaitAndContinueSpecification
-			"wait_and_continue_specification": schemaAttribute44d07f52053bae7e63a011a8(),
-		}, /*END SCHEMA*/
-		Description: "Settings that you can use for eliciting a slot value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49fb75f4b137f03041769c7f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8a5995030b5d02c05fde99bd(),
-				// Property: Value
-				"value": schemaAttribute3523ffb2580e6c0326d72668(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c7785bf31d7e37465e30496() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default value to use when a user doesn't provide a value for a slot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dbe735d058c95f2192974aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subtitle to display on the response card.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ed1d0f5082bfe650f78cba3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the built-in intent to base this intent on.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51a3e9ec2b5234d4f471706e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributea4bc4f7e79b6d19b2bf0a1d2(),
-			// Property: MaxRetries
-			"max_retries": schemaAttribute1743f3ea0555213920d23f14(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttributebe7dd1f1f636248451d63f08(),
-			// Property: MessageSelectionStrategy
-			"message_selection_strategy": schemaAttributef4ecaf16e6f5f34798820ab8(),
-			// Property: PromptAttemptsSpecification
-			"prompt_attempts_specification": schemaAttribute8fb768b7482d2f00b06eefe6(),
-		}, /*END SCHEMA*/
-		Description: "Prompts the user to confirm the intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52edf7aa802001ec674e9cc8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Active
-			"active": schemaAttribute2f299d794b84a52248183f07(),
-			// Property: StartResponse
-			"start_response": schemaAttributeb0b43d73f3a036e91432c5d8(),
-			// Property: TimeoutInSeconds
-			"timeout_in_seconds": schemaAttribute354083ca43c8536c96782f0e(),
-			// Property: UpdateResponse
-			"update_response": schemaAttribute652e91d91b28de9143b82421(),
-		}, /*END SCHEMA*/
-		Description: "Provides information for updating the user on the progress of fulfilling an intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute530075132d4597bae73fa02f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute541b6b0c1de5e7201e7bf2ae() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute587f69463b1fdb17b9ed29ce() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute9fcdff99073a5425d5691a03(),
-			// Property: S3ObjectKey
-			"s3_object_key": schemaAttribute7fe35aec3525194a7ceefde0(),
-			// Property: S3ObjectVersion
-			"s3_object_version": schemaAttribute3944660df36d11ceaae36357(),
-		}, /*END SCHEMA*/
-		Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute589e7c25afc91cbb916e2f49() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeHookSpecification
-			"code_hook_specification": schemaAttribute96e34d37160f4056a2e0faea(),
-			// Property: Enabled
-			"enabled": schemaAttribute8c8b8eb34a0e66e9d7e3fa86(),
-		}, /*END SCHEMA*/
-		Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59dbefa13dbce9b868dcdbaf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5aa7ec4645672353569884ea() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Utterance
-				"utterance": schemaAttribute530075132d4597bae73fa02f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of sample utterances",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5eb027bbbf6d1cfb269f29a2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Phrase
-				"phrase": schemaAttribute942d5a6ac657325477eed97f(),
-				// Property: Weight
-				"weight": schemaAttribute1574293d90ec4f5ea1291c20(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f9f98e486e6ab3d29452f5c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttribute1825d00e7a626286031b3484(),
-		}, /*END SCHEMA*/
-		Description: "Defines one of the values for a slot type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60635c08959f6a8cbda4b3a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6079d09762096147892e1960() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute8609a249718b8971dace6dca(),
-			// Property: FulfillmentUpdatesSpecification
-			"fulfillment_updates_specification": schemaAttribute52edf7aa802001ec674e9cc8(),
-			// Property: PostFulfillmentStatusSpecification
-			"post_fulfillment_status_specification": schemaAttribute2f1fc50a8087abae915afdea(),
-		}, /*END SCHEMA*/
-		Description: "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute630a429a367b1a1087ebd486() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the context.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute652e91d91b28de9143b82421() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttribute705e8a5d8fd6f36e3a7fc509(),
-			// Property: FrequencyInSeconds
-			"frequency_in_seconds": schemaAttribute541b6b0c1de5e7201e7bf2ae(),
-			// Property: MessageGroups
-			"message_groups": schemaAttributebe7dd1f1f636248451d63f08(),
-		}, /*END SCHEMA*/
-		Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67c54ebac98839b49b1037e2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttributed024bf85255c25b9b154e025(),
-		}, /*END SCHEMA*/
-		Description: "A message in Speech Synthesis Markup Language (SSML).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68990d0e85cbdb523db925f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID of resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68d33c00984b17c7462d9a5f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How often a message should be sent to the user in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute696423640d99b95d2d38805f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ObfuscationSettingType
-			"obfuscation_setting_type": schemaAttribute00ea033fe2240747038c44e7(),
-		}, /*END SCHEMA*/
-		Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6de40d0f81ec2d27a113acc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6df70f7f276b0eef74a213ac() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttributebcf61b8106cd1660ee66852a(),
-				// Property: DialogCodeHook
-				"dialog_code_hook": schemaAttributeff429e28195d806427ed4a3c(),
-				// Property: FulfillmentCodeHook
-				"fulfillment_code_hook": schemaAttribute6079d09762096147892e1960(),
-				// Property: InputContexts
-				"input_contexts": schemaAttribute9f36a0d18689d42eee4dfe15(),
-				// Property: IntentClosingSetting
-				"intent_closing_setting": schemaAttribute331304038b313af818f19bae(),
-				// Property: IntentConfirmationSetting
-				"intent_confirmation_setting": schemaAttributec83f5c36b84b9fbc78578837(),
-				// Property: KendraConfiguration
-				"kendra_configuration": schemaAttribute1bb8ede34d3fef380f535a6b(),
-				// Property: Name
-				"name": schemaAttribute3276f14ec25bcffe241de3d3(),
-				// Property: OutputContexts
-				"output_contexts": schemaAttribute2eb14bd3effd9183a1f63857(),
-				// Property: ParentIntentSignature
-				"parent_intent_signature": schemaAttribute4ed1d0f5082bfe650f78cba3(),
-				// Property: SampleUtterances
-				"sample_utterances": schemaAttribute5aa7ec4645672353569884ea(),
-				// Property: SlotPriorities
-				"slot_priorities": schemaAttribute1a5c633c4c65c480ecae0301(),
-				// Property: Slots
-				"slots": schemaAttribute1d8ea5fc065fc911ee6638eb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of intents",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f6566f67dafa17fa56e20b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute705e8a5d8fd6f36e3a7fc509() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the user can interrupt an update message while it is playing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute714aaae35bbba94c1501fc60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute721bd5fc3b8221da180a8811() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttributea91c0ceee4299a9bdf90022a(),
-		}, /*END SCHEMA*/
-		Description: "A message in a custom format defined by the client application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute726176bfaa3c73798ae7cb0e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GrammarSlotTypeSetting
-			"grammar_slot_type_setting": schemaAttributef0b2be41359e4ed39278ee66(),
-		}, /*END SCHEMA*/
-		Description: "Provides information about the external source of the slot type's definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72a871cff3f899ad5ea2784c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttributeba159695748cd57684b6ee90(),
-		}, /*END SCHEMA*/
-		Description: "A message in plain text format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7473ddefdecd6e5b915199b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7960bfcda728f209ff46b3d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for the Log Prefix",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ba611d5549d12ad2069fc18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value returned to Amazon Lex when the user chooses this button.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c306d7a945b122bb62ab67f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Regex pattern",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e34bc7dc7961f717df2cd98() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributea4bc4f7e79b6d19b2bf0a1d2(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttributebe7dd1f1f636248451d63f08(),
-		}, /*END SCHEMA*/
-		Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f669f5df513930916358cd4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndTimeoutMs
-			"end_timeout_ms": schemaAttribute4320e1e05599e23c709f8f73(),
-			// Property: MaxLengthMs
-			"max_length_ms": schemaAttribute8cb76732469d112fe4b17846(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the audio input specifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fe35aec3525194a7ceefde0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 key of the deployment package.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute811d65d4689dd06c88cb6dbf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatch
-			"cloudwatch": schemaAttributedd28381e8d97c55eb0ecff39(),
-		}, /*END SCHEMA*/
-		Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute815cfbe4cd226c9ba7dfeed4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributea4bc4f7e79b6d19b2bf0a1d2(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttributebe7dd1f1f636248451d63f08(),
-		}, /*END SCHEMA*/
-		Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83563115c73ab2ae9f7d6755() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The built-in slot type used as a parent of this slot type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84b63c59215ebcea41a52c6d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether audio input is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8609a249718b8971dace6dca() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88941267508b7d6542b082a8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of DTMF digits allowed in an utterance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a5995030b5d02c05fde99bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b7816590455eef67010c38a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Buttons
-			"buttons": schemaAttributea98a223f3a307d8d3e01fd76(),
-			// Property: ImageUrl
-			"image_url": schemaAttributea34e2f39925574bd0146d3da(),
-			// Property: Subtitle
-			"subtitle": schemaAttribute4dbe735d058c95f2192974aa(),
-			// Property: Title
-			"title": schemaAttributea99365d61175754208ccfbde(),
-		}, /*END SCHEMA*/
-		Description: "A message that defines a response card that the client application can show to the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c533e1ccd04d9e4893d2e7a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to build the bot locales after bot creation completes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c8b8eb34a0e66e9d7e3fa86() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the Lambda code hook is enabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cb76732469d112fe4b17846() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e8790deba73f2472781db9a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The priority that a slot should be elicited.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e8bc81fce8a04bab7dea0be() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowAudioInput
-			"allow_audio_input": schemaAttribute84b63c59215ebcea41a52c6d(),
-			// Property: AllowDTMFInput
-			"allow_dtmf_input": schemaAttribute11079ca7727d31b7f50fe0ef(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the allowed input types.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fb768b7482d2f00b06eefe6() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowInterrupt
-				"allow_interrupt": schemaAttributea3646b123a6d42d3136d1d4a(),
-				// Property: AllowedInputTypes
-				"allowed_input_types": schemaAttribute8e8bc81fce8a04bab7dea0be(),
-				// Property: AudioAndDTMFInputSpecification
-				"audio_and_dtmf_input_specification": schemaAttribute33561eb4d02e3d0531de7ace(),
-				// Property: TextInputSpecification
-				"text_input_specification": schemaAttributee978eb9cacc3befd4c09683c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the advanced settings on each attempt of the prompt.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute942d5a6ac657325477eed97f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Phrase that should be recognized.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96e34d37160f4056a2e0faea() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaCodeHook
-			"lambda_code_hook": schemaAttributee3c0ea12849a186475682774(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96fb1178b3c3292ac7eb4e08() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Time for which a bot waits before re-prompting a customer for text input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98c2d275ec5f6820ad3422f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the slot is required or optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a3e7222dfa9a7afdc97e811() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BotAliasLocaleSetting
-				"bot_alias_locale_setting": schemaAttribute589e7c25afc91cbb916e2f49(),
-				// Property: LocaleId
-				"locale_id": schemaAttribute40c8cda0f3a985c1ef8ee23f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of bot alias locale settings to add to the bot alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bbd0ed5d0d0a0d4df206a65() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomPayload
-			"custom_payload": schemaAttribute721bd5fc3b8221da180a8811(),
-			// Property: ImageResponseCard
-			"image_response_card": schemaAttribute8b7816590455eef67010c38a(),
-			// Property: PlainTextMessage
-			"plain_text_message": schemaAttribute72a871cff3f899ad5ea2784c(),
-			// Property: SSMLMessage
-			"ssml_message": schemaAttribute67c54ebac98839b49b1037e2(),
-		}, /*END SCHEMA*/
-		Description: "The primary message that Amazon Lex should send to the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f36a0d18689d42eee4dfe15() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute630a429a367b1a1087ebd486(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of input contexts specified for the intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fcdff99073a5425d5691a03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0498aa868cd0334362864fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the language and locale that the bot will be used in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea089f2ebc3a50ca2014729d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1a7ce9775fb346d50bdc200() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea34e2f39925574bd0146d3da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of an image to display on the response card.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea35932cb424b3f619944b3af() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8a5995030b5d02c05fde99bd(),
-				// Property: Value
-				"value": schemaAttribute3523ffb2580e6c0326d72668(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to add to the bot, which can only be added at bot creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3646b123a6d42d3136d1d4a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4bc4f7e79b6d19b2bf0a1d2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea91c0ceee4299a9bdf90022a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The string that is sent to your application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea98a223f3a307d8d3e01fd76() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Text
-				"text": schemaAttribute3ea69ec742ff768a377b0905(),
-				// Property: Value
-				"value": schemaAttribute7ba611d5549d12ad2069fc18(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of buttons that should be displayed on the response card.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea99365d61175754208ccfbde() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The title to display on the response card.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac6a3e3332d19699eb5f691d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of conversation turns that the output context should remain active.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafbe3f5c19e78d23e9412384() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowMultipleValues
-			"allow_multiple_values": schemaAttribute8609a249718b8971dace6dca(),
-		}, /*END SCHEMA*/
-		Description: "Indicates whether a slot can return multiple values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb05477251bedb627cebd9fc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0b43d73f3a036e91432c5d8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributee0440c8dee4fd28486637ff7(),
-			// Property: DelayInSeconds
-			"delay_in_seconds": schemaAttribute0652fee50fd4c51866723339(),
-			// Property: MessageGroups
-			"message_groups": schemaAttributebe7dd1f1f636248451d63f08(),
-		}, /*END SCHEMA*/
-		Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2568036881df144851f7bec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeletionCharacter
-			"deletion_character": schemaAttribute6f6566f67dafa17fa56e20b8(),
-			// Property: EndCharacter
-			"end_character": schemaAttributebe4d76d1dcfef34dfc942ff9(),
-			// Property: EndTimeoutMs
-			"end_timeout_ms": schemaAttributeb7ba11e04c740aed529cc9b1(),
-			// Property: MaxLength
-			"max_length": schemaAttribute88941267508b7d6542b082a8(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the settings on DTMF input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb624fd32253f9cd8e5ed06da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7ba11e04c740aed529cc9b1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9b68d6c8b59ef05cc3b4e4e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttributebcf61b8106cd1660ee66852a(),
-				// Property: ExternalSourceSetting
-				"external_source_setting": schemaAttribute726176bfaa3c73798ae7cb0e(),
-				// Property: Name
-				"name": schemaAttribute3276f14ec25bcffe241de3d3(),
-				// Property: ParentSlotTypeSignature
-				"parent_slot_type_signature": schemaAttribute83563115c73ab2ae9f7d6755(),
-				// Property: SlotTypeValues
-				"slot_type_values": schemaAttributeba9c70a2ac5b3fb98bec9ca5(),
-				// Property: ValueSelectionSetting
-				"value_selection_setting": schemaAttributec025f3d217ebc793bc4c71e4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of SlotTypes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba159695748cd57684b6ee90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The message to send to the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba9c70a2ac5b3fb98bec9ca5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SampleValue
-				"sample_value": schemaAttribute5f9f98e486e6ab3d29452f5c(),
-				// Property: Synonyms
-				"synonyms": schemaAttributec734b4ec855bbc2a10b8ed4a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A List of slot type values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcf61b8106cd1660ee66852a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe4d76d1dcfef34dfc942ff9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe7dd1f1f636248451d63f08() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Message
-				"message": schemaAttribute9bbd0ed5d0d0a0d4df206a65(),
-				// Property: Variations
-				"variations": schemaAttribute390cd423aaaa0e8d066aa07f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec025f3d217ebc793bc4c71e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdvancedRecognitionSetting
-			"advanced_recognition_setting": schemaAttribute0ddc528b7f08ab56ba336a57(),
-			// Property: RegexFilter
-			"regex_filter": schemaAttribute0bb98c734eb03ee102664924(),
-			// Property: ResolutionStrategy
-			"resolution_strategy": schemaAttribute39ba5825cac6c83b2f8d5112(),
-		}, /*END SCHEMA*/
-		Description: "Contains settings used by Amazon Lex to select a slot value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec05f8274c59525ad9b1a591f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BotAliasLocaleSettings
-			"bot_alias_locale_settings": schemaAttribute9a3e7222dfa9a7afdc97e811(),
-			// Property: ConversationLogSettings
-			"conversation_log_settings": schemaAttributec1cb669d91a6e04fc87b7544(),
-			// Property: Description
-			"description": schemaAttributebcf61b8106cd1660ee66852a(),
-			// Property: SentimentAnalysisSettings
-			"sentiment_analysis_settings": schemaAttribute3ef0bb7860313bbedef6a71d(),
-		}, /*END SCHEMA*/
-		Description: "Configuring the test bot alias settings for a given bot",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1cb669d91a6e04fc87b7544() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioLogSettings
-			"audio_log_settings": schemaAttributec64a84bf2179490e9f47259c(),
-			// Property: TextLogSettings
-			"text_log_settings": schemaAttribute473efcdc0f73d4bfc5919f50(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3ef0c6d4c186ba6b3917f08() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the bot will wait for a user to respond.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5ff432597b11257549c7afb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the slot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec64a84bf2179490e9f47259c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttributee33ea683af731276b6273624(),
-				// Property: Enabled
-				"enabled": schemaAttributea1a7ce9775fb346d50bdc200(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec734b4ec855bbc2a10b8ed4a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Value
-				"value": schemaAttribute1825d00e7a626286031b3484(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Additional values related to the slot type entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec83f5c36b84b9fbc78578837() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeclinationResponse
-			"declination_response": schemaAttribute815cfbe4cd226c9ba7dfeed4(),
-			// Property: IsActive
-			"is_active": schemaAttribute8609a249718b8971dace6dca(),
-			// Property: PromptSpecification
-			"prompt_specification": schemaAttribute51a3e9ec2b5234d4f471706e(),
-		}, /*END SCHEMA*/
-		Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed024bf85255c25b9b154e025() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SSML text that defines the prompt.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed37eef9a5dfb6b7dd544e9dd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowInterrupt
-			"allow_interrupt": schemaAttributea4bc4f7e79b6d19b2bf0a1d2(),
-			// Property: FrequencyInSeconds
-			"frequency_in_seconds": schemaAttribute68d33c00984b17c7462d9a5f(),
-			// Property: MessageGroupsList
-			"message_groups_list": schemaAttributebe7dd1f1f636248451d63f08(),
-			// Property: TimeoutInSeconds
-			"timeout_in_seconds": schemaAttribute095092b1c0fcc04757be5575(),
-		}, /*END SCHEMA*/
-		Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed960679fdffc53ccc8094390() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcd2fe56f6f834e884b1bb0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd23c9d0608909693a158223() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time, in seconds, that the output context should remain active.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd28381e8d97c55eb0ecff39() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogGroupArn
-			"cloudwatch_log_group_arn": schemaAttribute2b734195b0b5d76618d87d51(),
-			// Property: LogPrefix
-			"log_prefix": schemaAttribute7960bfcda728f209ff46b3d2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddc95d8c8053b79f00e65c91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChildDirected
-			"child_directed": schemaAttributea1a7ce9775fb346d50bdc200(),
-		}, /*END SCHEMA*/
-		Description: "Data privacy setting of the Bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0440c8dee4fd28486637ff7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the user can interrupt the start message while it is playing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee33ea683af731276b6273624() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute2ab411316c28bd10eb5da48d(),
-		}, /*END SCHEMA*/
-		Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3c0ea12849a186475682774() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeHookInterfaceVersion
-			"code_hook_interface_version": schemaAttribute7473ddefdecd6e5b915199b9(),
-			// Property: LambdaArn
-			"lambda_arn": schemaAttributea089f2ebc3a50ca2014729d4(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee978eb9cacc3befd4c09683c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StartTimeoutMs
-			"start_timeout_ms": schemaAttribute96fb1178b3c3292ac7eb4e08(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the text input specifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0b2be41359e4ed39278ee66() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Source
-			"source": schemaAttribute03251df5bf838429b7cda0bf(),
-		}, /*END SCHEMA*/
-		Description: "Settings required for a slot type based on a grammar that you provide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef406e65a0914c454e686694d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomVocabulary
-				"custom_vocabulary": schemaAttribute0c759c5b308ae37b12a4b84f(),
-				// Property: Description
-				"description": schemaAttributebcf61b8106cd1660ee66852a(),
-				// Property: Intents
-				"intents": schemaAttribute6df70f7f276b0eef74a213ac(),
-				// Property: LocaleId
-				"locale_id": schemaAttributea0498aa868cd0334362864fc(),
-				// Property: NluConfidenceThreshold
-				"nlu_confidence_threshold": schemaAttribute2da72b916065550b459b9248(),
-				// Property: SlotTypes
-				"slot_types": schemaAttributeb9b68d6c8b59ef05cc3b4e4e(),
-				// Property: VoiceSettings
-				"voice_settings": schemaAttribute235e71773f4a1a86be2fddbb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of bot locales",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4ecaf16e6f5f34798820ab8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates how a message is selected from a message group among retries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc5a3dae208499ecc883e2e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff429e28195d806427ed4a3c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute8609a249718b8971dace6dca(),
-		}, /*END SCHEMA*/
-		Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lex_bot", botDataSource)
 }
@@ -1667,7 +31,9 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute39ba5825cac6c83b2f8d5112(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoBuildBotLocales
 		// CloudFormation resource type schema:
 		//
@@ -1675,7 +41,10 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to build the bot locales after bot creation completes.",
 		//	  "type": "boolean"
 		//	}
-		"auto_build_bot_locales": schemaAttribute8c533e1ccd04d9e4893d2e7a(),
+		"auto_build_bot_locales": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to build the bot locales after bot creation completes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BotFileS3Location
 		// CloudFormation resource type schema:
 		//
@@ -1710,7 +79,27 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"bot_file_s3_location": schemaAttribute587f69463b1fdb17b9ed29ce(),
+		"bot_file_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectKey
+				"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 key of the deployment package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectVersion
+				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BotLocales
 		// CloudFormation resource type schema:
 		//
@@ -5821,7 +4210,3024 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bot_locales": schemaAttributef406e65a0914c454e686694d(),
+		"bot_locales": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CustomVocabulary
+					"custom_vocabulary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomVocabularyItems
+							"custom_vocabulary_items": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Phrase
+										"phrase": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Phrase that should be recognized.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Weight
+										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The degree to which the phrase recognition is boosted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description of the resource",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Intents
+					"intents": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A description of the resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DialogCodeHook
+								"dialog_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Enabled
+										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FulfillmentCodeHook
+								"fulfillment_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Enabled
+										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FulfillmentUpdatesSpecification
+										"fulfillment_updates_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Active
+												"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: StartResponse
+												"start_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Determines whether the user can interrupt the start message while it is playing.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: DelayInSeconds
+														"delay_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroups
+														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: TimeoutInSeconds
+												"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The length of time that the fulfillment Lambda function should run before it times out.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: UpdateResponse
+												"update_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Determines whether the user can interrupt an update message while it is playing.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: FrequencyInSeconds
+														"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroups
+														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PostFulfillmentStatusSpecification
+										"post_fulfillment_status_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FailureResponse
+												"failure_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: SuccessResponse
+												"success_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: TimeoutResponse
+												"timeout_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InputContexts
+								"input_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the context.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The list of input contexts specified for the intent.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntentClosingSetting
+								"intent_closing_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ClosingResponse
+										"closing_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: IsActive
+										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Response that Amazon Lex sends to the user when the intent is closed.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntentConfirmationSetting
+								"intent_confirmation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DeclinationResponse
+										"declination_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: IsActive
+										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: PromptSpecification
+										"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MaxRetries
+												"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageSelectionStrategy
+												"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates how a message is selected from a message group among retries.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: PromptAttemptsSpecification
+												"prompt_attempts_specification": // Pattern: ""
+												schema.MapNestedAttribute{       /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AllowInterrupt
+															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: AllowedInputTypes
+															"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowAudioInput
+																	"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether audio input is allowed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: AllowDTMFInput
+																	"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether DTMF input is allowed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the allowed input types.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: AudioAndDTMFInputSpecification
+															"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AudioSpecification
+																	"audio_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: EndTimeoutMs
+																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: MaxLengthMs
+																			"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Specifies the audio input specifications.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: DTMFSpecification
+																	"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: DeletionCharacter
+																			"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: EndCharacter
+																			"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: EndTimeoutMs
+																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: MaxLength
+																			"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "The maximum number of DTMF digits allowed in an utterance.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Specifies the settings on DTMF input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: StartTimeoutMs
+																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the audio and DTMF input specification.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: TextInputSpecification
+															"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: StartTimeoutMs
+																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the text input specifications.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "Specifies the advanced settings on each attempt of the prompt.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Prompts the user to confirm the intent.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KendraConfiguration
+								"kendra_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KendraIndex
+										"kendra_index": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: QueryFilterString
+										"query_filter_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: QueryFilterStringEnabled
+										"query_filter_string_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for searching a Amazon Kendra index specified for the intent.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Unique name for a resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputContexts
+								"output_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Unique name for a resource.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: TimeToLiveInSeconds
+											"time_to_live_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The amount of time, in seconds, that the output context should remain active.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: TurnsToLive
+											"turns_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of conversation turns that the output context should remain active.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of contexts that the intent activates when it is fulfilled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParentIntentSignature
+								"parent_intent_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique identifier for the built-in intent to base this intent on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SampleUtterances
+								"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Utterance
+											"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "An array of sample utterances",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SlotPriorities
+								"slot_priorities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Priority
+											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The priority that a slot should be elicited.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SlotName
+											"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the slot.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List for slot priorities",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Slots
+								"slots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Description
+											"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A description of the resource",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MultipleValuesSetting
+											"multiple_values_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AllowMultipleValues
+													"allow_multiple_values": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Indicates whether a slot can return multiple values.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Unique name for a resource.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ObfuscationSetting
+											"obfuscation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ObfuscationSettingType
+													"obfuscation_setting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SlotTypeName
+											"slot_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ValueElicitationSetting
+											"value_elicitation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DefaultValueSpecification
+													"default_value_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: DefaultValueList
+															"default_value_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: DefaultValue
+																		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The default value to use when a user doesn't provide a value for a slot.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "A list of slot default values",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "A list of default values for a slot.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: PromptSpecification
+													"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AllowInterrupt
+															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MaxRetries
+															"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MessageGroupsList
+															"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Message
+																		"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "The primary message that Amazon Lex should send to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Variations
+																		"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: CustomPayload
+																					"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The string that is sent to your application.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in a custom format defined by the client application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageResponseCard
+																					"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Buttons
+																							"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: Text
+																										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																											Description: "The text that appears on the button.",
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																										// Property: Value
+																										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																											Description: "The value returned to Amazon Lex when the user chooses this button.",
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																								}, /*END NESTED OBJECT*/
+																								Description: "A list of buttons that should be displayed on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageUrl
+																							"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The URL of an image to display on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Subtitle
+																							"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The subtitle to display on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Title
+																							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The title to display on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message that defines a response card that the client application can show to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: PlainTextMessage
+																					"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The message to send to the user.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in plain text format.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: SSMLMessage
+																					"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The SSML text that defines the prompt.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in Speech Synthesis Markup Language (SSML).",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Description: "Message variations to send to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MessageSelectionStrategy
+															"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates how a message is selected from a message group among retries.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: PromptAttemptsSpecification
+															"prompt_attempts_specification": // Pattern: ""
+															schema.MapNestedAttribute{       /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AllowInterrupt
+																		"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																			Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: AllowedInputTypes
+																		"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowAudioInput
+																				"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																					Description: "Indicates whether audio input is allowed.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: AllowDTMFInput
+																				"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																					Description: "Indicates whether DTMF input is allowed.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the allowed input types.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: AudioAndDTMFInputSpecification
+																		"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AudioSpecification
+																				"audio_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: EndTimeoutMs
+																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxLengthMs
+																						"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "Specifies the audio input specifications.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: DTMFSpecification
+																				"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: DeletionCharacter
+																						"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: EndCharacter
+																						"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: EndTimeoutMs
+																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxLength
+																						"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "The maximum number of DTMF digits allowed in an utterance.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "Specifies the settings on DTMF input.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: StartTimeoutMs
+																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the audio and DTMF input specification.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TextInputSpecification
+																		"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: StartTimeoutMs
+																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the text input specifications.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Specifies the advanced settings on each attempt of the prompt.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SampleUtterances
+													"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Utterance
+																"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SlotConstraint
+													"slot_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether the slot is required or optional.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: WaitAndContinueSpecification
+													"wait_and_continue_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ContinueResponse
+															"continue_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IsActive
+															"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Specifies whether the bot will wait for a user to respond.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: StillWaitingResponse
+															"still_waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: FrequencyInSeconds
+																	"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "How often a message should be sent to the user in seconds.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimeoutInSeconds
+																	"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: WaitingResponse
+															"waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Settings that you can use for eliciting a slot value.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of slots",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of intents",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LocaleId
+					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the language and locale that the bot will be used in.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NluConfidenceThreshold
+					"nlu_confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SlotTypes
+					"slot_types": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A description of the resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExternalSourceSetting
+								"external_source_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: GrammarSlotTypeSetting
+										"grammar_slot_type_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Source
+												"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: KmsKeyArn
+														"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: S3BucketName
+														"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The name of the S3 bucket that contains the grammar source.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: S3ObjectKey
+														"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The path to the grammar in the S3 bucket.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Settings required for a slot type based on a grammar that you provide.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Provides information about the external source of the slot type's definition.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Unique name for a resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParentSlotTypeSignature
+								"parent_slot_type_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The built-in slot type used as a parent of this slot type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SlotTypeValues
+								"slot_type_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SampleValue
+											"sample_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The value that can be used for a slot type.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Defines one of the values for a slot type.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Synonyms
+											"synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The value that can be used for a slot type.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Additional values related to the slot type entry.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A List of slot type values",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValueSelectionSetting
+								"value_selection_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AdvancedRecognitionSetting
+										"advanced_recognition_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AudioRecognitionStrategy
+												"audio_recognition_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides settings that enable advanced recognition settings for slot values.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RegexFilter
+										"regex_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Pattern
+												"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Regex pattern",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A regular expression used to validate the value of a slot.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ResolutionStrategy
+										"resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Contains settings used by Amazon Lex to select a slot value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of SlotTypes",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VoiceSettings
+					"voice_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Engine
+							"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VoiceId
+							"voice_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Settings for using an Amazon Polly voice to communicate with a user.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of bot locales",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BotTags
 		// CloudFormation resource type schema:
 		//
@@ -5855,7 +7261,24 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bot_tags": schemaAttributea35932cb424b3f619944b3af(),
+		"bot_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to add to the bot, which can only be added at bot creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataPrivacy
 		// CloudFormation resource type schema:
 		//
@@ -5873,7 +7296,17 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_privacy": schemaAttributeddc95d8c8053b79f00e65c91(),
+		"data_privacy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChildDirected
+				"child_directed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Data privacy setting of the Bot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -5882,7 +7315,10 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebcf61b8106cd1660ee66852a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -5893,7 +7329,10 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"bot_id": schemaAttribute68990d0e85cbdb523db925f5(),
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID of resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdleSessionTTLInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -5903,7 +7342,10 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 60,
 		//	  "type": "integer"
 		//	}
-		"idle_session_ttl_in_seconds": schemaAttribute243a641bdc19f97c06dbdd20(),
+		"idle_session_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "IdleSessionTTLInSeconds of the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -5914,7 +7356,10 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?)+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3276f14ec25bcffe241de3d3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique name for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -5925,7 +7370,10 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributefc5a3dae208499ecc883e2e0(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TestBotAliasSettings
 		// CloudFormation resource type schema:
 		//
@@ -6150,7 +7598,166 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"test_bot_alias_settings": schemaAttributec05f8274c59525ad9b1a591f(),
+		"test_bot_alias_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BotAliasLocaleSettings
+				"bot_alias_locale_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BotAliasLocaleSetting
+							"bot_alias_locale_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CodeHookSpecification
+									"code_hook_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: LambdaCodeHook
+											"lambda_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CodeHookInterfaceVersion
+													"code_hook_interface_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: LambdaArn
+													"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of the Lambda function.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the Lambda code hook is enabled",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LocaleId
+							"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A string used to identify the locale",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of bot alias locale settings to add to the bot alias.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConversationLogSettings
+				"conversation_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AudioLogSettings
+						"audio_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: S3Bucket
+											"s3_bucket": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: KmsKeyArn
+													"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: LogPrefix
+													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon S3 key of the deployment package.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: S3BucketArn
+													"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Specifies an Amazon S3 bucket for logging audio conversations",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TextLogSettings
+						"text_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CloudWatch
+											"cloudwatch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CloudWatchLogGroupArn
+													"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: LogPrefix
+													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string containing the value for the Log Prefix",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the resource",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SentimentAnalysisSettings
+				"sentiment_analysis_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetectSentiment
+						"detect_sentiment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuring the test bot alias settings for a given bot",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TestBotAliasTags
 		// CloudFormation resource type schema:
 		//
@@ -6184,7 +7791,24 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"test_bot_alias_tags": schemaAttribute49fb75f4b137f03041769c7f(),
+		"test_bot_alias_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

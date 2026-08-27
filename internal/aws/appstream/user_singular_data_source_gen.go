@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute060391f654778dda9d738456() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25a4b4f7ffc718da99e8f774() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Returns the Amazon Resource Name (ARN) for the Amazon AppStream User resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e5d7cbedb58552fae24bf1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication type for the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ccb03088a38776d6409c0fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The last name, or surname, of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec00f2c3bf5d451a3c9cef68a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The first name, or given name, of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede186bd2c8675efc7ac52b57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_user", userDataSource)
 }
@@ -72,7 +30,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute25a4b4f7ffc718da99e8f774(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the Amazon Resource Name (ARN) for the Amazon AppStream User resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +41,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The authentication type for the user.",
 		//	  "type": "string"
 		//	}
-		"authentication_type": schemaAttribute5e5d7cbedb58552fae24bf1c(),
+		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The authentication type for the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirstName
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +52,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The first name, or given name, of the user.",
 		//	  "type": "string"
 		//	}
-		"first_name": schemaAttributec00f2c3bf5d451a3c9cef68a(),
+		"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The first name, or given name, of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastName
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +63,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The last name, or surname, of the user.",
 		//	  "type": "string"
 		//	}
-		"last_name": schemaAttribute9ccb03088a38776d6409c0fe(),
+		"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The last name, or surname, of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageAction
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +74,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.",
 		//	  "type": "string"
 		//	}
-		"message_action": schemaAttribute060391f654778dda9d738456(),
+		"message_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +85,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The email address of the user.",
 		//	  "type": "string"
 		//	}
-		"user_name": schemaAttributede186bd2c8675efc7ac52b57(),
+		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

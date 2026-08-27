@@ -15,43 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00c9b5df414dfa3e963e77ae() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute060f51f752529e9b61e3dc21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e2bb625842562e2c0b1a7f4() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b55f7a31bf2ad5addb45cae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of private link authentication",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd15b42cc1562473fbb0df29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the target cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_msk_vpc_connection", vpcConnectionDataSource)
 }
@@ -66,7 +29,9 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute060f51f752529e9b61e3dc21(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Authentication
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +46,10 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"authentication": schemaAttribute6b55f7a31bf2ad5addb45cae(),
+		"authentication": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of private link authentication",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSubnets
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +62,10 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"client_subnets": schemaAttribute00c9b5df414dfa3e963e77ae(),
+		"client_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +78,10 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_groups": schemaAttribute00c9b5df414dfa3e963e77ae(),
+		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +95,12 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute5e2bb625842562e2c0b1a7f4(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +109,10 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"target_cluster_arn": schemaAttributefd15b42cc1562473fbb0df29(),
+		"target_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the target cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +120,9 @@ func vpcConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute060f51f752529e9b61e3dc21(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

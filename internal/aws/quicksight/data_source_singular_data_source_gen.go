@@ -16,1004 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0073af5f9b01b1a3d92e8d57() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CopySourceArn
-			"copy_source_arn": schemaAttribute0691535a2dc6738f474a324a(),
-			// Property: CredentialPair
-			"credential_pair": schemaAttribute270622e98a37c8d81f225069(),
-			// Property: KeyPairCredentials
-			"key_pair_credentials": schemaAttribute01ed5fed20d79ca58d5d31b9(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute64d2189244d52e4ac3f34f27(),
-		}, /*END SCHEMA*/
-		Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01ed5fed20d79ca58d5d31b9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KeyPairUsername
-			"key_pair_username": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: PrivateKey
-			"private_key": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: PrivateKeyPassphrase
-			"private_key_passphrase": schemaAttributee92226d42f28d1f376a6713c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05dcf764fd9e4bff604272bf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClusterId
-			"cluster_id": schemaAttributef8f1566952e332639470dc8f(),
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute855ea8c2389f4f123319fe53(),
-			// Property: IAMParameters
-			"iam_parameters": schemaAttributed103283d113be0f14bc3f39e(),
-			// Property: IdentityCenterConfiguration
-			"identity_center_configuration": schemaAttributee4bd507065413550c03cf0d5(),
-			// Property: Port
-			"port": schemaAttribute12e223a2503a9564fcc3e8a3(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0691535a2dc6738f474a324a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a1af4930cca1a2805ab1e92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The host name of the Starburst data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c725cb0fd2493ebaf25653a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The host name of the Databricks data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12e223a2503a9564fcc3e8a3() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute144e63e60553686243349a79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Amazon S3 bucket.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14dde45e68b9d2964bc0db59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17633278ef65c7ff856a43c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute189ba76fedcfa1f355c05e84() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdentityCenterConfiguration
-			"identity_center_configuration": schemaAttributee4bd507065413550c03cf0d5(),
-			// Property: RoleArn
-			"role_arn": schemaAttributefb2806c3a873baba88064145(),
-			// Property: WorkGroup
-			"work_group": schemaAttribute450f026dbedb351ff23fad4a(),
-		}, /*END SCHEMA*/
-		Description: "<p>Parameters for Amazon Athena.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a9df0c946a234855e4ce274() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Message
-			"message": schemaAttributede9b21cb3d197e89272b0761(),
-			// Property: Type
-			"type": schemaAttributee92226d42f28d1f376a6713c(),
-		}, /*END SCHEMA*/
-		Description: "<p>Error information for the data source creation or update.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ad02ebb0b9f7970b46e1f16() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ManifestFileLocation
-			"manifest_file_location": schemaAttribute6bbaeb6a000452200e3ea364(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute5797e838b292d5fdc07ab925(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for S3.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1eb5ee469b82c9ae56f2b4e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23826a21d08a06005166442e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AmazonElasticsearchParameters
-			"amazon_elasticsearch_parameters": schemaAttributed4cdcb313d4f5561a3de3cfa(),
-			// Property: AmazonOpenSearchParameters
-			"amazon_open_search_parameters": schemaAttributed4cdcb313d4f5561a3de3cfa(),
-			// Property: AthenaParameters
-			"athena_parameters": schemaAttribute189ba76fedcfa1f355c05e84(),
-			// Property: AuroraParameters
-			"aurora_parameters": schemaAttributef9f69f43de404adf43e6eacd(),
-			// Property: AuroraPostgreSqlParameters
-			"aurora_postgre_sql_parameters": schemaAttribute56c0b992d2e2814c0307da76(),
-			// Property: DatabricksParameters
-			"databricks_parameters": schemaAttributed26c8c2d1f8b3aacbbbf0da6(),
-			// Property: MariaDbParameters
-			"maria_db_parameters": schemaAttribute834eb3e7628fa02581bce50c(),
-			// Property: MySqlParameters
-			"my_sql_parameters": schemaAttributeaaf1c65663927f6b19fe305c(),
-			// Property: OracleParameters
-			"oracle_parameters": schemaAttribute285b1fb07330a9140fe0e681(),
-			// Property: PostgreSqlParameters
-			"postgre_sql_parameters": schemaAttribute3d9be744f48b08f6225db53f(),
-			// Property: PrestoParameters
-			"presto_parameters": schemaAttributeb1dd2cfa7f9206d6629cb5c9(),
-			// Property: RdsParameters
-			"rds_parameters": schemaAttributed3ae36e8beee51233d197bc0(),
-			// Property: RedshiftParameters
-			"redshift_parameters": schemaAttribute05dcf764fd9e4bff604272bf(),
-			// Property: S3Parameters
-			"s3_parameters": schemaAttribute1ad02ebb0b9f7970b46e1f16(),
-			// Property: S3TablesParameters
-			"s3_tables_parameters": schemaAttributed789f3ef00a0790da48ce54b(),
-			// Property: SnowflakeParameters
-			"snowflake_parameters": schemaAttributec3d6a63dc258150228488fe6(),
-			// Property: SparkParameters
-			"spark_parameters": schemaAttributebdd6be9d54f9e2bc9c2cd57b(),
-			// Property: SqlServerParameters
-			"sql_server_parameters": schemaAttribute4500602a4b26632873122458(),
-			// Property: StarburstParameters
-			"starburst_parameters": schemaAttributec20004b19067cc3991790a97(),
-			// Property: TeradataParameters
-			"teradata_parameters": schemaAttributefd6117d52a47ac79d861f006(),
-			// Property: TrinoParameters
-			"trino_parameters": schemaAttributeaab5b8d488490489471d3bf9(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute247ee2597df9460ec1aa6891() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25783bbc86ab6b5fac2bb40e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>An Oracle host.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute270622e98a37c8d81f225069() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AlternateDataSourceParameters
-			"alternate_data_source_parameters": schemaAttributec38cdf18db22ac26f29025f8(),
-			// Property: Password
-			"password": schemaAttributeba11584eea299e866265b003(),
-			// Property: Username
-			"username": schemaAttributec2b63fa4b4f47a1e3022c3aa(),
-		}, /*END SCHEMA*/
-		Description: "<p>The combination of user name and password that are used as credentials.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute285b1fb07330a9140fe0e681() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttribute2870e20bf8db2dfaf4e16a85(),
-			// Property: Host
-			"host": schemaAttribute25783bbc86ab6b5fac2bb40e(),
-			// Property: Port
-			"port": schemaAttribute54dba71c620be153bd478322(),
-			// Property: UseServiceName
-			"use_service_name": schemaAttribute71611bd50cf7818e44639474(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Oracle.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2870e20bf8db2dfaf4e16a85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The database.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a98cb3fbab4a0d2c1978579() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>Port.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36d0510c158490facd3bc2ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a396074f441d4429f57e467() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Warehouse.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d9be744f48b08f6225db53f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for PostgreSQL.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4500602a4b26632873122458() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for SQL Server.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute450f026dbedb351ff23fad4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The workgroup that Amazon Athena uses.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute459c68624fe07d5373ce613e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4840a7f057c21e2301d82921() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The catalog name for the Trino data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53b78f0d5bd9ed1b693e0062() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Instance ID.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54dba71c620be153bd478322() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The port.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56c0b992d2e2814c0307da76() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttribute5a67b677e05306cf1b2eb80c(),
-			// Property: Host
-			"host": schemaAttribute9c9c588418be49df23ae6c05(),
-			// Property: Port
-			"port": schemaAttributed45c927c63ed2cd04b03c7a5(),
-		}, /*END SCHEMA*/
-		Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5797e838b292d5fdc07ab925() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a0947727b244a22fbde5c17() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdentityProviderResourceUri
-			"identity_provider_resource_uri": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: IdentityProviderVpcConnectionProperties
-			"identity_provider_vpc_connection_properties": schemaAttribute686d042fda1646b430d8681b(),
-			// Property: OAuthScope
-			"o_auth_scope": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: TokenProviderUrl
-			"token_provider_url": schemaAttributee92226d42f28d1f376a6713c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a67b677e05306cf1b2eb80c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b2911fdf38d90be0a8843c1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64d2189244d52e4ac3f34f27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6721c4562e1f7cd9ff7fae92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Host.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute686d042fda1646b430d8681b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcConnectionArn
-			"vpc_connection_arn": schemaAttribute247ee2597df9460ec1aa6891(),
-		}, /*END SCHEMA*/
-		Description: "<p>VPC connection properties.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bbaeb6a000452200e3ea364() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute144e63e60553686243349a79(),
-			// Property: Key
-			"key": schemaAttribute761060b1292d9d62f93b3a57(),
-		}, /*END SCHEMA*/
-		Description: "<p>Amazon S3 manifest file location.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71611bd50cf7818e44639474() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75351dfbbd56df2c24783d09() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The port for the Databricks data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute761060b1292d9d62f93b3a57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Amazon S3 key that identifies an object.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute834eb3e7628fa02581bce50c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for MariaDB.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute855ea8c2389f4f123319fe53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute890f871c0058b121471ea01f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The HTTP path of the Databricks data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute898dd6e5d9fe3649f14b0f8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bc1c879f9178ba1d9305ab7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The host name of the Trino data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ee249c6a255aa7f0402f77b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttributefce6bf45bec23cefadfae99f(),
-				// Property: Principal
-				"principal": schemaAttribute17633278ef65c7ff856a43c1(),
-				// Property: Resource
-				"resource": schemaAttributee92226d42f28d1f376a6713c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute966b6ff88adc28391127126d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c9c588418be49df23ae6c05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaab5b8d488490489471d3bf9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Catalog
-			"catalog": schemaAttribute4840a7f057c21e2301d82921(),
-			// Property: Host
-			"host": schemaAttribute8bc1c879f9178ba1d9305ab7(),
-			// Property: Port
-			"port": schemaAttributefcdc81ece7e6c04aadf511a6(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaf1c65663927f6b19fe305c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for MySQL.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab881953c13d0e4f1de8d53b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead3947cc04420441a679eaf0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1dd2cfa7f9206d6629cb5c9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Catalog
-			"catalog": schemaAttributed03dbc469db32274efcb929d(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Presto.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb76fe07a7c7528f65802f278() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The time that this data source was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7f6c03867a26ec0ac032088() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Database.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba11584eea299e866265b003() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Password.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdd6be9d54f9e2bc9c2cd57b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Spark.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec20004b19067cc3991790a97() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationType
-			"authentication_type": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: Catalog
-			"catalog": schemaAttributef9613eca8366731cb875875a(),
-			// Property: DatabaseAccessControlRole
-			"database_access_control_role": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: Host
-			"host": schemaAttribute0a1af4930cca1a2805ab1e92(),
-			// Property: OAuthParameters
-			"o_auth_parameters": schemaAttribute5a0947727b244a22fbde5c17(),
-			// Property: Port
-			"port": schemaAttributeca737d09c281cbd31588257e(),
-			// Property: ProductType
-			"product_type": schemaAttributee92226d42f28d1f376a6713c(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2b63fa4b4f47a1e3022c3aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>User name.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec38cdf18db22ac26f29025f8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AmazonElasticsearchParameters
-				"amazon_elasticsearch_parameters": schemaAttributed4cdcb313d4f5561a3de3cfa(),
-				// Property: AmazonOpenSearchParameters
-				"amazon_open_search_parameters": schemaAttributed4cdcb313d4f5561a3de3cfa(),
-				// Property: AthenaParameters
-				"athena_parameters": schemaAttribute189ba76fedcfa1f355c05e84(),
-				// Property: AuroraParameters
-				"aurora_parameters": schemaAttributef9f69f43de404adf43e6eacd(),
-				// Property: AuroraPostgreSqlParameters
-				"aurora_postgre_sql_parameters": schemaAttribute56c0b992d2e2814c0307da76(),
-				// Property: DatabricksParameters
-				"databricks_parameters": schemaAttributed26c8c2d1f8b3aacbbbf0da6(),
-				// Property: MariaDbParameters
-				"maria_db_parameters": schemaAttribute834eb3e7628fa02581bce50c(),
-				// Property: MySqlParameters
-				"my_sql_parameters": schemaAttributeaaf1c65663927f6b19fe305c(),
-				// Property: OracleParameters
-				"oracle_parameters": schemaAttribute285b1fb07330a9140fe0e681(),
-				// Property: PostgreSqlParameters
-				"postgre_sql_parameters": schemaAttribute3d9be744f48b08f6225db53f(),
-				// Property: PrestoParameters
-				"presto_parameters": schemaAttributeb1dd2cfa7f9206d6629cb5c9(),
-				// Property: RdsParameters
-				"rds_parameters": schemaAttributed3ae36e8beee51233d197bc0(),
-				// Property: RedshiftParameters
-				"redshift_parameters": schemaAttribute05dcf764fd9e4bff604272bf(),
-				// Property: S3Parameters
-				"s3_parameters": schemaAttribute1ad02ebb0b9f7970b46e1f16(),
-				// Property: S3TablesParameters
-				"s3_tables_parameters": schemaAttributed789f3ef00a0790da48ce54b(),
-				// Property: SnowflakeParameters
-				"snowflake_parameters": schemaAttributec3d6a63dc258150228488fe6(),
-				// Property: SparkParameters
-				"spark_parameters": schemaAttributebdd6be9d54f9e2bc9c2cd57b(),
-				// Property: SqlServerParameters
-				"sql_server_parameters": schemaAttribute4500602a4b26632873122458(),
-				// Property: StarburstParameters
-				"starburst_parameters": schemaAttributec20004b19067cc3991790a97(),
-				// Property: TeradataParameters
-				"teradata_parameters": schemaAttributefd6117d52a47ac79d861f006(),
-				// Property: TrinoParameters
-				"trino_parameters": schemaAttributeaab5b8d488490489471d3bf9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3d6a63dc258150228488fe6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationType
-			"authentication_type": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: DatabaseAccessControlRole
-			"database_access_control_role": schemaAttributee92226d42f28d1f376a6713c(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: OAuthParameters
-			"o_auth_parameters": schemaAttribute5a0947727b244a22fbde5c17(),
-			// Property: Warehouse
-			"warehouse": schemaAttribute3a396074f441d4429f57e467(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Snowflake.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9e8425af13dad91c51e7f07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The OpenSearch domain.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca737d09c281cbd31588257e() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The port for the Starburst data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc0e2a99783e1782243515ac() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AmazonElasticsearchParameters
-				"amazon_elasticsearch_parameters": schemaAttributed4cdcb313d4f5561a3de3cfa(),
-				// Property: AmazonOpenSearchParameters
-				"amazon_open_search_parameters": schemaAttributed4cdcb313d4f5561a3de3cfa(),
-				// Property: AthenaParameters
-				"athena_parameters": schemaAttribute189ba76fedcfa1f355c05e84(),
-				// Property: AuroraParameters
-				"aurora_parameters": schemaAttributef9f69f43de404adf43e6eacd(),
-				// Property: AuroraPostgreSqlParameters
-				"aurora_postgre_sql_parameters": schemaAttribute56c0b992d2e2814c0307da76(),
-				// Property: DatabricksParameters
-				"databricks_parameters": schemaAttributed26c8c2d1f8b3aacbbbf0da6(),
-				// Property: MariaDbParameters
-				"maria_db_parameters": schemaAttribute834eb3e7628fa02581bce50c(),
-				// Property: MySqlParameters
-				"my_sql_parameters": schemaAttributeaaf1c65663927f6b19fe305c(),
-				// Property: OracleParameters
-				"oracle_parameters": schemaAttribute285b1fb07330a9140fe0e681(),
-				// Property: PostgreSqlParameters
-				"postgre_sql_parameters": schemaAttribute3d9be744f48b08f6225db53f(),
-				// Property: PrestoParameters
-				"presto_parameters": schemaAttributeb1dd2cfa7f9206d6629cb5c9(),
-				// Property: RdsParameters
-				"rds_parameters": schemaAttributed3ae36e8beee51233d197bc0(),
-				// Property: RedshiftParameters
-				"redshift_parameters": schemaAttribute05dcf764fd9e4bff604272bf(),
-				// Property: S3Parameters
-				"s3_parameters": schemaAttribute1ad02ebb0b9f7970b46e1f16(),
-				// Property: S3TablesParameters
-				"s3_tables_parameters": schemaAttributed789f3ef00a0790da48ce54b(),
-				// Property: SnowflakeParameters
-				"snowflake_parameters": schemaAttributec3d6a63dc258150228488fe6(),
-				// Property: SparkParameters
-				"spark_parameters": schemaAttributebdd6be9d54f9e2bc9c2cd57b(),
-				// Property: SqlServerParameters
-				"sql_server_parameters": schemaAttribute4500602a4b26632873122458(),
-				// Property: StarburstParameters
-				"starburst_parameters": schemaAttributec20004b19067cc3991790a97(),
-				// Property: TeradataParameters
-				"teradata_parameters": schemaAttributefd6117d52a47ac79d861f006(),
-				// Property: TrinoParameters
-				"trino_parameters": schemaAttributeaab5b8d488490489471d3bf9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>A set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the <code>DataSourceParameters</code> structure that's in the request\n            with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the <code>AlternateDataSourceParameters</code> list is null,\n            the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>\n            are automatically allowed.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed03dbc469db32274efcb929d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Catalog.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed103283d113be0f14bc3f39e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoCreateDatabaseUser
-			"auto_create_database_user": schemaAttribute459c68624fe07d5373ce613e(),
-			// Property: DatabaseGroups
-			"database_groups": schemaAttributef7e7c302b90e4bbe394555cf(),
-			// Property: DatabaseUser
-			"database_user": schemaAttribute14dde45e68b9d2964bc0db59(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute898dd6e5d9fe3649f14b0f8f(),
-		}, /*END SCHEMA*/
-		Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed26c8c2d1f8b3aacbbbf0da6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Host
-			"host": schemaAttribute0c725cb0fd2493ebaf25653a(),
-			// Property: Port
-			"port": schemaAttribute75351dfbbd56df2c24783d09(),
-			// Property: SqlEndpointPath
-			"sql_endpoint_path": schemaAttribute890f871c0058b121471ea01f(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3ae36e8beee51233d197bc0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: InstanceId
-			"instance_id": schemaAttribute53b78f0d5bd9ed1b693e0062(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Amazon RDS.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed45c927c63ed2cd04b03c7a5() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4cdcb313d4f5561a3de3cfa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Domain
-			"domain": schemaAttributec9e8425af13dad91c51e7f07(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for OpenSearch.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed789f3ef00a0790da48ce54b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TableBucketArn
-			"table_bucket_arn": schemaAttributee92226d42f28d1f376a6713c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede9b21cb3d197e89272b0761() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Error message.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf55d63d3f7717e03eddf2ac() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute36d0510c158490facd3bc2ab(),
-				// Property: Value
-				"value": schemaAttributeab881953c13d0e4f1de8d53b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4bd507065413550c03cf0d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableIdentityPropagation
-			"enable_identity_propagation": schemaAttribute5b2911fdf38d90be0a8843c1(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee51853f2114fb35fe41398e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The last time that this data source was updated.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee92226d42f28d1f376a6713c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2fa8bd700e6966866c8b8d0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DisableSsl
-			"disable_ssl": schemaAttributead3947cc04420441a679eaf0(),
-		}, /*END SCHEMA*/
-		Description: "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7e7c302b90e4bbe394555cf() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8f1566952e332639470dc8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9613eca8366731cb875875a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The catalog name for the Starburst data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9f69f43de404adf43e6eacd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>Parameters for Amazon Aurora.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb2806c3a873baba88064145() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcdc81ece7e6c04aadf511a6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The port for the Trino data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefce6bf45bec23cefadfae99f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd6117d52a47ac79d861f006() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Database
-			"database": schemaAttributeb7f6c03867a26ec0ac032088(),
-			// Property: Host
-			"host": schemaAttribute6721c4562e1f7cd9ff7fae92(),
-			// Property: Port
-			"port": schemaAttribute2a98cb3fbab4a0d2c1978579(),
-		}, /*END SCHEMA*/
-		Description: "<p>The parameters for Teradata.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_data_source", dataSourceDataSource)
 }
@@ -1797,7 +799,577 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"alternate_data_source_parameters": schemaAttributecc0e2a99783e1782243515ac(),
+		"alternate_data_source_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AmazonElasticsearchParameters
+					"amazon_elasticsearch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Domain
+							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The OpenSearch domain.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for OpenSearch.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AmazonOpenSearchParameters
+					"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Domain
+							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The OpenSearch domain.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for OpenSearch.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AthenaParameters
+					"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IdentityCenterConfiguration
+							"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnableIdentityPropagation
+									"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: WorkGroup
+							"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The workgroup that Amazon Athena uses.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Parameters for Amazon Athena.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AuroraParameters
+					"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Parameters for Amazon Aurora.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AuroraPostgreSqlParameters
+					"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DatabricksParameters
+					"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The host name of the Databricks data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port for the Databricks data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SqlEndpointPath
+							"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The HTTP path of the Databricks data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MariaDbParameters
+					"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for MariaDB.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MySqlParameters
+					"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for MySQL.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OracleParameters
+					"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>An Oracle host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UseServiceName
+							"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Oracle.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PostgreSqlParameters
+					"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for PostgreSQL.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PrestoParameters
+					"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Catalog.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Presto.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RdsParameters
+					"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InstanceId
+							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Instance ID.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Amazon RDS.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RedshiftParameters
+					"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ClusterId
+							"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IAMParameters
+							"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AutoCreateDatabaseUser
+									"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseGroups
+									"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseUser
+									"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IdentityCenterConfiguration
+							"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnableIdentityPropagation
+									"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Parameters
+					"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ManifestFileLocation
+							"manifest_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Bucket
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Amazon S3 bucket.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Amazon S3 key that identifies an object.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>Amazon S3 manifest file location.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for S3.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3TablesParameters
+					"s3_tables_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TableBucketArn
+							"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SnowflakeParameters
+					"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationType
+							"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DatabaseAccessControlRole
+							"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OAuthParameters
+							"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IdentityProviderResourceUri
+									"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IdentityProviderVpcConnectionProperties
+									"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: VpcConnectionArn
+											"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>VPC connection properties.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OAuthScope
+									"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TokenProviderUrl
+									"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Warehouse
+							"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Warehouse.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Snowflake.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SparkParameters
+					"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Spark.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SqlServerParameters
+					"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for SQL Server.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StarburstParameters
+					"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationType
+							"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The catalog name for the Starburst data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DatabaseAccessControlRole
+							"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The host name of the Starburst data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OAuthParameters
+							"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IdentityProviderResourceUri
+									"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IdentityProviderVpcConnectionProperties
+									"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: VpcConnectionArn
+											"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>VPC connection properties.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OAuthScope
+									"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TokenProviderUrl
+									"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port for the Starburst data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProductType
+							"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TeradataParameters
+					"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters for Teradata.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TrinoParameters
+					"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The catalog name for the Trino data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The host name of the Trino data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port for the Trino data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>A set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the <code>DataSourceParameters</code> structure that's in the request\n            with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the <code>AlternateDataSourceParameters</code> list is null,\n            the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>\n            are automatically allowed.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -1805,7 +1377,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the data source.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute1eb5ee469b82c9ae56f2b4e4(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -1815,7 +1390,9 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttributee92226d42f28d1f376a6713c(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -1824,7 +1401,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributeb76fe07a7c7528f65802f278(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that this data source was created.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Credentials
 		// CloudFormation resource type schema:
 		//
@@ -2668,14 +2249,638 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"credentials": schemaAttribute0073af5f9b01b1a3d92e8d57(),
+		"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CopySourceArn
+				"copy_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CredentialPair
+				"credential_pair": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AlternateDataSourceParameters
+						"alternate_data_source_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AmazonElasticsearchParameters
+									"amazon_elasticsearch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Domain
+											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The OpenSearch domain.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for OpenSearch.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: AmazonOpenSearchParameters
+									"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Domain
+											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The OpenSearch domain.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for OpenSearch.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: AthenaParameters
+									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IdentityCenterConfiguration
+											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EnableIdentityPropagation
+													"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RoleArn
+											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: WorkGroup
+											"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The workgroup that Amazon Athena uses.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Parameters for Amazon Athena.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: AuroraParameters
+									"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Parameters for Amazon Aurora.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: AuroraPostgreSqlParameters
+									"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DatabricksParameters
+									"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The host name of the Databricks data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port for the Databricks data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SqlEndpointPath
+											"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The HTTP path of the Databricks data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MariaDbParameters
+									"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for MariaDB.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MySqlParameters
+									"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for MySQL.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OracleParameters
+									"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>An Oracle host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: UseServiceName
+											"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Oracle.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PostgreSqlParameters
+									"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for PostgreSQL.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PrestoParameters
+									"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Catalog.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Presto.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RdsParameters
+									"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: InstanceId
+											"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Instance ID.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Amazon RDS.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RedshiftParameters
+									"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ClusterId
+											"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: IAMParameters
+											"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AutoCreateDatabaseUser
+													"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: DatabaseGroups
+													"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: DatabaseUser
+													"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: RoleArn
+													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: IdentityCenterConfiguration
+											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EnableIdentityPropagation
+													"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3Parameters
+									"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ManifestFileLocation
+											"manifest_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Bucket
+													"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Amazon S3 bucket.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Key
+													"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Amazon S3 key that identifies an object.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>Amazon S3 manifest file location.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RoleArn
+											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for S3.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3TablesParameters
+									"s3_tables_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: TableBucketArn
+											"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SnowflakeParameters
+									"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AuthenticationType
+											"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DatabaseAccessControlRole
+											"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OAuthParameters
+											"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: IdentityProviderResourceUri
+													"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: IdentityProviderVpcConnectionProperties
+													"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: VpcConnectionArn
+															"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "<p>VPC connection properties.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: OAuthScope
+													"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: TokenProviderUrl
+													"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Warehouse
+											"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Warehouse.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Snowflake.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SparkParameters
+									"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Spark.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SqlServerParameters
+									"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for SQL Server.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StarburstParameters
+									"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AuthenticationType
+											"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The catalog name for the Starburst data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DatabaseAccessControlRole
+											"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The host name of the Starburst data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OAuthParameters
+											"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: IdentityProviderResourceUri
+													"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: IdentityProviderVpcConnectionProperties
+													"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: VpcConnectionArn
+															"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "<p>VPC connection properties.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: OAuthScope
+													"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: TokenProviderUrl
+													"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port for the Starburst data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ProductType
+											"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TeradataParameters
+									"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters for Teradata.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TrinoParameters
+									"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The catalog name for the Trino data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The host name of the Trino data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port for the Trino data source.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Password
+						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Password.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Username
+						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>User name.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The combination of user name and password that are used as credentials.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyPairCredentials
+				"key_pair_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyPairUsername
+						"key_pair_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKey
+						"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKeyPassphrase
+						"private_key_passphrase": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSourceId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"data_source_id": schemaAttributee92226d42f28d1f376a6713c(),
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSourceParameters
 		// CloudFormation resource type schema:
 		//
@@ -3445,7 +3650,575 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_source_parameters": schemaAttribute23826a21d08a06005166442e(),
+		"data_source_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonElasticsearchParameters
+				"amazon_elasticsearch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Domain
+						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The OpenSearch domain.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for OpenSearch.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AmazonOpenSearchParameters
+				"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Domain
+						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The OpenSearch domain.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for OpenSearch.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AthenaParameters
+				"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IdentityCenterConfiguration
+						"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableIdentityPropagation
+								"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkGroup
+						"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The workgroup that Amazon Athena uses.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Parameters for Amazon Athena.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuroraParameters
+				"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Parameters for Amazon Aurora.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuroraPostgreSqlParameters
+				"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabricksParameters
+				"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The host name of the Databricks data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port for the Databricks data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SqlEndpointPath
+						"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The HTTP path of the Databricks data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MariaDbParameters
+				"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for MariaDB.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MySqlParameters
+				"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for MySQL.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OracleParameters
+				"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>An Oracle host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UseServiceName
+						"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Oracle.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostgreSqlParameters
+				"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for PostgreSQL.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrestoParameters
+				"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Catalog.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Presto.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RdsParameters
+				"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceId
+						"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Instance ID.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Amazon RDS.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftParameters
+				"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterId
+						"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IAMParameters
+						"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AutoCreateDatabaseUser
+								"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseGroups
+								"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseUser
+								"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IdentityCenterConfiguration
+						"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableIdentityPropagation
+								"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Parameters
+				"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ManifestFileLocation
+						"manifest_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Amazon S3 bucket.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Amazon S3 key that identifies an object.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>Amazon S3 manifest file location.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for S3.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3TablesParameters
+				"s3_tables_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TableBucketArn
+						"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnowflakeParameters
+				"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseAccessControlRole
+						"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OAuthParameters
+						"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityProviderResourceUri
+								"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityProviderVpcConnectionProperties
+								"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VpcConnectionArn
+										"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>VPC connection properties.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthScope
+								"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenProviderUrl
+								"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Warehouse
+						"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Warehouse.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Snowflake.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SparkParameters
+				"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Spark.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SqlServerParameters
+				"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for SQL Server.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StarburstParameters
+				"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The catalog name for the Starburst data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseAccessControlRole
+						"database_access_control_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The host name of the Starburst data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OAuthParameters
+						"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdentityProviderResourceUri
+								"identity_provider_resource_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityProviderVpcConnectionProperties
+								"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VpcConnectionArn
+										"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>VPC connection properties.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthScope
+								"o_auth_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenProviderUrl
+								"token_provider_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port for the Starburst data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProductType
+						"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TeradataParameters
+				"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters for Teradata.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrinoParameters
+				"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The catalog name for the Trino data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The host name of the Trino data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port for the Trino data source.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ErrorInfo
 		// CloudFormation resource type schema:
 		//
@@ -3473,7 +4246,21 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"error_info": schemaAttribute1a9df0c946a234855e4ce274(),
+		"error_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>Error message.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Error information for the data source creation or update.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FolderArns
 		// CloudFormation resource type schema:
 		//
@@ -3485,7 +4272,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"folder_arns": schemaAttribute966b6ff88adc28391127126d(),
+		"folder_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -3494,7 +4284,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributee51853f2114fb35fe41398e2(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The last time that this data source was updated.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -3503,7 +4297,9 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee92226d42f28d1f376a6713c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -3541,7 +4337,28 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"permissions": schemaAttribute8ee249c6a255aa7f0402f77b(),
+		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Resource
+					"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SslProperties
 		// CloudFormation resource type schema:
 		//
@@ -3557,7 +4374,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ssl_properties": schemaAttributef2fa8bd700e6966866c8b8d0(),
+		"ssl_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisableSsl
+				"disable_ssl": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -3574,7 +4401,9 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee92226d42f28d1f376a6713c(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3606,7 +4435,23 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributedf55d63d3f7717e03eddf2ac(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -3670,7 +4515,9 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributee92226d42f28d1f376a6713c(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConnectionProperties
 		// CloudFormation resource type schema:
 		//
@@ -3688,7 +4535,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_connection_properties": schemaAttribute686d042fda1646b430d8681b(),
+		"vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcConnectionArn
+				"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>VPC connection properties.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

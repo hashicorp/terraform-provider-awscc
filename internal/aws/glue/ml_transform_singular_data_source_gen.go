@@ -15,256 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute281c21a4594f191c89455659() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The timeout in minutes of the machine learning transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e72dac3a766f470a4ad3926() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MLUserDataEncryption
-			"ml_user_data_encryption": schemaAttributeffa49d7821b43e14bf27c888(),
-			// Property: TaskRunSecurityConfigurationName
-			"task_run_security_configuration_name": schemaAttributefc4796585a49801b3836090e(),
-		}, /*END SCHEMA*/
-		Description: "The encryption-at-rest settings of the transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32a5acdab0292e23d3bed9c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to the AWS Glue Data Catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute429e09499d3bee73c391ace3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of times to retry after an MLTaskRun fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b597fcc7d5d9d41aacb74f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a column that uniquely identifies rows in the source table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5482b2050b5d8ba233ff0b30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or ARN of the IAM role with the required permissions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57c2e8c286ff73e30fbc7ba1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption mode applied to user data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6083ef9fd2f32beb1fa896da() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CatalogId
-				"catalog_id": schemaAttributeb98acc0cd6a3da09c45c3614(),
-				// Property: ConnectionName
-				"connection_name": schemaAttribute32a5acdab0292e23d3bed9c5(),
-				// Property: DatabaseName
-				"database_name": schemaAttributefc697a033dd7d7288f2fcbef(),
-				// Property: TableName
-				"table_name": schemaAttribute919a657c299ede5dff8eb365(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The database and table in the AWS Glue Data Catalog that is used for input or output data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6efeebbff062e0e018e9500d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccuracyCostTradeoff
-			"accuracy_cost_tradeoff": schemaAttributefda0a70142f1b2ea6c93ad4c(),
-			// Property: EnforceProvidedLabels
-			"enforce_provided_labels": schemaAttributefd4e2aea36336b1b0be008ba(),
-			// Property: PrecisionRecallTradeoff
-			"precision_recall_tradeoff": schemaAttributeabf1efd3309b57dc80480c74(),
-			// Property: PrimaryKeyColumnName
-			"primary_key_column_name": schemaAttribute4b597fcc7d5d9d41aacb74f2(),
-		}, /*END SCHEMA*/
-		Description: "The parameters to configure the find matches transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fa829e88a0e75f7074459e5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of workers of a defined workerType that are allocated when a task runs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7716f9761d4b1d0624b92b65() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GlueTables
-			"glue_tables": schemaAttribute6083ef9fd2f32beb1fa896da(),
-		}, /*END SCHEMA*/
-		Description: "A list of AWS Glue table definitions used by the transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8422edb8d6eefa6d22e7af29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of machine learning transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute919a657c299ede5dff8eb365() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A table name in the AWS Glue Data Catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91b0ed2a363a78e2fae4787f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of predefined worker that is allocated when a task runs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute951b43b858a82e5aaa295142() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A user-defined, long-form description text for the machine learning transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute971545118996c64d5badac4e() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags to use with this machine learning transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6f067c2bcf375833f23b88a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID for the customer-provided KMS key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6fc2d859cca219468bacd0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabf1efd3309b57dc80480c74() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value for precision and recall tradeoff. A value of 0.5 means no preference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb185decf7502c18ad66b9a58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A user-defined name for the machine learning transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb284cd62c13b42e35fd851f7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FindMatchesParameters
-			"find_matches_parameters": schemaAttribute6efeebbff062e0e018e9500d(),
-			// Property: TransformType
-			"transform_type": schemaAttribute8422edb8d6eefa6d22e7af29(),
-		}, /*END SCHEMA*/
-		Description: "The algorithm-specific parameters that are associated with the machine learning transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7c63babaf5428ee0523065d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of AWS Glue this machine learning transform is compatible with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb98acc0cd6a3da09c45c3614() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the AWS Glue Data Catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9ba261ae475eda29955cb59() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of AWS Glue DPUs allocated to task runs for this transform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc4796585a49801b3836090e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the security configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc697a033dd7d7288f2fcbef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A database name in the AWS Glue Data Catalog.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd4e2aea36336b1b0be008ba() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, forces the output to match the provided labels.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefda0a70142f1b2ea6c93ad4c() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value for accuracy and cost tradeoff. A value of 0.5 means balance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffa49d7821b43e14bf27c888() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributea6f067c2bcf375833f23b88a(),
-			// Property: MLUserDataEncryptionMode
-			"ml_user_data_encryption_mode": schemaAttribute57c2e8c286ff73e30fbc7ba1(),
-		}, /*END SCHEMA*/
-		Description: "The encryption-at-rest settings of the transform that apply to accessing user data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_ml_transform", mLTransformDataSource)
 }
@@ -280,7 +30,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A user-defined, long-form description text for the machine learning transform.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute951b43b858a82e5aaa295142(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A user-defined, long-form description text for the machine learning transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlueVersion
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +41,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of AWS Glue this machine learning transform is compatible with.",
 		//	  "type": "string"
 		//	}
-		"glue_version": schemaAttributeb7c63babaf5428ee0523065d(),
+		"glue_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of AWS Glue this machine learning transform is compatible with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputRecordTables
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +86,41 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"input_record_tables": schemaAttribute7716f9761d4b1d0624b92b65(),
+		"input_record_tables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GlueTables
+				"glue_tables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CatalogId
+							"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the AWS Glue Data Catalog.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to the AWS Glue Data Catalog.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DatabaseName
+							"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A database name in the AWS Glue Data Catalog.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TableName
+							"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A table name in the AWS Glue Data Catalog.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The database and table in the AWS Glue Data Catalog that is used for input or output data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A list of AWS Glue table definitions used by the transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxCapacity
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +128,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of AWS Glue DPUs allocated to task runs for this transform.",
 		//	  "type": "number"
 		//	}
-		"max_capacity": schemaAttributed9ba261ae475eda29955cb59(),
+		"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of AWS Glue DPUs allocated to task runs for this transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxRetries
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +139,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum number of times to retry after an MLTaskRun fails.",
 		//	  "type": "integer"
 		//	}
-		"max_retries": schemaAttribute429e09499d3bee73c391ace3(),
+		"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of times to retry after an MLTaskRun fails.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -354,7 +150,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A user-defined name for the machine learning transform.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb185decf7502c18ad66b9a58(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A user-defined name for the machine learning transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumberOfWorkers
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +161,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of workers of a defined workerType that are allocated when a task runs.",
 		//	  "type": "integer"
 		//	}
-		"number_of_workers": schemaAttribute6fa829e88a0e75f7074459e5(),
+		"number_of_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of workers of a defined workerType that are allocated when a task runs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +172,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name or ARN of the IAM role with the required permissions.",
 		//	  "type": "string"
 		//	}
-		"role": schemaAttribute5482b2050b5d8ba233ff0b30(),
+		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name or ARN of the IAM role with the required permissions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -384,7 +189,12 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute971545118996c64d5badac4e(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags to use with this machine learning transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// CloudFormation resource type schema:
 		//
@@ -392,7 +202,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timeout in minutes of the machine learning transform.",
 		//	  "type": "integer"
 		//	}
-		"timeout": schemaAttribute281c21a4594f191c89455659(),
+		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timeout in minutes of the machine learning transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransformEncryption
 		// CloudFormation resource type schema:
 		//
@@ -425,7 +238,34 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"transform_encryption": schemaAttribute2e72dac3a766f470a4ad3926(),
+		"transform_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MLUserDataEncryption
+				"ml_user_data_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKeyId
+						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID for the customer-provided KMS key.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MLUserDataEncryptionMode
+						"ml_user_data_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The encryption mode applied to user data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The encryption-at-rest settings of the transform that apply to accessing user data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TaskRunSecurityConfigurationName
+				"task_run_security_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the security configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption-at-rest settings of the transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransformId
 		// CloudFormation resource type schema:
 		//
@@ -433,7 +273,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the transform.",
 		//	  "type": "string"
 		//	}
-		"transform_id": schemaAttributea6fc2d859cca219468bacd0e(),
+		"transform_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransformParameters
 		// CloudFormation resource type schema:
 		//
@@ -477,7 +320,44 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"transform_parameters": schemaAttributeb284cd62c13b42e35fd851f7(),
+		"transform_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FindMatchesParameters
+				"find_matches_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccuracyCostTradeoff
+						"accuracy_cost_tradeoff": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The value for accuracy and cost tradeoff. A value of 0.5 means balance.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnforceProvidedLabels
+						"enforce_provided_labels": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "If true, forces the output to match the provided labels.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrecisionRecallTradeoff
+						"precision_recall_tradeoff": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The value for precision and recall tradeoff. A value of 0.5 means no preference.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrimaryKeyColumnName
+						"primary_key_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of a column that uniquely identifies rows in the source table.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The parameters to configure the find matches transform.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TransformType
+				"transform_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of machine learning transform.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The algorithm-specific parameters that are associated with the machine learning transform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerType
 		// CloudFormation resource type schema:
 		//
@@ -485,7 +365,10 @@ func mLTransformDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of predefined worker that is allocated when a task runs.",
 		//	  "type": "string"
 		//	}
-		"worker_type": schemaAttribute91b0ed2a363a78e2fae4787f(),
+		"worker_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of predefined worker that is allocated when a task runs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

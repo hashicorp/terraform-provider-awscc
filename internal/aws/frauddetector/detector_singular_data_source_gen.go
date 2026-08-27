@@ -14,433 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0318e244017e361bd132872f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the detector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute039ee4f7e906b87482e8d489() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the entity type was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0434c00d0f9a70f797a79b44() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Value
-				"value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this event type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17c84a0cab02252ad313237f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the outcome was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute299ba0857ff184501923d3a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the label was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29e930e9549e962bd099c7d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the event variable was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2adf8af5375c747b0ddc597d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the entity type was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute333149c491ce7fe65e53e064() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Value
-				"value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this entity type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dcea5ba8d9c9e6e494168b9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Value
-				"value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this event variable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fc2271fb7d10ae1d458cef1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: CreatedTime
-				"created_time": schemaAttribute2adf8af5375c747b0ddc597d(),
-				// Property: Description
-				"description": schemaAttribute45a029a4c0e909a8459b1cb0(),
-				// Property: Inline
-				"inline": schemaAttributefa6753ce54f4ad29f72473f2(),
-				// Property: LastUpdatedTime
-				"last_updated_time": schemaAttribute039ee4f7e906b87482e8d489(),
-				// Property: Name
-				"name": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Tags
-				"tags": schemaAttribute333149c491ce7fe65e53e064(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a029a4c0e909a8459b1cb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d7d699042d2ef830e1e4136() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the outcome was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute521cdca741e8b2cc09b9918e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute523be24638a32e68ad21e5d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The active version ID of the detector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53a501dd6c1ba62ec66b45b6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: CreatedTime
-				"created_time": schemaAttribute17c84a0cab02252ad313237f(),
-				// Property: Description
-				"description": schemaAttribute45a029a4c0e909a8459b1cb0(),
-				// Property: Inline
-				"inline": schemaAttributefa6753ce54f4ad29f72473f2(),
-				// Property: LastUpdatedTime
-				"last_updated_time": schemaAttribute4d7d699042d2ef830e1e4136(),
-				// Property: Name
-				"name": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Tags
-				"tags": schemaAttribute84c9efe4a22541d34e6e73df(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69cad147ea0b0eef67602b11() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: CreatedTime
-				"created_time": schemaAttributec0ec90db92374427adcc89a1(),
-				// Property: Description
-				"description": schemaAttribute45a029a4c0e909a8459b1cb0(),
-				// Property: DetectorId
-				"detector_id": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Expression
-				"expression": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Language
-				"language": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: LastUpdatedTime
-				"last_updated_time": schemaAttributeb453f6ac7180c88c797600aa(),
-				// Property: Outcomes
-				"outcomes": schemaAttribute53a501dd6c1ba62ec66b45b6(),
-				// Property: RuleId
-				"rule_id": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: RuleVersion
-				"rule_version": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Tags
-				"tags": schemaAttribute0434c00d0f9a70f797a79b44(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ee3dd5e6ffd9ceeb8cabea0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the event variable was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83d6e6953e84ea4d9b51bb3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the event type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84c9efe4a22541d34e6e73df() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Value
-				"value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this outcome.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute856eae72e1fec5cf9391ae75() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: CreatedTime
-				"created_time": schemaAttribute6ee3dd5e6ffd9ceeb8cabea0(),
-				// Property: DataSource
-				"data_source": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: DataType
-				"data_type": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: DefaultValue
-				"default_value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Description
-				"description": schemaAttribute45a029a4c0e909a8459b1cb0(),
-				// Property: Inline
-				"inline": schemaAttributefa6753ce54f4ad29f72473f2(),
-				// Property: LastUpdatedTime
-				"last_updated_time": schemaAttribute29e930e9549e962bd099c7d2(),
-				// Property: Name
-				"name": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Tags
-				"tags": schemaAttribute3dcea5ba8d9c9e6e494168b9(),
-				// Property: VariableType
-				"variable_type": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94b8d799959f649f8c890237() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the event type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ab1fa0ace2a47d178406ff9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Value
-				"value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this label.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae910cc5a613297f9a766fd6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute83d6e6953e84ea4d9b51bb3c(),
-			// Property: CreatedTime
-			"created_time": schemaAttributec0ec90db92374427adcc89a1(),
-			// Property: Description
-			"description": schemaAttribute94b8d799959f649f8c890237(),
-			// Property: EntityTypes
-			"entity_types": schemaAttribute3fc2271fb7d10ae1d458cef1(),
-			// Property: EventVariables
-			"event_variables": schemaAttribute856eae72e1fec5cf9391ae75(),
-			// Property: Inline
-			"inline": schemaAttributefa6753ce54f4ad29f72473f2(),
-			// Property: Labels
-			"labels": schemaAttributee9bc2811c518f897ebfce80e(),
-			// Property: LastUpdatedTime
-			"last_updated_time": schemaAttributeb453f6ac7180c88c797600aa(),
-			// Property: Name
-			"name": schemaAttributeaf6ce04d6b2335938169e211(),
-			// Property: Tags
-			"tags": schemaAttribute0434c00d0f9a70f797a79b44(),
-		}, /*END SCHEMA*/
-		Description: "The event type to associate this detector with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf6ce04d6b2335938169e211() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the event type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb453f6ac7180c88c797600aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the event type was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbd1dca7ed73c6567c6da623() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The desired detector version status for the detector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc3f4f23bad84eccae0c559a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the detector was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebeefec17e5127b12dddfcf85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the label was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0ec90db92374427adcc89a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the event type was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4d14c274f0c38b944b7a9c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5ae61f30c4a0094161cc778() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Value
-				"value": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfaaa37d0c47c504fba5d868() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7ec1916af15a15b317377eb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributed4d14c274f0c38b944b7a9c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The models to associate with this detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9bc2811c518f897ebfce80e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: CreatedTime
-				"created_time": schemaAttribute299ba0857ff184501923d3a3(),
-				// Property: Description
-				"description": schemaAttribute45a029a4c0e909a8459b1cb0(),
-				// Property: Inline
-				"inline": schemaAttributefa6753ce54f4ad29f72473f2(),
-				// Property: LastUpdatedTime
-				"last_updated_time": schemaAttributebeefec17e5127b12dddfcf85(),
-				// Property: Name
-				"name": schemaAttributed4d14c274f0c38b944b7a9c2(),
-				// Property: Tags
-				"tags": schemaAttribute9ab1fa0ace2a47d178406ff9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeade6a602c385b49ae045975() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the detector was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa6753ce54f4ad29f72473f2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_detector", detectorDataSource)
 }
@@ -456,7 +29,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the detector.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributedfaaa37d0c47c504fba5d868(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the detector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedModels
 		// CloudFormation resource type schema:
 		//
@@ -477,7 +53,18 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"associated_models": schemaAttributee7ec1916af15a15b317377eb(),
+		"associated_models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Arn
+					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The models to associate with this detector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -485,7 +72,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the detector was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributeeade6a602c385b49ae045975(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time when the detector was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -495,7 +85,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute521cdca741e8b2cc09b9918e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the detector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorId
 		// CloudFormation resource type schema:
 		//
@@ -506,7 +99,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_-]+$",
 		//	  "type": "string"
 		//	}
-		"detector_id": schemaAttribute0318e244017e361bd132872f(),
+		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the detector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorVersionId
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +110,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The active version ID of the detector",
 		//	  "type": "string"
 		//	}
-		"detector_version_id": schemaAttribute523be24638a32e68ad21e5d9(),
+		"detector_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The active version ID of the detector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorVersionStatus
 		// CloudFormation resource type schema:
 		//
@@ -526,7 +125,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"detector_version_status": schemaAttributebbd1dca7ed73c6567c6da623(),
+		"detector_version_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The desired detector version status for the detector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventType
 		// CloudFormation resource type schema:
 		//
@@ -834,7 +436,230 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"event_type": schemaAttributeae910cc5a613297f9a766fd6(),
+		"event_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the event type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreatedTime
+				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The time when the event type was created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The description of the event type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EntityTypes
+				"entity_types": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Arn
+							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CreatedTime
+							"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The time when the entity type was created.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The description.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Inline
+							"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LastUpdatedTime
+							"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The time when the entity type was last updated.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Tags associated with this entity type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventVariables
+				"event_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Arn
+							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CreatedTime
+							"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The time when the event variable was created.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataSource
+							"data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultValue
+							"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The description.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Inline
+							"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LastUpdatedTime
+							"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The time when the event variable was last updated.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Tags associated with this event variable.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VariableType
+							"variable_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Inline
+				"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Labels
+				"labels": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Arn
+							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CreatedTime
+							"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The time when the label was created.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The description.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Inline
+							"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LastUpdatedTime
+							"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The time when the label was last updated.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Tags associated with this label.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LastUpdatedTime
+				"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The time when the event type was last updated.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name for the event type",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Tags associated with this event type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The event type to associate this detector with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -842,7 +667,10 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the detector was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributebc3f4f23bad84eccae0c559a(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time when the detector was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleExecutionMode
 		// CloudFormation resource type schema:
 		//
@@ -853,7 +681,9 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"rule_execution_mode": schemaAttributed4d14c274f0c38b944b7a9c2(),
+		"rule_execution_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -993,7 +823,121 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"rules": schemaAttribute69cad147ea0b0eef67602b11(),
+		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Arn
+					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: CreatedTime
+					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The time when the event type was created.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The description.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DetectorId
+					"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Expression
+					"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Language
+					"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: LastUpdatedTime
+					"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The time when the event type was last updated.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Outcomes
+					"outcomes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CreatedTime
+								"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The time when the outcome was created.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The description.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Inline
+								"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LastUpdatedTime
+								"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The time when the outcome was last updated.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Tags
+								"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Tags associated with this outcome.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleId
+					"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleVersion
+					"rule_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Tags associated with this event type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1024,7 +968,22 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributed5ae61f30c4a0094161cc778(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with this detector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute8c65178c45fb3c53107aa38e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackagev2_channel_policy", channelPolicyDataSource)
 }
@@ -37,7 +31,9 @@ func channelPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_group_name": schemaAttribute8c65178c45fb3c53107aa38e(),
+		"channel_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -47,14 +43,18 @@ func channelPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schemaAttribute8c65178c45fb3c53107aa38e(),
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"policy": schemaAttribute8c65178c45fb3c53107aa38e(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

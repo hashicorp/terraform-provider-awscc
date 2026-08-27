@@ -15,21 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3465ea35fb58a1f6ed3c5cab() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa5198cc21f5b80a859905bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_replica", userPoolReplicaDataSource)
 }
@@ -46,14 +31,18 @@ func userPoolReplicaDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 5,
 		//	  "type": "string"
 		//	}
-		"region_name": schemaAttributefa5198cc21f5b80a859905bf(),
+		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttributefa5198cc21f5b80a859905bf(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolTagsAtCreate
 		// CloudFormation resource type schema:
 		//
@@ -66,7 +55,11 @@ func userPoolReplicaDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"user_pool_tags_at_create": schemaAttribute3465ea35fb58a1f6ed3c5cab(),
+		"user_pool_tags_at_create": // Pattern: ""
+		schema.MapAttribute{        /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

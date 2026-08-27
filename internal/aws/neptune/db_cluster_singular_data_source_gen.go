@@ -15,276 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0d6ff26d0dc06626b8912dc4() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e966ddd5fa4c7b70519c8a3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Provides a list of VPC security groups that the DB cluster belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1434024173bd154edf3b9b2b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute238f721affcab8ed65f6e312() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28a14f9ac2cc3a56dcced347() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3da1908c9c366dc1ef88bb9e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides the name of the DB cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59d9bd0c42996e8f4d66acc6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute99aec9e075f49975cf84f00c(),
-				// Property: Value
-				"value": schemaAttribute28a14f9ac2cc3a56dcced347(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a7050c21be8c51233a9d73c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxCapacity
-			"max_capacity": schemaAttribute1434024173bd154edf3b9b2b(),
-			// Property: MinCapacity
-			"min_capacity": schemaAttribute0d6ff26d0dc06626b8912dc4(),
-		}, /*END SCHEMA*/
-		Description: "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fe430b8c3fc8eed2c135239() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61217b383d068b0b9c46a1c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67491ce32ba01e79a6be9652() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the database engine version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71b2e5d9887754f4a626007f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the DB cluster is encrypted.\n\nIf you specify the KmsKeyId property, then you must enable encryption and set this property to true.\n\nIf you enable the StorageEncrypted property but don't specify KmsKeyId property, then the default KMS key is used. If you specify KmsKeyId property, then that KMS Key is used to encrypt the database instances in the DB cluster.\n\nIf you specify the SourceDBClusterIdentifier property and don't specify this property or disable it. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the KmsKeyId property from the source cluster is used.\n\nIf you specify the DBSnapshotIdentifier and don't specify this property or disable it. The value is inherited from the snapshot, and the specified KmsKeyId property from the snapshot is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute740b89cc98f568739a68e8bb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of days for which automatic DB snapshots are retained.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute750d1f7b641b7f2ecc339b71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon Neptune API Reference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute878b2352bd4c70612dc55446() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89c8b05323af10318b026aa8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a46e02fda5b955c77d0a1fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Neptune global database to which this new DB cluster should be added.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute957020df7d54fee32e4368f9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Provides the list of EC2 Availability Zones that instances in the DB cluster can be created in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99aec9e075f49975cf84f00c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea62b9493e4ea32a197e89df3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaea9b430323d461b2a8420c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf920846f746eaba8a999548() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4a8deeba3fe5ceb32616515() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network type of the DB cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb4e4f1fb1607a980e081579() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe0ca3760428dbd6b3c47b23() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Specifies a list of log types that are enabled for export to CloudWatch Logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd762d66bb9f941722ca188d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7c40a79e5c5ad4e0a47d1a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9f0145f2b8320b201fb8965() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0c3c8ea4355261f59881664() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the DB cluster accepts connections. For example: `8182`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2da8d99c37056ebdbb782db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2db8f8f1c55c2ac943108d8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6319ff8496a52483be8bcd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2b2c12ae0107e77087bf46a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FeatureName
-				"feature_name": schemaAttribute750d1f7b641b7f2ecc339b71(),
-				// Property: RoleArn
-				"role_arn": schemaAttributea62b9493e4ea32a197e89df3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3964fab658bc8a5da0abd70() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef51970f8b3c3a280296cda7a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_neptune_db_cluster", dBClusterDataSource)
 }
@@ -320,7 +50,24 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"associated_roles": schemaAttributef2b2c12ae0107e77087bf46a(),
+		"associated_roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FeatureName
+					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon Neptune API Reference.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -333,7 +80,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"availability_zones": schemaAttribute957020df7d54fee32e4368f9(),
+		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Provides the list of EC2 Availability Zones that instances in the DB cluster can be created in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +94,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"backup_retention_period": schemaAttribute740b89cc98f568739a68e8bb(),
+		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the number of days for which automatic DB snapshots are retained.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +105,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
 		//	  "type": "string"
 		//	}
-		"cluster_resource_id": schemaAttributeaea9b430323d461b2a8420c3(),
+		"cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CopyTagsToSnapshot
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +116,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
 		//	  "type": "boolean"
 		//	}
-		"copy_tags_to_snapshot": schemaAttributef3964fab658bc8a5da0abd70(),
+		"copy_tags_to_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +130,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schemaAttributef51970f8b3c3a280296cda7a(),
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +141,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Provides the name of the DB cluster parameter group.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_parameter_group_name": schemaAttribute3da1908c9c366dc1ef88bb9e(),
+		"db_cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provides the name of the DB cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBInstanceParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +152,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
 		//	  "type": "string"
 		//	}
-		"db_instance_parameter_group_name": schemaAttributeaf920846f746eaba8a999548(),
+		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBPort
 		// CloudFormation resource type schema:
 		//
@@ -394,7 +163,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
 		//	  "type": "integer"
 		//	}
-		"db_port": schemaAttributebb4e4f1fb1607a980e081579(),
+		"db_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +174,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_name": schemaAttribute238f721affcab8ed65f6e312(),
+		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -410,7 +185,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schemaAttributecd762d66bb9f941722ca188d(),
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableCloudwatchLogsExports
 		// CloudFormation resource type schema:
 		//
@@ -423,7 +201,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"enable_cloudwatch_logs_exports": schemaAttributebe0ca3760428dbd6b3c47b23(),
+		"enable_cloudwatch_logs_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specifies a list of log types that are enabled for export to CloudWatch Logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -431,7 +213,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttributed9f0145f2b8320b201fb8965(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -439,7 +224,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates the database engine version.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute67491ce32ba01e79a6be9652(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the database engine version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -450,7 +238,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$",
 		//	  "type": "string"
 		//	}
-		"global_cluster_identifier": schemaAttribute8a46e02fda5b955c77d0a1fa(),
+		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Neptune global database to which this new DB cluster should be added.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamAuthEnabled
 		// CloudFormation resource type schema:
 		//
@@ -458,7 +249,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
 		//	  "type": "boolean"
 		//	}
-		"iam_auth_enabled": schemaAttribute878b2352bd4c70612dc55446(),
+		"iam_auth_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -466,7 +260,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributee6319ff8496a52483be8bcd1(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +275,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttributeb4a8deeba3fe5ceb32616515(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -486,7 +286,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port number on which the DB cluster accepts connections. For example: `8182`.",
 		//	  "type": "string"
 		//	}
-		"port": schemaAttributee0c3c8ea4355261f59881664(),
+		"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the DB cluster accepts connections. For example: `8182`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredBackupWindow
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +297,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.",
 		//	  "type": "string"
 		//	}
-		"preferred_backup_window": schemaAttribute89c8b05323af10318b026aa8(),
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +308,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttribute5fe430b8c3fc8eed2c135239(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReadEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -510,7 +319,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 		//	  "type": "string"
 		//	}
-		"read_endpoint": schemaAttribute61217b383d068b0b9c46a1c0(),
+		"read_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestoreToTime
 		// CloudFormation resource type schema:
 		//
@@ -518,7 +330,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "string"
 		//	}
-		"restore_to_time": schemaAttributee2da8d99c37056ebdbb782db(),
+		"restore_to_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestoreType
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +342,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "string"
 		//	}
-		"restore_type": schemaAttributee2da8d99c37056ebdbb782db(),
+		"restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerlessScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -554,7 +372,22 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"serverless_scaling_configuration": schemaAttribute5a7050c21be8c51233a9d73c(),
+		"serverless_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacity
+				"min_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -562,7 +395,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
 		//	  "type": "string"
 		//	}
-		"snapshot_identifier": schemaAttributed7c40a79e5c5ad4e0a47d1a9(),
+		"snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -570,7 +406,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_identifier": schemaAttributee2da8d99c37056ebdbb782db(),
+		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -578,7 +417,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the DB cluster is encrypted.\n\nIf you specify the KmsKeyId property, then you must enable encryption and set this property to true.\n\nIf you enable the StorageEncrypted property but don't specify KmsKeyId property, then the default KMS key is used. If you specify KmsKeyId property, then that KMS Key is used to encrypt the database instances in the DB cluster.\n\nIf you specify the SourceDBClusterIdentifier property and don't specify this property or disable it. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the KmsKeyId property from the source cluster is used.\n\nIf you specify the DBSnapshotIdentifier and don't specify this property or disable it. The value is inherited from the snapshot, and the specified KmsKeyId property from the snapshot is used.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schemaAttribute71b2e5d9887754f4a626007f(),
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB cluster is encrypted.\n\nIf you specify the KmsKeyId property, then you must enable encryption and set this property to true.\n\nIf you enable the StorageEncrypted property but don't specify KmsKeyId property, then the default KMS key is used. If you specify KmsKeyId property, then that KMS Key is used to encrypt the database instances in the DB cluster.\n\nIf you specify the SourceDBClusterIdentifier property and don't specify this property or disable it. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the KmsKeyId property from the source cluster is used.\n\nIf you specify the DBSnapshotIdentifier and don't specify this property or disable it. The value is inherited from the snapshot, and the specified KmsKeyId property from the snapshot is used.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -611,7 +453,24 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute59d9bd0c42996e8f4d66acc6(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UseLatestRestorableTime
 		// CloudFormation resource type schema:
 		//
@@ -619,7 +478,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "boolean"
 		//	}
-		"use_latest_restorable_time": schemaAttributee2db8f8f1c55c2ac943108d8(),
+		"use_latest_restorable_time": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -632,7 +494,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"vpc_security_group_ids": schemaAttribute0e966ddd5fa4c7b70519c8a3(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Provides a list of VPC security groups that the DB cluster belongs to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

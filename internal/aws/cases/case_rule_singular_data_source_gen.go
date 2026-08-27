@@ -16,255 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute092c3b0a5c6c872cf13f5f2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the case rule was created or last modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a4b0bb5ea48925278077736() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e7ee067d379f5a227a51bd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The field ID this operand should take the value of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f03ae8fb6e21ad10065ebe5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute16a703bcfcb57d90447cad0d(),
-				// Property: Value
-				"value": schemaAttribute0a4b0bb5ea48925278077736(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags that you attach to this case rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fe5113d981c3d3c65439556() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the outer rule if the condition evaluates to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16a703bcfcb57d90447cad0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f0ccfc9aa3a346b6f5f10fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive name for the case rule. Must be unique within the domain and should clearly indicate the rule's purpose (e.g., 'Priority Field Required for Urgent Cases').",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25e062d22fc0edebeeac5f82() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BooleanValue
-			"boolean_value": schemaAttribute6ed6a0c0e50049d354ed7916(),
-			// Property: DoubleValue
-			"double_value": schemaAttributebda0f2a71cb800ec5cd72eef(),
-			// Property: EmptyValue
-			"empty_value": schemaAttribute864d95b79a0c30ba8b0a39c7(),
-			// Property: StringValue
-			"string_value": schemaAttribute6cb8d61618dc4d5c880e564a(),
-		}, /*END SCHEMA*/
-		Description: "The right hand operand in the condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35d57adb6da786790d628b88() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FieldId
-			"field_id": schemaAttribute0e7ee067d379f5a227a51bd1(),
-		}, /*END SCHEMA*/
-		Description: "The left hand operand in the condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute486670fe61eb9a3fa1ae6e1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of a case rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bf9cd276c6f8323a3e0283a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of a case rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52aa0316a499863384b2e223() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The default required state for the field when none of the specified conditions are met. If true, the field is required by default; if false, the field is optional by default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6194232a9c298ef6ae2b70a3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Conditions
-			"conditions": schemaAttributec068f080616b54f98fdf5505(),
-			// Property: DefaultValue
-			"default_value": schemaAttribute52aa0316a499863384b2e223(),
-		}, /*END SCHEMA*/
-		Description: "A required rule type, used to indicate whether a field is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b2849a9406b49a787c88f5b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Conditions
-			"conditions": schemaAttribute75fb10525e8eac1ae681d143(),
-			// Property: DefaultValue
-			"default_value": schemaAttribute895c6ae4cb35821fcacf632f(),
-		}, /*END SCHEMA*/
-		Description: "Hidden rule type, used to indicate whether a field is hidden",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cb8d61618dc4d5c880e564a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string value to compare against the field value in the condition evaluation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ed6a0c0e50049d354ed7916() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean value to compare against the field value in the condition evaluation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75fb10525e8eac1ae681d143() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EqualTo
-				"equal_to": schemaAttribute7e9bc19aacba318d8c3f00b0(),
-				// Property: NotEqualTo
-				"not_equal_to": schemaAttribute7e9bc19aacba318d8c3f00b0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of conditions for the hidden rule; the first condition to evaluate to true dictates the value of the rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e9bc19aacba318d8c3f00b0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OperandOne
-			"operand_one": schemaAttribute35d57adb6da786790d628b88(),
-			// Property: OperandTwo
-			"operand_two": schemaAttribute25e062d22fc0edebeeac5f82(),
-			// Property: Result
-			"result": schemaAttribute0fe5113d981c3d3c65439556(),
-		}, /*END SCHEMA*/
-		Description: "Boolean operands for a condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute864d95b79a0c30ba8b0a39c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "An empty operand value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute895c6ae4cb35821fcacf632f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the rule (i.e. whether the field is hidden) should none of the conditions evaluate to true",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c531eb6a92867b6d4337b43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the case rule was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebda0f2a71cb800ec5cd72eef() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "A numeric value to compare against the field value in the condition evaluation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdd908b4102bbc3645c73d45() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Hidden
-			"hidden": schemaAttribute6b2849a9406b49a787c88f5b(),
-			// Property: Required
-			"required": schemaAttribute6194232a9c298ef6ae2b70a3(),
-		}, /*END SCHEMA*/
-		Description: "Defines the rule behavior and conditions. Specifies the rule type and the conditions under which it applies. In the Amazon Connect admin website, this corresponds to case field conditions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec068f080616b54f98fdf5505() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EqualTo
-				"equal_to": schemaAttribute7e9bc19aacba318d8c3f00b0(),
-				// Property: NotEqualTo
-				"not_equal_to": schemaAttribute7e9bc19aacba318d8c3f00b0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An ordered list of boolean conditions that determine when the field should be required. Conditions are evaluated in order, and the first condition that evaluates to true determines whether the field is required, overriding the default value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb99c1d31905be66071d1db9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description explaining the purpose and behavior of this case rule. Helps administrators understand when and why this rule applies to case fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8e3118ba7ab663084438a84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Cases domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cases_case_rule", caseRuleDataSource)
 }
@@ -282,7 +33,10 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"case_rule_arn": schemaAttribute4bf9cd276c6f8323a3e0283a(),
+		"case_rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of a case rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CaseRuleId
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +46,10 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"case_rule_id": schemaAttribute486670fe61eb9a3fa1ae6e1c(),
+		"case_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of a case rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +58,11 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute8c531eb6a92867b6d4337b43(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the case rule was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +71,10 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributedb99c1d31905be66071d1db9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description explaining the purpose and behavior of this case rule. Helps administrators understand when and why this rule applies to case fields.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +84,10 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributee8e3118ba7ab663084438a84(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the Cases domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +96,11 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttribute092c3b0a5c6c872cf13f5f2a(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the case rule was created or last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +111,10 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*[\\S]$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1f0ccfc9aa3a346b6f5f10fe(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A descriptive name for the case rule. Must be unique within the domain and should clearly indicate the rule's purpose (e.g., 'Priority Field Required for Urgent Cases').",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rule
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +388,262 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rule": schemaAttributebdd908b4102bbc3645c73d45(),
+		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Hidden
+				"hidden": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Conditions
+						"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EqualTo
+									"equal_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperandOne
+											"operand_one": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: FieldId
+													"field_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The field ID this operand should take the value of.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The left hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OperandTwo
+											"operand_two": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: BooleanValue
+													"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "A boolean value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: DoubleValue
+													"double_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Description: "A numeric value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: EmptyValue
+													"empty_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "An empty operand value.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: StringValue
+													"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The right hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Result
+											"result": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "The value of the outer rule if the condition evaluates to true.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Boolean operands for a condition.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: NotEqualTo
+									"not_equal_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperandOne
+											"operand_one": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: FieldId
+													"field_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The field ID this operand should take the value of.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The left hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OperandTwo
+											"operand_two": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: BooleanValue
+													"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "A boolean value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: DoubleValue
+													"double_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Description: "A numeric value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: EmptyValue
+													"empty_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "An empty operand value.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: StringValue
+													"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The right hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Result
+											"result": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "The value of the outer rule if the condition evaluates to true.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Boolean operands for a condition.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of conditions for the hidden rule; the first condition to evaluate to true dictates the value of the rule",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultValue
+						"default_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "The value of the rule (i.e. whether the field is hidden) should none of the conditions evaluate to true",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Hidden rule type, used to indicate whether a field is hidden",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Required
+				"required": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Conditions
+						"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EqualTo
+									"equal_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperandOne
+											"operand_one": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: FieldId
+													"field_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The field ID this operand should take the value of.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The left hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OperandTwo
+											"operand_two": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: BooleanValue
+													"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "A boolean value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: DoubleValue
+													"double_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Description: "A numeric value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: EmptyValue
+													"empty_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "An empty operand value.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: StringValue
+													"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The right hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Result
+											"result": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "The value of the outer rule if the condition evaluates to true.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Boolean operands for a condition.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: NotEqualTo
+									"not_equal_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperandOne
+											"operand_one": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: FieldId
+													"field_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The field ID this operand should take the value of.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The left hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OperandTwo
+											"operand_two": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: BooleanValue
+													"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "A boolean value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: DoubleValue
+													"double_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Description: "A numeric value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: EmptyValue
+													"empty_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "An empty operand value.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: StringValue
+													"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string value to compare against the field value in the condition evaluation.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The right hand operand in the condition.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Result
+											"result": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "The value of the outer rule if the condition evaluates to true.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Boolean operands for a condition.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "An ordered list of boolean conditions that determine when the field should be required. Conditions are evaluated in order, and the first condition that evaluates to true determines whether the field is required, overriding the default value.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultValue
+						"default_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "The default required state for the field when none of the specified conditions are met. If true, the field is required by default; if false, the field is optional by default.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A required rule type, used to indicate whether a field is required.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the rule behavior and conditions. Specifies the rule type and the conditions under which it applies. In the Amazon Connect admin website, this corresponds to case field conditions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -647,7 +676,24 @@ func caseRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute0f03ae8fb6e21ad10065ebe5(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags that you attach to this case rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

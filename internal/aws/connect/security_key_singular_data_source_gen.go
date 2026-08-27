@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute9860c489170145ab73a70a88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A valid security key in PEM format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b2988b7832f1513b7fbbb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An associationID is automatically generated when a storage config is associated with an instance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb8e7f4c219a5ab602ceef35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Connect instance identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_security_key", securityKeyDataSource)
 }
@@ -53,7 +32,10 @@ func securityKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[-a-z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttributed5b2988b7832f1513b7fbbb2(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An associationID is automatically generated when a storage config is associated with an instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -64,7 +46,10 @@ func securityKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttributefb8e7f4c219a5ab602ceef35(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Connect instance identifier",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Key
 		// CloudFormation resource type schema:
 		//
@@ -74,7 +59,10 @@ func securityKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"key": schemaAttribute9860c489170145ab73a70a88(),
+		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A valid security key in PEM format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

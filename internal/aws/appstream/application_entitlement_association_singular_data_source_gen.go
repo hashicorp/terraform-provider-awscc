@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute46488142999518bbdccd054c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_application_entitlement_association", applicationEntitlementAssociationDataSource)
 }
@@ -34,21 +28,27 @@ func applicationEntitlementAssociationDataSource(ctx context.Context) (datasourc
 		//	{
 		//	  "type": "string"
 		//	}
-		"application_identifier": schemaAttribute46488142999518bbdccd054c(),
+		"application_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntitlementName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"entitlement_name": schemaAttribute46488142999518bbdccd054c(),
+		"entitlement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"stack_name": schemaAttribute46488142999518bbdccd054c(),
+		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

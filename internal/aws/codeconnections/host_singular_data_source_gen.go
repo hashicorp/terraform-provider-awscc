@@ -15,124 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute152c46b614f3e5690170079a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint of the infrastructure where your provider type is installed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bd84f390f3d39982a4cbf95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f80072d29c683d7f6f4e198() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea5a21dbcbb3203d142ab5ae3(),
-				// Property: Value
-				"value": schemaAttribute55984dd58b43d54b7e254a30(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to apply to the host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52cbd52a40393911e095f144() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55984dd58b43d54b7e254a30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85f9bfd9ce41b638c99f2ec3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute861b9976b43e24ceaf4e7ad6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea511678b13424fa1a9502a6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the installed provider to be associated with your connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5a21dbcbb3203d142ab5ae3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead0328d4c97d1f638d09b04e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of the security group or security groups associated with the Amazon VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca8bff7b0818378ebdf760fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf9267d3aee9aeff2f3d0956() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of the subnet or subnets associated with the Amazon VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7284b0536b4bcc537ed8d9d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributead0328d4c97d1f638d09b04e(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttributecf9267d3aee9aeff2f3d0956(),
-			// Property: TlsCertificate
-			"tls_certificate": schemaAttribute85f9bfd9ce41b638c99f2ec3(),
-			// Property: VpcId
-			"vpc_id": schemaAttribute1bd84f390f3d39982a4cbf95(),
-		}, /*END SCHEMA*/
-		Description: "The VPC configuration provisioned for the host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee28066ffe40b05ec7464fd34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The server-generated unique identifier for the host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codeconnections_host", hostDataSource)
 }
@@ -151,7 +33,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[\\w]+)*:(codestar-connections|codeconnections):.+:[0-9]{12}:host\\/.+$",
 		//	  "type": "string"
 		//	}
-		"host_arn": schemaAttributeca8bff7b0818378ebdf760fc(),
+		"host_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostId
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +44,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The server-generated unique identifier for the host.",
 		//	  "type": "string"
 		//	}
-		"host_id": schemaAttributee28066ffe40b05ec7464fd34(),
+		"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The server-generated unique identifier for the host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +57,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute52cbd52a40393911e095f144(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +70,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"provider_endpoint": schemaAttribute152c46b614f3e5690170079a(),
+		"provider_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The endpoint of the infrastructure where your provider type is installed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderType
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +89,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provider_type": schemaAttributea511678b13424fa1a9502a6b(),
+		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the installed provider to be associated with your connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +102,10 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute861b9976b43e24ceaf4e7ad6(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +137,24 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3f80072d29c683d7f6f4e198(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to apply to the host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +209,34 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_configuration": schemaAttributed7284b0536b4bcc537ed8d9d(),
+		"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The ID of the security group or security groups associated with the Amazon VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The ID of the subnet or subnets associated with the Amazon VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TlsCertificate
+				"tls_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The VPC configuration provisioned for the host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

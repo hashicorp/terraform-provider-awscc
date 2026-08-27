@@ -15,50 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute480e62740722acc6d2961c4b() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e2d727fe36e070a9a546b92() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2389dda90257171251b71b8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttributee3e06592b74121e13917408f(),
-				// Property: Resources
-				"resources": schemaAttributebc55cc2726f6295d5560cd17(),
-				// Property: TieringDownSettingsInDays
-				"tiering_down_settings_in_days": schemaAttribute8e2d727fe36e070a9a546b92(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc55cc2726f6295d5560cd17() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3e06592b74121e13917408f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_backup_tiering_configuration", tieringConfigurationDataSource)
 }
@@ -73,21 +29,27 @@ func tieringConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	{
 		//	  "type": "string"
 		//	}
-		"backup_vault_name": schemaAttributee3e06592b74121e13917408f(),
+		"backup_vault_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributee3e06592b74121e13917408f(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributee3e06592b74121e13917408f(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceSelection
 		// CloudFormation resource type schema:
 		//
@@ -119,21 +81,44 @@ func tieringConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resource_selection": schemaAttributea2389dda90257171251b71b8(),
+		"resource_selection": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Resources
+					"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TieringDownSettingsInDays
+					"tiering_down_settings_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TieringConfigurationArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"tiering_configuration_arn": schemaAttributee3e06592b74121e13917408f(),
+		"tiering_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TieringConfigurationName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"tiering_configuration_name": schemaAttributee3e06592b74121e13917408f(),
+		"tiering_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TieringConfigurationTags
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +131,11 @@ func tieringConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tiering_configuration_tags": schemaAttribute480e62740722acc6d2961c4b(),
+		"tiering_configuration_tags": // Pattern: ""
+		schema.MapAttribute{          /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

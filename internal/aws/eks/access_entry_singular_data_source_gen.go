@@ -15,128 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute165bc96b6ca858c75a5ab120() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The principal ARN that the access entry is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1933c43aeb7425b6b1633a2d() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The namespaces to associate with the access scope. Only specify if Type is set to 'namespace'.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28dfcc530dbae393a0d43ff3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The node type to associate with the access entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3456785daedafbcb376f9842() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Kubernetes user that the access entry is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48bb255bccdeb17636872313() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the access policy to add to the access entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dc97cb82f571333429d10d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute904ab3dedb409c20a9276b61() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7dc97cb82f571333429d10d3(),
-				// Property: Value
-				"value": schemaAttribute955cf893a63d5d8fbb6ab4ba(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute955cf893a63d5d8fbb6ab4ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec366d4a93e9008e515f392ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster that the access entry is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec83ee40989bb4e07566b8b8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the access entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecae902c09df9378a20b91357() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessScope
-				"access_scope": schemaAttributed1e4151161356b0754157c9d(),
-				// Property: PolicyArn
-				"policy_arn": schemaAttribute48bb255bccdeb17636872313(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of access policies that are associated with the access entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1e4151161356b0754157c9d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Namespaces
-			"namespaces": schemaAttribute1933c43aeb7425b6b1633a2d(),
-			// Property: Type
-			"type": schemaAttributede222b3e267897a5307bc26f(),
-		}, /*END SCHEMA*/
-		Description: "The access scope of the access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede222b3e267897a5307bc26f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the access scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0fbdbef3f6f39334f2fefbc() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Kubernetes groups that the access entry is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_eks_access_entry", accessEntryDataSource)
 }
@@ -152,7 +30,10 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the access entry.",
 		//	  "type": "string"
 		//	}
-		"access_entry_arn": schemaAttributec83ee40989bb4e07566b8b8b(),
+		"access_entry_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the access entry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicies
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +86,37 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"access_policies": schemaAttributecae902c09df9378a20b91357(),
+		"access_policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessScope
+					"access_scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Namespaces
+							"namespaces": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The namespaces to associate with the access scope. Only specify if Type is set to 'namespace'.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of the access scope.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The access scope of the access policy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PolicyArn
+					"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the access policy to add to the access entry.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of access policies that are associated with the access entry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +125,10 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttributec366d4a93e9008e515f392ee(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster that the access entry is created for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KubernetesGroups
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +141,11 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"kubernetes_groups": schemaAttributee0fbdbef3f6f39334f2fefbc(),
+		"kubernetes_groups": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Kubernetes groups that the access entry is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrincipalArn
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +154,10 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"principal_arn": schemaAttribute165bc96b6ca858c75a5ab120(),
+		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The principal ARN that the access entry is created for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +190,24 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute904ab3dedb409c20a9276b61(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +215,10 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The node type to associate with the access entry.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute28dfcc530dbae393a0d43ff3(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The node type to associate with the access entry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +226,10 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Kubernetes user that the access entry is associated with.",
 		//	  "type": "string"
 		//	}
-		"username": schemaAttribute3456785daedafbcb376f9842(),
+		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Kubernetes user that the access entry is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

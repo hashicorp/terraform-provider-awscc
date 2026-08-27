@@ -21,177 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute19b0655ae6ead933eb9d00d0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute309f9f3e48df2c94484857a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 127),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65d4b2f9dac9ecbec6f92851() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VLAN.",
-		Required:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e3589981168a756e0e58b51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the virtual interface",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute877c92454709458e987e7ee4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9405787da97ee44296349253() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Outpost LAG ID.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3f73a648386da82ccfa2ab8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The extended 32-bit ASN of the BGP peer for use with larger ASN values.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba6c915461aaa308b5c58057() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the virtual interface group",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc3af20918875a3596cd352e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3cb614c3ffe7abb3e9f40d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The local address.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcfa8ff5c3b18c23fd05d7c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedecd3f2a80a309cc1d666450() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The peer BGP ASN.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6917ff76fb763e0ec084ce7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the local gateway virtual interface",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee894011091ae33335911bc65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The peer address.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedd18051e5685ac440df1021() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute309f9f3e48df2c94484857a1(),
-				// Property: Value
-				"value": schemaAttribute877c92454709458e987e7ee4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_local_gateway_virtual_interface", localGatewayVirtualInterfaceResource)
 	registry.AddListResourceFactory("awscc_ec2_local_gateway_virtual_interface", generic.NewListResource(localGatewayVirtualInterfaceResource))
@@ -208,7 +37,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The current state of the local gateway virtual interface",
 		//	  "type": "string"
 		//	}
-		"configuration_state": schemaAttributee6917ff76fb763e0ec084ce7(),
+		"configuration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the local gateway virtual interface",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalAddress
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +51,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The local address.",
 		//	  "type": "string"
 		//	}
-		"local_address": schemaAttributec3cb614c3ffe7abb3e9f40d6(),
+		"local_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The local address.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalBgpAsn
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +65,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
 		//	  "type": "integer"
 		//	}
-		"local_bgp_asn": schemaAttribute19b0655ae6ead933eb9d00d0(),
+		"local_bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +79,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the local gateway",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttributebc3af20918875a3596cd352e(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceGroupId
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +93,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the virtual interface group",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_group_id": schemaAttributeba6c915461aaa308b5c58057(),
+		"local_gateway_virtual_interface_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface group",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +107,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the virtual interface",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_id": schemaAttribute6e3589981168a756e0e58b51(),
+		"local_gateway_virtual_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OutpostLagId
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +121,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The Outpost LAG ID.",
 		//	  "type": "string"
 		//	}
-		"outpost_lag_id": schemaAttribute9405787da97ee44296349253(),
+		"outpost_lag_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Outpost LAG ID.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +135,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttributedcfa8ff5c3b18c23fd05d7c7(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +149,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The peer address.",
 		//	  "type": "string"
 		//	}
-		"peer_address": schemaAttributee894011091ae33335911bc65(),
+		"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The peer address.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PeerBgpAsn
 		// CloudFormation resource type schema:
 		//
@@ -280,7 +163,15 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The peer BGP ASN.",
 		//	  "type": "integer"
 		//	}
-		"peer_bgp_asn": schemaAttributedecd3f2a80a309cc1d666450(),
+		"peer_bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The peer BGP ASN.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PeerBgpAsnExtended
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +180,15 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"peer_bgp_asn_extended": schemaAttributea3f73a648386da82ccfa2ab8(),
+		"peer_bgp_asn_extended": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The extended 32-bit ASN of the BGP peer for use with larger ASN values.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +219,42 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeedd18051e5685ac440df1021(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Vlan
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +262,13 @@ func localGatewayVirtualInterfaceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the VLAN.",
 		//	  "type": "integer"
 		//	}
-		"vlan": schemaAttribute65d4b2f9dac9ecbec6f92851(),
+		"vlan": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VLAN.",
+			Required:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

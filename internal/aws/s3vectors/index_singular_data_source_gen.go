@@ -16,138 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1952a6f71771af780b7807fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41f4d2a1b3571ae1f4018ac4() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys cannot be used as query filters. Non-filterable metadata keys can be retrieved but cannot be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41fd96aa5a1b8ba04bbc0c50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the index",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute497d562b85e8f0a2d6fba95a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type of the vectors to be inserted into the vector index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80eba03f82986f4ec66229d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c2f1f40617edaae9890b5c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Date and time when the vector index was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9177ae1b5abd007e8c85c53d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute80eba03f82986f4ec66229d0(),
-				// Property: Value
-				"value": schemaAttributefb9af5b2720135dd42a84145(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "User tags (key-value pairs) to associate with the index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b0c6314b0fc09d28df4598a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttributec0a300c27138bb190918afd8(),
-			// Property: SseType
-			"sse_type": schemaAttribute1952a6f71771af780b7807fd(),
-		}, /*END SCHEMA*/
-		Description: "The encryption configuration for the index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb015dd7707f643e6bfb3411c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the vector bucket that contains the vector index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2c953233d54d60e39972b59() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The dimensions of the vectors to be inserted into the vector index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb49d559f0433602ed68d721a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the vector bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0a300c27138bb190918afd8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec87366a3fb1e0f8e255161ea() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NonFilterableMetadataKeys
-			"non_filterable_metadata_keys": schemaAttribute41f4d2a1b3571ae1f4018ac4(),
-		}, /*END SCHEMA*/
-		Description: "The metadata configuration for the vector index.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2f978c90d5d83fe4a62db1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the vector index to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5a54c8952a8ded09db1019b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The distance metric to be used for similarity search.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb9af5b2720135dd42a84145() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3vectors_index", indexDataSource)
 }
@@ -164,7 +32,11 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute8c2f1f40617edaae9890b5c7(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Date and time when the vector index was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataType
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +47,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_type": schemaAttribute497d562b85e8f0a2d6fba95a(),
+		"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The data type of the vectors to be inserted into the vector index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Dimension
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +60,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"dimension": schemaAttributeb2c953233d54d60e39972b59(),
+		"dimension": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The dimensions of the vectors to be inserted into the vector index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DistanceMetric
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +75,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"distance_metric": schemaAttributed5a54c8952a8ded09db1019b(),
+		"distance_metric": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The distance metric to be used for similarity search.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +104,22 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schemaAttribute9b0c6314b0fc09d28df4598a(),
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SseType
+				"sse_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption configuration for the index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexArn
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +130,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"index_arn": schemaAttribute41fd96aa5a1b8ba04bbc0c50(),
+		"index_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the index",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexName
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +143,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"index_name": schemaAttributed2f978c90d5d83fe4a62db1b(),
+		"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the vector index to create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetadataConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +170,18 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"metadata_configuration": schemaAttributec87366a3fb1e0f8e255161ea(),
+		"metadata_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NonFilterableMetadataKeys
+				"non_filterable_metadata_keys": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys cannot be used as query filters. Non-filterable metadata keys can be retrieved but cannot be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The metadata configuration for the vector index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +212,24 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute9177ae1b5abd007e8c85c53d(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "User tags (key-value pairs) to associate with the index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VectorBucketArn
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +240,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vector_bucket_arn": schemaAttributeb49d559f0433602ed68d721a(),
+		"vector_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the vector bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VectorBucketName
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +253,10 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"vector_bucket_name": schemaAttributeb015dd7707f643e6bfb3411c(),
+		"vector_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the vector bucket that contains the vector index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

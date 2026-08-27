@@ -16,280 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute14076d21c1fdadf36c9eb23b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute140b8adeb8b8fcad99e1724a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1634df401d2e82b5a399f3de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Pipeline Role (ARN) for the pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1975721c362a7fd7c2884781() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Data Prepper pipeline configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d216d4b3f7b0327b875884a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key to use for encrypting data. By default an AWS owned key is used",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33fb846241b914e7f09f0e64() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether logs should be published.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38f674d4028d1e8dd2df7f86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39784c7a415eac0dc8783594() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of subnet IDs associated with the VPC endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f3a408100e4b0815c2a4541() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute472abb41ebbd6c3a426b3179() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute2d216d4b3f7b0327b875884a(),
-		}, /*END SCHEMA*/
-		Description: "Key-value pairs to configure encryption at rest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47fd524eaa65f62ea412111a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AttachToVpc
-			"attach_to_vpc": schemaAttribute8b4193add7e1ae54ef2f5498(),
-			// Property: CidrBlock
-			"cidr_block": schemaAttributeb469b07d5f2c91ca3ed42c18(),
-		}, /*END SCHEMA*/
-		Description: "Options for attaching a VPC to the pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute482b462474441161bdc4c379() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Policy
-			"policy": schemaAttributeea4cadc03bfb9504a7520e4e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d54712e1bb92d93e8198d91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributecbdd6c2856bf541c37e3f0b5(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute39784c7a415eac0dc8783594(),
-			// Property: VpcAttachmentOptions
-			"vpc_attachment_options": schemaAttribute47fd524eaa65f62ea412111a(),
-			// Property: VpcEndpointManagement
-			"vpc_endpoint_management": schemaAttributef060b16a7eb53942ea0bf878(),
-		}, /*END SCHEMA*/
-		Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ecf95bd6c3a0703852d3275() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID for your VPC. AWS Privatelink generates this value when you create a VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71545a38029d8e125b489a37() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3f3a408100e4b0815c2a4541(),
-				// Property: Value
-				"value": schemaAttribute140b8adeb8b8fcad99e1724a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7847898f83db27c756975535() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogDestination
-			"cloudwatch_log_destination": schemaAttributea4af8362d3eed3698c6fa46c(),
-			// Property: IsLoggingEnabled
-			"is_logging_enabled": schemaAttribute33fb846241b914e7f09f0e64(),
-		}, /*END SCHEMA*/
-		Description: "Key-value pairs to configure log publishing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82467964f92ebf9e5ab3d791() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8378fe4987e24438a043415f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b4193add7e1ae54ef2f5498() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the pipeline should be attached to the provided VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92d0aeedfd468e2520ab3350() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC endpoint service name for the pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4af8362d3eed3698c6fa46c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogGroup
-			"log_group": schemaAttribute38f674d4028d1e8dd2df7f86(),
-		}, /*END SCHEMA*/
-		Description: "The destination for OpenSearch Ingestion Service logs sent to Amazon CloudWatch.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa6bf000ab06a6756bfe6525() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PersistentBufferEnabled
-			"persistent_buffer_enabled": schemaAttributef6a33db690288a3ec68dcd22(),
-		}, /*END SCHEMA*/
-		Description: "Key-value pairs to configure buffering.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb469b07d5f2c91ca3ed42c18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbdd6c2856bf541c37e3f0b5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security groups associated with the VPC endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecea76aeb998ca4f05929d010() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of endpoints that can be used for ingesting data into a pipeline",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5743391e56d55cdd001300b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed835b77df05d0862e039a52b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea4cadc03bfb9504a7520e4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef060b16a7eb53942ea0bf878() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1992b3986b4bc5f23110273() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: VpcEndpointId
-				"vpc_endpoint_id": schemaAttribute14076d21c1fdadf36c9eb23b(),
-				// Property: VpcId
-				"vpc_id": schemaAttribute6ecf95bd6c3a0703852d3275(),
-				// Property: VpcOptions
-				"vpc_options": schemaAttribute6d54712e1bb92d93e8198d91(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The VPC interface endpoints that have access to the pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6a33db690288a3ec68dcd22() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether persistent buffering should be enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_osis_pipeline", pipelineDataSource)
 }
@@ -315,7 +41,17 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"buffer_options": schemaAttributeaa6bf000ab06a6756bfe6525(),
+		"buffer_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PersistentBufferEnabled
+				"persistent_buffer_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether persistent buffering should be enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure buffering.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionAtRestOptions
 		// CloudFormation resource type schema:
 		//
@@ -333,7 +69,17 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_at_rest_options": schemaAttribute472abb41ebbd6c3a426b3179(),
+		"encryption_at_rest_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS key to use for encrypting data. By default an AWS owned key is used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure encryption at rest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestEndpointUrls
 		// CloudFormation resource type schema:
 		//
@@ -345,7 +91,11 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ingest_endpoint_urls": schemaAttributecea76aeb998ca4f05929d010(),
+		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of endpoints that can be used for ingesting data into a pipeline",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogPublishingOptions
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +126,28 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"log_publishing_options": schemaAttribute7847898f83db27c756975535(),
+		"log_publishing_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchLogDestination
+				"cloudwatch_log_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroup
+						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The destination for OpenSearch Ingestion Service logs sent to Amazon CloudWatch.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsLoggingEnabled
+				"is_logging_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether logs should be published.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure log publishing.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxUnits
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +157,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"max_units": schemaAttributed835b77df05d0862e039a52b(),
+		"max_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinUnits
 		// CloudFormation resource type schema:
 		//
@@ -396,7 +170,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"min_units": schemaAttribute8378fe4987e24438a043415f(),
+		"min_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelineArn
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +184,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):osis:.+:pipeline\\/.+$",
 		//	  "type": "string"
 		//	}
-		"pipeline_arn": schemaAttributed5743391e56d55cdd001300b(),
+		"pipeline_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelineConfigurationBody
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +197,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"pipeline_configuration_body": schemaAttribute1975721c362a7fd7c2884781(),
+		"pipeline_configuration_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Data Prepper pipeline configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelineName
 		// CloudFormation resource type schema:
 		//
@@ -428,7 +211,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z][a-z0-9\\-]+",
 		//	  "type": "string"
 		//	}
-		"pipeline_name": schemaAttribute82467964f92ebf9e5ab3d791(),
+		"pipeline_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelineRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -439,7 +225,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$",
 		//	  "type": "string"
 		//	}
-		"pipeline_role_arn": schemaAttribute1634df401d2e82b5a399f3de(),
+		"pipeline_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Pipeline Role (ARN) for the pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -455,7 +244,16 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"resource_policy": schemaAttribute482b462474441161bdc4c379(),
+		"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Policy
+				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -488,7 +286,24 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute71545a38029d8e125b489a37(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointService
 		// CloudFormation resource type schema:
 		//
@@ -498,7 +313,10 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_service": schemaAttribute92d0aeedfd468e2520ab3350(),
+		"vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC endpoint service name for the pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpoints
 		// CloudFormation resource type schema:
 		//
@@ -582,7 +400,65 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_endpoints": schemaAttributef1992b3986b4bc5f23110273(),
+		"vpc_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: VpcEndpointId
+					"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the endpoint.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VpcId
+					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID for your VPC. AWS Privatelink generates this value when you create a VPC.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VpcOptions
+					"vpc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecurityGroupIds
+							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of security groups associated with the VPC endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SubnetIds
+							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of subnet IDs associated with the VPC endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VpcAttachmentOptions
+							"vpc_attachment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AttachToVpc
+									"attach_to_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the pipeline should be attached to the provided VPC",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: CidrBlock
+									"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Options for attaching a VPC to the pipeline.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VpcEndpointManagement
+							"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The VPC interface endpoints that have access to the pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcOptions
 		// CloudFormation resource type schema:
 		//
@@ -646,7 +522,46 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_options": schemaAttribute6d54712e1bb92d93e8198d91(),
+		"vpc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of security groups associated with the VPC endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of subnet IDs associated with the VPC endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcAttachmentOptions
+				"vpc_attachment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AttachToVpc
+						"attach_to_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the pipeline should be attached to the provided VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CidrBlock
+						"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Options for attaching a VPC to the pipeline.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcEndpointManagement
+				"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

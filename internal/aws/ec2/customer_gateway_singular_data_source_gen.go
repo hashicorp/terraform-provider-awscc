@@ -14,84 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute42f8679ed40657b92673a740() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4855d89357417787fb686623() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ba3be6aee21f76c8d6e59a7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Default: 65000\n Valid values: ``1`` to ``2,147,483,647``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54128b3eeed7c0d351a26146() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed9b17d2fde0e95e6b080e1a9(),
-				// Property: Value
-				"value": schemaAttribute42f8679ed40657b92673a740(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags for the customer gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60b0b9421bbd0e11477c5e32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of VPN connection that this customer gateway supports (``ipsec.1``).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a1f6ab477a528456c02cbaa() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Valid values: ``2,147,483,648`` to ``4,294,967,295``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a7d119d0dfeb0fe7c291e3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of customer gateway device.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f69493a2c6588dd5ccb7636() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``Ipv6``, you can use an IPv6 address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9b17d2fde0e95e6b080e1a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9fea29207d2c1993b82c164() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the customer gateway certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_customer_gateway", customerGatewayDataSource)
 }
@@ -108,7 +30,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Default: 65000\n Valid values: ``1`` to ``2,147,483,647``",
 		//	  "type": "integer"
 		//	}
-		"bgp_asn": schemaAttribute4ba3be6aee21f76c8d6e59a7(),
+		"bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Default: 65000\n Valid values: ``1`` to ``2,147,483,647``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BgpAsnExtended
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +43,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minimum": 2147483648,
 		//	  "type": "number"
 		//	}
-		"bgp_asn_extended": schemaAttribute7a1f6ab477a528456c02cbaa(),
+		"bgp_asn_extended": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Valid values: ``2,147,483,648`` to ``4,294,967,295``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +55,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:acm:[a-z]{2}((-gov)|(-iso([a-z]{1})?))?-[a-z]+-\\d{1}:\\d{12}:certificate\\/[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schemaAttributed9fea29207d2c1993b82c164(),
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the customer gateway certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomerGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +66,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"customer_gateway_id": schemaAttribute4855d89357417787fb686623(),
+		"customer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceName
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +77,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of customer gateway device.",
 		//	  "type": "string"
 		//	}
-		"device_name": schemaAttribute8a7d119d0dfeb0fe7c291e3c(),
+		"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of customer gateway device.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +88,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The IP address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``Ipv6``, you can use an IPv6 address.",
 		//	  "type": "string"
 		//	}
-		"ip_address": schemaAttribute9f69493a2c6588dd5ccb7636(),
+		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``Ipv6``, you can use an IPv6 address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +120,24 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute54128b3eeed7c0d351a26146(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags for the customer gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +145,10 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The type of VPN connection that this customer gateway supports (``ipsec.1``).",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute60b0b9421bbd0e11477c5e32(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of VPN connection that this customer gateway supports (``ipsec.1``).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

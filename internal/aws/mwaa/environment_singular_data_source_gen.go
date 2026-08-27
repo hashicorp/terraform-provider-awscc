@@ -16,253 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute09cf532a2954a4dea3ba1c84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cb25cde72f1f15a7f126c4c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogGroupArn
-			"cloudwatch_log_group_arn": schemaAttributeebb17ca12f6148e00e53258b(),
-			// Property: Enabled
-			"enabled": schemaAttribute0e6edbce9d47a0c1e7c699bd(),
-			// Property: LogLevel
-			"log_level": schemaAttributeebb17ca12f6148e00e53258b(),
-		}, /*END SCHEMA*/
-		Description: "Logging configuration for a specific airflow component.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0dab4254c302332955d863ae() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Scheduler compute units.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e6edbce9d47a0c1e7c699bd() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute184d78e323e832cc0708a7bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A map of tags for the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b2319eadb83376c458450aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Version of airflow to deploy to the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e5f2a7d74985fb5fc834f35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The celery executor queue associated with the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ef051932e3db646148a6828() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e48f42bbafa66e67581e38b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute488597c52919d4107a5c997e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents an version ID for an S3 object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute505f7addb90245c7d685004b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59de6a4cb0d41e574bb2427e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum webserver compute units.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68b04c70ba6d3d3a12c19bb1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7884f16efea1a7a86dce44c4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Minimum webserver compute units.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c1d8c2aa60fce46a823c3a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82db11e4a559623ced14757d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum worker compute units.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d1bfb090717f5b60055afbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Start time for the weekly maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98f706030361e3a92c53cffe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The database VPC endpoint service name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6d991a25d3edeaf13dcd520() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN for the MWAA environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9a01c259c7c1c0f3cbd2fa7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security groups to use for the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafed02d7e85ef1b2f92ce33c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Url endpoint for the environment's Airflow UI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb36ab5de9489a77560d11b50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbaa23d72f67b51766ecb3ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Templated configuration for airflow processes and backing infrastructure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdbce93bc1df15f4f805bf97() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributea9a01c259c7c1c0f3cbd2fa7(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute68b04c70ba6d3d3a12c19bb1(),
-		}, /*END SCHEMA*/
-		Description: "Configures the network resources of the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1696f7d6d8b23fe252653a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IAM role to be used by tasks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed487a144e2c7e9e39f3acbfe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed944975c01acbe61c005a452() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer-defined identifier for the environment, unique per customer region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf551cc1ed8d0890f27be67e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DagProcessingLogs
-			"dag_processing_logs": schemaAttribute0cb25cde72f1f15a7f126c4c(),
-			// Property: SchedulerLogs
-			"scheduler_logs": schemaAttribute0cb25cde72f1f15a7f126c4c(),
-			// Property: TaskLogs
-			"task_logs": schemaAttribute0cb25cde72f1f15a7f126c4c(),
-			// Property: WebserverLogs
-			"webserver_logs": schemaAttribute0cb25cde72f1f15a7f126c4c(),
-			// Property: WorkerLogs
-			"worker_logs": schemaAttribute0cb25cde72f1f15a7f126c4c(),
-		}, /*END SCHEMA*/
-		Description: "Logging configuration for the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebb17ca12f6148e00e53258b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef14e8cc81bfec72e7294b8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4d14d7576ddd4fc2f7fb659() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Minimum worker compute units.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mwaa_environment", environmentDataSource)
 }
@@ -278,7 +31,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 		//	  "type": "object"
 		//	}
-		"airflow_configuration_options": schemaAttribute09cf532a2954a4dea3ba1c84(),
+		"airflow_configuration_options": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AirflowVersion
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +45,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z.]+$",
 		//	  "type": "string"
 		//	}
-		"airflow_version": schemaAttribute1b2319eadb83376c458450aa(),
+		"airflow_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Version of airflow to deploy to the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +59,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea6d991a25d3edeaf13dcd520(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN for the MWAA environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CeleryExecutorQueue
 		// CloudFormation resource type schema:
 		//
@@ -308,7 +71,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1224,
 		//	  "type": "string"
 		//	}
-		"celery_executor_queue": schemaAttribute1e5f2a7d74985fb5fc834f35(),
+		"celery_executor_queue": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The celery executor queue associated with the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DagS3Path
 		// CloudFormation resource type schema:
 		//
@@ -318,7 +84,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"dag_s3_path": schemaAttributeef14e8cc81bfec72e7294b8b(),
+		"dag_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseVpcEndpointService
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +96,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1224,
 		//	  "type": "string"
 		//	}
-		"database_vpc_endpoint_service": schemaAttribute98f706030361e3a92c53cffe(),
+		"database_vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The database VPC endpoint service name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointManagement
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +111,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"endpoint_management": schemaAttribute2ef051932e3db646148a6828(),
+		"endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentClass
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +124,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"environment_class": schemaAttributecbaa23d72f67b51766ecb3ba(),
+		"environment_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Templated configuration for airflow processes and backing infrastructure.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +137,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttributed1696f7d6d8b23fe252653a0(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IAM role to be used by tasks.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKey
 		// CloudFormation resource type schema:
 		//
@@ -369,7 +150,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$",
 		//	  "type": "string"
 		//	}
-		"kms_key": schemaAttributeb36ab5de9489a77560d11b50(),
+		"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -520,7 +304,122 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schemaAttributedf551cc1ed8d0890f27be67e(),
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DagProcessingLogs
+				"dag_processing_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogGroupArn
+						"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogLevel
+						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Logging configuration for a specific airflow component.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SchedulerLogs
+				"scheduler_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogGroupArn
+						"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogLevel
+						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Logging configuration for a specific airflow component.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TaskLogs
+				"task_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogGroupArn
+						"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogLevel
+						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Logging configuration for a specific airflow component.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WebserverLogs
+				"webserver_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogGroupArn
+						"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogLevel
+						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Logging configuration for a specific airflow component.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WorkerLogs
+				"worker_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogGroupArn
+						"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogLevel
+						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Logging configuration for a specific airflow component.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Logging configuration for the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxWebservers
 		// CloudFormation resource type schema:
 		//
@@ -529,7 +428,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"max_webservers": schemaAttribute59de6a4cb0d41e574bb2427e(),
+		"max_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Maximum webserver compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxWorkers
 		// CloudFormation resource type schema:
 		//
@@ -538,7 +440,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"max_workers": schemaAttribute82db11e4a559623ced14757d(),
+		"max_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Maximum worker compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinWebservers
 		// CloudFormation resource type schema:
 		//
@@ -547,7 +452,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"min_webservers": schemaAttribute7884f16efea1a7a86dce44c4(),
+		"min_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Minimum webserver compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinWorkers
 		// CloudFormation resource type schema:
 		//
@@ -556,7 +464,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"min_workers": schemaAttributef4d14d7576ddd4fc2f7fb659(),
+		"min_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Minimum worker compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -567,7 +478,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][0-9a-zA-Z\\-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed944975c01acbe61c005a452(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Customer-defined identifier for the environment, unique per customer region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -605,7 +519,24 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_configuration": schemaAttributecdbce93bc1df15f4f805bf97(),
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of security groups to use for the environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configures the network resources of the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PluginsS3ObjectVersion
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +545,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"plugins_s3_object_version": schemaAttribute488597c52919d4107a5c997e(),
+		"plugins_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an version ID for an S3 object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PluginsS3Path
 		// CloudFormation resource type schema:
 		//
@@ -624,7 +558,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"plugins_s3_path": schemaAttributeef14e8cc81bfec72e7294b8b(),
+		"plugins_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequirementsS3ObjectVersion
 		// CloudFormation resource type schema:
 		//
@@ -633,7 +570,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"requirements_s3_object_version": schemaAttribute488597c52919d4107a5c997e(),
+		"requirements_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an version ID for an S3 object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequirementsS3Path
 		// CloudFormation resource type schema:
 		//
@@ -643,7 +583,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"requirements_s3_path": schemaAttributeef14e8cc81bfec72e7294b8b(),
+		"requirements_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedulers
 		// CloudFormation resource type schema:
 		//
@@ -652,7 +595,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"schedulers": schemaAttribute0dab4254c302332955d863ae(),
+		"schedulers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Scheduler compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceBucketArn
 		// CloudFormation resource type schema:
 		//
@@ -663,7 +609,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$",
 		//	  "type": "string"
 		//	}
-		"source_bucket_arn": schemaAttribute505f7addb90245c7d685004b(),
+		"source_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartupScriptS3ObjectVersion
 		// CloudFormation resource type schema:
 		//
@@ -672,7 +621,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"startup_script_s3_object_version": schemaAttribute488597c52919d4107a5c997e(),
+		"startup_script_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an version ID for an S3 object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartupScriptS3Path
 		// CloudFormation resource type schema:
 		//
@@ -682,7 +634,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"startup_script_s3_path": schemaAttributeef14e8cc81bfec72e7294b8b(),
+		"startup_script_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -690,7 +645,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A map of tags for the environment.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute184d78e323e832cc0708a7bf(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "A map of tags for the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebserverAccessMode
 		// CloudFormation resource type schema:
 		//
@@ -703,7 +662,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"webserver_access_mode": schemaAttribute7c1d8c2aa60fce46a823c3a6(),
+		"webserver_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebserverUrl
 		// CloudFormation resource type schema:
 		//
@@ -714,7 +676,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^https://.+$",
 		//	  "type": "string"
 		//	}
-		"webserver_url": schemaAttributeafed02d7e85ef1b2f92ce33c(),
+		"webserver_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Url endpoint for the environment's Airflow UI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebserverVpcEndpointService
 		// CloudFormation resource type schema:
 		//
@@ -723,7 +688,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1224,
 		//	  "type": "string"
 		//	}
-		"webserver_vpc_endpoint_service": schemaAttributed487a144e2c7e9e39f3acbfe(),
+		"webserver_vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WeeklyMaintenanceWindowStart
 		// CloudFormation resource type schema:
 		//
@@ -733,7 +701,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)",
 		//	  "type": "string"
 		//	}
-		"weekly_maintenance_window_start": schemaAttribute8d1bfb090717f5b60055afbf(),
+		"weekly_maintenance_window_start": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Start time for the weekly maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerReplacementStrategy
 		// CloudFormation resource type schema:
 		//
@@ -745,7 +716,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"worker_replacement_strategy": schemaAttribute3e48f42bbafa66e67581e38b(),
+		"worker_replacement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

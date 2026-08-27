@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01f17f8258a19488cf90d61f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2697e590dcd1781b7e568a9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f030da90a96039497ea889f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AccountId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1c5afac223c87fcff26577a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResourceId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc528f045d5e7f8da1bbd0bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_config", resolverConfigDataSource)
 }
@@ -70,7 +35,10 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"autodefined_reverse": schemaAttribute2697e590dcd1781b7e568a9a(),
+		"autodefined_reverse": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutodefinedReverseFlag
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +49,10 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"autodefined_reverse_flag": schemaAttribute01f17f8258a19488cf90d61f(),
+		"autodefined_reverse_flag": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +62,10 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_config_id": schemaAttributefc528f045d5e7f8da1bbd0bd(),
+		"resolver_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +75,10 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute6f030da90a96039497ea889f(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AccountId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +88,10 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttributea1c5afac223c87fcff26577a(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

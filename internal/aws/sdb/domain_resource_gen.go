@@ -17,27 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributecee201928068b92dd8240cb6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the domain to create.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed000d478f5fead040a4339e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about the SimpleDB domain.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_sdb_domain", domainResource)
 	registry.AddListResourceFactory("awscc_sdb_domain", generic.NewListResource(domainResource))
@@ -54,7 +33,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Information about the SimpleDB domain.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed000d478f5fead040a4339e9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Information about the SimpleDB domain.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -62,7 +48,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the domain to create.",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributecee201928068b92dd8240cb6(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the domain to create.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

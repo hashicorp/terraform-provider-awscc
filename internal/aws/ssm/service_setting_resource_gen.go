@@ -20,70 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute713aee2808faf262e3e66e1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the service setting. The value can be Default, Customized or PendingUpdate.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute714480621087ffe117b3264a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the service setting.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88d855aa2e55d7d389582560() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the service setting, such as /ssm/parameter-store/high-throughput-enabled.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef4dfa219e152e17255c9b37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the service setting.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 4096),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef62f4c32758f8df341bd0141() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the last modified user.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb970ecfa86c3691bcc2b6af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The last time the service setting was modified.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ssm_service_setting", serviceSettingResource)
 }
@@ -99,7 +35,13 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the service setting.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute714480621087ffe117b3264a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the service setting.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedDate
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +50,14 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_date": schemaAttributefb970ecfa86c3691bcc2b6af(),
+		"last_modified_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The last time the service setting was modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedUser
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +65,13 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the last modified user.",
 		//	  "type": "string"
 		//	}
-		"last_modified_user": schemaAttributef62f4c32758f8df341bd0141(),
+		"last_modified_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the last modified user.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SettingId
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +81,16 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"setting_id": schemaAttribute88d855aa2e55d7d389582560(),
+		"setting_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the service setting, such as /ssm/parameter-store/high-throughput-enabled.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SettingValue
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +100,13 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"setting_value": schemaAttributeef4dfa219e152e17255c9b37(),
+		"setting_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value of the service setting.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 4096),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +114,13 @@ func serviceSettingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the service setting. The value can be Default, Customized or PendingUpdate.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute713aee2808faf262e3e66e1a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the service setting. The value can be Default, Customized or PendingUpdate.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

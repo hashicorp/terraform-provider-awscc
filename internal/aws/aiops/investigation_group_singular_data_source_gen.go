@@ -15,123 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04e57d452d92e2254e6b4533() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChatConfigurationArns
-				"chat_configuration_arns": schemaAttributedc69c5b07fb61da3d2d8e6d1(),
-				// Property: SNSTopicArn
-				"sns_topic_arn": schemaAttribute8046fddd89e90bc48c35fb76(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs of notification channels to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35485961f06d828654bbf9fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Investigation Group policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute387a0f40a3daf9e7f82f85f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Investigation Role's ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ed77933f3ea3dedd1e2b03a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f38205edecd5847fdb72d3c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to retain the investigation group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8046fddd89e90bc48c35fb76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute823c2eb262a9ac85b4fd6a47() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Flag to enable cloud trail history",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87ac76da519694e8f9371074() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionConfigurationType
-			"encryption_configuration_type": schemaAttribute8046fddd89e90bc48c35fb76(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute8046fddd89e90bc48c35fb76(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5bcfa396827195e28aa382f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceRoleArn
-				"source_role_arn": schemaAttribute387a0f40a3daf9e7f82f85f5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of cross account configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed855120136687ff0caf5b4cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Investigation Group's ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed90c09639b24943424aa5489() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8046fddd89e90bc48c35fb76(),
-				// Property: Value
-				"value": schemaAttribute8046fddd89e90bc48c35fb76(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc69c5b07fb61da3d2d8e6d1() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee053ec3ca9833f115bfcabdd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User friendly name for resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_aiops_investigation_group", investigationGroupDataSource)
 }
@@ -149,7 +32,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributed855120136687ff0caf5b4cc(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Investigation Group's ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChatbotNotificationChannels
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +64,23 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"chatbot_notification_channels": schemaAttribute04e57d452d92e2254e6b4533(),
+		"chatbot_notification_channels": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ChatConfigurationArns
+					"chat_configuration_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SNSTopicArn
+					"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs of notification channels to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +88,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The timestamp value.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute6ed77933f3ea3dedd1e2b03a(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +101,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttributee053ec3ca9833f115bfcabdd(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User friendly name for resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CrossAccountConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +126,19 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cross_account_configurations": schemaAttributed5bcfa396827195e28aa382f(),
+		"cross_account_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SourceRoleArn
+					"source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Investigation Role's ARN.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of cross account configurations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfig
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +158,19 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_config": schemaAttribute87ac76da519694e8f9371074(),
+		"encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionConfigurationType
+				"encryption_configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InvestigationGroupPolicy
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +178,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Investigation Group policy",
 		//	  "type": "string"
 		//	}
-		"investigation_group_policy": schemaAttribute35485961f06d828654bbf9fd(),
+		"investigation_group_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Investigation Group policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsCloudTrailEventHistoryEnabled
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +189,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Flag to enable cloud trail history",
 		//	  "type": "boolean"
 		//	}
-		"is_cloud_trail_event_history_enabled": schemaAttribute823c2eb262a9ac85b4fd6a47(),
+		"is_cloud_trail_event_history_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Flag to enable cloud trail history",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +202,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"last_modified_at": schemaAttributee053ec3ca9833f115bfcabdd(),
+		"last_modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User friendly name for resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedBy
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +215,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"last_modified_by": schemaAttributee053ec3ca9833f115bfcabdd(),
+		"last_modified_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User friendly name for resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +228,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee053ec3ca9833f115bfcabdd(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User friendly name for resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionInDays
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +239,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The number of days to retain the investigation group",
 		//	  "type": "integer"
 		//	}
-		"retention_in_days": schemaAttribute7f38205edecd5847fdb72d3c(),
+		"retention_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to retain the investigation group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +252,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute387a0f40a3daf9e7f82f85f5(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Investigation Role's ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagKeyBoundaries
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +269,10 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tag_key_boundaries": schemaAttributedc69c5b07fb61da3d2d8e6d1(),
+		"tag_key_boundaries": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +302,22 @@ func investigationGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed90c09639b24943424aa5489(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

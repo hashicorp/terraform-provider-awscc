@@ -16,197 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute075336a9c0a79a2cfb481ab0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute98719a336c8ef287256cb09d(),
-				// Property: Value
-				"value": schemaAttributee0780672f8a5b6045ff44059(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags belonging to the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42fbaf6a103645d4fe15934b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The code execution progress of the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f54b8ba97d76254883b71e5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Connections
-			"connections": schemaAttributeea61ca3f7b7e786a0fcf03d8(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the connections used by the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5abc5f9cc6332d4d03d4b025() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b4c46060abd7ef517761fcc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The origin of the request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d2e23a3829103344394cf4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71e3905e4eaeb02b4e120047() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map array of key-value pairs. Max is 75 pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76c7be2083b3c28c9318fcdd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttributec4851007ea7948588211dcbd(),
-			// Property: PythonVersion
-			"python_version": schemaAttributeebedfec953bade4602ad670f(),
-		}, /*END SCHEMA*/
-		Description: "The SessionCommand that runs the job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93972baefdc78960f59dee16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM Role ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93cc2009cc332cdc9093bdca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of predefined worker that is allocated when a session runs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98719a336c8ef287256cb09d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea785eebc3e08539bb6a79391() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes before session times out.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3eb8be7f37a85cff9090c43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SecurityConfiguration structure to be used with the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc3d15c9bf4647cfe01b9424() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe83d6ac1c9539937813da37() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes when idle before session times out. Default is the value of Timeout.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4851007ea7948588211dcbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the SessionCommand. Can be 'glueetl' or 'gluestreaming'.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7604b31cbd7fd201d0f1ca8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time and date when the session was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecead822ea30b1d94b29bb4e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The session status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede63186611e7413de721f40d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Glue version determines the versions of Apache Spark and Python that Glue supports. The GlueVersion must be greater than 2.0.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0780672f8a5b6045ff44059() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee419caed42f22077b6b3ad7a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of Glue data processing units (DPUs) that can be allocated when the job runs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea61ca3f7b7e786a0fcf03d8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of connection names used by the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebedfec953bade4602ad670f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the Python version. The Python version indicates the version supported for jobs of type Spark.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef958e5d85d156af7962861cb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of workers of a defined WorkerType to use for the session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_session", sessionDataSource)
 }
@@ -222,7 +31,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the session.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributebc3d15c9bf4647cfe01b9424(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Command
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +57,22 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"command": schemaAttribute76c7be2083b3c28c9318fcdd(),
+		"command": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the name of the SessionCommand. Can be 'glueetl' or 'gluestreaming'.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PythonVersion
+				"python_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the Python version. The Python version indicates the version supported for jobs of type Spark.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The SessionCommand that runs the job.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Connections
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +94,18 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connections": schemaAttribute4f54b8ba97d76254883b71e5(),
+		"connections": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Connections
+				"connections": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of connection names used by the session.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the connections used by the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedOn
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +114,11 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_on": schemaAttributec7604b31cbd7fd201d0f1ca8(),
+		"created_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time and date when the session was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultArguments
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +135,12 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"default_arguments": schemaAttribute71e3905e4eaeb02b4e120047(),
+		"default_arguments": // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map array of key-value pairs. Max is 75 pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -304,7 +151,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5abc5f9cc6332d4d03d4b025(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlueVersion
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +165,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\w+\\.)+\\w+$",
 		//	  "type": "string"
 		//	}
-		"glue_version": schemaAttributede63186611e7413de721f40d(),
+		"glue_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Glue version determines the versions of Apache Spark and Python that Glue supports. The GlueVersion must be greater than 2.0.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +179,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"session_id": schemaAttribute6d2e23a3829103344394cf4b(),
+		"session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdleTimeout
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +190,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of minutes when idle before session times out. Default is the value of Timeout.",
 		//	  "type": "integer"
 		//	}
-		"idle_timeout": schemaAttributebe83d6ac1c9539937813da37(),
+		"idle_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of minutes when idle before session times out. Default is the value of Timeout.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxCapacity
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +201,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of Glue data processing units (DPUs) that can be allocated when the job runs.",
 		//	  "type": "number"
 		//	}
-		"max_capacity": schemaAttributee419caed42f22077b6b3ad7a(),
+		"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of Glue data processing units (DPUs) that can be allocated when the job runs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumberOfWorkers
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +212,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of workers of a defined WorkerType to use for the session.",
 		//	  "type": "integer"
 		//	}
-		"number_of_workers": schemaAttributef958e5d85d156af7962861cb(),
+		"number_of_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of workers of a defined WorkerType to use for the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Progress
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +223,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The code execution progress of the session.",
 		//	  "type": "number"
 		//	}
-		"progress": schemaAttribute42fbaf6a103645d4fe15934b(),
+		"progress": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The code execution progress of the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequestOrigin
 		// CloudFormation resource type schema:
 		//
@@ -369,7 +237,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[.\\-_A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"request_origin": schemaAttribute6b4c46060abd7ef517761fcc(),
+		"request_origin": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The origin of the request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +251,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[^:]*:iam::[0-9]*:role/.+$",
 		//	  "type": "string"
 		//	}
-		"role": schemaAttribute93972baefdc78960f59dee16(),
+		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM Role ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +265,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"security_configuration": schemaAttributeb3eb8be7f37a85cff9090c43(),
+		"security_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the SecurityConfiguration structure to be used with the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +284,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributecead822ea30b1d94b29bb4e6(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The session status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +320,24 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute075336a9c0a79a2cfb481ab0(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags belonging to the session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// CloudFormation resource type schema:
 		//
@@ -449,7 +346,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"timeout": schemaAttributea785eebc3e08539bb6a79391(),
+		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of minutes before session times out.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerType
 		// CloudFormation resource type schema:
 		//
@@ -466,7 +366,10 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"worker_type": schemaAttribute93cc2009cc332cdc9093bdca(),
+		"worker_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of predefined worker that is allocated when a session runs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

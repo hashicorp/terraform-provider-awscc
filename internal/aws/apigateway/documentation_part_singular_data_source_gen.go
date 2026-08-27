@@ -14,32 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute53e7b98eba34b30cb485cb4c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Method
-			"method": schemaAttribute980f57067074a8712ca83aab(),
-			// Property: Name
-			"name": schemaAttribute980f57067074a8712ca83aab(),
-			// Property: Path
-			"path": schemaAttribute980f57067074a8712ca83aab(),
-			// Property: StatusCode
-			"status_code": schemaAttribute980f57067074a8712ca83aab(),
-			// Property: Type
-			"type": schemaAttribute980f57067074a8712ca83aab(),
-		}, /*END SCHEMA*/
-		Description: "The ``Location`` property specifies the location of the Amazon API Gateway API entity that the documentation applies to. ``Location`` is a property of the [AWS::ApiGateway::DocumentationPart](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html) resource.\n  For more information about each property, including constraints and valid values, see [DocumentationPart](https://docs.aws.amazon.com/apigateway/latest/api/API_DocumentationPartLocation.html) in the *Amazon API Gateway REST API Reference*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute980f57067074a8712ca83aab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_documentation_part", documentationPartDataSource)
 }
@@ -55,7 +29,10 @@ func documentationPartDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"documentation_part_id": schemaAttribute980f57067074a8712ca83aab(),
+		"documentation_part_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +77,37 @@ func documentationPartDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schemaAttribute53e7b98eba34b30cb485cb4c(),
+		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Method
+				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Path
+				"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StatusCode
+				"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ``Location`` property specifies the location of the Amazon API Gateway API entity that the documentation applies to. ``Location`` is a property of the [AWS::ApiGateway::DocumentationPart](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html) resource.\n  For more information about each property, including constraints and valid values, see [DocumentationPart](https://docs.aws.amazon.com/apigateway/latest/api/API_DocumentationPartLocation.html) in the *Amazon API Gateway REST API Reference*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Properties
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +115,10 @@ func documentationPartDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"properties": schemaAttribute980f57067074a8712ca83aab(),
+		"properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +126,10 @@ func documentationPartDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schemaAttribute980f57067074a8712ca83aab(),
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

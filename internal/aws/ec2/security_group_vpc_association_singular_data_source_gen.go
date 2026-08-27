@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute51b608d648fba7ac04bac35d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The group ID of the specified security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dfa3702a3e5b96a731288f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reason for the state of the security group vpc association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e375d054e737e95e4c5cd38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the security group vpc association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbf4a8ec3c311b7e9b72c0f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC in the security group vpc association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc2fb51533977de79b5532a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the VPC in the security group vpc association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_security_group_vpc_association", securityGroupVpcAssociationDataSource)
 }
@@ -64,7 +29,10 @@ func securityGroupVpcAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The group ID of the specified security group.",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttribute51b608d648fba7ac04bac35d(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The group ID of the specified security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +49,10 @@ func securityGroupVpcAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute8e375d054e737e95e4c5cd38(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the security group vpc association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StateReason
 		// CloudFormation resource type schema:
 		//
@@ -89,7 +60,10 @@ func securityGroupVpcAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The reason for the state of the security group vpc association.",
 		//	  "type": "string"
 		//	}
-		"state_reason": schemaAttribute7dfa3702a3e5b96a731288f2(),
+		"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for the state of the security group vpc association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -97,7 +71,10 @@ func securityGroupVpcAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the VPC in the security group vpc association.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributedbf4a8ec3c311b7e9b72c0f7(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC in the security group vpc association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcOwnerId
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +82,10 @@ func securityGroupVpcAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The owner of the VPC in the security group vpc association.",
 		//	  "type": "string"
 		//	}
-		"vpc_owner_id": schemaAttributedc2fb51533977de79b5532a0(),
+		"vpc_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the VPC in the security group vpc association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

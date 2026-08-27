@@ -22,100 +22,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute159136e2fc0c72681b51b3a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Lambda ARN of the connector being registered.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(512),
-			stringvalidator.RegexMatches(regexp.MustCompile("arn:*:.*:.*:[0-9]+:.*"), ""),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute196ea629b53b6f7f21cbc92e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The arn of the connector. The arn is unique for each ConnectorRegistration in your AWS account.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40b21dfd9545305b7e8434cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The name of the connector. The name is unique for each ConnectorRegistration in your AWS account.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(512),
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c503155f2f85828905c9f67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The provisioning type of the connector. Currently the only supported value is LAMBDA. ",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65961bb068610cc2a96c2fb2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Lambda
-			"lambda": schemaAttributea425a9c8d8d8030490d35bda(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about the configuration of the connector being registered.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea425a9c8d8d8030490d35bda() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaArn
-			"lambda_arn": schemaAttribute159136e2fc0c72681b51b3a6(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about the configuration of the lambda which is being registered as the connector.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6c646229a202b7ea8f3efd0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description about the connector that's being registered.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_appflow_connector", connectorResource)
 	registry.AddListResourceFactory("awscc_appflow_connector", generic.NewListResource(connectorResource))
@@ -134,7 +40,13 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:.*:appflow:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schemaAttribute196ea629b53b6f7f21cbc92e(),
+		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: " The arn of the connector. The arn is unique for each ConnectorRegistration in your AWS account.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorLabel
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +56,19 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 		//	  "type": "string"
 		//	}
-		"connector_label": schemaAttribute40b21dfd9545305b7e8434cd(),
+		"connector_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: " The name of the connector. The name is unique for each ConnectorRegistration in your AWS account.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(512),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorProvisioningConfig
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +95,37 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connector_provisioning_config": schemaAttribute65961bb068610cc2a96c2fb2(),
+		"connector_provisioning_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Lambda
+				"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Lambda ARN of the connector being registered.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(512),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:*:.*:.*:[0-9]+:.*"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information about the configuration of the lambda which is being registered as the connector.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains information about the configuration of the connector being registered.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorProvisioningType
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +136,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 		//	  "type": "string"
 		//	}
-		"connector_provisioning_type": schemaAttribute4c503155f2f85828905c9f67(),
+		"connector_provisioning_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provisioning type of the connector. Currently the only supported value is LAMBDA. ",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +153,18 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[\\s\\w/!@#+=.-]*",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed6c646229a202b7ea8f3efd0(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description about the connector that's being registered.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -22,49 +22,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0899200c272228d11f4b29df() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsPublic
-			"is_public": schemaAttributef3c4c304116cd2b76f16fe27(),
-		}, /*END SCHEMA*/
-		Description: "The Policy Status associated with this Multi Region Access Point",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1a0eb871c7c6cc7ad8586d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Policy document to apply to a Multi Region Access Point",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3af9e3d336e5a9bef0595c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Multi Region Access Point to apply policy",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(3, 50),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3c4c304116cd2b76f16fe27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the policy is public or not.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_s3_multi_region_access_point_policy", multiRegionAccessPointPolicyResource)
 	registry.AddListResourceFactory("awscc_s3_multi_region_access_point_policy", generic.NewListResource(multiRegionAccessPointPolicyResource))
@@ -84,7 +41,17 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"mrap_name": schemaAttributee3af9e3d336e5a9bef0595c3(),
+		"mrap_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Multi Region Access Point to apply policy",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 50),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +59,11 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "description": "Policy document to apply to a Multi Region Access Point",
 		//	  "type": "object"
 		//	}
-		"policy": schemaAttributea1a0eb871c7c6cc7ad8586d5(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "Policy document to apply to a Multi Region Access Point",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyStatus
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +85,20 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"policy_status": schemaAttribute0899200c272228d11f4b29df(),
+		"policy_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IsPublic
+				"is_public": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the policy is public or not.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Policy Status associated with this Multi Region Access Point",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

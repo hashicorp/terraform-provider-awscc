@@ -14,182 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute165b71f43b2080c0a3cb7ad9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the target resource (dataset) to apply the ruleset to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e51445fe73815cd970b9183() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute343c9def183a9dc2e3dcf997() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2e51445fe73815cd970b9183(),
-				// Property: Value
-				"value": schemaAttribute2e51445fe73815cd970b9183(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36f3f73f077593fe2fb9ace9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Ruleset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute488665a263247300a5b24a0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Threshold type for a rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f49056e435603ba53d43f85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Value or column name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5457516a24bcc4fd2c4f7433() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Threshold value for a rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54722b1defa2d9fe5961ebf8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Expression with rule conditions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e70fde1fa1cbcc1dfdf0163() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Threshold unit for a rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60433fae002407b81c6c82e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7338a7e2400d8f87489d2d18() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CheckExpression
-				"check_expression": schemaAttribute54722b1defa2d9fe5961ebf8(),
-				// Property: ColumnSelectors
-				"column_selectors": schemaAttributee3bdca205d9d4c46a2de2d92(),
-				// Property: Disabled
-				"disabled": schemaAttributeff9ed782dc432f0f69dd24f2(),
-				// Property: Name
-				"name": schemaAttribute60433fae002407b81c6c82e4(),
-				// Property: SubstitutionMap
-				"substitution_map": schemaAttributee0a054e2262fdac52aa8c2b5(),
-				// Property: Threshold
-				"threshold": schemaAttributed8f57a4a20b024b6ef310023(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of the data quality rules in the ruleset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77361c2ffc661f65d94a88bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a column from a dataset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf292d761af091ee18e24ced() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A regular expression for selecting a column from a dataset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd7d21c9a87fb3ea4146b737() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Ruleset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed16955d20ee7e2c74d238a0b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Variable name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8f57a4a20b024b6ef310023() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute488665a263247300a5b24a0c(),
-			// Property: Unit
-			"unit": schemaAttribute5e70fde1fa1cbcc1dfdf0163(),
-			// Property: Value
-			"value": schemaAttribute5457516a24bcc4fd2c4f7433(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0a054e2262fdac52aa8c2b5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Value
-				"value": schemaAttribute4f49056e435603ba53d43f85(),
-				// Property: ValueReference
-				"value_reference": schemaAttributed16955d20ee7e2c74d238a0b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3bdca205d9d4c46a2de2d92() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute77361c2ffc661f65d94a88bc(),
-				// Property: Regex
-				"regex": schemaAttributebf292d761af091ee18e24ced(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff9ed782dc432f0f69dd24f2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean value to disable/enable a rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_databrew_ruleset", rulesetDataSource)
 }
@@ -206,7 +30,10 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributecd7d21c9a87fb3ea4146b737(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Ruleset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +43,10 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute36f3f73f077593fe2fb9ace9(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the Ruleset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +167,86 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"rules": schemaAttribute7338a7e2400d8f87489d2d18(),
+		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CheckExpression
+					"check_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Expression with rule conditions",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ColumnSelectors
+					"column_selectors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of a column from a dataset",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Regex
+								"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A regular expression for selecting a column from a dataset",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Disabled
+					"disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Boolean value to disable/enable a rule",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of the rule",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubstitutionMap
+					"substitution_map": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Value or column name",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValueReference
+								"value_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Variable name",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Threshold
+					"threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Threshold type for a rule",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Threshold unit for a rule",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "Threshold value for a rule",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of the data quality rules in the ruleset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +276,21 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute343c9def183a9dc2e3dcf997(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetArn
 		// CloudFormation resource type schema:
 		//
@@ -377,7 +300,10 @@ func rulesetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"target_arn": schemaAttribute165b71f43b2080c0a3cb7ad9(),
+		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the target resource (dataset) to apply the ruleset to",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

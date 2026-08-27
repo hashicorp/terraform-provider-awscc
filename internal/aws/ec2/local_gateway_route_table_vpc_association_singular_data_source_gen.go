@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute14b40cd202400c005828d915() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2dde83932082d3053785e7df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ee415106370fb5f4147bda2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2dde83932082d3053785e7df(),
-				// Property: Value
-				"value": schemaAttribute2dde83932082d3053785e7df(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fcf9c088c32a1b656d19a7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb512141e41da6a5c945ab2c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec547eafb9b8a119af564811d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee798120d77f31e6152650539() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_local_gateway_route_table_vpc_association", localGatewayRouteTableVPCAssociationDataSource)
 }
@@ -85,7 +29,10 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of the local gateway.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttribute6fcf9c088c32a1b656d19a7c(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +40,10 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_id": schemaAttributec547eafb9b8a119af564811d(),
+		"local_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayRouteTableVpcAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +51,10 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of the association.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_vpc_association_id": schemaAttributee798120d77f31e6152650539(),
+		"local_gateway_route_table_vpc_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +62,10 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The state of the association.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributeb512141e41da6a5c945ab2c8(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +93,22 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5ee415106370fb5f4147bda2(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +116,10 @@ func localGatewayRouteTableVPCAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute14b40cd202400c005828d915(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

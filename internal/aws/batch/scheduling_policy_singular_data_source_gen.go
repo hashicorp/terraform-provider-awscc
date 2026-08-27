@@ -15,83 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0bb650c037491b75f5b8de10() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdleResourceAssignmentStrategy
-			"idle_resource_assignment_strategy": schemaAttribute96f1f787e91cf57fa0c74ceb(),
-		}, /*END SCHEMA*/
-		Description: "Quota Share Policy for the Job Queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute424f2570a74eb219bf83b9c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the Scheduling Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute851710c99f6c99defaa92de6() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96f1f787e91cf57fa0c74ceb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea228ca67bc3ef2ccecec9f9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of Scheduling Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf0e217c849fa459e2b5c9e9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ShareIdentifier
-				"share_identifier": schemaAttribute96f1f787e91cf57fa0c74ceb(),
-				// Property: WeightFactor
-				"weight_factor": schemaAttribute851710c99f6c99defaa92de6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Share Attributes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1920c9a89313f405e6116a4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComputeReservation
-			"compute_reservation": schemaAttribute851710c99f6c99defaa92de6(),
-			// Property: ShareDecaySeconds
-			"share_decay_seconds": schemaAttribute851710c99f6c99defaa92de6(),
-			// Property: ShareDistribution
-			"share_distribution": schemaAttributebf0e217c849fa459e2b5c9e9(),
-		}, /*END SCHEMA*/
-		Description: "Fair Share Policy for the Job Queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed00e67b8a921a82725b83d62() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_batch_scheduling_policy", schedulingPolicyDataSource)
 }
@@ -107,7 +30,10 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "ARN of the Scheduling Policy.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute424f2570a74eb219bf83b9c3(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the Scheduling Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FairsharePolicy
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +73,37 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"fairshare_policy": schemaAttributec1920c9a89313f405e6116a4(),
+		"fairshare_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComputeReservation
+				"compute_reservation": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDecaySeconds
+				"share_decay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDistribution
+				"share_distribution": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ShareIdentifier
+							"share_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WeightFactor
+							"weight_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of Share Attributes",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Fair Share Policy for the Job Queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +112,10 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea228ca67bc3ef2ccecec9f9d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Scheduling Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuotaSharePolicy
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +132,16 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"quota_share_policy": schemaAttribute0bb650c037491b75f5b8de10(),
+		"quota_share_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdleResourceAssignmentStrategy
+				"idle_resource_assignment_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Quota Share Policy for the Job Queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +155,12 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributed00e67b8a921a82725b83d62(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

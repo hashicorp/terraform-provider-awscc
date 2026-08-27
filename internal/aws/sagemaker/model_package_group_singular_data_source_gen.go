@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b310caedd2627b4bbef4594() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d529ac66fc8ecb0e086d49c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2052897de97b4c59242516e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the model package group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23e4e3a5f9de09e3c564c8f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of a modelpackage group job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5464670b3d2521a7694e4e1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time at which the model package group was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8af5da5a78b4fe5fee885606() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1d529ac66fc8ecb0e086d49c(),
-				// Property: Value
-				"value": schemaAttributeabfa1c66d4f1186b6fb236ca(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabfa1c66d4f1186b6fb236ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaf28b99680155b3a8a8be88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the model package group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefad7b1b8bad1f773b37782e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the model package group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_model_package_group", modelPackageGroupDataSource)
 }
@@ -99,7 +29,10 @@ func modelPackageGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The time at which the model package group was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute5464670b3d2521a7694e4e1e(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time at which the model package group was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelPackageGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +43,10 @@ func modelPackageGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"model_package_group_arn": schemaAttribute2052897de97b4c59242516e3(),
+		"model_package_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the model package group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelPackageGroupDescription
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +56,10 @@ func modelPackageGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
 		//	  "type": "string"
 		//	}
-		"model_package_group_description": schemaAttributefad7b1b8bad1f773b37782e4(),
+		"model_package_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the model package group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelPackageGroupName
 		// CloudFormation resource type schema:
 		//
@@ -130,14 +69,19 @@ func modelPackageGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"model_package_group_name": schemaAttributebaf28b99680155b3a8a8be88(),
+		"model_package_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the model package group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelPackageGroupPolicy
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"model_package_group_policy": schemaAttribute0b310caedd2627b4bbef4594(),
+		"model_package_group_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelPackageGroupStatus
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +97,10 @@ func modelPackageGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"model_package_group_status": schemaAttribute23e4e3a5f9de09e3c564c8f4(),
+		"model_package_group_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of a modelpackage group job.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +133,24 @@ func modelPackageGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute8af5da5a78b4fe5fee885606(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

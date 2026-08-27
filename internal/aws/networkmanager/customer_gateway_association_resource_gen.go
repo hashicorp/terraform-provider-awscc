@@ -17,48 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute55f0d4f1ed749176fcfe0294() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the link",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ce86f098e0da98a20f25a26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the customer gateway.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute690f855f524ffba9137f43d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the global network.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedafa0b1d533b70e601b9821() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the device",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_customer_gateway_association", customerGatewayAssociationResource)
 }
@@ -74,7 +32,13 @@ func customerGatewayAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The Amazon Resource Name (ARN) of the customer gateway.",
 		//	  "type": "string"
 		//	}
-		"customer_gateway_arn": schemaAttribute5ce86f098e0da98a20f25a26(),
+		"customer_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the customer gateway.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceId
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +46,13 @@ func customerGatewayAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the device",
 		//	  "type": "string"
 		//	}
-		"device_id": schemaAttributeedafa0b1d533b70e601b9821(),
+		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the device",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -90,7 +60,13 @@ func customerGatewayAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schemaAttribute690f855f524ffba9137f43d2(),
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the global network.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +74,15 @@ func customerGatewayAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the link",
 		//	  "type": "string"
 		//	}
-		"link_id": schemaAttribute55f0d4f1ed749176fcfe0294(),
+		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the link",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

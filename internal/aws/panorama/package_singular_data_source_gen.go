@@ -14,101 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute22bb899b6cff356296f641c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's repo prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38dc3115871d7f7e790112cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's binary prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56ca27c725830acfebcde64a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the package.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6638944748dafdcd4fcae3a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c13bb74753fc50c2590056e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c2f8b697f58469486caad8e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BinaryPrefixLocation
-			"binary_prefix_location": schemaAttribute38dc3115871d7f7e790112cf(),
-			// Property: Bucket
-			"bucket": schemaAttributee4b88fa2c2df8eb5d40f7721(),
-			// Property: GeneratedPrefixLocation
-			"generated_prefix_location": schemaAttributec4c21e5a529ff0d55648305f(),
-			// Property: ManifestPrefixLocation
-			"manifest_prefix_location": schemaAttributee66e26b1f557ccf505c392e4(),
-			// Property: RepoPrefixLocation
-			"repo_prefix_location": schemaAttribute22bb899b6cff356296f641c2(),
-		}, /*END SCHEMA*/
-		Description: "A storage location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c7f61cad2a4e86c66ee1f1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb298eb76b59f49813e6f7e35() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6638944748dafdcd4fcae3a0(),
-				// Property: Value
-				"value": schemaAttribute6638944748dafdcd4fcae3a0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the package.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4c21e5a529ff0d55648305f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's generated prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4b88fa2c2df8eb5d40f7721() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee66e26b1f557ccf505c392e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's manifest prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_panorama_package", packageDataSource)
 }
@@ -125,14 +30,18 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute9c7f61cad2a4e86c66ee1f1c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"created_time": schemaAttribute7c13bb74753fc50c2590056e(),
+		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackageId
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +51,9 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 		//	  "type": "string"
 		//	}
-		"package_id": schemaAttribute9c7f61cad2a4e86c66ee1f1c(),
+		"package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackageName
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +64,10 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"package_name": schemaAttribute56ca27c725830acfebcde64a(),
+		"package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the package.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageLocation
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +98,37 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"storage_location": schemaAttribute8c2f8b697f58469486caad8e(),
+		"storage_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BinaryPrefixLocation
+				"binary_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The location's binary prefix.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The location's bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GeneratedPrefixLocation
+				"generated_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The location's generated prefix.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManifestPrefixLocation
+				"manifest_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The location's manifest prefix.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RepoPrefixLocation
+				"repo_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The location's repo prefix.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A storage location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +163,24 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb298eb76b59f49813e6f7e35(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the package.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1f0b6553620679cf97a670d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverQueryLogConfigAssociationErrorMessage",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2267269c24c722d6ed3a9f27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverQueryLogConfigId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a14669dcd9783c237875671() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResourceId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b2322e28c75c4b8d1797e9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverQueryLogConfigAssociationStatus",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea08f49f9e51e6e1441ac4a9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rfc3339TimeString",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbe9e5a0f44cf700ee1646de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebea8daae003637b3c635b3ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverQueryLogConfigAssociationError",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_query_logging_config_association", resolverQueryLoggingConfigAssociationDataSource)
 }
@@ -80,7 +31,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributea08f49f9e51e6e1441ac4a9d(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Error
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +47,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"error": schemaAttributebea8daae003637b3c635b3ad(),
+		"error": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverQueryLogConfigAssociationError",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ErrorMessage
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +58,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "description": "ResolverQueryLogConfigAssociationErrorMessage",
 		//	  "type": "string"
 		//	}
-		"error_message": schemaAttribute1f0b6553620679cf97a670d1(),
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverQueryLogConfigAssociationErrorMessage",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +71,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_query_logging_config_association_id": schemaAttributebbe9e5a0f44cf700ee1646de(),
+		"resolver_query_logging_config_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolverQueryLogConfigId
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +84,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_query_log_config_id": schemaAttribute2267269c24c722d6ed3a9f27(),
+		"resolver_query_log_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverQueryLogConfigId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +97,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttribute4a14669dcd9783c237875671(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +116,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute9b2322e28c75c4b8d1797e9a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverQueryLogConfigAssociationStatus",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

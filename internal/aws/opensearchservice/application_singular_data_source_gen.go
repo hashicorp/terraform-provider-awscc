@@ -14,164 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01afc5d4e3a6e62ed40c5aab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint for the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute037ed5d05d627967ea20fc6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e261d09c26c11facd7707da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value in the key-value pair",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e837338a0b40ff6bf32d0b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4259957c48dac80f09acf730() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49830fc1a762770e803b0554() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4beb1033061630b77309ff41() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute53c9ea60aebb0e0a183d7165(),
-			// Property: IamIdentityCenterInstanceArn
-			"iam_identity_center_instance_arn": schemaAttribute6dd1f5487ca75b9c7a1dc936(),
-			// Property: IamRoleForIdentityCenterApplicationArn
-			"iam_role_for_identity_center_application_arn": schemaAttributebf6a285d77d6d8fada4966f2(),
-		}, /*END SCHEMA*/
-		Description: "Options for configuring IAM Identity Center",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fcdd3191217c2dcdeb5d84b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53c9ea60aebb0e0a183d7165() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether IAM Identity Center is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a0f1e619d4c4849e1d88380() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6dd1f5487ca75b9c7a1dc936() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM Identity Center instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b9f895cc2e4e12570d8a63c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute878a23b87fc6b5faa8c2b6a9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeaa031216ed3979509528bfc4(),
-				// Property: Value
-				"value": schemaAttribute2e261d09c26c11facd7707da(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa031216ed3979509528bfc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key in the key-value pair",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7c185b47e71825034c27b99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key used to encrypt the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc63051ee07fa702c2ee8993() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataSourceArn
-				"data_source_arn": schemaAttribute2e837338a0b40ff6bf32d0b7(),
-				// Property: DataSourceDescription
-				"data_source_description": schemaAttribute4fcdd3191217c2dcdeb5d84b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of data sources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf6a285d77d6d8fada4966f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role for Identity Center application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee84aa3e909572c26edbd3ad9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute49830fc1a762770e803b0554(),
-				// Property: Value
-				"value": schemaAttribute6a0f1e619d4c4849e1d88380(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of application configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchservice_application", applicationDataSource)
 }
@@ -213,7 +55,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"app_configs": schemaAttributee84aa3e909572c26edbd3ad9(),
+		"app_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The configuration key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The configuration value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of application configurations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +80,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Amazon Resource Name (ARN) format.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute037ed5d05d627967ea20fc6d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSources
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +110,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"data_sources": schemaAttributebc63051ee07fa702c2ee8993(),
+		"data_sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataSourceArn
+					"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the data source.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataSourceDescription
+					"data_source_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Description of the data source.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of data sources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +135,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The endpoint for the application.",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttribute01afc5d4e3a6e62ed40c5aab(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The endpoint for the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamIdentityCenterOptions
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +161,27 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"iam_identity_center_options": schemaAttribute4beb1033061630b77309ff41(),
+		"iam_identity_center_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether IAM Identity Center is enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamIdentityCenterInstanceArn
+				"iam_identity_center_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM Identity Center instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamRoleForIdentityCenterApplicationArn
+				"iam_role_for_identity_center_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role for Identity Center application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Options for configuring IAM Identity Center",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +191,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute4259957c48dac80f09acf730(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +205,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]+)*:kms:[a-z0-9-]+:\\d{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schemaAttributeb7c185b47e71825034c27b99(),
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS key used to encrypt the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +219,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z][a-z0-9\\-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7b9f895cc2e4e12570d8a63c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +254,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute878a23b87fc6b5faa8c2b6a9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key in the key-value pair",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value in the key-value pair",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

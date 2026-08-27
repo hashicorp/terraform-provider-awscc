@@ -16,385 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute047493eb4e1a135689fc04b9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessToken
-			"access_token": schemaAttributecc75b235ba681d66f636b16c(),
-			// Property: JwtToken
-			"jwt_token": schemaAttributee499371da3a4d4f999c97a1d(),
-			// Property: RefreshToken
-			"refresh_token": schemaAttribute2f7949f242211d0fd3a15bf4(),
-			// Property: UserManagedClientApplicationClientSecret
-			"user_managed_client_application_client_secret": schemaAttribute3cf3c3704d40013cf2a06529(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing the OAuth2 credentials used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute183f5991e7e928bfd110f192() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AWSManagedClientApplicationReference
-			"aws_managed_client_application_reference": schemaAttribute8c7690826b66bba642eb6cc5(),
-			// Property: UserManagedClientApplicationClientId
-			"user_managed_client_application_client_id": schemaAttributefc6b050da73fd79a4e3905e8(),
-		}, /*END SCHEMA*/
-		Description: "The OAuth2 client app used for the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19e8821885cd476fc670d921() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The security group ID list used by the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f7949f242211d0fd3a15bf4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The refresh token used when the authentication type is OAuth2.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute332975a3ce4c1ad935016940() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cf3c3704d40013cf2a06529() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client application client secret if the client application is user managed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f1d70e1357b594a6f9febf3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag to validate the credentials during create connection. Default is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5283ef7ca8d9075909eb6d0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The grant type used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a0a8519529d3df81afadef1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subnet ID used by the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d482ab9abb36f7592bd007b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationType
-			"authentication_type": schemaAttribute6f26307800caf4cd86bcc350(),
-			// Property: BasicAuthenticationCredentials
-			"basic_authentication_credentials": schemaAttribute99eb98935023eb5943c16837(),
-			// Property: CustomAuthenticationCredentials
-			"custom_authentication_credentials": schemaAttributee83fa20c760100b6aebd8944(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute6c0b575e92638383f9f22fd4(),
-			// Property: OAuth2Properties
-			"o_auth_2_properties": schemaAttributec32b5788ad8303881fcf7a5f(),
-			// Property: SecretArn
-			"secret_arn": schemaAttributea9528d0849179e7164c8a012(),
-		}, /*END SCHEMA*/
-		Description: "The authentication configuration used to connect to the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f3edddf5e6dc34acef9e151() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c0b575e92638383f9f22fd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the KMS key used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d80310c495fbdaed21c88a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The availability zone where the connection is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f26307800caf4cd86bcc350() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A structure containing the authentication configuration in the CreateConnection request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bb80e3508649c9be14d08a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Connection properties specific to the Spark compute environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c7690826b66bba642eb6cc5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reference to the SaaS-side client app that is AWS managed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute969b872c65e6dbc11aee53d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A map of key-value pairs used as parameters for this connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99eb98935023eb5943c16837() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Password
-			"password": schemaAttribute332975a3ce4c1ad935016940(),
-			// Property: Username
-			"username": schemaAttributeaf6f800e7e44bbe675f1f99a(),
-		}, /*END SCHEMA*/
-		Description: "For supplying basic auth credentials when not providing a SecretArn value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9528d0849179e7164c8a012() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The secret manager ARN to store credentials in the CreateConnection request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf6f800e7e44bbe675f1f99a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The username used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb29d98b14986f1c9d58c085a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A map of key-value pairs used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2dad9e5de91818e7ffcd6c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The collection of tags. Each tag element is associated with a given resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc5dbbd489b405f5a8f6ecdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe88d596669419f2820ebeb9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The redirect URI where the user gets redirected to by authorization server when issuing an authorization code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec32b5788ad8303881fcf7a5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationCodeProperties
-			"authorization_code_properties": schemaAttributefa954774d717e3967795570a(),
-			// Property: OAuth2ClientApplication
-			"o_auth_2_client_application": schemaAttribute183f5991e7e928bfd110f192(),
-			// Property: OAuth2Credentials
-			"o_auth_2_credentials": schemaAttribute047493eb4e1a135689fc04b9(),
-			// Property: OAuth2GrantType
-			"o_auth_2_grant_type": schemaAttribute5283ef7ca8d9075909eb6d0c(),
-			// Property: TokenUrl
-			"token_url": schemaAttributef3af7c23c399335b43f91764(),
-			// Property: TokenUrlParametersMap
-			"token_url_parameters_map": schemaAttributeb29d98b14986f1c9d58c085a(),
-		}, /*END SCHEMA*/
-		Description: "A structure containing properties for OAuth2 in the CreateConnection request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec36b338e840d714f4af5878d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of criteria that can be used in selecting this connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaeaaf214aea73e7bdf47b50() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute6d80310c495fbdaed21c88a6(),
-			// Property: SecurityGroupIdList
-			"security_group_id_list": schemaAttribute19e8821885cd476fc670d921(),
-			// Property: SubnetId
-			"subnet_id": schemaAttribute5a0a8519529d3df81afadef1(),
-		}, /*END SCHEMA*/
-		Description: "The physical connection requirements.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc0e0e559feeae61ea1296f0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AthenaProperties
-			"athena_properties": schemaAttributefecaf315272bb9109c1c16e4(),
-			// Property: AuthenticationConfiguration
-			"authentication_configuration": schemaAttribute5d482ab9abb36f7592bd007b(),
-			// Property: ConnectionProperties
-			"connection_properties": schemaAttribute969b872c65e6dbc11aee53d5(),
-			// Property: ConnectionType
-			"connection_type": schemaAttributef0c9f90bea7b1d6649dbb3cc(),
-			// Property: Description
-			"description": schemaAttributebc5dbbd489b405f5a8f6ecdf(),
-			// Property: MatchCriteria
-			"match_criteria": schemaAttributec36b338e840d714f4af5878d(),
-			// Property: Name
-			"name": schemaAttribute5f3edddf5e6dc34acef9e151(),
-			// Property: PhysicalConnectionRequirements
-			"physical_connection_requirements": schemaAttributecaeaaf214aea73e7bdf47b50(),
-			// Property: PythonProperties
-			"python_properties": schemaAttributececa7471dc9048811e8e22c6(),
-			// Property: SparkProperties
-			"spark_properties": schemaAttribute7bb80e3508649c9be14d08a1(),
-			// Property: ValidateCredentials
-			"validate_credentials": schemaAttribute4f1d70e1357b594a6f9febf3(),
-			// Property: ValidateForComputeEnvironments
-			"validate_for_compute_environments": schemaAttributefa43695722e6efeada80bdd0(),
-		}, /*END SCHEMA*/
-		Description: "The connection properties used for this connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc75b235ba681d66f636b16c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The access token used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributececa7471dc9048811e8e22c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Connection properties specific to the Python compute environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee499371da3a4d4f999c97a1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON Web Token (JWT) used when the authentication type is OAuth2.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee83fa20c760100b6aebd8944() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A structure containing the authentication credentials in the CreateConnection request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee89122bb111d827efda4ea40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization code used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaaa720628de7069761df994() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the data catalog to create the catalog object in. Currently, this should be the AWS account ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0c9f90bea7b1d6649dbb3cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the connection that needs to be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3af7c23c399335b43f91764() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL used in the authentication configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa43695722e6efeada80bdd0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa954774d717e3967795570a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationCode
-			"authorization_code": schemaAttributee89122bb111d827efda4ea40(),
-			// Property: RedirectUri
-			"redirect_uri": schemaAttributebe88d596669419f2820ebeb9(),
-		}, /*END SCHEMA*/
-		Description: "The set of properties required for the the OAuth2 AUTHORIZATION_CODE grant type workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc6b050da73fd79a4e3905e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client application clientID if the ClientAppType is USER_MANAGED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefecaf315272bb9109c1c16e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Connection properties specific to the Athena compute environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_connection", connectionDataSource)
 }
@@ -410,7 +31,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the data catalog to create the catalog object in. Currently, this should be the AWS account ID.",
 		//	  "type": "string"
 		//	}
-		"catalog_id": schemaAttributeeaaa720628de7069761df994(),
+		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the data catalog to create the catalog object in. Currently, this should be the AWS account ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionInput
 		// CloudFormation resource type schema:
 		//
@@ -605,7 +229,219 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connection_input": schemaAttributecc0e0e559feeae61ea1296f0(),
+		"connection_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AthenaProperties
+				"athena_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Connection properties specific to the Athena compute environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthenticationConfiguration
+				"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A structure containing the authentication configuration in the CreateConnection request.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BasicAuthenticationCredentials
+						"basic_authentication_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password used in the authentication configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The username used in the authentication configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "For supplying basic auth credentials when not providing a SecretArn value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomAuthenticationCredentials
+						"custom_authentication_credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "A structure containing the authentication credentials in the CreateConnection request.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the KMS key used in the authentication configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OAuth2Properties
+						"o_auth_2_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AuthorizationCodeProperties
+								"authorization_code_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthorizationCode
+										"authorization_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The authorization code used in the authentication configuration.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The redirect URI where the user gets redirected to by authorization server when issuing an authorization code.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The set of properties required for the the OAuth2 AUTHORIZATION_CODE grant type workflow.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuth2ClientApplication
+								"o_auth_2_client_application": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AWSManagedClientApplicationReference
+										"aws_managed_client_application_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The reference to the SaaS-side client app that is AWS managed.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: UserManagedClientApplicationClientId
+										"user_managed_client_application_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The client application clientID if the ClientAppType is USER_MANAGED.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The OAuth2 client app used for the connection.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuth2Credentials
+								"o_auth_2_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The access token used in the authentication configuration.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: JwtToken
+										"jwt_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The JSON Web Token (JWT) used when the authentication type is OAuth2.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The refresh token used when the authentication type is OAuth2.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: UserManagedClientApplicationClientSecret
+										"user_managed_client_application_client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The client application client secret if the client application is user managed.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "A structure containing the OAuth2 credentials used in the authentication configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuth2GrantType
+								"o_auth_2_grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The grant type used in the authentication configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenUrl
+								"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL used in the authentication configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenUrlParametersMap
+								"token_url_parameters_map": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "A map of key-value pairs used in the authentication configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure containing properties for OAuth2 in the CreateConnection request.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The secret manager ARN to store credentials in the CreateConnection request.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The authentication configuration used to connect to the connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionProperties
+				"connection_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "A map of key-value pairs used as parameters for this connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionType
+				"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the connection that needs to be created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MatchCriteria
+				"match_criteria": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of criteria that can be used in selecting this connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PhysicalConnectionRequirements
+				"physical_connection_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AvailabilityZone
+						"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The availability zone where the connection is located.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecurityGroupIdList
+						"security_group_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The security group ID list used by the connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetId
+						"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The subnet ID used by the connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The physical connection requirements.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PythonProperties
+				"python_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Connection properties specific to the Python compute environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SparkProperties
+				"spark_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Connection properties specific to the Spark compute environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ValidateCredentials
+				"validate_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A flag to validate the credentials during create connection. Default is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ValidateForComputeEnvironments
+				"validate_for_compute_environments": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The connection properties used for this connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -613,7 +449,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the connection.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute5f3edddf5e6dc34acef9e151(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -621,7 +460,11 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributeb2dad9e5de91818e7ffcd6c3(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

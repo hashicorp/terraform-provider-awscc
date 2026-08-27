@@ -15,294 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0d918d201f4c92fd55ec5fe6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute230270d1defe96486d482e61() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResolutionTime
-			"resolution_time": schemaAttribute500142e7afd3d54cb23b51cd(),
-			// Property: ResolvedImage
-			"resolved_image": schemaAttributed155c358a3ded2bc5909892b(),
-			// Property: SpecifiedImage
-			"specified_image": schemaAttributed155c358a3ded2bc5909892b(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute259fbd8b2cb4a7885149f8a8() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Environment variables to specify on the container",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d4c9131c0e657cf3c93d736() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CopyCount
-			"copy_count": schemaAttributefac1fec44b5f6a0adc0b136f(),
-			// Property: CurrentCopyCount
-			"current_copy_count": schemaAttributefac1fec44b5f6a0adc0b136f(),
-			// Property: DesiredCopyCount
-			"desired_copy_count": schemaAttributefac1fec44b5f6a0adc0b136f(),
-		}, /*END SCHEMA*/
-		Description: "The runtime config for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bbe7008d2034e7dc0a1af32() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoRollbackConfiguration
-			"auto_rollback_configuration": schemaAttributec9fe13e0bbbdc40100cae801(),
-			// Property: RollingUpdatePolicy
-			"rolling_update_policy": schemaAttributeffde47c0eb161ba03c24330d(),
-		}, /*END SCHEMA*/
-		Description: "The deployment config for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47ac3255cfa07f85faa565dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the model to use with the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bcc2b93b7364a9365fc9446() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute500142e7afd3d54cb23b51cd(),
-			// Property: Value
-			"value": schemaAttributefac1fec44b5f6a0adc0b136f(),
-		}, /*END SCHEMA*/
-		Description: "Capacity size configuration for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute500142e7afd3d54cb23b51cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute583dc6964d599bab9a923081() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the base inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ec913b21ab4095ab3597926() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63e842cfe59956ed8c88dbe1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The failure reason if the inference component is in a failed state",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute669a3839f51e61153dcdf829() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80565a78047ee752538a0abb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the endpoint the inference component is associated with",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94c53d379baa90526f2822cf() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AlarmName
-				"alarm_name": schemaAttribute500142e7afd3d54cb23b51cd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95d93bddc67e8c5a1be84696() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BaseInferenceComponentName
-			"base_inference_component_name": schemaAttribute583dc6964d599bab9a923081(),
-			// Property: ComputeResourceRequirements
-			"compute_resource_requirements": schemaAttributeb35cd77445d5bca8e8417825(),
-			// Property: Container
-			"container": schemaAttributea3b3373eece097778a73398b(),
-			// Property: ModelName
-			"model_name": schemaAttribute47ac3255cfa07f85faa565dc(),
-			// Property: StartupParameters
-			"startup_parameters": schemaAttributeb20da5d5c3b252846aa663d1(),
-		}, /*END SCHEMA*/
-		Description: "The specification for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9eae658281788298d65ea183() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3b3373eece097778a73398b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ArtifactUrl
-			"artifact_url": schemaAttribute500142e7afd3d54cb23b51cd(),
-			// Property: DeployedImage
-			"deployed_image": schemaAttribute230270d1defe96486d482e61(),
-			// Property: Environment
-			"environment": schemaAttribute259fbd8b2cb4a7885149f8a8(),
-			// Property: Image
-			"image": schemaAttributed155c358a3ded2bc5909892b(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9fc89fb14941526f97d32b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the endpoint the inference component is associated with",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb20da5d5c3b252846aa663d1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerStartupHealthCheckTimeoutInSeconds
-			"container_startup_health_check_timeout_in_seconds": schemaAttribute0d918d201f4c92fd55ec5fe6(),
-			// Property: ModelDataDownloadTimeoutInSeconds
-			"model_data_download_timeout_in_seconds": schemaAttribute0d918d201f4c92fd55ec5fe6(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb35cd77445d5bca8e8417825() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxMemoryRequiredInMb
-			"max_memory_required_in_mb": schemaAttribute0d918d201f4c92fd55ec5fe6(),
-			// Property: MinMemoryRequiredInMb
-			"min_memory_required_in_mb": schemaAttribute0d918d201f4c92fd55ec5fe6(),
-			// Property: NumberOfAcceleratorDevicesRequired
-			"number_of_accelerator_devices_required": schemaAttributeda4586450b69c102c2944a34(),
-			// Property: NumberOfCpuCoresRequired
-			"number_of_cpu_cores_required": schemaAttributeda4586450b69c102c2944a34(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5895a35c7b6c0fd955be17c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9eae658281788298d65ea183(),
-				// Property: Value
-				"value": schemaAttributee06af995bd082dbf49ab8595(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of tags to apply to the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9fe13e0bbbdc40100cae801() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Alarms
-			"alarms": schemaAttribute94c53d379baa90526f2822cf(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed155c358a3ded2bc5909892b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The image to use for the container that will be materialized for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda4586450b69c102c2944a34() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee06af995bd082dbf49ab8595() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee544d736220a74f39684b556() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the endpoint variant the inference component is associated with",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefac1fec44b5f6a0adc0b136f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of copies for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffde47c0eb161ba03c24330d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumBatchSize
-			"maximum_batch_size": schemaAttribute4bcc2b93b7364a9365fc9446(),
-			// Property: MaximumExecutionTimeoutInSeconds
-			"maximum_execution_timeout_in_seconds": schemaAttribute0d918d201f4c92fd55ec5fe6(),
-			// Property: RollbackMaximumBatchSize
-			"rollback_maximum_batch_size": schemaAttribute4bcc2b93b7364a9365fc9446(),
-			// Property: WaitIntervalInSeconds
-			"wait_interval_in_seconds": schemaAttribute0d918d201f4c92fd55ec5fe6(),
-		}, /*END SCHEMA*/
-		Description: "The rolling update policy for the inference component",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_inference_component", inferenceComponentDataSource)
 }
@@ -317,7 +29,9 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute500142e7afd3d54cb23b51cd(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentConfig
 		// CloudFormation resource type schema:
 		//
@@ -418,7 +132,77 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_config": schemaAttribute3bbe7008d2034e7dc0a1af32(),
+		"deployment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRollbackConfiguration
+				"auto_rollback_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Alarms
+						"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AlarmName
+									"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RollingUpdatePolicy
+				"rolling_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaximumBatchSize
+						"maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of copies for the inference component",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Capacity size configuration for the inference component",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumExecutionTimeoutInSeconds
+						"maximum_execution_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RollbackMaximumBatchSize
+						"rollback_maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of copies for the inference component",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Capacity size configuration for the inference component",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WaitIntervalInSeconds
+						"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The rolling update policy for the inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The deployment config for the inference component",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -428,7 +212,10 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"endpoint_arn": schemaAttributea9fc89fb14941526f97d32b5(),
+		"endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the endpoint the inference component is associated with",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -438,7 +225,10 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schemaAttribute80565a78047ee752538a0abb(),
+		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the endpoint the inference component is associated with",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -447,7 +237,10 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 63,
 		//	  "type": "string"
 		//	}
-		"failure_reason": schemaAttribute63e842cfe59956ed8c88dbe1(),
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The failure reason if the inference component is in a failed state",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceComponentArn
 		// CloudFormation resource type schema:
 		//
@@ -457,7 +250,10 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"inference_component_arn": schemaAttribute5ec913b21ab4095ab3597926(),
+		"inference_component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the inference component",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceComponentName
 		// CloudFormation resource type schema:
 		//
@@ -467,7 +263,10 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"inference_component_name": schemaAttribute669a3839f51e61153dcdf829(),
+		"inference_component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the inference component",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceComponentStatus
 		// CloudFormation resource type schema:
 		//
@@ -481,14 +280,18 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"inference_component_status": schemaAttribute500142e7afd3d54cb23b51cd(),
+		"inference_component_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttribute500142e7afd3d54cb23b51cd(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuntimeConfig
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +317,27 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"runtime_config": schemaAttribute2d4c9131c0e657cf3c93d736(),
+		"runtime_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CopyCount
+				"copy_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of copies for the inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CurrentCopyCount
+				"current_copy_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of copies for the inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DesiredCopyCount
+				"desired_copy_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of copies for the inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The runtime config for the inference component",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Specification
 		// CloudFormation resource type schema:
 		//
@@ -629,7 +452,104 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"specification": schemaAttribute95d93bddc67e8c5a1be84696(),
+		"specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BaseInferenceComponentName
+				"base_inference_component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the base inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComputeResourceRequirements
+				"compute_resource_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxMemoryRequiredInMb
+						"max_memory_required_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MinMemoryRequiredInMb
+						"min_memory_required_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NumberOfAcceleratorDevicesRequired
+						"number_of_accelerator_devices_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NumberOfCpuCoresRequired
+						"number_of_cpu_cores_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Container
+				"container": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ArtifactUrl
+						"artifact_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeployedImage
+						"deployed_image": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResolutionTime
+								"resolution_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResolvedImage
+								"resolved_image": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The image to use for the container that will be materialized for the inference component",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SpecifiedImage
+								"specified_image": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The image to use for the container that will be materialized for the inference component",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Environment
+						"environment":       // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Environment variables to specify on the container",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Image
+						"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The image to use for the container that will be materialized for the inference component",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelName
+				"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the model to use with the inference component",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartupParameters
+				"startup_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerStartupHealthCheckTimeoutInSeconds
+						"container_startup_health_check_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ModelDataDownloadTimeoutInSeconds
+						"model_data_download_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The specification for the inference component",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -661,7 +581,24 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeb5895a35c7b6c0fd955be17c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of tags to apply to the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VariantName
 		// CloudFormation resource type schema:
 		//
@@ -671,7 +608,10 @@ func inferenceComponentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"variant_name": schemaAttributee544d736220a74f39684b556(),
+		"variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the endpoint variant the inference component is associated with",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

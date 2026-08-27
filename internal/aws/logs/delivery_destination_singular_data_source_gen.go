@@ -15,98 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3d9978469158a33a687fc28a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute64cf109191b11b0dcdac7bec(),
-				// Property: Value
-				"value": schemaAttribute7052f053dc5c94c56f4a51ce(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags that have been assigned to this delivery destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute529dd05fb47e4b126de68880() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5996976bb0430eb0c251ed24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The contents of the policy attached to the delivery destination",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c817f793830524bef2898a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of this delivery destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64b98a5a77ac57d371dbd69d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64cf109191b11b0dcdac7bec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7052f053dc5c94c56f4a51ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d6bc0a4546d12b6f38edee9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the logs that are sent to this delivery destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea67b557e0d0279bf22b8ff37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the delivery destination to assign this policy to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed006fd6e2178e3dd74e504f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5dd467148b2d140b6f12d0e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeliveryDestinationName
-			"delivery_destination_name": schemaAttributea67b557e0d0279bf22b8ff37(),
-			// Property: DeliveryDestinationPolicy
-			"delivery_destination_policy": schemaAttribute5996976bb0430eb0c251ed24(),
-		}, /*END SCHEMA*/
-		Description: "IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 51200",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_delivery_destination", deliveryDestinationDataSource)
 }
@@ -125,7 +33,10 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute529dd05fb47e4b126de68880(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryDestinationPolicy
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +57,23 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"delivery_destination_policy": schemaAttributef5dd467148b2d140b6f12d0e(),
+		"delivery_destination_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeliveryDestinationName
+				"delivery_destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the delivery destination to assign this policy to",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeliveryDestinationPolicy
+				"delivery_destination_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "The contents of the policy attached to the delivery destination",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 51200",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryDestinationType
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +84,10 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
-		"delivery_destination_type": schemaAttribute64b98a5a77ac57d371dbd69d(),
+		"delivery_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +98,10 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
-		"destination_resource_arn": schemaAttributed006fd6e2178e3dd74e504f1(),
+		"destination_resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +112,10 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "[\\w-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute5c817f793830524bef2898a9(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of this delivery destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputFormat
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +126,10 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
-		"output_format": schemaAttribute7d6bc0a4546d12b6f38edee9(),
+		"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The format of the logs that are sent to this delivery destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +162,24 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3d9978469158a33a687fc28a(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags that have been assigned to this delivery destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

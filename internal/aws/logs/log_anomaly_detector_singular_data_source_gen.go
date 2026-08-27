@@ -15,84 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0c1624756b95cb1664b126ab() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of Arns for the given log group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e7ab1e7fe9ea6ef73b34661() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Account ID for owner of detector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65e376523c270ff4fd3d36a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of LogAnomalyDetector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute690408eb8c63882a1e589b44() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "When detector was lsat modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacc1959f9213ed5aed1692cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9ec5997e2d90deff4fabb7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How often log group is evaluated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecacf007f2d9b0b4ca93f7124() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "When detector was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed423366e15d7d8f42c3e5eec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4fa2b011d7f973bf00bbba1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of detector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfd34b2c43900022a209824e() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1966a88ed4a6c2503387a5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_log_anomaly_detector", logAnomalyDetectorDataSource)
 }
@@ -108,7 +30,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Account ID for owner of detector",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute2e7ab1e7fe9ea6ef73b34661(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Account ID for owner of detector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyDetectorArn
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +41,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "ARN of LogAnomalyDetector",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_arn": schemaAttribute65e376523c270ff4fd3d36a4(),
+		"anomaly_detector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of LogAnomalyDetector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyDetectorStatus
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +52,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Current status of detector.",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_status": schemaAttributeacc1959f9213ed5aed1692cf(),
+		"anomaly_detector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current status of detector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyVisibilityTime
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +63,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "number"
 		//	}
-		"anomaly_visibility_time": schemaAttributedfd34b2c43900022a209824e(),
+		"anomaly_visibility_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTimeStamp
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +74,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "When detector was created.",
 		//	  "type": "number"
 		//	}
-		"creation_time_stamp": schemaAttributecacf007f2d9b0b4ca93f7124(),
+		"creation_time_stamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "When detector was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorName
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +85,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Name of detector",
 		//	  "type": "string"
 		//	}
-		"detector_name": schemaAttributed4fa2b011d7f973bf00bbba1(),
+		"detector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of detector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationFrequency
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +103,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"evaluation_frequency": schemaAttributeb9ec5997e2d90deff4fabb7f(),
+		"evaluation_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How often log group is evaluated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPattern
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +115,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"filter_pattern": schemaAttributed423366e15d7d8f42c3e5eec(),
+		"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +127,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributef1966a88ed4a6c2503387a5f(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTimeStamp
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +138,10 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "When detector was lsat modified.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time_stamp": schemaAttribute690408eb8c63882a1e589b44(),
+		"last_modified_time_stamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "When detector was lsat modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupArnList
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +156,11 @@ func logAnomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"log_group_arn_list": schemaAttribute0c1624756b95cb1664b126ab(),
+		"log_group_arn_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of Arns for the given log group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

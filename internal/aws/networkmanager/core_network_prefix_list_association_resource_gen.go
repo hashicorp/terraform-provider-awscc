@@ -20,39 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15ecc1994ba3408d6a997fef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The alias of the prefix list",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69203c86b3510b9039897ad2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the prefix list.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]+:ec2:[a-z]+-[a-z]+-[0-9]:([0-9]{12}):prefix-list/pl-[a-z0-9]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96ee13319f8d6212e80fa68e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the core network.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_core_network_prefix_list_association", coreNetworkPrefixListAssociationResource)
 }
@@ -68,7 +35,13 @@ func coreNetworkPrefixListAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The ID of the core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schemaAttribute96ee13319f8d6212e80fa68e(),
+		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the core network.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrefixListAlias
 		// CloudFormation resource type schema:
 		//
@@ -76,7 +49,13 @@ func coreNetworkPrefixListAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The alias of the prefix list",
 		//	  "type": "string"
 		//	}
-		"prefix_list_alias": schemaAttribute15ecc1994ba3408d6a997fef(),
+		"prefix_list_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The alias of the prefix list",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrefixListArn
 		// CloudFormation resource type schema:
 		//
@@ -85,7 +64,16 @@ func coreNetworkPrefixListAssociationResource(ctx context.Context) (resource.Res
 		//	  "pattern": "^arn:[a-z0-9-]+:ec2:[a-z]+-[a-z]+-[0-9]:([0-9]{12}):prefix-list/pl-[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"prefix_list_arn": schemaAttribute69203c86b3510b9039897ad2(),
+		"prefix_list_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the prefix list.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]+:ec2:[a-z]+-[a-z]+-[0-9]:([0-9]{12}):prefix-list/pl-[a-z0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

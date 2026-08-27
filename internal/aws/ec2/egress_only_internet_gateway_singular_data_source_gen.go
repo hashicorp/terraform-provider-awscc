@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute527f55970ed4ed684020b31e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service Generated ID of the EgressOnlyInternetGateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6718d306d04f54bff762a06d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93f7f66c84b4f537699b8325() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC for which to create the egress-only internet gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ed48fe88f712a12a27b3f7c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6718d306d04f54bff762a06d(),
-				// Property: Value
-				"value": schemaAttribute6718d306d04f54bff762a06d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Any tags assigned to the egress only internet gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayDataSource)
 }
@@ -64,7 +29,10 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Service Generated ID of the EgressOnlyInternetGateway",
 		//	  "type": "string"
 		//	}
-		"egress_only_internet_gateway_id": schemaAttribute527f55970ed4ed684020b31e(),
+		"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service Generated ID of the EgressOnlyInternetGateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +61,22 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute9ed48fe88f712a12a27b3f7c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags assigned to the egress only internet gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +84,10 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The ID of the VPC for which to create the egress-only internet gateway.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute93f7f66c84b4f537699b8325(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC for which to create the egress-only internet gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

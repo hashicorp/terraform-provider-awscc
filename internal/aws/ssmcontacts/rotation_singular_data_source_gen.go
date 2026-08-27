@@ -15,194 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1af9f4a6c9dc7f82e35994fa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Members of the rotation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43af9c25d6e49a147f43badf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DailySettings
-			"daily_settings": schemaAttributec1dd1c9131ef047ceeb1939e(),
-			// Property: MonthlySettings
-			"monthly_settings": schemaAttribute991d342da60b43b62d4b8ae5(),
-			// Property: NumberOfOnCalls
-			"number_of_on_calls": schemaAttributefc50714cc26c7d030f6f3bdc(),
-			// Property: RecurrenceMultiplier
-			"recurrence_multiplier": schemaAttribute5e2c6fee82beb038e0339bf9(),
-			// Property: ShiftCoverages
-			"shift_coverages": schemaAttributebc5924f6a100ac82a5213b40(),
-			// Property: WeeklySettings
-			"weekly_settings": schemaAttributebbebc714561466c8079e13d7(),
-		}, /*END SCHEMA*/
-		Description: "Information about when an on-call rotation is in effect and how long the rotation period lasts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4856db98cf629978b7b3dea7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The day of the month when monthly recurring on-call rotations begin.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e2c6fee82beb038e0339bf9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days, weeks, or months a single rotation lasts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e62768dbf37f316c454791c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Start time of the first shift of Oncall Schedule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute637e129883aed5d3f1b1379c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Rotation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a7b99da2ac96860418b352a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the rotation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88495b7bc38596daaeedccef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute991d342da60b43b62d4b8ae5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DayOfMonth
-				"day_of_month": schemaAttribute4856db98cf629978b7b3dea7(),
-				// Property: HandOffTime
-				"hand_off_time": schemaAttribute88495b7bc38596daaeedccef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about on-call rotations that recur monthly.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6413bc71e5e33a2ddf350c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndTime
-				"end_time": schemaAttribute88495b7bc38596daaeedccef(),
-				// Property: StartTime
-				"start_time": schemaAttribute88495b7bc38596daaeedccef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about when an on-call shift begins and ends.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e26475c9750daa8d5e428d7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef1f17ea29b653e9703bb6408(),
-				// Property: Value
-				"value": schemaAttributef2fc90b4ec7b0dd3ffdb55fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea857349389b4e617a1cda16e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "TimeZone Identifier for the Oncall Schedule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbebc714561466c8079e13d7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DayOfWeek
-				"day_of_week": schemaAttributedc47ec8ffd64f51a404c9fd7(),
-				// Property: HandOffTime
-				"hand_off_time": schemaAttribute88495b7bc38596daaeedccef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about on-call rotations that recur weekly.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc5924f6a100ac82a5213b40() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CoverageTimes
-				"coverage_times": schemaAttribute9b6413bc71e5e33a2ddf350c(),
-				// Property: DayOfWeek
-				"day_of_week": schemaAttributedc47ec8ffd64f51a404c9fd7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the days of the week included in on-call rotation coverage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1dd1c9131ef047ceeb1939e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Information about on-call rotations that recur daily.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc47ec8ffd64f51a404c9fd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The day of the week when weekly recurring on-call shift rotations begin. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1f17ea29b653e9703bb6408() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2fc90b4ec7b0dd3ffdb55fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc50714cc26c7d030f6f3bdc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of Oncalls per shift.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmcontacts_rotation", rotationDataSource)
 }
@@ -218,7 +30,10 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the rotation.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7a7b99da2ac96860418b352a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the rotation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactIds
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +45,11 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"contact_ids": schemaAttribute1af9f4a6c9dc7f82e35994fa(),
+		"contact_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Members of the rotation",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +58,10 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute637e129883aed5d3f1b1379c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the Rotation",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Recurrence
 		// CloudFormation resource type schema:
 		//
@@ -410,7 +232,99 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"recurrence": schemaAttribute43af9c25d6e49a147f43badf(),
+		"recurrence": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DailySettings
+				"daily_settings": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Information about on-call rotations that recur daily.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonthlySettings
+				"monthly_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DayOfMonth
+							"day_of_month": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The day of the month when monthly recurring on-call rotations begin.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: HandOffTime
+							"hand_off_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Information about on-call rotations that recur monthly.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NumberOfOnCalls
+				"number_of_on_calls": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Number of Oncalls per shift.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RecurrenceMultiplier
+				"recurrence_multiplier": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of days, weeks, or months a single rotation lasts.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShiftCoverages
+				"shift_coverages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CoverageTimes
+							"coverage_times": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EndTime
+										"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StartTime
+										"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Information about when an on-call shift begins and ends.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DayOfWeek
+							"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The day of the week when weekly recurring on-call shift rotations begin. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Information about the days of the week included in on-call rotation coverage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WeeklySettings
+				"weekly_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DayOfWeek
+							"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The day of the week when weekly recurring on-call shift rotations begin. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: HandOffTime
+							"hand_off_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Details about when an on-call rotation shift begins or ends. Time of the day in format HH:MM",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Information about on-call rotations that recur weekly.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about when an on-call rotation is in effect and how long the rotation period lasts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartTime
 		// CloudFormation resource type schema:
 		//
@@ -419,7 +333,10 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})$",
 		//	  "type": "string"
 		//	}
-		"start_time": schemaAttribute5e62768dbf37f316c454791c(),
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Start time of the first shift of Oncall Schedule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -451,7 +368,23 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute9e26475c9750daa8d5e428d7(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeZoneId
 		// CloudFormation resource type schema:
 		//
@@ -459,7 +392,10 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "TimeZone Identifier for the Oncall Schedule",
 		//	  "type": "string"
 		//	}
-		"time_zone_id": schemaAttributea857349389b4e617a1cda16e(),
+		"time_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "TimeZone Identifier for the Oncall Schedule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

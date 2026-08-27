@@ -15,167 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04b8066c0e70211836683c04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ec96c440fa053162af542ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bc1e9f7e513e408411ded1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute208bee533afa2249ac7606cd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Algorithm
-			"algorithm": schemaAttribute1bc1e9f7e513e408411ded1d(),
-			// Property: ConstantInitializationVector
-			"constant_initialization_vector": schemaAttribute0ec96c440fa053162af542ac(),
-			// Property: DeviceId
-			"device_id": schemaAttributea730e7edd30c4284cc86a2f6(),
-			// Property: KeyType
-			"key_type": schemaAttribute6628b84b07af29e64324a11b(),
-			// Property: Region
-			"region": schemaAttribute9630f35e810c9f3af36bd14c(),
-			// Property: ResourceId
-			"resource_id": schemaAttribute61a613e8ddedae635570a00c(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute44e3150b833d3bfa031062fd(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute54718f413535e07fcd136747(),
-			// Property: Url
-			"url": schemaAttributedccd6379ba83a0069649a0fc(),
-		}, /*END SCHEMA*/
-		Description: "The type of encryption that will be used on the output that is associated with this entitlement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31eec267499add15ed20df2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the entitlement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3281e0d78a75f6776c12406d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the entitlement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cff927553312094572c35d6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44e3150b833d3bfa031062fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a31473c53dc1b7870bf3e1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute04b8066c0e70211836683c04(),
-				// Property: Value
-				"value": schemaAttribute04b8066c0e70211836683c04(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to tag and organize this flow entitlement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54718f413535e07fcd136747() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61a613e8ddedae635570a00c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6628b84b07af29e64324a11b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute667ae0c137891f6689578c0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9630f35e810c9f3af36bd14c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea730e7edd30c4284cc86a2f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa8079cee42ad24afb77c7f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " An indication of whether the entitlement is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1ffef1aef2363f99b1a92cb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedccd6379ba83a0069649a0fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaa7108dfef3b964a159753a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the entitlement.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_flow_entitlement", flowEntitlementDataSource)
 }
@@ -192,7 +31,10 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
 		//	  "type": "integer"
 		//	}
-		"data_transfer_subscriber_fee_percent": schemaAttributec1ffef1aef2363f99b1a92cb(),
+		"data_transfer_subscriber_fee_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +42,10 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A description of the entitlement.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute31eec267499add15ed20df2d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the entitlement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Encryption
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +108,57 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption": schemaAttribute208bee533afa2249ac7606cd(),
+		"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Algorithm
+				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConstantInitializationVector
+				"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceId
+				"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyType
+				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceId
+				"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Url
+				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The type of encryption that will be used on the output that is associated with this entitlement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntitlementArn
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +167,10 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:entitlement:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"entitlement_arn": schemaAttribute3281e0d78a75f6776c12406d(),
+		"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the entitlement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntitlementStatus
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +182,10 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"entitlement_status": schemaAttributeaa8079cee42ad24afb77c7f0(),
+		"entitlement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: " An indication of whether the entitlement is enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowArn
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +193,10 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ARN of the flow.",
 		//	  "type": "string"
 		//	}
-		"flow_arn": schemaAttribute667ae0c137891f6689578c0c(),
+		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +204,10 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the entitlement.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeeaa7108dfef3b964a159753a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the entitlement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subscribers
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +218,11 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subscribers": schemaAttribute3cff927553312094572c35d6(),
+		"subscribers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +248,22 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute45a31473c53dc1b7870bf3e1(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag and organize this flow entitlement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

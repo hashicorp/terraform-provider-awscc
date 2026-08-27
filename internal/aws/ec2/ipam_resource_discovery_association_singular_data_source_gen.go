@@ -14,105 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute020746e50c55c768de0168d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Account ID for the account where the shared IPAM exists.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12938f0621a8bc3eab081556() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute48730602ad32837496a9d446(),
-				// Property: Value
-				"value": schemaAttributebff5b4eac69f0443251ac1ee(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1382b352303a47e79e205bb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the resource discovery association is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48730602ad32837496a9d446() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute658dbc2656ffed589ab4c03b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operational state of the Resource Discovery Association. Related to Create/Delete activities.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute842b2dc5043a6f68885896d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the IPAM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f7c85badb4e60981a450b7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If the Resource Discovery Association exists due as part of CreateIpam.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9833819ea9f9be95930901e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the IPAM this Resource Discovery is associated to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbed96f45b2dce2c9ba9ce74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPAM Resource Discovery Association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd6b5a815b9f99e672b4c968() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the resource discovery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebff5b4eac69f0443251ac1ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef65e9a25b80ed3ce2325128() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The home region of the IPAM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1f0fbc2eac7e4f3bb49078c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IPAM Resource Discovery Association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam_resource_discovery_association", iPAMResourceDiscoveryAssociationDataSource)
 }
@@ -128,7 +29,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "Arn of the IPAM.",
 		//	  "type": "string"
 		//	}
-		"ipam_arn": schemaAttribute842b2dc5043a6f68885896d1(),
+		"ipam_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamId
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +40,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The Id of the IPAM this Resource Discovery is associated to.",
 		//	  "type": "string"
 		//	}
-		"ipam_id": schemaAttribute9833819ea9f9be95930901e8(),
+		"ipam_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the IPAM this Resource Discovery is associated to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamRegion
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +51,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The home region of the IPAM.",
 		//	  "type": "string"
 		//	}
-		"ipam_region": schemaAttributeef65e9a25b80ed3ce2325128(),
+		"ipam_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The home region of the IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamResourceDiscoveryAssociationArn
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +62,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The Amazon Resource Name (ARN) of the resource discovery association is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_association_arn": schemaAttribute1382b352303a47e79e205bb8(),
+		"ipam_resource_discovery_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the resource discovery association is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamResourceDiscoveryAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +73,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "Id of the IPAM Resource Discovery Association.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_association_id": schemaAttributebbed96f45b2dce2c9ba9ce74(),
+		"ipam_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPAM Resource Discovery Association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamResourceDiscoveryId
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +84,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM Resource Discovery Association.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_id": schemaAttributef1f0fbc2eac7e4f3bb49078c(),
+		"ipam_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IPAM Resource Discovery Association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +95,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "If the Resource Discovery Association exists due as part of CreateIpam.",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schemaAttribute86f7c85badb4e60981a450b7(),
+		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If the Resource Discovery Association exists due as part of CreateIpam.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +106,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The AWS Account ID for the account where the shared IPAM exists.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute020746e50c55c768de0168d3(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Account ID for the account where the shared IPAM exists.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceDiscoveryStatus
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +117,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The status of the resource discovery.",
 		//	  "type": "string"
 		//	}
-		"resource_discovery_status": schemaAttributebd6b5a815b9f99e672b4c968(),
+		"resource_discovery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the resource discovery.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +128,10 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The operational state of the Resource Discovery Association. Related to Create/Delete activities.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute658dbc2656ffed589ab4c03b(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The operational state of the Resource Discovery Association. Related to Create/Delete activities.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +164,24 @@ func iPAMResourceDiscoveryAssociationDataSource(ctx context.Context) (datasource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute12938f0621a8bc3eab081556(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

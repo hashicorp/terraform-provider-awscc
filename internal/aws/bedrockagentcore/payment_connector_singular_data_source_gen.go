@@ -15,109 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute045123eea72c80be9d357344() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute343dd057db571ae039487937() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the parent payment manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute534ecdd5f2bc2b4393d21548() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the payment credential provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bb526613b37487049d7c4df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the payment connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77be71a43dae37b1a056d85f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a52451c0486cbb2b8e0c726() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CoinbaseCDP
-				"coinbase_cdp": schemaAttribute8c6734431f4d63702cf42e10(),
-				// Property: StripePrivy
-				"stripe_privy": schemaAttribute8c6734431f4d63702cf42e10(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c6734431f4d63702cf42e10() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CredentialProviderArn
-			"credential_provider_arn": schemaAttribute534ecdd5f2bc2b4393d21548(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9868b98c80c06c9f1c15d3e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the payment connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabe956f18051d05aebf5fc87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the connector was last updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec710a60dfbb73d0d819fb460() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed21751a1c82767764aca16c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Synthetic ARN for the payment connector (used for engine resolution)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8453de879e04221c08dcfce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the payment connector",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9f85de123c262e9c44d3c12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the connector was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_payment_connector", paymentConnectorDataSource)
 }
@@ -135,7 +32,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^https://[^\\p{C}]*$",
 		//	  "type": "string"
 		//	}
-		"authorization_url": schemaAttributec710a60dfbb73d0d819fb460(),
+		"authorization_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorCreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +44,11 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"connector_created_at": schemaAttributee9f85de123c262e9c44d3c12(),
+		"connector_created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the connector was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorLastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +57,11 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"connector_last_updated_at": schemaAttributeabe956f18051d05aebf5fc87(),
+		"connector_last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the connector was last updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorName
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +70,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"connector_name": schemaAttribute9868b98c80c06c9f1c15d3e7(),
+		"connector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the payment connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorStatus
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +94,9 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"connector_status": schemaAttribute77be71a43dae37b1a056d85f(),
+		"connector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectorType
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +107,9 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"connector_type": schemaAttribute77be71a43dae37b1a056d85f(),
+		"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialProviderConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +152,36 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"credential_provider_configurations": schemaAttribute8a52451c0486cbb2b8e0c726(),
+		"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CoinbaseCDP
+					"coinbase_cdp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CredentialProviderArn
+							"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the payment credential provider",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: StripePrivy
+					"stripe_privy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CredentialProviderArn
+							"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the payment credential provider",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +192,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9\\s]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed8453de879e04221c08dcfce(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the payment connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PaymentConnectorArn
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +204,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:payment-manager/[a-z0-9-]+/connector/[a-z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"payment_connector_arn": schemaAttributed21751a1c82767764aca16c0(),
+		"payment_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Synthetic ARN for the payment connector (used for engine resolution)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PaymentConnectorId
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +216,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
-		"payment_connector_id": schemaAttribute6bb526613b37487049d7c4df(),
+		"payment_connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the payment connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PaymentManagerId
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +228,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
-		"payment_manager_id": schemaAttribute343dd057db571ae039487937(),
+		"payment_manager_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the parent payment manager",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionMode
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +243,10 @@ func paymentConnectorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provision_mode": schemaAttribute045123eea72c80be9d357344(),
+		"provision_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -19,56 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06a0f6a649ea694e6260af07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type definition, in GraphQL Schema Definition Language (SDL) format.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99d91b714835a77e738b0514() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type name.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b02e851ffe98d4a831252e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The API ID.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee294eabf4d58fda457915886() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the type.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8e7cfe0e47326f2120ce3b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type format: SDL or JSON.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"SDL",
-				"JSON",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_appsync_type", typeResource)
 }
@@ -84,7 +34,13 @@ func typeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API ID.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttribute9b02e851ffe98d4a831252e4(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The API ID.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +48,13 @@ func typeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the type.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee294eabf4d58fda457915886(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the type.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +62,10 @@ func typeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type definition, in GraphQL Schema Definition Language (SDL) format.",
 		//	  "type": "string"
 		//	}
-		"definition": schemaAttribute06a0f6a649ea694e6260af07(),
+		"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type definition, in GraphQL Schema Definition Language (SDL) format.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +77,16 @@ func typeResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"format": schemaAttributef8e7cfe0e47326f2120ce3b4(),
+		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type format: SDL or JSON.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SDL",
+					"JSON",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +97,13 @@ func typeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[_A-Za-z][_0-9A-Za-z]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute99d91b714835a77e738b0514(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type name.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

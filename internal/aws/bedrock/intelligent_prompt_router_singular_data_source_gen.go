@@ -15,126 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute049f5db9ef5ed449eb9c1e9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute223cfdf229685d95fbc7dffa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute049f5db9ef5ed449eb9c1e9a(),
-				// Property: Value
-				"value": schemaAttribute6ecfac6eb2d75dc64f359249(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b2230c5fd6c96975ef917b5() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute338d97efa757d2b73be6555a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of a PromptRouter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e9e736306c9dfb2054d3a31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ModelArn
-			"model_arn": schemaAttribute8fa466de4b45f203f6e0703e(),
-		}, /*END SCHEMA*/
-		Description: "Model configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute509b8c755ba46b899be9a3d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of a Prompt Router",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ecfac6eb2d75dc64f359249() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag Value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f07c6653755aff90060a266() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Prompt Router.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78527654f70213fb32ca9213() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the Prompt Router.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b674fac22e526cb2906fc68() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResponseQualityDifference
-			"response_quality_difference": schemaAttribute2b2230c5fd6c96975ef917b5(),
-		}, /*END SCHEMA*/
-		Description: "Represents the criteria used for routing requests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85e786ec1336e3c488a5b2e4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ModelArn
-				"model_arn": schemaAttribute8fa466de4b45f203f6e0703e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of model configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fa466de4b45f203f6e0703e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of underlying model which are added in the Prompt Router.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabedbff93f3ff58576b38f5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time Stamp",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae16d3b3e3b09f51c5c83402() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Prompt Router.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_intelligent_prompt_router", intelligentPromptRouterDataSource)
 }
@@ -151,7 +31,11 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeabedbff93f3ff58576b38f5e(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +46,10 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^([0-9a-zA-Z:.][ _-]?)+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute6f07c6653755aff90060a266(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Prompt Router.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FallbackModel
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +70,17 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"fallback_model": schemaAttribute4e9e736306c9dfb2054d3a31(),
+		"fallback_model": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ModelArn
+				"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Arn of underlying model which are added in the Prompt Router.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Model configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Models
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +105,19 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"models": schemaAttribute85e786ec1336e3c488a5b2e4(),
+		"models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ModelArn
+					"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Arn of underlying model which are added in the Prompt Router.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of model configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PromptRouterArn
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +128,10 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:(default-)?prompt-router/[a-zA-Z0-9-:.]+$",
 		//	  "type": "string"
 		//	}
-		"prompt_router_arn": schemaAttribute78527654f70213fb32ca9213(),
+		"prompt_router_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the Prompt Router.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PromptRouterName
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +142,10 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^([0-9a-zA-Z][ _-]?)+$",
 		//	  "type": "string"
 		//	}
-		"prompt_router_name": schemaAttributeae16d3b3e3b09f51c5c83402(),
+		"prompt_router_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the Prompt Router.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingCriteria
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +164,16 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"routing_criteria": schemaAttribute7b674fac22e526cb2906fc68(),
+		"routing_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResponseQualityDifference
+				"response_quality_difference": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the criteria used for routing requests.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +184,10 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute338d97efa757d2b73be6555a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of a PromptRouter",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -295,7 +222,24 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute223cfdf229685d95fbc7dffa(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag Value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +251,10 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute509b8c755ba46b899be9a3d4(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of a Prompt Router",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +263,11 @@ func intelligentPromptRouterDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributeabedbff93f3ff58576b38f5e(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

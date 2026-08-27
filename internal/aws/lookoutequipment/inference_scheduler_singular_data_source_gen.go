@@ -14,185 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0808bf69602c45df1a0ece65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c0f48ec492e2619ceccb255() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the delimiter character used between items in the data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1812b4cee756230b02e08c7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the previously trained ML model being used to create the inference scheduler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c779d8abe6bd2f07903a8e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for the specified tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b6a5b509c487e28c0d29277() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e46f8ead761d098394f3ed5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dff923b890111a64dca9ad5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InferenceInputNameConfiguration
-			"inference_input_name_configuration": schemaAttributea59cb3a3e7c6180ccf06b5c0(),
-			// Property: InputTimeZoneOffset
-			"input_time_zone_offset": schemaAttributef335e66c7673c6be5d845f82(),
-			// Property: S3InputConfiguration
-			"s3_input_configuration": schemaAttribute8564c15c3bfa175bf3df79c8(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a06f85d5d105a826f665140() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttributea6c475ee4211a65c7fdcad6b(),
-			// Property: Prefix
-			"prefix": schemaAttributea6c475ee4211a65c7fdcad6b(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for the output results from the inference, including output S3 location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a10071048c98a54ab767529() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributebadadca794ba39f90bb4bbe4(),
-			// Property: S3OutputConfiguration
-			"s3_output_configuration": schemaAttribute5a06f85d5d105a826f665140(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8564c15c3bfa175bf3df79c8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttributea6c475ee4211a65c7fdcad6b(),
-			// Property: Prefix
-			"prefix": schemaAttributea6c475ee4211a65c7fdcad6b(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for the input data for the inference, including input data S3 location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97174f316a6a741dcf828e79() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea184f1c3ea5ea238e5c671aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea59cb3a3e7c6180ccf06b5c0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComponentTimestampDelimiter
-			"component_timestamp_delimiter": schemaAttribute0c0f48ec492e2619ceccb255(),
-			// Property: TimestampFormat
-			"timestamp_format": schemaAttribute0808bf69602c45df1a0ece65(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for the input data for the inference, including timestamp format and delimiter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6c475ee4211a65c7fdcad6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae002452be4adcd926cb44e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How often data is uploaded to the source S3 bucket for the input data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebadadca794ba39f90bb4bbe4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID number for the AWS KMS key used to encrypt the inference output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf29a26352d19f0ccfbbd402() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1c779d8abe6bd2f07903a8e8(),
-				// Property: Value
-				"value": schemaAttributec42281df53aa73d5f0588e5f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Any tags associated with the inference scheduler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec42281df53aa73d5f0588e5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the specified tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee1d4460dc2a408825e9d77e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the inference scheduler being created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef335e66c7673c6be5d845f82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lookoutequipment_inference_scheduler", inferenceSchedulerDataSource)
 }
@@ -210,7 +31,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"data_delay_offset_in_minutes": schemaAttribute97174f316a6a741dcf828e79(),
+		"data_delay_offset_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataInputConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +93,49 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_input_configuration": schemaAttribute4dff923b890111a64dca9ad5(),
+		"data_input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InferenceInputNameConfiguration
+				"inference_input_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ComponentTimestampDelimiter
+						"component_timestamp_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates the delimiter character used between items in the data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TimestampFormat
+						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies configuration information for the input data for the inference, including timestamp format and delimiter.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InputTimeZoneOffset
+				"input_time_zone_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3InputConfiguration
+				"s3_input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies configuration information for the input data for the inference, including input data S3 location.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataOutputConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +177,32 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_output_configuration": schemaAttribute6a10071048c98a54ab767529(),
+		"data_output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID number for the AWS KMS key used to encrypt the inference output.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3OutputConfiguration
+				"s3_output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies configuration information for the output results from the inference, including output S3 location.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataUploadFrequency
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +217,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_upload_frequency": schemaAttributeae002452be4adcd926cb44e1(),
+		"data_upload_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How often data is uploaded to the source S3 bucket for the input data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceSchedulerArn
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +231,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+",
 		//	  "type": "string"
 		//	}
-		"inference_scheduler_arn": schemaAttributea184f1c3ea5ea238e5c671aa(),
+		"inference_scheduler_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceSchedulerName
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +245,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 		//	  "type": "string"
 		//	}
-		"inference_scheduler_name": schemaAttributeee1d4460dc2a408825e9d77e(),
+		"inference_scheduler_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the inference scheduler being created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelName
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +259,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 		//	  "type": "string"
 		//	}
-		"model_name": schemaAttribute1812b4cee756230b02e08c7c(),
+		"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the previously trained ML model being used to create the inference scheduler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +273,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute3e46f8ead761d098394f3ed5(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerSideKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +287,10 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"server_side_kms_key_id": schemaAttribute3b6a5b509c487e28c0d29277(),
+		"server_side_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +326,24 @@ func inferenceSchedulerDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributebf29a26352d19f0ccfbbd402(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for the specified tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags associated with the inference scheduler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

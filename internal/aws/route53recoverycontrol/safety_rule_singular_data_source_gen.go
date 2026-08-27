@@ -15,150 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0911ecb3632d5a33e623229d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19ca03a69c2d7b6944fd88ce() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three AWS Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. \nIn other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19de84cbe0f5936c49615e1b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Inverted
-			"inverted": schemaAttribute0911ecb3632d5a33e623229d(),
-			// Property: Threshold
-			"threshold": schemaAttribute2243e9add5478b9265c65abf(),
-			// Property: Type
-			"type": schemaAttribute854e062c8caa4ea765785791(),
-		}, /*END SCHEMA*/
-		Description: "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2243e9add5478b9265c65abf() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute304b6d71bd7c6b136f744868() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AssertedControls
-			"asserted_controls": schemaAttribute8b7bc3fb2f4d365a0def294c(),
-			// Property: WaitPeriodMs
-			"wait_period_ms": schemaAttribute72770bfe315583f3c3ff59cc(),
-		}, /*END SCHEMA*/
-		Description: "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59a1523ff3ee76b5a7629936() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GatingControls
-			"gating_controls": schemaAttribute8d83b5d94c8d54ba972c6bfa(),
-			// Property: TargetControls
-			"target_controls": schemaAttribute19ca03a69c2d7b6944fd88ce(),
-			// Property: WaitPeriodMs
-			"wait_period_ms": schemaAttribute72770bfe315583f3c3ff59cc(),
-		}, /*END SCHEMA*/
-		Description: "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61d9936fae63331c87a4774f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the safety rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72770bfe315583f3c3ff59cc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute824eac2ffa87cda35e96e391() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute854e062c8caa4ea765785791() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A rule can be one of the following: ATLEAST, AND, or OR.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88c79d8f0bc6fc56c90a7678() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute824eac2ffa87cda35e96e391(),
-				// Property: Value
-				"value": schemaAttribute824eac2ffa87cda35e96e391(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of tags associated with a resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b7bc3fb2f4d365a0def294c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d83b5d94c8d54ba972c6bfa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96e341cfaab88d7744f662ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the control panel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec01a82c9a9d0da386a92e228() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe6465ba03c085c7d8ec498c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the safety rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoverycontrol_safety_rule", safetyRuleDataSource)
 }
@@ -193,7 +49,23 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"assertion_rule": schemaAttribute304b6d71bd7c6b136f744868(),
+		"assertion_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AssertedControls
+				"asserted_controls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WaitPeriodMs
+				"wait_period_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ControlPanelArn
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +73,10 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the control panel.",
 		//	  "type": "string"
 		//	}
-		"control_panel_arn": schemaAttribute96e341cfaab88d7744f662ec(),
+		"control_panel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the control panel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatingRule
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +112,29 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"gating_rule": schemaAttribute59a1523ff3ee76b5a7629936(),
+		"gating_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GatingControls
+				"gating_controls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetControls
+				"target_controls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three AWS Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. \nIn other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WaitPeriodMs
+				"wait_period_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +142,10 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name for the safety rule.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributefe6465ba03c085c7d8ec498c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the safety rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleConfig
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +178,27 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule_config": schemaAttribute19de84cbe0f5936c49615e1b(),
+		"rule_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Inverted
+				"inverted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Threshold
+				"threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A rule can be one of the following: ATLEAST, AND, or OR.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SafetyRuleArn
 		// CloudFormation resource type schema:
 		//
@@ -286,7 +206,10 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the safety rule.",
 		//	  "type": "string"
 		//	}
-		"safety_rule_arn": schemaAttribute61d9936fae63331c87a4774f(),
+		"safety_rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the safety rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +222,10 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributec01a82c9a9d0da386a92e228(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +253,22 @@ func safetyRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute88c79d8f0bc6fc56c90a7678(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -17,73 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute28c9fdf8700dd323f803b367() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Returns the Amazon Resource Name (ARN) for the Amazon AppStream User resource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5279c48c89279808fff0f173() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The first name, or given name, of the user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75de989e6504c535b19f6764() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// MessageAction is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f51ef21bd89343f502ffd9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address of the user.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fa3b592c6562b041ec1967c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The last name, or surname, of the user.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf4cf1709151d47aeee7f46b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication type for the user.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_appstream_user", userResource)
 	registry.AddListResourceFactory("awscc_appstream_user", generic.NewListResource(userResource))
@@ -101,7 +34,13 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute28c9fdf8700dd323f803b367(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the Amazon Resource Name (ARN) for the Amazon AppStream User resource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +48,13 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The authentication type for the user.",
 		//	  "type": "string"
 		//	}
-		"authentication_type": schemaAttributecf4cf1709151d47aeee7f46b(),
+		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The authentication type for the user.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FirstName
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +62,15 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The first name, or given name, of the user.",
 		//	  "type": "string"
 		//	}
-		"first_name": schemaAttribute5279c48c89279808fff0f173(),
+		"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The first name, or given name, of the user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastName
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +78,15 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The last name, or surname, of the user.",
 		//	  "type": "string"
 		//	}
-		"last_name": schemaAttribute7fa3b592c6562b041ec1967c(),
+		"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The last name, or surname, of the user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MessageAction
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +94,16 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.",
 		//	  "type": "string"
 		//	}
-		"message_action": schemaAttribute75de989e6504c535b19f6764(),
+		"message_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// MessageAction is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +111,13 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The email address of the user.",
 		//	  "type": "string"
 		//	}
-		"user_name": schemaAttribute7f51ef21bd89343f502ffd9a(),
+		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address of the user.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

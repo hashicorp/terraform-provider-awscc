@@ -15,28 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03657db8c2e77e12e058a5cb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of possible values an attribute can take.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute954138dbf13e0d9c4243ad5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7194dab324240c45a73dbc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key-name for the LF-tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lakeformation_tag", tagDataSource)
 }
@@ -54,7 +32,10 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"catalog_id": schemaAttribute954138dbf13e0d9c4243ad5e(),
+		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagKey
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +46,10 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$",
 		//	  "type": "string"
 		//	}
-		"tag_key": schemaAttributef7194dab324240c45a73dbc6(),
+		"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The key-name for the LF-tag.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagValues
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +66,11 @@ func tagDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tag_values": schemaAttribute03657db8c2e77e12e058a5cb(),
+		"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of possible values an attribute can take.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,264 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03109f8fe0a26ebb417279e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The username for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0705f1268540f16879985fd8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether logging to customer specified bucket is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c2cbe38084b88b4112af32d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Network type of the InfluxDB Instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fef14729faef6ab657bf9fd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The allocated storage for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute205c6096f58f3f677cd9989f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22e6d9a0be2cb16bc50d75e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttributeca457f12cca8746354c617ae(),
-			// Property: Enabled
-			"enabled": schemaAttribute0705f1268540f16879985fd8(),
-		}, /*END SCHEMA*/
-		Description: "S3 configuration for sending logs to customer account from the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24fb460687cfb7bf230fc092() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute270490aed81fa2dca6764f9a(),
-				// Property: Value
-				"value": schemaAttributefadfb1070781edef482b012f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) for this DB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute270490aed81fa2dca6764f9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28fc3a6975b0e3ff2e0690ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ee6027961c7ed70560d5fa8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compute instance of the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50d36a10f740e8a681013e80() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The organization for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53f61ce4190ef37cb97c031c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an existing InfluxDB parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b1190f2ed50aecec34eed25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62100e3b1c79ed3a152d1b71() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which InfluxDB accepts connections.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63edca02cd8a17b38be28dbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of the InfluxDB Instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64068d168f163163d6ee65d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Configuration
-			"s3_configuration": schemaAttribute22e6d9a0be2cb16bc50d75e4(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for sending logs to customer account from the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ad7542bd5472fc0f5c332bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The bucket for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86eed42906b01df11a0757fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of the next scheduled maintenance event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91e092e171cef98d0397c56e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that is associated with the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute936b606776eb4f5d39216a3a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone (AZ) where the InfluxDB instance is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9be6bd370469571b732ba84e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of EC2 subnet IDs for this InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fcff952c74b05ddd1f9525f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IANA timezone identifier for the maintenance schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5253be9872e2093848b4729() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service generated unique identifier for InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8173c2feb97c97939e00f31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The storage type of the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5bea340c56b0e7ca6b63037() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Attach a public IP to the customer ENI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe38244c6bb1c83fa49a6803() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of Amazon EC2 VPC security groups to associate with this InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca457f12cca8746354c617ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The bucket name for logs to be sent from the InfluxDB instance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecec4c3f19c496ee38e8c50b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name that is associated with the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed83ec10bf9ea8d414a15a0d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Secondary Availability Zone (AZ) where the InfluxDB instance is created, if DeploymentType is set as WITH_MULTIAZ_STANDBY.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd77dc20951cb59a27a575e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection endpoint for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee539f1a441856952f319f3ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Deployment type of the InfluxDB Instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec85b9cf35e4c6ff69a5120d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PreferredMaintenanceWindow
-			"preferred_maintenance_window": schemaAttribute28fc3a6975b0e3ff2e0690ea(),
-			// Property: Timezone
-			"timezone": schemaAttribute9fcff952c74b05ddd1f9525f(),
-		}, /*END SCHEMA*/
-		Description: "The maintenance schedule for the InfluxDB instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefadfb1070781edef482b012f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_timestream_influx_db_instance", influxDBInstanceDataSource)
 }
@@ -291,7 +33,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 20,
 		//	  "type": "integer"
 		//	}
-		"allocated_storage": schemaAttribute0fef14729faef6ab657bf9fd(),
+		"allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The allocated storage for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +47,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[a-z\\-]*:timestream\\-influxdb:[a-z0-9\\-]+:[0-9]{12}:(db\\-instance)/[a-zA-Z0-9]{3,64}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute91e092e171cef98d0397c56e(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that is associated with the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +58,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Availability Zone (AZ) where the InfluxDB instance is created.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute936b606776eb4f5d39216a3a(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Availability Zone (AZ) where the InfluxDB instance is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Bucket
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +72,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[^_][^\"]*$",
 		//	  "type": "string"
 		//	}
-		"bucket": schemaAttribute6ad7542bd5472fc0f5c332bd(),
+		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The bucket for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbInstanceType
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +94,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"db_instance_type": schemaAttribute3ee6027961c7ed70560d5fa8(),
+		"db_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compute instance of the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbParameterGroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +108,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"db_parameter_group_identifier": schemaAttribute53f61ce4190ef37cb97c031c(),
+		"db_parameter_group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an existing InfluxDB parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbStorageType
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +124,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"db_storage_type": schemaAttributea8173c2feb97c97939e00f31(),
+		"db_storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The storage type of the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentType
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +139,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"deployment_type": schemaAttributee539f1a441856952f319f3ee(),
+		"deployment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Deployment type of the InfluxDB Instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -384,7 +150,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The connection endpoint for the InfluxDB instance.",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttributedd77dc20951cb59a27a575e8(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection endpoint for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -395,7 +164,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"influx_db_instance_id": schemaAttributea5253be9872e2093848b4729(),
+		"influx_db_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service generated unique identifier for InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InfluxAuthParametersSecretArn
 		// CloudFormation resource type schema:
 		//
@@ -404,7 +176,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:[a-z]*:secretsmanager:[a-z\\-0-9]*:[0-9]*:secret:[a-zA-Z0-9\\-]*",
 		//	  "type": "string"
 		//	}
-		"influx_auth_parameters_secret_arn": schemaAttribute5b1190f2ed50aecec34eed25(),
+		"influx_auth_parameters_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogDeliveryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +215,29 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"log_delivery_configuration": schemaAttribute64068d168f163163d6ee65d5(),
+		"log_delivery_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Configuration
+				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The bucket name for logs to be sent from the InfluxDB instance",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether logging to customer specified bucket is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 configuration for sending logs to customer account from the InfluxDB instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for sending logs to customer account from the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceSchedule
 		// CloudFormation resource type schema:
 		//
@@ -469,7 +266,22 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"maintenance_schedule": schemaAttributeec85b9cf35e4c6ff69a5120d(),
+		"maintenance_schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PreferredMaintenanceWindow
+				"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Timezone
+				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IANA timezone identifier for the maintenance schedule.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The maintenance schedule for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -480,7 +292,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecec4c3f19c496ee38e8c50b4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name that is associated with the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -492,7 +307,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttribute0c2cbe38084b88b4112af32d(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Network type of the InfluxDB Instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NextMaintenanceTime
 		// CloudFormation resource type schema:
 		//
@@ -501,7 +319,11 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"next_maintenance_time": schemaAttribute86eed42906b01df11a0757fa(),
+		"next_maintenance_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of the next scheduled maintenance event.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Organization
 		// CloudFormation resource type schema:
 		//
@@ -511,7 +333,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"organization": schemaAttribute50d36a10f740e8a681013e80(),
+		"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The organization for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +347,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"password": schemaAttribute205c6096f58f3f677cd9989f(),
+		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The password for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -532,7 +360,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute62100e3b1c79ed3a152d1b71(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which InfluxDB accepts connections.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -541,7 +372,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Attach a public IP to the customer ENI.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttributeb5bea340c56b0e7ca6b63037(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Attach a public IP to the customer ENI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecondaryAvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -549,7 +383,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Secondary Availability Zone (AZ) where the InfluxDB instance is created, if DeploymentType is set as WITH_MULTIAZ_STANDBY.",
 		//	  "type": "string"
 		//	}
-		"secondary_availability_zone": schemaAttributed83ec10bf9ea8d414a15a0d4(),
+		"secondary_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Secondary Availability Zone (AZ) where the InfluxDB instance is created, if DeploymentType is set as WITH_MULTIAZ_STANDBY.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -571,7 +408,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute63edca02cd8a17b38be28dbc(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of the InfluxDB Instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -605,7 +445,24 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute24fb460687cfb7bf230fc092(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -615,7 +472,10 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"username": schemaAttribute03109f8fe0a26ebb417279e6(),
+		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The username for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -629,7 +489,11 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"vpc_security_group_ids": schemaAttributebe38244c6bb1c83fa49a6803(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of Amazon EC2 VPC security groups to associate with this InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -643,7 +507,11 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"vpc_subnet_ids": schemaAttribute9be6bd370469571b732ba84e(),
+		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of EC2 subnet IDs for this InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

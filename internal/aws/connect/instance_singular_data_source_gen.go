@@ -15,218 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f5c3b298517cf0dea0916db() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables CONTACT_LENS on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a4ba99a91b7f8e11edc08eb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables AUTO_RESOLVE_BEST_VOICES on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ab0de029db6ca52f51d4086() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute56d696d4e0e6282e37e2677f(),
-				// Property: Value
-				"value": schemaAttribute402a93d31cca2f9895631c0c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38eadc72b1e3fb3d519c2f8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An instanceArn is automatically generated on creation based on instanceId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute402a93d31cca2f9895631c0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41b5aaddb29f94cc45ae0b75() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables HIGH_VOLUME_OUTBOUND on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute435294c21d5814e127239724() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An instanceId is automatically generated on creation and assigned as the unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56d696d4e0e6282e37e2677f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57f25dc3f838855a406ae691() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables ENHANCED_CONTACT_MONITORING on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5920688c97803d438385f2c4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables MULTI_PARTY_CONFERENCE on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b7cd351ca6f7ce7b38eae98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the creation status of new instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c56621841678de926ab5227() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Existing directoryId user wants to map to the new Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c27c2b2dd58bd022c4f920f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables CONTACTFLOW_LOGS on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f66611b061520b6e8758e47() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables USE_CUSTOM_TTS_VOICES on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8423bd740c169ca22b96d7cc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b14588f053d8d17e8e26418() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables EARLY_MEDIA on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6bff845a5e7017088307a0e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Mandatory element which enables outbound calls on new instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb83316e4f267a186cbf412ec() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables MESSAGE_STREAMING on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe8ddc38f9c6e106ae4177ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service linked role created as part of instance creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec22c51f6d4275ff86d6a9aac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the type of directory integration for new instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3b2c711ee2b3ebc9f9fbe67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Alias of the new directory created as part of new instance creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeedaf88c107852b4e403b09c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoResolveBestVoices
-			"auto_resolve_best_voices": schemaAttribute1a4ba99a91b7f8e11edc08eb(),
-			// Property: ContactLens
-			"contact_lens": schemaAttribute0f5c3b298517cf0dea0916db(),
-			// Property: ContactflowLogs
-			"contactflow_logs": schemaAttribute7c27c2b2dd58bd022c4f920f(),
-			// Property: EarlyMedia
-			"early_media": schemaAttribute8b14588f053d8d17e8e26418(),
-			// Property: EnhancedChatMonitoring
-			"enhanced_chat_monitoring": schemaAttributefb434c52753c05da654ffde6(),
-			// Property: EnhancedContactMonitoring
-			"enhanced_contact_monitoring": schemaAttribute57f25dc3f838855a406ae691(),
-			// Property: HighVolumeOutBound
-			"high_volume_out_bound": schemaAttribute41b5aaddb29f94cc45ae0b75(),
-			// Property: InboundCalls
-			"inbound_calls": schemaAttributeef5678b018651c67337f1443(),
-			// Property: MessageStreaming
-			"message_streaming": schemaAttributeb83316e4f267a186cbf412ec(),
-			// Property: MultiPartyChatConference
-			"multi_party_chat_conference": schemaAttribute8423bd740c169ca22b96d7cc(),
-			// Property: MultiPartyConference
-			"multi_party_conference": schemaAttribute5920688c97803d438385f2c4(),
-			// Property: OutboundCalls
-			"outbound_calls": schemaAttributeb6bff845a5e7017088307a0e(),
-			// Property: UseCustomTTSVoices
-			"use_custom_tts_voices": schemaAttribute7f66611b061520b6e8758e47(),
-		}, /*END SCHEMA*/
-		Description: "The attributes for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef5678b018651c67337f1443() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Mandatory element which enables inbound calls on new instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb434c52753c05da654ffde6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Boolean flag which enables ENHANCED_CHAT_MONITORING on an instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd297c9da961558d55efe186() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp of instance creation logged as part of instance creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_instance", instanceDataSource)
 }
@@ -243,7 +31,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute38eadc72b1e3fb3d519c2f8c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An instanceArn is automatically generated on creation based on instanceId.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Attributes
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +101,77 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"attributes": schemaAttributeeedaf88c107852b4e403b09c(),
+		"attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoResolveBestVoices
+				"auto_resolve_best_voices": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables AUTO_RESOLVE_BEST_VOICES on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ContactLens
+				"contact_lens": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables CONTACT_LENS on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ContactflowLogs
+				"contactflow_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables CONTACTFLOW_LOGS on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EarlyMedia
+				"early_media": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables EARLY_MEDIA on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnhancedChatMonitoring
+				"enhanced_chat_monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables ENHANCED_CHAT_MONITORING on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnhancedContactMonitoring
+				"enhanced_contact_monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables ENHANCED_CONTACT_MONITORING on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HighVolumeOutBound
+				"high_volume_out_bound": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables HIGH_VOLUME_OUTBOUND on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InboundCalls
+				"inbound_calls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Mandatory element which enables inbound calls on new instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageStreaming
+				"message_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MESSAGE_STREAMING on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiPartyChatConference
+				"multi_party_chat_conference": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiPartyConference
+				"multi_party_conference": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MULTI_PARTY_CONFERENCE on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OutboundCalls
+				"outbound_calls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Mandatory element which enables outbound calls on new instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseCustomTTSVoices
+				"use_custom_tts_voices": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables USE_CUSTOM_TTS_VOICES on an instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The attributes for the instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +180,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributefd297c9da961558d55efe186(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp of instance creation logged as part of instance creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectoryId
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +195,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^d-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"directory_id": schemaAttribute5c56621841678de926ab5227(),
+		"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Existing directoryId user wants to map to the new Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +206,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An instanceId is automatically generated on creation and assigned as the unique identifier.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute435294c21d5814e127239724(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An instanceId is automatically generated on creation and assigned as the unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityManagementType
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +222,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"identity_management_type": schemaAttributec22c51f6d4275ff86d6a9aac(),
+		"identity_management_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the type of directory integration for new instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceAlias
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +236,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"instance_alias": schemaAttributee3b2c711ee2b3ebc9f9fbe67(),
+		"instance_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Alias of the new directory created as part of new instance creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceStatus
 		// CloudFormation resource type schema:
 		//
@@ -375,7 +252,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"instance_status": schemaAttribute5b7cd351ca6f7ce7b38eae98(),
+		"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the creation status of new instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -383,7 +263,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Service linked role created as part of instance creation.",
 		//	  "type": "string"
 		//	}
-		"service_role": schemaAttributebe8ddc38f9c6e106ae4177ea(),
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service linked role created as part of instance creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +299,24 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute2ab0de029db6ca52f51d4086(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

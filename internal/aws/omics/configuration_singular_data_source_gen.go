@@ -16,89 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute11bf659737613850b5c0ff3b() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tags for the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute229a0905757b0c91b5e21a94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional description for the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a6a65b2215844d9991fc335() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current configuration status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3062e30068cccde177393bd0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Configuration creation timestamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7959d640ed265ee7d0e36ce4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e9500b2a4d38a66692878f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique resource identifier for the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec896e1fabbab31a212f3b5d1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcConfig
-			"vpc_config": schemaAttributefecb95e14a17d22b6b2e54c7(),
-		}, /*END SCHEMA*/
-		Description: "Required run-specific configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed0c949fe006a4dfb1fb5e6f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9ea31d73c069ada0fbddd04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User-friendly name for the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefecb95e14a17d22b6b2e54c7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributeed0c949fe006a4dfb1fb5e6f(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttributeed0c949fe006a4dfb1fb5e6f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_omics_configuration", configurationDataSource)
 }
@@ -117,7 +34,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute9e9500b2a4d38a66692878f8(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique resource identifier for the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +46,11 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute3062e30068cccde177393bd0(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Configuration creation timestamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +61,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute229a0905757b0c91b5e21a94(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Optional description for the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +75,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef9ea31d73c069ada0fbddd04(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User-friendly name for the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RunConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +111,28 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"run_configurations": schemaAttributec896e1fabbab31a212f3b5d1(),
+		"run_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcConfig
+				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Required run-specific configurations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +148,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute2a6a65b2215844d9991fc335(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current configuration status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +168,12 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute11bf659737613850b5c0ff3b(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Tags for the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Uuid
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +184,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"uuid": schemaAttribute7959d640ed265ee7d0e36ce4(),
+		"uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

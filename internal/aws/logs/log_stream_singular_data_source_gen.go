@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute95b6fbcf5c51479fa4c988f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the log group where the log stream is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee19eef310cf28d3f29627cc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the log stream. The name must be unique wihtin the log group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_log_stream", logStreamDataSource)
 }
@@ -43,7 +29,10 @@ func logStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the log group where the log stream is created.",
 		//	  "type": "string"
 		//	}
-		"log_group_name": schemaAttribute95b6fbcf5c51479fa4c988f3(),
+		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the log group where the log stream is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogStreamName
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,10 @@ func logStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the log stream. The name must be unique wihtin the log group.",
 		//	  "type": "string"
 		//	}
-		"log_stream_name": schemaAttributee19eef310cf28d3f29627cc4(),
+		"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the log stream. The name must be unique wihtin the log group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

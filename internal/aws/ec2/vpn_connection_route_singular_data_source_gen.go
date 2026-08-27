@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e4e85cac95d9547c406d5fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPN connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55bed2fe0f72d43426a982eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block associated with the local subnet of the customer network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpn_connection_route", vPNConnectionRouteDataSource)
 }
@@ -43,7 +29,10 @@ func vPNConnectionRouteDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The CIDR block associated with the local subnet of the customer network.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schemaAttribute55bed2fe0f72d43426a982eb(),
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The CIDR block associated with the local subnet of the customer network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpnConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,10 @@ func vPNConnectionRouteDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ID of the VPN connection.",
 		//	  "type": "string"
 		//	}
-		"vpn_connection_id": schemaAttribute0e4e85cac95d9547c406d5fa(),
+		"vpn_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPN connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

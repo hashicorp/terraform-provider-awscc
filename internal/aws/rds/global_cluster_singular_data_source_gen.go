@@ -14,101 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04585e3fc7a03ee405cef05c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: " The storage encryption setting for the new global database cluster.\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0664e4da4614f5452ede1399() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb940df92629eec428b84c236(),
-				// Property: Value
-				"value": schemaAttributecd6196423543a0a9e36344dc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute07cf734533edac1847ad39d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08908abd6b54cd4be326ce95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora).\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19d1667796b3e534a0037e76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ba82f873f476233d7eee33b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7eeab77a844fc24b100b5d78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The writer endpoint for the global database cluster. This endpoint always points to the writer DB instance in the current primary cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88ce502879355712953aded6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute7eeab77a844fc24b100b5d78(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5ee4d552753e0c79559bfba() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb940df92629eec428b84c236() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec685cc9191f6683c76d7fb23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd6196423543a0a9e36344dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_global_cluster", globalClusterDataSource)
 }
@@ -124,7 +29,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schemaAttributeb5ee4d552753e0c79559bfba(),
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +45,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttribute08908abd6b54cd4be326ce95(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora).\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineLifecycleSupport
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +56,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
 		//	  "type": "string"
 		//	}
-		"engine_lifecycle_support": schemaAttribute5ba82f873f476233d7eee33b(),
+		"engine_lifecycle_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +67,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute07cf734533edac1847ad39d7(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the database engine to use. If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +81,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"global_cluster_identifier": schemaAttribute19d1667796b3e534a0037e76(),
+		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +98,16 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"global_endpoint": schemaAttribute88ce502879355712953aded6(),
+		"global_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The writer endpoint for the global database cluster. This endpoint always points to the writer DB instance in the current primary cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +119,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_identifier": schemaAttributec685cc9191f6683c76d7fb23(),
+		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +130,10 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": " The storage encryption setting for the new global database cluster.\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schemaAttribute04585e3fc7a03ee405cef05c(),
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: " The storage encryption setting for the new global database cluster.\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +166,24 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute0664e4da4614f5452ede1399(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

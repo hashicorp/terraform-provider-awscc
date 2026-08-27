@@ -15,438 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute068bef8a9176218f80750618() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the map filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c0b9a2bb40fc74bed98202a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the field",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ead6f36d842baaa2a3640fc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Unit
-			"unit": schemaAttribute5e885914041722bd6b6ca750(),
-			// Property: Value
-			"value": schemaAttributebde6677c652c976d728c89be(),
-		}, /*END SCHEMA*/
-		Description: "A date range for the date filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute101aa776b47ae7e57581ff89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the connector that establishes the integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute104a19163f2bf68f31dfffa2() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20d49d1c0dabe54412816604() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DateRange
-			"date_range": schemaAttribute0ead6f36d842baaa2a3640fc(),
-			// Property: End
-			"end": schemaAttributeb88534e42ca7b208100513ce(),
-			// Property: Start
-			"start": schemaAttributeb88534e42ca7b208100513ce(),
-		}, /*END SCHEMA*/
-		Description: "A date filter for querying findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute273c2177395bc37ddcc43bfb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Comparison
-			"comparison": schemaAttribute68c233d63e203ff352c50be0(),
-			// Property: Key
-			"key": schemaAttribute068bef8a9176218f80750618(),
-			// Property: Value
-			"value": schemaAttribute9be30b64cb1eb0f34372c60b(),
-		}, /*END SCHEMA*/
-		Description: "A map filter for filtering findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31f880d88ecb51ba01fa2ca9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fb062e013f9ad65c95a4bde() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4342835430709cdae53b1391() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The greater-than-equal condition to be applied to a single field when querying for findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49864fe61973fec08d4f5a2c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CompositeFilters
-			"composite_filters": schemaAttributebc4db2f1090ebe5145f1fe83(),
-			// Property: CompositeOperator
-			"composite_operator": schemaAttributeaa6b948801ee4983eca49dd8(),
-		}, /*END SCHEMA*/
-		Description: "The filtering conditions that align with OCSF standards",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4989f74c6f9839815f6a9c6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Notes or contextual information for findings that are modified by the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bcb2a2ed4cf86a12c2c6b28() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value for the rule priority",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e03f467543e9c80e2a861b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The condition to apply to a string value when filtering findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54a4f5ec1f09e9bcf0b85aa2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttribute0c0b9a2bb40fc74bed98202a(),
-				// Property: Filter
-				"filter": schemaAttributefe33e111ba465a4c17ecc68e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Enables filtering based on string field values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55b29a9b3c7311ba65ec8799() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The severity level to be assigned to findings that match the automation rule criteria",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e885914041722bd6b6ca750() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A date range unit for the date filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ee7794df0207c7cf90662d5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttribute0c0b9a2bb40fc74bed98202a(),
-				// Property: Filter
-				"filter": schemaAttribute20d49d1c0dabe54412816604(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Enables filtering based on date and timestamp fields",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute680dbf418f75cdf0e84c8df7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The status to be applied to findings that match automation rule criteria",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68c233d63e203ff352c50be0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The condition to apply to the key value when filtering findings with a map filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b6a2849526146bd5a9061d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bfa7dff3396f83851530b3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The string filter value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute767b514096b721e168cd632d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExternalIntegrationConfiguration
-				"external_integration_configuration": schemaAttribute969be9ae244411206b8ed528(),
-				// Property: FindingFieldsUpdate
-				"finding_fields_update": schemaAttributed2f1ac18b896d2d7486157cb(),
-				// Property: Type
-				"type": schemaAttributef3af284c751ddae8fe15f5b5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of actions to be performed when the rule criteria is met",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b1f9120b60a08a8b75259af() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The equal-to condition to be applied to a single field when querying for findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute969be9ae244411206b8ed528() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectorArn
-			"connector_arn": schemaAttribute101aa776b47ae7e57581ff89(),
-		}, /*END SCHEMA*/
-		Description: "The settings for integrating automation rule actions with external systems or service",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9be30b64cb1eb0f34372c60b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the key in the map filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dec4c0bc142d286abc9b678() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The less-than-equal condition to be applied to a single field when querying for findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fb58ca1b3624a4cd5e2dee5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa6b948801ee4983eca49dd8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logical operator used to combine multiple conditions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab37cfb8bf58f86688b7d13f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttributeedc57127e43ac499fb346d46(),
-		}, /*END SCHEMA*/
-		Description: "Boolean filter for querying findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb73fbd50d11fd26154b41d07() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttribute0c0b9a2bb40fc74bed98202a(),
-				// Property: Filter
-				"filter": schemaAttributef36f347bf7669c37ab11214e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Enables filtering based on numerical field values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb775bc959420f688d6ec122b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb88534e42ca7b208100513ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp formatted in ISO8601",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbefc77fa970956c2edd8aa3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttribute0c0b9a2bb40fc74bed98202a(),
-				// Property: Filter
-				"filter": schemaAttributeab37cfb8bf58f86688b7d13f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Enables filtering based on boolean field values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc4db2f1090ebe5145f1fe83() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BooleanFilters
-				"boolean_filters": schemaAttributebbefc77fa970956c2edd8aa3(),
-				// Property: DateFilters
-				"date_filters": schemaAttribute5ee7794df0207c7cf90662d5(),
-				// Property: MapFilters
-				"map_filters": schemaAttributec09834edb2457b0cb5d4d311(),
-				// Property: NumberFilters
-				"number_filters": schemaAttributeb73fbd50d11fd26154b41d07(),
-				// Property: Operator
-				"operator": schemaAttributeaa6b948801ee4983eca49dd8(),
-				// Property: StringFilters
-				"string_filters": schemaAttribute54a4f5ec1f09e9bcf0b85aa2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Enables the creation of complex filtering conditions by combining filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebde6677c652c976d728c89be() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "A date range value for the date filter",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec09834edb2457b0cb5d4d311() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttribute0c0b9a2bb40fc74bed98202a(),
-				// Property: Filter
-				"filter": schemaAttribute273c2177395bc37ddcc43bfb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Enables filtering based on map field value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2f1ac18b896d2d7486157cb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Comment
-			"comment": schemaAttribute4989f74c6f9839815f6a9c6b(),
-			// Property: SeverityId
-			"severity_id": schemaAttribute55b29a9b3c7311ba65ec8799(),
-			// Property: StatusId
-			"status_id": schemaAttribute680dbf418f75cdf0e84c8df7(),
-		}, /*END SCHEMA*/
-		Description: "The changes to be applied to fields in a security finding when an automation rule is triggered",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed61c5bd6a7e524e292764ec7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OcsfFindingCriteria
-			"ocsf_finding_criteria": schemaAttribute49864fe61973fec08d4f5a2c(),
-		}, /*END SCHEMA*/
-		Description: "Defines the parameters and conditions used to evaluate and filter security findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedc57127e43ac499fb346d46() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the boolean",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef36f347bf7669c37ab11214e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Eq
-			"eq": schemaAttribute8b1f9120b60a08a8b75259af(),
-			// Property: Gte
-			"gte": schemaAttribute4342835430709cdae53b1391(),
-			// Property: Lte
-			"lte": schemaAttribute9dec4c0bc142d286abc9b678(),
-		}, /*END SCHEMA*/
-		Description: "A number filter for querying findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3af284c751ddae8fe15f5b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The category of action to be executed by the automation rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe33e111ba465a4c17ecc68e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Comparison
-			"comparison": schemaAttribute4e03f467543e9c80e2a861b3(),
-			// Property: Value
-			"value": schemaAttribute6bfa7dff3396f83851530b3d(),
-		}, /*END SCHEMA*/
-		Description: "A string filter for filtering findings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_automation_rule_v2", automationRuleV2DataSource)
 }
@@ -516,7 +84,53 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"actions": schemaAttribute767b514096b721e168cd632d(),
+		"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ExternalIntegrationConfiguration
+					"external_integration_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectorArn
+							"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN of the connector that establishes the integration",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The settings for integrating automation rule actions with external systems or service",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FindingFieldsUpdate
+					"finding_fields_update": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comment
+							"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Notes or contextual information for findings that are modified by the automation rule",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SeverityId
+							"severity_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The severity level to be assigned to findings that match the automation rule criteria",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusId
+							"status_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The status to be applied to findings that match automation rule criteria",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The changes to be applied to fields in a security finding when an automation rule is triggered",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The category of action to be executed by the automation rule",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of actions to be performed when the rule criteria is met",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -525,7 +139,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeb88534e42ca7b208100513ce(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp formatted in ISO8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Criteria
 		// CloudFormation resource type schema:
 		//
@@ -872,7 +489,215 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"criteria": schemaAttributed61c5bd6a7e524e292764ec7(),
+		"criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OcsfFindingCriteria
+				"ocsf_finding_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeFilters
+						"composite_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BooleanFilters
+									"boolean_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FieldName
+												"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the field",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Filter
+												"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Value
+														"value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "The value of the boolean",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Boolean filter for querying findings",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Enables filtering based on boolean field values",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DateFilters
+									"date_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FieldName
+												"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the field",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Filter
+												"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: DateRange
+														"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Unit
+																"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "A date range unit for the date filter",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																	Description: "A date range value for the date filter",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "A date range for the date filter",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: End
+														"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The timestamp formatted in ISO8601",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Start
+														"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The timestamp formatted in ISO8601",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A date filter for querying findings",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Enables filtering based on date and timestamp fields",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MapFilters
+									"map_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FieldName
+												"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the field",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Filter
+												"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Comparison
+														"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The condition to apply to the key value when filtering findings with a map filter",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The key of the map filter",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The value for the key in the map filter",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A map filter for filtering findings",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Enables filtering based on map field value",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: NumberFilters
+									"number_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FieldName
+												"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the field",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Filter
+												"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Eq
+														"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
+															Description: "The equal-to condition to be applied to a single field when querying for findings",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Gte
+														"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
+															Description: "The greater-than-equal condition to be applied to a single field when querying for findings",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Lte
+														"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
+															Description: "The less-than-equal condition to be applied to a single field when querying for findings",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A number filter for querying findings",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Enables filtering based on numerical field values",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Operator
+									"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The logical operator used to combine multiple conditions",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StringFilters
+									"string_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FieldName
+												"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the field",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Filter
+												"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Comparison
+														"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The condition to apply to a string value when filtering findings",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The string filter value",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A string filter for filtering findings",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Enables filtering based on string field values",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Enables the creation of complex filtering conditions by combining filter",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CompositeOperator
+						"composite_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The logical operator used to combine multiple conditions",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The filtering conditions that align with OCSF standards",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the parameters and conditions used to evaluate and filter security findings",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -883,7 +708,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3fb062e013f9ad65c95a4bde(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the automation rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleArn
 		// CloudFormation resource type schema:
 		//
@@ -892,7 +720,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:automation-rulev2/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"rule_arn": schemaAttribute9fb58ca1b3624a4cd5e2dee5(),
+		"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the automation rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleId
 		// CloudFormation resource type schema:
 		//
@@ -901,7 +732,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"rule_id": schemaAttribute31f880d88ecb51ba01fa2ca9(),
+		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the automation rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleName
 		// CloudFormation resource type schema:
 		//
@@ -912,7 +746,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"rule_name": schemaAttributeb775bc959420f688d6ec122b(),
+		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the automation rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleOrder
 		// CloudFormation resource type schema:
 		//
@@ -922,7 +759,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 1.0,
 		//	  "type": "number"
 		//	}
-		"rule_order": schemaAttribute4bcb2a2ed4cf86a12c2c6b28(),
+		"rule_order": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The value for the rule priority",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleStatus
 		// CloudFormation resource type schema:
 		//
@@ -934,7 +774,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"rule_status": schemaAttribute6b6a2849526146bd5a9061d3(),
+		"rule_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the automation rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -951,7 +794,12 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute104a19163f2bf68f31dfffa2(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -960,7 +808,10 @@ func automationRuleV2DataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributeb88534e42ca7b208100513ce(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp formatted in ISO8601",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,68 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute14858e9dafbde0939c07b2c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the TopicRuleDestination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b3a11a7ae7a9c440398f343() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reasoning for the current status of the TopicRuleDestination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b202fbde9f440fc9eb501f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7be0196edcc017b01887dabe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1d5f0dfc9e1581d64470f6f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConfirmationUrl
-			"confirmation_url": schemaAttribute7be0196edcc017b01887dabe(),
-		}, /*END SCHEMA*/
-		Description: "HTTP URL destination properties.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd44b46ae44d8f9b00d36cde() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff8dfe7c0bbf676aca23aa51() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttribute7be0196edcc017b01887dabe(),
-			// Property: SecurityGroups
-			"security_groups": schemaAttributedd44b46ae44d8f9b00d36cde(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttributedd44b46ae44d8f9b00d36cde(),
-			// Property: VpcId
-			"vpc_id": schemaAttribute7be0196edcc017b01887dabe(),
-		}, /*END SCHEMA*/
-		Description: "VPC destination properties.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_topic_rule_destination", topicRuleDestinationDataSource)
 }
@@ -92,7 +30,10 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Amazon Resource Name (ARN).",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6b202fbde9f440fc9eb501f8(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HttpUrlProperties
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +47,16 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"http_url_properties": schemaAttributed1d5f0dfc9e1581d64470f6f(),
+		"http_url_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfirmationUrl
+				"confirmation_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "HTTP URL destination properties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +69,10 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute14858e9dafbde0939c07b2c3(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the TopicRuleDestination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +80,10 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The reasoning for the current status of the TopicRuleDestination.",
 		//	  "type": "string"
 		//	}
-		"status_reason": schemaAttribute3b3a11a7ae7a9c440398f343(),
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reasoning for the current status of the TopicRuleDestination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcProperties
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +114,30 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vpc_properties": schemaAttributeff8dfe7c0bbf676aca23aa51(),
+		"vpc_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "VPC destination properties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

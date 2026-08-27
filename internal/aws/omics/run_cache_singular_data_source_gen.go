@@ -15,99 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute09b04adaefeca3962af972e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the run cache.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0dcc763ff2dab17495322026() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e71fa55a3237d245458e6f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the run cache.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51390684be0f9106a99baa85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The run cache status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52b873186c7be25b7c7a7a67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74283c31decfefb1524d0075() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the expected owner of the S3 bucket for the run cache.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77703ba70169ab5acdde4119() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Creation time of the run cache (an ISO 8601 formatted string).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78c1066fa48cceb968d81039() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default cache behavior for runs using this cache.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92251825c1c5db136ca69cb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The run cache ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b264044b43b968e0f88e961() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 location for storing the cached task outputs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed559397247d6e123e219147a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The run cache ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee21a3c08157f7bc631678a80() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0dcc763ff2dab17495322026(),
-				// Property: Value
-				"value": schemaAttribute52b873186c7be25b7c7a7a67(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the run cache.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_omics_run_cache", runCacheDataSource)
 }
@@ -126,7 +33,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute92251825c1c5db136ca69cb1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The run cache ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheBehavior
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +48,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"cache_behavior": schemaAttribute78c1066fa48cceb968d81039(),
+		"cache_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default cache behavior for runs using this cache.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheBucketOwnerId
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +62,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"cache_bucket_owner_id": schemaAttribute74283c31decfefb1524d0075(),
+		"cache_bucket_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID of the expected owner of the S3 bucket for the run cache.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheS3Location
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +74,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"cache_s3_location": schemaAttribute9b264044b43b968e0f88e961(),
+		"cache_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The S3 location for storing the cached task outputs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +86,11 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute77703ba70169ab5acdde4119(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Creation time of the run cache (an ISO 8601 formatted string).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +101,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3e71fa55a3237d245458e6f0(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the run cache.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +115,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"run_cache_id": schemaAttributed559397247d6e123e219147a(),
+		"run_cache_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The run cache ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +129,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute09b04adaefeca3962af972e2(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the run cache.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +145,10 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute51390684be0f9106a99baa85(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The run cache status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +180,24 @@ func runCacheDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributee21a3c08157f7bc631678a80(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the run cache.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

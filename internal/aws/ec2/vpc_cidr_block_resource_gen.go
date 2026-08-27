@@ -19,158 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0470347c3e504ff91b87b167() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv6NetmaskLength is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17a07b94164b7e30868a3382() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An IPv4 CIDR block to associate with the VPC.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bb486f25ffc9868799e6eac() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-			boolplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2df258da09ca9bfc775d86b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv4IpamPoolId is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e958c9d7c7119cf85483638() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv6IpamPoolId is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f20ccff167c8a160c1926aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4636229e8fa9e4f88b17f58d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP Source of an IPv6 VPC CIDR Block.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6211f18eb0f8ee0cd840c39c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the VPC associated CIDR Block.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ebe726472b020ea0617b909() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An IPv6 CIDR block from the IPv6 address pool.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea78c11300a973c72d36907fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae78ceb79da8bf67399224d5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv4NetmaskLength is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec14db8c3c4fdd73f64df1f3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8ca0204020c0ee2b8301a7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the location from which we advertise the IPV6 CIDR block.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_cidr_block", vPCCidrBlockResource)
 }
@@ -186,7 +34,15 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.",
 		//	  "type": "boolean"
 		//	}
-		"amazon_provided_ipv_6_cidr_block": schemaAttribute2bb486f25ffc9868799e6eac(),
+		"amazon_provided_ipv_6_cidr_block": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +50,15 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An IPv4 CIDR block to associate with the VPC.",
 		//	  "type": "string"
 		//	}
-		"cidr_block": schemaAttribute17a07b94164b7e30868a3382(),
+		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An IPv4 CIDR block to associate with the VPC.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +66,13 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Id of the VPC associated CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"vpc_cidr_block_id": schemaAttribute6211f18eb0f8ee0cd840c39c(),
+		"vpc_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the VPC associated CIDR Block.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpSource
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +80,13 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IP Source of an IPv6 VPC CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"ip_source": schemaAttribute4636229e8fa9e4f88b17f58d(),
+		"ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP Source of an IPv6 VPC CIDR Block.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +94,16 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.",
 		//	  "type": "string"
 		//	}
-		"ipv_4_ipam_pool_id": schemaAttribute2df258da09ca9bfc775d86b9(),
+		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv4IpamPoolId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +111,16 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
 		//	  "type": "integer"
 		//	}
-		"ipv_4_netmask_length": schemaAttributeae78ceb79da8bf67399224d5(),
+		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv4NetmaskLength is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6AddressAttribute
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +128,13 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_address_attribute": schemaAttributea78c11300a973c72d36907fd(),
+		"ipv_6_address_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +142,15 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An IPv6 CIDR block from the IPv6 address pool.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block": schemaAttribute7ebe726472b020ea0617b909(),
+		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An IPv6 CIDR block from the IPv6 address pool.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlockNetworkBorderGroup
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +158,15 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the location from which we advertise the IPV6 CIDR block.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block_network_border_group": schemaAttributed8ca0204020c0ee2b8301a7c(),
+		"ipv_6_cidr_block_network_border_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the location from which we advertise the IPV6 CIDR block.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +174,16 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_ipam_pool_id": schemaAttribute3e958c9d7c7119cf85483638(),
+		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv6IpamPoolId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +191,16 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_netmask_length": schemaAttribute0470347c3e504ff91b87b167(),
+		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv6NetmaskLength is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Pool
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +208,15 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_pool": schemaAttributec14db8c3c4fdd73f64df1f3d(),
+		"ipv_6_pool": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +224,13 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute3f20ccff167c8a160c1926aa(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

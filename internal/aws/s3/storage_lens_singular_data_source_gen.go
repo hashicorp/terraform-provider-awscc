@@ -16,507 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00fe0cf6ab16ecbb52cefda8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActivityMetrics
-			"activity_metrics": schemaAttribute833f4df80bfd6f100f906230(),
-			// Property: AdvancedCostOptimizationMetrics
-			"advanced_cost_optimization_metrics": schemaAttributed94ba2fd9f6736882056f9e1(),
-			// Property: AdvancedDataProtectionMetrics
-			"advanced_data_protection_metrics": schemaAttribute7a36c54aadb2afcde53a44b8(),
-			// Property: AdvancedPerformanceMetrics
-			"advanced_performance_metrics": schemaAttribute3c1e36fabf04e15762702d97(),
-			// Property: BucketLevel
-			"bucket_level": schemaAttributeef3dde950bec5968acdb365c(),
-			// Property: DetailedStatusCodesMetrics
-			"detailed_status_codes_metrics": schemaAttributea2ec21bf43ce55427fdf7f5b(),
-			// Property: StorageLensGroupLevel
-			"storage_lens_group_level": schemaAttributeec4f528007a5a45c5b242ed2(),
-		}, /*END SCHEMA*/
-		Description: "Account-level metrics configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0616ba45b57dac98dbde5ba1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute07d4aef66a3b1c7a1102d21a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KeyId
-			"key_id": schemaAttribute8ba307fdd2710fa71fb637c0(),
-		}, /*END SCHEMA*/
-		Description: "AWS KMS server-side encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f73ecab44f893014ad3813f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Delimiter to divide S3 key into hierarchy of prefixes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24284a7b61c05c3570bc295e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2603bf3591fc0fb7df2fbd76() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2726b6cde858e4612c731834() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountId
-			"account_id": schemaAttributea334dd558386cdffc08f41e3(),
-			// Property: Arn
-			"arn": schemaAttribute6b05127a2ed7acd1f4008c4f(),
-			// Property: Encryption
-			"encryption": schemaAttributed988133cf73a1623109a5d41(),
-			// Property: Format
-			"format": schemaAttribute432fa01c02453a7d3a25b16b(),
-			// Property: OutputSchemaVersion
-			"output_schema_version": schemaAttribute24284a7b61c05c3570bc295e(),
-			// Property: Prefix
-			"prefix": schemaAttribute8c5ab87d57232769ec0155c7(),
-		}, /*END SCHEMA*/
-		Description: "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b30394408c4d69040d3d738() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fd158a0375669314600a3f0() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c1e36fabf04e15762702d97() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttribute2b30394408c4d69040d3d738(),
-		}, /*END SCHEMA*/
-		Description: "Advanced Performance Metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41642b5daf08dfd8fce8c169() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The delimiter to divide S3 key into hierarchy of prefixes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute432fa01c02453a7d3a25b16b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49385aef5e1fdadb0f769500() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3BucketDestination
-			"s3_bucket_destination": schemaAttribute2726b6cde858e4612c731834(),
-			// Property: StorageLensTableDestination
-			"storage_lens_table_destination": schemaAttributeecc77903484e0998542d1a66(),
-		}, /*END SCHEMA*/
-		Description: "Expanded Prefixes Data Export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4af69b8fc55dcb3238ca757d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the Amazon S3 Storage Lens configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fed1c7c420c394a2779f71d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttribute9694ccac1fc394a78737dd6b(),
-			// Property: SelectionCriteria
-			"selection_criteria": schemaAttributebfa493d006f2d685c4df161a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute545dd03fc4bf1847d014d105() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the export to S3 Tables is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b05127a2ed7acd1f4008c4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6de2197a237c9ec4030cc400() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute0616ba45b57dac98dbde5ba1(),
-		}, /*END SCHEMA*/
-		Description: "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7209f30e333e4b11fa341661() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether detailed status codes metrics are enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute798feeaacb4c8a8f4b0e4ee6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StorageMetrics
-			"storage_metrics": schemaAttribute4fed1c7c420c394a2779f71d(),
-		}, /*END SCHEMA*/
-		Description: "Prefix-level metrics configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a36c54aadb2afcde53a44b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttributea699e3ed8bcb795ec3f05bee(),
-		}, /*END SCHEMA*/
-		Description: "Enables advanced data protection metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cbd47820c242166a8a5ff91() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether CloudWatch metrics are enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ed7b36e70e094cbb7824562() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "S3 default server-side encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute833f4df80bfd6f100f906230() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttribute954b9c2767e238143187bcae(),
-		}, /*END SCHEMA*/
-		Description: "Enables activity metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute842cd5a49b2daa9a550556a2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Exclude
-			"exclude": schemaAttribute2fd158a0375669314600a3f0(),
-			// Property: Include
-			"include": schemaAttribute2fd158a0375669314600a3f0(),
-		}, /*END SCHEMA*/
-		Description: "Selection criteria for Storage Lens Group level metrics",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84631cb8c42049b9c929e9ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ba307fdd2710fa71fb637c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key to use for encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c5ab87d57232769ec0155c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix to use for Amazon S3 Storage Lens export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute954b9c2767e238143187bcae() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether activity metrics are enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9694ccac1fc394a78737dd6b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether prefix-level storage metrics are enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d5d4e982a18573ff968e925() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID that identifies the Amazon S3 Storage Lens configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2ec21bf43ce55427fdf7f5b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttribute7209f30e333e4b11fa341661(),
-		}, /*END SCHEMA*/
-		Description: "Enables detailed status codes metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea334dd558386cdffc08f41e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID that owns the destination S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea345d31b0dff48dcc97b5451() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute84631cb8c42049b9c929e9ca(),
-				// Property: Value
-				"value": schemaAttribute84631cb8c42049b9c929e9ca(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea699e3ed8bcb795ec3f05bee() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether advanced data protection metrics are enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8cf5a83143652b91b69d51f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttribute7cbd47820c242166a8a5ff91(),
-		}, /*END SCHEMA*/
-		Description: "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaff608dfeff16dda6e7613a0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountLevel
-			"account_level": schemaAttribute00fe0cf6ab16ecbb52cefda8(),
-			// Property: AwsOrg
-			"aws_org": schemaAttribute6de2197a237c9ec4030cc400(),
-			// Property: DataExport
-			"data_export": schemaAttributeb086f2ed2987a586f721c02e(),
-			// Property: Exclude
-			"exclude": schemaAttributed7a626c41e02d65393afdb94(),
-			// Property: ExpandedPrefixesDataExport
-			"expanded_prefixes_data_export": schemaAttribute49385aef5e1fdadb0f769500(),
-			// Property: Id
-			"id": schemaAttribute9d5d4e982a18573ff968e925(),
-			// Property: Include
-			"include": schemaAttributed7a626c41e02d65393afdb94(),
-			// Property: IsEnabled
-			"is_enabled": schemaAttributee64ffda9cbdb9c544caa38da(),
-			// Property: PrefixDelimiter
-			"prefix_delimiter": schemaAttribute41642b5daf08dfd8fce8c169(),
-			// Property: StorageLensArn
-			"storage_lens_arn": schemaAttribute4af69b8fc55dcb3238ca757d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the details of Amazon S3 Storage Lens configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb086f2ed2987a586f721c02e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchMetrics
-			"cloudwatch_metrics": schemaAttributea8cf5a83143652b91b69d51f(),
-			// Property: S3BucketDestination
-			"s3_bucket_destination": schemaAttribute2726b6cde858e4612c731834(),
-			// Property: StorageLensTableDestination
-			"storage_lens_table_destination": schemaAttributeecc77903484e0998542d1a66(),
-		}, /*END SCHEMA*/
-		Description: "Specifies how Amazon S3 Storage Lens metrics should be exported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2179f6b86a55d3cd444d484() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether advanced cost optimization metrics are enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfa493d006f2d685c4df161a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Delimiter
-			"delimiter": schemaAttribute0f73ecab44f893014ad3813f(),
-			// Property: MaxDepth
-			"max_depth": schemaAttribute2603bf3591fc0fb7df2fbd76(),
-			// Property: MinStorageBytesPercentage
-			"min_storage_bytes_percentage": schemaAttributef8bb237ea2b012a6654a0a1e(),
-		}, /*END SCHEMA*/
-		Description: "Selection criteria for prefix-level metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7a626c41e02d65393afdb94() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Buckets
-			"buckets": schemaAttribute2fd158a0375669314600a3f0(),
-			// Property: Regions
-			"regions": schemaAttribute2fd158a0375669314600a3f0(),
-		}, /*END SCHEMA*/
-		Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed94ba2fd9f6736882056f9e1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsEnabled
-			"is_enabled": schemaAttributeb2179f6b86a55d3cd444d484(),
-		}, /*END SCHEMA*/
-		Description: "Enables advanced cost optimization metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed988133cf73a1623109a5d41() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SSEKMS
-			"ssekms": schemaAttribute07d4aef66a3b1c7a1102d21a(),
-			// Property: SSES3
-			"sses3": schemaAttribute7ed7b36e70e094cbb7824562(),
-		}, /*END SCHEMA*/
-		Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee64ffda9cbdb9c544caa38da() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec4f528007a5a45c5b242ed2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StorageLensGroupSelectionCriteria
-			"storage_lens_group_selection_criteria": schemaAttribute842cd5a49b2daa9a550556a2(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the details of Amazon S3 Storage Lens Group configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecc77903484e0998542d1a66() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encryption
-			"encryption": schemaAttributed988133cf73a1623109a5d41(),
-			// Property: IsEnabled
-			"is_enabled": schemaAttribute545dd03fc4bf1847d014d105(),
-		}, /*END SCHEMA*/
-		Description: "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef3dde950bec5968acdb365c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActivityMetrics
-			"activity_metrics": schemaAttribute833f4df80bfd6f100f906230(),
-			// Property: AdvancedCostOptimizationMetrics
-			"advanced_cost_optimization_metrics": schemaAttributed94ba2fd9f6736882056f9e1(),
-			// Property: AdvancedDataProtectionMetrics
-			"advanced_data_protection_metrics": schemaAttribute7a36c54aadb2afcde53a44b8(),
-			// Property: AdvancedPerformanceMetrics
-			"advanced_performance_metrics": schemaAttribute3c1e36fabf04e15762702d97(),
-			// Property: DetailedStatusCodesMetrics
-			"detailed_status_codes_metrics": schemaAttributea2ec21bf43ce55427fdf7f5b(),
-			// Property: PrefixLevel
-			"prefix_level": schemaAttribute798feeaacb4c8a8f4b0e4ee6(),
-		}, /*END SCHEMA*/
-		Description: "Bucket-level metrics configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8bb237ea2b012a6654a0a1e() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum storage bytes threshold for the prefixes to be included in the analysis.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_storage_lens", storageLensDataSource)
 }
@@ -1057,7 +556,490 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"storage_lens_configuration": schemaAttributeaff608dfeff16dda6e7613a0(),
+		"storage_lens_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountLevel
+				"account_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActivityMetrics
+						"activity_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether activity metrics are enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Enables activity metrics.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AdvancedCostOptimizationMetrics
+						"advanced_cost_optimization_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether advanced cost optimization metrics are enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Enables advanced cost optimization metrics.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AdvancedDataProtectionMetrics
+						"advanced_data_protection_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether advanced data protection metrics are enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Enables advanced data protection metrics.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AdvancedPerformanceMetrics
+						"advanced_performance_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Advanced Performance Metrics.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BucketLevel
+						"bucket_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ActivityMetrics
+								"activity_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEnabled
+										"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether activity metrics are enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Enables activity metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AdvancedCostOptimizationMetrics
+								"advanced_cost_optimization_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEnabled
+										"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether advanced cost optimization metrics are enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Enables advanced cost optimization metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AdvancedDataProtectionMetrics
+								"advanced_data_protection_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEnabled
+										"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether advanced data protection metrics are enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Enables advanced data protection metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AdvancedPerformanceMetrics
+								"advanced_performance_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEnabled
+										"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Advanced Performance Metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DetailedStatusCodesMetrics
+								"detailed_status_codes_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEnabled
+										"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether detailed status codes metrics are enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Enables detailed status codes metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrefixLevel
+								"prefix_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: StorageMetrics
+										"storage_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: IsEnabled
+												"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether prefix-level storage metrics are enabled or disabled.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: SelectionCriteria
+												"selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Delimiter
+														"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Delimiter to divide S3 key into hierarchy of prefixes.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MaxDepth
+														"max_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MinStorageBytesPercentage
+														"min_storage_bytes_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+															Description: "The minimum storage bytes threshold for the prefixes to be included in the analysis.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Selection criteria for prefix-level metrics.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Prefix-level metrics configurations.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Bucket-level metrics configurations.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DetailedStatusCodesMetrics
+						"detailed_status_codes_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether detailed status codes metrics are enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Enables detailed status codes metrics.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StorageLensGroupLevel
+						"storage_lens_group_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageLensGroupSelectionCriteria
+								"storage_lens_group_selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Exclude
+										"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Include
+										"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Selection criteria for Storage Lens Group level metrics",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Account-level metrics configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AwsOrg
+				"aws_org": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the specified resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AWS Organizations ARN to use in the Amazon S3 Storage Lens configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataExport
+				"data_export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchMetrics
+						"cloudwatch_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether CloudWatch metrics are enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3BucketDestination
+						"s3_bucket_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountId
+								"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The AWS account ID that owns the destination S3 bucket.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Format
+								"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputSchemaVersion
+								"output_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Prefix
+								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The prefix to use for Amazon S3 Storage Lens export.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StorageLensTableDestination
+						"storage_lens_table_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the export to S3 Tables is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies how Amazon S3 Storage Lens metrics should be exported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Exclude
+				"exclude": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Buckets
+						"buckets": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Regions
+						"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExpandedPrefixesDataExport
+				"expanded_prefixes_data_export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3BucketDestination
+						"s3_bucket_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountId
+								"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The AWS account ID that owns the destination S3 bucket.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Format
+								"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputSchemaVersion
+								"output_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Prefix
+								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The prefix to use for Amazon S3 Storage Lens export.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StorageLensTableDestination
+						"storage_lens_table_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the export to S3 Tables is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Expanded Prefixes Data Export.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Id
+				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID that identifies the Amazon S3 Storage Lens configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Include
+				"include": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Buckets
+						"buckets": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Regions
+						"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsEnabled
+				"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrefixDelimiter
+				"prefix_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The delimiter to divide S3 key into hierarchy of prefixes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageLensArn
+				"storage_lens_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN for the Amazon S3 Storage Lens configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the details of Amazon S3 Storage Lens configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1090,7 +1072,22 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea345d31b0dff48dcc97b5451(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

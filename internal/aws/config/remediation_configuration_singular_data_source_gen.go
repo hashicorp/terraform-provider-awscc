@@ -15,53 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute44e2154c6ac9de55286da802() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d91e9605c39b331db791ac4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c5300739f3fbcc466374d2b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ee0529d958a768306fc03b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7f07a441d563435754b6a03() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConcurrentExecutionRatePercentage
-			"concurrent_execution_rate_percentage": schemaAttribute7c5300739f3fbcc466374d2b(),
-			// Property: ErrorPercentage
-			"error_percentage": schemaAttribute7c5300739f3fbcc466374d2b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1190375a5406155b7649e55() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SsmControls
-			"ssm_controls": schemaAttributea7f07a441d563435754b6a03(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_config_remediation_configuration", remediationConfigurationDataSource)
 }
@@ -76,14 +29,18 @@ func remediationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"automatic": schemaAttribute4d91e9605c39b331db791ac4(),
+		"automatic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigRuleName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"config_rule_name": schemaAttribute8ee0529d958a768306fc03b4(),
+		"config_rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionControls
 		// CloudFormation resource type schema:
 		//
@@ -105,56 +62,89 @@ func remediationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"execution_controls": schemaAttributeb1190375a5406155b7649e55(),
+		"execution_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SsmControls
+				"ssm_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConcurrentExecutionRatePercentage
+						"concurrent_execution_rate_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ErrorPercentage
+						"error_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumAutomaticAttempts
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"maximum_automatic_attempts": schemaAttribute7c5300739f3fbcc466374d2b(),
+		"maximum_automatic_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttribute44e2154c6ac9de55286da802(),
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute8ee0529d958a768306fc03b4(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetryAttemptSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"retry_attempt_seconds": schemaAttribute7c5300739f3fbcc466374d2b(),
+		"retry_attempt_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"target_id": schemaAttribute8ee0529d958a768306fc03b4(),
+		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"target_type": schemaAttribute8ee0529d958a768306fc03b4(),
+		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetVersion
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"target_version": schemaAttribute8ee0529d958a768306fc03b4(),
+		"target_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

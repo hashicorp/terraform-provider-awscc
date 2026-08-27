@@ -15,749 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0099803cb860ecd848b0a65b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute023d16965399f9f0037173c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A deployment configuration name or a predefined configuration name. With predefined configurations, you can deploy application revisions to one instance at a time (CodeDeployDefault.OneAtATime), half of the instances at a time (CodeDeployDefault.HalfAtATime), or all the instances at once (CodeDeployDefault.AllAtOnce).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute04e7b04a8bf042e668b70430() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to route deployment traffic behind a load balancer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute080d99bbf9916c879565c2af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A specific version of the Amazon S3 object that represents the bundled artifacts for the application revision. If the version is not specified, the system uses the most recent version by default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute095975a7107367fda713336d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute3be54c14151a6ab25f3e94c1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of alarms configured for the deployment or deployment group. A maximum of 10 alarms can be added.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a5eda72ee030d65bcce3a2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The on-premises instance tag filter key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0bbf70dd18d13b2c9037bc2b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ListenerArns
-			"listener_arns": schemaAttribute20cd8aa9a6ad6f60fe18a2c8(),
-		}, /*END SCHEMA*/
-		Description: "The path used by a load balancer to route production traffic when an Amazon ECS deployment is complete.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute114902fa14f13995d1856393() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActionOnTimeout
-			"action_on_timeout": schemaAttribute1f985672d693ae8b6404e856(),
-			// Property: WaitTimeInMinutes
-			"wait_time_in_minutes": schemaAttribute21d62a3f39340eb758c05a3d(),
-		}, /*END SCHEMA*/
-		Description: "Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute118dad03b50a08a9c48b9add() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. For more information, see 'Create a Service Role for AWS CodeDeploy' in the AWS CodeDeploy User Guide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute164abb94d91d3facb8604a13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cluster that the Amazon ECS service is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18492da6ef02a13bac741cc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to run an in-place or blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute193275e6b3a6caff64ba68a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. If this option is set to UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not initiate a deployment to update the new Amazon EC2 instances. This may result in instances having different revisions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c409ca8c50b2bc20d0695bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the notification trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f985672d693ae8b6404e856() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment. CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment. STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using ContinueDeployment . If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20cd8aa9a6ad6f60fe18a2c8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Amazon Resource Name (ARN) of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21bc8fbd13da2a2d2502e3ff() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ProdTrafficRoute
-				"prod_traffic_route": schemaAttribute0bbf70dd18d13b2c9037bc2b(),
-				// Property: TargetGroups
-				"target_groups": schemaAttributeba6da3b295da818a0bf52180(),
-				// Property: TestTrafficRoute
-				"test_traffic_route": schemaAttribute826fd44128a0c878d4319143(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The target group pair information. This is an array of TargeGroupPairInfo objects with a maximum size of one.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21d62a3f39340eb758c05a3d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of minutes to wait before the status of a blue/green deployment is changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26fe7a29889861c4a8d87af0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TriggerEvents
-				"trigger_events": schemaAttributeded3565e5b5a6a04ae8158f2(),
-				// Property: TriggerName
-				"trigger_name": schemaAttribute1c409ca8c50b2bc20d0695bd(),
-				// Property: TriggerTargetArn
-				"trigger_target_arn": schemaAttributefd043e6ec14d6089010ed875(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about triggers associated with the deployment group. Duplicates are not allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28eacceaa090e1ec80168844() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic deployment lifecycle event to an instance fails, then the deployment continues to the next deployment lifecycle event. If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, then a deployment to the next instance is attempted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e1f29d4ba5c923206e84d56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The GitHub account and repository pair that stores the application revision to be deployed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33887b96445c8ad8ef7c596d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The event type or types that trigger a rollback.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3be54c14151a6ab25f3e94c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the alarm. Maximum length is 255 characters. Each alarm name can be used only once in a list of alarms.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ebd66f179770dd2fc90d45f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OnPremisesTagGroup
-				"on_premises_tag_group": schemaAttributecd55f124747ca62f8f1d875c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list that contains other lists of on-premises instance tag groups. For an instance to be included in the deployment group, it must be identified by all of the tag groups in the list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46b033532da6421754d69a7d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributea388ba7eafe269bcab93a579(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array that contains information about the load balancers to use for load balancing in a deployment. If you're using Classic Load Balancers, specify those load balancers in this array.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute483215a097b3b27874c6bfba() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "For an Amazon EC2 deployment, the number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. For an Amazon ECS deployment, the number of minutes before deleting the original (blue) task set. During an Amazon ECS deployment, CodeDeploy shifts traffic from the original (blue) task set to a replacement (green) task set. The maximum setting is 2880 minutes (2 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute582e84ef2dd488586a163cca() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9c9ce68a950e3c11b09d523a(),
-				// Property: Value
-				"value": schemaAttribute623f65191fe6177e1f91fc88(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c05a4f40d5f98902a3921ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The on-premises instance tag filter type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c18cd91a0db4844e8ea7cc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag filter value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60d4cde9060ed65818aa1811() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeploymentOption
-			"deployment_option": schemaAttribute04e7b04a8bf042e668b70430(),
-			// Property: DeploymentType
-			"deployment_type": schemaAttribute18492da6ef02a13bac741cc8(),
-		}, /*END SCHEMA*/
-		Description: "Attributes that determine the type of deployment to run and whether to route deployment traffic behind a load balancer. If you specify this property with a blue/green deployment type, don't specify the AutoScalingGroups, LoadBalancerInfo, or Deployment properties.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute611998a8c8fc18b5d24387fe() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClusterName
-				"cluster_name": schemaAttribute164abb94d91d3facb8604a13(),
-				// Property: ServiceName
-				"service_name": schemaAttribute669fe4e9ab282e09a842a612(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The target Amazon ECS services in the deployment group. This applies only to deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name pair using the format <clustername>:<servicename>.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61235c12d0968d20527cf1e7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute6e0c64607a1a4a8beb8dbdac(),
-			// Property: Events
-			"events": schemaAttribute33887b96445c8ad8ef7c596d(),
-		}, /*END SCHEMA*/
-		Description: "Information about the automatic rollback configuration that is associated with the deployment group. If you specify this property, don't specify the Deployment property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute623f65191fe6177e1f91fc88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64c54273b5a9eef0b079c867() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The method used to add instances to a replacement environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute669fe4e9ab282e09a842a612() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the target Amazon ECS service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bb82ffdfd5cb355e25b8531() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Ec2TagSetList
-			"ec_2_tag_set_list": schemaAttribute89543fb0764f638fa63b4449(),
-		}, /*END SCHEMA*/
-		Description: "Information about groups of tags applied to Amazon EC2 instances. Use when the deployment group includes only Amazon EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e0c64607a1a4a8beb8dbdac() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether a defined automatic rollback configuration is currently enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7119a2d39410b474d6c4863c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7794e2d64d163f3dd01bd6c9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0a5eda72ee030d65bcce3a2f(),
-				// Property: Type
-				"type": schemaAttribute5c05a4f40d5f98902a3921ce(),
-				// Property: Value
-				"value": schemaAttributebbd3f76783d6737c273b6f46(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The on-premises instance tags already applied to on-premises instances that you want to include in the deployment group. CodeDeploy includes all on-premises instances identified by any of the tags you specify in this deployment group. Duplicates are not allowed. You can specify OnPremisesInstanceTagFilters or OnPremisesInstanceTagSet, but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79b0ac93616c23e5d21a26fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. No duplicates allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aed7d0dff702edc93ce8563() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Description
-			"description": schemaAttribute7119a2d39410b474d6c4863c(),
-			// Property: IgnoreApplicationStopFailures
-			"ignore_application_stop_failures": schemaAttribute28eacceaa090e1ec80168844(),
-			// Property: Revision
-			"revision": schemaAttributeea55db0be84533256ca41e16(),
-		}, /*END SCHEMA*/
-		Description: "The application revision to deploy to this deployment group. If you specify this property, your target application revision is deployed as soon as the provisioning process is complete. If you specify this property, don't specify the AutoRollbackConfiguration property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dda1a0884b18486e25d148d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute79b0ac93616c23e5d21a26fd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array that contains information about the target groups to use for load balancing in a deployment. If you're using Application Load Balancers and Network Load Balancers, specify their associated target groups in this array.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute802c82afd407dc62ea1782cd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed18d767fd7a2b0ba054bf3c1(),
-				// Property: Type
-				"type": schemaAttributeff512329e7d2cf27f13136ce(),
-				// Property: Value
-				"value": schemaAttribute5c18cd91a0db4844e8ea7cc7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The Amazon EC2 tags that are already applied to Amazon EC2 instances that you want to include in the deployment group. CodeDeploy includes all Amazon EC2 instances identified by any of the tags you specify in this deployment group. Duplicates are not allowed. You can specify EC2TagFilters or Ec2TagSet, but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute826fd44128a0c878d4319143() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ListenerArns
-			"listener_arns": schemaAttribute20cd8aa9a6ad6f60fe18a2c8(),
-		}, /*END SCHEMA*/
-		Description: "An optional path used by a load balancer to route test traffic after an Amazon ECS deployment. Validation can occur while test traffic is served during a deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84a41fb8abb2bfa89b2d8b37() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed18d767fd7a2b0ba054bf3c1(),
-				// Property: Type
-				"type": schemaAttributeff512329e7d2cf27f13136ce(),
-				// Property: Value
-				"value": schemaAttribute5c18cd91a0db4844e8ea7cc7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list that contains other lists of Amazon EC2 instance tag groups. For an instance to be included in the deployment group, it must be identified by all of the tag groups in the list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85af9e5b0094c453bf15b640() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Action
-			"action": schemaAttribute64c54273b5a9eef0b079c867(),
-		}, /*END SCHEMA*/
-		Description: "Information about how instances are provisioned for a replacement environment in a blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute868a33ee681ee46b787214ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ETag of the Amazon S3 object that represents the bundled artifacts for the application revision. If the ETag is not specified as an input parameter, ETag validation of the object is skipped.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute881b715dd0d3f3137dfb98eb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeploymentReadyOption
-			"deployment_ready_option": schemaAttribute114902fa14f13995d1856393(),
-			// Property: GreenFleetProvisioningOption
-			"green_fleet_provisioning_option": schemaAttribute85af9e5b0094c453bf15b640(),
-			// Property: TerminateBlueInstancesOnDeploymentSuccess
-			"terminate_blue_instances_on_deployment_success": schemaAttributef9db362af6f422c74630db5a(),
-		}, /*END SCHEMA*/
-		Description: "Information about blue/green deployment options for a deployment group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89543fb0764f638fa63b4449() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ec2TagGroup
-				"ec_2_tag_group": schemaAttribute84a41fb8abb2bfa89b2d8b37(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The Amazon EC2 tags that are already applied to Amazon EC2 instances that you want to include in the deployment group. CodeDeploy includes all Amazon EC2 instances identified by any of the tags you specify in this deployment group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a685613d45ba827f6682b7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 object that represents the bundled artifacts for the application revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c7ac02104ff247b8828df58() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the alarm configuration is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c9ce68a950e3c11b09d523a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e902ffa09f71e63a18a4d26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket where the application revision is stored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea36b2e47aea02a77f8f06471() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SHA1 commit ID of the GitHub commit that represents the bundled artifacts for the application revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea388ba7eafe269bcab93a579() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For blue/green deployments, the name of the load balancer that is used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment is complete.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab5e961fd8b5b198234a6664() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ElbInfoList
-			"elb_info_list": schemaAttribute46b033532da6421754d69a7d(),
-			// Property: TargetGroupInfoList
-			"target_group_info_list": schemaAttribute7dda1a0884b18486e25d148d(),
-			// Property: TargetGroupPairInfoList
-			"target_group_pair_info_list": schemaAttribute21bc8fbd13da2a2d2502e3ff(),
-		}, /*END SCHEMA*/
-		Description: "Information about the load balancer to use in a deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb46788ce03b5f6b7be1aa17b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CommitId
-			"commit_id": schemaAttributea36b2e47aea02a77f8f06471(),
-			// Property: Repository
-			"repository": schemaAttribute2e1f29d4ba5c923206e84d56(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the location of an application revision that is stored in GitHub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba6da3b295da818a0bf52180() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute79b0ac93616c23e5d21a26fd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One pair of target groups. One is associated with the original task set. The second is associated with the task set that serves traffic after the deployment is complete.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbd3f76783d6737c273b6f46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The on-premises instance tag filter value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf47954387a4072c1e18cf75() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Alarms
-			"alarms": schemaAttribute095975a7107367fda713336d(),
-			// Property: Enabled
-			"enabled": schemaAttribute8c7ac02104ff247b8828df58(),
-			// Property: IgnorePollAlarmFailure
-			"ignore_poll_alarm_failure": schemaAttributec8091be825db92d3ba450472(),
-		}, /*END SCHEMA*/
-		Description: "Information about the Amazon CloudWatch alarms that are associated with the deployment group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8091be825db92d3ba450472() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd55f124747ca62f8f1d875c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0a5eda72ee030d65bcce3a2f(),
-				// Property: Type
-				"type": schemaAttribute5c05a4f40d5f98902a3921ce(),
-				// Property: Value
-				"value": schemaAttributebbd3f76783d6737c273b6f46(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about groups of on-premises instance tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0df509657ad7712f4e77f9c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OnPremisesTagSetList
-			"on_premises_tag_set_list": schemaAttribute3ebd66f179770dd2fc90d45f(),
-		}, /*END SCHEMA*/
-		Description: "Information about groups of tags applied to on-premises instances. The deployment group includes only on-premises instances identified by all the tag groups. You can specify OnPremisesInstanceTagFilters or OnPremisesInstanceTagSet, but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed18d767fd7a2b0ba054bf3c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag filter key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedab4e7cf7e0acf4507e827b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file type of the application revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeded3565e5b5a6a04ae8158f2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The event type or types that trigger notifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2ec9ff63fddb00b6986522a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action to take on instances in the original environment after a successful blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7b3c0fc2627358141df8141() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an existing CodeDeploy application to associate this deployment group with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee82e29caeffd8ad1613d0150() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of application revision.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea23aa26e619ca7899ba234c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of associated Auto Scaling groups that CodeDeploy automatically deploys revisions to when new instances are created. Duplicates are not allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea55db0be84533256ca41e16() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GitHubLocation
-			"git_hub_location": schemaAttributeb46788ce03b5f6b7be1aa17b(),
-			// Property: RevisionType
-			"revision_type": schemaAttributee82e29caeffd8ad1613d0150(),
-			// Property: S3Location
-			"s3_location": schemaAttributeefb0d7e75a0d99cc51d13a8d(),
-		}, /*END SCHEMA*/
-		Description: "Information about the location of stored application artifacts and the service from which to retrieve them.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeefb0d7e75a0d99cc51d13a8d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute9e902ffa09f71e63a18a4d26(),
-			// Property: BundleType
-			"bundle_type": schemaAttributedab4e7cf7e0acf4507e827b7(),
-			// Property: ETag
-			"e_tag": schemaAttribute868a33ee681ee46b787214ca(),
-			// Property: Key
-			"key": schemaAttribute8a685613d45ba827f6682b7e(),
-			// Property: Version
-			"version": schemaAttribute080d99bbf9916c879565c2af(),
-		}, /*END SCHEMA*/
-		Description: "Information about the location of application artifacts stored in Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1506bbc10905455ca707156() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the deployment group. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment group name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9db362af6f422c74630db5a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Action
-			"action": schemaAttributee2ec9ff63fddb00b6986522a(),
-			// Property: TerminationWaitTimeInMinutes
-			"termination_wait_time_in_minutes": schemaAttribute483215a097b3b27874c6bfba(),
-		}, /*END SCHEMA*/
-		Description: "Information about whether to terminate instances in the original fleet during a blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd043e6ec14d6089010ed875() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff512329e7d2cf27f13136ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag filter type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codedeploy_deployment_group", deploymentGroupDataSource)
 }
@@ -800,7 +57,36 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"alarm_configuration": schemaAttributebf47954387a4072c1e18cf75(),
+		"alarm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Alarms
+				"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the alarm. Maximum length is 255 characters. Each alarm name can be used only once in a list of alarms.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of alarms configured for the deployment or deployment group. A maximum of 10 alarms can be added.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether the alarm configuration is enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IgnorePollAlarmFailure
+				"ignore_poll_alarm_failure": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the Amazon CloudWatch alarms that are associated with the deployment group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationName
 		// CloudFormation resource type schema:
 		//
@@ -808,7 +94,10 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of an existing CodeDeploy application to associate this deployment group with.",
 		//	  "type": "string"
 		//	}
-		"application_name": schemaAttributee7b3c0fc2627358141df8141(),
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an existing CodeDeploy application to associate this deployment group with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoRollbackConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -831,7 +120,23 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"auto_rollback_configuration": schemaAttribute61235c12d0968d20527cf1e7(),
+		"auto_rollback_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether a defined automatic rollback configuration is currently enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Events
+				"events": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The event type or types that trigger a rollback.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the automatic rollback configuration that is associated with the deployment group. If you specify this property, don't specify the Deployment property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoScalingGroups
 		// CloudFormation resource type schema:
 		//
@@ -843,7 +148,11 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"auto_scaling_groups": schemaAttributeea23aa26e619ca7899ba234c(),
+		"auto_scaling_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of associated Auto Scaling groups that CodeDeploy automatically deploys revisions to when new instances are created. Duplicates are not allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlueGreenDeploymentConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -895,7 +204,58 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"blue_green_deployment_configuration": schemaAttribute881b715dd0d3f3137dfb98eb(),
+		"blue_green_deployment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentReadyOption
+				"deployment_ready_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActionOnTimeout
+						"action_on_timeout": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment. CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment. STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using ContinueDeployment . If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WaitTimeInMinutes
+						"wait_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of minutes to wait before the status of a blue/green deployment is changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GreenFleetProvisioningOption
+				"green_fleet_provisioning_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Action
+						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The method used to add instances to a replacement environment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about how instances are provisioned for a replacement environment in a blue/green deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TerminateBlueInstancesOnDeploymentSuccess
+				"terminate_blue_instances_on_deployment_success": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Action
+						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The action to take on instances in the original environment after a successful blue/green deployment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TerminationWaitTimeInMinutes
+						"termination_wait_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "For an Amazon EC2 deployment, the number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment. For an Amazon ECS deployment, the number of minutes before deleting the original (blue) task set. During an Amazon ECS deployment, CodeDeploy shifts traffic from the original (blue) task set to a replacement (green) task set. The maximum setting is 2880 minutes (2 days).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about whether to terminate instances in the original fleet during a blue/green deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about blue/green deployment options for a deployment group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Deployment
 		// CloudFormation resource type schema:
 		//
@@ -978,7 +338,83 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"deployment": schemaAttribute7aed7d0dff702edc93ce8563(),
+		"deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IgnoreApplicationStopFailures
+				"ignore_application_stop_failures": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic deployment lifecycle event to an instance fails, then the deployment continues to the next deployment lifecycle event. If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, then a deployment to the next instance is attempted.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Revision
+				"revision": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GitHubLocation
+						"git_hub_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CommitId
+								"commit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The SHA1 commit ID of the GitHub commit that represents the bundled artifacts for the application revision.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Repository
+								"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The GitHub account and repository pair that stores the application revision to be deployed.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the location of an application revision that is stored in GitHub.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RevisionType
+						"revision_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of application revision.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Location
+						"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket where the application revision is stored.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BundleType
+								"bundle_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The file type of the application revision.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ETag
+								"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ETag of the Amazon S3 object that represents the bundled artifacts for the application revision. If the ETag is not specified as an input parameter, ETag validation of the object is skipped.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 object that represents the bundled artifacts for the application revision.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Version
+								"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A specific version of the Amazon S3 object that represents the bundled artifacts for the application revision. If the version is not specified, the system uses the most recent version by default.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Information about the location of application artifacts stored in Amazon S3.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about the location of stored application artifacts and the service from which to retrieve them.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The application revision to deploy to this deployment group. If you specify this property, your target application revision is deployed as soon as the provisioning process is complete. If you specify this property, don't specify the AutoRollbackConfiguration property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentConfigName
 		// CloudFormation resource type schema:
 		//
@@ -986,7 +422,10 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A deployment configuration name or a predefined configuration name. With predefined configurations, you can deploy application revisions to one instance at a time (CodeDeployDefault.OneAtATime), half of the instances at a time (CodeDeployDefault.HalfAtATime), or all the instances at once (CodeDeployDefault.AllAtOnce).",
 		//	  "type": "string"
 		//	}
-		"deployment_config_name": schemaAttribute023d16965399f9f0037173c1(),
+		"deployment_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A deployment configuration name or a predefined configuration name. With predefined configurations, you can deploy application revisions to one instance at a time (CodeDeployDefault.OneAtATime), half of the instances at a time (CodeDeployDefault.HalfAtATime), or all the instances at once (CodeDeployDefault.AllAtOnce).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentGroupName
 		// CloudFormation resource type schema:
 		//
@@ -994,7 +433,10 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A name for the deployment group. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment group name.",
 		//	  "type": "string"
 		//	}
-		"deployment_group_name": schemaAttributef1506bbc10905455ca707156(),
+		"deployment_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the deployment group. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment group name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentStyle
 		// CloudFormation resource type schema:
 		//
@@ -1013,7 +455,22 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_style": schemaAttribute60d4cde9060ed65818aa1811(),
+		"deployment_style": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentOption
+				"deployment_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to route deployment traffic behind a load balancer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeploymentType
+				"deployment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to run an in-place or blue/green deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Attributes that determine the type of deployment to run and whether to route deployment traffic behind a load balancer. If you specify this property with a blue/green deployment type, don't specify the AutoScalingGroups, LoadBalancerInfo, or Deployment properties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ECSServices
 		// CloudFormation resource type schema:
 		//
@@ -1041,7 +498,24 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"ecs_services": schemaAttribute611998a8c8fc18b5d24387fe(),
+		"ecs_services": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ClusterName
+					"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the cluster that the Amazon ECS service is associated with.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ServiceName
+					"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the target Amazon ECS service.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The target Amazon ECS services in the deployment group. This applies only to deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name pair using the format <clustername>:<servicename>.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ec2TagFilters
 		// CloudFormation resource type schema:
 		//
@@ -1069,7 +543,29 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"ec_2_tag_filters": schemaAttribute802c82afd407dc62ea1782cd(),
+		"ec_2_tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag filter key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag filter type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag filter value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The Amazon EC2 tags that are already applied to Amazon EC2 instances that you want to include in the deployment group. CodeDeploy includes all Amazon EC2 instances identified by any of the tags you specify in this deployment group. Duplicates are not allowed. You can specify EC2TagFilters or Ec2TagSet, but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ec2TagSet
 		// CloudFormation resource type schema:
 		//
@@ -1116,7 +612,45 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ec_2_tag_set": schemaAttribute6bb82ffdfd5cb355e25b8531(),
+		"ec_2_tag_set": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ec2TagSetList
+				"ec_2_tag_set_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Ec2TagGroup
+							"ec_2_tag_group": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag filter key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag filter type.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The tag filter value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "A list that contains other lists of Amazon EC2 instance tag groups. For an instance to be included in the deployment group, it must be identified by all of the tag groups in the list.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The Amazon EC2 tags that are already applied to Amazon EC2 instances that you want to include in the deployment group. CodeDeploy includes all Amazon EC2 instances identified by any of the tags you specify in this deployment group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about groups of tags applied to Amazon EC2 instances. Use when the deployment group includes only Amazon EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerInfo
 		// CloudFormation resource type schema:
 		//
@@ -1217,7 +751,89 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"load_balancer_info": schemaAttributeab5e961fd8b5b198234a6664(),
+		"load_balancer_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ElbInfoList
+				"elb_info_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "For blue/green deployments, the name of the load balancer that is used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment is complete.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array that contains information about the load balancers to use for load balancing in a deployment. If you're using Classic Load Balancers, specify those load balancers in this array.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetGroupInfoList
+				"target_group_info_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. No duplicates allowed.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array that contains information about the target groups to use for load balancing in a deployment. If you're using Application Load Balancers and Network Load Balancers, specify their associated target groups in this array.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetGroupPairInfoList
+				"target_group_pair_info_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ProdTrafficRoute
+							"prod_traffic_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ListenerArns
+									"listener_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The Amazon Resource Name (ARN) of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The path used by a load balancer to route production traffic when an Amazon ECS deployment is complete.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetGroups
+							"target_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. No duplicates allowed.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "One pair of target groups. One is associated with the original task set. The second is associated with the task set that serves traffic after the deployment is complete.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TestTrafficRoute
+							"test_traffic_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ListenerArns
+									"listener_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The Amazon Resource Name (ARN) of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "An optional path used by a load balancer to route test traffic after an Amazon ECS deployment. Validation can occur while test traffic is served during a deployment.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The target group pair information. This is an array of TargeGroupPairInfo objects with a maximum size of one.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the load balancer to use in a deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OnPremisesInstanceTagFilters
 		// CloudFormation resource type schema:
 		//
@@ -1245,7 +861,29 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"on_premises_instance_tag_filters": schemaAttribute7794e2d64d163f3dd01bd6c9(),
+		"on_premises_instance_tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The on-premises instance tag filter key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The on-premises instance tag filter type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The on-premises instance tag filter value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The on-premises instance tags already applied to on-premises instances that you want to include in the deployment group. CodeDeploy includes all on-premises instances identified by any of the tags you specify in this deployment group. Duplicates are not allowed. You can specify OnPremisesInstanceTagFilters or OnPremisesInstanceTagSet, but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OnPremisesTagSet
 		// CloudFormation resource type schema:
 		//
@@ -1292,7 +930,45 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"on_premises_tag_set": schemaAttributed0df509657ad7712f4e77f9c(),
+		"on_premises_tag_set": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnPremisesTagSetList
+				"on_premises_tag_set_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: OnPremisesTagGroup
+							"on_premises_tag_group": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The on-premises instance tag filter key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The on-premises instance tag filter type",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The on-premises instance tag filter value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Information about groups of on-premises instance tags.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list that contains other lists of on-premises instance tag groups. For an instance to be included in the deployment group, it must be identified by all of the tag groups in the list.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about groups of tags applied to on-premises instances. The deployment group includes only on-premises instances identified by all the tag groups. You can specify OnPremisesInstanceTagFilters or OnPremisesInstanceTagSet, but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutdatedInstancesStrategy
 		// CloudFormation resource type schema:
 		//
@@ -1300,7 +976,10 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. If this option is set to UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not initiate a deployment to update the new Amazon EC2 instances. This may result in instances having different revisions.",
 		//	  "type": "string"
 		//	}
-		"outdated_instances_strategy": schemaAttribute193275e6b3a6caff64ba68a0(),
+		"outdated_instances_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. If this option is set to UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated instances' deployments to apply the deployed application revision to the new Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not initiate a deployment to update the new Amazon EC2 instances. This may result in instances having different revisions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1308,7 +987,10 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. For more information, see 'Create a Service Role for AWS CodeDeploy' in the AWS CodeDeploy User Guide.",
 		//	  "type": "string"
 		//	}
-		"service_role_arn": schemaAttribute118dad03b50a08a9c48b9add(),
+		"service_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. For more information, see 'Create a Service Role for AWS CodeDeploy' in the AWS CodeDeploy User Guide.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1336,7 +1018,24 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute582e84ef2dd488586a163cca(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TerminationHookEnabled
 		// CloudFormation resource type schema:
 		//
@@ -1344,7 +1043,10 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.",
 		//	  "type": "boolean"
 		//	}
-		"termination_hook_enabled": schemaAttribute0099803cb860ecd848b0a65b(),
+		"termination_hook_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TriggerConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -1376,7 +1078,30 @@ func deploymentGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"trigger_configurations": schemaAttribute26fe7a29889861c4a8d87af0(),
+		"trigger_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: TriggerEvents
+					"trigger_events": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The event type or types that trigger notifications.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TriggerName
+					"trigger_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the notification trigger.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TriggerTargetArn
+					"trigger_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about triggers associated with the deployment group. Duplicates are not allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

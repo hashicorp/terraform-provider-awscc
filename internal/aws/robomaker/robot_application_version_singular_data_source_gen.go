@@ -14,19 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute53c8bb6a09ebb5b51dc62456() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The revision ID of robot application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6588ba7cfb55d4bc706c710a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_robomaker_robot_application_version", robotApplicationVersionDataSource)
 }
@@ -42,14 +29,18 @@ func robotApplicationVersionDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 		//	  "type": "string"
 		//	}
-		"application": schemaAttribute6588ba7cfb55d4bc706c710a(),
+		"application": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationVersion
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"application_version": schemaAttribute6588ba7cfb55d4bc706c710a(),
+		"application_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -57,7 +48,9 @@ func robotApplicationVersionDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6588ba7cfb55d4bc706c710a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CurrentRevisionId
 		// CloudFormation resource type schema:
 		//
@@ -68,7 +61,10 @@ func robotApplicationVersionDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "[a-zA-Z0-9_.\\-]*",
 		//	  "type": "string"
 		//	}
-		"current_revision_id": schemaAttribute53c8bb6a09ebb5b51dc62456(),
+		"current_revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The revision ID of robot application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

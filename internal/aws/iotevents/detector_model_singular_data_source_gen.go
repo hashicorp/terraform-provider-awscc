@@ -14,888 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0027adc1d5f159f2d7f78105() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The new value of the variable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0028c683f56ee41081a98b4a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClearTimer
-				"clear_timer": schemaAttribute7c22e3e29f4802ef71cb3b97(),
-				// Property: DynamoDB
-				"dynamo_db": schemaAttribute285a0703e56f333e44931f20(),
-				// Property: DynamoDBv2
-				"dynamo_d_bv_2": schemaAttributeedf7145a68b85635b82c157b(),
-				// Property: Firehose
-				"firehose": schemaAttribute7cefed16a3629e8c718ff2ad(),
-				// Property: IotEvents
-				"iot_events": schemaAttributecd78fc9c107b6acdc6ca0728(),
-				// Property: IotSiteWise
-				"iot_site_wise": schemaAttributebb627e48be21575a3d110184(),
-				// Property: IotTopicPublish
-				"iot_topic_publish": schemaAttribute33493a3336b2442a3012b9eb(),
-				// Property: Lambda
-				"lambda": schemaAttribute67a4a09360691a3bd620baad(),
-				// Property: ResetTimer
-				"reset_timer": schemaAttributeb49fb2022d94fd97d48584f5(),
-				// Property: SetTimer
-				"set_timer": schemaAttributeaa512be23e14043c729522f8(),
-				// Property: SetVariable
-				"set_variable": schemaAttribute5730a3d4befa1623a12488c0(),
-				// Property: Sns
-				"sns": schemaAttribute698568a0b237afbd416f044e(),
-				// Property: Sqs
-				"sqs": schemaAttributedaad2a54e16ebc8d477dcf42(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The actions to be performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute02758f2363935261751d5f2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0353305d061de85dd5a05044() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. ITE can continue to route input to its corresponding detector instance based on this identifying information. \n This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0796103021c24bde2fdda018() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09b13f660ea307b7ab84a1a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the asset property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e70decfa796f3e5c0c1ebc9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "You can configure the action payload when you send a message to an ITE input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e8ad6e85eea0a526f1b4b77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14b8033a68a5f0bc6ef5bb40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the variable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute157baeaf21441579f46f329d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the SQS queue where the data is written.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1682e73c1cd4de772caa6122() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Required. A Boolean expression that when TRUE causes the actions to be performed and the ``nextState`` to be entered.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute182204ef9c67a2b85959a33d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18872d1f74803f25c4db41e0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttribute0028c683f56ee41081a98b4a(),
-				// Property: Condition
-				"condition": schemaAttribute439b6acc0c032c6e2b2ac239(),
-				// Property: EventName
-				"event_name": schemaAttributeb46b73b0d45b2077c71cb497(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the ``actions`` that are performed when the state is exited and the ``condition`` is ``TRUE``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute202db582e5cd8bde6938c903() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InitialStateName
-			"initial_state_name": schemaAttributeb6b62e2eaf24e3aebacbe09b(),
-			// Property: States
-			"states": schemaAttributec1db1b017a087bc9c8b0b7bd(),
-		}, /*END SCHEMA*/
-		Description: "Information that defines how a detector operates.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute225706d6874e578c1efd495c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about the order in which events are evaluated and how actions are executed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2358535b8e0f4c1dba67b418() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute65a1362bddd8861ca3835f1c(),
-				// Property: Value
-				"value": schemaAttributeddcdf8f43be3246279a277b0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute241c58a5272ee088ca07cc24() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2668095fc04fbca238205663() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The alias of the asset property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute285a0703e56f333e44931f20() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HashKeyField
-			"hash_key_field": schemaAttributeb8f802cd18eaa6910688b5f8(),
-			// Property: HashKeyType
-			"hash_key_type": schemaAttribute4ee84c94d2d5bec5de3fe5eb(),
-			// Property: HashKeyValue
-			"hash_key_value": schemaAttribute41a684ac040b607b314aec4b(),
-			// Property: Operation
-			"operation": schemaAttribute528a82f9d28a9fe8d98ec022(),
-			// Property: Payload
-			"payload": schemaAttribute5c962707ec1c404711df0fdb(),
-			// Property: PayloadField
-			"payload_field": schemaAttributece4cbed47e53a3032cdaa3df(),
-			// Property: RangeKeyField
-			"range_key_field": schemaAttribute75dae48dd372aca85ffee65f(),
-			// Property: RangeKeyType
-			"range_key_type": schemaAttribute61f45521c85fcc47f9471a02(),
-			// Property: RangeKeyValue
-			"range_key_value": schemaAttribute58d6bc4e6c8e888221fb066a(),
-			// Property: TableName
-			"table_name": schemaAttribute5317775f4cd97829cf4eb984(),
-		}, /*END SCHEMA*/
-		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a33c50e14eaaf6efe7abf6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that grants permission to ITE to perform its operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31aee398117b5c7713f28bbe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The next state to enter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33493a3336b2442a3012b9eb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MqttTopic
-			"mqtt_topic": schemaAttribute0e8ad6e85eea0a526f1b4b77(),
-			// Property: Payload
-			"payload": schemaAttribute8585401d59dd6dacfcf91304(),
-		}, /*END SCHEMA*/
-		Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35b520180aa69866b8d9cdb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DynamoDB table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute373f4671f8e6a607ff002345() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c734f629f357482cae42bdb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OffsetInNanos
-			"offset_in_nanos": schemaAttributebb50cdb90fe9d52a84c1eeed(),
-			// Property: TimeInSeconds
-			"time_in_seconds": schemaAttributebf2fa815343a5219b434b9a5(),
-		}, /*END SCHEMA*/
-		Description: "The timestamp associated with the asset property value. The default is the current event time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41a684ac040b607b314aec4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the hash key (also called the partition key).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42ba3dea6b70a0bfd5908b66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Amazon SNS target where the message is sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute439b6acc0c032c6e2b2ac239() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43cc6c78eb54a1a7a0b2a5ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ee84c94d2d5bec5de3fe5eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f02bf993bd9b2bf448f803c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BooleanValue
-			"boolean_value": schemaAttributecdf619d6d30b21c28b80d07e(),
-			// Property: DoubleValue
-			"double_value": schemaAttribute43cc6c78eb54a1a7a0b2a5ce(),
-			// Property: IntegerValue
-			"integer_value": schemaAttributebe3e46f60688804f63330249(),
-			// Property: StringValue
-			"string_value": schemaAttributef2467dc07befb82712c4384d(),
-		}, /*END SCHEMA*/
-		Description: "The value to send to an asset property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50738d9b74d1659b15861dfe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute528a82f9d28a9fe8d98ec022() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52fcfc7a7e06ada22528953f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the timer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5317775f4cd97829cf4eb984() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5730a3d4befa1623a12488c0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Value
-			"value": schemaAttribute0027adc1d5f159f2d7f78105(),
-			// Property: VariableName
-			"variable_name": schemaAttribute14b8033a68a5f0bc6ef5bb40(),
-		}, /*END SCHEMA*/
-		Description: "Sets a variable to a specified value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58d6bc4e6c8e888221fb066a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the range key (also called the sort key).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c962707ec1c404711df0fdb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61f45521c85fcc47f9471a02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65a1362bddd8861ca3835f1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67a4a09360691a3bd620baad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FunctionArn
-			"function_arn": schemaAttribute831d86418c1f70096854a1d2(),
-			// Property: Payload
-			"payload": schemaAttributefe562229d9baec98d3eba043(),
-		}, /*END SCHEMA*/
-		Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute698568a0b237afbd416f044e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Payload
-			"payload": schemaAttribute999e763d68668a0412e99df2(),
-			// Property: TargetArn
-			"target_arn": schemaAttribute42ba3dea6b70a0bfd5908b66(),
-		}, /*END SCHEMA*/
-		Description: "Sends an Amazon SNS message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75dae48dd372aca85ffee65f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c22e3e29f4802ef71cb3b97() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TimerName
-			"timer_name": schemaAttributeffa8aa40e30a61745b541679(),
-		}, /*END SCHEMA*/
-		Description: "Information needed to clear the timer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cefed16a3629e8c718ff2ad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeliveryStreamName
-			"delivery_stream_name": schemaAttribute182204ef9c67a2b85959a33d(),
-			// Property: Payload
-			"payload": schemaAttributef04250a98b5d4f1609078dad(),
-			// Property: Separator
-			"separator": schemaAttributedff403aa9179050a84be09be(),
-		}, /*END SCHEMA*/
-		Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute831d86418c1f70096854a1d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Lambda function that is executed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8585401d59dd6dacfcf91304() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96a78fe021a6936a0340485c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Quality
-			"quality": schemaAttribute373f4671f8e6a607ff002345(),
-			// Property: Timestamp
-			"timestamp": schemaAttribute3c734f629f357482cae42bdb(),
-			// Property: Value
-			"value": schemaAttribute4f02bf993bd9b2bf448f803c(),
-		}, /*END SCHEMA*/
-		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute989d7ddc41693f9506574f70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the ITE input where the data is sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute999e763d68668a0412e99df2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1ffcf1e81262d20e379d409() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the timer to reset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6a33ae75a7100341d472b0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6d57633b7ae8a3308dcf1a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the transition event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa512be23e14043c729522f8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DurationExpression
-			"duration_expression": schemaAttributea6a33ae75a7100341d472b0e(),
-			// Property: Seconds
-			"seconds": schemaAttribute0796103021c24bde2fdda018(),
-			// Property: TimerName
-			"timer_name": schemaAttribute52fcfc7a7e06ada22528953f(),
-		}, /*END SCHEMA*/
-		Description: "Information needed to set the timer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb46b73b0d45b2077c71cb497() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb49fb2022d94fd97d48584f5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TimerName
-			"timer_name": schemaAttributea1ffcf1e81262d20e379d409(),
-		}, /*END SCHEMA*/
-		Description: "Information needed to reset the timer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6b62e2eaf24e3aebacbe09b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state that is entered at the creation of each detector (instance).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8f802cd18eaa6910688b5f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9c4f2b5965246331294585e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Events
-			"events": schemaAttributedf1d291ac39041a5a57ca41d(),
-		}, /*END SCHEMA*/
-		Description: "When entering this state, perform these ``actions`` if the ``condition`` is TRUE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb50cdb90fe9d52a84c1eeed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb627e48be21575a3d110184() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AssetId
-			"asset_id": schemaAttributef12df2374717f9249975c11b(),
-			// Property: EntryId
-			"entry_id": schemaAttributec59e5d7154a10fe7d4885fed(),
-			// Property: PropertyAlias
-			"property_alias": schemaAttribute2668095fc04fbca238205663(),
-			// Property: PropertyId
-			"property_id": schemaAttribute09b13f660ea307b7ab84a1a5(),
-			// Property: PropertyValue
-			"property_value": schemaAttribute96a78fe021a6936a0340485c(),
-		}, /*END SCHEMA*/
-		Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe3e46f60688804f63330249() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2fa815343a5219b434b9a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1db1b017a087bc9c8b0b7bd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OnEnter
-				"on_enter": schemaAttributeb9c4f2b5965246331294585e(),
-				// Property: OnExit
-				"on_exit": schemaAttributee440f8ceaf9397bf803be5e7(),
-				// Property: OnInput
-				"on_input": schemaAttributec9f4f4df552c26e03a8aad00(),
-				// Property: StateName
-				"state_name": schemaAttributedb2d5880113f7cb9c1d2a7a1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the states of the detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec59e5d7154a10fe7d4885fed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9f4f4df552c26e03a8aad00() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Events
-			"events": schemaAttributef9cfff9fbb0230e54fd6c666(),
-			// Property: TransitionEvents
-			"transition_events": schemaAttributecd8135304a48d48858766d6d(),
-		}, /*END SCHEMA*/
-		Description: "When an input is received and the ``condition`` is TRUE, perform the specified ``actions``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd78fc9c107b6acdc6ca0728() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InputName
-			"input_name": schemaAttribute989d7ddc41693f9506574f70(),
-			// Property: Payload
-			"payload": schemaAttribute0e70decfa796f3e5c0c1ebc9(),
-		}, /*END SCHEMA*/
-		Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd8135304a48d48858766d6d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttribute0028c683f56ee41081a98b4a(),
-				// Property: Condition
-				"condition": schemaAttribute1682e73c1cd4de772caa6122(),
-				// Property: EventName
-				"event_name": schemaAttributea6d57633b7ae8a3308dcf1a6(),
-				// Property: NextState
-				"next_state": schemaAttribute31aee398117b5c7713f28bbe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the actions performed, and the next state entered, when a ``condition`` evaluates to TRUE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdf619d6d30b21c28b80d07e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece4cbed47e53a3032cdaa3df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedaad2a54e16ebc8d477dcf42() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Payload
-			"payload": schemaAttribute241c58a5272ee088ca07cc24(),
-			// Property: QueueUrl
-			"queue_url": schemaAttribute157baeaf21441579f46f329d(),
-			// Property: UseBase64
-			"use_base_64": schemaAttributedbb2f2579de4dba3ff55841d(),
-		}, /*END SCHEMA*/
-		Description: "Sends an Amazon SNS message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb2d5880113f7cb9c1d2a7a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbb2f2579de4dba3ff55841d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddcdf8f43be3246279a277b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf1d291ac39041a5a57ca41d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttribute0028c683f56ee41081a98b4a(),
-				// Property: Condition
-				"condition": schemaAttribute439b6acc0c032c6e2b2ac239(),
-				// Property: EventName
-				"event_name": schemaAttributeb46b73b0d45b2077c71cb497(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the actions that are performed when the state is entered and the ``condition`` is ``TRUE``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedff403aa9179050a84be09be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee440f8ceaf9397bf803be5e7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Events
-			"events": schemaAttribute18872d1f74803f25c4db41e0(),
-		}, /*END SCHEMA*/
-		Description: "When exiting this state, perform these ``actions`` if the specified ``condition`` is ``TRUE``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedf7145a68b85635b82c157b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Payload
-			"payload": schemaAttribute5c962707ec1c404711df0fdb(),
-			// Property: TableName
-			"table_name": schemaAttribute35b520180aa69866b8d9cdb5(),
-		}, /*END SCHEMA*/
-		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef04250a98b5d4f1609078dad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef12df2374717f9249975c11b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the asset that has the specified property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2467dc07befb82712c4384d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef58b1a74c872f02d31d2d164() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the detector model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef59872a40a64a3d479b6c47b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A brief description of the detector model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9cfff9fbb0230e54fd6c666() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttribute0028c683f56ee41081a98b4a(),
-				// Property: Condition
-				"condition": schemaAttribute439b6acc0c032c6e2b2ac239(),
-				// Property: EventName
-				"event_name": schemaAttributeb46b73b0d45b2077c71cb497(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the actions performed when the ``condition`` evaluates to TRUE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe562229d9baec98d3eba043() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentExpression
-			"content_expression": schemaAttribute02758f2363935261751d5f2f(),
-			// Property: Type
-			"type": schemaAttribute50738d9b74d1659b15861dfe(),
-		}, /*END SCHEMA*/
-		Description: "You can configure the action payload when you send a message to a Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffa8aa40e30a61745b541679() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the timer to clear.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotevents_detector_model", detectorModelDataSource)
 }
@@ -3089,7 +2207,1881 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"detector_model_definition": schemaAttribute202db582e5cd8bde6938c903(),
+		"detector_model_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InitialStateName
+				"initial_state_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state that is entered at the creation of each detector (instance).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: States
+				"states": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: OnEnter
+							"on_enter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Events
+									"events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Actions
+												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ClearTimer
+															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to clear.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to clear the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDB
+															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HashKeyField
+																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyType
+																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyValue
+																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the hash key (also called the partition key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Operation
+																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PayloadField
+																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyField
+																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyType
+																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyValue
+																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the range key (also called the sort key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDBv2
+															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Firehose
+															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DeliveryStreamName
+																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Separator
+																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotEvents
+															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: InputName
+																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the ITE input where the data is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an ITE input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotSiteWise
+															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AssetId
+																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset that has the specified property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: EntryId
+																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyAlias
+																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The alias of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyValue
+																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Quality
+																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Timestamp
+																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: OffsetInNanos
+																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: TimeInSeconds
+																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: BooleanValue
+																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: DoubleValue
+																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: IntegerValue
+																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: StringValue
+																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The value to send to an asset property.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotTopicPublish
+															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MqttTopic
+																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Lambda
+															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: FunctionArn
+																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Lambda function that is executed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to a Lambda function.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: ResetTimer
+															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to reset.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to reset the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetTimer
+															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DurationExpression
+																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Seconds
+																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to set the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetVariable
+															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The new value of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: VariableName
+																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sets a variable to a specified value.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sns
+															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TargetArn
+																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Amazon SNS target where the message is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sqs
+															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: QueueUrl
+																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The URL of the SQS queue where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: UseBase64
+																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The actions to be performed.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Condition
+												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: EventName
+												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the event.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Specifies the actions that are performed when the state is entered and the ``condition`` is ``TRUE``.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "When entering this state, perform these ``actions`` if the ``condition`` is TRUE.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnExit
+							"on_exit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Events
+									"events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Actions
+												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ClearTimer
+															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to clear.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to clear the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDB
+															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HashKeyField
+																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyType
+																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyValue
+																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the hash key (also called the partition key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Operation
+																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PayloadField
+																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyField
+																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyType
+																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyValue
+																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the range key (also called the sort key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDBv2
+															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Firehose
+															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DeliveryStreamName
+																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Separator
+																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotEvents
+															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: InputName
+																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the ITE input where the data is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an ITE input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotSiteWise
+															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AssetId
+																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset that has the specified property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: EntryId
+																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyAlias
+																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The alias of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyValue
+																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Quality
+																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Timestamp
+																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: OffsetInNanos
+																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: TimeInSeconds
+																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: BooleanValue
+																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: DoubleValue
+																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: IntegerValue
+																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: StringValue
+																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The value to send to an asset property.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotTopicPublish
+															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MqttTopic
+																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Lambda
+															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: FunctionArn
+																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Lambda function that is executed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to a Lambda function.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: ResetTimer
+															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to reset.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to reset the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetTimer
+															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DurationExpression
+																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Seconds
+																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to set the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetVariable
+															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The new value of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: VariableName
+																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sets a variable to a specified value.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sns
+															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TargetArn
+																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Amazon SNS target where the message is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sqs
+															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: QueueUrl
+																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The URL of the SQS queue where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: UseBase64
+																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The actions to be performed.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Condition
+												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: EventName
+												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the event.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Specifies the ``actions`` that are performed when the state is exited and the ``condition`` is ``TRUE``.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "When exiting this state, perform these ``actions`` if the specified ``condition`` is ``TRUE``.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnInput
+							"on_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Events
+									"events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Actions
+												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ClearTimer
+															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to clear.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to clear the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDB
+															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HashKeyField
+																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyType
+																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyValue
+																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the hash key (also called the partition key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Operation
+																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PayloadField
+																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyField
+																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyType
+																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyValue
+																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the range key (also called the sort key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDBv2
+															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Firehose
+															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DeliveryStreamName
+																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Separator
+																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotEvents
+															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: InputName
+																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the ITE input where the data is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an ITE input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotSiteWise
+															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AssetId
+																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset that has the specified property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: EntryId
+																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyAlias
+																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The alias of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyValue
+																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Quality
+																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Timestamp
+																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: OffsetInNanos
+																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: TimeInSeconds
+																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: BooleanValue
+																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: DoubleValue
+																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: IntegerValue
+																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: StringValue
+																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The value to send to an asset property.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotTopicPublish
+															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MqttTopic
+																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Lambda
+															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: FunctionArn
+																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Lambda function that is executed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to a Lambda function.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: ResetTimer
+															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to reset.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to reset the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetTimer
+															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DurationExpression
+																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Seconds
+																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to set the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetVariable
+															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The new value of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: VariableName
+																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sets a variable to a specified value.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sns
+															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TargetArn
+																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Amazon SNS target where the message is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sqs
+															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: QueueUrl
+																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The URL of the SQS queue where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: UseBase64
+																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The actions to be performed.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Condition
+												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: EventName
+												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the event.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Specifies the actions performed when the ``condition`` evaluates to TRUE.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionEvents
+									"transition_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Actions
+												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ClearTimer
+															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to clear.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to clear the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDB
+															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HashKeyField
+																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyType
+																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HashKeyValue
+																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the hash key (also called the partition key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Operation
+																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PayloadField
+																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyField
+																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyType
+																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RangeKeyValue
+																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The value of the range key (also called the sort key).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DynamoDBv2
+															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TableName
+																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the DynamoDB table.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Firehose
+															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DeliveryStreamName
+																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Separator
+																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotEvents
+															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: InputName
+																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the ITE input where the data is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an ITE input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotSiteWise
+															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AssetId
+																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset that has the specified property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: EntryId
+																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyAlias
+																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The alias of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the asset property.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyValue
+																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Quality
+																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Timestamp
+																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: OffsetInNanos
+																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: TimeInSeconds
+																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: BooleanValue
+																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: DoubleValue
+																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: IntegerValue
+																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: StringValue
+																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "The value to send to an asset property.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IotTopicPublish
+															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: MqttTopic
+																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Lambda
+															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: FunctionArn
+																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Lambda function that is executed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to a Lambda function.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: ResetTimer
+															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer to reset.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to reset the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetTimer
+															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: DurationExpression
+																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Seconds
+																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimerName
+																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the timer.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Information needed to set the timer.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SetVariable
+															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The new value of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: VariableName
+																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the variable.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sets a variable to a specified value.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sns
+															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TargetArn
+																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the Amazon SNS target where the message is sent.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sqs
+															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Payload
+																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: ContentExpression
+																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Type
+																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: QueueUrl
+																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The URL of the SQS queue where the data is written.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: UseBase64
+																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Sends an Amazon SNS message.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The actions to be performed.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Condition
+												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Required. A Boolean expression that when TRUE causes the actions to be performed and the ``nextState`` to be entered.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: EventName
+												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the transition event.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: NextState
+												"next_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The next state to enter.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Specifies the actions performed, and the next state entered, when a ``condition`` evaluates to TRUE.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "When an input is received and the ``condition`` is TRUE, perform the specified ``actions``.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StateName
+							"state_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the state.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Information about the states of the detector.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information that defines how a detector operates.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorModelDescription
 		// CloudFormation resource type schema:
 		//
@@ -3098,7 +4090,10 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"detector_model_description": schemaAttributef59872a40a64a3d479b6c47b(),
+		"detector_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A brief description of the detector model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorModelName
 		// CloudFormation resource type schema:
 		//
@@ -3109,7 +4104,10 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"detector_model_name": schemaAttributef58b1a74c872f02d31d2d164(),
+		"detector_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the detector model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationMethod
 		// CloudFormation resource type schema:
 		//
@@ -3121,7 +4119,10 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"evaluation_method": schemaAttribute225706d6874e578c1efd495c(),
+		"evaluation_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Information about the order in which events are evaluated and how actions are executed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Key
 		// CloudFormation resource type schema:
 		//
@@ -3132,7 +4133,10 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$",
 		//	  "type": "string"
 		//	}
-		"key": schemaAttribute0353305d061de85dd5a05044(),
+		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. ITE can continue to route input to its corresponding detector instance based on this identifying information. \n This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -3142,7 +4146,10 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute2a33c50e14eaaf6efe7abf6b(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role that grants permission to ITE to perform its operations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3171,7 +4178,24 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute2358535b8e0f4c1dba67b418(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

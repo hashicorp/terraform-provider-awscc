@@ -15,335 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute030af4537879f9acc84307bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the metric. Valid values are Maximize and Minimize.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ab59962f6f3a6f3443a25de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25c0888b23c03a2a3920a17f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the dataset group that provides the training data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31b77de3f344f9b07d244442() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35d1333494cce66d64db687e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MetricName
-			"metric_name": schemaAttributee28c62ee3dcac5286faa27a4(),
-			// Property: RecipeList
-			"recipe_list": schemaAttributeec15e48bdcf68d2e3e6b0d96(),
-		}, /*END SCHEMA*/
-		Description: "The AutoMLConfig object containing a list of recipes to search when AutoML is performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c508b925c142e127318e46c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxNumberOfTrainingJobs
-			"max_number_of_training_jobs": schemaAttribute31b77de3f344f9b07d244442(),
-			// Property: MaxParallelTrainingJobs
-			"max_parallel_training_jobs": schemaAttribute9ea4bd2817ee1ca8b035c9c8(),
-		}, /*END SCHEMA*/
-		Description: "Describes the resource configuration for hyperparameter optimization (HPO).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute412076b4d3affbd64f30d659() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Lists the feature transformation parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute459cca41bdadea3c64d96bdd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum allowable value for the hyperparameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46d67457da89152998c9863b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum allowable value for the hyperparameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52b2a5eaf91fe58aeeb1e2ce() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MetricName
-			"metric_name": schemaAttribute5d1ccd00130c3ea1a23f8bfc(),
-			// Property: MetricRegex
-			"metric_regex": schemaAttributeece12e41529064af9be1444b(),
-			// Property: Type
-			"type": schemaAttribute030af4537879f9acc84307bb(),
-		}, /*END SCHEMA*/
-		Description: "The metric to optimize during HPO.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute563a28c6d32e9199d5cc1952() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum allowable value for the hyperparameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b5b45fff52ee3cc6daedbea() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Lists the hyperparameter names and ranges.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d1ccd00130c3ea1a23f8bfc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65a4ef6f27bf978d671bfdf2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the solution",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c7b4b0531741d59ef5ea498() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8346f12338efcfa59c66df97() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1ab59962f6f3a6f3443a25de(),
-				// Property: Value
-				"value": schemaAttribute1ab59962f6f3a6f3443a25de(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags used to organize, track, or control access for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute857c5880fed2529560eb9b54() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AlgorithmHyperParameterRanges
-			"algorithm_hyper_parameter_ranges": schemaAttribute99fee98e3e977231393285d5(),
-			// Property: HpoObjective
-			"hpo_objective": schemaAttribute52b2a5eaf91fe58aeeb1e2ce(),
-			// Property: HpoResourceConfig
-			"hpo_resource_config": schemaAttribute3c508b925c142e127318e46c(),
-		}, /*END SCHEMA*/
-		Description: "Describes the properties for hyperparameter optimization (HPO)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88716203dd222446b1849fa7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the hyperparameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99fee98e3e977231393285d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CategoricalHyperParameterRanges
-			"categorical_hyper_parameter_ranges": schemaAttributed3071c311ebefca2c7ceca74(),
-			// Property: ContinuousHyperParameterRanges
-			"continuous_hyper_parameter_ranges": schemaAttributebe9a1363bfef48de1c3e6791(),
-			// Property: IntegerHyperParameterRanges
-			"integer_hyper_parameter_ranges": schemaAttributeaf4b1176f5fb656b82afa3fb(),
-		}, /*END SCHEMA*/
-		Description: "The hyperparameters and their allowable ranges",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ea4bd2817ee1ca8b035c9c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0ce0bcafb9bc78200d6a29b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum allowable value for the hyperparameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1fc69f52ed9762c0e632dd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Only events with a value greater than or equal to this threshold are used for training a model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3c58de15fc497e547c4fd6a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AlgorithmHyperParameters
-			"algorithm_hyper_parameters": schemaAttribute5b5b45fff52ee3cc6daedbea(),
-			// Property: AutoMLConfig
-			"auto_ml_config": schemaAttribute35d1333494cce66d64db687e(),
-			// Property: EventValueThreshold
-			"event_value_threshold": schemaAttributea1fc69f52ed9762c0e632dd4(),
-			// Property: FeatureTransformationParameters
-			"feature_transformation_parameters": schemaAttribute412076b4d3affbd64f30d659(),
-			// Property: HpoConfig
-			"hpo_config": schemaAttribute857c5880fed2529560eb9b54(),
-		}, /*END SCHEMA*/
-		Description: "The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf4b1176f5fb656b82afa3fb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxValue
-				"max_value": schemaAttribute459cca41bdadea3c64d96bdd(),
-				// Property: MinValue
-				"min_value": schemaAttribute46d67457da89152998c9863b(),
-				// Property: Name
-				"name": schemaAttribute88716203dd222446b1849fa7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The integer hyperparameters and their ranges.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1c6c217650afad6e65552e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the recipe to use for model training. Only specified when performAutoML is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe9a1363bfef48de1c3e6791() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxValue
-				"max_value": schemaAttribute563a28c6d32e9199d5cc1952(),
-				// Property: MinValue
-				"min_value": schemaAttributea0ce0bcafb9bc78200d6a29b(),
-				// Property: Name
-				"name": schemaAttribute88716203dd222446b1849fa7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The continuous hyperparameters and their ranges.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0e9efc4ab36b98ac10bd654() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the solution",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3071c311ebefca2c7ceca74() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute88716203dd222446b1849fa7(),
-				// Property: Values
-				"values": schemaAttributef0035f66bec5de140bbdc69e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The categorical hyperparameters and their ranges.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfc9fdcb7875e91ec56a9c11() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee28c62ee3dcac5286faa27a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metric to optimize.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec15e48bdcf68d2e3e6b0d96() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of candidate recipes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeece12e41529064af9be1444b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A regular expression for finding the metric in the training job logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0035f66bec5de140bbdc69e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of the categories for the hyperparameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef135078998f2757da6e59218() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_personalize_solution", solutionDataSource)
 }
@@ -361,7 +32,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schemaAttribute25c0888b23c03a2a3920a17f(),
+		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the dataset group that provides the training data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventType
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +44,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"event_type": schemaAttributef135078998f2757da6e59218(),
+		"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +58,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute65a4ef6f27bf978d671bfdf2(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the solution",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformAutoML
 		// CloudFormation resource type schema:
 		//
@@ -389,7 +69,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.",
 		//	  "type": "boolean"
 		//	}
-		"perform_auto_ml": schemaAttribute7c7b4b0531741d59ef5ea498(),
+		"perform_auto_ml": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformHPO
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +80,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.",
 		//	  "type": "boolean"
 		//	}
-		"perform_hpo": schemaAttributedfc9fdcb7875e91ec56a9c11(),
+		"perform_hpo": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecipeArn
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +93,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"recipe_arn": schemaAttributeb1c6c217650afad6e65552e9(),
+		"recipe_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the recipe to use for model training. Only specified when performAutoML is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SolutionArn
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +106,10 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"solution_arn": schemaAttributed0e9efc4ab36b98ac10bd654(),
+		"solution_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the solution",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SolutionConfig
 		// CloudFormation resource type schema:
 		//
@@ -616,7 +308,170 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"solution_config": schemaAttributea3c58de15fc497e547c4fd6a(),
+		"solution_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlgorithmHyperParameters
+				"algorithm_hyper_parameters": // Pattern: ""
+				schema.MapAttribute{          /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Lists the hyperparameter names and ranges.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AutoMLConfig
+				"auto_ml_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The metric to optimize.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RecipeList
+						"recipe_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of candidate recipes.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AutoMLConfig object containing a list of recipes to search when AutoML is performed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventValueThreshold
+				"event_value_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Only events with a value greater than or equal to this threshold are used for training a model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FeatureTransformationParameters
+				"feature_transformation_parameters": // Pattern: ""
+				schema.MapAttribute{                 /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Lists the feature transformation parameters.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HpoConfig
+				"hpo_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AlgorithmHyperParameterRanges
+						"algorithm_hyper_parameter_ranges": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CategoricalHyperParameterRanges
+								"categorical_hyper_parameter_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Values
+											"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "A list of the categories for the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The categorical hyperparameters and their ranges.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContinuousHyperParameterRanges
+								"continuous_hyper_parameter_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxValue
+											"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "The maximum allowable value for the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MinValue
+											"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "The minimum allowable value for the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The continuous hyperparameters and their ranges.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntegerHyperParameterRanges
+								"integer_hyper_parameter_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxValue
+											"max_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The maximum allowable value for the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: MinValue
+											"min_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The minimum allowable value for the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the hyperparameter.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The integer hyperparameters and their ranges.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The hyperparameters and their allowable ranges",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HpoObjective
+						"hpo_objective": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricName
+								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the metric",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MetricRegex
+								"metric_regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A regular expression for finding the metric in the training job logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of the metric. Valid values are Maximize and Minimize.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The metric to optimize during HPO.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HpoResourceConfig
+						"hpo_resource_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MaxNumberOfTrainingJobs
+								"max_number_of_training_jobs": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxParallelTrainingJobs
+								"max_parallel_training_jobs": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Describes the resource configuration for hyperparameter optimization (HPO).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes the properties for hyperparameter optimization (HPO)",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -647,7 +502,22 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute8346f12338efcfa59c66df97(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

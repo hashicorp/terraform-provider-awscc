@@ -24,222 +24,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute011f09a5f13885d747046141() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the portal.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24623d1cdc6c8852c4fa4639() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e8c459506a95e56e7f32091() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the portal.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute396caa97aa2c010b52e43915() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address that sends alarm notifications.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49e695ae573715113cf667d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fd9ad9d22ede025d80f9c55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the portal, which has the following format.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50087b468b56192479e9591f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5539210ffba086f84e0ee67c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AlarmRoleArn
-			"alarm_role_arn": schemaAttribute50087b468b56192479e9591f(),
-			// Property: NotificationLambdaArn
-			"notification_lambda_arn": schemaAttribute5d587c8b110f95d6ebd1860a(),
-		}, /*END SCHEMA*/
-		Description: "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d587c8b110f95d6ebd1860a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68585afe6a789f6d8976ed26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a465033102358707e31818f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of enabled Tools for a certain portal.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cd6dcabc36d41d0c19ffb67() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PortalTools
-				"portal_tools": schemaAttribute6a465033102358707e31818f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Map to associate detail of configuration related with a PortalType.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f0d6922be9d540187cb11a0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute68585afe6a789f6d8976ed26(),
-				// Property: Value
-				"value": schemaAttribute68585afe6a789f6d8976ed26(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the portal.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fe7f0601c0f7330c57373e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A friendly name for the portal.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeb91556c5ae2ab768758e7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS administrator's contact email address.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9dc6440f61b5f7829176e35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of portal",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"SITEWISE_PORTAL_V1",
-				"SITEWISE_PORTAL_V2",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8490ce940173fa15661ee18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd21fd1b6130b5a075637d49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_portal", portalResource)
 	registry.AddListResourceFactory("awscc_iotsitewise_portal", generic.NewListResource(portalResource))
@@ -267,7 +51,34 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"alarms": schemaAttribute5539210ffba086f84e0ee67c(),
+		"alarms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmRoleArn
+				"alarm_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NotificationLambdaArn
+				"notification_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationSenderEmail
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +86,14 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The email address that sends alarm notifications.",
 		//	  "type": "string"
 		//	}
-		"notification_sender_email": schemaAttribute396caa97aa2c010b52e43915(),
+		"notification_sender_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address that sends alarm notifications.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalArn
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +101,13 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the portal, which has the following format.",
 		//	  "type": "string"
 		//	}
-		"portal_arn": schemaAttribute4fd9ad9d22ede025d80f9c55(),
+		"portal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the portal, which has the following format.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalAuthMode
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +115,15 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
 		//	  "type": "string"
 		//	}
-		"portal_auth_mode": schemaAttribute24623d1cdc6c8852c4fa4639(),
+		"portal_auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service to use to authenticate users to the portal. Choose from SSO or IAM. You can't change this value after you create a portal.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalClientId
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +131,13 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS SSO application generated client ID (used with AWS SSO APIs).",
 		//	  "type": "string"
 		//	}
-		"portal_client_id": schemaAttributefd21fd1b6130b5a075637d49(),
+		"portal_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalContactEmail
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +145,10 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS administrator's contact email address.",
 		//	  "type": "string"
 		//	}
-		"portal_contact_email": schemaAttributeaeb91556c5ae2ab768758e7f(),
+		"portal_contact_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS administrator's contact email address.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalDescription
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +156,14 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description for the portal.",
 		//	  "type": "string"
 		//	}
-		"portal_description": schemaAttribute011f09a5f13885d747046141(),
+		"portal_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the portal.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalId
 		// CloudFormation resource type schema:
 		//
@@ -323,7 +171,13 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the portal.",
 		//	  "type": "string"
 		//	}
-		"portal_id": schemaAttribute2e8c459506a95e56e7f32091(),
+		"portal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the portal.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalName
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +185,10 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A friendly name for the portal.",
 		//	  "type": "string"
 		//	}
-		"portal_name": schemaAttribute9fe7f0601c0f7330c57373e0(),
+		"portal_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A friendly name for the portal.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalStartUrl
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +196,13 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
 		//	  "type": "string"
 		//	}
-		"portal_start_url": schemaAttributee8490ce940173fa15661ee18(),
+		"portal_start_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalType
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +214,21 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"portal_type": schemaAttributed9dc6440f61b5f7829176e35(),
+		"portal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of portal",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SITEWISE_PORTAL_V1",
+					"SITEWISE_PORTAL_V2",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalTypeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -379,7 +256,29 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"portal_type_configuration": schemaAttribute7cd6dcabc36d41d0c19ffb67(),
+		"portal_type_configuration": // Pattern: ""
+		schema.MapNestedAttribute{   /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: PortalTools
+					"portal_tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "List of enabled Tools for a certain portal.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Map to associate detail of configuration related with a PortalType.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -387,7 +286,10 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute49e695ae573715113cf667d9(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -414,7 +316,41 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute9f0d6922be9d540187cb11a0(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the portal.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

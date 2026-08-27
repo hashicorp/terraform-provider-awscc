@@ -15,114 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute12bfb2d6e30cb412d7278ee3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service profile Id. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45811ec681065244e5aaefbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4baaed09ec7b7d7ac0473e29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service profile Arn. Returned after successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c77497838bcd899cb5e8b5d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70bbea659fea96fed1c98769() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71c3ab649b3d8d542bbcf078() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClassBTimeout
-			"class_b_timeout": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: ClassCTimeout
-			"class_c_timeout": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: FactoryPresetFreqsList
-			"factory_preset_freqs_list": schemaAttribute4c77497838bcd899cb5e8b5d(),
-			// Property: MacVersion
-			"mac_version": schemaAttribute45811ec681065244e5aaefbc(),
-			// Property: MaxDutyCycle
-			"max_duty_cycle": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: MaxEirp
-			"max_eirp": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: PingSlotDr
-			"ping_slot_dr": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: PingSlotFreq
-			"ping_slot_freq": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: PingSlotPeriod
-			"ping_slot_period": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: RegParamsRevision
-			"reg_params_revision": schemaAttribute45811ec681065244e5aaefbc(),
-			// Property: RfRegion
-			"rf_region": schemaAttribute45811ec681065244e5aaefbc(),
-			// Property: RxDataRate2
-			"rx_data_rate_2": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: RxDelay1
-			"rx_delay_1": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: RxDrOffset1
-			"rx_dr_offset_1": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: RxFreq2
-			"rx_freq_2": schemaAttribute70bbea659fea96fed1c98769(),
-			// Property: Supports32BitFCnt
-			"supports_32_bit_f_cnt": schemaAttribute73fdcf5032db875046223f1e(),
-			// Property: SupportsClassB
-			"supports_class_b": schemaAttribute73fdcf5032db875046223f1e(),
-			// Property: SupportsClassC
-			"supports_class_c": schemaAttribute73fdcf5032db875046223f1e(),
-			// Property: SupportsJoin
-			"supports_join": schemaAttribute73fdcf5032db875046223f1e(),
-		}, /*END SCHEMA*/
-		Description: "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73fdcf5032db875046223f1e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0f43424dd4c5d8d6da1e202() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute45811ec681065244e5aaefbc(),
-				// Property: Value
-				"value": schemaAttribute45811ec681065244e5aaefbc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the device profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef33da424def251605c89e13e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of service profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_device_profile", deviceProfileDataSource)
 }
@@ -138,7 +30,10 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Service profile Arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4baaed09ec7b7d7ac0473e29(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service profile Arn. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +42,10 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"device_profile_id": schemaAttribute12bfb2d6e30cb412d7278ee3(),
+		"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service profile Id. Returned after successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoRaWAN
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +144,89 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan": schemaAttribute71c3ab649b3d8d542bbcf078(),
+		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClassBTimeout
+				"class_b_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClassCTimeout
+				"class_c_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FactoryPresetFreqsList
+				"factory_preset_freqs_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MacVersion
+				"mac_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxDutyCycle
+				"max_duty_cycle": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxEirp
+				"max_eirp": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PingSlotDr
+				"ping_slot_dr": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PingSlotFreq
+				"ping_slot_freq": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PingSlotPeriod
+				"ping_slot_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegParamsRevision
+				"reg_params_revision": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RfRegion
+				"rf_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RxDataRate2
+				"rx_data_rate_2": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RxDelay1
+				"rx_delay_1": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RxDrOffset1
+				"rx_dr_offset_1": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RxFreq2
+				"rx_freq_2": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Supports32BitFCnt
+				"supports_32_bit_f_cnt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportsClassB
+				"supports_class_b": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportsClassC
+				"supports_class_c": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportsJoin
+				"supports_join": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +235,10 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef33da424def251605c89e13e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of service profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +265,22 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef0f43424dd4c5d8d6da1e202(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the device profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute298841fded009e916d97c4be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a module existing in the registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4338cca3ae4e3b381cfcb328() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an existing version of the named module to set as the default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e17edb0127087512c6ee6f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the module version to set as the default version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_module_default_version", moduleDefaultVersionDataSource)
 }
@@ -51,7 +30,10 @@ func moduleDefaultVersionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+/[0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4e17edb0127087512c6ee6f9(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the module version to set as the default version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModuleName
 		// CloudFormation resource type schema:
 		//
@@ -60,7 +42,10 @@ func moduleDefaultVersionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE",
 		//	  "type": "string"
 		//	}
-		"module_name": schemaAttribute298841fded009e916d97c4be(),
+		"module_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of a module existing in the registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -69,7 +54,10 @@ func moduleDefaultVersionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"version_id": schemaAttribute4338cca3ae4e3b381cfcb328(),
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an existing version of the named module to set as the default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

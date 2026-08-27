@@ -14,63 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2ed309b57adc844906baa926() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Number (ARN) of the custom metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a6c724693283f95ae30fc20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws: . Cannot be updated once defined.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93d7d11ca1fc7716dd6a97ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99b83ed962b944bf0dbca448() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec647c1b42633a491177cb255(),
-				// Property: Value
-				"value": schemaAttributec92df2aa271bf153cd053c72(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb06d5c743b3006ed2798e8bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec647c1b42633a491177cb255() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec92df2aa271bf153cd053c72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_custom_metric", customMetricDataSource)
 }
@@ -87,7 +30,10 @@ func customMetricDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute93d7d11ca1fc7716dd6a97ea(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricArn
 		// CloudFormation resource type schema:
 		//
@@ -97,7 +43,10 @@ func customMetricDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"metric_arn": schemaAttribute2ed309b57adc844906baa926(),
+		"metric_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Number (ARN) of the custom metric.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricName
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +57,10 @@ func customMetricDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[a-zA-Z0-9:_-]+",
 		//	  "type": "string"
 		//	}
-		"metric_name": schemaAttribute7a6c724693283f95ae30fc20(),
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws: . Cannot be updated once defined.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricType
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +74,10 @@ func customMetricDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metric_type": schemaAttributeb06d5c743b3006ed2798e8bf(),
+		"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +111,24 @@ func customMetricDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute99b83ed962b944bf0dbca448(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

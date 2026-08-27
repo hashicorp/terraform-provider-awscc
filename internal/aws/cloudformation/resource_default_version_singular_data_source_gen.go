@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a9d309fca8085bea7e77178() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an existing version of the resource to set as the default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15ff8c7598e79350a3cc6647() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the type version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c1720ee0ad4ef25007ae7d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39dcbde1c40908362a113f2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_resource_default_version", resourceDefaultVersionDataSource)
 }
@@ -58,7 +30,10 @@ func resourceDefaultVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute39dcbde1c40908362a113f2d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +42,10 @@ func resourceDefaultVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 		//	  "type": "string"
 		//	}
-		"type_name": schemaAttribute1c1720ee0ad4ef25007ae7d5(),
+		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TypeVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -76,7 +54,10 @@ func resourceDefaultVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 		//	  "type": "string"
 		//	}
-		"type_version_arn": schemaAttribute15ff8c7598e79350a3cc6647(),
+		"type_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the type version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -85,7 +66,10 @@ func resourceDefaultVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[A-Za-z0-9-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"version_id": schemaAttribute0a9d309fca8085bea7e77178(),
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an existing version of the resource to set as the default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

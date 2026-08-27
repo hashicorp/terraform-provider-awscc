@@ -14,364 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a3162322f6550dc6e923532() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CRLSign
-			"crl_sign": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: DataEncipherment
-			"data_encipherment": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: DecipherOnly
-			"decipher_only": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: DigitalSignature
-			"digital_signature": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: EncipherOnly
-			"encipher_only": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: KeyAgreement
-			"key_agreement": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: KeyCertSign
-			"key_cert_sign": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: KeyEncipherment
-			"key_encipherment": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: NonRepudiation
-			"non_repudiation": schemaAttributea1649570d8ed536211faf2c0(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains X.509 KeyUsage information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fe303580d03332c293a794b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ef0a6cb0b74767757ab4c01() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute321be14098a086edddffd567() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessLocation
-				"access_location": schemaAttributec4de7701dda3c6964fd212d5(),
-				// Property: AccessMethod
-				"access_method": schemaAttributeae65e188c3d32d5bdccb581a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Array of X.509 AccessDescription.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute418bd0753e87d54465bd939a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OmitExtension
-			"omit_extension": schemaAttributea1649570d8ed536211faf2c0(),
-		}, /*END SCHEMA*/
-		Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e84fa137ce17f57fcb682fa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CrlConfiguration
-			"crl_configuration": schemaAttributed7c79bf555d720608a854d52(),
-			// Property: OcspConfiguration
-			"ocsp_configuration": schemaAttributeecc2eb0e035d7c189d54f2b8(),
-		}, /*END SCHEMA*/
-		Description: "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5eb5d043308777bd4005832e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ObjectIdentifier
-				"object_identifier": schemaAttributef8dafcab17a80cc3fad9e611(),
-				// Property: Value
-				"value": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71bdcc9d1eff5fdacda7eb09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7494af0639c9bc1699fc8985() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String that contains X.509 DnsName information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7786c82d4f07c730936b0b73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8125729e2aef1d9f5bbdccc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String that contains X.509 IpAddress information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b6ff3ebb70aa92dd975fd03() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeddadb9841ebc0f616a43d2f1(),
-				// Property: Value
-				"value": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ca7506bc17ac7d5c831b8b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Usage mode of the ceritificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1649570d8ed536211faf2c0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1802d881a3b2c1846c8a20d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1972ddfc6423a69c618369c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae65e188c3d32d5bdccb581a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessMethodType
-			"access_method_type": schemaAttribute71bdcc9d1eff5fdacda7eb09(),
-			// Property: CustomObjectIdentifier
-			"custom_object_identifier": schemaAttributef8dafcab17a80cc3fad9e611(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4de7701dda3c6964fd212d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DirectoryName
-			"directory_name": schemaAttributef5588d2320b252554213c1e3(),
-			// Property: DnsName
-			"dns_name": schemaAttribute7494af0639c9bc1699fc8985(),
-			// Property: EdiPartyName
-			"edi_party_name": schemaAttributec8eb74c4e4378735751de96d(),
-			// Property: IpAddress
-			"ip_address": schemaAttribute8125729e2aef1d9f5bbdccc4(),
-			// Property: OtherName
-			"other_name": schemaAttributef9a16bacc93d8e46ed1eb38c(),
-			// Property: RegisteredId
-			"registered_id": schemaAttributef8dafcab17a80cc3fad9e611(),
-			// Property: Rfc822Name
-			"rfc_822_name": schemaAttributeea1bb4faedc56cd3e97372a9(),
-			// Property: UniformResourceIdentifier
-			"uniform_resource_identifier": schemaAttributed33203a7543ffbae23541358(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8eb74c4e4378735751de96d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NameAssigner
-			"name_assigner": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: PartyName
-			"party_name": schemaAttributeddadb9841ebc0f616a43d2f1(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains X.509 EdiPartyName information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed33203a7543ffbae23541358() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String that contains X.509 UniformResourceIdentifier information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7c79bf555d720608a854d52() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CrlDistributionPointExtensionConfiguration
-			"crl_distribution_point_extension_configuration": schemaAttribute418bd0753e87d54465bd939a(),
-			// Property: CrlType
-			"crl_type": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: CustomCname
-			"custom_cname": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: CustomPath
-			"custom_path": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Enabled
-			"enabled": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: ExpirationInDays
-			"expiration_in_days": schemaAttribute0fe303580d03332c293a794b(),
-			// Property: S3BucketName
-			"s3_bucket_name": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: S3ObjectAcl
-			"s3_object_acl": schemaAttributeddadb9841ebc0f616a43d2f1(),
-		}, /*END SCHEMA*/
-		Description: "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddadb9841ebc0f616a43d2f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee09fba47780cc17b272c38bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Algorithm your CA uses to sign certificate requests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea1bb4faedc56cd3e97372a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String that contains X.509 Rfc822Name information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecc2eb0e035d7c189d54f2b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributea1649570d8ed536211faf2c0(),
-			// Property: OcspCustomCname
-			"ocsp_custom_cname": schemaAttributeddadb9841ebc0f616a43d2f1(),
-		}, /*END SCHEMA*/
-		Description: "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef834fff36702a264f106b3d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KeyUsage
-			"key_usage": schemaAttribute0a3162322f6550dc6e923532(),
-			// Property: SubjectInformationAccess
-			"subject_information_access": schemaAttribute321be14098a086edddffd567(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0125d502a1adcd389857f96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5588d2320b252554213c1e3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CommonName
-			"common_name": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Country
-			"country": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: CustomAttributes
-			"custom_attributes": schemaAttribute5eb5d043308777bd4005832e(),
-			// Property: DistinguishedNameQualifier
-			"distinguished_name_qualifier": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: GenerationQualifier
-			"generation_qualifier": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: GivenName
-			"given_name": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Initials
-			"initials": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Locality
-			"locality": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Organization
-			"organization": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: OrganizationalUnit
-			"organizational_unit": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Pseudonym
-			"pseudonym": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: SerialNumber
-			"serial_number": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: State
-			"state": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Surname
-			"surname": schemaAttributeddadb9841ebc0f616a43d2f1(),
-			// Property: Title
-			"title": schemaAttributeddadb9841ebc0f616a43d2f1(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains X.500 distinguished name information for your CA.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8dafcab17a80cc3fad9e611() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String that contains X.509 ObjectIdentifier information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9a16bacc93d8e46ed1eb38c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TypeId
-			"type_id": schemaAttributef8dafcab17a80cc3fad9e611(),
-			// Property: Value
-			"value": schemaAttributeddadb9841ebc0f616a43d2f1(),
-		}, /*END SCHEMA*/
-		Description: "Structure that contains X.509 OtherName information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_acmpca_certificate_authority", certificateAuthorityDataSource)
 }
@@ -387,7 +29,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7786c82d4f07c730936b0b73(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateSigningRequest
 		// CloudFormation resource type schema:
 		//
@@ -395,7 +40,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_signing_request": schemaAttributea1802d881a3b2c1846c8a20d(),
+		"certificate_signing_request": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CsrExtensions
 		// CloudFormation resource type schema:
 		//
@@ -611,7 +259,225 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"csr_extensions": schemaAttributeef834fff36702a264f106b3d(),
+		"csr_extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyUsage
+				"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CRLSign
+						"crl_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataEncipherment
+						"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DecipherOnly
+						"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DigitalSignature
+						"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncipherOnly
+						"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyAgreement
+						"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyCertSign
+						"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyEncipherment
+						"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NonRepudiation
+						"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Structure that contains X.509 KeyUsage information.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubjectInformationAccess
+				"subject_information_access": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessLocation
+							"access_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DirectoryName
+									"directory_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CommonName
+											"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Country
+											"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: CustomAttributes
+											"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ObjectIdentifier
+														"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "String that contains X.509 ObjectIdentifier information.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DistinguishedNameQualifier
+											"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: GenerationQualifier
+											"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: GivenName
+											"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Initials
+											"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Locality
+											"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Organization
+											"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: OrganizationalUnit
+											"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Pseudonym
+											"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: SerialNumber
+											"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: State
+											"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Surname
+											"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Title
+											"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Structure that contains X.500 distinguished name information for your CA.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DnsName
+									"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 DnsName information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EdiPartyName
+									"edi_party_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: NameAssigner
+											"name_assigner": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: PartyName
+											"party_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Structure that contains X.509 EdiPartyName information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: IpAddress
+									"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 IpAddress information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OtherName
+									"other_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: TypeId
+											"type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "String that contains X.509 ObjectIdentifier information.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Structure that contains X.509 OtherName information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RegisteredId
+									"registered_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 ObjectIdentifier information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Rfc822Name
+									"rfc_822_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 Rfc822Name information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UniformResourceIdentifier
+									"uniform_resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 UniformResourceIdentifier information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AccessMethod
+							"access_method": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccessMethodType
+									"access_method_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: CustomObjectIdentifier
+									"custom_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 ObjectIdentifier information.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Array of X.509 AccessDescription.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyAlgorithm
 		// CloudFormation resource type schema:
 		//
@@ -619,7 +485,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
 		//	  "type": "string"
 		//	}
-		"key_algorithm": schemaAttribute1ef0a6cb0b74767757ab4c01(),
+		"key_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyStorageSecurityStandard
 		// CloudFormation resource type schema:
 		//
@@ -627,7 +496,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
 		//	  "type": "string"
 		//	}
-		"key_storage_security_standard": schemaAttributea1972ddfc6423a69c618369c(),
+		"key_storage_security_standard": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RevocationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -698,7 +570,73 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"revocation_configuration": schemaAttribute4e84fa137ce17f57fcb682fa(),
+		"revocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrlConfiguration
+				"crl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrlDistributionPointExtensionConfiguration
+						"crl_distribution_point_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OmitExtension
+								"omit_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CrlType
+						"crl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomCname
+						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomPath
+						"custom_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExpirationInDays
+						"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3BucketName
+						"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3ObjectAcl
+						"s3_object_acl": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OcspConfiguration
+				"ocsp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OcspCustomCname
+						"ocsp_custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SigningAlgorithm
 		// CloudFormation resource type schema:
 		//
@@ -706,7 +644,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Algorithm your CA uses to sign certificate requests.",
 		//	  "type": "string"
 		//	}
-		"signing_algorithm": schemaAttributee09fba47780cc17b272c38bc(),
+		"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Algorithm your CA uses to sign certificate requests.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subject
 		// CloudFormation resource type schema:
 		//
@@ -781,7 +722,86 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"subject": schemaAttributef5588d2320b252554213c1e3(),
+		"subject": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CommonName
+				"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Country
+				"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomAttributes
+				"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ObjectIdentifier
+							"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "String that contains X.509 ObjectIdentifier information.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DistinguishedNameQualifier
+				"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: GenerationQualifier
+				"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: GivenName
+				"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Initials
+				"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Locality
+				"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Organization
+				"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OrganizationalUnit
+				"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Pseudonym
+				"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SerialNumber
+				"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: State
+				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Surname
+				"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Title
+				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure that contains X.500 distinguished name information for your CA.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -803,7 +823,21 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute8b6ff3ebb70aa92dd975fd03(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -811,7 +845,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The type of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributef0125d502a1adcd389857f96(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the certificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UsageMode
 		// CloudFormation resource type schema:
 		//
@@ -819,7 +856,10 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Usage mode of the ceritificate authority.",
 		//	  "type": "string"
 		//	}
-		"usage_mode": schemaAttribute9ca7506bc17ac7d5c831b8b8(),
+		"usage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Usage mode of the ceritificate authority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

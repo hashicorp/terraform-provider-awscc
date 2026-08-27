@@ -15,415 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute068238801596a0ccbd1677d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a0de5110643393ba3b3c997() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LaunchTemplateId
-			"launch_template_id": schemaAttribute12b6770c6db55405009717bc(),
-			// Property: LaunchTemplateName
-			"launch_template_name": schemaAttributebcccc2825dc990f3223422fe(),
-			// Property: LaunchTemplateVersion
-			"launch_template_version": schemaAttributed52a853f2c89e72e3a5c6992(),
-		}, /*END SCHEMA*/
-		Description: "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12b6770c6db55405009717bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the launch template to use for faster launching for a Windows AMI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15e98e5420c3b74bfd4fba98() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of parallel instances that are launched for creating resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1769ba526bbc861aa8fa0489() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type of the SSM parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ba7fec9f5f1f07752a6e129() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner account ID for the fast-launch enabled Windows AMI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c8af5cb0d9ab02b17128c8e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AmiAccountId
-				"ami_account_id": schemaAttributea88fe0ba729617babaf7b469(),
-				// Property: DataType
-				"data_type": schemaAttribute1769ba526bbc861aa8fa0489(),
-				// Property: ParameterName
-				"parameter_name": schemaAttribute3627fc43e007cdd5783c2c23(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The SSM parameter configurations to use for AMI distribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a33cc0732ae51603a741365() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b3b02de930d283e779f86ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies the EC2 launch template to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ec0a0096e9cae9551440162() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3627fc43e007cdd5783c2c23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SSM parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38684bbbc01eadaff3b173e8() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags to apply to AMIs distributed to this Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38978a1074aae556c70ecf1c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute439c379ba7b12ff79dfab99f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RepositoryName
-			"repository_name": schemaAttributefff525afed75881061b31528(),
-			// Property: Service
-			"service": schemaAttribute8a4d53460f858e4e66f93fd5(),
-		}, /*END SCHEMA*/
-		Description: "The destination repository for the container distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute459abbba79fcb6b82173c8ae() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48c7edad22667c7e79591b87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account ID that this configuration applies to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e17def60b49829bdad6e0ae() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags associated with the component.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5178ba2414f31c77514c6927() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57c4da3a15bd5a1993e21cd1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tags that are attached to the container distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c25ad717f687f1b927dda1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "region",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e1c58cb12de4331346e200f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The name of the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61cdeba4a902c6402e609328() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute685a8f55c2239ac6e6f65bd2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AmiDistributionConfiguration
-				"ami_distribution_configuration": schemaAttribute9608ff115cb73a1ae868d715(),
-				// Property: ContainerDistributionConfiguration
-				"container_distribution_configuration": schemaAttributefbd6cc99fc1518af9897b76b(),
-				// Property: FastLaunchConfigurations
-				"fast_launch_configurations": schemaAttributeaaec5a36c388ebe3f0e7e304(),
-				// Property: LaunchTemplateConfigurations
-				"launch_template_configurations": schemaAttribute744950a4b189757f6ef3f446(),
-				// Property: LicenseConfigurationArns
-				"license_configuration_arns": schemaAttributedfaa2f077bf1bed68d7d670d(),
-				// Property: Region
-				"region": schemaAttribute5c25ad717f687f1b927dda1c(),
-				// Property: SsmParameterConfigurations
-				"ssm_parameter_configurations": schemaAttribute1c8af5cb0d9ab02b17128c8e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The distributions of the distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d272e98086ff964a754911d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The AWS account ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ef5eeb808d42a90b5f03aea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AMI distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute744950a4b189757f6ef3f446() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttribute48c7edad22667c7e79591b87(),
-				// Property: LaunchTemplateId
-				"launch_template_id": schemaAttribute2b3b02de930d283e779f86ef(),
-				// Property: SetDefaultVersion
-				"set_default_version": schemaAttributed0f8e7a38f25134cfb6d8a3b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A group of launchTemplateConfiguration settings that apply to image distribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e4005eca7cce27df2b712c8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OrganizationArns
-			"organization_arns": schemaAttribute38978a1074aae556c70ecf1c(),
-			// Property: OrganizationalUnitArns
-			"organizational_unit_arns": schemaAttribute2ec0a0096e9cae9551440162(),
-			// Property: UserGroups
-			"user_groups": schemaAttribute5e1c58cb12de4331346e200f(),
-			// Property: UserIds
-			"user_ids": schemaAttribute6d272e98086ff964a754911d(),
-		}, /*END SCHEMA*/
-		Description: "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a4d53460f858e4e66f93fd5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service of target container repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9608ff115cb73a1ae868d715() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AmiTags
-			"ami_tags": schemaAttribute38684bbbc01eadaff3b173e8(),
-			// Property: Description
-			"description": schemaAttribute978b20456c5ba100aef3376e(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute970abf5f0516b89960435d0f(),
-			// Property: LaunchPermissionConfiguration
-			"launch_permission_configuration": schemaAttribute7e4005eca7cce27df2b712c8(),
-			// Property: Name
-			"name": schemaAttribute6ef5eeb808d42a90b5f03aea(),
-			// Property: TargetAccountIds
-			"target_account_ids": schemaAttributed87c0a01c5a24f8e06350304(),
-		}, /*END SCHEMA*/
-		Description: "The specific AMI settings (for example, launch permissions, AMI tags).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute970abf5f0516b89960435d0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key identifier used to encrypt the distributed image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute978b20456c5ba100aef3376e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the AMI distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea88fe0ba729617babaf7b469() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account ID for the AMI to update the parameter with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaec5a36c388ebe3f0e7e304() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountId
-				"account_id": schemaAttribute1ba7fec9f5f1f07752a6e129(),
-				// Property: Enabled
-				"enabled": schemaAttribute5178ba2414f31c77514c6927(),
-				// Property: LaunchTemplate
-				"launch_template": schemaAttribute0a0de5110643393ba3b3c997(),
-				// Property: MaxParallelLaunches
-				"max_parallel_launches": schemaAttribute15e98e5420c3b74bfd4fba98(),
-				// Property: SnapshotConfiguration
-				"snapshot_configuration": schemaAttributef1ce23040813be1f878ed109(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The Windows faster-launching configurations to use for AMI distribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcccc2825dc990f3223422fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the launch template to use for faster launching for a Windows AMI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0f8e7a38f25134cfb6d8a3b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set the specified EC2 launch template as the default launch template for the specified account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed52a853f2c89e72e3a5c6992() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the launch template to use for faster launching for a Windows AMI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed87c0a01c5a24f8e06350304() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of accounts to which you want to distribute an image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfaa2f077bf1bed68d7d670d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The License Manager Configuration to associate with the AMI in the specified Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1ce23040813be1f878ed109() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TargetResourceCount
-			"target_resource_count": schemaAttribute459abbba79fcb6b82173c8ae(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef224d83be2eb74c09c98cecc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the container distribution configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbd6cc99fc1518af9897b76b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerTags
-			"container_tags": schemaAttribute57c4da3a15bd5a1993e21cd1(),
-			// Property: Description
-			"description": schemaAttributef224d83be2eb74c09c98cecc(),
-			// Property: TargetRepository
-			"target_repository": schemaAttribute439c379ba7b12ff79dfab99f(),
-		}, /*END SCHEMA*/
-		Description: "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefff525afed75881061b31528() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The repository name of target container repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_distribution_configuration", distributionConfigurationDataSource)
 }
@@ -440,7 +31,10 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:distribution-configuration/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute068238801596a0ccbd1677d5(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the distribution configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -448,7 +42,10 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The description of the distribution configuration.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute61cdeba4a902c6402e609328(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the distribution configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Distributions
 		// CloudFormation resource type schema:
 		//
@@ -702,7 +299,232 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "array"
 		//	}
-		"distributions": schemaAttribute685a8f55c2239ac6e6f65bd2(),
+		"distributions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AmiDistributionConfiguration
+					"ami_distribution_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AmiTags
+							"ami_tags":          // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The tags to apply to AMIs distributed to this Region.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The description of the AMI distribution configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: KmsKeyId
+							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The KMS key identifier used to encrypt the distributed image.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LaunchPermissionConfiguration
+							"launch_permission_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: OrganizationArns
+									"organization_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OrganizationalUnitArns
+									"organizational_unit_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserGroups
+									"user_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The name of the group.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserIds
+									"user_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The AWS account ID.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the AMI distribution configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetAccountIds
+							"target_account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The ID of accounts to which you want to distribute an image.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The specific AMI settings (for example, launch permissions, AMI tags).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ContainerDistributionConfiguration
+					"container_distribution_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerTags
+							"container_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Tags that are attached to the container distribution configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The description of the container distribution configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetRepository
+							"target_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RepositoryName
+									"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The repository name of target container repository.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Service
+									"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The service of target container repository.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The destination repository for the container distribution configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Container distribution settings for encryption, licensing, and sharing in a specific Region.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FastLaunchConfigurations
+					"fast_launch_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountId
+								"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The owner account ID for the fast-launch enabled Windows AMI.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LaunchTemplate
+								"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LaunchTemplateId
+										"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ID of the launch template to use for faster launching for a Windows AMI.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: LaunchTemplateName
+										"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the launch template to use for faster launching for a Windows AMI.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: LaunchTemplateVersion
+										"launch_template_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The version of the launch template to use for faster launching for a Windows AMI.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxParallelLaunches
+								"max_parallel_launches": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of parallel instances that are launched for creating resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SnapshotConfiguration
+								"snapshot_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: TargetResourceCount
+										"target_resource_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration settings for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The Windows faster-launching configurations to use for AMI distribution.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LaunchTemplateConfigurations
+					"launch_template_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountId
+								"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The account ID that this configuration applies to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LaunchTemplateId
+								"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Identifies the EC2 launch template to use.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SetDefaultVersion
+								"set_default_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Set the specified EC2 launch template as the default launch template for the specified account.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A group of launchTemplateConfiguration settings that apply to image distribution.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LicenseConfigurationArns
+					"license_configuration_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The License Manager Configuration to associate with the AMI in the specified Region.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "region",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SsmParameterConfigurations
+					"ssm_parameter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AmiAccountId
+								"ami_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The account ID for the AMI to update the parameter with.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataType
+								"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The data type of the SSM parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParameterName
+								"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the SSM parameter.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The SSM parameter configurations to use for AMI distribution.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The distributions of the distribution configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -710,7 +532,10 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The name of the distribution configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2a33cc0732ae51603a741365(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the distribution configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -724,7 +549,12 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute4e17def60b49829bdad6e0ae(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags associated with the component.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

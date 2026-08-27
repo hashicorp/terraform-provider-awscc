@@ -15,114 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b012abe0eb1a42491650cf1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b652daf8a9a3a7ece78268b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22c5816cc3ec469b5701674f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute376ba331a1aacd0783bf8dc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the Microsoft Teams channel",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute799e988a9fae720b41040876() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables use of a user role requirement in your chat configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f7194948312eabc14cb863c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the Microsoft Teams team",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9593290a24827f932ed18ce4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea97ef82055a3a1a6c5eb39ca() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa3963d72bf6c1fdfd6dbe5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb486c5d2dff5aa0d44dca32e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Microsoft Teams channel",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5c4e8d303d844737ef095d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the Microsoft Teams tenant",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec824a5afae88afa883990e9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8d62039018ef986efb79f22() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeaa3963d72bf6c1fdfd6dbe5b(),
-				// Property: Value
-				"value": schemaAttributeaa3963d72bf6c1fdfd6dbe5b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to add to the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee97b01ced1c32df35817d16b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_chatbot_microsoft_teams_channel_configuration", microsoftTeamsChannelConfigurationDataSource)
 }
@@ -139,7 +31,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee97b01ced1c32df35817d16b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +45,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "^[A-Za-z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"configuration_name": schemaAttributec824a5afae88afa883990e9b(),
+		"configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomizationResourceArns
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +61,11 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"customization_resource_arns": schemaAttributea97ef82055a3a1a6c5eb39ca(),
+		"customization_resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailPolicies
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +78,11 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"guardrail_policies": schemaAttribute0b652daf8a9a3a7ece78268b(),
+		"guardrail_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +91,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"iam_role_arn": schemaAttribute22c5816cc3ec469b5701674f(),
+		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingLevel
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +104,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "^(ERROR|INFO|NONE)$",
 		//	  "type": "string"
 		//	}
-		"logging_level": schemaAttribute0b012abe0eb1a42491650cf1(),
+		"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsTopicArns
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +120,11 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"sns_topic_arns": schemaAttribute9593290a24827f932ed18ce4(),
+		"sns_topic_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +154,22 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributee8d62039018ef986efb79f22(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to add to the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamId
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +180,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"team_id": schemaAttribute7f7194948312eabc14cb863c(),
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the Microsoft Teams team",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamsChannelId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +194,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "^([a-zA-Z0-9-_=+/.,])*%3[aA]([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$",
 		//	  "type": "string"
 		//	}
-		"teams_channel_id": schemaAttribute376ba331a1aacd0783bf8dc7(),
+		"teams_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the Microsoft Teams channel",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamsChannelName
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +208,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "^(.*)$",
 		//	  "type": "string"
 		//	}
-		"teams_channel_name": schemaAttributeb486c5d2dff5aa0d44dca32e(),
+		"teams_channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Microsoft Teams channel",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamsTenantId
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +222,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"teams_tenant_id": schemaAttributec5c4e8d303d844737ef095d0(),
+		"teams_tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the Microsoft Teams tenant",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserRoleRequired
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +234,10 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "description": "Enables use of a user role requirement in your chat configuration",
 		//	  "type": "boolean"
 		//	}
-		"user_role_required": schemaAttribute799e988a9fae720b41040876(),
+		"user_role_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables use of a user role requirement in your chat configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

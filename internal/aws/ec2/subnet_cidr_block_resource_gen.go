@@ -21,90 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute38e0d978597eea5f45dee67d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Int64{ /*START VALIDATORS*/
-			int64validator.Between(0, 128),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv6NetmaskLength is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74c7aa45ee11dadd82aa67f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the subnet",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ced6797667178e0970a0e56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about the IPv6 association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafdd9c1c3527545b8d709ce6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Ipv6IpamPoolId is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafe2441cab68b97524a8455e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd8ad6962a4ab95d186407b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP Source of an IPv6 Subnet CIDR Block.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6f9ecea31696b83b58d60a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(42),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet_cidr_block", subnetCidrBlockResource)
 	registry.AddListResourceFactory("awscc_ec2_subnet_cidr_block", generic.NewListResource(subnetCidrBlockResource))
@@ -121,7 +37,13 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Information about the IPv6 association.",
 		//	  "type": "string"
 		//	}
-		"subnet_cidr_block_id": schemaAttribute8ced6797667178e0970a0e56(),
+		"subnet_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Information about the IPv6 association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpSource
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +51,13 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IP Source of an IPv6 Subnet CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"ip_source": schemaAttributebd8ad6962a4ab95d186407b4(),
+		"ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP Source of an IPv6 Subnet CIDR Block.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6AddressAttribute
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +65,13 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_address_attribute": schemaAttributeafe2441cab68b97524a8455e(),
+		"ipv_6_address_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +80,18 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 42,
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block": schemaAttributef6f9ecea31696b83b58d60a9(),
+		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(42),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +99,16 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
 		//	  "type": "string"
 		//	}
-		"ipv_6_ipam_pool_id": schemaAttributeafdd9c1c3527545b8d709ce6(),
+		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv6IpamPoolId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +118,19 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"ipv_6_netmask_length": schemaAttribute38e0d978597eea5f45dee67d(),
+		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(0, 128),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv6NetmaskLength is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +138,13 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the subnet",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schemaAttribute74c7aa45ee11dadd82aa67f5(),
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the subnet",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

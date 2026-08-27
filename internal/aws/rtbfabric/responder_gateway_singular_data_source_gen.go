@@ -15,167 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0aad233803fec5f5a18a0af9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HealthyThresholdCount
-			"healthy_threshold_count": schemaAttribute76f9e77e5823153a3b35e940(),
-			// Property: IntervalSeconds
-			"interval_seconds": schemaAttribute76f9e77e5823153a3b35e940(),
-			// Property: Path
-			"path": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: Port
-			"port": schemaAttribute76f9e77e5823153a3b35e940(),
-			// Property: Protocol
-			"protocol": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: StatusCodeMatcher
-			"status_code_matcher": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: TimeoutMs
-			"timeout_ms": schemaAttribute76f9e77e5823153a3b35e940(),
-			// Property: UnhealthyThresholdCount
-			"unhealthy_threshold_count": schemaAttribute76f9e77e5823153a3b35e940(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute126e6885b67a64aa8e568db5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Protocols
-			"protocols": schemaAttributed10277adba2d9c3960e097d4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute400296f12bcabb506ebe9436() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47995476cb8efafd47801635() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76f9e77e5823153a3b35e940() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute847333ee162ce155b6d0ed06() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertificateAuthorityCertificates
-			"certificate_authority_certificates": schemaAttributedeff4de6941f09b880ab8df0(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e2ca0d9fa6d1719f5750e15() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of one or more security groups in order to create a gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb079500a3f25635cab8f23c8() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of one or more subnets in order to create a gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec75c8d44b49d30fe8a55c91d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoScalingGroupsConfiguration
-			"auto_scaling_groups_configuration": schemaAttributecff4225210fdd6dcc62500ed(),
-			// Property: EksEndpointsConfiguration
-			"eks_endpoints_configuration": schemaAttributedb0747efd4ed1ca5f5f631b4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecff4225210fdd6dcc62500ed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoScalingGroupNameList
-			"auto_scaling_group_name_list": schemaAttributedeff4de6941f09b880ab8df0(),
-			// Property: HealthCheckConfig
-			"health_check_config": schemaAttribute0aad233803fec5f5a18a0af9(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute400296f12bcabb506ebe9436(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed10277adba2d9c3960e097d4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb0747efd4ed1ca5f5f631b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClusterApiServerCaCertificateChain
-			"cluster_api_server_ca_certificate_chain": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: ClusterApiServerEndpointUri
-			"cluster_api_server_endpoint_uri": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: ClusterName
-			"cluster_name": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: EndpointsResourceName
-			"endpoints_resource_name": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: EndpointsResourceNamespace
-			"endpoints_resource_namespace": schemaAttribute400296f12bcabb506ebe9436(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute400296f12bcabb506ebe9436(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede1078ee8bc9d083aea24c3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedeff4de6941f09b880ab8df0() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee74bddd4d7aa682a00f0eec5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute47995476cb8efafd47801635(),
-				// Property: Value
-				"value": schemaAttributede1078ee8bc9d083aea24c3c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the Responder Gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rtbfabric_responder_gateway", responderGatewayDataSource)
 }
@@ -195,7 +34,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "string"
 		//	}
-		"acm_certificate_arn": schemaAttribute400296f12bcabb506ebe9436(),
+		"acm_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +46,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute400296f12bcabb506ebe9436(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateAssociationStatus
 		// CloudFormation resource type schema:
 		//
@@ -220,14 +63,18 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"certificate_association_status": schemaAttribute400296f12bcabb506ebe9436(),
+		"certificate_association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schemaAttribute400296f12bcabb506ebe9436(),
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +82,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[A-Za-z0-9 ]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute400296f12bcabb506ebe9436(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +92,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute400296f12bcabb506ebe9436(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExternalInboundEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +102,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$",
 		//	  "type": "string"
 		//	}
-		"external_inbound_endpoint": schemaAttribute400296f12bcabb506ebe9436(),
+		"external_inbound_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +112,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(rtbapp-[a-z0-9-]{1,25}|rtb-gw-[a-z0-9-]{1,25})$",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schemaAttribute400296f12bcabb506ebe9436(),
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayType
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +125,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"gateway_type": schemaAttribute400296f12bcabb506ebe9436(),
+		"gateway_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ListenerConfig
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +153,16 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"listener_config": schemaAttribute126e6885b67a64aa8e568db5(),
+		"listener_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Protocols
+				"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedEndpointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -420,7 +286,94 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"managed_endpoint_configuration": schemaAttributec75c8d44b49d30fe8a55c91d(),
+		"managed_endpoint_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoScalingGroupsConfiguration
+				"auto_scaling_groups_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoScalingGroupNameList
+						"auto_scaling_group_name_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HealthCheckConfig
+						"health_check_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HealthyThresholdCount
+								"healthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntervalSeconds
+								"interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Path
+								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Port
+								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Protocol
+								"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: StatusCodeMatcher
+								"status_code_matcher": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TimeoutMs
+								"timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: UnhealthyThresholdCount
+								"unhealthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EksEndpointsConfiguration
+				"eks_endpoints_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterApiServerCaCertificateChain
+						"cluster_api_server_ca_certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClusterApiServerEndpointUri
+						"cluster_api_server_endpoint_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClusterName
+						"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointsResourceName
+						"endpoints_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointsResourceNamespace
+						"endpoints_resource_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -429,7 +382,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute76f9e77e5823153a3b35e940(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +395,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttribute400296f12bcabb506ebe9436(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResponderGatewayStatus
 		// CloudFormation resource type schema:
 		//
@@ -458,7 +415,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"responder_gateway_status": schemaAttribute400296f12bcabb506ebe9436(),
+		"responder_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +435,11 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schemaAttribute9e2ca0d9fa6d1719f5750e15(),
+		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ID of one or more security groups in order to create a gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +457,11 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnet_ids": schemaAttributeb079500a3f25635cab8f23c8(),
+		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ID of one or more subnets in order to create a gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -529,7 +496,24 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributee74bddd4d7aa682a00f0eec5(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the Responder Gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrustStoreConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -554,14 +538,25 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"trust_store_configuration": schemaAttribute847333ee162ce155b6d0ed06(),
+		"trust_store_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateAuthorityCertificates
+				"certificate_authority_certificates": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_timestamp": schemaAttribute400296f12bcabb506ebe9436(),
+		"updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -574,7 +569,9 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute400296f12bcabb506ebe9436(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

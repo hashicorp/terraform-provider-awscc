@@ -14,286 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute194dfb277041f54916d7ebce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination type, such as Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24ad725923db0702292316a8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsAccounts
-			"aws_accounts": schemaAttributeb2cffe02976253909243136d(),
-			// Property: AwsServices
-			"aws_services": schemaAttributeb10d81bb81a454b485e0f981(),
-		}, /*END SCHEMA*/
-		Description: "The wrapper that contains the AWS accounts and AWS services in scope for the assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24bfc64889d4ae3713f39ced() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27e61e870efe579455268a9e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the specified Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2902d696b452011a37ec4507() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b60554f3d0d004c3f94e950() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the email account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44c6de4c8a4dba15279b665f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the specified AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c2e6fe3c1acb407e5e608b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the specified assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62d86125483c7169c3d8b6de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the delegation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cfa548d29dac0bb258f56a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the specified assessment. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d5aae8f2bd9369e92d4d037() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72ddc6560f512cba5fec6e96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM user or role that performed the action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77effbbf4a6df65a81f7a536() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The comment related to the delegation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c91851fc82168825c947b20() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Destination
-			"destination": schemaAttribute27e61e870efe579455268a9e(),
-			// Property: DestinationType
-			"destination_type": schemaAttribute194dfb277041f54916d7ebce(),
-		}, /*END SCHEMA*/
-		Description: "The destination in which evidence reports are stored for the specified assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ccd4cb18e3fcea8ae25be44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f6db400602eff40f4bac452() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AWS service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e64e3413281cc2c70122442() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4bfd7fc7625bbae2b2d306a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EmailAddress
-			"email_address": schemaAttribute2b60554f3d0d004c3f94e950(),
-			// Property: Id
-			"id": schemaAttributecc1f42540d56dc09668b2aa0(),
-			// Property: Name
-			"name": schemaAttribute44c6de4c8a4dba15279b665f(),
-		}, /*END SCHEMA*/
-		Description: "The AWS account associated with the assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea61bc5e2d3d723f40a9fcecd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the related assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea93c4f5c001d4f9912b6fc90() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RoleArn
-				"role_arn": schemaAttribute6d5aae8f2bd9369e92d4d037(),
-				// Property: RoleType
-				"role_type": schemaAttributeff3feb297f7b3f191c05d1e4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of roles for the specified assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaba7784ee6b8ff33d777776d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb10d81bb81a454b485e0f981() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ServiceName
-				"service_name": schemaAttribute7f6db400602eff40f4bac452(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The AWS services included in scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2cffe02976253909243136d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EmailAddress
-				"email_address": schemaAttribute2b60554f3d0d004c3f94e950(),
-				// Property: Id
-				"id": schemaAttributecc1f42540d56dc09668b2aa0(),
-				// Property: Name
-				"name": schemaAttribute44c6de4c8a4dba15279b665f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The AWS accounts included in scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8a54addea4aa11648080c88() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The sequence of characters that identifies when the event occurred.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe6ddee854cd24e254fceb85() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AssessmentId
-				"assessment_id": schemaAttribute9e64e3413281cc2c70122442(),
-				// Property: AssessmentName
-				"assessment_name": schemaAttributea61bc5e2d3d723f40a9fcecd(),
-				// Property: Comment
-				"comment": schemaAttribute77effbbf4a6df65a81f7a536(),
-				// Property: ControlSetId
-				"control_set_id": schemaAttributee84fb4fa807a4ca49237bdbc(),
-				// Property: CreatedBy
-				"created_by": schemaAttribute72ddc6560f512cba5fec6e96(),
-				// Property: CreationTime
-				"creation_time": schemaAttributeb8a54addea4aa11648080c88(),
-				// Property: Id
-				"id": schemaAttribute9e64e3413281cc2c70122442(),
-				// Property: LastUpdated
-				"last_updated": schemaAttributeb8a54addea4aa11648080c88(),
-				// Property: RoleArn
-				"role_arn": schemaAttribute6d5aae8f2bd9369e92d4d037(),
-				// Property: RoleType
-				"role_type": schemaAttributeff3feb297f7b3f191c05d1e4(),
-				// Property: Status
-				"status": schemaAttribute62d86125483c7169c3d8b6de(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of delegations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc1f42540d56dc09668b2aa0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee843f3d3e3faacf5a4997acb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeaba7784ee6b8ff33d777776d(),
-				// Property: Value
-				"value": schemaAttribute7ccd4cb18e3fcea8ae25be44(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with the assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee84fb4fa807a4ca49237bdbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified control set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff3feb297f7b3f191c05d1e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The IAM role type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_auditmanager_assessment", assessmentDataSource)
 }
@@ -312,7 +32,10 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*:auditmanager:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute24bfc64889d4ae3713f39ced(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssessmentId
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +45,9 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"assessment_id": schemaAttribute9e64e3413281cc2c70122442(),
+		"assessment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssessmentReportsDestination
 		// CloudFormation resource type schema:
 		//
@@ -344,7 +69,22 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"assessment_reports_destination": schemaAttribute7c91851fc82168825c947b20(),
+		"assessment_reports_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destination
+				"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL of the specified Amazon S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DestinationType
+				"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The destination type, such as Amazon S3.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The destination in which evidence reports are stored for the specified assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccount
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +116,27 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"aws_account": schemaAttributea4bfd7fc7625bbae2b2d306a(),
+		"aws_account": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EmailAddress
+				"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The unique identifier for the email account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Id
+				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier for the specified AWS account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the specified AWS account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The AWS account associated with the assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -384,7 +144,10 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The sequence of characters that identifies when the event occurred.",
 		//	  "type": "number"
 		//	}
-		"creation_time": schemaAttributeb8a54addea4aa11648080c88(),
+		"creation_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The sequence of characters that identifies when the event occurred.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Delegations
 		// CloudFormation resource type schema:
 		//
@@ -470,7 +233,67 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"delegations": schemaAttributebe6ddee854cd24e254fceb85(),
+		"delegations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AssessmentId
+					"assessment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: AssessmentName
+					"assessment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the related assessment.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Comment
+					"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The comment related to the delegation.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ControlSetId
+					"control_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier for the specified control set.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CreatedBy
+					"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IAM user or role that performed the action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CreationTime
+					"creation_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The sequence of characters that identifies when the event occurred.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: LastUpdated
+					"last_updated": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The sequence of characters that identifies when the event occurred.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleType
+					"role_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: " The IAM role type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the delegation.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of delegations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +301,10 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the specified assessment.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute4c2e6fe3c1acb407e5e608b4(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the specified assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FrameworkId
 		// CloudFormation resource type schema:
 		//
@@ -489,7 +315,10 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|.*\\S.*)$",
 		//	  "type": "string"
 		//	}
-		"framework_id": schemaAttribute2902d696b452011a37ec4507(),
+		"framework_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the specified framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -500,7 +329,10 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_\\.]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea61bc5e2d3d723f40a9fcecd(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the related assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Roles
 		// CloudFormation resource type schema:
 		//
@@ -530,7 +362,24 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"roles": schemaAttributea93c4f5c001d4f9912b6fc90(),
+		"roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoleType
+					"role_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: " The IAM role type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of roles for the specified assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -588,7 +437,50 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scope": schemaAttribute24ad725923db0702292316a8(),
+		"scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsAccounts
+				"aws_accounts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EmailAddress
+							"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The unique identifier for the email account.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The identifier for the specified AWS account.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the specified AWS account.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The AWS accounts included in scope.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AwsServices
+				"aws_services": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ServiceName
+							"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the AWS service.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The AWS services included in scope.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The wrapper that contains the AWS accounts and AWS services in scope for the assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -600,7 +492,10 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute6cfa548d29dac0bb258f56a4(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the specified assessment. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -631,7 +526,24 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributee843f3d3e3faacf5a4997acb(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with the assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

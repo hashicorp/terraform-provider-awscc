@@ -20,87 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3626dbc2f706d753f6225afe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to automatically enable Security Hub default standards in new member accounts when they join the organization.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"DEFAULT",
-				"NONE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73cdb4c802c5e14538227822() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to automatically enable Security Hub in new member accounts when they join the organization.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaca3cad9301ff2b3b4261aac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether central configuration could be enabled as the ConfigurationType for the organization.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0e741cfe0a0ed1f66abc130() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4ebeda715c594c0fe743a3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the OrganizationConfiguration being created and assigned as the unique identifier.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccd84373b33e43e7013fb11a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the organization uses local or central configuration.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"CENTRAL",
-				"LOCAL",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed82986561366e499b2f226d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_organization_configuration", organizationConfigurationResource)
 	registry.AddListResourceFactory("awscc_securityhub_organization_configuration", generic.NewListResource(organizationConfigurationResource))
@@ -117,7 +36,10 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Whether to automatically enable Security Hub in new member accounts when they join the organization.",
 		//	  "type": "boolean"
 		//	}
-		"auto_enable": schemaAttribute73cdb4c802c5e14538227822(),
+		"auto_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically enable Security Hub in new member accounts when they join the organization.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoEnableStandards
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +51,20 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auto_enable_standards": schemaAttribute3626dbc2f706d753f6225afe(),
+		"auto_enable_standards": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically enable Security Hub default standards in new member accounts when they join the organization.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DEFAULT",
+					"NONE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationType
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +76,20 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"configuration_type": schemaAttributeccd84373b33e43e7013fb11a(),
+		"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the organization uses local or central configuration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CENTRAL",
+					"LOCAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MemberAccountLimitReached
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +97,13 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.",
 		//	  "type": "boolean"
 		//	}
-		"member_account_limit_reached": schemaAttributeb0e741cfe0a0ed1f66abc130(),
+		"member_account_limit_reached": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationConfigurationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +112,13 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}/securityhub-organization-configuration$",
 		//	  "type": "string"
 		//	}
-		"organization_configuration_identifier": schemaAttributec4ebeda715c594c0fe743a3d(),
+		"organization_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the OrganizationConfiguration being created and assigned as the unique identifier.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +131,13 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeaca3cad9301ff2b3b4261aac(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Describes whether central configuration could be enabled as the ConfigurationType for the organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +145,13 @@ func organizationConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL.",
 		//	  "type": "string"
 		//	}
-		"status_message": schemaAttributed82986561366e499b2f226d5(),
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

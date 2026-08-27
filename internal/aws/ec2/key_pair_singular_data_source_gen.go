@@ -14,70 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f0952fa62b8b41e04dd77a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute153ce9bee62ffc63445156bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c4a2158a10be62d8954a0ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51e44b28553d528f977901ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of key pair. Note that ED25519 keys are not supported for Windows instances.\n If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.\n Default: ``rsa``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81fdb1fe47c0d7aec0f238f2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute153ce9bee62ffc63445156bb(),
-				// Property: Value
-				"value": schemaAttributed00dfb4bf152008e39b2d56f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the key pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8843af2119cf07d642bac3e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the key pair.\n Default: ``pem``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89bcb7bf2ec789fdaf32c36e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed00dfb4bf152008e39b2d56f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_key_pair", keyPairDataSource)
 }
@@ -93,7 +29,10 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"key_fingerprint": schemaAttribute2c4a2158a10be62d8954a0ae(),
+		"key_fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyFormat
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +45,10 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_format": schemaAttribute8843af2119cf07d642bac3e9(),
+		"key_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The format of the key pair.\n Default: ``pem``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyName
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +56,10 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
 		//	  "type": "string"
 		//	}
-		"key_name": schemaAttribute0f0952fa62b8b41e04dd77a1(),
+		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyPairId
 		// CloudFormation resource type schema:
 		//
@@ -122,7 +67,10 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"key_pair_id": schemaAttribute2c4a2158a10be62d8954a0ae(),
+		"key_pair_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyType
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +83,10 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_type": schemaAttribute51e44b28553d528f977901ff(),
+		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of key pair. Note that ED25519 keys are not supported for Windows instances.\n If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.\n Default: ``rsa``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicKeyMaterial
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +94,10 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
 		//	  "type": "string"
 		//	}
-		"public_key_material": schemaAttribute89bcb7bf2ec789fdaf32c36e(),
+		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +130,24 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute81fdb1fe47c0d7aec0f238f2(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to apply to the key pair.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

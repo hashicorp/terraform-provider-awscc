@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1a669765ea44f996e3895c57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the type version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5226d0c9b90afea8ba328d41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a HookDefaultVersion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83e57a6717b71b88da8886f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84cde0aa27622b1891ed9ba1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an existing version of the hook to set as the default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_hook_default_version", hookDefaultVersionDataSource)
 }
@@ -58,7 +30,10 @@ func hookDefaultVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5226d0c9b90afea8ba328d41(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a HookDefaultVersion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +42,10 @@ func hookDefaultVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 		//	  "type": "string"
 		//	}
-		"type_name": schemaAttribute83e57a6717b71b88da8886f2(),
+		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TypeVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -76,7 +54,10 @@ func hookDefaultVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"type_version_arn": schemaAttribute1a669765ea44f996e3895c57(),
+		"type_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the type version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -85,7 +66,10 @@ func hookDefaultVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[A-Za-z0-9-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"version_id": schemaAttribute84cde0aa27622b1891ed9ba1(),
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an existing version of the hook to set as the default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

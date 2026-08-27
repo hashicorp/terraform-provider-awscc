@@ -15,282 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0975f3ca8efe420f28452f4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the network function group to change.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f07612b6b8be9491652a836() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a core network for the VPC attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute146b17bcd78266dc8e175e05() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3080ad8781d61b1386c2a392() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31ef91f4460e9ab6fa08224f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Owner account of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c7ab6df52dce033ff19dda8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the network function group attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50bec5aa9ead4b6fb0866229() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Subnet Arn list",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute540a926d1bbf4555f225c791() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb553143d17393baa014f0ce3(),
-				// Property: Value
-				"value": schemaAttributec8bb0558453440a88651d98a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The key-value tags that changed for the segment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e392afe692b31aa9e37fe5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Region where the edge is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68e74b85404cbcc4bf108c63() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AttachmentPolicyRuleNumber
-			"attachment_policy_rule_number": schemaAttributeb7ba6908ccccfdbeabcded8e(),
-			// Property: SegmentName
-			"segment_name": schemaAttributea7966e2d9abb6ba75c9e0160(),
-			// Property: Tags
-			"tags": schemaAttribute540a926d1bbf4555f225c791(),
-		}, /*END SCHEMA*/
-		Description: "The attachment to move from one segment to another.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute728e793711dce5de53e27aa4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the segment attachment..",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72cb79bffc5158d388e7cc5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bc4c831455ce244bbcfff0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Last update time of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bcf64501aad14978879316a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Errors from the last modification of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e549667bb8c5ef7ae6b637e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb553143d17393baa014f0ce3(),
-				// Property: Value
-				"value": schemaAttributec8bb0558453440a88651d98a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The key-value tags that changed for the network function group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute944949468e8b119e4dd104a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a core network for the VPC attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dc783ca99db115d23ab2296() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Routing policy label",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7966e2d9abb6ba75c9e0160() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the segment to change.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7b36003080ad2982e6d5cca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attachment type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaf977e9294091ca1f494144() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb553143d17393baa014f0ce3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7ba6908ccccfdbeabcded8e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The rule number in the policy document that applies to this change.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba81d8ce56b151d6dff9e1d7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AttachmentPolicyRuleNumber
-			"attachment_policy_rule_number": schemaAttributeb7ba6908ccccfdbeabcded8e(),
-			// Property: NetworkFunctionGroupName
-			"network_function_group_name": schemaAttribute0975f3ca8efe420f28452f4f(),
-			// Property: Tags
-			"tags": schemaAttribute8e549667bb8c5ef7ae6b637e(),
-		}, /*END SCHEMA*/
-		Description: "The attachment to move from one network function group to another.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5ee2b6774fc20bf32daf304() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8bb0558453440a88651d98a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5594a2861193000e242de6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b29edd7be2b322837b3961() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplianceModeSupport
-			"appliance_mode_support": schemaAttributec5ee2b6774fc20bf32daf304(),
-			// Property: DnsSupport
-			"dns_support": schemaAttribute146b17bcd78266dc8e175e05(),
-			// Property: Ipv6Support
-			"ipv_6_support": schemaAttributef04171c41d0a3f10149a091a(),
-			// Property: SecurityGroupReferencingSupport
-			"security_group_referencing_support": schemaAttribute3080ad8781d61b1386c2a392(),
-		}, /*END SCHEMA*/
-		Description: "Vpc options of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed78d3635f03e98386e380f72() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The policy rule number associated with the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda3055c63ce05ecaf23e1430() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee291f57314171a541b74de9b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb553143d17393baa014f0ce3(),
-				// Property: Value
-				"value": schemaAttributec8bb0558453440a88651d98a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee96d52c492af22adf5a51993() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Creation time of the attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef04171c41d0a3f10149a091a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_vpc_attachment", vpcAttachmentDataSource)
 }
@@ -306,7 +30,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Id of the attachment.",
 		//	  "type": "string"
 		//	}
-		"attachment_id": schemaAttribute72cb79bffc5158d388e7cc5e(),
+		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttachmentPolicyRuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +41,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The policy rule number associated with the attachment.",
 		//	  "type": "integer"
 		//	}
-		"attachment_policy_rule_number": schemaAttributed78d3635f03e98386e380f72(),
+		"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The policy rule number associated with the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +52,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Attachment type.",
 		//	  "type": "string"
 		//	}
-		"attachment_type": schemaAttributea7b36003080ad2982e6d5cca(),
+		"attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Attachment type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +63,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ARN of a core network for the VPC attachment.",
 		//	  "type": "string"
 		//	}
-		"core_network_arn": schemaAttribute944949468e8b119e4dd104a5(),
+		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a core network for the VPC attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +74,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of a core network for the VPC attachment.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schemaAttribute0f07612b6b8be9491652a836(),
+		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a core network for the VPC attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +85,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Creation time of the attachment.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributee96d52c492af22adf5a51993(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Creation time of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EdgeLocation
 		// CloudFormation resource type schema:
 		//
@@ -354,7 +96,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Region where the edge is located.",
 		//	  "type": "string"
 		//	}
-		"edge_location": schemaAttribute5e392afe692b31aa9e37fe5c(),
+		"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Region where the edge is located.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModificationErrors
 		// CloudFormation resource type schema:
 		//
@@ -365,7 +110,11 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"last_modification_errors": schemaAttribute8bcf64501aad14978879316a(),
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -373,7 +122,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the network function group attachment.",
 		//	  "type": "string"
 		//	}
-		"network_function_group_name": schemaAttribute3c7ab6df52dce033ff19dda8(),
+		"network_function_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the network function group attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Options
 		// CloudFormation resource type schema:
 		//
@@ -404,7 +156,32 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"options": schemaAttributed5b29edd7be2b322837b3961(),
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplianceModeSupport
+				"appliance_mode_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DnsSupport
+				"dns_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Ipv6Support
+				"ipv_6_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupReferencingSupport
+				"security_group_referencing_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Vpc options of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +189,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Owner account of the attachment.",
 		//	  "type": "string"
 		//	}
-		"owner_account_id": schemaAttribute31ef91f4460e9ab6fa08224f(),
+		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Owner account of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProposedNetworkFunctionGroupChange
 		// CloudFormation resource type schema:
 		//
@@ -456,7 +236,41 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"proposed_network_function_group_change": schemaAttributeba81d8ce56b151d6dff9e1d7(),
+		"proposed_network_function_group_change": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachmentPolicyRuleNumber
+				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The rule number in the policy document that applies to this change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkFunctionGroupName
+				"network_function_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the network function group to change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The key-value tags that changed for the network function group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The attachment to move from one network function group to another.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProposedSegmentChange
 		// CloudFormation resource type schema:
 		//
@@ -500,7 +314,41 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"proposed_segment_change": schemaAttribute68e74b85404cbcc4bf108c63(),
+		"proposed_segment_change": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachmentPolicyRuleNumber
+				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The rule number in the policy document that applies to this change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentName
+				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the segment to change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The key-value tags that changed for the segment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The attachment to move from one segment to another.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -508,7 +356,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ARN of the Resource.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttributeda3055c63ce05ecaf23e1430(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingPolicyLabel
 		// CloudFormation resource type schema:
 		//
@@ -516,7 +367,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Routing policy label",
 		//	  "type": "string"
 		//	}
-		"routing_policy_label": schemaAttribute9dc783ca99db115d23ab2296(),
+		"routing_policy_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Routing policy label",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentName
 		// CloudFormation resource type schema:
 		//
@@ -524,7 +378,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the segment attachment..",
 		//	  "type": "string"
 		//	}
-		"segment_name": schemaAttribute728e793711dce5de53e27aa4(),
+		"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the segment attachment..",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -532,7 +389,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "State of the attachment.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributeaaf977e9294091ca1f494144(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetArns
 		// CloudFormation resource type schema:
 		//
@@ -544,7 +404,11 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subnet_arns": schemaAttribute50bec5aa9ead4b6fb0866229(),
+		"subnet_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Subnet Arn list",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -573,7 +437,24 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributee291f57314171a541b74de9b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -581,7 +462,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Last update time of the attachment.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute8bc4c831455ce244bbcfff0c(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Last update time of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcArn
 		// CloudFormation resource type schema:
 		//
@@ -589,7 +473,10 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ARN of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_arn": schemaAttributed5594a2861193000e242de6a(),
+		"vpc_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

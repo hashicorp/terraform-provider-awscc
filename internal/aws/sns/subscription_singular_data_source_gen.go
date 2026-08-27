@@ -14,90 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute109ea6cf05e5e3060bff7245() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the subscription",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39be4b783ab8e69f4c1f947c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subscription's protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45bcbb2e03528759e5496805() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4622e43c082ef3e39df59c18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This attribute lets you choose the filtering scope by using one of the following string value types: MessageAttributes (default) and MessageBody.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69a388a371c12e48e5694500() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors are held in the dead-letter queue for further analysis or reprocessing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6eb9aa3e8cd3ea854a1d7d2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This property applies only to Amazon Data Firehose delivery stream subscriptions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85da9b8d5e5021b1fc995ddd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subscription's endpoint. The endpoint value depends on the protocol that you specify. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87a9264607f7a4c39a0edfab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter policy JSON assigned to the subscription. Enables the subscriber to filter out unwanted messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a8b1eb882147c40ec3ad5b0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, enables raw message delivery. Raw messages don't contain any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6871a109c8859fcf83680f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon SNS resends the notification to the subscription when a message's attribute changes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede97f90f16720605222e9be5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the topic to subscribe to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedea5727d86a7cacd171b71fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The delivery policy JSON assigned to the subscription. Enables the subscriber to define the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to the topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sns_subscription", subscriptionDataSource)
 }
@@ -113,7 +29,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Arn of the subscription",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute109ea6cf05e5e3060bff7245(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the subscription",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryPolicy
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +40,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The delivery policy JSON assigned to the subscription. Enables the subscriber to define the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to the topic.",
 		//	  "type": "string"
 		//	}
-		"delivery_policy": schemaAttributedea5727d86a7cacd171b71fe(),
+		"delivery_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The delivery policy JSON assigned to the subscription. Enables the subscriber to define the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to the topic.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +51,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The subscription's endpoint. The endpoint value depends on the protocol that you specify. ",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttribute85da9b8d5e5021b1fc995ddd(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subscription's endpoint. The endpoint value depends on the protocol that you specify. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPolicy
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +62,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The filter policy JSON assigned to the subscription. Enables the subscriber to filter out unwanted messages.",
 		//	  "type": "string"
 		//	}
-		"filter_policy": schemaAttribute87a9264607f7a4c39a0edfab(),
+		"filter_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The filter policy JSON assigned to the subscription. Enables the subscriber to filter out unwanted messages.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPolicyScope
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +73,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "This attribute lets you choose the filtering scope by using one of the following string value types: MessageAttributes (default) and MessageBody.",
 		//	  "type": "string"
 		//	}
-		"filter_policy_scope": schemaAttribute4622e43c082ef3e39df59c18(),
+		"filter_policy_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This attribute lets you choose the filtering scope by using one of the following string value types: MessageAttributes (default) and MessageBody.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +84,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The subscription's protocol.",
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttribute39be4b783ab8e69f4c1f947c(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subscription's protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RawMessageDelivery
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +95,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "When set to true, enables raw message delivery. Raw messages don't contain any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints.",
 		//	  "type": "boolean"
 		//	}
-		"raw_message_delivery": schemaAttribute8a8b1eb882147c40ec3ad5b0(),
+		"raw_message_delivery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When set to true, enables raw message delivery. Raw messages don't contain any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RedrivePolicy
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +106,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors are held in the dead-letter queue for further analysis or reprocessing.",
 		//	  "type": "string"
 		//	}
-		"redrive_policy": schemaAttribute69a388a371c12e48e5694500(),
+		"redrive_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors are held in the dead-letter queue for further analysis or reprocessing.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +117,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
 		//	  "type": "string"
 		//	}
-		"region": schemaAttribute45bcbb2e03528759e5496805(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplayPolicy
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +128,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Specifies whether Amazon SNS resends the notification to the subscription when a message's attribute changes.",
 		//	  "type": "string"
 		//	}
-		"replay_policy": schemaAttributec6871a109c8859fcf83680f6(),
+		"replay_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether Amazon SNS resends the notification to the subscription when a message's attribute changes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubscriptionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +139,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "This property applies only to Amazon Data Firehose delivery stream subscriptions.",
 		//	  "type": "string"
 		//	}
-		"subscription_role_arn": schemaAttribute6eb9aa3e8cd3ea854a1d7d2b(),
+		"subscription_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This property applies only to Amazon Data Firehose delivery stream subscriptions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TopicArn
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +150,10 @@ func subscriptionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ARN of the topic to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"topic_arn": schemaAttributede97f90f16720605222e9be5(),
+		"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the topic to subscribe to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

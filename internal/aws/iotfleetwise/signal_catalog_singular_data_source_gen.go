@@ -16,166 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1f7de6c0f129e88c486d5f10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3431d2412d4fa551f4b8871d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedValues
-			"allowed_values": schemaAttributefaf07109c7185c83e2799123(),
-			// Property: AssignedValue
-			"assigned_value": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: DataType
-			"data_type": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: Description
-			"description": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: FullyQualifiedName
-			"fully_qualified_name": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: Max
-			"max": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: Min
-			"min": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: Unit
-			"unit": schemaAttribute1f7de6c0f129e88c486d5f10(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69a726b5f631eb45752b05c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Description
-			"description": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: FullyQualifiedName
-			"fully_qualified_name": schemaAttribute1f7de6c0f129e88c486d5f10(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8af5a3b6980f3539e1868192() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedValues
-			"allowed_values": schemaAttributefaf07109c7185c83e2799123(),
-			// Property: DataType
-			"data_type": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: Description
-			"description": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: FullyQualifiedName
-			"fully_qualified_name": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: Max
-			"max": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: Min
-			"min": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: Unit
-			"unit": schemaAttribute1f7de6c0f129e88c486d5f10(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95d42ba1d99d7ba441f2eeec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedValues
-			"allowed_values": schemaAttributefaf07109c7185c83e2799123(),
-			// Property: AssignedValue
-			"assigned_value": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: DataType
-			"data_type": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: DefaultValue
-			"default_value": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: Description
-			"description": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: FullyQualifiedName
-			"fully_qualified_name": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			// Property: Max
-			"max": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: Min
-			"min": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: Unit
-			"unit": schemaAttribute1f7de6c0f129e88c486d5f10(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe0111522180b80acf4d418a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecabd032e0d5095c095722811() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actuator
-				"actuator": schemaAttribute3431d2412d4fa551f4b8871d(),
-				// Property: Attribute
-				"attribute": schemaAttribute95d42ba1d99d7ba441f2eeec(),
-				// Property: Branch
-				"branch": schemaAttribute69a726b5f631eb45752b05c6(),
-				// Property: Sensor
-				"sensor": schemaAttribute8af5a3b6980f3539e1868192(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1acf5354d07b92059facb25() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1f7de6c0f129e88c486d5f10(),
-				// Property: Value
-				"value": schemaAttribute1f7de6c0f129e88c486d5f10(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefaf07109c7185c83e2799123() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbce96c25dcbd2332c05b08c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TotalActuators
-			"total_actuators": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: TotalAttributes
-			"total_attributes": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: TotalBranches
-			"total_branches": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: TotalNodes
-			"total_nodes": schemaAttributebe0111522180b80acf4d418a(),
-			// Property: TotalSensors
-			"total_sensors": schemaAttributebe0111522180b80acf4d418a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefda4e2167cb1cb762fde892e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotfleetwise_signal_catalog", signalCatalogDataSource)
 }
@@ -190,7 +30,9 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute1f7de6c0f129e88c486d5f10(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +40,10 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributefda4e2167cb1cb762fde892e(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +53,9 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1f7de6c0f129e88c486d5f10(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +63,10 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modification_time": schemaAttributefda4e2167cb1cb762fde892e(),
+		"last_modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +76,9 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z\\d\\-_:]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1f7de6c0f129e88c486d5f10(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeCounts
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +103,31 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"node_counts": schemaAttributefbce96c25dcbd2332c05b08c(),
+		"node_counts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TotalActuators
+				"total_actuators": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalAttributes
+				"total_attributes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalBranches
+				"total_branches": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalNodes
+				"total_nodes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalSensors
+				"total_sensors": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Nodes
 		// CloudFormation resource type schema:
 		//
@@ -498,7 +374,144 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"nodes": schemaAttributecabd032e0d5095c095722811(),
+		"nodes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actuator
+					"actuator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AssignedValue
+							"assigned_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Max
+							"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Min
+							"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Attribute
+					"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AssignedValue
+							"assigned_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultValue
+							"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Max
+							"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Min
+							"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Branch
+					"branch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Sensor
+					"sensor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Max
+							"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Min
+							"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -529,7 +542,21 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributee1acf5354d07b92059facb25(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

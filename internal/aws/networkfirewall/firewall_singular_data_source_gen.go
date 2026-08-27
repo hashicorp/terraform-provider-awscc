@@ -15,101 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute031cdeb04c99f2f4db3908ff() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schemaAttributeadd6a87b5bcd22f43092d2f7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fd2ecee3aea59f82a72bda8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f50ae34d45d11dc5dc3aa7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A IPAddressType",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50d01a86877d5c3f220c878e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55f8a82cf0c55da87d259466() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a7dfa764a74be3d3bcc3555() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A SubnetId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e22cf04240493b752494edf() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec8157302726759cfcfd97fbd(),
-				// Property: Value
-				"value": schemaAttributec8157302726759cfcfd97fbd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7db638fbb21f712d08bcd4f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadd6a87b5bcd22f43092d2f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A AvailabilityZone",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4cb29c78e41cbb91e920e7a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IPAddressType
-				"ip_address_type": schemaAttribute3f50ae34d45d11dc5dc3aa7e(),
-				// Property: SubnetId
-				"subnet_id": schemaAttribute9a7dfa764a74be3d3bcc3555(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8157302726759cfcfd97fbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_networkfirewall_firewall", firewallDataSource)
 }
@@ -124,7 +29,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"availability_zone_change_protection": schemaAttribute50d01a86877d5c3f220c878e(),
+		"availability_zone_change_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneMappings
 		// CloudFormation resource type schema:
 		//
@@ -146,14 +53,27 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"availability_zone_mappings": schemaAttribute031cdeb04c99f2f4db3908ff(),
+		"availability_zone_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AvailabilityZone
+					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A AvailabilityZone",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteProtection
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"delete_protection": schemaAttribute50d01a86877d5c3f220c878e(),
+		"delete_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +82,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec8157302726759cfcfd97fbd(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnabledAnalysisTypes
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +101,11 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"enabled_analysis_types": schemaAttribute55f8a82cf0c55da87d259466(),
+		"enabled_analysis_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointIds
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +117,10 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"endpoint_ids": schemaAttributea7db638fbb21f712d08bcd4f(),
+		"endpoint_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallArn
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +131,10 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws.*$",
 		//	  "type": "string"
 		//	}
-		"firewall_arn": schemaAttribute0fd2ecee3aea59f82a72bda8(),
+		"firewall_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallId
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +144,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
-		"firewall_id": schemaAttributec8157302726759cfcfd97fbd(),
+		"firewall_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallName
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +156,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"firewall_name": schemaAttributec8157302726759cfcfd97fbd(),
+		"firewall_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallPolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -233,21 +169,28 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws.*$",
 		//	  "type": "string"
 		//	}
-		"firewall_policy_arn": schemaAttribute0fd2ecee3aea59f82a72bda8(),
+		"firewall_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallPolicyChangeProtection
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"firewall_policy_change_protection": schemaAttribute50d01a86877d5c3f220c878e(),
+		"firewall_policy_change_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetChangeProtection
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"subnet_change_protection": schemaAttribute50d01a86877d5c3f220c878e(),
+		"subnet_change_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetMappings
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +216,23 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnet_mappings": schemaAttributeb4cb29c78e41cbb91e920e7a(),
+		"subnet_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: IPAddressType
+					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A IPAddressType",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubnetId
+					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A SubnetId.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +261,21 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute9e22cf04240493b752494edf(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +285,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^tgw-attach-[0-9a-z]+$",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schemaAttributec8157302726759cfcfd97fbd(),
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +296,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^tgw-[0-9a-z]+$",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttributec8157302726759cfcfd97fbd(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +308,9 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpc-[0-9a-f]+$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributec8157302726759cfcfd97fbd(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

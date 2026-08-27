@@ -15,19 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute6dd959efbdecff4910b4099f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee877aad770036c105addfd90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_msk_batch_scram_secret", batchScramSecretDataSource)
 }
@@ -42,7 +29,9 @@ func batchScramSecretDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schemaAttributee877aad770036c105addfd90(),
+		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecretArnList
 		// CloudFormation resource type schema:
 		//
@@ -53,7 +42,10 @@ func batchScramSecretDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"secret_arn_list": schemaAttribute6dd959efbdecff4910b4099f(),
+		"secret_arn_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

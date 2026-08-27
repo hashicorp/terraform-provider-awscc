@@ -15,234 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute057dc4506e1590d27981c798() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0740971a3bfa5885e13ca8a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute077a0451262c6890b74b9e2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the event trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09df610a2d5896371aea8993() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum allowed number of destination invocations per profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute138132752eb1e6eb1470e9b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the object type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1fb3b929dea6f0e5d4c49fc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the event trigger was most recently updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28497195c711f4767556afe3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operator used to combine multiple dimensions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2abae167c771c98b22b41d9e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time of the specified unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e8c866483c82b4715370ed6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComparisonOperator
-				"comparison_operator": schemaAttributeba0c840141e12253767e0402(),
-				// Property: FieldName
-				"field_name": schemaAttributeff265f1bb111acd90481c80f(),
-				// Property: Source
-				"source": schemaAttributef36816090d23368d9cbd59bf(),
-				// Property: Values
-				"values": schemaAttributeef42875213312968130dcccd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of object attributes to be evaluated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3def9c9f35783dae86fae21c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination is triggered only for profiles that meet the criteria of a segment definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44add8e07cb084da34bbf3c4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies that an event will only trigger the destination if it is processed within a certain latency period.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72347c2287ca23c10d51c339() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0740971a3bfa5885e13ca8a8(),
-				// Property: Value
-				"value": schemaAttribute057dc4506e1590d27981c798(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ab27dccd0a1c3c563473674() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8db4254a0b4b2cf36702f5b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the event trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1ff88ea13c503ce8301f168() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the event trigger was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea242588742a12fd8f527727e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxInvocationsPerProfile
-				"max_invocations_per_profile": schemaAttribute09df610a2d5896371aea8993(),
-				// Property: Unit
-				"unit": schemaAttributebf7a5505df70b5dcba6a19ad(),
-				// Property: Unlimited
-				"unlimited": schemaAttributed9606cb92be2634bf1787d90(),
-				// Property: Value
-				"value": schemaAttribute2abae167c771c98b22b41d9e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of time periods during which the limits apply.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb802084fded23f0da009cf9a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EventExpiration
-			"event_expiration": schemaAttribute44add8e07cb084da34bbf3c4(),
-			// Property: Periods
-			"periods": schemaAttributea242588742a12fd8f527727e(),
-		}, /*END SCHEMA*/
-		Description: "Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba0c840141e12253767e0402() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operator used to compare an attribute against a list of values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb7b72a752873a1080e7a63f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventTriggerDimensions
-				"event_trigger_dimensions": schemaAttributece7fe7cd0feee5b423b152d9(),
-				// Property: LogicalOperator
-				"logical_operator": schemaAttribute28497195c711f4767556afe3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of conditions that determine when an event should trigger the destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf7a5505df70b5dcba6a19ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unit of time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece7fe7cd0feee5b423b152d9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ObjectAttributes
-				"object_attributes": schemaAttribute2e8c866483c82b4715370ed6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of dimensions to be evaluated for the event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9606cb92be2634bf1787d90() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, there is no limit on the number of destination invocations per profile. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef42875213312968130dcccd() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of attribute values used for comparison.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef36816090d23368d9cbd59bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An attribute contained within a source object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff265f1bb111acd90481c80f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A field defined within an object type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_event_trigger", eventTriggerDataSource)
 }
@@ -258,7 +30,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The timestamp of when the event trigger was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributea1ff88ea13c503ce8301f168(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the event trigger was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +43,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute077a0451262c6890b74b9e2f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the event trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +57,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute8ab27dccd0a1c3c563473674(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTriggerConditions
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +172,58 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"event_trigger_conditions": schemaAttributebb7b72a752873a1080e7a63f(),
+		"event_trigger_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventTriggerDimensions
+					"event_trigger_dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ObjectAttributes
+								"object_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ComparisonOperator
+											"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The operator used to compare an attribute against a list of values.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: FieldName
+											"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A field defined within an object type.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Source
+											"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An attribute contained within a source object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Values
+											"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "A list of attribute values used for comparison.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of object attributes to be evaluated.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A list of dimensions to be evaluated for the event.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalOperator
+					"logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The operator used to combine multiple dimensions.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of conditions that determine when an event should trigger the destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTriggerLimits
 		// CloudFormation resource type schema:
 		//
@@ -452,7 +284,46 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"event_trigger_limits": schemaAttributeb802084fded23f0da009cf9a(),
+		"event_trigger_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventExpiration
+				"event_expiration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies that an event will only trigger the destination if it is processed within a certain latency period.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Periods
+				"periods": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxInvocationsPerProfile
+							"max_invocations_per_profile": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum allowed number of destination invocations per profile.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The unit of time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unlimited
+							"unlimited": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "If set to true, there is no limit on the number of destination invocations per profile. The default is false.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The amount of time of the specified unit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of time periods during which the limits apply.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTriggerName
 		// CloudFormation resource type schema:
 		//
@@ -463,7 +334,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"event_trigger_name": schemaAttribute8db4254a0b4b2cf36702f5b7(),
+		"event_trigger_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the event trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -471,7 +345,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The timestamp of when the event trigger was most recently updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute1fb3b929dea6f0e5d4c49fc0(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the event trigger was most recently updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectTypeName
 		// CloudFormation resource type schema:
 		//
@@ -482,7 +359,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"object_type_name": schemaAttribute138132752eb1e6eb1470e9b6(),
+		"object_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the object type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentFilter
 		// CloudFormation resource type schema:
 		//
@@ -493,7 +373,10 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"segment_filter": schemaAttribute3def9c9f35783dae86fae21c(),
+		"segment_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The destination is triggered only for profiles that meet the criteria of a segment definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -528,7 +411,24 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute72347c2287ca23c10d51c339(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

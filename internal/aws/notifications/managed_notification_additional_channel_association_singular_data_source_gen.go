@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributeb449202a238644388edffaa3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN identifier of the channel.\nExample: arn:aws:chatbot::123456789012:chat-configuration/slack-channel/security-ops",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6aed80e9edca52896acf88c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN identifier of the Managed Notification.\nExample: arn:aws:notifications::381491923782:managed-notification-configuration/category/AWS-Health/sub-category/Billing",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_notifications_managed_notification_additional_channel_association", managedNotificationAdditionalChannelAssociationDataSource)
 }
@@ -44,7 +30,10 @@ func managedNotificationAdditionalChannelAssociationDataSource(ctx context.Conte
 		//	  "pattern": "^arn:[a-z-]{3,10}:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_arn": schemaAttributeb449202a238644388edffaa3(),
+		"channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN identifier of the channel.\nExample: arn:aws:chatbot::123456789012:chat-configuration/slack-channel/security-ops",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedNotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -53,7 +42,10 @@ func managedNotificationAdditionalChannelAssociationDataSource(ctx context.Conte
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$",
 		//	  "type": "string"
 		//	}
-		"managed_notification_configuration_arn": schemaAttributeb6aed80e9edca52896acf88c(),
+		"managed_notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN identifier of the Managed Notification.\nExample: arn:aws:notifications::381491923782:managed-notification-configuration/category/AWS-Health/sub-category/Billing",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

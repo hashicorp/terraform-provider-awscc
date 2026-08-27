@@ -14,90 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04ce08cb7ce27f1cc0dd720a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeef0b4e3d7f401bd26db025fb(),
-				// Property: Value
-				"value": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18f7df1bdfc06632eef3e2f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace the snapshot is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f509051b399b5ed6eb6ff18() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3396c674e2316e1046c793d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ce680cba4de19455ea74655() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner account of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54d76dd1dfab35343dd01a0d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The retention period of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ef4c99a0a9f21420674fff2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdminUsername
-			"admin_username": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: NamespaceArn
-			"namespace_arn": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: NamespaceName
-			"namespace_name": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: OwnerAccount
-			"owner_account": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: RetentionPeriod
-			"retention_period": schemaAttribute2f509051b399b5ed6eb6ff18(),
-			// Property: SnapshotArn
-			"snapshot_arn": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: SnapshotCreateTime
-			"snapshot_create_time": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: SnapshotName
-			"snapshot_name": schemaAttributeef0b4e3d7f401bd26db025fb(),
-			// Property: Status
-			"status": schemaAttributeef0b4e3d7f401bd26db025fb(),
-		}, /*END SCHEMA*/
-		Description: "Definition for snapshot resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef0b4e3d7f401bd26db025fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_redshiftserverless_snapshot", snapshotDataSource)
 }
@@ -116,7 +32,10 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"namespace_name": schemaAttribute18f7df1bdfc06632eef3e2f1(),
+		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The namespace the snapshot is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +43,10 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The owner account of the snapshot.",
 		//	  "type": "string"
 		//	}
-		"owner_account": schemaAttribute4ce680cba4de19455ea74655(),
+		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner account of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +54,10 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The retention period of the snapshot.",
 		//	  "type": "integer"
 		//	}
-		"retention_period": schemaAttribute54d76dd1dfab35343dd01a0d(),
+		"retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The retention period of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Snapshot
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +112,52 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"snapshot": schemaAttribute5ef4c99a0a9f21420674fff2(),
+		"snapshot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdminUsername
+				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceArn
+				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceName
+				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OwnerAccount
+				"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetentionPeriod
+				"retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotArn
+				"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotCreateTime
+				"snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnapshotName
+				"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Definition for snapshot resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +168,10 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schemaAttribute3396c674e2316e1046c793d8(),
+		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +202,22 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute04ce08cb7ce27f1cc0dd720a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

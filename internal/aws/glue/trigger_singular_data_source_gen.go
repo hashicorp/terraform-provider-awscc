@@ -15,236 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15c5cc933c3bdce67eba27ac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Conditions
-			"conditions": schemaAttributefe0381e3e19551094573b3be(),
-			// Property: Logical
-			"logical": schemaAttribute5cf19aabb6b43132e6f29b92(),
-		}, /*END SCHEMA*/
-		Description: "The predicate of this trigger, which defines when it will fire.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c600b6947246849f771441a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arguments
-				"arguments": schemaAttribute567bc29bfe043a3d39ce62b5(),
-				// Property: CrawlerName
-				"crawler_name": schemaAttribute9da38809665079255fbc2f8d(),
-				// Property: JobName
-				"job_name": schemaAttributee9a02550e026322ace47cae1(),
-				// Property: NotificationProperty
-				"notification_property": schemaAttributef0bad5f46d8ac6c564752be1(),
-				// Property: SecurityConfiguration
-				"security_configuration": schemaAttributedbe2184d359d5f53aa7bcd78(),
-				// Property: Timeout
-				"timeout": schemaAttributee21f36e619db5a9031648a95(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The actions initiated by this trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4144312c123677949c9d28b2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute567bc29bfe043a3d39ce62b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cf19aabb6b43132e6f29b92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional field if only one condition is listed. If multiple conditions are listed, then this field is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61ded93659afffcae56a3290() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7badecf67ed96df883eafbd2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A logical operator.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute847e8996ea0d42fc60d0f503() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88af9545a320e6bfdc1ee5ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c831f28983fb0035f5c9e39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of trigger that this is.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute958ac61446e49c62648d3a3c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "After a job run starts, the number of minutes to wait before sending a job run delay notification",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97f16a623cffbb1dd1284805() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the job whose JobRuns this condition applies to, and on which this trigger waits.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9da38809665079255fbc2f8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the crawler to be used with this action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e7f20891d98d240e58160b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The tags to use with this trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead48a50402afca0dca2f2019() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cron expression used to specify the schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9063ccb8b0c1821aeeaf8fa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BatchSize
-			"batch_size": schemaAttributebb74bcb6d5304f05b5b3ffdd(),
-			// Property: BatchWindow
-			"batch_window": schemaAttribute61ded93659afffcae56a3290(),
-		}, /*END SCHEMA*/
-		Description: "Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb74bcb6d5304f05b5b3ffdd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec93f6f4e591c79537b7b2c9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the crawler to which this condition applies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb8a80dda75ce74885195733() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the workflow associated with the trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbe2184d359d5f53aa7bcd78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SecurityConfiguration structure to be used with this action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee21f36e619db5a9031648a95() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9a02550e026322ace47cae1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a job to be executed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb861090db4bd8b6ff174a08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of this trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb9ca32556250a8162ea478a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the crawler to which this condition applies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0bad5f46d8ac6c564752be1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NotifyDelayAfter
-			"notify_delay_after": schemaAttribute958ac61446e49c62648d3a3c(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration properties of a job run notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe0381e3e19551094573b3be() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CrawlState
-				"crawl_state": schemaAttributec93f6f4e591c79537b7b2c9c(),
-				// Property: CrawlerName
-				"crawler_name": schemaAttributeeb9ca32556250a8162ea478a(),
-				// Property: JobName
-				"job_name": schemaAttribute97f16a623cffbb1dd1284805(),
-				// Property: LogicalOperator
-				"logical_operator": schemaAttribute7badecf67ed96df883eafbd2(),
-				// Property: State
-				"state": schemaAttribute88af9545a320e6bfdc1ee5ef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of the conditions that determine when the trigger will fire.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_trigger", triggerDataSource)
 }
@@ -299,7 +69,52 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"actions": schemaAttribute2c600b6947246849f771441a(),
+		"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Arguments
+					"arguments": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  jsontypes.NormalizedType{},
+						Description: "The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CrawlerName
+					"crawler_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the crawler to be used with this action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: JobName
+					"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of a job to be executed.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NotificationProperty
+					"notification_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NotifyDelayAfter
+							"notify_delay_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "After a job run starts, the number of minutes to wait before sending a job run delay notification",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies configuration properties of a job run notification.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecurityConfiguration
+					"security_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the SecurityConfiguration structure to be used with this action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Timeout
+					"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The actions initiated by this trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +122,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of this trigger.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeeb861090db4bd8b6ff174a08(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of this trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBatchingCondition
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +147,22 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"event_batching_condition": schemaAttributeb9063ccb8b0c1821aeeaf8fa(),
+		"event_batching_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BatchSize
+				"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BatchWindow
+				"batch_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +170,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the trigger.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute847e8996ea0d42fc60d0f503(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Predicate
 		// CloudFormation resource type schema:
 		//
@@ -384,7 +220,51 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"predicate": schemaAttribute15c5cc933c3bdce67eba27ac(),
+		"predicate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Conditions
+				"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CrawlState
+							"crawl_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The state of the crawler to which this condition applies.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CrawlerName
+							"crawler_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the crawler to which this condition applies.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: JobName
+							"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the job whose JobRuns this condition applies to, and on which this trigger waits.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LogicalOperator
+							"logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A logical operator.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: State
+							"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of the conditions that determine when the trigger will fire.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Logical
+				"logical": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional field if only one condition is listed. If multiple conditions are listed, then this field is required.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The predicate of this trigger, which defines when it will fire.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -392,7 +272,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A cron expression used to specify the schedule.",
 		//	  "type": "string"
 		//	}
-		"schedule": schemaAttributead48a50402afca0dca2f2019(),
+		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A cron expression used to specify the schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartOnCreation
 		// CloudFormation resource type schema:
 		//
@@ -400,7 +283,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.",
 		//	  "type": "boolean"
 		//	}
-		"start_on_creation": schemaAttribute4144312c123677949c9d28b2(),
+		"start_on_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -408,7 +294,11 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The tags to use with this trigger.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute9e7f20891d98d240e58160b2(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The tags to use with this trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +306,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of trigger that this is.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute8c831f28983fb0035f5c9e39(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of trigger that this is.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkflowName
 		// CloudFormation resource type schema:
 		//
@@ -424,7 +317,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the workflow associated with the trigger.",
 		//	  "type": "string"
 		//	}
-		"workflow_name": schemaAttributecb8a80dda75ce74885195733(),
+		"workflow_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workflow associated with the trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1c479eb0a7e9cb0961a78692() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed5c39c334201cf0e866423cb(),
-				// Property: Value
-				"value": schemaAttribute826ca94dd91d17c234902f71(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the cost category.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26da1637782a3c53b4018c8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ISO 8601 date time with offset format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39bf9220203bdcd8c16876fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default value for the cost category",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute826ca94dd91d17c234902f71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86fcc20c5fea690ba93f1eed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "JSON array format of Expression in Billing and Cost Management API",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute884dd46da993053dd90143c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Cost category ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5c39c334201cf0e866423cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb1f870534c4998dfba38783() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2e46933c23548b5a4dbd765() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ce_cost_category", costCategoryDataSource)
 }
@@ -100,7 +30,10 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute884dd46da993053dd90143c7(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Cost category ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultValue
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +43,10 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"default_value": schemaAttribute39bf9220203bdcd8c16876fa(),
+		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default value for the cost category",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EffectiveStart
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +57,10 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(([+-]\\d\\d:\\d\\d)|Z)$",
 		//	  "type": "string"
 		//	}
-		"effective_start": schemaAttribute26da1637782a3c53b4018c8c(),
+		"effective_start": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ISO 8601 date time with offset format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +69,9 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeeb1f870534c4998dfba38783(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleVersion
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +81,9 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"rule_version": schemaAttributeeb1f870534c4998dfba38783(),
+		"rule_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +91,10 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "JSON array format of Expression in Billing and Cost Management API",
 		//	  "type": "string"
 		//	}
-		"rules": schemaAttribute86fcc20c5fea690ba93f1eed(),
+		"rules": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "JSON array format of Expression in Billing and Cost Management API",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SplitChargeRules
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +102,10 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
 		//	  "type": "string"
 		//	}
-		"split_charge_rules": schemaAttributef2e46933c23548b5a4dbd765(),
+		"split_charge_rules": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +140,24 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute1c479eb0a7e9cb0961a78692(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the cost category.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,91 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute18f89f96c5fa93684a391476() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31c90224f10a155c5175fd6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Owner Id of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35a4f521ff3ec224c3b9de5b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Cidr
-				"cidr": schemaAttributebb1275327b5e1d752b4d3657(),
-				// Property: Description
-				"description": schemaAttributebb1275327b5e1d752b4d3657(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Entries of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5688c0f03128b0aea33ddadc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Version of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59e5f4c683cab54c6915e5bc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Max Entries of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b19383c7f6a461832f9235a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Ip Version of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f773cce63fc66d1a5dd2903() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f2c55366af0cf6f0d60ceda() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebb1275327b5e1d752b4d3657(),
-				// Property: Value
-				"value": schemaAttributebb1275327b5e1d752b4d3657(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for Prefix List",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb1275327b5e1d752b4d3657() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec370a1da7ef4e39a69ffe9db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of Prefix List.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_prefix_list", prefixListDataSource)
 }
@@ -118,7 +33,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"address_family": schemaAttribute5b19383c7f6a461832f9235a(),
+		"address_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Ip Version of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +44,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Prefix List.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6f773cce63fc66d1a5dd2903(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Entries
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +74,22 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"entries": schemaAttribute35a4f521ff3ec224c3b9de5b(),
+		"entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Entries of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxEntries
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +98,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"max_entries": schemaAttribute59e5f4c683cab54c6915e5bc(),
+		"max_entries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Max Entries of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +109,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Owner Id of Prefix List.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute31c90224f10a155c5175fd6f(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Owner Id of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +120,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Id of Prefix List.",
 		//	  "type": "string"
 		//	}
-		"prefix_list_id": schemaAttributec370a1da7ef4e39a69ffe9db(),
+		"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrefixListName
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +133,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"prefix_list_name": schemaAttribute18f89f96c5fa93684a391476(),
+		"prefix_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +162,22 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute8f2c55366af0cf6f0d60ceda(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for Prefix List",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +185,10 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Version of Prefix List.",
 		//	  "type": "integer"
 		//	}
-		"version": schemaAttribute5688c0f03128b0aea33ddadc(),
+		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Version of Prefix List.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

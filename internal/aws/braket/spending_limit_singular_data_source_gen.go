@@ -15,115 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute193f71c196ff99b624f08f83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time when the spending limit was created, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31fddc40f7a50c05a3e88c5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the quantum device to apply the spending limit to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b86ea8904a15cc5284f7ed4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that uniquely identifies the spending limit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fa7f5b8c785156fb2b94de7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The end date and time for the spending limit period, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e82acbf9feeab44d8ad91f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70794dcd211ab51089c7a8e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time when the spending limit was last modified, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89e915d7cf8e8d1db003029b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndAt
-			"end_at": schemaAttribute3fa7f5b8c785156fb2b94de7(),
-			// Property: StartAt
-			"start_at": schemaAttributeef18f4c8dc9ee6bf6e34083e(),
-		}, /*END SCHEMA*/
-		Description: "Defines a time range for spending limits, specifying when the limit is active.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6ddc659812805f07b1c7e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb53a96692ad9a2a13e4f747a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4e82acbf9feeab44d8ad91f7(),
-				// Property: Value
-				"value": schemaAttribute9b6ddc659812805f07b1c7e0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the spending limit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2f72ba973b9dbe2c3511015() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The total amount spent on the device so far during the current time period, in USD.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4bb76ef7adf49553d7bcd97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount that can be spent on the specified device, in USD.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed0df941f62160ce5738261b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The amount currently queued for spending on the device, in USD.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef18f4c8dc9ee6bf6e34083e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The start date and time for the spending limit period, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_braket_spending_limit", spendingLimitDataSource)
 }
@@ -140,7 +31,11 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute193f71c196ff99b624f08f83(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the spending limit was created, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceArn
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +45,10 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"device_arn": schemaAttribute31fddc40f7a50c05a3e88c5c(),
+		"device_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the quantum device to apply the spending limit to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueuedSpend
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +56,10 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The amount currently queued for spending on the device, in USD.",
 		//	  "type": "string"
 		//	}
-		"queued_spend": schemaAttributeed0df941f62160ce5738261b(),
+		"queued_spend": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The amount currently queued for spending on the device, in USD.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpendingLimit
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +69,10 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^\\d+(\\.\\d{1,2})?$",
 		//	  "type": "string"
 		//	}
-		"spending_limit": schemaAttributee4bb76ef7adf49553d7bcd97(),
+		"spending_limit": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maximum amount that can be spent on the specified device, in USD.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpendingLimitArn
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +83,10 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]+:[0-9]{12}:spending-limit/.*$",
 		//	  "type": "string"
 		//	}
-		"spending_limit_arn": schemaAttribute3b86ea8904a15cc5284f7ed4(),
+		"spending_limit_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that uniquely identifies the spending limit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +119,24 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb53a96692ad9a2a13e4f747a(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to apply to the spending limit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimePeriod
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +161,24 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"time_period": schemaAttribute89e915d7cf8e8d1db003029b(),
+		"time_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndAt
+				"end_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The end date and time for the spending limit period, in ISO 8601 format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartAt
+				"start_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "The start date and time for the spending limit period, in ISO 8601 format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines a time range for spending limits, specifying when the limit is active.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TotalSpend
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +186,10 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The total amount spent on the device so far during the current time period, in USD.",
 		//	  "type": "string"
 		//	}
-		"total_spend": schemaAttributee2f72ba973b9dbe2c3511015(),
+		"total_spend": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The total amount spent on the device so far during the current time period, in USD.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +198,11 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute70794dcd211ab51089c7a8e0(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the spending limit was last modified, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

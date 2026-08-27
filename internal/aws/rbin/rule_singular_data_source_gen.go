@@ -14,175 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute074bb1dc0b91e70ade695cbe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the retention rule. Only retention rules that are in the available state retain resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b23a498899cbf6cc60b868c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rule Arn is unique for each rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b6379dc390261c33184d958() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceTagKey
-				"resource_tag_key": schemaAttribute7ab645d776c874a1ed82d907(),
-				// Property: ResourceTagValue
-				"resource_tag_value": schemaAttribute58b8732882fe6a4766c5cba2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the exclude resource tags used to identify resources that are excluded by the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13d5d9e74bfc7b6778fc1f71() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The retention period value of the rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58b8732882fe6a4766c5cba2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value of the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5aa8b20004c733411531f707() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee39120236cdff17a40732462(),
-				// Property: Value
-				"value": schemaAttribute60908c05355fa1ecdadae5c2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the tags assigned to the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60908c05355fa1ecdadae5c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String which you can use to describe or define the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute667a82a06c0cc199aec94eab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute757f1d8e2f8480903881bdbc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RetentionPeriodUnit
-			"retention_period_unit": schemaAttribute7aaa65ca00c09f677719d2f1(),
-			// Property: RetentionPeriodValue
-			"retention_period_value": schemaAttribute13d5d9e74bfc7b6778fc1f71(),
-		}, /*END SCHEMA*/
-		Description: "Information about the retention period for which the retention rule is to retain resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aaa65ca00c09f677719d2f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The retention period unit of the rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ab645d776c874a1ed82d907() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key of the resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82b28bdfb08c8aefb5a97604() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: UnlockDelayUnit
-			"unlock_delay_unit": schemaAttributede6a7d807cc467e4d363ec01(),
-			// Property: UnlockDelayValue
-			"unlock_delay_value": schemaAttribute8f7e258c39f9c0e01d6bbb81(),
-		}, /*END SCHEMA*/
-		Description: "Information about the retention rule lock configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f7e258c39f9c0e01d6bbb81() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The unlock delay period, measured in the unit specified for UnlockDelayUnit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ac504f867bdc86bd05f202b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource type retained by the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b55100048d013bc37a88d84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The lock state for the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6f83acbc9cc9b52c294d593() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceTagKey
-				"resource_tag_key": schemaAttribute7ab645d776c874a1ed82d907(),
-				// Property: ResourceTagValue
-				"resource_tag_value": schemaAttribute58b8732882fe6a4766c5cba2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the resource tags used to identify resources that are retained by the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede6a7d807cc467e4d363ec01() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unit of time in which to measure the unlock delay. Currently, the unlock delay can be measure only in days.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee39120236cdff17a40732462() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee88b3b593972cba2a64b3c2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID of the retention rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rbin_rule", ruleDataSource)
 }
@@ -200,7 +31,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute0b23a498899cbf6cc60b868c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rule Arn is unique for each rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +43,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute667a82a06c0cc199aec94eab(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExcludeResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +80,24 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"exclude_resource_tags": schemaAttribute0b6379dc390261c33184d958(),
+		"exclude_resource_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceTagKey
+					"resource_tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key of the resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceTagValue
+					"resource_tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value of the resource",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about the exclude resource tags used to identify resources that are excluded by the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +106,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9a-zA-Z]{11}",
 		//	  "type": "string"
 		//	}
-		"identifier": schemaAttributee88b3b593972cba2a64b3c2b(),
+		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID of the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +133,22 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lock_configuration": schemaAttribute82b28bdfb08c8aefb5a97604(),
+		"lock_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: UnlockDelayUnit
+				"unlock_delay_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The unit of time in which to measure the unlock delay. Currently, the unlock delay can be measure only in days.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UnlockDelayValue
+				"unlock_delay_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The unlock delay period, measured in the unit specified for UnlockDelayUnit.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the retention rule lock configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LockState
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +157,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "locked|pending_unlock|unlocked",
 		//	  "type": "string"
 		//	}
-		"lock_state": schemaAttribute9b55100048d013bc37a88d84(),
+		"lock_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The lock state for the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +194,24 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resource_tags": schemaAttributeb6f83acbc9cc9b52c294d593(),
+		"resource_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceTagKey
+					"resource_tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key of the resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceTagValue
+					"resource_tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value of the resource",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about the resource tags used to identify resources that are retained by the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +224,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute9ac504f867bdc86bd05f202b(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource type retained by the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +255,22 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"retention_period": schemaAttribute757f1d8e2f8480903881bdbc(),
+		"retention_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RetentionPeriodUnit
+				"retention_period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The retention period unit of the rule",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetentionPeriodValue
+				"retention_period_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The retention period value of the rule.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about the retention period for which the retention rule is to retain resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -369,7 +279,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "pending|available",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute074bb1dc0b91e70ade695cbe(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the retention rule. Only retention rules that are in the available state retain resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +316,24 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5aa8b20004c733411531f707(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique identifier for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String which you can use to describe or define the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about the tags assigned to the retention rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -21,42 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute44264fe45953315c50b640d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource policy document, which can be up to 5kb in size.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 5120),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d723ede339a86d454a5ce92() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag to indicate whether to bypass the resource policy lockout safety check",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// BypassPolicyLockoutCheck is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3506d7e0f59c53518a6984d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the resource policy. Must be unique within a specific AWS account.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_xray_resource_policy", resourcePolicyResource)
 	registry.AddListResourceFactory("awscc_xray_resource_policy", generic.NewListResource(resourcePolicyResource))
@@ -73,7 +37,15 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A flag to indicate whether to bypass the resource policy lockout safety check",
 		//	  "type": "boolean"
 		//	}
-		"bypass_policy_lockout_check": schemaAttribute8d723ede339a86d454a5ce92(),
+		"bypass_policy_lockout_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag to indicate whether to bypass the resource policy lockout safety check",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BypassPolicyLockoutCheck is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -83,7 +55,13 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"policy_document": schemaAttribute44264fe45953315c50b640d6(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource policy document, which can be up to 5kb in size.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 5120),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +72,17 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[\\w+=,.@-]+",
 		//	  "type": "string"
 		//	}
-		"policy_name": schemaAttributef3506d7e0f59c53518a6984d(),
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the resource policy. Must be unique within a specific AWS account.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\w+=,.@-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

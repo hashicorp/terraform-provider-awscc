@@ -20,36 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute98082815a1d361e4491e57e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The team ID in Slack, which uniquely identifies a workspace.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebf38f0c7d66981487555ee2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// VersionId is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_supportapp_slack_workspace_configuration", slackWorkspaceConfigurationResource)
 	registry.AddListResourceFactory("awscc_supportapp_slack_workspace_configuration", generic.NewListResource(slackWorkspaceConfigurationResource))
@@ -69,7 +39,17 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"team_id": schemaAttribute98082815a1d361e4491e57e2(),
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The team ID in Slack, which uniquely identifies a workspace.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +60,19 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"version_id": schemaAttributeebf38f0c7d66981487555ee2(),
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// VersionId is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

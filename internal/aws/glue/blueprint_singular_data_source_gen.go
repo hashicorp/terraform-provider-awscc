@@ -15,93 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00c3f8b61550c756a7f53bb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the blueprint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute104787bf2f415a6f6a87fdc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35e0caaed697808b0f72b3d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the blueprint was registered.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute540375c8c2a132efa32f34d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the blueprint was last modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c59815863ac5308ef274346() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a path in Amazon S3 where the blueprint is published.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute793b7efec8e384e5b5481b7a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A JSON string that indicates the list of parameter specifications for the blueprint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2c6e886453eb4ebe11101f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec37864230e9ea05573d5b07a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the blueprint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0e29033afd0e544ed2966c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the blueprint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4c54f75d81bb14c4223bb08() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute104787bf2f415a6f6a87fdc8(),
-				// Property: Value
-				"value": schemaAttributeb2c6e886453eb4ebe11101f6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to be applied to this blueprint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedeaac4663cf6a4c04ef2293() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the blueprint registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_blueprint", blueprintDataSource)
 }
@@ -117,7 +30,10 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the blueprint.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec37864230e9ea05573d5b07a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlueprintLocation
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +44,10 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^s3://([^/]+)/([^/]+/)*([^/]+)$",
 		//	  "type": "string"
 		//	}
-		"blueprint_location": schemaAttribute6c59815863ac5308ef274346(),
+		"blueprint_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies a path in Amazon S3 where the blueprint is published.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedOn
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +56,11 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_on": schemaAttribute35e0caaed697808b0f72b3d0(),
+		"created_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the blueprint was registered.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +70,10 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute00c3f8b61550c756a7f53bb2(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedOn
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +82,11 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_on": schemaAttribute540375c8c2a132efa32f34d9(),
+		"last_modified_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the blueprint was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +97,10 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed0e29033afd0e544ed2966c4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParameterSpec
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +110,10 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"parameter_spec": schemaAttribute793b7efec8e384e5b5481b7a(),
+		"parameter_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A JSON string that indicates the list of parameter specifications for the blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +127,10 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeedeaac4663cf6a4c04ef2293(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the blueprint registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +163,24 @@ func blueprintDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributed4c54f75d81bb14c4223bb08(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to be applied to this blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

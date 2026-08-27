@@ -16,85 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1e1faafb21efe372be1f1b28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the review template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1fe0580f4a9a4f37130e4757() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The review template ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45473fc0046c542b74f03413() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the review template was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d5ee5318e4ad0e9a1713606() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The notes associated with the review template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3c1336221cd7102f25e5e97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the review template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb989fcaed7064b453d5e31c4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebb1e036a8856587acbfb6d0e(),
-				// Property: Value
-				"value": schemaAttributebb1e036a8856587acbfb6d0e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the review template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb1e036a8856587acbfb6d0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6443c0fa346eaed824973aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The review template description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8a34ef9b10dcfe53857e457() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The lenses applied to the review template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdaa5f4019d2c11792205ff3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest status of the review template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wellarchitected_review_template", reviewTemplateDataSource)
 }
@@ -113,7 +34,10 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9-_.,:/()@!\u0026?#+''\\s]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed6443c0fa346eaed824973aa(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The review template description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Lenses
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +50,11 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"lenses": schemaAttributef8a34ef9b10dcfe53857e457(),
+		"lenses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The lenses applied to the review template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Notes
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +64,10 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"notes": schemaAttribute7d5ee5318e4ad0e9a1713606(),
+		"notes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The notes associated with the review template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +78,10 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttribute1e1faafb21efe372be1f1b28(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the review template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +111,22 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb989fcaed7064b453d5e31c4(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the review template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +137,10 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-us-gov|-iso(-[a-z])?|-cn)?:wellarchitected:[a-z]{2}(-gov|-iso([a-z])?)?-[a-z]+-\\d:\\d{12}:(review-template)/[a-f0-9]{32}$",
 		//	  "type": "string"
 		//	}
-		"template_arn": schemaAttribute1fe0580f4a9a4f37130e4757(),
+		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The review template ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateName
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +151,10 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9-_.,:/()@!\u0026?#+''\\s]+$",
 		//	  "type": "string"
 		//	}
-		"template_name": schemaAttributeb3c1336221cd7102f25e5e97(),
+		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the review template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateStatus
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +166,10 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"update_status": schemaAttributefdaa5f4019d2c11792205ff3(),
+		"update_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The latest status of the review template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +178,11 @@ func reviewTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute45473fc0046c542b74f03413(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the review template was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,641 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute013fb0fb32624969122fc3fd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Level
-				"level": schemaAttribute9176de2b9d5ffab079dbc790(),
-				// Property: Type
-				"type": schemaAttributec9082b9bed09e79941204ca2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute019f022ff91c7549f20d5319() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppendToPrompt
-			"append_to_prompt": schemaAttributea6103091c9833da5d8eb4921(),
-			// Property: ModelId
-			"model_id": schemaAttribute34422fb82e8e9f2cd149de60(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute056a1cc9cf98780d3528df1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "LLM extraction instruction",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08f57d2f96152aef29b7da30() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TokenCount
-			"token_count": schemaAttributef8c963f26cece848e450013b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14bc724a6c8ef92f42f3d4a3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Definition
-			"definition": schemaAttribute32ffbbdbed6bf69e8fd38b93(),
-			// Property: LlmExtractionInstruction
-			"llm_extraction_instruction": schemaAttribute056a1cc9cf98780d3528df1e(),
-			// Property: Validation
-			"validation": schemaAttribute61e60c632d4b503ca7946476(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18a354fb6231754c212839d6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentConfigurations
-			"content_configurations": schemaAttribute013fb0fb32624969122fc3fd(),
-			// Property: DataStreamArn
-			"data_stream_arn": schemaAttribute6fe4c8444708889abb049bd9(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e8bdf2ff800793b41dcb3a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of the memory strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ecdaf9e88328d177e30a55c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Resources
-			"resources": schemaAttribute39e947487c18b0dd9d3162f5(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20993436171ccaaed3b81112() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PayloadDeliveryBucketName
-			"payload_delivery_bucket_name": schemaAttribute34422fb82e8e9f2cd149de60(),
-			// Property: TopicArn
-			"topic_arn": schemaAttribute6fe4c8444708889abb049bd9(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute236ce983a9b58aa62a6a8a23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of the Memory resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24e6f91d053e398726da24fc() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of namespaces for memory strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute314760850fe94933821393fb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Consolidation
-			"consolidation": schemaAttribute019f022ff91c7549f20d5319(),
-			// Property: Extraction
-			"extraction": schemaAttribute019f022ff91c7549f20d5319(),
-			// Property: Reflection
-			"reflection": schemaAttributee7a8b0a5a35d258bd4f58bc8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32ffbbdbed6bf69e8fd38b93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Definition for the metadata schema entry",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34422fb82e8e9f2cd149de60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37b136e5eb68551a7e63236a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MessageBasedTrigger
-				"message_based_trigger": schemaAttributec9f69ccccdf043e730650406(),
-				// Property: TimeBasedTrigger
-				"time_based_trigger": schemaAttribute47d8ba38bf6e22cf360735c0(),
-				// Property: TokenBasedTrigger
-				"token_based_trigger": schemaAttribute08f57d2f96152aef29b7da30(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39e947487c18b0dd9d3162f5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Kinesis
-				"kinesis": schemaAttribute18a354fb6231754c212839d6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46200758244c54ee7b963f02() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47d8ba38bf6e22cf360735c0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdleSessionTimeout
-			"idle_session_timeout": schemaAttributef8c963f26cece848e450013b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute530c8823483ed63787b53d7c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CreatedAt
-			"created_at": schemaAttribute73704415e3345edcc89dc111(),
-			// Property: Description
-			"description": schemaAttributebe967633ac6d2693eb408954(),
-			// Property: MemoryRecordSchema
-			"memory_record_schema": schemaAttributef04e706443f7601b4445d8d0(),
-			// Property: Name
-			"name": schemaAttributec991947536c40422b9be2478(),
-			// Property: NamespaceTemplates
-			"namespace_templates": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Namespaces
-			"namespaces": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Status
-			"status": schemaAttribute1e8bdf2ff800793b41dcb3a6(),
-			// Property: StrategyId
-			"strategy_id": schemaAttributec5b0ab042bef92bcbfa948eb(),
-			// Property: Type
-			"type": schemaAttributeb505b4eb4a52054ec556a298(),
-			// Property: UpdatedAt
-			"updated_at": schemaAttributefa5464a58d7885896b7c4861(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55ebb947833436f1d6cc2b0c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Consolidation
-			"consolidation": schemaAttribute019f022ff91c7549f20d5319(),
-			// Property: Extraction
-			"extraction": schemaAttribute019f022ff91c7549f20d5319(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bbf066c24aac4f4b1789563() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Duration in days until memory events expire",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c32a78e4accfda35d0fc640() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HistoricalContextWindowSize
-			"historical_context_window_size": schemaAttributef8c963f26cece848e450013b(),
-			// Property: InvocationConfiguration
-			"invocation_configuration": schemaAttribute20993436171ccaaed3b81112(),
-			// Property: TriggerConditions
-			"trigger_conditions": schemaAttribute37b136e5eb68551a7e63236a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61e60c632d4b503ca7946476() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NumberValidation
-			"number_validation": schemaAttribute9559f48bd0f3596390eae1c6(),
-			// Property: StringListValidation
-			"string_list_validation": schemaAttribute67da477fe15f095a899d63a7(),
-			// Property: StringValidation
-			"string_validation": schemaAttribute865244239da566f311538197(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6723870d1b477cd922a29ea4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67da477fe15f095a899d63a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedValues
-			"allowed_values": schemaAttribute6723870d1b477cd922a29ea4(),
-			// Property: MaxItems
-			"max_items": schemaAttributef8c963f26cece848e450013b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fe4c8444708889abb049bd9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute701655c289e275b451a806e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73704415e3345edcc89dc111() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Creation timestamp of the memory strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cdbf08382eeffce64a4d064() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EpisodicOverride
-			"episodic_override": schemaAttribute314760850fe94933821393fb(),
-			// Property: SelfManagedConfiguration
-			"self_managed_configuration": schemaAttribute5c32a78e4accfda35d0fc640(),
-			// Property: SemanticOverride
-			"semantic_override": schemaAttribute55ebb947833436f1d6cc2b0c(),
-			// Property: SummaryOverride
-			"summary_override": schemaAttribute92caf9ac9a4b21853ecb382d(),
-			// Property: UserPreferenceOverride
-			"user_preference_override": schemaAttribute55ebb947833436f1d6cc2b0c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute865244239da566f311538197() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedValues
-			"allowed_values": schemaAttribute6723870d1b477cd922a29ea4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9176de2b9d5ffab079dbc790() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The level of content detail to deliver",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92caf9ac9a4b21853ecb382d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Consolidation
-			"consolidation": schemaAttribute019f022ff91c7549f20d5319(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9559f48bd0f3596390eae1c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxValue
-			"max_value": schemaAttribute46200758244c54ee7b963f02(),
-			// Property: MinValue
-			"min_value": schemaAttribute46200758244c54ee7b963f02(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b41a6e89244d57ffc95651d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Key name for metadata fields",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6103091c9833da5d8eb4921() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Text prompt for model instructions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4d3aa205a42b458497e27ab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Configuration
-			"configuration": schemaAttribute7cdbf08382eeffce64a4d064(),
-			// Property: CreatedAt
-			"created_at": schemaAttribute73704415e3345edcc89dc111(),
-			// Property: Description
-			"description": schemaAttributebe967633ac6d2693eb408954(),
-			// Property: MemoryRecordSchema
-			"memory_record_schema": schemaAttributef04e706443f7601b4445d8d0(),
-			// Property: Name
-			"name": schemaAttributec991947536c40422b9be2478(),
-			// Property: NamespaceTemplates
-			"namespace_templates": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Namespaces
-			"namespaces": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Status
-			"status": schemaAttribute1e8bdf2ff800793b41dcb3a6(),
-			// Property: StrategyId
-			"strategy_id": schemaAttributec5b0ab042bef92bcbfa948eb(),
-			// Property: Type
-			"type": schemaAttributeb505b4eb4a52054ec556a298(),
-			// Property: UpdatedAt
-			"updated_at": schemaAttributefa5464a58d7885896b7c4861(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb505b4eb4a52054ec556a298() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of memory strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe967633ac6d2693eb408954() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Memory resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec08713d9d2a3d85fe146eb98() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9b41a6e89244d57ffc95651d(),
-				// Property: Type
-				"type": schemaAttributef348ca864a65e833cfc5e2ab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of indexed keys for the memory",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec40f247e22f68abb111f8e93() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomMemoryStrategy
-				"custom_memory_strategy": schemaAttributeb4d3aa205a42b458497e27ab(),
-				// Property: EpisodicMemoryStrategy
-				"episodic_memory_strategy": schemaAttributeecdbeefc5065c8efa5d3ec66(),
-				// Property: SemanticMemoryStrategy
-				"semantic_memory_strategy": schemaAttribute530c8823483ed63787b53d7c(),
-				// Property: SummaryMemoryStrategy
-				"summary_memory_strategy": schemaAttribute530c8823483ed63787b53d7c(),
-				// Property: UserPreferenceMemoryStrategy
-				"user_preference_memory_strategy": schemaAttribute530c8823483ed63787b53d7c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of memory strategies attached to this memory",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5b0ab042bef92bcbfa948eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the memory strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8c37260f53bb2cb4cabe7ff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MemoryRecordSchema
-			"memory_record_schema": schemaAttributef04e706443f7601b4445d8d0(),
-			// Property: NamespaceTemplates
-			"namespace_templates": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Namespaces
-			"namespaces": schemaAttribute24e6f91d053e398726da24fc(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9082b9bed09e79941204ca2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of content to deliver",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec991947536c40422b9be2478() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Memory resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9f69ccccdf043e730650406() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MessageCount
-			"message_count": schemaAttributef8c963f26cece848e450013b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b6e92956f85525e5701c55() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LlmExtractionConfig
-			"llm_extraction_config": schemaAttribute14bc724a6c8ef92f42f3d4a3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6c6573a220ba38e51564355() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the Memory resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda64704a1019a7f613bbd0ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the Memory resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd1602a019d6b8527b6e6efc() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee759f73a2f66597bb137fbfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7a8b0a5a35d258bd4f58bc8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AppendToPrompt
-			"append_to_prompt": schemaAttributea6103091c9833da5d8eb4921(),
-			// Property: MemoryRecordSchema
-			"memory_record_schema": schemaAttributef04e706443f7601b4445d8d0(),
-			// Property: ModelId
-			"model_id": schemaAttribute34422fb82e8e9f2cd149de60(),
-			// Property: NamespaceTemplates
-			"namespace_templates": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Namespaces
-			"namespaces": schemaAttribute24e6f91d053e398726da24fc(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7fc4e8c7046d898290845ce() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExtractionConfig
-				"extraction_config": schemaAttributed5b6e92956f85525e5701c55(),
-				// Property: ExtractionType
-				"extraction_type": schemaAttributee759f73a2f66597bb137fbfd(),
-				// Property: Key
-				"key": schemaAttribute9b41a6e89244d57ffc95651d(),
-				// Property: Type
-				"type": schemaAttributef348ca864a65e833cfc5e2ab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of metadata schema entries",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecdbeefc5065c8efa5d3ec66() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CreatedAt
-			"created_at": schemaAttribute73704415e3345edcc89dc111(),
-			// Property: Description
-			"description": schemaAttributebe967633ac6d2693eb408954(),
-			// Property: MemoryRecordSchema
-			"memory_record_schema": schemaAttributef04e706443f7601b4445d8d0(),
-			// Property: Name
-			"name": schemaAttributec991947536c40422b9be2478(),
-			// Property: NamespaceTemplates
-			"namespace_templates": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: Namespaces
-			"namespaces": schemaAttribute24e6f91d053e398726da24fc(),
-			// Property: ReflectionConfiguration
-			"reflection_configuration": schemaAttributec8c37260f53bb2cb4cabe7ff(),
-			// Property: Status
-			"status": schemaAttribute1e8bdf2ff800793b41dcb3a6(),
-			// Property: StrategyId
-			"strategy_id": schemaAttributec5b0ab042bef92bcbfa948eb(),
-			// Property: Type
-			"type": schemaAttributeb505b4eb4a52054ec556a298(),
-			// Property: UpdatedAt
-			"updated_at": schemaAttributefa5464a58d7885896b7c4861(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef04e706443f7601b4445d8d0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MetadataSchema
-			"metadata_schema": schemaAttributee7fc4e8c7046d898290845ce(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef348ca864a65e833cfc5e2ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Supported data types for metadata values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8c963f26cece848e450013b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa5464a58d7885896b7c4861() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Last update timestamp of the memory strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_memory", memoryDataSource)
 }
@@ -666,7 +31,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute701655c289e275b451a806e9(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -674,7 +42,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Description of the Memory resource",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebe967633ac6d2693eb408954(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Memory resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -683,7 +54,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"encryption_key_arn": schemaAttribute6fe4c8444708889abb049bd9(),
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventExpiryDuration
 		// CloudFormation resource type schema:
 		//
@@ -693,14 +67,19 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 3,
 		//	  "type": "integer"
 		//	}
-		"event_expiry_duration": schemaAttribute5bbf066c24aac4f4b1789563(),
+		"event_expiry_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Duration in days until memory events expire",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"failure_reason": schemaAttribute34422fb82e8e9f2cd149de60(),
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexedKeys
 		// CloudFormation resource type schema:
 		//
@@ -737,7 +116,24 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"indexed_keys": schemaAttributec08713d9d2a3d85fe146eb98(),
+		"indexed_keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Key name for metadata fields",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Supported data types for metadata values",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of indexed keys for the memory",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryArn
 		// CloudFormation resource type schema:
 		//
@@ -746,7 +142,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"memory_arn": schemaAttributeda64704a1019a7f613bbd0ff(),
+		"memory_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the Memory resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -755,7 +154,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"memory_execution_role_arn": schemaAttribute6fe4c8444708889abb049bd9(),
+		"memory_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryId
 		// CloudFormation resource type schema:
 		//
@@ -765,7 +167,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"memory_id": schemaAttributed6c6573a220ba38e51564355(),
+		"memory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for the Memory resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryStrategies
 		// CloudFormation resource type schema:
 		//
@@ -2371,7 +1776,1218 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"memory_strategies": schemaAttributec40f247e22f68abb111f8e93(),
+		"memory_strategies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CustomMemoryStrategy
+					"custom_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Configuration
+							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EpisodicOverride
+									"episodic_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Consolidation
+											"consolidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Extraction
+											"extraction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Reflection
+											"reflection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MemoryRecordSchema
+													"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: MetadataSchema
+															"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: ExtractionConfig
+																		"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: LlmExtractionConfig
+																				"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Definition
+																						"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "Definition for the metadata schema entry",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: LlmExtractionInstruction
+																						"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "LLM extraction instruction",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Validation
+																						"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: NumberValidation
+																								"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: MaxValue
+																										"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																											Computed: true,
+																										}, /*END ATTRIBUTE*/
+																										// Property: MinValue
+																										"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																											Computed: true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																									Computed: true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: StringListValidation
+																								"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: AllowedValues
+																										"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																											ElementType: types.StringType,
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																										// Property: MaxItems
+																										"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																											Computed: true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																									Computed: true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: StringValidation
+																								"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: AllowedValues
+																										"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																											ElementType: types.StringType,
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																									Computed: true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ExtractionType
+																		"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Key name for metadata fields",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Type
+																		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Supported data types for metadata values",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "List of metadata schema entries",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: NamespaceTemplates
+													"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of namespaces for memory strategy",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespaces
+													"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of namespaces for memory strategy",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SelfManagedConfiguration
+									"self_managed_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: HistoricalContextWindowSize
+											"historical_context_window_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: InvocationConfiguration
+											"invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: PayloadDeliveryBucketName
+													"payload_delivery_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: TopicArn
+													"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "ARN format",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: TriggerConditions
+											"trigger_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: MessageBasedTrigger
+														"message_based_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: MessageCount
+																"message_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TimeBasedTrigger
+														"time_based_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: IdleSessionTimeout
+																"idle_session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TokenBasedTrigger
+														"token_based_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: TokenCount
+																"token_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SemanticOverride
+									"semantic_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Consolidation
+											"consolidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Extraction
+											"extraction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SummaryOverride
+									"summary_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Consolidation
+											"consolidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: UserPreferenceOverride
+									"user_preference_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Consolidation
+											"consolidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Extraction
+											"extraction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EpisodicMemoryStrategy
+					"episodic_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ReflectionConfiguration
+							"reflection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MemoryRecordSchema
+									"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MetadataSchema
+											"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ExtractionConfig
+														"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: LlmExtractionConfig
+																"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Definition
+																		"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Definition for the metadata schema entry",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: LlmExtractionInstruction
+																		"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "LLM extraction instruction",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Validation
+																		"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: NumberValidation
+																				"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: MaxValue
+																						"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MinValue
+																						"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: StringListValidation
+																				"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: AllowedValues
+																						"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																							ElementType: types.StringType,
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxItems
+																						"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: StringValidation
+																				"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: AllowedValues
+																						"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																							ElementType: types.StringType,
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: ExtractionType
+														"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Key name for metadata fields",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Supported data types for metadata values",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "List of metadata schema entries",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: NamespaceTemplates
+									"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of namespaces for memory strategy",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Namespaces
+									"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of namespaces for memory strategy",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SemanticMemoryStrategy
+					"semantic_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SummaryMemoryStrategy
+					"summary_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: UserPreferenceMemoryStrategy
+					"user_preference_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of memory strategies attached to this memory",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -2380,7 +2996,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec991947536c40422b9be2478(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the Memory resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -2394,7 +3013,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute236ce983a9b58aa62a6a8a23(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of the Memory resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamDeliveryResources
 		// CloudFormation resource type schema:
 		//
@@ -2463,7 +3085,48 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stream_delivery_resources": schemaAttribute1ecdaf9e88328d177e30a55c(),
+		"stream_delivery_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Resources
+				"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Kinesis
+							"kinesis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ContentConfigurations
+									"content_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Level
+												"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The level of content detail to deliver",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The type of content to deliver",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: DataStreamArn
+									"data_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "ARN format",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2481,7 +3144,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributedd1602a019d6b8527b6e6efc(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -2489,7 +3157,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute701655c289e275b451a806e9(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

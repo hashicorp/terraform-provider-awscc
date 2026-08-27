@@ -16,70 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute158e2c7972a19b2892dcc98d() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6837aeab976c019239e1e8b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An encryption key ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute734265ced9b00d6d11fe69f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96ac833c2c3903316c04b9a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "When the store was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac4d77e1cb29f459d7ca7db2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The store's ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7b50c71ad9b600ec303e85b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecef3d8fe7a8555cfc50b0316() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KeyArn
-			"key_arn": schemaAttribute6837aeab976c019239e1e8b5(),
-			// Property: Type
-			"type": schemaAttributeb7b50c71ad9b600ec303e85b(),
-		}, /*END SCHEMA*/
-		Description: "Server-side encryption (SSE) settings for a store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3cd39c8f16eb3665021df3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_omics_reference_store", referenceStoreDataSource)
 }
@@ -98,7 +34,10 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeac4d77e1cb29f459d7ca7db2(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The store's ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +46,11 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute96ac833c2c3903316c04b9a5(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "When the store was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +61,10 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute734265ced9b00d6d11fe69f2(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +75,10 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee3cd39c8f16eb3665021df3e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReferenceStoreId
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +88,9 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"reference_store_id": schemaAttributeb7b50c71ad9b600ec303e85b(),
+		"reference_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SseConfig
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +117,21 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sse_config": schemaAttributecef3d8fe7a8555cfc50b0316(),
+		"sse_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyArn
+				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An encryption key ARN.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Server-side encryption (SSE) settings for a store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +146,11 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute158e2c7972a19b2892dcc98d(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

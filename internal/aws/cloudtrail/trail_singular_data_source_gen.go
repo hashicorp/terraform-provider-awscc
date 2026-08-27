@@ -15,349 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0ba32e0d702edf192c215e9b() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2097477d329c9222ad286601() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndsWith
-				"ends_with": schemaAttribute0ba32e0d702edf192c215e9b(),
-				// Property: Equals
-				"equals": schemaAttribute7053d2fea2b114a8c0e43d64(),
-				// Property: Field
-				"field": schemaAttributed57cf2aa6557a9f0b2a8efe0(),
-				// Property: NotEndsWith
-				"not_ends_with": schemaAttributeb3d77dd33a45a88e8a80c64d(),
-				// Property: NotEquals
-				"not_equals": schemaAttribute6272effefc4f38e7b58e4fcf(),
-				// Property: NotStartsWith
-				"not_starts_with": schemaAttributebc2fe95a074f446b2e1d0aaa(),
-				// Property: StartsWith
-				"starts_with": schemaAttribute6e2e1fa8599a577e8f65889d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains all selector statements in an advanced event selector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2364111b6755b1778cb22dcf() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventCategory
-				"event_category": schemaAttribute416e8c1883eb5445e0e9c92d(),
-				// Property: Templates
-				"templates": schemaAttribute2f74c296e31ea18ee35f2dfb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the aggregation configuration to aggregate CloudTrail Events. A maximum of 1 aggregation configuration is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute246f3728baa57724c13ece6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f74c296e31ea18ee35f2dfb() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Contains all templates in an aggregation configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f7ca003b97752354466917a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeaff9e803a37410d4c291b9b0(),
-				// Property: Value
-				"value": schemaAttribute246f3728baa57724c13ece6e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute306553538b87cfeb49e01dd9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the trail is publishing events from global services such as IAM to the log files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35c83028847d9f23529a3189() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of insight to log on a trail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute384a96a5bad0b630329d755f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f0e2451335e5d6cf2fcfad4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether log file validation is enabled. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute416e8c1883eb5445e0e9c92d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The category of events to be aggregated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f8f1aa665bc89455bdbf1c9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the CloudTrail is currently logging AWS API calls.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute542058c71b07b9cb81e4bb7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f682cfc4ccd01cf42b6fd9d() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The categories of events for which to log insights. By default, insights are logged for management events only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60d446bc4bfe33e5c515491a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataResources
-				"data_resources": schemaAttribute6edfd9e187cf46b3dd0eb608(),
-				// Property: ExcludeManagementEventSources
-				"exclude_management_event_sources": schemaAttribute7401a6945404ea98d746938d(),
-				// Property: IncludeManagementEvents
-				"include_management_events": schemaAttribute879f7cbfbbbe7ede8d9dc853(),
-				// Property: ReadWriteType
-				"read_write_type": schemaAttribute8ba41c8e5075370d6f13c754(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6272effefc4f38e7b58e4fcf() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e2e1fa8599a577e8f65889d() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6edfd9e187cf46b3dd0eb608() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Type
-				"type": schemaAttributefc66c0da2a63b5f219962b58(),
-				// Property: Values
-				"values": schemaAttributef996cd9d04a35fdb89cd1370(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7053d2fea2b114a8c0e43d64() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7401a6945404ea98d746938d() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing \"kms.amazonaws.com\". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ec93a0384d24f42eeb50d49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81eb400b528a60c2e146260d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventCategories
-				"event_categories": schemaAttribute5f682cfc4ccd01cf42b6fd9d(),
-				// Property: InsightType
-				"insight_type": schemaAttribute35c83028847d9f23529a3189(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute879f7cbfbbbe7ede8d9dc853() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specify if you want your event selector to include management events for your trail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ba41c8e5075370d6f13c754() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92ddf6fba1b591bf3606bef1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e7c53ab8926f66c4e8d689c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaff9e803a37410d4c291b9b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3d77dd33a45a88e8a80c64d() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc2fe95a074f446b2e1d0aaa() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec67986c1bea226d631003179() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8a6de99282a94e860af6464() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed57cf2aa6557a9f0b2a8efe0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed844c3705087f96ff20e4ba9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee982865efe4d1beed2549a18() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldSelectors
-				"field_selectors": schemaAttribute2097477d329c9222ad286601(),
-				// Property: Name
-				"name": schemaAttributec67986c1bea226d631003179(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The advanced event selectors that were used to select events for the data store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef08a1b3ba2d81ce7fe256cba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef996cd9d04a35fdb89cd1370() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb8d1b58cdb96b98fed72d37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc66c0da2a63b5f219962b58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudtrail_trail", trailDataSource)
 }
@@ -493,7 +150,69 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"advanced_event_selectors": schemaAttributee982865efe4d1beed2549a18(),
+		"advanced_event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FieldSelectors
+					"field_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EndsWith
+								"ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Equals
+								"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Field
+								"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotEndsWith
+								"not_ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotEquals
+								"not_equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotStartsWith
+								"not_starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StartsWith
+								"starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Contains all selector statements in an advanced event selector.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The advanced event selectors that were used to select events for the data store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AggregationConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -539,14 +258,34 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"aggregation_configurations": schemaAttribute2364111b6755b1778cb22dcf(),
+		"aggregation_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventCategory
+					"event_category": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The category of events to be aggregated.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Templates
+					"templates": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Contains all templates in an aggregation configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the aggregation configuration to aggregate CloudTrail Events. A maximum of 1 aggregation configuration is allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7ec93a0384d24f42eeb50d49(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchLogsLogGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -554,7 +293,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.",
 		//	  "type": "string"
 		//	}
-		"cloudwatch_logs_log_group_arn": schemaAttribute9e7c53ab8926f66c4e8d689c(),
+		"cloudwatch_logs_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchLogsRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -562,7 +304,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.",
 		//	  "type": "string"
 		//	}
-		"cloudwatch_logs_role_arn": schemaAttributefb8d1b58cdb96b98fed72d37(),
+		"cloudwatch_logs_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableLogFileValidation
 		// CloudFormation resource type schema:
 		//
@@ -570,7 +315,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether log file validation is enabled. The default is false.",
 		//	  "type": "boolean"
 		//	}
-		"enable_log_file_validation": schemaAttribute3f0e2451335e5d6cf2fcfad4(),
+		"enable_log_file_validation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether log file validation is enabled. The default is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventSelectors
 		// CloudFormation resource type schema:
 		//
@@ -638,7 +386,49 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"event_selectors": schemaAttribute60d446bc4bfe33e5c515491a(),
+		"event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataResources
+					"data_resources": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Values
+								"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExcludeManagementEventSources
+					"exclude_management_event_sources": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing \"kms.amazonaws.com\". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IncludeManagementEvents
+					"include_management_events": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specify if you want your event selector to include management events for your trail.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ReadWriteType
+					"read_write_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IncludeGlobalServiceEvents
 		// CloudFormation resource type schema:
 		//
@@ -646,7 +436,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the trail is publishing events from global services such as IAM to the log files.",
 		//	  "type": "boolean"
 		//	}
-		"include_global_service_events": schemaAttribute306553538b87cfeb49e01dd9(),
+		"include_global_service_events": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the trail is publishing events from global services such as IAM to the log files.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InsightSelectors
 		// CloudFormation resource type schema:
 		//
@@ -681,7 +474,25 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"insight_selectors": schemaAttribute81eb400b528a60c2e146260d(),
+		"insight_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventCategories
+					"event_categories": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The categories of events for which to log insights. By default, insights are logged for management events only.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InsightType
+					"insight_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of insight to log on a trail.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsLogging
 		// CloudFormation resource type schema:
 		//
@@ -689,7 +500,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether the CloudTrail is currently logging AWS API calls.",
 		//	  "type": "boolean"
 		//	}
-		"is_logging": schemaAttribute4f8f1aa665bc89455bdbf1c9(),
+		"is_logging": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the CloudTrail is currently logging AWS API calls.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsMultiRegionTrail
 		// CloudFormation resource type schema:
 		//
@@ -697,7 +511,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.",
 		//	  "type": "boolean"
 		//	}
-		"is_multi_region_trail": schemaAttributed844c3705087f96ff20e4ba9(),
+		"is_multi_region_trail": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsOrganizationTrail
 		// CloudFormation resource type schema:
 		//
@@ -705,7 +522,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.",
 		//	  "type": "boolean"
 		//	}
-		"is_organization_trail": schemaAttribute92ddf6fba1b591bf3606bef1(),
+		"is_organization_trail": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KMSKeyId
 		// CloudFormation resource type schema:
 		//
@@ -713,7 +533,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributef08a1b3ba2d81ce7fe256cba(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3BucketName
 		// CloudFormation resource type schema:
 		//
@@ -721,7 +544,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.",
 		//	  "type": "string"
 		//	}
-		"s3_bucket_name": schemaAttribute384a96a5bad0b630329d755f(),
+		"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3KeyPrefix
 		// CloudFormation resource type schema:
 		//
@@ -730,14 +556,19 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"s3_key_prefix": schemaAttributec8a6de99282a94e860af6464(),
+		"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schemaAttribute7ec93a0384d24f42eeb50d49(),
+		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsTopicName
 		// CloudFormation resource type schema:
 		//
@@ -746,7 +577,10 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"sns_topic_name": schemaAttribute542058c71b07b9cb81e4bb7e(),
+		"sns_topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -774,7 +608,23 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute2f7ca003b97752354466917a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrailName
 		// CloudFormation resource type schema:
 		//
@@ -784,7 +634,9 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9]([a-zA-Z0-9\\._-])*[a-zA-Z0-9]$)",
 		//	  "type": "string"
 		//	}
-		"trail_name": schemaAttribute7ec93a0384d24f42eeb50d49(),
+		"trail_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

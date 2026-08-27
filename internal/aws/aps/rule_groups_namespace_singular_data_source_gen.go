@@ -14,63 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute20a4ad81589a5d810d508828() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The RuleGroupsNamespace ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28751616112037691dfcce27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cb626c1cd31763411797ff9() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed30f624ae1c088a0dad98f71(),
-				// Property: Value
-				"value": schemaAttribute28751616112037691dfcce27(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70d2be8197841b63b9bacd4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The RuleGroupsNamespace name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute869441e751ccdc5f51d0cabf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec08f46e2c28d5f95c06ed90c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The RuleGroupsNamespace data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed30f624ae1c088a0dad98f71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_aps_rule_groups_namespace", ruleGroupsNamespaceDataSource)
 }
@@ -87,7 +30,10 @@ func ruleGroupsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:rulegroupsnamespace/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute20a4ad81589a5d810d508828(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The RuleGroupsNamespace ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +41,10 @@ func ruleGroupsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The RuleGroupsNamespace data.",
 		//	  "type": "string"
 		//	}
-		"data": schemaAttributec08f46e2c28d5f95c06ed90c(),
+		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The RuleGroupsNamespace data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +54,10 @@ func ruleGroupsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute70d2be8197841b63b9bacd4f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The RuleGroupsNamespace name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +90,24 @@ func ruleGroupsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3cb626c1cd31763411797ff9(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Workspace
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +116,10 @@ func ruleGroupsNamespaceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"workspace": schemaAttribute869441e751ccdc5f51d0cabf(),
+		"workspace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,146 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1b855b38fc75f0256d1ead62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1df1f7c1c4a25b04b9b22340() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Flow Log ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49467b5dd7a1369b07f706a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the subnet, network interface, or VPC for which you want to create a flow log.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b4d5590375551b401952ba4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ec8ad840770cb9b758124b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50aa5d89c9752866b1359254() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5db1d5ea4fb348c81aad58e1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FileFormat
-			"file_format": schemaAttribute4b4d5590375551b401952ba4(),
-			// Property: HiveCompatiblePartitions
-			"hive_compatible_partitions": schemaAttribute80b2feac1d6a6feed35ae94c(),
-			// Property: PerHourPartition
-			"per_hour_partition": schemaAttribute80b2feac1d6a6feed35ae94c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute618b54b12eeec1b592d16da7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute656dc3fe2ebcaf9e039599d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66495d8439e93027fa6b6b5c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ffeb920bb88bc694a7576aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7040b9d8f0ff597e5da10b1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80b2feac1d6a6feed35ae94c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e319975bbf0b0feab9366c1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4b4d5590375551b401952ba4(),
-				// Property: Value
-				"value": schemaAttribute4b4d5590375551b401952ba4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the flow logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9ad062bc1df62e0f0535f8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadab1987ef52905a88e5beef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fields to include in the flow log record, in the order in which they should appear.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee76a819d3f618bd02a36f39b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttribute4b4d5590375551b401952ba4(),
-				// Property: TagKeys
-				"tag_keys": schemaAttribute618b54b12eeec1b592d16da7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_flow_log", flowLogDataSource)
 }
@@ -170,7 +30,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
 		//	  "type": "string"
 		//	}
-		"deliver_cross_account_role": schemaAttribute656dc3fe2ebcaf9e039599d2(),
+		"deliver_cross_account_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliverLogsPermissionArn
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +41,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
 		//	  "type": "string"
 		//	}
-		"deliver_logs_permission_arn": schemaAttributea9ad062bc1df62e0f0535f8b(),
+		"deliver_logs_permission_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationOptions
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +72,23 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"destination_options": schemaAttribute5db1d5ea4fb348c81aad58e1(),
+		"destination_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FileFormat
+				"file_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HiveCompatiblePartitions
+				"hive_compatible_partitions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PerHourPartition
+				"per_hour_partition": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +96,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Flow Log ID",
 		//	  "type": "string"
 		//	}
-		"flow_log_id": schemaAttribute1df1f7c1c4a25b04b9b22340(),
+		"flow_log_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Flow Log ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogDestination
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +107,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.",
 		//	  "type": "string"
 		//	}
-		"log_destination": schemaAttribute4ec8ad840770cb9b758124b7(),
+		"log_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogDestinationType
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +123,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"log_destination_type": schemaAttribute6ffeb920bb88bc694a7576aa(),
+		"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogFormat
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +134,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The fields to include in the flow log record, in the order in which they should appear.",
 		//	  "type": "string"
 		//	}
-		"log_format": schemaAttributeadab1987ef52905a88e5beef(),
+		"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The fields to include in the flow log record, in the order in which they should appear.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +145,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
 		//	  "type": "string"
 		//	}
-		"log_group_name": schemaAttribute7040b9d8f0ff597e5da10b1e(),
+		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxAggregationInterval
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +156,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).",
 		//	  "type": "integer"
 		//	}
-		"max_aggregation_interval": schemaAttribute66495d8439e93027fa6b6b5c(),
+		"max_aggregation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +167,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the subnet, network interface, or VPC for which you want to create a flow log.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttribute49467b5dd7a1369b07f706a2(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the subnet, network interface, or VPC for which you want to create a flow log.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +186,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute1b855b38fc75f0256d1ead62(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagFieldSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +218,23 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tag_field_specifications": schemaAttributee76a819d3f618bd02a36f39b(),
+		"tag_field_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagKeys
+					"tag_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +259,22 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute9e319975bbf0b0feab9366c1(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to apply to the flow logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrafficType
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +287,10 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"traffic_type": schemaAttribute50aa5d89c9752866b1359254(),
+		"traffic_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

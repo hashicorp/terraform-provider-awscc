@@ -14,277 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0975506f3e6e301e122a3b64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of provisioning artifact. Valid values are CLOUD_FORMATION_TEMPLATE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12781447cfd18e4de45f1510() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the product, such as prod-tsjbmal34qvek",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute143f18ee374e8d353f168612() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the provisioning artifact, including how it differs from the previous provisioning artifact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14471700db9e39aa54d1b768() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The contact email for product support.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a5ffd5c9dd38f80b27bc7cd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ArtifactPath
-			"artifact_path": schemaAttribute221c28ff6753a4716a9ab75f(),
-			// Property: Branch
-			"branch": schemaAttribute229d95be1016437e8a243b7d(),
-			// Property: ConnectionArn
-			"connection_arn": schemaAttributea2a7adb3494a7bca330864af(),
-			// Property: Repository
-			"repository": schemaAttributecbf02afc5dd8cd2ae46d341c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f1667649ef849c8f540eb3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of product.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute221c28ff6753a4716a9ab75f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The absolute path where the artifact resides within the repo and branch, formatted as \"folder/file.json\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute229d95be1016437e8a243b7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The specific branch where the artifact resides.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2edbd1a761f0b5afee93ea53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The support information about the product.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32760a3e671b5abf43b8d92d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the AWS CloudFormation template in Amazon S3 in JSON format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute382edee90f7b50bf5a1b4a4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a9fe1f3968f948d133c43be() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeStar
-			"code_star": schemaAttribute1a5ffd5c9dd38f80b27bc7cd(),
-		}, /*END SCHEMA*/
-		Description: "The connection details based on the connection Type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40906c3e2ec4d70c114a6d4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cbe44b83347baba33b55ea4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute143f18ee374e8d353f168612(),
-				// Property: DisableTemplateValidation
-				"disable_template_validation": schemaAttributeeafcce82bbc2e3f4808965b0(),
-				// Property: Info
-				"info": schemaAttributeea9f08922b751e8944263af7(),
-				// Property: Name
-				"name": schemaAttribute8565e3eb3feb9ff266f46f5c(),
-				// Property: Type
-				"type": schemaAttribute0975506f3e6e301e122a3b64(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The configuration of the provisioning artifact (also known as a version).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5afdc2ec308723f0154df42c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the product.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ffaf933fe0d59add246b914() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The only supported SourceConnection type is Codestar.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68d588a9152daf0b846047d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fc52fd32fcf07223942a907() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8565e3eb3feb9ff266f46f5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88f4e8b75ed1e5337203bd38() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectionParameters
-			"connection_parameters": schemaAttribute3a9fe1f3968f948d133c43be(),
-			// Property: Type
-			"type": schemaAttribute5ffaf933fe0d59add246b914(),
-		}, /*END SCHEMA*/
-		Description: "A top level ProductViewDetail response containing details about the product's connection. AWS Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f61332cadbbc7f5190ec229() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IDs of the provisioning artifacts",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6e2d1518a2a05e4226807c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The distributor of the product.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea026bf2c4ff9933c43e5a2d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2a7adb3494a7bca330864af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CodeStar ARN, which is the connection between AWS Service Catalog and the external repository.\n\n",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea98931e055765d698d07308c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute68d588a9152daf0b846047d6(),
-				// Property: Value
-				"value": schemaAttributea026bf2c4ff9933c43e5a2d6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb86d6688444aa573662e8152() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the product.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb8d7c5a6556789f7765f263() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the product.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec39cef8ec058e1299d296a82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The names of the provisioning artifacts",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbf02afc5dd8cd2ae46d341c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The specific repository where the product's artifact-to-be-synced resides, formatted as \"Account/Repo.\"",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5e27a07d665f9117acc9bbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The contact URL for product support.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea9f08922b751e8944263af7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ImportFromPhysicalId
-			"import_from_physical_id": schemaAttribute382edee90f7b50bf5a1b4a4f(),
-			// Property: LoadTemplateFromURL
-			"load_template_from_url": schemaAttribute32760a3e671b5abf43b8d92d(),
-		}, /*END SCHEMA*/
-		Description: "Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the AWS CloudFormation template in Amazon S3 in JSON format. Specify the URL in JSON format as follows:\n\n\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"\n\nImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: \"arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeafcce82bbc2e3f4808965b0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_cloudformation_product", cloudFormationProductDataSource)
 }
@@ -300,7 +29,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schemaAttribute40906c3e2ec4d70c114a6d4a(),
+		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -308,7 +40,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The description of the product.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeb86d6688444aa573662e8152(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Distributor
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +51,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The distributor of the product.",
 		//	  "type": "string"
 		//	}
-		"distributor": schemaAttribute9b6e2d1518a2a05e4226807c(),
+		"distributor": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The distributor of the product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -324,7 +62,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ID of the product, such as prod-tsjbmal34qvek",
 		//	  "type": "string"
 		//	}
-		"cloudformation_product_id": schemaAttribute12781447cfd18e4de45f1510(),
+		"cloudformation_product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the product, such as prod-tsjbmal34qvek",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +73,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the product.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute5afdc2ec308723f0154df42c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +84,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The owner of the product.",
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttributebb8d7c5a6556789f7765f263(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductName
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +95,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the product.",
 		//	  "type": "string"
 		//	}
-		"product_name": schemaAttribute5afdc2ec308723f0154df42c(),
+		"product_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductType
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +114,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"product_type": schemaAttribute1f1667649ef849c8f540eb3d(),
+		"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningArtifactIds
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +125,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The IDs of the provisioning artifacts",
 		//	  "type": "string"
 		//	}
-		"provisioning_artifact_ids": schemaAttribute8f61332cadbbc7f5190ec229(),
+		"provisioning_artifact_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IDs of the provisioning artifacts",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningArtifactNames
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +136,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The names of the provisioning artifacts",
 		//	  "type": "string"
 		//	}
-		"provisioning_artifact_names": schemaAttributec39cef8ec058e1299d296a82(),
+		"provisioning_artifact_names": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The names of the provisioning artifacts",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningArtifactParameters
 		// CloudFormation resource type schema:
 		//
@@ -438,7 +197,51 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"provisioning_artifact_parameters": schemaAttribute4cbe44b83347baba33b55ea4(),
+		"provisioning_artifact_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The description of the provisioning artifact, including how it differs from the previous provisioning artifact.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DisableTemplateValidation
+					"disable_template_validation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Info
+					"info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ImportFromPhysicalId
+							"import_from_physical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LoadTemplateFromURL
+							"load_template_from_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URL of the AWS CloudFormation template in Amazon S3 in JSON format.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the AWS CloudFormation template in Amazon S3 in JSON format. Specify the URL in JSON format as follows:\n\n\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"\n\nImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: \"arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of provisioning artifact. Valid values are CLOUD_FORMATION_TEMPLATE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The configuration of the provisioning artifact (also known as a version).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplaceProvisioningArtifacts
 		// CloudFormation resource type schema:
 		//
@@ -446,7 +249,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.",
 		//	  "type": "boolean"
 		//	}
-		"replace_provisioning_artifacts": schemaAttribute7fc52fd32fcf07223942a907(),
+		"replace_provisioning_artifacts": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceConnection
 		// CloudFormation resource type schema:
 		//
@@ -500,7 +306,50 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_connection": schemaAttribute88f4e8b75ed1e5337203bd38(),
+		"source_connection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectionParameters
+				"connection_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CodeStar
+						"code_star": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ArtifactPath
+								"artifact_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The absolute path where the artifact resides within the repo and branch, formatted as \"folder/file.json\".",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Branch
+								"branch": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The specific branch where the artifact resides.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectionArn
+								"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The CodeStar ARN, which is the connection between AWS Service Catalog and the external repository.\n\n",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Repository
+								"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The specific repository where the product's artifact-to-be-synced resides, formatted as \"Account/Repo.\"",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The connection details based on the connection Type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The only supported SourceConnection type is Codestar.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A top level ProductViewDetail response containing details about the product's connection. AWS Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportDescription
 		// CloudFormation resource type schema:
 		//
@@ -508,7 +357,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The support information about the product.",
 		//	  "type": "string"
 		//	}
-		"support_description": schemaAttribute2edbd1a761f0b5afee93ea53(),
+		"support_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The support information about the product.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportEmail
 		// CloudFormation resource type schema:
 		//
@@ -516,7 +368,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The contact email for product support.",
 		//	  "type": "string"
 		//	}
-		"support_email": schemaAttribute14471700db9e39aa54d1b768(),
+		"support_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The contact email for product support.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportUrl
 		// CloudFormation resource type schema:
 		//
@@ -524,7 +379,10 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The contact URL for product support.",
 		//	  "type": "string"
 		//	}
-		"support_url": schemaAttributee5e27a07d665f9117acc9bbd(),
+		"support_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The contact URL for product support.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -552,7 +410,24 @@ func cloudFormationProductDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributea98931e055765d698d07308c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

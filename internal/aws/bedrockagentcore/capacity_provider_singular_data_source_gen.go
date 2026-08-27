@@ -16,609 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07f791f8ba2729e51e5580f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logical name of the volume, used to reference it when mounting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09527e1f6687d8677d54fa9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the license configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b2d7b0236ee98b549baf597() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdleInstanceTimeout
-			"idle_instance_timeout": schemaAttributec6d4ca9e68aec7ee237989db(),
-			// Property: MaxLifetime
-			"max_lifetime": schemaAttribute2ea3ca7603ed129efe7bdc92(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for managing the lifecycle of instances in a capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0be50aa784ef64c5ed7b25c4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityProviderOperatorRoleArn
-			"capacity_provider_operator_role_arn": schemaAttribute2586b93987b2b9b85e5e56fb(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for permissions associated with a capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e4977de6246fd8ffae14b5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the capacity provider was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f610b4e123b827541a59b57() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encrypted
-			"encrypted": schemaAttribute2fbcbeb83ebbfcec69b989e7(),
-			// Property: Iops
-			"iops": schemaAttributee143cb946fa1e56a0f9039f2(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute560e32dc24f45e382a9922c8(),
-			// Property: Name
-			"name": schemaAttribute07f791f8ba2729e51e5580f1(),
-			// Property: SizeGiB
-			"size_gi_b": schemaAttribute7aaeea80debdc76a133f4ab3(),
-			// Property: SnapshotId
-			"snapshot_id": schemaAttributeca105e5eb9bca1d5bb87b592(),
-			// Property: Throughput
-			"throughput": schemaAttribute85a218f9516f8376a07cd84e(),
-			// Property: VolumeType
-			"volume_type": schemaAttributeb3c2c973363b35fd43625c62(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an EBS-backed persistent volume.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15ee6e3fae355d8e6134c33c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute35f13c1f0310f8b26b731cd4(),
-				// Property: Value
-				"value": schemaAttribute45be4c02b1353a0c2f4ff147(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16d3d3d02a1b2a73151acd8c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroups
-			"security_groups": schemaAttributed30248fdd4c5ad5c2a7d98bf(),
-			// Property: Subnets
-			"subnets": schemaAttributea878858e714ccb31292bde07(),
-		}, /*END SCHEMA*/
-		Description: "VPC configuration for launching EC2 instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute177f7148fd106a40d6511554() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of I/O operations per second (IOPS).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cb800e60ff13ca817097eda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier of the customer managed KMS key to use for EBS encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24e5d0b1a97095b70e16aeb4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2586b93987b2b9b85e5e56fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that operators use to manage the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2933ace127d0e2fac7a1135c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b91adfb0fd1cffef7dac044() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the capacity provider was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d141bd44c08e3e9e6c898db() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LicenseConfigurationArn
-				"license_configuration_arn": schemaAttribute09527e1f6687d8677d54fa9b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The license configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ea3ca7603ed129efe7bdc92() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated regardless of activity. Default: 28800 seconds (8 hours). Maximum: 1209600 seconds (14 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fbcbeb83ebbfcec69b989e7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to encrypt the volume. Defaults to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute333addda9e815c998a7a55ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35f13c1f0310f8b26b731cd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3be850e81f434f97a470d6ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44721313a30c6536fd517de9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45be4c02b1353a0c2f4ff147() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4930acc69a7c2ed4c57b0dba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationSpecification
-			"capacity_reservation_specification": schemaAttribute7feb28a4a3ee93d96eecf20c(),
-			// Property: EphemeralVolumes
-			"ephemeral_volumes": schemaAttribute5706d027606027d11ab70dcd(),
-			// Property: InstanceProfileArn
-			"instance_profile_arn": schemaAttributef09f78865a8b46571fe56cb6(),
-			// Property: InstanceRequirements
-			"instance_requirements": schemaAttributef3a118ca7df84a26e220423b(),
-			// Property: LicenseSpecifications
-			"license_specifications": schemaAttribute2d141bd44c08e3e9e6c898db(),
-			// Property: Monitoring
-			"monitoring": schemaAttributeddc74ac45f3da350d9d6cc6c(),
-			// Property: OperatingSystem
-			"operating_system": schemaAttributeb8dd1c812155b137cd7773fb(),
-			// Property: PropagatedTags
-			"propagated_tags": schemaAttributed83354fc7020d7cb2141a158(),
-			// Property: SshKeyName
-			"ssh_key_name": schemaAttributeadf5e3d373ef17ec91faed4f(),
-		}, /*END SCHEMA*/
-		Description: "Parameters for launching EC2 instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50a0540b9408aa2316ae4c8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description of the capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute560e32dc24f45e382a9922c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier of the KMS key to use for encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5706d027606027d11ab70dcd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeviceName
-				"device_name": schemaAttributec7a055652b9b2c7c2aec51f4(),
-				// Property: Ebs
-				"ebs": schemaAttributec213aa2980112b9faf50cfc8(),
-				// Property: VirtualName
-				"virtual_name": schemaAttributef668dc6eb4c7f69316e519e5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The block device mapping for ephemeral (instance store) volumes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e144f6c05f71121530c11c4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The free space guaranteed on the root volume, in GiB. The service adds the operating system overhead on top of this value. Defaults to 8 GiB. The maximum is below the 65,536 GiB gp3 ceiling because the service adds the AMI size bucket on top of this value, and the resulting total must still be a provisionable gp3 volume.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a00c8c9cbd7f6f651b0fa54() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LaunchTemplateSource
-			"launch_template_source": schemaAttributed51db7135db78ff1923acc2a(),
-			// Property: LifecycleConfiguration
-			"lifecycle_configuration": schemaAttribute0b2d7b0236ee98b549baf597(),
-			// Property: RootVolume
-			"root_volume": schemaAttributed71ca9132396bb854798663d(),
-			// Property: Volumes
-			"volumes": schemaAttribute770c0ac2369f9fbba81e793e(),
-			// Property: VpcConfiguration
-			"vpc_configuration": schemaAttribute16d3d3d02a1b2a73151acd8c(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for EC2-based capacity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f73c976cefb36cd930222e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Capacity Reservation in which to run the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute770c0ac2369f9fbba81e793e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EbsConfiguration
-				"ebs_configuration": schemaAttribute0f610b4e123b827541a59b57(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Named persistent EBS volumes for this capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aaeea80debdc76a133f4ab3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the volume in GiB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7feb28a4a3ee93d96eecf20c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationPreference
-			"capacity_reservation_preference": schemaAttribute8385eef4ae53442b044c1697(),
-			// Property: CapacityReservationTarget
-			"capacity_reservation_target": schemaAttribute861514ee0462baa5f1e153a0(),
-		}, /*END SCHEMA*/
-		Description: "The Capacity Reservation targeting option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8385eef4ae53442b044c1697() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the instance's Capacity Reservation preferences.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute845264ee5f12e26b0e29bdba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The volume type. Defaults to gp3 if not specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85a218f9516f8376a07cd84e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput in MiB/s. Only valid for gp3 volumes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute861514ee0462baa5f1e153a0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityReservationId
-			"capacity_reservation_id": schemaAttribute6f73c976cefb36cd930222e5(),
-			// Property: CapacityReservationResourceGroupArn
-			"capacity_reservation_resource_group_arn": schemaAttributedd7735bf03eb397c09169797(),
-		}, /*END SCHEMA*/
-		Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94a6c49547fa0ef7b6b26a65() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput to provision for a gp3 volume, in MiB/s.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97e0b5dc495284dadff72e82() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The index of the EBS card. Applies to instances with multiple EBS cards.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea878858e714ccb31292bde07() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of the subnets in which to launch instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadf5e3d373ef17ec91faed4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SSH key pair to configure on instances for SSH connectivity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0a8f0756009d52ab3205ec2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the EBS volume is encrypted.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3c2c973363b35fd43625c62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The EBS volume type. Defaults to gp3 if not specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8dd1c812155b137cd7773fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operating system and CPU architecture for the instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec213aa2980112b9faf50cfc8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EbsCardIndex
-			"ebs_card_index": schemaAttribute97e0b5dc495284dadff72e82(),
-			// Property: Encrypted
-			"encrypted": schemaAttributeb0a8f0756009d52ab3205ec2(),
-			// Property: Iops
-			"iops": schemaAttribute177f7148fd106a40d6511554(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute1cb800e60ff13ca817097eda(),
-			// Property: SnapshotId
-			"snapshot_id": schemaAttribute2933ace127d0e2fac7a1135c(),
-			// Property: Throughput
-			"throughput": schemaAttribute94a6c49547fa0ef7b6b26a65(),
-			// Property: VolumeInitializationRate
-			"volume_initialization_rate": schemaAttributed1cb7583f4bef2e65b43e953(),
-			// Property: VolumeSize
-			"volume_size": schemaAttributefffd9e76175d20ccb9b4e4c8(),
-			// Property: VolumeType
-			"volume_type": schemaAttribute845264ee5f12e26b0e29bdba(),
-		}, /*END SCHEMA*/
-		Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec483b56261342d5a81fc9df7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput to provision for a gp3 volume, in MiB/s. Valid range: 125-2000 MiB/s.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6d4ca9e68aec7ee237989db() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds an instance can remain idle before it is stopped.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7a055652b9b2c7c2aec51f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device name (for example, /dev/sdh or xvdh).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca105e5eb9bca1d5bb87b592() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional EBS snapshot ID to initialize the volume from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1cb7583f4bef2e65b43e953() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The rate at which the volume is initialized after creation, in MiB/s. Supported only for volumes created from snapshots. If the snapshot is enabled for fast snapshot restore and a volume initialization rate is also specified, the volume is initialized at the specified rate instead of by fast snapshot restore. Valid range: 100-300 MiB/s.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed30248fdd4c5ad5c2a7d98bf() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of the security groups to associate with the instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed51db7135db78ff1923acc2a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LaunchParameters
-			"launch_parameters": schemaAttribute4930acc69a7c2ed4c57b0dba(),
-		}, /*END SCHEMA*/
-		Description: "How the launch template is specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed71ca9132396bb854798663d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encrypted
-			"encrypted": schemaAttributef171544740d4cc4d981e6ee3(),
-			// Property: FreeSpaceGiB
-			"free_space_gi_b": schemaAttribute5e144f6c05f71121530c11c4(),
-			// Property: Iops
-			"iops": schemaAttributee143cb946fa1e56a0f9039f2(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute1cb800e60ff13ca817097eda(),
-			// Property: Throughput
-			"throughput": schemaAttributec483b56261342d5a81fc9df7(),
-			// Property: VolumeType
-			"volume_type": schemaAttributeb3c2c973363b35fd43625c62(),
-		}, /*END SCHEMA*/
-		Description: "Customer-facing configuration for the (service-managed) root volume. The service provisions the root volume at its own AMI size estimate plus FreeSpaceGiB, and pins the visible free space to FreeSpaceGiB with a filler file, so the space you are guaranteed does not change as the underlying AMI grows. The device name and the delete-on-termination behavior are service-owned and are not configurable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed83354fc7020d7cb2141a158() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tags to apply to all EC2 resources (instances, volumes, and network interfaces) created by this capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd7735bf03eb397c09169797() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Capacity Reservation resource group in which to run the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddc74ac45f3da350d9d6cc6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The monitoring level for the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee143cb946fa1e56a0f9039f2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9153d9668ce05a5a1c60f9f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Ec2Configuration
-			"ec_2_configuration": schemaAttribute6a00c8c9cbd7f6f651b0fa54(),
-		}, /*END SCHEMA*/
-		Description: "The capacity configuration for the capacity provider. Defines the compute resources for this capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee6a6a679befd422d3bc9890() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of allowed instance types.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef09f78865a8b46571fe56cb6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM instance profile to associate with launched instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef171544740d4cc4d981e6ee3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3a118ca7df84a26e220423b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedInstanceTypes
-			"allowed_instance_types": schemaAttributeee6a6a679befd422d3bc9890(),
-		}, /*END SCHEMA*/
-		Description: "Requirements for EC2 instance types.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef668dc6eb4c7f69316e519e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The virtual device name (ephemeralN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefffd9e76175d20ccb9b4e4c8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the volume, in GiBs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_capacity_provider", capacityProviderDataSource)
 }
@@ -635,7 +32,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute44721313a30c6536fd517de9(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CapacityProviderId
 		// CloudFormation resource type schema:
 		//
@@ -646,7 +46,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"capacity_provider_id": schemaAttribute3be850e81f434f97a470d6ac(),
+		"capacity_provider_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComputeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1092,7 +495,316 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"compute_configuration": schemaAttributee9153d9668ce05a5a1c60f9f(),
+		"compute_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ec2Configuration
+				"ec_2_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LaunchTemplateSource
+						"launch_template_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LaunchParameters
+								"launch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CapacityReservationSpecification
+										"capacity_reservation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CapacityReservationPreference
+												"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates the instance's Capacity Reservation preferences.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: CapacityReservationTarget
+												"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CapacityReservationId
+														"capacity_reservation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the Capacity Reservation in which to run the instance.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: CapacityReservationResourceGroupArn
+														"capacity_reservation_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ARN of the Capacity Reservation resource group in which to run the instance.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The Capacity Reservation targeting option.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: EphemeralVolumes
+										"ephemeral_volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DeviceName
+													"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The device name (for example, /dev/sdh or xvdh).",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Ebs
+													"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: EbsCardIndex
+															"ebs_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The index of the EBS card. Applies to instances with multiple EBS cards.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Encrypted
+															"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the EBS volume is encrypted.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Iops
+															"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The number of I/O operations per second (IOPS).",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: KmsKeyId
+															"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Identifier of the customer managed KMS key to use for EBS encryption.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SnapshotId
+															"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The ID of the snapshot.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Throughput
+															"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The throughput to provision for a gp3 volume, in MiB/s.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: VolumeInitializationRate
+															"volume_initialization_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The rate at which the volume is initialized after creation, in MiB/s. Supported only for volumes created from snapshots. If the snapshot is enabled for fast snapshot restore and a volume initialization rate is also specified, the volume is initialized at the specified rate instead of by fast snapshot restore. Valid range: 100-300 MiB/s.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: VolumeSize
+															"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The size of the volume, in GiBs.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: VolumeType
+															"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The volume type. Defaults to gp3 if not specified.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: VirtualName
+													"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The virtual device name (ephemeralN).",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The block device mapping for ephemeral (instance store) volumes.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: InstanceProfileArn
+										"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the IAM instance profile to associate with launched instances.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: InstanceRequirements
+										"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowedInstanceTypes
+												"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Description: "List of allowed instance types.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Requirements for EC2 instance types.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: LicenseSpecifications
+										"license_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: LicenseConfigurationArn
+													"license_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN of the license configuration.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The license configurations.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Monitoring
+										"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The monitoring level for the instance.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: OperatingSystem
+										"operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The operating system and CPU architecture for the instances.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PropagatedTags
+										"propagated_tags":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Tags to apply to all EC2 resources (instances, volumes, and network interfaces) created by this capacity provider.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SshKeyName
+										"ssh_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the SSH key pair to configure on instances for SSH connectivity.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Parameters for launching EC2 instances.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "How the launch template is specified.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfiguration
+						"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleInstanceTimeout
+								"idle_instance_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of seconds an instance can remain idle before it is stopped.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxLifetime
+								"max_lifetime": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated regardless of activity. Default: 28800 seconds (8 hours). Maximum: 1209600 seconds (14 days).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for managing the lifecycle of instances in a capacity provider.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RootVolume
+						"root_volume": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Encrypted
+								"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FreeSpaceGiB
+								"free_space_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The free space guaranteed on the root volume, in GiB. The service adds the operating system overhead on top of this value. Defaults to 8 GiB. The maximum is below the 65,536 GiB gp3 ceiling because the service adds the AMI size bucket on top of this value, and the resulting total must still be a provisionable gp3 volume.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Iops
+								"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKeyId
+								"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Identifier of the customer managed KMS key to use for EBS encryption.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Throughput
+								"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The throughput to provision for a gp3 volume, in MiB/s. Valid range: 125-2000 MiB/s.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: VolumeType
+								"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The EBS volume type. Defaults to gp3 if not specified.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Customer-facing configuration for the (service-managed) root volume. The service provisions the root volume at its own AMI size estimate plus FreeSpaceGiB, and pins the visible free space to FreeSpaceGiB with a filler file, so the space you are guaranteed does not change as the underlying AMI grows. The device name and the delete-on-termination behavior are service-owned and are not configurable.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Volumes
+						"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EbsConfiguration
+									"ebs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Encrypted
+											"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "Whether to encrypt the volume. Defaults to true.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Iops
+											"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: KmsKeyId
+											"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Identifier of the KMS key to use for encryption.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The logical name of the volume, used to reference it when mounting.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SizeGiB
+											"size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The size of the volume in GiB.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SnapshotId
+											"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Optional EBS snapshot ID to initialize the volume from.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Throughput
+											"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The throughput in MiB/s. Only valid for gp3 volumes.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: VolumeType
+											"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The EBS volume type. Defaults to gp3 if not specified.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration for an EBS-backed persistent volume.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Named persistent EBS volumes for this capacity provider.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroups
+								"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The IDs of the security groups to associate with the instances.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Subnets
+								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The IDs of the subnets in which to launch instances.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "VPC configuration for launching EC2 instances.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for EC2-based capacity.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The capacity configuration for the capacity provider. Defines the compute resources for this capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1101,7 +813,11 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute0e4977de6246fd8ffae14b5c(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the capacity provider was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1111,7 +827,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute50a0540b9408aa2316ae4c8b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description of the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1120,7 +839,11 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute2b91adfb0fd1cffef7dac044(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the capacity provider was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1131,7 +854,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute333addda9e815c998a7a55ca(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1152,7 +878,17 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"permissions_configuration": schemaAttribute0be50aa784ef64c5ed7b25c4(),
+		"permissions_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityProviderOperatorRoleArn
+				"capacity_provider_operator_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that operators use to manage the capacity provider.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for permissions associated with a capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1168,7 +904,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute24e5d0b1a97095b70e16aeb4(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1201,7 +940,24 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute15ee6e3fae355d8e6134c33c(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

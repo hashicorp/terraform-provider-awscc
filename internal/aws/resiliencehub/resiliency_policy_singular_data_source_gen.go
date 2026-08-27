@@ -15,93 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1c6675304a9a61f224bee3f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Data Location Constraint of the Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ccfd58ed23ab03d99332a53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of Resiliency Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45d9e81d39697d8c7f331344() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a4b6b73060116e2d20cd018() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "RPO in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ead97e743d042c1e99bbdac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Resiliency Policy Tier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute910e0f3ca44f7961ce0f1339() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute955433036f9aafbd97e1e42e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AZ
-			"az": schemaAttributeb5aee2873f9798c153c6914b(),
-			// Property: Hardware
-			"hardware": schemaAttributeb5aee2873f9798c153c6914b(),
-			// Property: Region
-			"region": schemaAttributeb5aee2873f9798c153c6914b(),
-			// Property: Software
-			"software": schemaAttributeb5aee2873f9798c153c6914b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5aee2873f9798c153c6914b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RpoInSecs
-			"rpo_in_secs": schemaAttribute8a4b6b73060116e2d20cd018(),
-			// Property: RtoInSecs
-			"rto_in_secs": schemaAttributeb601115db65f44c9594b1c3c(),
-		}, /*END SCHEMA*/
-		Description: "Failure Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb601115db65f44c9594b1c3c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "RTO in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee47a63006fe4104ecfb71b52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of Resiliency Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_resiliencehub_resiliency_policy", resiliencyPolicyDataSource)
 }
@@ -122,7 +35,10 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_location_constraint": schemaAttribute1c6675304a9a61f224bee3f8(),
+		"data_location_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Data Location Constraint of the Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +129,79 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"policy": schemaAttribute955433036f9aafbd97e1e42e(),
+		"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AZ
+				"az": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Hardware
+				"hardware": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Software
+				"software": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +210,10 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schemaAttribute910e0f3ca44f7961ce0f1339(),
+		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDescription
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +222,10 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"policy_description": schemaAttribute3ccfd58ed23ab03d99332a53(),
+		"policy_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of Resiliency Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +234,10 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"policy_name": schemaAttributee47a63006fe4104ecfb71b52(),
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Resiliency Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +251,11 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute45d9e81d39697d8c7f331344(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +270,10 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tier": schemaAttribute8ead97e743d042c1e99bbdac(),
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Resiliency Policy Tier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

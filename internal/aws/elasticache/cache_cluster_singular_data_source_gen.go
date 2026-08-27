@@ -15,307 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00fe1d01fc587256b1fc0d6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute02c4f5510f94ff37e3d17f1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Valid values are either json or text",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0843b085df9c7f9bd691a6b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specify either CloudWatch Logs or Kinesis Data Firehose as the destination type. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0eff6c7046bae102e61b0163() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DestinationDetails
-				"destination_details": schemaAttribute6081490d85bac938025bdd9b(),
-				// Property: DestinationType
-				"destination_type": schemaAttribute0843b085df9c7f9bd691a6b7(),
-				// Property: LogFormat
-				"log_format": schemaAttribute02c4f5510f94ff37e3d17f1c(),
-				// Property: LogType
-				"log_type": schemaAttributed35191418f46e3371b26fabf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the destination, format and type of the logs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f0c3d0f4ee3bcbf20ef544a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of the Availability Zones in which cache nodes are created. The order of the zones in the list is not important.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute169beb9b0435226944cc905c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a Redis snapshot from which to restore data into the new node group (shard).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1babb37e325f4d287cdbbf26() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security group names to associate with this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2963f10cbc1b34d500a966bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compute and memory capacity of the nodes in the node group (shard).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fa832a1e06270ca1f47b53d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Ip Discovery parameter for cachecluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3448024b196c4e4756bfb38a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next minor version upgrade campaign.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4405e1f46cd0a5767f8177fe() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A single-element string list containing an Amazon Resource Name (ARN) that uniquely identifies a Redis RDB snapshot file stored in Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute469a7cf778176cb9f368cfcb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the subnet group to be used for the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute536fea41114a75a1349dfcec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute569d497580002f5e45585b7a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of cache nodes that the cache cluster should have.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6081490d85bac938025bdd9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogsDetails
-			"cloudwatch_logs_details": schemaAttributedc9933d0b8ea83b4dfed39ab(),
-			// Property: KinesisFirehoseDetails
-			"kinesis_firehose_details": schemaAttributebb67dfe537a7258ee33ab9c7(),
-		}, /*END SCHEMA*/
-		Description: "Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7331918c841525bf9397a0dd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute00fe1d01fc587256b1fc0d6f(),
-			// Property: Port
-			"port": schemaAttribute00fe1d01fc587256b1fc0d6f(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the ConfigurationEndpoint address and port",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76b7136d1e84b1c15faf9647() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Kinesis Data Firehose delivery stream",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute806a6dd380aa4589ec0c196b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group to associate with this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82eda98fdb1a2fa5029ba595() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the weekly time range during which maintenance on the cluster is performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b0881539763176b773358d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The EC2 Availability Zone in which the cluster is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute991cc50e5f745b72f1fce88c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute993b110d5106bdd1b5a1215c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e9e3ad704394840576e1489() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more VPC security groups associated with the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f724b44d8167506ced89fcb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute00fe1d01fc587256b1fc0d6f(),
-			// Property: Port
-			"port": schemaAttribute00fe1d01fc587256b1fc0d6f(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the RedisEndPoint address and port",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa546bedca820bb93d34041a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the cache cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac51c8a5bcce017b9c46b2ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cache engine to be used for this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaca405d92562cd3734eb9a2b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days for which ElastiCache retains automatic snapshots before deleting them.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb241fbfa50e073d50996fb74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network type parameter for cachecluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4a9abb10c4029aedf55cb5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version number of the cache engine to be used for this cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb67dfe537a7258ee33ab9c7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeliveryStream
-			"delivery_stream": schemaAttribute76b7136d1e84b1c15faf9647(),
-		}, /*END SCHEMA*/
-		Description: "The configuration details of the Kinesis Data Firehose destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec21432366dfff8fe0fd8d117() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which each of the cache nodes accepts connections.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed35191418f46e3371b26fabf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Valid value is either slow-log, which refers to slow-log or engine-log",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc9933d0b8ea83b4dfed39ab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogGroup
-			"log_group": schemaAttributef9e0a9136c94e2aea6899c2e(),
-		}, /*END SCHEMA*/
-		Description: "The configuration details of the CloudWatch Logs destination",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee571c2b0e9d8c093e42e4ba4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef57274c6970d9a0c9bdcd662() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute00fe1d01fc587256b1fc0d6f(),
-				// Property: Value
-				"value": schemaAttribute00fe1d01fc587256b1fc0d6f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to be added to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9e0a9136c94e2aea6899c2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the CloudWatch Logs log group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticache_cache_cluster", cacheClusterDataSource)
 }
@@ -331,7 +30,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.",
 		//	  "type": "string"
 		//	}
-		"az_mode": schemaAttribute536fea41114a75a1349dfcec(),
+		"az_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +41,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next minor version upgrade campaign.",
 		//	  "type": "boolean"
 		//	}
-		"auto_minor_version_upgrade": schemaAttribute3448024b196c4e4756bfb38a(),
+		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next minor version upgrade campaign.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheNodeType
 		// CloudFormation resource type schema:
 		//
@@ -347,7 +52,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The compute and memory capacity of the nodes in the node group (shard).",
 		//	  "type": "string"
 		//	}
-		"cache_node_type": schemaAttribute2963f10cbc1b34d500a966bb(),
+		"cache_node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compute and memory capacity of the nodes in the node group (shard).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -355,7 +63,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the parameter group to associate with this cluster.",
 		//	  "type": "string"
 		//	}
-		"cache_parameter_group_name": schemaAttribute806a6dd380aa4589ec0c196b(),
+		"cache_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group to associate with this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheSecurityGroupNames
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +79,11 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cache_security_group_names": schemaAttribute1babb37e325f4d287cdbbf26(),
+		"cache_security_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of security group names to associate with this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CacheSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +91,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the subnet group to be used for the cluster.",
 		//	  "type": "string"
 		//	}
-		"cache_subnet_group_name": schemaAttribute469a7cf778176cb9f368cfcb(),
+		"cache_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the subnet group to be used for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -384,7 +102,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "A name for the cache cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttributeaa546bedca820bb93d34041a(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the cache cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -401,7 +122,20 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration_endpoint": schemaAttribute7331918c841525bf9397a0dd(),
+		"configuration_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the ConfigurationEndpoint address and port",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -409,7 +143,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the cache engine to be used for this cluster.",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttributeac51c8a5bcce017b9c46b2ca(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the cache engine to be used for this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +154,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The version number of the cache engine to be used for this cluster",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttributeb4a9abb10c4029aedf55cb5e(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the cache engine to be used for this cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpDiscovery
 		// CloudFormation resource type schema:
 		//
@@ -425,7 +165,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Ip Discovery parameter for cachecluster.",
 		//	  "type": "string"
 		//	}
-		"ip_discovery": schemaAttribute2fa832a1e06270ca1f47b53d(),
+		"ip_discovery": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Ip Discovery parameter for cachecluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogDeliveryConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +237,60 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"log_delivery_configurations": schemaAttribute0eff6c7046bae102e61b0163(),
+		"log_delivery_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DestinationDetails
+					"destination_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CloudWatchLogsDetails
+							"cloudwatch_logs_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LogGroup
+									"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CloudWatch Logs log group.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration details of the CloudWatch Logs destination",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: KinesisFirehoseDetails
+							"kinesis_firehose_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DeliveryStream
+									"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the Kinesis Data Firehose delivery stream",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration details of the Kinesis Data Firehose destination.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DestinationType
+					"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specify either CloudWatch Logs or Kinesis Data Firehose as the destination type. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogFormat
+					"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Valid values are either json or text",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogType
+					"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Valid value is either slow-log, which refers to slow-log or engine-log",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the destination, format and type of the logs",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +298,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The network type parameter for cachecluster.",
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttributeb241fbfa50e073d50996fb74(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type parameter for cachecluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -510,7 +309,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
 		//	  "type": "string"
 		//	}
-		"notification_topic_arn": schemaAttribute991cc50e5f745b72f1fce88c(),
+		"notification_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumCacheNodes
 		// CloudFormation resource type schema:
 		//
@@ -518,7 +320,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The number of cache nodes that the cache cluster should have.",
 		//	  "type": "integer"
 		//	}
-		"num_cache_nodes": schemaAttribute569d497580002f5e45585b7a(),
+		"num_cache_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of cache nodes that the cache cluster should have.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -526,7 +331,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The port number on which each of the cache nodes accepts connections.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttributec21432366dfff8fe0fd8d117(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which each of the cache nodes accepts connections.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredAvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -534,7 +342,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The EC2 Availability Zone in which the cluster is created.",
 		//	  "type": "string"
 		//	}
-		"preferred_availability_zone": schemaAttribute8b0881539763176b773358d9(),
+		"preferred_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The EC2 Availability Zone in which the cluster is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredAvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -547,7 +358,11 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"preferred_availability_zones": schemaAttribute0f0c3d0f4ee3bcbf20ef544a(),
+		"preferred_availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of the Availability Zones in which cache nodes are created. The order of the zones in the list is not important.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -555,7 +370,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Specifies the weekly time range during which maintenance on the cluster is performed.",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttribute82eda98fdb1a2fa5029ba595(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the weekly time range during which maintenance on the cluster is performed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RedisEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -572,7 +390,20 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"redis_endpoint": schemaAttribute9f724b44d8167506ced89fcb(),
+		"redis_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the RedisEndPoint address and port",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotArns
 		// CloudFormation resource type schema:
 		//
@@ -585,7 +416,11 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"snapshot_arns": schemaAttribute4405e1f46cd0a5767f8177fe(),
+		"snapshot_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A single-element string list containing an Amazon Resource Name (ARN) that uniquely identifies a Redis RDB snapshot file stored in Amazon S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -593,7 +428,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of a Redis snapshot from which to restore data into the new node group (shard).",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schemaAttribute169beb9b0435226944cc905c(),
+		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of a Redis snapshot from which to restore data into the new node group (shard).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotRetentionLimit
 		// CloudFormation resource type schema:
 		//
@@ -601,7 +439,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The number of days for which ElastiCache retains automatic snapshots before deleting them.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_retention_limit": schemaAttributeaca405d92562cd3734eb9a2b(),
+		"snapshot_retention_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days for which ElastiCache retains automatic snapshots before deleting them.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotWindow
 		// CloudFormation resource type schema:
 		//
@@ -609,7 +450,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
 		//	  "type": "string"
 		//	}
-		"snapshot_window": schemaAttributee571c2b0e9d8c093e42e4ba4(),
+		"snapshot_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -635,7 +479,22 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributef57274c6970d9a0c9bdcd662(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to be added to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitEncryptionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -643,7 +502,10 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created",
 		//	  "type": "boolean"
 		//	}
-		"transit_encryption_enabled": schemaAttribute993b110d5106bdd1b5a1215c(),
+		"transit_encryption_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -656,7 +518,11 @@ func cacheClusterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vpc_security_group_ids": schemaAttribute9e9e3ad704394840576e1489(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "One or more VPC security groups associated with the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

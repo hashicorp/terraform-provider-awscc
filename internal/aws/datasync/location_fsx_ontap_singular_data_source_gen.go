@@ -15,254 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0024c41cc3b4efcdbcfb3a07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for an AWS Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19bdb792f041cd4108dc70b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute42b570530a31fb944d021b2e(),
-			// Property: SecretArn
-			"secret_arn": schemaAttributed289861c6009041e8ab1c965(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b262664e8f9ed624f1aac12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute252f508a47b73d703a11d061() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NFS
-			"nfs": schemaAttributef39e83cddda04601559357f1(),
-			// Property: SMB
-			"smb": schemaAttribute78d50de637f3f85b12aa5c46(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for NFS or SMB protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bfe1a61be4950d57082a253() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40aef18e041887b8bd9de5c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for an AWS resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42b570530a31fb944d021b2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute468390291fb79b938c97223e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the FSx ONAP file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58fbed5125c3d0d4b14d72bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6080d2d714cf31dc35d6d6e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61340406837e2840b9460af3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretAccessRoleArn
-			"secret_access_role_arn": schemaAttributed0dc6c7405e0909e96f17c9d(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute6080d2d714cf31dc35d6d6e8(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78d50de637f3f85b12aa5c46() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CmkSecretConfig
-			"cmk_secret_config": schemaAttribute19bdb792f041cd4108dc70b8(),
-			// Property: CustomSecretConfig
-			"custom_secret_config": schemaAttribute61340406837e2840b9460af3(),
-			// Property: Domain
-			"domain": schemaAttributef983a9e9531a77551a9e8676(),
-			// Property: ManagedSecretConfig
-			"managed_secret_config": schemaAttributedd4b9951c0703ff7479fb0a4(),
-			// Property: MountOptions
-			"mount_options": schemaAttributef6a01860715ca03e0367af08(),
-			// Property: Password
-			"password": schemaAttributeadbf821b714afe4999ae6254(),
-			// Property: User
-			"user": schemaAttribute58fbed5125c3d0d4b14d72bf(),
-		}, /*END SCHEMA*/
-		Description: "SMB protocol configuration for FSx ONTAP file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c2bf395feb343c8d638d167() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for an AWS resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute908b72b3127a4f719e6a92c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the FSx ONTAP file system that was described.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea01dc90671f4b99f316c8c5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A subdirectory in the location's path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadbf821b714afe4999ae6254() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1258e05b24f4b4633e39e71() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Version
-			"version": schemaAttribute1b262664e8f9ed624f1aac12(),
-		}, /*END SCHEMA*/
-		Description: "The NFS mount options that DataSync can use to mount your NFS share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcb9cb5715dd73cbf2fa5df4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon FSx ONTAP file system location that is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccfa10d51ba8db1f38120f4e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ARNs of the security groups that are to use to configure the FSx ONTAP file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed069930551395e1be6e31da5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8c2bf395feb343c8d638d167(),
-				// Property: Value
-				"value": schemaAttribute40aef18e041887b8bd9de5c4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0dc6c7405e0909e96f17c9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed289861c6009041e8ab1c965() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd4b9951c0703ff7479fb0a4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttribute0024c41cc3b4efcdbcfb3a07(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2e07e4a2635f1cddd0f53ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the FSx ONTAP SVM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef39e83cddda04601559357f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MountOptions
-			"mount_options": schemaAttributeb1258e05b24f4b4633e39e71(),
-		}, /*END SCHEMA*/
-		Description: "NFS protocol configuration for FSx ONTAP file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6a01860715ca03e0367af08() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Version
-			"version": schemaAttribute2bfe1a61be4950d57082a253(),
-		}, /*END SCHEMA*/
-		Description: "The mount options used by DataSync to access the SMB server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef983a9e9531a77551a9e8676() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Windows domain that the SMB server belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_fsx_ontap", locationFSxONTAPDataSource)
 }
@@ -280,7 +32,10 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
 		//	  "type": "string"
 		//	}
-		"fsx_filesystem_arn": schemaAttribute468390291fb79b938c97223e(),
+		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the FSx ONAP file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +45,10 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schemaAttributebcb9cb5715dd73cbf2fa5df4(),
+		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Amazon FSx ONTAP file system location that is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +58,10 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(efs|nfs|s3|smb|hdfs|fsx[a-z0-9-]+)://[a-zA-Z0-9.:/\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schemaAttribute908b72b3127a4f719e6a92c8(),
+		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the FSx ONTAP file system that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -441,7 +202,111 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"protocol": schemaAttribute252f508a47b73d703a11d061(),
+		"protocol": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NFS
+				"nfs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MountOptions
+						"mount_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Version
+								"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The NFS mount options that DataSync can use to mount your NFS share.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "NFS protocol configuration for FSx ONTAP file system.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SMB
+				"smb": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CmkSecretConfig
+						"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomSecretConfig
+						"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretAccessRoleArn
+								"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Domain
+						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the Windows domain that the SMB server belongs to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedSecretConfig
+						"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MountOptions
+						"mount_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Version
+								"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The mount options used by DataSync to access the SMB server.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Password
+						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: User
+						"user": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "SMB protocol configuration for FSx ONTAP file system.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration settings for NFS or SMB protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
 		//
@@ -457,7 +322,11 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_arns": schemaAttributeccfa10d51ba8db1f38120f4e(),
+		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ARNs of the security groups that are to use to configure the FSx ONTAP file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageVirtualMachineArn
 		// CloudFormation resource type schema:
 		//
@@ -467,7 +336,10 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:storage-virtual-machine/fs-[0-9a-f]+/svm-[0-9a-f]{17,}$",
 		//	  "type": "string"
 		//	}
-		"storage_virtual_machine_arn": schemaAttributef2e07e4a2635f1cddd0f53ef(),
+		"storage_virtual_machine_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the FSx ONTAP SVM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -477,7 +349,10 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schemaAttributea01dc90671f4b99f316c8c5e(),
+		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A subdirectory in the location's path.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +389,24 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed069930551395e1be6e31da5(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for an AWS resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for an AWS resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02984e2cfecdc6af2057300a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bede89a176f1b4bd8f68170() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute547e3b3a0ba11c120ab8740e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66d5a170854aa0c9cb9ff24c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute02984e2cfecdc6af2057300a(),
-				// Property: Value
-				"value": schemaAttribute547e3b3a0ba11c120ab8740e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee10bd8dbe2f811510578ab7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Detective graph ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_detective_graph", graphDataSource)
 }
@@ -71,7 +29,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Detective graph ARN",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee10bd8dbe2f811510578ab7b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Detective graph ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoEnableMembers
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +41,10 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.",
 		//	  "type": "boolean"
 		//	}
-		"auto_enable_members": schemaAttribute1bede89a176f1b4bd8f68170(),
+		"auto_enable_members": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +70,23 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute66d5a170854aa0c9cb9ff24c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

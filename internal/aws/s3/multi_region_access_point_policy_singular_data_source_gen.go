@@ -15,39 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute31bd7c9cb1ea0399699e772b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Policy document to apply to a Multi Region Access Point",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute664addf1e1a8cd38c5e4376e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsPublic
-			"is_public": schemaAttributed0bde558c456128c362f9294(),
-		}, /*END SCHEMA*/
-		Description: "The Policy Status associated with this Multi Region Access Point",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0bde558c456128c362f9294() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the policy is public or not.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee67070ba58713f941f2eadfb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Multi Region Access Point to apply policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_multi_region_access_point_policy", multiRegionAccessPointPolicyDataSource)
 }
@@ -66,7 +33,10 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"mrap_name": schemaAttributee67070ba58713f941f2eadfb(),
+		"mrap_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Multi Region Access Point to apply policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -74,7 +44,11 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Policy document to apply to a Multi Region Access Point",
 		//	  "type": "object"
 		//	}
-		"policy": schemaAttribute31bd7c9cb1ea0399699e772b(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "Policy document to apply to a Multi Region Access Point",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyStatus
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +70,17 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"policy_status": schemaAttribute664addf1e1a8cd38c5e4376e(),
+		"policy_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IsPublic
+				"is_public": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the policy is public or not.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Policy Status associated with this Multi Region Access Point",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

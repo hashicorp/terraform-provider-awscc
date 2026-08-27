@@ -15,162 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute181015073098cba927f2b940() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33392bf8fdea07eae74b6aba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DimensionConfigurations
-			"dimension_configurations": schemaAttribute350f94155b36ac3242334b85(),
-		}, /*END SCHEMA*/
-		Description: "An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute350f94155b36ac3242334b85() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultDimensionValue
-				"default_dimension_value": schemaAttribute181015073098cba927f2b940(),
-				// Property: DimensionName
-				"dimension_name": schemaAttribute5237c740045de0a943dd0cf7(),
-				// Property: DimensionValueSource
-				"dimension_value_source": schemaAttribute8dd89cc9d24a63d8635b797e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute371bc71d52f44bcb924286ac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50e6bbc963fe077509ea8f81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5237c740045de0a943dd0cf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6112c5cdab2a19c20a2ab24e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a0f019aabd1c068f90d1609() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the event destination set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70576f5d10711eb19d4f1a9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EventBusArn
-			"event_bus_arn": schemaAttribute6112c5cdab2a19c20a2ab24e(),
-		}, /*END SCHEMA*/
-		Description: "An object that contains Event bus ARN associated with the event bridge destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dd89cc9d24a63d8635b797e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The place where Amazon SES finds the value of a dimension to publish to Amazon CloudWatch. To use the message tags that you specify using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail/SendRawEmail API, specify messageTag. To use your own email headers, specify emailHeader. To put a custom tag on any link included in your email, specify linkTag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6fc3dbf5633dde9be5e7c63() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeliveryStreamARN
-			"delivery_stream_arn": schemaAttributeebb2fd58d9419ac43fbb5e89(),
-			// Property: IAMRoleARN
-			"iam_role_arn": schemaAttribute50e6bbc963fe077509ea8f81(),
-		}, /*END SCHEMA*/
-		Description: "An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec299fdd914290912e5d44322() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchDestination
-			"cloudwatch_destination": schemaAttribute33392bf8fdea07eae74b6aba(),
-			// Property: Enabled
-			"enabled": schemaAttributed9ace341c83e7e5358f5d006(),
-			// Property: EventBridgeDestination
-			"event_bridge_destination": schemaAttribute70576f5d10711eb19d4f1a9b(),
-			// Property: KinesisFirehoseDestination
-			"kinesis_firehose_destination": schemaAttributeb6fc3dbf5633dde9be5e7c63(),
-			// Property: MatchingEventTypes
-			"matching_event_types": schemaAttribute371bc71d52f44bcb924286ac(),
-			// Property: Name
-			"name": schemaAttribute6a0f019aabd1c068f90d1609(),
-			// Property: SnsDestination
-			"sns_destination": schemaAttributeebdebc1582d0ee19976435cf(),
-		}, /*END SCHEMA*/
-		Description: "The event destination object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2a37078832bff0d66649991() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration set that contains the event destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9ace341c83e7e5358f5d006() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.   ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebb2fd58d9419ac43fbb5e89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Amazon Kinesis Firehose stream that email sending events should be published to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebdebc1582d0ee19976435cf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TopicARN
-			"topic_arn": schemaAttribute6112c5cdab2a19c20a2ab24e(),
-		}, /*END SCHEMA*/
-		Description: "An object that contains SNS topic ARN associated event destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_configuration_set_event_destination", configurationSetEventDestinationDataSource)
 }
@@ -186,7 +30,10 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 		//	  "description": "The name of the configuration set that contains the event destination.",
 		//	  "type": "string"
 		//	}
-		"configuration_set_name": schemaAttributec2a37078832bff0d66649991(),
+		"configuration_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the configuration set that contains the event destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventDestination
 		// CloudFormation resource type schema:
 		//
@@ -312,14 +159,107 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"event_destination": schemaAttributec299fdd914290912e5d44322(),
+		"event_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchDestination
+				"cloudwatch_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DimensionConfigurations
+						"dimension_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DefaultDimensionValue
+									"default_dimension_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DimensionName
+									"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DimensionValueSource
+									"dimension_value_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The place where Amazon SES finds the value of a dimension to publish to Amazon CloudWatch. To use the message tags that you specify using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail/SendRawEmail API, specify messageTag. To use your own email headers, specify emailHeader. To put a custom tag on any link included in your email, specify linkTag.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.   ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventBridgeDestination
+				"event_bridge_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EventBusArn
+						"event_bus_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that contains Event bus ARN associated with the event bridge destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KinesisFirehoseDestination
+				"kinesis_firehose_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DeliveryStreamARN
+						"delivery_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the Amazon Kinesis Firehose stream that email sending events should be published to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IAMRoleARN
+						"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MatchingEventTypes
+				"matching_event_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the event destination set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnsDestination
+				"sns_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TopicARN
+						"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that contains SNS topic ARN associated event destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The event destination object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"configuration_set_event_destination_id": schemaAttribute6112c5cdab2a19c20a2ab24e(),
+		"configuration_set_event_destination_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

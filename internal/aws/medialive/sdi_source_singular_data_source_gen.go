@@ -15,70 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute34cd6004d187e0d6773c2946() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45185ca2ca4b712ca4b85049() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique arn of the SdiSource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70ed32a112d6abe3ed913c62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the SdiSource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fbee6884cbfb3320e399440() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute34cd6004d187e0d6773c2946(),
-				// Property: Value
-				"value": schemaAttribute34cd6004d187e0d6773c2946(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec4f9070e96bf96f628ebbd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the SdiSource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2637ea995a57f2656424b90() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of inputs currently using this SDI source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef70b2ca246b24e0e9b563cf1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SdiSource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc12fff1a008bb0abed5502d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The interface mode of the SdiSource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_sdi_source", sdiSourceDataSource)
 }
@@ -94,7 +30,10 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique arn of the SdiSource.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute45185ca2ca4b712ca4b85049(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique arn of the SdiSource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +41,10 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of the SdiSource.",
 		//	  "type": "string"
 		//	}
-		"sdi_source_id": schemaAttribute70ed32a112d6abe3ed913c62(),
+		"sdi_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the SdiSource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Inputs
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +56,11 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"inputs": schemaAttributef2637ea995a57f2656424b90(),
+		"inputs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of inputs currently using this SDI source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +72,10 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttributeec4f9070e96bf96f628ebbd6(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the SdiSource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +83,10 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the SdiSource.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef70b2ca246b24e0e9b563cf1(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the SdiSource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +99,10 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributeec4f9070e96bf96f628ebbd6(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the SdiSource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +124,22 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute8fbee6884cbfb3320e399440(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of key-value pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +151,10 @@ func sdiSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributefc12fff1a008bb0abed5502d(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The interface mode of the SdiSource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

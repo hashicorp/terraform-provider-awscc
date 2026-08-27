@@ -17,635 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01d34fb65d78cdbee4cad803() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Role ARN to be assumed by DevOpsAgent to operate on behalf of customer",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute028a49f932bff0d7bda2ce9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the association",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d19e901634222f569cfbb61() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: InstanceIdentifier
-			"instance_identifier": schemaAttributeca3fa96c12903ddde72687e2(),
-			// Property: ProjectId
-			"project_id": schemaAttribute341c85b4132646550f142fe1(),
-			// Property: ProjectPath
-			"project_path": schemaAttributead10e55b7e37cb76b4d71423(),
-		}, /*END SCHEMA*/
-		Description: "GitLab project integration configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute145432c85c4ea11825c8e1e9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceArn
-				"resource_arn": schemaAttribute899e5d50a1cd520956c70fd1(),
-				// Property: ResourceMetadata
-				"resource_metadata": schemaAttribute2fe7d9e64e6d41e49753ccac(),
-				// Property: ResourceType
-				"resource_type": schemaAttribute5cfe0d10ebd708b6b4157fa0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of AWS resources",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a3d5cf56a7c34da859548d1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of tool categories to enable for the Grafana MCP server",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cad549f968deff543b26ebc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ServiceNow instance ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e0fe2530c01e1a17c76a606() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the association was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f910da2149028a8c64ff1a8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute9f9d1c6d1e8c138b31711795(),
-			// Property: Tools
-			"tools": schemaAttribute1a3d5cf56a7c34da859548d1(),
-		}, /*END SCHEMA*/
-		Description: "Grafana MCP server configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23711ee0ff9b86e383934f4c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Set of linked association IDs for parent-child relationships",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f2de980e55fcf2a0e9a52be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the associated service",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fe7d9e64e6d41e49753ccac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Additional metadata for the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute341c85b4132646550f142fe1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "GitLab numeric project ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f13776dd408031e0cad19c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Dynatrace environment id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4275a4fd13e3957ab9059216() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Slack channel ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44c8e9199a7889da94f0555b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountId
-			"account_id": schemaAttribute85bc9fa053dc174dc6c6a3aa(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute83d1f2e5960d15710723e137(),
-		}, /*END SCHEMA*/
-		Description: "NewRelic MCP server configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45258b0fc65c75b03b887ea5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the MCP server",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45d95038440d772cb8df9942() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedc49a4614a459892c5609445(),
-				// Property: Value
-				"value": schemaAttributedc49a4614a459892c5609445(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of AWS tags as key-value pairs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4805eaa97c08299430cb9e82() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Aws
-			"aws": schemaAttribute86152f81c119569cbab9fea7(),
-			// Property: Azure
-			"azure": schemaAttributefc342597a01d60e82182e91c(),
-			// Property: Dynatrace
-			"dynatrace": schemaAttribute97ce5613bacfd312972f8f78(),
-			// Property: EventChannel
-			"event_channel": schemaAttributea1ccef05247296fe6de311ab(),
-			// Property: GitHub
-			"git_hub": schemaAttributeda948394af31a0162bcea31e(),
-			// Property: GitLab
-			"git_lab": schemaAttribute0d19e901634222f569cfbb61(),
-			// Property: MCPServer
-			"mcp_server": schemaAttributec881890435d62316cb306e83(),
-			// Property: MCPServerDatadog
-			"mcp_server_datadog": schemaAttribute51a6b1d05c21327623fc5e28(),
-			// Property: MCPServerGrafana
-			"mcp_server_grafana": schemaAttribute1f910da2149028a8c64ff1a8(),
-			// Property: MCPServerNewRelic
-			"mcp_server_new_relic": schemaAttribute44c8e9199a7889da94f0555b(),
-			// Property: MCPServerSigV4
-			"mcp_server_sig_v4": schemaAttribute86f776c96a919b7816be5e0e(),
-			// Property: MCPServerSplunk
-			"mcp_server_splunk": schemaAttribute57615681b6ceeef1ab73e478(),
-			// Property: PagerDuty
-			"pager_duty": schemaAttributeed196965d5831c1f670a6252(),
-			// Property: ServiceNow
-			"service_now": schemaAttribute9046459ac298b1b496406984(),
-			// Property: Slack
-			"slack": schemaAttribute80614ea800273d7027118eae(),
-			// Property: SourceAws
-			"source_aws": schemaAttribute9c335a528017bea97fe9d7eb(),
-		}, /*END SCHEMA*/
-		Description: "The configuration that directs how AgentSpace interacts with the given service",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d9ee4ce39556dbfeef205e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the association was last updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51a6b1d05c21327623fc5e28() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Description
-			"description": schemaAttributee88d28f88aa56bcfb5b74f5c(),
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute9f9d1c6d1e8c138b31711795(),
-			// Property: Name
-			"name": schemaAttribute45258b0fc65c75b03b887ea5(),
-		}, /*END SCHEMA*/
-		Description: "Datadog MCP server configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57615681b6ceeef1ab73e478() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Description
-			"description": schemaAttributee88d28f88aa56bcfb5b74f5c(),
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute9f9d1c6d1e8c138b31711795(),
-			// Property: Name
-			"name": schemaAttribute45258b0fc65c75b03b887ea5(),
-		}, /*END SCHEMA*/
-		Description: "Splunk MCP server configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cfe0d10ebd708b6b4157fa0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Resource type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6769b61772ae7f1c28fcc68d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Account Type 'monitor' for DevOpsAgent monitoring",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f08b5a55af5e3e582d91a2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Associated Github repo ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute700981d2c422d5b91c8a3b70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Email to be used in PagerDuty API header",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute703549d957fdc93130a42fa7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the AgentSpace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7785971792a9d1b8d6ef5abc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Associated Slack workspace name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ecf82270b307d66ff9243d8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of PagerDuty service IDs available for the association",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80614ea800273d7027118eae() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TransmissionTarget
-			"transmission_target": schemaAttributec78821e47b2ef3b4c85fc08b(),
-			// Property: WorkspaceId
-			"workspace_id": schemaAttributeeb72ea26374bbc60b4f8ba58(),
-			// Property: WorkspaceName
-			"workspace_name": schemaAttribute7785971792a9d1b8d6ef5abc(),
-		}, /*END SCHEMA*/
-		Description: "Slack workspace integration configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83d1f2e5960d15710723e137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "MCP server endpoint URL (e.g., https://mcp.newrelic.com/mcp/)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85bc9fa053dc174dc6c6a3aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "New Relic Account ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86152f81c119569cbab9fea7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountId
-			"account_id": schemaAttributee66e9802ecdd7f5826f445f1(),
-			// Property: AccountType
-			"account_type": schemaAttribute6769b61772ae7f1c28fcc68d(),
-			// Property: AssumableRoleArn
-			"assumable_role_arn": schemaAttribute01d34fb65d78cdbee4cad803(),
-			// Property: Resources
-			"resources": schemaAttribute145432c85c4ea11825c8e1e9(),
-			// Property: Tags
-			"tags": schemaAttribute45d95038440d772cb8df9942(),
-		}, /*END SCHEMA*/
-		Description: "AWS association for 'monitor' account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f776c96a919b7816be5e0e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Tools
-			"tools": schemaAttributef63a4b5b448691548db82244(),
-		}, /*END SCHEMA*/
-		Description: "SigV4-authenticated MCP server configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute899e5d50a1cd520956c70fd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bb0336852b92948afea21f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Associated Github repo name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c629c912bed6d48fae43fb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Azure subscription ID corresponding to provided resources",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9046459ac298b1b496406984() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: InstanceId
-			"instance_id": schemaAttribute1cad549f968deff543b26ebc(),
-		}, /*END SCHEMA*/
-		Description: "ServiceNow integration configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute964fb9b2940a9baed957e90b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Slack channel name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97ce5613bacfd312972f8f78() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: EnvId
-			"env_id": schemaAttribute3f13776dd408031e0cad19c8(),
-			// Property: Resources
-			"resources": schemaAttributedb363fcff6781dd0ff16fcda(),
-		}, /*END SCHEMA*/
-		Description: "Dynatrace monitoring configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c335a528017bea97fe9d7eb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountId
-			"account_id": schemaAttributee66e9802ecdd7f5826f445f1(),
-			// Property: AccountType
-			"account_type": schemaAttributebd45ab4fc5cfbfb1951e6616(),
-			// Property: AssumableRoleArn
-			"assumable_role_arn": schemaAttribute01d34fb65d78cdbee4cad803(),
-			// Property: Resources
-			"resources": schemaAttribute145432c85c4ea11825c8e1e9(),
-			// Property: Tags
-			"tags": schemaAttribute45d95038440d772cb8df9942(),
-		}, /*END SCHEMA*/
-		Description: "AWS association for 'source' account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f9d1c6d1e8c138b31711795() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "MCP server endpoint URL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1ccef05247296fe6de311ab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-		}, /*END SCHEMA*/
-		Description: "EventChannelconfiguration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8f18cf5e9627bf78bc9d79f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead10e55b7e37cb76b4d71423() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Full GitLab project path (e.g., namespace/project-name)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd45ab4fc5cfbfb1951e6616() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Account Type 'source' for DevOpsAgent monitoring",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6801228fb45e15b7b23c543() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Repository owner",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec78821e47b2ef3b4c85fc08b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncidentResponseTarget
-			"incident_response_target": schemaAttributede53be3f272530fcb8cf6a16(),
-		}, /*END SCHEMA*/
-		Description: "Transmission targets for agent notifications",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec881890435d62316cb306e83() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Description
-			"description": schemaAttributee88d28f88aa56bcfb5b74f5c(),
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: Endpoint
-			"endpoint": schemaAttribute9f9d1c6d1e8c138b31711795(),
-			// Property: Name
-			"name": schemaAttribute45258b0fc65c75b03b887ea5(),
-			// Property: Tools
-			"tools": schemaAttributeffd6d956e66979f4522d6540(),
-		}, /*END SCHEMA*/
-		Description: "MCP server configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca3fa96c12903ddde72687e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "GitLab instance identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda948394af31a0162bcea31e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Owner
-			"owner": schemaAttributec6801228fb45e15b7b23c543(),
-			// Property: OwnerType
-			"owner_type": schemaAttributee8d2babdeca5527fafbb4fc5(),
-			// Property: RepoId
-			"repo_id": schemaAttribute6f08b5a55af5e3e582d91a2d(),
-			// Property: RepoName
-			"repo_name": schemaAttribute8bb0336852b92948afea21f3(),
-		}, /*END SCHEMA*/
-		Description: "GitHub repository integration configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb363fcff6781dd0ff16fcda() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of Dynatrace resources to monitor",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc49a4614a459892c5609445() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede53be3f272530fcb8cf6a16() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChannelId
-			"channel_id": schemaAttribute4275a4fd13e3957ab9059216(),
-			// Property: ChannelName
-			"channel_name": schemaAttribute964fb9b2940a9baed957e90b(),
-		}, /*END SCHEMA*/
-		Description: "Destination for IncidentResponse agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee66e9802ecdd7f5826f445f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS Account Id corresponding to provided resources",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee88d28f88aa56bcfb5b74f5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the MCP server",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8d2babdeca5527fafbb4fc5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of repository owner",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb72ea26374bbc60b4f8ba58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Associated Slack workspace ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed196965d5831c1f670a6252() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomerEmail
-			"customer_email": schemaAttribute700981d2c422d5b91c8a3b70(),
-			// Property: EnableWebhookUpdates
-			"enable_webhook_updates": schemaAttributea8f18cf5e9627bf78bc9d79f(),
-			// Property: Services
-			"services": schemaAttribute7ecf82270b307d66ff9243d8(),
-		}, /*END SCHEMA*/
-		Description: "PagerDuty integration configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef63a4b5b448691548db82244() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of MCP tools available for the association",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc342597a01d60e82182e91c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SubscriptionId
-			"subscription_id": schemaAttribute8c629c912bed6d48fae43fb0(),
-		}, /*END SCHEMA*/
-		Description: "Azure subscription integration configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffd6d956e66979f4522d6540() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of MCP tools that can be used with the association",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsagent_association", associationDataSource)
 }
@@ -663,7 +34,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schemaAttribute703549d957fdc93130a42fa7(),
+		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the AgentSpace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -673,7 +47,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute028a49f932bff0d7bda2ce9b(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the association",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -1233,7 +610,462 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttribute4805eaa97c08299430cb9e82(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Aws
+				"aws": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccountId
+						"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "AWS Account Id corresponding to provided resources",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccountType
+						"account_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Account Type 'monitor' for DevOpsAgent monitoring",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AssumableRoleArn
+						"assumable_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Role ARN to be assumed by DevOpsAgent to operate on behalf of customer",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Resources
+						"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ResourceArn
+									"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Amazon Resource Name (ARN) of the resource",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceMetadata
+									"resource_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType:  jsontypes.NormalizedType{},
+										Description: "Additional metadata for the resource",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceType
+									"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Resource type",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of AWS resources",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tags
+						"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of AWS tags as key-value pairs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "AWS association for 'monitor' account",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Azure
+				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SubscriptionId
+						"subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Azure subscription ID corresponding to provided resources",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Azure subscription integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Dynatrace
+				"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnvId
+						"env_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Dynatrace environment id",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Resources
+						"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of Dynatrace resources to monitor",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Dynatrace monitoring configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventChannel
+				"event_channel": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "EventChannelconfiguration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GitHub
+				"git_hub": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Owner
+						"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Repository owner",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OwnerType
+						"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Type of repository owner",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RepoId
+						"repo_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Associated Github repo ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RepoName
+						"repo_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Associated Github repo name",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "GitHub repository integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GitLab
+				"git_lab": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceIdentifier
+						"instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "GitLab instance identifier",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectId
+						"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "GitLab numeric project ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectPath
+						"project_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Full GitLab project path (e.g., namespace/project-name)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "GitLab project integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServer
+				"mcp_server": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Description
+						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The description of the MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tools
+						"tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of MCP tools that can be used with the association",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServerDatadog
+				"mcp_server_datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Description
+						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The description of the MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Datadog MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServerGrafana
+				"mcp_server_grafana": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tools
+						"tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of tool categories to enable for the Grafana MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Grafana MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServerNewRelic
+				"mcp_server_new_relic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccountId
+						"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "New Relic Account ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL (e.g., https://mcp.newrelic.com/mcp/)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "NewRelic MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServerSigV4
+				"mcp_server_sig_v4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Tools
+						"tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of MCP tools available for the association",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "SigV4-authenticated MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServerSplunk
+				"mcp_server_splunk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Description
+						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The description of the MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Splunk MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PagerDuty
+				"pager_duty": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomerEmail
+						"customer_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Email to be used in PagerDuty API header",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Services
+						"services": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of PagerDuty service IDs available for the association",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "PagerDuty integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNow
+				"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceId
+						"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ServiceNow instance ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "ServiceNow integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Slack
+				"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TransmissionTarget
+						"transmission_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IncidentResponseTarget
+								"incident_response_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ChannelId
+										"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Slack channel ID",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ChannelName
+										"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Slack channel name",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Destination for IncidentResponse agent.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Transmission targets for agent notifications",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkspaceId
+						"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Associated Slack workspace ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WorkspaceName
+						"workspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Associated Slack workspace name",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Slack workspace integration configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceAws
+				"source_aws": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccountId
+						"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "AWS Account Id corresponding to provided resources",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccountType
+						"account_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Account Type 'source' for DevOpsAgent monitoring",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AssumableRoleArn
+						"assumable_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Role ARN to be assumed by DevOpsAgent to operate on behalf of customer",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Resources
+						"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ResourceArn
+									"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Amazon Resource Name (ARN) of the resource",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceMetadata
+									"resource_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType:  jsontypes.NormalizedType{},
+										Description: "Additional metadata for the resource",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceType
+									"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Resource type",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of AWS resources",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tags
+						"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of AWS tags as key-value pairs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "AWS association for 'source' account",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration that directs how AgentSpace interacts with the given service",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1242,7 +1074,11 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute1e0fe2530c01e1a17c76a606(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the association was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LinkedAssociationIds
 		// CloudFormation resource type schema:
 		//
@@ -1256,7 +1092,11 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"linked_association_ids": schemaAttribute23711ee0ff9b86e383934f4c(),
+		"linked_association_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Set of linked association IDs for parent-child relationships",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
@@ -1266,7 +1106,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"service_id": schemaAttribute2f2de980e55fcf2a0e9a52be(),
+		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the associated service",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1275,7 +1118,11 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute4d9ee4ce39556dbfeef205e0(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the association was last updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

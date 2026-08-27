@@ -14,293 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute198425e3b1de9b8821363010() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the wait interval between traffic shifts, in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20e3c6a38054b8ca139cfbfb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the endpoint configuration for the SageMaker endpoint. This is a required property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute213910627ef98c7acecd4470() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CanarySize
-			"canary_size": schemaAttributefa2d57ed0adfe0110948ec23(),
-			// Property: LinearStepSize
-			"linear_step_size": schemaAttribute7b802882263a777044228fec(),
-			// Property: Type
-			"type": schemaAttribute9c512ee97e88472b6be007e5(),
-			// Property: WaitIntervalInSeconds
-			"wait_interval_in_seconds": schemaAttribute198425e3b1de9b8821363010(),
-		}, /*END SCHEMA*/
-		Description: "The traffic routing configuration for the blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e5ce8941d640b23b90c9734() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, retains the deployment configuration during endpoint updates.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute337f4a0087ff21fee69bc372() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The wait time before terminating the old endpoint during a blue/green deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute407d9368490cc22105838c76() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute44bf01deee233dc92b3e8d90(),
-			// Property: Value
-			"value": schemaAttribute496797562331e59951717062(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the maximum batch size for each rolling update.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44bf01deee233dc92b3e8d90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the `Value` is an instance count or a capacity unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute496797562331e59951717062() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value representing either the number of instances or the number of capacity units.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute521111872a84312fe4fc089c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Alarms
-			"alarms": schemaAttributecc8a2b713ca4d1cec5b7fb1e(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for automatic rollback if an error occurs during deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b7e23eb15c0c0e090f6b4bc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: VariantPropertyType
-				"variant_property_type": schemaAttribute9fd230c7a7f09132d5233b7f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies a list of variant properties that you want to exclude when updating an endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78db3088f0f55f32d6b40062() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b802882263a777044228fec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute44bf01deee233dc92b3e8d90(),
-			// Property: Value
-			"value": schemaAttribute496797562331e59951717062(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the step size for linear traffic routing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8294d5b077d011b35f24d5ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the CloudWatch alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute894f1afcddfdeaa2e920f65d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed2d332f9decc8c4bc0d23b44(),
-				// Property: Value
-				"value": schemaAttribute78db3088f0f55f32d6b40062(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c512ee97e88472b6be007e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the type of traffic routing (e.g., 'AllAtOnce', 'Canary', 'Linear').",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fd230c7a7f09132d5233b7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of variant property (e.g., 'DesiredInstanceCount', 'DesiredWeight', 'DataCaptureConfig').",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea10faf43f264f7bc4b398e18() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum time allowed for the blue/green update, in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6ed3d281b66e3064106089a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time to wait between steps during the rolling update, in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea87cb45bb0e4790007cf4946() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumBatchSize
-			"maximum_batch_size": schemaAttribute407d9368490cc22105838c76(),
-			// Property: MaximumExecutionTimeoutInSeconds
-			"maximum_execution_timeout_in_seconds": schemaAttributeacadd2bd2b2853d06b23971c(),
-			// Property: RollbackMaximumBatchSize
-			"rollback_maximum_batch_size": schemaAttributed21977a787e0a90065b892cd(),
-			// Property: WaitIntervalInSeconds
-			"wait_interval_in_seconds": schemaAttributea6ed3d281b66e3064106089a(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for rolling update deployment policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea905e56d175dc9d62ccad0a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SageMaker endpoint. This name must be unique within an AWS Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacadd2bd2b2853d06b23971c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum time allowed for the rolling update, in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc8a2b713ca4d1cec5b7fb1e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AlarmName
-				"alarm_name": schemaAttribute8294d5b077d011b35f24d5ce(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of CloudWatch alarms to monitor during the deployment. If any alarm goes off, the deployment is rolled back.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccdba15400287c12aad77288() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoRollbackConfiguration
-			"auto_rollback_configuration": schemaAttribute521111872a84312fe4fc089c(),
-			// Property: BlueGreenUpdatePolicy
-			"blue_green_update_policy": schemaAttributee5e09a2b7e603c3007e5c659(),
-			// Property: RollingUpdatePolicy
-			"rolling_update_policy": schemaAttributea87cb45bb0e4790007cf4946(),
-		}, /*END SCHEMA*/
-		Description: "Specifies deployment configuration for updating the SageMaker endpoint. Includes rollback and update policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdfd090aef539e97d898e8f7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, retains all variant properties for an endpoint when it is updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed21977a787e0a90065b892cd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute44bf01deee233dc92b3e8d90(),
-			// Property: Value
-			"value": schemaAttribute496797562331e59951717062(),
-		}, /*END SCHEMA*/
-		Description: "The maximum batch size for rollback during an update failure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2d332f9decc8c4bc0d23b44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee29172dcadb34e32bf8e2070() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5e09a2b7e603c3007e5c659() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumExecutionTimeoutInSeconds
-			"maximum_execution_timeout_in_seconds": schemaAttributea10faf43f264f7bc4b398e18(),
-			// Property: TerminationWaitInSeconds
-			"termination_wait_in_seconds": schemaAttribute337f4a0087ff21fee69bc372(),
-			// Property: TrafficRoutingConfiguration
-			"traffic_routing_configuration": schemaAttribute213910627ef98c7acecd4470(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for blue-green update deployment policies.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa2d57ed0adfe0110948ec23() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute44bf01deee233dc92b3e8d90(),
-			// Property: Value
-			"value": schemaAttribute496797562331e59951717062(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the size of the canary traffic in a canary deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_endpoint", endpointDataSource)
 }
@@ -478,7 +191,152 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_config": schemaAttributeccdba15400287c12aad77288(),
+		"deployment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRollbackConfiguration
+				"auto_rollback_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Alarms
+						"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AlarmName
+									"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CloudWatch alarm.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of CloudWatch alarms to monitor during the deployment. If any alarm goes off, the deployment is rolled back.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for automatic rollback if an error occurs during deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlueGreenUpdatePolicy
+				"blue_green_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaximumExecutionTimeoutInSeconds
+						"maximum_execution_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum time allowed for the blue/green update, in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TerminationWaitInSeconds
+						"termination_wait_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The wait time before terminating the old endpoint during a blue/green deployment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrafficRoutingConfiguration
+						"traffic_routing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CanarySize
+								"canary_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether the `Value` is an instance count or a capacity unit.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The value representing either the number of instances or the number of capacity units.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Specifies the size of the canary traffic in a canary deployment.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LinearStepSize
+								"linear_step_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether the `Value` is an instance count or a capacity unit.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The value representing either the number of instances or the number of capacity units.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Specifies the step size for linear traffic routing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the type of traffic routing (e.g., 'AllAtOnce', 'Canary', 'Linear').",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: WaitIntervalInSeconds
+								"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the wait interval between traffic shifts, in seconds.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The traffic routing configuration for the blue/green deployment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for blue-green update deployment policies.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RollingUpdatePolicy
+				"rolling_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaximumBatchSize
+						"maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the `Value` is an instance count or a capacity unit.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The value representing either the number of instances or the number of capacity units.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the maximum batch size for each rolling update.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumExecutionTimeoutInSeconds
+						"maximum_execution_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum time allowed for the rolling update, in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RollbackMaximumBatchSize
+						"rollback_maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the `Value` is an instance count or a capacity unit.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The value representing either the number of instances or the number of capacity units.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The maximum batch size for rollback during an update failure.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WaitIntervalInSeconds
+						"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The time to wait between steps during the rolling update, in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for rolling update deployment policies.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies deployment configuration for updating the SageMaker endpoint. Includes rollback and update policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -486,7 +344,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint_arn": schemaAttributee29172dcadb34e32bf8e2070(),
+		"endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfigName
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +355,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the endpoint configuration for the SageMaker endpoint. This is a required property.",
 		//	  "type": "string"
 		//	}
-		"endpoint_config_name": schemaAttribute20e3c6a38054b8ca139cfbfb(),
+		"endpoint_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the endpoint configuration for the SageMaker endpoint. This is a required property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +366,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the SageMaker endpoint. This name must be unique within an AWS Region.",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schemaAttributea905e56d175dc9d62ccad0a8(),
+		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the SageMaker endpoint. This name must be unique within an AWS Region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExcludeRetainedVariantProperties
 		// CloudFormation resource type schema:
 		//
@@ -521,7 +388,19 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"exclude_retained_variant_properties": schemaAttribute5b7e23eb15c0c0e090f6b4bc(),
+		"exclude_retained_variant_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: VariantPropertyType
+					"variant_property_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of variant property (e.g., 'DesiredInstanceCount', 'DesiredWeight', 'DataCaptureConfig').",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies a list of variant properties that you want to exclude when updating an endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetainAllVariantProperties
 		// CloudFormation resource type schema:
 		//
@@ -529,7 +408,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When set to true, retains all variant properties for an endpoint when it is updated.",
 		//	  "type": "boolean"
 		//	}
-		"retain_all_variant_properties": schemaAttributecdfd090aef539e97d898e8f7(),
+		"retain_all_variant_properties": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When set to true, retains all variant properties for an endpoint when it is updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetainDeploymentConfig
 		// CloudFormation resource type schema:
 		//
@@ -537,7 +419,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When set to true, retains the deployment configuration during endpoint updates.",
 		//	  "type": "boolean"
 		//	}
-		"retain_deployment_config": schemaAttribute2e5ce8941d640b23b90c9734(),
+		"retain_deployment_config": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When set to true, retains the deployment configuration during endpoint updates.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -564,7 +449,24 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute894f1afcddfdeaa2e920f65d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

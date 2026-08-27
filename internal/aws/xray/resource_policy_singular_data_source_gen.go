@@ -14,27 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute191f2cca92c4ae33a26b3ecc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource policy document, which can be up to 5kb in size.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute622cf05acafb8c692dcb2277() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag to indicate whether to bypass the resource policy lockout safety check",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec29773743a67faee8fee0514() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the resource policy. Must be unique within a specific AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_xray_resource_policy", resourcePolicyDataSource)
 }
@@ -50,7 +29,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A flag to indicate whether to bypass the resource policy lockout safety check",
 		//	  "type": "boolean"
 		//	}
-		"bypass_policy_lockout_check": schemaAttribute622cf05acafb8c692dcb2277(),
+		"bypass_policy_lockout_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag to indicate whether to bypass the resource policy lockout safety check",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -60,7 +42,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"policy_document": schemaAttribute191f2cca92c4ae33a26b3ecc(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource policy document, which can be up to 5kb in size.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +56,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\w+=,.@-]+",
 		//	  "type": "string"
 		//	}
-		"policy_name": schemaAttributec29773743a67faee8fee0514(),
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the resource policy. Must be unique within a specific AWS account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

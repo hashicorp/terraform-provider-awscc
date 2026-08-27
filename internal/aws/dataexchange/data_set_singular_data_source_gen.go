@@ -15,85 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07a3bf79cd144a7b40348ec7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of asset that is added to a data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f01f2e84f3ab50a6d1994b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute206507ec69a24e0590954e4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute326c41a662848e860e413f1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute545f3ec535453b607f74896d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the data set was last updated, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a9fcba70de41dd0c228dc91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the data set was created, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec13a9c73caa31773d27dd898() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0f01f2e84f3ab50a6d1994b4(),
-				// Property: Value
-				"value": schemaAttribute0f01f2e84f3ab50a6d1994b4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4660ae24bc02bba53e65c8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec741bd8f0106f50bb59570c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0f2ff3339b134011069b52d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dataexchange_data_set", dataSetDataSource)
 }
@@ -109,7 +30,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN for the data set.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute326c41a662848e860e413f1f(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetType
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +48,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"asset_type": schemaAttribute07a3bf79cd144a7b40348ec7(),
+		"asset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of asset that is added to a data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +60,11 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute7a9fcba70de41dd0c228dc91(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the data set was created, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +72,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the data set.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec4660ae24bc02bba53e65c8f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +83,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the data set.",
 		//	  "type": "string"
 		//	}
-		"data_set_id": schemaAttributec741bd8f0106f50bb59570c8(),
+		"data_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +94,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the data set.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute206507ec69a24e0590954e4e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Origin
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +109,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"origin": schemaAttributed0f2ff3339b134011069b52d(),
+		"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +138,22 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributec13a9c73caa31773d27dd898(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +162,11 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute545f3ec535453b607f74896d(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the data set was last updated, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

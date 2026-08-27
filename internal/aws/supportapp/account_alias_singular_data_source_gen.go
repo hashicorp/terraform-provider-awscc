@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute571c382b621a489b8ba53430() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An account alias associated with a customer's account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66ac200c5e1c79f8ab07ceb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier representing an alias tied to an account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_supportapp_account_alias", accountAliasDataSource)
 }
@@ -46,7 +32,10 @@ func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[\\w\\- ]+$",
 		//	  "type": "string"
 		//	}
-		"account_alias": schemaAttribute571c382b621a489b8ba53430(),
+		"account_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An account alias associated with a customer's account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccountAliasResourceId
 		// CloudFormation resource type schema:
 		//
@@ -57,7 +46,10 @@ func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[\\w\\- ]+$",
 		//	  "type": "string"
 		//	}
-		"account_alias_resource_id": schemaAttribute66ac200c5e1c79f8ab07ceb8(),
+		"account_alias_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier representing an alias tied to an account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

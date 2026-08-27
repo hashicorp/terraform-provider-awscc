@@ -14,90 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute18d8f45536929be83ee5a9b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the account that owns the Traffic Mirror session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e8a3c531d9b79d6ab2ebdee() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of bytes in each packet to mirror.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28b37b3856ec5ec69063dea6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute74b8a726e0025d7dddd75131(),
-				// Property: Value
-				"value": schemaAttribute74b8a726e0025d7dddd75131(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the Traffic Mirror session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b8f596de5b5eecea100ad42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a Traffic Mirror target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute659ae777e400f9dd6f20a8c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a Traffic Mirror session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c3314cf9a97f1fee3a04b66() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74b8a726e0025d7dddd75131() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute998c0a12117f1298e139d86d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a Traffic Mirror filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7215acc6db8072cc00ec9b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the source network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4b8ee01fa3c1613122d86a1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The VXLAN ID for the Traffic Mirror session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa4685fa9bc1f84058eeaa19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the Traffic Mirror session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_traffic_mirror_session", trafficMirrorSessionDataSource)
 }
@@ -113,7 +29,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The description of the Traffic Mirror session.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributefa4685fa9bc1f84058eeaa19(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the Traffic Mirror session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +40,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of a Traffic Mirror session.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_session_id": schemaAttribute659ae777e400f9dd6f20a8c6(),
+		"traffic_mirror_session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a Traffic Mirror session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +51,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the source network interface.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttributeb7215acc6db8072cc00ec9b5(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the source network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +62,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the account that owns the Traffic Mirror session.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute18d8f45536929be83ee5a9b1(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the account that owns the Traffic Mirror session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PacketLength
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +73,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The number of bytes in each packet to mirror.",
 		//	  "type": "integer"
 		//	}
-		"packet_length": schemaAttribute1e8a3c531d9b79d6ab2ebdee(),
+		"packet_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of bytes in each packet to mirror.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SessionNumber
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +84,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
 		//	  "type": "integer"
 		//	}
-		"session_number": schemaAttribute6c3314cf9a97f1fee3a04b66(),
+		"session_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +114,22 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute28b37b3856ec5ec69063dea6(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the Traffic Mirror session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorFilterId
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +137,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of a Traffic Mirror filter.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_filter_id": schemaAttribute998c0a12117f1298e139d86d(),
+		"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a Traffic Mirror filter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorTargetId
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +148,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of a Traffic Mirror target.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_target_id": schemaAttribute3b8f596de5b5eecea100ad42(),
+		"traffic_mirror_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a Traffic Mirror target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VirtualNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +159,10 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The VXLAN ID for the Traffic Mirror session.",
 		//	  "type": "integer"
 		//	}
-		"virtual_network_id": schemaAttributec4b8ee01fa3c1613122d86a1(),
+		"virtual_network_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The VXLAN ID for the Traffic Mirror session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

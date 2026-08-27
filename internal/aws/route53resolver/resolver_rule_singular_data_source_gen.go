@@ -14,133 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15f1f1a120769541aae56790() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7999d8f4dc2dbb7df1a831a4(),
-				// Property: Value
-				"value": schemaAttribute3e20de420853a0aaecdcc9a8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute242dfce20dae5a3550f0804f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d1d0f641cb40ff088f18305() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ip
-				"ip": schemaAttribute242dfce20dae5a3550f0804f(),
-				// Property: Ipv6
-				"ipv_6": schemaAttributec60dd4168684cff043063111(),
-				// Property: Port
-				"port": schemaAttribute3f592c65704fb078bbc9168c(),
-				// Property: Protocol
-				"protocol": schemaAttribute718a9bb0708d1c38c1439a29(),
-				// Property: ServerNameIndication
-				"server_name_indication": schemaAttribute4c5edc7712d083bc31fb9ea3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e20de420853a0aaecdcc9a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f592c65704fb078bbc9168c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The port at Ip that you want to forward DNS queries to. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c5edc7712d083bc31fb9ea3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f50ba16a51fecef8bcb8be2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the endpoint that the rule is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute557c51f60eb886dc10aa1a59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the Resolver rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute718a9bb0708d1c38c1439a29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol that you want to use to forward DNS queries. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute722c3d650a2d09bdc41eabf0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the resolver rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7841d54485ae3950c8bd7ce8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When you want to forward DNS queries for specified domain name to resolvers on your network, specify FORWARD. When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for a subdomain of that domain, specify SYSTEM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7999d8f4dc2dbb7df1a831a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9af8a76045d83b98132003b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name server domain for queries to be delegated to if a query matches the delegation record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec60dd4168684cff043063111() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd1819353d99caa8b771acb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_rule", resolverRuleDataSource)
 }
@@ -156,7 +29,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the resolver rule.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute722c3d650a2d09bdc41eabf0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the resolver rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DelegationRecord
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +42,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"delegation_record": schemaAttribute9af8a76045d83b98132003b6(),
+		"delegation_record": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name server domain for queries to be delegated to if a query matches the delegation record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +55,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttributefd1819353d99caa8b771acb0(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +68,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute557c51f60eb886dc10aa1a59(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the Resolver rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolverEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +81,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_endpoint_id": schemaAttribute4f50ba16a51fecef8bcb8be2(),
+		"resolver_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the endpoint that the rule is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolverRuleId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +92,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the endpoint that the rule is associated with.",
 		//	  "type": "string"
 		//	}
-		"resolver_rule_id": schemaAttribute4f50ba16a51fecef8bcb8be2(),
+		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the endpoint that the rule is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleType
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +109,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"rule_type": schemaAttribute7841d54485ae3950c8bd7ce8(),
+		"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When you want to forward DNS queries for specified domain name to resolvers on your network, specify FORWARD. When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for a subdomain of that domain, specify SYSTEM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +144,24 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute15f1f1a120769541aae56790(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetIps
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +205,39 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"target_ips": schemaAttribute2d1d0f641cb40ff088f18305(),
+		"target_ips": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Ip
+					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ipv6
+					"ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Port
+					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The port at Ip that you want to forward DNS queries to. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Protocol
+					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The protocol that you want to use to forward DNS queries. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ServerNameIndication
+					"server_name_indication": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The SNI of the target name servers for DoH/DoH-FIPS outbound endpoints",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

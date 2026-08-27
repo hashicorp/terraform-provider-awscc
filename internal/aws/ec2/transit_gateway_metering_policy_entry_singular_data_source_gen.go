@@ -14,104 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03ce90f503de2d69fd58d104() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the attachment through which traffic enters a  transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f786e4b3310519047d9711a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp at which the latest action performed on the metering policy entry will become effective",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1172ef5d9f0a1fb3ecbf4f87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The list of ports on destination instances receiving traffic from the transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1476eb24d870e1c6307bfcaa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The list of ports on source instances sending traffic to the transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute255a2d825661149b19504250() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the attachment through which traffic leaves a transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute281c0d942a26bcf9db9de133() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the source attachment through which traffic enters a transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dec5d52e39f0ffb9624777e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The list of IP addresses of the instances sending traffic to the transit gateway for which the metering policy entry is applicable",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute472b8cf4aa33059cf45c94fe() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The rule number of the metering policy entry",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bf7f82cd2557212b59728f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the transit gateway metering policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab8dccded29918a49304d59f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol of the traffic",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc7b67fe97cb218982914a65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The list of IP addresses of the instances receiving traffic from the transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc2e6acb07ec832a259d930a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway metering policy for which the entry is being created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef246c791c1ab486f28f05939() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the source attachment through which traffic leaves a transit gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9d26f7560a27e305f4f035f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource owner information responsible for paying default billable charges for the traffic flow",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_metering_policy_entry", transitGatewayMeteringPolicyEntryDataSource)
 }
@@ -127,7 +29,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The list of IP addresses of the instances receiving traffic from the transit gateway",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schemaAttributebc7b67fe97cb218982914a65(),
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The list of IP addresses of the instances receiving traffic from the transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationPortRange
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +40,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The list of ports on destination instances receiving traffic from the transit gateway",
 		//	  "type": "string"
 		//	}
-		"destination_port_range": schemaAttribute1172ef5d9f0a1fb3ecbf4f87(),
+		"destination_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The list of ports on destination instances receiving traffic from the transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationTransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +51,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The ID of the source attachment through which traffic leaves a transit gateway",
 		//	  "type": "string"
 		//	}
-		"destination_transit_gateway_attachment_id": schemaAttributef246c791c1ab486f28f05939(),
+		"destination_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the source attachment through which traffic leaves a transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationTransitGatewayAttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +71,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"destination_transit_gateway_attachment_type": schemaAttribute255a2d825661149b19504250(),
+		"destination_transit_gateway_attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the attachment through which traffic leaves a transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MeteredAccount
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +87,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metered_account": schemaAttributef9d26f7560a27e305f4f035f(),
+		"metered_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource owner information responsible for paying default billable charges for the traffic flow",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyRuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +98,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The rule number of the metering policy entry",
 		//	  "type": "integer"
 		//	}
-		"policy_rule_number": schemaAttribute472b8cf4aa33059cf45c94fe(),
+		"policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The rule number of the metering policy entry",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +109,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The protocol of the traffic",
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttributeab8dccded29918a49304d59f(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The protocol of the traffic",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +120,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The list of IP addresses of the instances sending traffic to the transit gateway for which the metering policy entry is applicable",
 		//	  "type": "string"
 		//	}
-		"source_cidr_block": schemaAttribute3dec5d52e39f0ffb9624777e(),
+		"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The list of IP addresses of the instances sending traffic to the transit gateway for which the metering policy entry is applicable",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourcePortRange
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +131,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The list of ports on source instances sending traffic to the transit gateway",
 		//	  "type": "string"
 		//	}
-		"source_port_range": schemaAttribute1476eb24d870e1c6307bfcaa(),
+		"source_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The list of ports on source instances sending traffic to the transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceTransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +142,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The ID of the source attachment through which traffic enters a transit gateway",
 		//	  "type": "string"
 		//	}
-		"source_transit_gateway_attachment_id": schemaAttribute281c0d942a26bcf9db9de133(),
+		"source_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the source attachment through which traffic enters a transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceTransitGatewayAttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +162,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_transit_gateway_attachment_type": schemaAttribute03ce90f503de2d69fd58d104(),
+		"source_transit_gateway_attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the attachment through which traffic enters a  transit gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +173,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "State of the transit gateway metering policy",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute8bf7f82cd2557212b59728f9(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the transit gateway metering policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayMeteringPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +184,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The ID of the transit gateway metering policy for which the entry is being created",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_metering_policy_id": schemaAttributecc2e6acb07ec832a259d930a(),
+		"transit_gateway_metering_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway metering policy for which the entry is being created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateEffectiveAt
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +195,10 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	  "description": "The timestamp at which the latest action performed on the metering policy entry will become effective",
 		//	  "type": "string"
 		//	}
-		"update_effective_at": schemaAttribute0f786e4b3310519047d9711a(),
+		"update_effective_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp at which the latest action performed on the metering policy entry will become effective",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

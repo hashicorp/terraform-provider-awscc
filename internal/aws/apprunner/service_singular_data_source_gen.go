@@ -14,532 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b84d501e98fc9c8e3c94060() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Repository Url",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c18f37c80af137c62e1b79b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10c09f5072b833be6b518533() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15a0c62ee194dba212ae04dd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeConfiguration
-			"code_configuration": schemaAttribute90cc8f1e64761be9bd48f901(),
-			// Property: RepositoryUrl
-			"repository_url": schemaAttribute0b84d501e98fc9c8e3c94060(),
-			// Property: SourceCodeVersion
-			"source_code_version": schemaAttributed086f995e23474c836423ddc(),
-			// Property: SourceDirectory
-			"source_directory": schemaAttribute961917e87f4aedf9b32fe8de(),
-		}, /*END SCHEMA*/
-		Description: "Source Code Repository",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b76b09774865f21f3d2b6d4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BuildCommand
-			"build_command": schemaAttribute5f916f93444f2ad24747afb9(),
-			// Property: Port
-			"port": schemaAttribute277200d10a7e6e8424728fac(),
-			// Property: Runtime
-			"runtime": schemaAttribute5ad24eea64e8ec3b3d7a3183(),
-			// Property: RuntimeEnvironmentSecrets
-			"runtime_environment_secrets": schemaAttribute208d919d9c0cff7e1a798ba3(),
-			// Property: RuntimeEnvironmentVariables
-			"runtime_environment_variables": schemaAttributecf228a709f213ed66623536b(),
-			// Property: StartCommand
-			"start_command": schemaAttribute6c63e70976d42c17400fe2ba(),
-		}, /*END SCHEMA*/
-		Description: "Code Configuration Values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute208d919d9c0cff7e1a798ba3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute69fe1d6a529efa7ab5731791(),
-				// Property: Value
-				"value": schemaAttribute69fe1d6a529efa7ab5731791(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The secrets and parameters that get referenced by your service as environment variables",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22e79cd2bb2e2acbe6b66903() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Image Identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute269c4aa3ab52e8c6312402f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Instance Role Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute277200d10a7e6e8424728fac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Port",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c1f4fffdfac94d7a519f814() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Service Url of the AppRunner Service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute301a71236ac1899016fbd487() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute319c96eadd671579c0edfdee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "App Runner service endpoint IP address type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f3e2e7274cb6ceefc584a09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Network egress type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47f48f691beb26b8e99b6707() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AppRunner Service Name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5082da773d323b70deb15d47() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationConfiguration
-			"authentication_configuration": schemaAttributec71abe321c966411a294359f(),
-			// Property: AutoDeploymentsEnabled
-			"auto_deployments_enabled": schemaAttributee2f41eed8e85f8fd3f60588b(),
-			// Property: CodeRepository
-			"code_repository": schemaAttribute15a0c62ee194dba212ae04dd(),
-			// Property: ImageRepository
-			"image_repository": schemaAttributeb0c8857d21f9781d1710a3d8(),
-		}, /*END SCHEMA*/
-		Description: "Source Code configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55f632f4d718d72fa1d3487f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HealthyThreshold
-			"healthy_threshold": schemaAttribute86490e3120966a64a344774e(),
-			// Property: Interval
-			"interval": schemaAttribute73e5068b4f94fe63a1e3b395(),
-			// Property: Path
-			"path": schemaAttributef9d533fe4d73f6a43ad2b9b8(),
-			// Property: Protocol
-			"protocol": schemaAttributea9a48166072c92c9b525d38f(),
-			// Property: Timeout
-			"timeout": schemaAttribute89ac9eaa0a0f33d27b5e4604(),
-			// Property: UnhealthyThreshold
-			"unhealthy_threshold": schemaAttribute89fd0a2a180066bf0b5500f2(),
-		}, /*END SCHEMA*/
-		Description: "Health check configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ad24eea64e8ec3b3d7a3183() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Runtime",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b2aeeebe54e1f792635fc66() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute69fe1d6a529efa7ab5731791(),
-				// Property: Value
-				"value": schemaAttribute69fe1d6a529efa7ab5731791(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f916f93444f2ad24747afb9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Build Command",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6148fc10ed60e6da5edbd15a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Autoscaling configuration ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69b9fb1c46f56e0c60e11af1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EgressType
-			"egress_type": schemaAttribute3f3e2e7274cb6ceefc584a09(),
-			// Property: VpcConnectorArn
-			"vpc_connector_arn": schemaAttribute10c09f5072b833be6b518533(),
-		}, /*END SCHEMA*/
-		Description: "Network egress configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69fe1d6a529efa7ab5731791() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a7fc86154206411ad17e0e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Image Repository Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c63e70976d42c17400fe2ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Start Command",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73e5068b4f94fe63a1e3b395() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Health check Interval",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute831fc12b4777365e8ff17f14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Source Code Version Value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86490e3120966a64a344774e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Health check Healthy Threshold",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89ac9eaa0a0f33d27b5e4604() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Health check Timeout",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89fd0a2a180066bf0b5500f2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Health check Unhealthy Threshold",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90cc8f1e64761be9bd48f901() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeConfigurationValues
-			"code_configuration_values": schemaAttribute1b76b09774865f21f3d2b6d4(),
-			// Property: ConfigurationSource
-			"configuration_source": schemaAttributeac8f8c776ce01000c2c0c69a(),
-		}, /*END SCHEMA*/
-		Description: "Code Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute961917e87f4aedf9b32fe8de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Source Directory",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute993429bbbca5a3069395478d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Access Role Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea47b8777eb6e67decd4de7aa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKey
-			"kms_key": schemaAttributea92ccfb594f190329bb1a7d7(),
-		}, /*END SCHEMA*/
-		Description: "Encryption configuration (KMS key)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea92ccfb594f190329bb1a7d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS Key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9a48166072c92c9b525d38f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Health Check Protocol",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac8f8c776ce01000c2c0c69a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configuration Source",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf3b50f8994750115bb5bcf4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Memory",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0c8857d21f9781d1710a3d8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ImageConfiguration
-			"image_configuration": schemaAttributec5c3e8f6845f64f2c63e6024(),
-			// Property: ImageIdentifier
-			"image_identifier": schemaAttribute22e79cd2bb2e2acbe6b66903(),
-			// Property: ImageRepositoryType
-			"image_repository_type": schemaAttribute6a7fc86154206411ad17e0e7(),
-		}, /*END SCHEMA*/
-		Description: "Image Repository",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7925ea691f13c242d4d8471() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ObservabilityConfigurationArn
-			"observability_configuration_arn": schemaAttribute0c18f37c80af137c62e1b79b(),
-			// Property: ObservabilityEnabled
-			"observability_enabled": schemaAttributebccf807934920751a71bbccf(),
-		}, /*END SCHEMA*/
-		Description: "Service observability configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb837eeee37dff2d3749c4b4a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebccf807934920751a71bbccf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Observability enabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1cee3ceb285cdc63aaee964() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsPubliclyAccessible
-			"is_publicly_accessible": schemaAttributeb837eeee37dff2d3749c4b4a(),
-		}, /*END SCHEMA*/
-		Description: "Network ingress configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5c3e8f6845f64f2c63e6024() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Port
-			"port": schemaAttribute277200d10a7e6e8424728fac(),
-			// Property: RuntimeEnvironmentSecrets
-			"runtime_environment_secrets": schemaAttribute208d919d9c0cff7e1a798ba3(),
-			// Property: RuntimeEnvironmentVariables
-			"runtime_environment_variables": schemaAttributecf228a709f213ed66623536b(),
-			// Property: StartCommand
-			"start_command": schemaAttribute6c63e70976d42c17400fe2ba(),
-		}, /*END SCHEMA*/
-		Description: "Image Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec71abe321c966411a294359f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessRoleArn
-			"access_role_arn": schemaAttribute993429bbbca5a3069395478d(),
-			// Property: ConnectionArn
-			"connection_arn": schemaAttributef8c7b6889d0a9e1b3f4ab79f(),
-		}, /*END SCHEMA*/
-		Description: "Authentication Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8b0ca6180dc1e70ff12800a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "CPU",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf228a709f213ed66623536b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute69fe1d6a529efa7ab5731791(),
-				// Property: Value
-				"value": schemaAttribute69fe1d6a529efa7ab5731791(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed086f995e23474c836423ddc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttributef532143ca9f4897693afefbd(),
-			// Property: Value
-			"value": schemaAttribute831fc12b4777365e8ff17f14(),
-		}, /*END SCHEMA*/
-		Description: "Source Code Version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee04c864308e03f57e06e0692() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AppRunner Service status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2f41eed8e85f8fd3f60588b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Auto Deployment enabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4f636c11c1912a5dc284876() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EgressConfiguration
-			"egress_configuration": schemaAttribute69b9fb1c46f56e0c60e11af1(),
-			// Property: IngressConfiguration
-			"ingress_configuration": schemaAttributec1cee3ceb285cdc63aaee964(),
-			// Property: IpAddressType
-			"ip_address_type": schemaAttribute319c96eadd671579c0edfdee(),
-		}, /*END SCHEMA*/
-		Description: "Network configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed22d98df5be30938d24a712() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cpu
-			"cpu": schemaAttributec8b0ca6180dc1e70ff12800a(),
-			// Property: InstanceRoleArn
-			"instance_role_arn": schemaAttribute269c4aa3ab52e8c6312402f7(),
-			// Property: Memory
-			"memory": schemaAttributeaf3b50f8994750115bb5bcf4(),
-		}, /*END SCHEMA*/
-		Description: "Instance Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4179470dfe5ba8e98dc4360() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AppRunner Service Id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef532143ca9f4897693afefbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Source Code Version Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8c7b6889d0a9e1b3f4ab79f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Connection Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9d533fe4d73f6a43ad2b9b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Health check Path",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apprunner_service", serviceDataSource)
 }
@@ -558,7 +32,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_configuration_arn": schemaAttribute6148fc10ed60e6da5edbd15a(),
+		"auto_scaling_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Autoscaling configuration ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -579,7 +56,17 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schemaAttributea47b8777eb6e67decd4de7aa(),
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKey
+				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS Key",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Encryption configuration (KMS key)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -624,7 +111,42 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"health_check_configuration": schemaAttribute55f632f4d718d72fa1d3487f(),
+		"health_check_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HealthyThreshold
+				"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Healthy Threshold",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Interval
+				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Interval",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Path
+				"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Health check Path",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Health Check Protocol",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Timeout
+				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Timeout",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UnhealthyThreshold
+				"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Unhealthy Threshold",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Health check configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -656,7 +178,27 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"instance_configuration": schemaAttributeed22d98df5be30938d24a712(),
+		"instance_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cpu
+				"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "CPU",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceRoleArn
+				"instance_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Instance Role Arn",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Memory
+				"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Memory",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instance Configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -714,7 +256,46 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_configuration": schemaAttributee4f636c11c1912a5dc284876(),
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressConfiguration
+				"egress_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EgressType
+						"egress_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Network egress type.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConnectorArn
+						"vpc_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network egress configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IngressConfiguration
+				"ingress_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsPubliclyAccessible
+						"is_publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network ingress configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "App Runner service endpoint IP address type",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Network configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObservabilityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -739,7 +320,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"observability_configuration": schemaAttributeb7925ea691f13c242d4d8471(),
+		"observability_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ObservabilityConfigurationArn
+				"observability_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObservabilityEnabled
+				"observability_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Observability enabled",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Service observability configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceArn
 		// CloudFormation resource type schema:
 		//
@@ -750,7 +346,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_arn": schemaAttribute301a71236ac1899016fbd487(),
+		"service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
@@ -760,7 +359,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 32,
 		//	  "type": "string"
 		//	}
-		"service_id": schemaAttributef4179470dfe5ba8e98dc4360(),
+		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AppRunner Service Id",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceName
 		// CloudFormation resource type schema:
 		//
@@ -771,7 +373,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
 		//	  "type": "string"
 		//	}
-		"service_name": schemaAttribute47f48f691beb26b8e99b6707(),
+		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AppRunner Service Name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceUrl
 		// CloudFormation resource type schema:
 		//
@@ -779,7 +384,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Service Url of the AppRunner Service.",
 		//	  "type": "string"
 		//	}
-		"service_url": schemaAttribute2c1f4fffdfac94d7a519f814(),
+		"service_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Service Url of the AppRunner Service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1021,7 +629,207 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source_configuration": schemaAttribute5082da773d323b70deb15d47(),
+		"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationConfiguration
+				"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessRoleArn
+						"access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Access Role Arn",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ConnectionArn
+						"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Connection Arn",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Authentication Configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AutoDeploymentsEnabled
+				"auto_deployments_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Auto Deployment enabled",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeRepository
+				"code_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CodeConfiguration
+						"code_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CodeConfigurationValues
+								"code_configuration_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BuildCommand
+										"build_command": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Build Command",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Port
+										"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Port",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Runtime
+										"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Runtime",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RuntimeEnvironmentSecrets
+										"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The secrets and parameters that get referenced by your service as environment variables",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RuntimeEnvironmentVariables
+										"runtime_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: StartCommand
+										"start_command": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Start Command",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Code Configuration Values",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConfigurationSource
+								"configuration_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Configuration Source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Code Configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RepositoryUrl
+						"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Repository Url",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceCodeVersion
+						"source_code_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Source Code Version Type",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Source Code Version Value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Source Code Version",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceDirectory
+						"source_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Source Directory",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Source Code Repository",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageRepository
+				"image_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ImageConfiguration
+						"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Port
+								"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Port",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RuntimeEnvironmentSecrets
+								"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The secrets and parameters that get referenced by your service as environment variables",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RuntimeEnvironmentVariables
+								"runtime_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: StartCommand
+								"start_command": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Start Command",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Image Configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ImageIdentifier
+						"image_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Image Identifier",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ImageRepositoryType
+						"image_repository_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Image Repository Type",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Image Repository",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Source Code configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1029,7 +837,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AppRunner Service status.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee04c864308e03f57e06e0692(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AppRunner Service status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1048,7 +859,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute5b2aeeebe54e1f792635fc66(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

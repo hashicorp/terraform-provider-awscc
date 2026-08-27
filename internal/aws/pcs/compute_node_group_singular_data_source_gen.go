@@ -15,390 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute009fa6464b0b93f614fe4718() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ScaleDownIdleTimeInSeconds
-			"scale_down_idle_time_in_seconds": schemaAttributebbfea83d3ff6e82e0c216a9d(),
-			// Property: SlurmCustomSettings
-			"slurm_custom_settings": schemaAttributea2818eb7ec9c6d3971ce5699(),
-		}, /*END SCHEMA*/
-		Description: "Additional options related to the Slurm scheduler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a8b9b5b961f7358f91e3260() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon EC2 allocation strategy AWS PCS uses to provision EC2 instances. AWS PCS supports lowest price, capacity optimized, and price capacity optimized. If you don't provide this option, it defaults to price capacity optimized.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20b60343c2ee01641aeead87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The short-form error code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute222d9c612ebec70ab07a1833() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the configured Slurm setting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute278a713480072396164973d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute345a662e98c7898dc3119dd7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An ordered list of arguments passed to the script.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36e5b99feed220e84fb48944() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The EC2 instance type that AWS PCS can provision in the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5504c744cc13f2242fa06e10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the EC2 launch template to use to provision instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute599ec70b861a7d398a998fdf() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arguments
-				"arguments": schemaAttribute345a662e98c7898dc3119dd7(),
-				// Property: ExecutionPolicy
-				"execution_policy": schemaAttributeba35cfdb6793ec44d19b35e7(),
-				// Property: Name
-				"name": schemaAttributece75261571ebc5b2c34c4356(),
-				// Property: OnError
-				"on_error": schemaAttribute85d908be33858dc1c83460f7(),
-				// Property: ScriptSource
-				"script_source": schemaAttributea44ddebb847dd9e79ad554fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Scripts to execute when the node becomes ready (every boot).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bac6617294d1f48f7620253() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ScriptCachingPolicy
-			"script_caching_policy": schemaAttributec1b204e8db3df9869e903396(),
-			// Property: Stages
-			"stages": schemaAttribute8ea1205f7cfd21ae722a49a9(),
-		}, /*END SCHEMA*/
-		Description: "Custom scripts that run at defined points in a compute node's lifecycle.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d36c5296c076c10b802f045() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS PCS supports configuration of the following Slurm parameters for compute node groups: Weight and RealMemory.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d2ffb78dcc534b9c1cbb409() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70ef524cd64e6b578fe100b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71dc296dd23f291525bb38ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name that identifies the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute729df65bbdb40de560477b82() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arguments
-				"arguments": schemaAttribute345a662e98c7898dc3119dd7(),
-				// Property: ExecutionPolicy
-				"execution_policy": schemaAttributeba35cfdb6793ec44d19b35e7(),
-				// Property: Name
-				"name": schemaAttributece75261571ebc5b2c34c4356(),
-				// Property: OnError
-				"on_error": schemaAttribute85d908be33858dc1c83460f7(),
-				// Property: ScriptSource
-				"script_source": schemaAttributea44ddebb847dd9e79ad554fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Scripts to run after the node is bootstrapped, once the PCS configuration phase completes and before slurmd starts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83cf8847757763eb039991a5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TemplateId
-			"template_id": schemaAttributef825913561fe4cce1bda2567(),
-			// Property: Version
-			"version": schemaAttribute5504c744cc13f2242fa06e10(),
-		}, /*END SCHEMA*/
-		Description: "An Amazon EC2 launch template AWS PCS uses to launch compute nodes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85d908be33858dc1c83460f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The behavior when the script exits with an error. Defaults to TERMINATE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86c07ba8cbd5c54fb1da69f7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InstanceType
-				"instance_type": schemaAttribute36e5b99feed220e84fb48944(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of EC2 instance configurations that AWS PCS can provision in the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87be12f5a4f6a11bc4254a5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the cluster of the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89f10fa57898efeb7bcd42bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The generated unique ID of the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8af439bb48a7877bae181a01() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxInstanceCount
-			"max_instance_count": schemaAttributea1aeb34fd55ced87be15c20d(),
-			// Property: MinInstanceCount
-			"min_instance_count": schemaAttributea65a5a5a1e0cf8479497a6c5(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the boundaries of the compute node group auto scaling.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b2d31256b90a559b6d58f9e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique Amazon Resource Name (ARN) of the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e91930c4f396396a83dfd07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The detailed error information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ea1205f7cfd21ae722a49a9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NodeBootstrapped
-			"node_bootstrapped": schemaAttribute729df65bbdb40de560477b82(),
-			// Property: NodeReady
-			"node_ready": schemaAttribute599ec70b861a7d398a998fdf(),
-		}, /*END SCHEMA*/
-		Description: "The ordered scripts to run at each compute node lifecycle stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute955478cec84ecccd5b984f1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 object version ID of the script, when stored in a versioned bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1aeb34fd55ced87be15c20d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The upper bound of the number of instances allowed in the compute fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2818eb7ec9c6d3971ce5699() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ParameterName
-				"parameter_name": schemaAttribute5d36c5296c076c10b802f045(),
-				// Property: ParameterValue
-				"parameter_value": schemaAttribute222d9c612ebec70ab07a1833(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Additional Slurm-specific configuration that directly maps to Slurm settings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea44ddebb847dd9e79ad554fa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Checksum
-			"checksum": schemaAttribute278a713480072396164973d5(),
-			// Property: S3VersionId
-			"s3_version_id": schemaAttribute955478cec84ecccd5b984f1c(),
-			// Property: ScriptLocation
-			"script_location": schemaAttributec5744e7571febdd1a553ce3a(),
-		}, /*END SCHEMA*/
-		Description: "The external location of a lifecycle script.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea65a5a5a1e0cf8479497a6c5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The lower bound of the number of instances allowed in the compute fleet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb84c9292f9049916b89fc5e2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllocationStrategy
-			"allocation_strategy": schemaAttribute0a8b9b5b961f7358f91e3260(),
-		}, /*END SCHEMA*/
-		Description: "Additional configuration when you specify SPOT as the purchase option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba35cfdb6793ec44d19b35e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbfea83d3ff6e82e0c216a9d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time before an idle node is scaled down.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1b204e8db3df9869e903396() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Controls whether lifecycle scripts are downloaded once at first boot (CACHE_ONCE) or re-downloaded on every reboot (REFRESH_ON_REBOOT). Defaults to CACHE_ONCE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5744e7571febdd1a553ce3a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 URI or HTTPS URL where the script is stored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc2c19afcabd3396d5ff9fd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The provisioning status of the compute node group. The provisioning status doesn't indicate the overall health of the compute node group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece75261571ebc5b2c34c4356() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A human-readable name that identifies the script.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2b271c41d8d263ba5fb2ac9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Code
-				"code": schemaAttribute20b60343c2ee01641aeead87(),
-				// Property: Message
-				"message": schemaAttribute8e91930c4f396396a83dfd07(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of errors that occurred during compute node group provisioning.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee721d8c4c523e0791876931() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have pcs:RegisterComputeNodeGroupInstance permissions attached to provision instances correctly.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef825913561fe4cce1bda2567() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the EC2 launch template to use to provision instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8e3f9bc5db6f0f32598bd87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Machine Image (AMI) that AWS PCS uses to launch instances. If not provided, AWS PCS uses the AMI ID specified in the custom launch template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefaa85e0c171bd19eb6b4ad2c() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_pcs_compute_node_group", computeNodeGroupDataSource)
 }
@@ -415,7 +31,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^ami-[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"ami_id": schemaAttributef8e3f9bc5db6f0f32598bd87(),
+		"ami_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon Machine Image (AMI) that AWS PCS uses to launch instances. If not provided, AWS PCS uses the AMI ID specified in the custom launch template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -423,7 +42,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The unique Amazon Resource Name (ARN) of the compute node group.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8b2d31256b90a559b6d58f9e(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique Amazon Resource Name (ARN) of the compute node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterId
 		// CloudFormation resource type schema:
 		//
@@ -431,7 +53,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the cluster of the compute node group.",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schemaAttribute87be12f5a4f6a11bc4254a5a(),
+		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the cluster of the compute node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomLaunchTemplate
 		// CloudFormation resource type schema:
 		//
@@ -453,7 +78,22 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_launch_template": schemaAttribute83cf8847757763eb039991a5(),
+		"custom_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TemplateId
+				"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the EC2 launch template to use to provision instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the EC2 launch template to use to provision instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An Amazon EC2 launch template AWS PCS uses to launch compute nodes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ErrorInfo
 		// CloudFormation resource type schema:
 		//
@@ -477,7 +117,24 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"error_info": schemaAttributed2b271c41d8d263ba5fb2ac9(),
+		"error_info": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Code
+					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The short-form error code.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Message
+					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The detailed error information.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of errors that occurred during compute node group provisioning.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamInstanceProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -486,7 +143,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/.{1,128}$",
 		//	  "type": "string"
 		//	}
-		"iam_instance_profile_arn": schemaAttributeee721d8c4c523e0791876931(),
+		"iam_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have pcs:RegisterComputeNodeGroupInstance permissions attached to provision instances correctly.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +154,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The generated unique ID of the compute node group.",
 		//	  "type": "string"
 		//	}
-		"compute_node_group_id": schemaAttribute89f10fa57898efeb7bcd42bb(),
+		"compute_node_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The generated unique ID of the compute node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceConfigs
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +177,19 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"instance_configs": schemaAttribute86c07ba8cbd5c54fb1da69f7(),
+		"instance_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The EC2 instance type that AWS PCS can provision in the compute node group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of EC2 instance configurations that AWS PCS can provision in the compute node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +197,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name that identifies the compute node group.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute71dc296dd23f291525bb38ed(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name that identifies the compute node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeLifecycleActions
 		// CloudFormation resource type schema:
 		//
@@ -713,7 +391,128 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"node_lifecycle_actions": schemaAttribute5bac6617294d1f48f7620253(),
+		"node_lifecycle_actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScriptCachingPolicy
+				"script_caching_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Controls whether lifecycle scripts are downloaded once at first boot (CACHE_ONCE) or re-downloaded on every reboot (REFRESH_ON_REBOOT). Defaults to CACHE_ONCE.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Stages
+				"stages": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NodeBootstrapped
+						"node_bootstrapped": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Arguments
+									"arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "An ordered list of arguments passed to the script.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ExecutionPolicy
+									"execution_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A human-readable name that identifies the script.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OnError
+									"on_error": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The behavior when the script exits with an error. Defaults to TERMINATE.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ScriptSource
+									"script_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Checksum
+											"checksum": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: S3VersionId
+											"s3_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 object version ID of the script, when stored in a versioned bucket.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ScriptLocation
+											"script_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 URI or HTTPS URL where the script is stored.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The external location of a lifecycle script.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Scripts to run after the node is bootstrapped, once the PCS configuration phase completes and before slurmd starts.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: NodeReady
+						"node_ready": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Arguments
+									"arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "An ordered list of arguments passed to the script.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ExecutionPolicy
+									"execution_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A human-readable name that identifies the script.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OnError
+									"on_error": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The behavior when the script exits with an error. Defaults to TERMINATE.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ScriptSource
+									"script_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Checksum
+											"checksum": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: S3VersionId
+											"s3_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 object version ID of the script, when stored in a versioned bucket.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ScriptLocation
+											"script_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 URI or HTTPS URL where the script is stored.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The external location of a lifecycle script.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Scripts to execute when the node becomes ready (every boot).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The ordered scripts to run at each compute node lifecycle stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Custom scripts that run at defined points in a compute node's lifecycle.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PurchaseOption
 		// CloudFormation resource type schema:
 		//
@@ -727,7 +526,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"purchase_option": schemaAttribute70ef524cd64e6b578fe100b0(),
+		"purchase_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -752,7 +554,22 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"scaling_configuration": schemaAttribute8af439bb48a7877bae181a01(),
+		"scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxInstanceCount
+				"max_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The upper bound of the number of instances allowed in the compute fleet.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinInstanceCount
+				"min_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The lower bound of the number of instances allowed in the compute fleet.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the boundaries of the compute node group auto scaling.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SlurmConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -793,7 +610,36 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"slurm_configuration": schemaAttribute009fa6464b0b93f614fe4718(),
+		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScaleDownIdleTimeInSeconds
+				"scale_down_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time before an idle node is scaled down.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SlurmCustomSettings
+				"slurm_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ParameterName
+							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "AWS PCS supports configuration of the following Slurm parameters for compute node groups: Weight and RealMemory.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ParameterValue
+							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the configured Slurm setting.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Additional Slurm-specific configuration that directly maps to Slurm settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Additional options related to the Slurm scheduler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpotOptions
 		// CloudFormation resource type schema:
 		//
@@ -813,7 +659,17 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"spot_options": schemaAttributeb84c9292f9049916b89fc5e2(),
+		"spot_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllocationStrategy
+				"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon EC2 allocation strategy AWS PCS uses to provision EC2 instances. AWS PCS supports lowest price, capacity optimized, and price capacity optimized. If you don't provide this option, it defaults to price capacity optimized.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Additional configuration when you specify SPOT as the purchase option.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -830,7 +686,10 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributecc2c19afcabd3396d5ff9fd1(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provisioning status of the compute node group. The provisioning status doesn't indicate the overall health of the compute node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -843,7 +702,11 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schemaAttribute6d2ffb78dcc534b9c1cbb409(),
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -856,7 +719,12 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    }
 		//	  }
 		//	}
-		"tags": schemaAttributefaa85e0c171bd19eb6b4ad2c(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

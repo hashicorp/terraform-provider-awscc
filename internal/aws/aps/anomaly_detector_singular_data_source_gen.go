@@ -14,156 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0311c5438fc7dddd3978e757() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1af6bc79dde737d68273410b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IgnoreNearExpectedFromAbove
-			"ignore_near_expected_from_above": schemaAttribute3b21ce1ff9e4470f317b7201(),
-			// Property: IgnoreNearExpectedFromBelow
-			"ignore_near_expected_from_below": schemaAttribute3b21ce1ff9e4470f317b7201(),
-			// Property: Query
-			"query": schemaAttribute9bc8641fb7159d48a873c476(),
-			// Property: SampleSize
-			"sample_size": schemaAttribute3d13a98b89279317e9686764(),
-			// Property: ShingleSize
-			"shingle_size": schemaAttribute3d13a98b89279317e9686764(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1cd49ff1f9d431b602e83478() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b21ce1ff9e4470f317b7201() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Amount
-			"amount": schemaAttribute7ba890b0e6e93671513f98b7(),
-			// Property: Ratio
-			"ratio": schemaAttribute7ba890b0e6e93671513f98b7(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d13a98b89279317e9686764() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47a194cac640826040c625d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ac3eb7b6811fbc3c897f631() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The AnomalyDetector period of detection and metric generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f3e282f0b578a56abb011ec() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1cd49ff1f9d431b602e83478(),
-				// Property: Value
-				"value": schemaAttribute47a194cac640826040c625d1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ba890b0e6e93671513f98b7() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90fe6974d617cfd4a5712c1a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MarkAsAnomaly
-			"mark_as_anomaly": schemaAttribute0311c5438fc7dddd3978e757(),
-			// Property: Skip
-			"skip": schemaAttribute0311c5438fc7dddd3978e757(),
-		}, /*END SCHEMA*/
-		Description: "The action to perform when running the expression returns no data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9100bbb660acfc078512b845() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Required to identify a specific APS Workspace associated with this Anomaly Detector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bc8641fb7159d48a873c476() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0aa9f90b5465ba909e27777() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AnomalyDetector alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed58eaab2c29af7306f92f3a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RandomCutForest
-			"random_cut_forest": schemaAttribute1af6bc79dde737d68273410b(),
-		}, /*END SCHEMA*/
-		Description: "Determines the anomaly detector's algorithm and its configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4f2b84c806b13699141a075() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AnomalyDetector ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef300499447a0d522e7c732c7() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1cd49ff1f9d431b602e83478(),
-				// Property: Value
-				"value": schemaAttribute47a194cac640826040c625d1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to provide meta-data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_aps_anomaly_detector", anomalyDetectorDataSource)
 }
@@ -181,7 +31,10 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alias": schemaAttributed0aa9f90b5465ba909e27777(),
+		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AnomalyDetector alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +43,10 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:anomalydetector/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee4f2b84c806b13699141a075(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AnomalyDetector ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +131,58 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttributed58eaab2c29af7306f92f3a7(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RandomCutForest
+				"random_cut_forest": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IgnoreNearExpectedFromAbove
+						"ignore_near_expected_from_above": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Amount
+								"amount": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Ratio
+								"ratio": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: IgnoreNearExpectedFromBelow
+						"ignore_near_expected_from_below": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Amount
+								"amount": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Ratio
+								"ratio": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Query
+						"query": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SampleSize
+						"sample_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShingleSize
+						"shingle_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Determines the anomaly detector's algorithm and its configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationIntervalInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +191,10 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The AnomalyDetector period of detection and metric generation.",
 		//	  "type": "integer"
 		//	}
-		"evaluation_interval_in_seconds": schemaAttribute5ac3eb7b6811fbc3c897f631(),
+		"evaluation_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The AnomalyDetector period of detection and metric generation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Labels
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +227,24 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"labels": schemaAttributef300499447a0d522e7c732c7(),
+		"labels": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to provide meta-data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MissingDataAction
 		// CloudFormation resource type schema:
 		//
@@ -345,7 +272,20 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    }
 		//	  }
 		//	}
-		"missing_data_action": schemaAttribute90fe6974d617cfd4a5712c1a(),
+		"missing_data_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MarkAsAnomaly
+				"mark_as_anomaly": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Skip
+				"skip": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The action to perform when running the expression returns no data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +318,24 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5f3e282f0b578a56abb011ec(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Workspace
 		// CloudFormation resource type schema:
 		//
@@ -387,7 +344,10 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"workspace": schemaAttribute9100bbb660acfc078512b845(),
+		"workspace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Required to identify a specific APS Workspace associated with this Anomaly Detector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,53 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute075261c8f61396e1e74e7a90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Elastic Beanstalk application that is associated with this application version. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2610e35291b9f31821072aa2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute6fc54b2886d6c84a79876014(),
-			// Property: S3Key
-			"s3_key": schemaAttribute899b9f410f30a898e3589c7d(),
-		}, /*END SCHEMA*/
-		Description: "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fc54b2886d6c84a79876014() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket where the data is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute899b9f410f30a898e3589c7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 key where the data is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea472b2c232dbdaac7c954fbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb2f09654cc78eff3431e226() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of this application version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticbeanstalk_application_version", applicationVersionDataSource)
 }
@@ -76,7 +29,10 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The name of the Elastic Beanstalk application that is associated with this application version. ",
 		//	  "type": "string"
 		//	}
-		"application_name": schemaAttribute075261c8f61396e1e74e7a90(),
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Elastic Beanstalk application that is associated with this application version. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -84,14 +40,19 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A description of this application version.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributedb2f09654cc78eff3431e226(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of this application version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"application_version_id": schemaAttributea472b2c232dbdaac7c954fbf(),
+		"application_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceBundle
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +75,22 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_bundle": schemaAttribute2610e35291b9f31821072aa2(),
+		"source_bundle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 bucket where the data is located.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Key
+				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 key where the data is located.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

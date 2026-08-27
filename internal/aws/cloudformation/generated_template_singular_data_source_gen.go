@@ -15,122 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute19c92d8223e848693e291e54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the generated template was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute398fbd456799740a9e276993() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of warnings generated for this template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5468f0c6d29ff5daa8504ddf() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of resources that are still pending the template generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6027e5f7973179bbf624a99b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of resources that failed the template generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79e912a620246c5e16a5fb50() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeletionPolicy
-			"deletion_policy": schemaAttributedafa6265073a5dc5e1ff0d33(),
-			// Property: UpdateReplacePolicy
-			"update_replace_policy": schemaAttributed7af75e1a8872809a203b4d5(),
-		}, /*END SCHEMA*/
-		Description: "The configuration details of the generated template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82eef18eb50a8f1f2da7aa23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the generated template was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a21f493566bf7fbd5807bc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the generated template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute981cc3b8bf530af365c83aeb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourcesFailed
-			"resources_failed": schemaAttribute6027e5f7973179bbf624a99b(),
-			// Property: ResourcesPending
-			"resources_pending": schemaAttribute5468f0c6d29ff5daa8504ddf(),
-			// Property: ResourcesProcessing
-			"resources_processing": schemaAttributefa64302a02fe705a90a4a526(),
-			// Property: ResourcesSucceeded
-			"resources_succeeded": schemaAttributed71201ff5dccda02e02bd25e(),
-		}, /*END SCHEMA*/
-		Description: "A summary of the progress of the template generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea15aa4cf4346ed07ca98abcd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the template generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed71201ff5dccda02e02bd25e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of resources that succeeded the template generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7af75e1a8872809a203b4d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The UpdateReplacePolicy assigned to resources in the generated template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedafa6265073a5dc5e1ff0d33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DeletionPolicy assigned to resources in the generated template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef83b313398252e1cca9ca27a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name assigned to the generated template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa64302a02fe705a90a4a526() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of resources that are in-process for the template generation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_generated_template", generatedTemplateDataSource)
 }
@@ -147,7 +31,11 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute19c92d8223e848693e291e54(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the generated template was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GeneratedTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +45,10 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"generated_template_id": schemaAttribute8a21f493566bf7fbd5807bc1(),
+		"generated_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the generated template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GeneratedTemplateName
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +58,10 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"generated_template_name": schemaAttributef83b313398252e1cca9ca27a(),
+		"generated_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name assigned to the generated template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +70,11 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute82eef18eb50a8f1f2da7aa23(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the generated template was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Progress
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +101,32 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"progress": schemaAttribute981cc3b8bf530af365c83aeb(),
+		"progress": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourcesFailed
+				"resources_failed": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of resources that failed the template generation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourcesPending
+				"resources_pending": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of resources that are still pending the template generation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourcesProcessing
+				"resources_processing": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of resources that are in-process for the template generation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourcesSucceeded
+				"resources_succeeded": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of resources that succeeded the template generation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A summary of the progress of the template generation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +144,10 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributea15aa4cf4346ed07ca98abcd(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the template generation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +174,22 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"template_configuration": schemaAttribute79e912a620246c5e16a5fb50(),
+		"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeletionPolicy
+				"deletion_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The DeletionPolicy assigned to resources in the generated template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateReplacePolicy
+				"update_replace_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The UpdateReplacePolicy assigned to resources in the generated template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration details of the generated template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TotalWarnings
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +198,10 @@ func generatedTemplateDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"total_warnings": schemaAttribute398fbd456799740a9e276993(),
+		"total_warnings": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of warnings generated for this template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

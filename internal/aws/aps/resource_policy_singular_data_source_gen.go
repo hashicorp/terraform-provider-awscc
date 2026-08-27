@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute47ff33000864b49c1076f78c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Arn of an APS Workspace that the PolicyDocument will be attached to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53fc5601b62c29bed3dd4aa8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON to use as the Resource-based Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_aps_resource_policy", resourcePolicyDataSource)
 }
@@ -43,7 +29,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The JSON to use as the Resource-based Policy.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schemaAttribute53fc5601b62c29bed3dd4aa8(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The JSON to use as the Resource-based Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkspaceArn
 		// CloudFormation resource type schema:
 		//
@@ -52,7 +41,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"workspace_arn": schemaAttribute47ff33000864b49c1076f78c(),
+		"workspace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Arn of an APS Workspace that the PolicyDocument will be attached to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

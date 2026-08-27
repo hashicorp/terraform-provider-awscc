@@ -16,36 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4007cb86455527c0e95f824e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A regular expression string that is used for detecting sensitive data in a custom pattern.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute950c8aaacad8af4ed9b99499() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the custom entity type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0eece6959c9085fe0b56a57() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of context words.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc5866e4004f0cd481c060c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Tags to associate with the custom entity type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_custom_entity_type", customEntityTypeDataSource)
 }
@@ -65,7 +35,11 @@ func customEntityTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"context_words": schemaAttributeb0eece6959c9085fe0b56a57(),
+		"context_words": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of context words.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +47,10 @@ func customEntityTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name of the custom entity type.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute950c8aaacad8af4ed9b99499(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the custom entity type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegexString
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +58,10 @@ func customEntityTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A regular expression string that is used for detecting sensitive data in a custom pattern.",
 		//	  "type": "string"
 		//	}
-		"regex_string": schemaAttribute4007cb86455527c0e95f824e(),
+		"regex_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A regular expression string that is used for detecting sensitive data in a custom pattern.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -89,7 +69,11 @@ func customEntityTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Tags to associate with the custom entity type.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributefc5866e4004f0cd481c060c1(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "Tags to associate with the custom entity type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

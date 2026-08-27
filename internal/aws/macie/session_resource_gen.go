@@ -20,73 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute35934f3d2986a78f30fccc17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A enumeration value that specifies how frequently finding updates are published.",
-		Optional:    true,
-		Computed:    true,
-		Default:     stringdefault.StaticString("SIX_HOURS"),
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"FIFTEEN_MINUTES",
-				"ONE_HOUR",
-				"SIX_HOURS",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d7f17700d85f297c8c15d8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A enumeration value that specifies the status of the Macie Session.",
-		Optional:    true,
-		Computed:    true,
-		Default:     stringdefault.StaticString("ENABLED"),
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"PAUSED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc2bcba87c59cb255ca09af4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS account ID of customer",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebddba94fe5e2929bd51edec4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Service role used by Macie",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec151fc0b5a1e955d18d19581() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of automated sensitive data discovery for the Macie session.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_macie_session", sessionResource)
 	registry.AddListResourceFactory("awscc_macie_session", generic.NewListResource(sessionResource))
@@ -107,7 +40,13 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"automated_discovery_status": schemaAttributec151fc0b5a1e955d18d19581(),
+		"automated_discovery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of automated sensitive data discovery for the Macie session.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +54,13 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "AWS account ID of customer",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttributebc2bcba87c59cb255ca09af4(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AWS account ID of customer",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FindingPublishingFrequency
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +74,22 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"finding_publishing_frequency": schemaAttribute35934f3d2986a78f30fccc17(),
+		"finding_publishing_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A enumeration value that specifies how frequently finding updates are published.",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("SIX_HOURS"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"FIFTEEN_MINUTES",
+					"ONE_HOUR",
+					"SIX_HOURS",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +97,13 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Service role used by Macie",
 		//	  "type": "string"
 		//	}
-		"service_role": schemaAttributebddba94fe5e2929bd51edec4(),
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Service role used by Macie",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +116,21 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute8d7f17700d85f297c8c15d8d(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A enumeration value that specifies the status of the Macie Session.",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("ENABLED"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"PAUSED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

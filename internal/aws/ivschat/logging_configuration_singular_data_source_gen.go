@@ -14,132 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f9721d3131468cfc7092437() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2212ee7f7e86e5339b288138() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Amazon S3 bucket where chat activity will be logged.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bf21a2758003874e9f22caf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Amazon CloudWatch Logs log group where chat activity will be logged.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3438e51ce6f4c65c47f6af38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The system-generated ID of the logging configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50ba9ab0532b5c6bbdcab428() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the logging configuration. The value does not need to be unique.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c5f8e2a26cb87cfe13b2537() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogGroupName
-			"log_group_name": schemaAttribute2bf21a2758003874e9f22caf(),
-		}, /*END SCHEMA*/
-		Description: "CloudWatch destination configuration for IVS Chat logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8109af71e45cbed48ce8d865() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeliveryStreamName
-			"delivery_stream_name": schemaAttribute8607948381e8db81765d2dfd(),
-		}, /*END SCHEMA*/
-		Description: "Kinesis Firehose destination configuration for IVS Chat logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8569aaa933d693dfe0dff7ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "LoggingConfiguration ARN is automatically generated on creation and assigned as the unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8607948381e8db81765d2dfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Amazon Kinesis Firehose delivery stream where chat activity will be logged.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute920360ea4ca9b23f3e57f4b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the logging configuration. When the state is ACTIVE, the configuration is ready to log chat content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f43342b6b12ef1a8ae49af7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed48a5be77284aceee2a30cb4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9f43342b6b12ef1a8ae49af7(),
-				// Property: Value
-				"value": schemaAttribute0f9721d3131468cfc7092437(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01f4fe2d5036ca5b543e9a8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttribute2212ee7f7e86e5339b288138(),
-		}, /*END SCHEMA*/
-		Description: "S3 destination configuration for IVS Chat logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2d1598ab42a41476ef15f44() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLogs
-			"cloudwatch_logs": schemaAttribute5c5f8e2a26cb87cfe13b2537(),
-			// Property: Firehose
-			"firehose": schemaAttribute8109af71e45cbed48ce8d865(),
-			// Property: S3
-			"s3": schemaAttributee01f4fe2d5036ca5b543e9a8(),
-		}, /*END SCHEMA*/
-		Description: "Destination configuration for IVS Chat logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ivschat_logging_configuration", loggingConfigurationDataSource)
 }
@@ -158,7 +32,10 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8569aaa933d693dfe0dff7ab(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "LoggingConfiguration ARN is automatically generated on creation and assigned as the unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +97,48 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination_configuration": schemaAttributef2d1598ab42a41476ef15f44(),
+		"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchLogs
+				"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroupName
+						"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the Amazon CloudWatch Logs log group where chat activity will be logged.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "CloudWatch destination configuration for IVS Chat logging.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Firehose
+				"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DeliveryStreamName
+						"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the Amazon Kinesis Firehose delivery stream where chat activity will be logged.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Kinesis Firehose destination configuration for IVS Chat logging.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3
+				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the Amazon S3 bucket where chat activity will be logged.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 destination configuration for IVS Chat logging.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Destination configuration for IVS Chat logging.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +149,10 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"logging_configuration_id": schemaAttribute3438e51ce6f4c65c47f6af38(),
+		"logging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The system-generated ID of the logging configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +163,10 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute50ba9ab0532b5c6bbdcab428(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the logging configuration. The value does not need to be unique.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +183,10 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute920360ea4ca9b23f3e57f4b7(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the logging configuration. When the state is ACTIVE, the configuration is ready to log chat content.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +219,24 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed48a5be77284aceee2a30cb4(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

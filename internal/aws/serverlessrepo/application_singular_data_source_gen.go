@@ -15,105 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute17d3a42d4ad6e655a271f1f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A valid identifier from https://spdx.org/licenses/.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute286680086b485eae4bbf4eb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The local raw packaged AWS SAM template file of your application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bb7bdb85d33f69b9943d335() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A URL with more information about the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40ded18c824d7b043dafc26d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time this resource was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48c1d0a0ae547a0e2dfe83ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute535101d95abeb2226d1dfa8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A link to a public repository for the source code of your application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute636349cc2581a29d2861cafe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The semantic version of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71da8f15a9538276f3ca9f06() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Labels to improve discovery of apps in search results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute839392851c350b2e5cdab037() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the author of this application has been verified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute887110d62e88bcfc56c1e50e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e6bcac9e817588ff2d2f846() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A text readme file in Markdown language that contains a more detailed description of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8806406e6f93dbb2b02dd5b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed873a33fe9f0dc7e3dcac5d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A local text file that contains the license of the app.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec0def7e6a42fe11c6214716() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the author publishing the app.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_serverlessrepo_application", applicationDataSource)
 }
@@ -129,7 +30,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the application.",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute887110d62e88bcfc56c1e50e(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Author
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +43,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"author": schemaAttributeec0def7e6a42fe11c6214716(),
+		"author": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the author publishing the app.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +54,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time this resource was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute40ded18c824d7b043dafc26d(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time this resource was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +67,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeb8806406e6f93dbb2b02dd5b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HomePageUrl
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +78,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A URL with more information about the application.",
 		//	  "type": "string"
 		//	}
-		"home_page_url": schemaAttribute2bb7bdb85d33f69b9943d335(),
+		"home_page_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A URL with more information about the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsVerifiedAuthor
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +89,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether the author of this application has been verified.",
 		//	  "type": "boolean"
 		//	}
-		"is_verified_author": schemaAttribute839392851c350b2e5cdab037(),
+		"is_verified_author": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the author of this application has been verified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Labels
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +104,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"labels": schemaAttribute71da8f15a9538276f3ca9f06(),
+		"labels": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Labels to improve discovery of apps in search results.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseBody
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +116,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A local text file that contains the license of the app.",
 		//	  "type": "string"
 		//	}
-		"license_body": schemaAttributed873a33fe9f0dc7e3dcac5d5(),
+		"license_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A local text file that contains the license of the app.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +130,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9\\-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute48c1d0a0ae547a0e2dfe83ba(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReadmeBody
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +141,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A text readme file in Markdown language that contains a more detailed description of the application.",
 		//	  "type": "string"
 		//	}
-		"readme_body": schemaAttribute8e6bcac9e817588ff2d2f846(),
+		"readme_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A text readme file in Markdown language that contains a more detailed description of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SemanticVersion
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +152,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The semantic version of the application.",
 		//	  "type": "string"
 		//	}
-		"semantic_version": schemaAttribute636349cc2581a29d2861cafe(),
+		"semantic_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The semantic version of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceCodeUrl
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +163,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A link to a public repository for the source code of your application.",
 		//	  "type": "string"
 		//	}
-		"source_code_url": schemaAttribute535101d95abeb2226d1dfa8d(),
+		"source_code_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A link to a public repository for the source code of your application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpdxLicenseId
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +174,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A valid identifier from https://spdx.org/licenses/.",
 		//	  "type": "string"
 		//	}
-		"spdx_license_id": schemaAttribute17d3a42d4ad6e655a271f1f8(),
+		"spdx_license_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A valid identifier from https://spdx.org/licenses/.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +185,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The local raw packaged AWS SAM template file of your application.",
 		//	  "type": "string"
 		//	}
-		"template_body": schemaAttribute286680086b485eae4bbf4eb7(),
+		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The local raw packaged AWS SAM template file of your application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

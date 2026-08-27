@@ -14,187 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b41a474773f3231af3be753() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BandwidthAllocation
-			"bandwidth_allocation": schemaAttributeb57fb93f024fcf37b83f3118(),
-			// Property: DialingCapacity
-			"dialing_capacity": schemaAttributeb71f7c567211fd639fc10536(),
-		}, /*END SCHEMA*/
-		Description: "Progressive Dialer config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13e4b13bc3854344fac66b84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b2ff949722042e22729fa55() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AgentlessDialerConfig
-			"agentless_dialer_config": schemaAttribute7f5728b029c0b3c47d01e168(),
-			// Property: PredictiveDialerConfig
-			"predictive_dialer_config": schemaAttribute2ea893549bc58be857367632(),
-			// Property: ProgressiveDialerConfig
-			"progressive_dialer_config": schemaAttribute0b41a474773f3231af3be753(),
-		}, /*END SCHEMA*/
-		Description: "The possible types of dialer config parameters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c8b6f0bf8f68ff0ace3e87b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e22905e3c87cbef6b74dbd2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ea893549bc58be857367632() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BandwidthAllocation
-			"bandwidth_allocation": schemaAttributeb57fb93f024fcf37b83f3118(),
-			// Property: DialingCapacity
-			"dialing_capacity": schemaAttributeb71f7c567211fd639fc10536(),
-		}, /*END SCHEMA*/
-		Description: "Predictive Dialer config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38a70e23ab21a017d4a881da() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute13e4b13bc3854344fac66b84(),
-				// Property: Value
-				"value": schemaAttribute6f097ab6ac88329f446b8960(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48bd8269191acb0ed4eba6df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Connect Campaign Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5414c78ddbeb00fd83cf4e49() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwaitAnswerMachinePrompt
-			"await_answer_machine_prompt": schemaAttribute78f322d055cb50fbcd40f8fc(),
-			// Property: EnableAnswerMachineDetection
-			"enable_answer_machine_detection": schemaAttribute5595852118d49f1ff9d9a913(),
-		}, /*END SCHEMA*/
-		Description: "The configuration used for answering machine detection during outbound calls",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5595852118d49f1ff9d9a913() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fb3a520f696644260e25af5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow for the outbound call.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f097ab6ac88329f446b8960() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78f322d055cb50fbcd40f8fc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f5728b029c0b3c47d01e168() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DialingCapacity
-			"dialing_capacity": schemaAttributeb71f7c567211fd639fc10536(),
-		}, /*END SCHEMA*/
-		Description: "Agentless Dialer config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ce7cfb96c2eaf7143fe5e51() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AnswerMachineDetectionConfig
-			"answer_machine_detection_config": schemaAttribute5414c78ddbeb00fd83cf4e49(),
-			// Property: ConnectContactFlowArn
-			"connect_contact_flow_arn": schemaAttribute5fb3a520f696644260e25af5(),
-			// Property: ConnectQueueArn
-			"connect_queue_arn": schemaAttribute1e22905e3c87cbef6b74dbd2(),
-			// Property: ConnectSourcePhoneNumber
-			"connect_source_phone_number": schemaAttribute1c8b6f0bf8f68ff0ace3e87b(),
-		}, /*END SCHEMA*/
-		Description: "The configuration used for outbound calls.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7956c5f35981bc5b3c1b8fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Connect Instance Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb57fb93f024fcf37b83f3118() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The bandwidth allocation of a queue resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb71f7c567211fd639fc10536() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee03b1d009a6762ce25089d1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Connect Campaign Name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connectcampaigns_campaign", campaignDataSource)
 }
@@ -213,7 +32,10 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect-campaigns:[-a-z0-9]*:[0-9]{12}:campaign/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute48bd8269191acb0ed4eba6df(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Connect Campaign Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectInstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +46,10 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"connect_instance_arn": schemaAttributea7956c5f35981bc5b3c1b8fb(),
+		"connect_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Connect Instance Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DialerConfig
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +134,58 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dialer_config": schemaAttribute1b2ff949722042e22729fa55(),
+		"dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AgentlessDialerConfig
+				"agentless_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Agentless Dialer config",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PredictiveDialerConfig
+				"predictive_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BandwidthAllocation
+						"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The bandwidth allocation of a queue resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Predictive Dialer config",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProgressiveDialerConfig
+				"progressive_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BandwidthAllocation
+						"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The bandwidth allocation of a queue resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Progressive Dialer config",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The possible types of dialer config parameters",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +195,10 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee03b1d009a6762ce25089d1d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Connect Campaign Name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutboundCallConfig
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +247,44 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"outbound_call_config": schemaAttribute8ce7cfb96c2eaf7143fe5e51(),
+		"outbound_call_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AnswerMachineDetectionConfig
+				"answer_machine_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AwaitAnswerMachinePrompt
+						"await_answer_machine_prompt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableAnswerMachineDetection
+						"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration used for answering machine detection during outbound calls",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectContactFlowArn
+				"connect_contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier of the contact flow for the outbound call.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectQueueArn
+				"connect_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectSourcePhoneNumber
+				"connect_source_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration used for outbound calls.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +319,24 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute38a70e23ab21a017d4a881da(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

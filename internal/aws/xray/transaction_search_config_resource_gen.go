@@ -20,30 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03ff821b6f199b5b5a813737() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User account id, used as the primary identifier for the resource",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2c7f66cc65a9366d1b8c7a1() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Determines the percentage of traces indexed from CloudWatch Logs to X-Ray",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Float64{ /*START VALIDATORS*/
-			float64validator.Between(0.000000, 100.000000),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_xray_transaction_search_config", transactionSearchConfigResource)
 	registry.AddListResourceFactory("awscc_xray_transaction_search_config", generic.NewListResource(transactionSearchConfigResource))
@@ -61,7 +37,13 @@ func transactionSearchConfigResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute03ff821b6f199b5b5a813737(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User account id, used as the primary identifier for the resource",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IndexingPercentage
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +53,17 @@ func transactionSearchConfigResource(ctx context.Context) (resource.Resource, er
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"indexing_percentage": schemaAttributee2c7f66cc65a9366d1b8c7a1(),
+		"indexing_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Determines the percentage of traces indexed from CloudWatch Logs to X-Ray",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Float64{ /*START VALIDATORS*/
+				float64validator.Between(0.000000, 100.000000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

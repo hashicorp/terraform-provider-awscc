@@ -14,118 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0eeda01527d9969cb7363872() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the SchemaMapping",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute235d192b6e60e76fc5592dcf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ab82905a67ddf6ada95a0dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SchemaMapping",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute450ffb6d4e0b256d2c00c14c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The boolean value that indicates whether or not a SchemaMapping has MatchingWorkflows that are associated with",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47c7e558f837b56ff62f8a85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51602bd88c8b7d3e8d3617a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SchemaMapping arn associated with the Schema",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65fb9fbadefc23e16dae8286() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time of this SchemaMapping got created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb15b4381d985ead0820eccf0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subtype of the Attribute. Would be required only when type is PROVIDER_ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec26b4faf93c88848e5a3ba1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0340d4dd33704ef09b8a4d4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6f93d70d48c3ec39c597e7b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute235d192b6e60e76fc5592dcf(),
-				// Property: Value
-				"value": schemaAttribute47c7e558f837b56ff62f8a85(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4c40cd5c2a5c35d3bafc34d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttributec26b4faf93c88848e5a3ba1b(),
-				// Property: GroupName
-				"group_name": schemaAttributec26b4faf93c88848e5a3ba1b(),
-				// Property: Hashed
-				"hashed": schemaAttributed0340d4dd33704ef09b8a4d4(),
-				// Property: MatchKey
-				"match_key": schemaAttributec26b4faf93c88848e5a3ba1b(),
-				// Property: SubType
-				"sub_type": schemaAttributeb15b4381d985ead0820eccf0(),
-				// Property: Type
-				"type": schemaAttributec26b4faf93c88848e5a3ba1b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The SchemaMapping attributes input",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef52670fb403f84338d435916() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time of this SchemaMapping got last updated at",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_entityresolution_schema_mapping", schemaMappingDataSource)
 }
@@ -141,7 +29,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time of this SchemaMapping got created",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute65fb9fbadefc23e16dae8286(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time of this SchemaMapping got created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +42,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute0eeda01527d9969cb7363872(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the SchemaMapping",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HasWorkflows
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +53,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The boolean value that indicates whether or not a SchemaMapping has MatchingWorkflows that are associated with",
 		//	  "type": "boolean"
 		//	}
-		"has_workflows": schemaAttribute450ffb6d4e0b256d2c00c14c(),
+		"has_workflows": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The boolean value that indicates whether or not a SchemaMapping has MatchingWorkflows that are associated with",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MappedInputFields
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +127,39 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
-		"mapped_input_fields": schemaAttributef4c40cd5c2a5c35d3bafc34d(),
+		"mapped_input_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FieldName
+					"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: GroupName
+					"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Hashed
+					"hashed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: MatchKey
+					"match_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubType
+					"sub_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The subtype of the Attribute. Would be required only when type is PROVIDER_ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The SchemaMapping attributes input",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaArn
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +168,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(schemamapping/.*)$",
 		//	  "type": "string"
 		//	}
-		"schema_arn": schemaAttribute51602bd88c8b7d3e8d3617a4(),
+		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The SchemaMapping arn associated with the Schema",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaName
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +182,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"schema_name": schemaAttribute2ab82905a67ddf6ada95a0dd(),
+		"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the SchemaMapping",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +219,23 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed6f93d70d48c3ec39c597e7b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +243,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time of this SchemaMapping got last updated at",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributef52670fb403f84338d435916(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time of this SchemaMapping got last updated at",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

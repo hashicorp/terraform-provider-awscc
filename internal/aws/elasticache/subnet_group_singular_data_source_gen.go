@@ -15,48 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute18cd673764a42829205978a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description for the cache subnet group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a37849479b39a2d247d525d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ed511affd74e41a7b8088ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the cache subnet group. This value is stored as a lowercase string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98e431d8c7839ff941a11461() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The EC2 subnet IDs for the cache subnet group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1ffc05ee6c28f9c54cfa010() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3a37849479b39a2d247d525d(),
-				// Property: Value
-				"value": schemaAttribute3a37849479b39a2d247d525d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticache_subnet_group", subnetGroupDataSource)
 }
@@ -72,7 +30,10 @@ func subnetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name for the cache subnet group. This value is stored as a lowercase string.",
 		//	  "type": "string"
 		//	}
-		"cache_subnet_group_name": schemaAttribute7ed511affd74e41a7b8088ac(),
+		"cache_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the cache subnet group. This value is stored as a lowercase string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +41,10 @@ func subnetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description for the cache subnet group.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute18cd673764a42829205978a2(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description for the cache subnet group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +57,11 @@ func subnetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schemaAttribute98e431d8c7839ff941a11461(),
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The EC2 subnet IDs for the cache subnet group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +87,21 @@ func subnetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributec1ffc05ee6c28f9c54cfa010(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

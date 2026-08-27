@@ -14,178 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute034161f1228bc7924c047548() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User attribute for this IAM federation integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26014a479e0ca6565956315b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Config type for security config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute307741c109aa7f2429e58dcd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the IAM Identity Center application used to integrate with OpenSearch Serverless",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5155fe81573ac2edd047162b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the security config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64adccd91c7082de440b72d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Group attribute for this IAM Identity Center integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b27fdcd8386d6267167fb83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The friendly name of the security config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ba01391dd91954374ead7de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User attribute for this IAM Identity Center integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d472a6fdfa6dd8a1066d214() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Security config description",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8414b8a43c24dcc47249eb6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Custom attribute for this saml integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87e49acb92da1415d54bb2cc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GroupAttribute
-			"group_attribute": schemaAttribute96480b342ebdf3448606044c(),
-			// Property: UserAttribute
-			"user_attribute": schemaAttribute034161f1228bc7924c047548(),
-		}, /*END SCHEMA*/
-		Description: "Describe IAM federation options in form of key value map",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute897cac6efa813ba71051f33b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The XML saml provider metadata document that you want to use",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bbde865baa59abbd3ae4ec0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationArn
-			"application_arn": schemaAttributed5aa7db51fa35a071d020688(),
-			// Property: ApplicationDescription
-			"application_description": schemaAttribute307741c109aa7f2429e58dcd(),
-			// Property: ApplicationName
-			"application_name": schemaAttributefd6efd6035562039093bbb5f(),
-			// Property: GroupAttribute
-			"group_attribute": schemaAttribute64adccd91c7082de440b72d4(),
-			// Property: InstanceArn
-			"instance_arn": schemaAttributed1d4a61b4f74d06950cdce98(),
-			// Property: UserAttribute
-			"user_attribute": schemaAttribute6ba01391dd91954374ead7de(),
-		}, /*END SCHEMA*/
-		Description: "Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96480b342ebdf3448606044c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Group attribute for this IAM federation integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a4cf4753fb024a95286aa4c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Defines the session timeout in minutes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed03e500fd98591a537fc00f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Custom entity id attribute to override default entity id for this saml integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1d4a61b4f74d06950cdce98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5aa7db51fa35a071d020688() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6085ef4c5f04aae7cac8362() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Group attribute for this saml integration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef99ab25e7739822a9bde177e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GroupAttribute
-			"group_attribute": schemaAttributed6085ef4c5f04aae7cac8362(),
-			// Property: Metadata
-			"metadata": schemaAttribute897cac6efa813ba71051f33b(),
-			// Property: OpenSearchServerlessEntityId
-			"open_search_serverless_entity_id": schemaAttributed03e500fd98591a537fc00f9(),
-			// Property: SessionTimeout
-			"session_timeout": schemaAttribute9a4cf4753fb024a95286aa4c(),
-			// Property: UserAttribute
-			"user_attribute": schemaAttribute8414b8a43c24dcc47249eb6d(),
-		}, /*END SCHEMA*/
-		Description: "Describes saml options in form of key value map",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd6efd6035562039093bbb5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the IAM Identity Center application used to integrate with OpenSearch Serverless",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_security_config", securityConfigDataSource)
 }
@@ -203,7 +31,10 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7d472a6fdfa6dd8a1066d214(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Security config description",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamFederationOptions
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +53,22 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"iam_federation_options": schemaAttribute87e49acb92da1415d54bb2cc(),
+		"iam_federation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GroupAttribute
+				"group_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Group attribute for this IAM federation integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserAttribute
+				"user_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "User attribute for this IAM federation integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describe IAM federation options in form of key value map",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamIdentityCenterOptions
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +106,42 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"iam_identity_center_options": schemaAttribute8bbde865baa59abbd3ae4ec0(),
+		"iam_identity_center_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationArn
+				"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationDescription
+				"application_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The description of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationName
+				"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the IAM Identity Center application used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GroupAttribute
+				"group_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Group attribute for this IAM Identity Center integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceArn
+				"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserAttribute
+				"user_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "User attribute for this IAM Identity Center integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +151,10 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"security_config_id": schemaAttribute5155fe81573ac2edd047162b(),
+		"security_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the security config",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +165,10 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6b27fdcd8386d6267167fb83(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The friendly name of the security config",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SamlOptions
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +214,37 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"saml_options": schemaAttributef99ab25e7739822a9bde177e(),
+		"saml_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GroupAttribute
+				"group_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Group attribute for this saml integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Metadata
+				"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The XML saml provider metadata document that you want to use",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OpenSearchServerlessEntityId
+				"open_search_serverless_entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom entity id attribute to override default entity id for this saml integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SessionTimeout
+				"session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Defines the session timeout in minutes",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserAttribute
+				"user_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom attribute for this saml integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes saml options in form of key value map",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +257,10 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute26014a479e0ca6565956315b(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Config type for security config",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

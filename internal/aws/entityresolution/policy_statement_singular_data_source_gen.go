@@ -15,33 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2d87a71eaeae67cfd7244fb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Statement Id of the policy statement that is being attached.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4899fbe43eb344427e8d53fa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96a87f3a6401fc24ca94bc93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9d1c40f1dc2f20768a75070() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the resource to which the policy statement is being attached.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_entityresolution_policy_statement", policyStatementDataSource)
 }
@@ -62,7 +35,10 @@ func policyStatementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"action": schemaAttribute4899fbe43eb344427e8d53fa(),
+		"action": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +47,10 @@ func policyStatementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:((schemamapping|matchingworkflow|idmappingworkflow|idnamespace)/[a-zA-Z_0-9-]{1,255})$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec9d1c40f1dc2f20768a75070(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the resource to which the policy statement is being attached.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Condition
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +59,9 @@ func policyStatementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"condition": schemaAttribute96a87f3a6401fc24ca94bc93(),
+		"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Effect
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +72,9 @@ func policyStatementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"effect": schemaAttribute96a87f3a6401fc24ca94bc93(),
+		"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +87,10 @@ func policyStatementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"principal": schemaAttribute4899fbe43eb344427e8d53fa(),
+		"principal": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatementId
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +101,10 @@ func policyStatementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
-		"statement_id": schemaAttribute2d87a71eaeae67cfd7244fb8(),
+		"statement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Statement Id of the policy statement that is being attached.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

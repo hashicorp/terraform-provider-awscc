@@ -15,166 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute275b17ea09c7ead544b125b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a64343e81d942bdb71abe35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display settings of the Custom Line Item.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f03b5902297d4113b8f90b7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Latest modified timestamp in UNIX epoch time format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute477f58f3e336660f78a53eb3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account which this custom line item will be charged to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute478505a663c75b0a96540d9d() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ae4ff98f94890ed2225cde4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of source values associated to this custom line item",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5070e648ac292c986370e5cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Billing Group ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute681db749e243f9ae7a778b51() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85bb957923a800b490cb0614() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8baa6b4003cc46688dcf3cd6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExclusiveEndBillingPeriod
-			"exclusive_end_billing_period": schemaAttribute85bb957923a800b490cb0614(),
-			// Property: InclusiveStartBillingPeriod
-			"inclusive_start_billing_period": schemaAttribute85bb957923a800b490cb0614(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea87e27ee8c535962b5f75301() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChildAssociatedResources
-			"child_associated_resources": schemaAttribute681db749e243f9ae7a778b51(),
-			// Property: PercentageValue
-			"percentage_value": schemaAttribute478505a663c75b0a96540d9d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadac193dbef1197a897b5bb5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChargeValue
-			"charge_value": schemaAttribute478505a663c75b0a96540d9d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec59f63f2adb3c4951654bcb6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Flat
-			"flat": schemaAttributeadac193dbef1197a897b5bb5(),
-			// Property: LineItemFilters
-			"line_item_filters": schemaAttributeff4d66612c18157cc90d2a43(),
-			// Property: Percentage
-			"percentage": schemaAttributea87e27ee8c535962b5f75301(),
-			// Property: Type
-			"type": schemaAttribute85bb957923a800b490cb0614(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf0698efac50d0956fd0280b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Creation timestamp in UNIX epoch time format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed78e814999a2d1ecea5c152b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute85bb957923a800b490cb0614(),
-				// Property: Value
-				"value": schemaAttribute85bb957923a800b490cb0614(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6c4265c1e73bc32aa2a3141() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Service
-			"service": schemaAttribute85bb957923a800b490cb0614(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff4d66612c18157cc90d2a43() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Attribute
-				"attribute": schemaAttribute85bb957923a800b490cb0614(),
-				// Property: AttributeValues
-				"attribute_values": schemaAttribute681db749e243f9ae7a778b51(),
-				// Property: MatchOption
-				"match_option": schemaAttribute85bb957923a800b490cb0614(),
-				// Property: Values
-				"values": schemaAttribute681db749e243f9ae7a778b51(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_billingconductor_custom_line_item", customLineItemDataSource)
 }
@@ -191,7 +31,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute477f58f3e336660f78a53eb3(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The account which this custom line item will be charged to",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +43,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute275b17ea09c7ead544b125b1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationSize
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +54,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Number of source values associated to this custom line item",
 		//	  "type": "integer"
 		//	}
-		"association_size": schemaAttribute4ae4ff98f94890ed2225cde4(),
+		"association_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Number of source values associated to this custom line item",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BillingGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +66,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}",
 		//	  "type": "string"
 		//	}
-		"billing_group_arn": schemaAttribute5070e648ac292c986370e5cc(),
+		"billing_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Billing Group ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BillingPeriodRange
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +87,19 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"billing_period_range": schemaAttribute8baa6b4003cc46688dcf3cd6(),
+		"billing_period_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExclusiveEndBillingPeriod
+				"exclusive_end_billing_period": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InclusiveStartBillingPeriod
+				"inclusive_start_billing_period": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComputationRule
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +111,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"computation_rule": schemaAttribute2a64343e81d942bdb71abe35(),
+		"computation_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display settings of the Custom Line Item.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +122,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Creation timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"creation_time": schemaAttributecf0698efac50d0956fd0280b(),
+		"creation_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Creation timestamp in UNIX epoch time format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CurrencyCode
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +136,9 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"currency_code": schemaAttribute85bb957923a800b490cb0614(),
+		"currency_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomLineItemChargeDetails
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +246,66 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_line_item_charge_details": schemaAttributec59f63f2adb3c4951654bcb6(),
+		"custom_line_item_charge_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Flat
+				"flat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChargeValue
+						"charge_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LineItemFilters
+				"line_item_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Attribute
+							"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: AttributeValues
+							"attribute_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MatchOption
+							"match_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Percentage
+				"percentage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChildAssociatedResources
+						"child_associated_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PercentageValue
+						"percentage_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +313,9 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute85bb957923a800b490cb0614(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -390,7 +323,10 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Latest modified timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"last_modified_time": schemaAttribute2f03b5902297d4113b8f90b7(),
+		"last_modified_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Latest modified timestamp in UNIX epoch time format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -400,7 +336,9 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute85bb957923a800b490cb0614(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PresentationDetails
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +355,15 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"presentation_details": schemaAttributef6c4265c1e73bc32aa2a3141(),
+		"presentation_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Service
+				"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductCode
 		// CloudFormation resource type schema:
 		//
@@ -426,7 +372,9 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"product_code": schemaAttribute85bb957923a800b490cb0614(),
+		"product_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -455,7 +403,21 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed78e814999a2d1ecea5c152b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

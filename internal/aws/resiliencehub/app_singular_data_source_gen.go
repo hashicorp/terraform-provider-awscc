@@ -15,184 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute012c079f54f4154b81e2a324() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Assessment execution schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05a5a4b5ffa6ee09b9b8eb7d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventType
-				"event_type": schemaAttribute4ed6e9382e32e7f451f503cd(),
-				// Property: Name
-				"name": schemaAttribute7f114a868d8981cc76dfc3f7(),
-				// Property: SnsTopicArn
-				"sns_topic_arn": schemaAttributec619577cdb5643365fee0a30(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of events you would like to subscribe and get notification for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08af1b80db4f7de439d3fff0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EksSourceName
-				"eks_source_name": schemaAttribute3001b247966d8a3e7c70b332(),
-				// Property: LogicalStackName
-				"logical_stack_name": schemaAttribute3001b247966d8a3e7c70b332(),
-				// Property: MappingType
-				"mapping_type": schemaAttribute3001b247966d8a3e7c70b332(),
-				// Property: PhysicalResourceId
-				"physical_resource_id": schemaAttribute559fc7bf7092effb44444f7b(),
-				// Property: ResourceName
-				"resource_name": schemaAttribute3001b247966d8a3e7c70b332(),
-				// Property: TerraformSourceName
-				"terraform_source_name": schemaAttribute3001b247966d8a3e7c70b332(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of ResourceMapping objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ab1a6cce74929abf90fa16c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CrossAccountRoleArns
-			"cross_account_role_arns": schemaAttributea2ec1d4805f8ceba4c56f463(),
-			// Property: InvokerRoleName
-			"invoker_role_name": schemaAttribute0cc2e81417d34efe6e1e0f12(),
-			// Property: Type
-			"type": schemaAttribute627d2f4955c9a70e06bdbe84(),
-		}, /*END SCHEMA*/
-		Description: "Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cc2e81417d34efe6e1e0f12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute104194c8a593143d6b5d59b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the App.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15c23d91a72e1c09f6264330() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the app.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3001b247966d8a3e7c70b332() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3329de3dc4f7779e1aae3478() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41077b7d0e2dd13efdd32523() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ed6e9382e32e7f451f503cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of event you would like to subscribe and get notification for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute559fc7bf7092effb44444f7b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsAccountId
-			"aws_account_id": schemaAttribute3001b247966d8a3e7c70b332(),
-			// Property: AwsRegion
-			"aws_region": schemaAttribute3001b247966d8a3e7c70b332(),
-			// Property: Identifier
-			"identifier": schemaAttribute3001b247966d8a3e7c70b332(),
-			// Property: Type
-			"type": schemaAttribute3001b247966d8a3e7c70b332(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute627d2f4955c9a70e06bdbe84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d5fed00948f750b1dac97b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "App description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7dff9c5de3a37a2271802bb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates if compliance drifts (deviations) were detected while running an assessment for your application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f114a868d8981cc76dfc3f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name to identify an event subscription.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2ec1d4805f8ceba4c56f463() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec619577cdb5643365fee0a30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7d5753deb71b212e829037e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing full ResilienceHub app template body.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_resiliencehub_app", appDataSource)
 }
@@ -209,7 +31,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_arn": schemaAttribute104194c8a593143d6b5d59b7(),
+		"app_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the App.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AppAssessmentSchedule
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +46,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"app_assessment_schedule": schemaAttribute012c079f54f4154b81e2a324(),
+		"app_assessment_schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Assessment execution schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AppTemplateBody
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +60,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w\\s:,-\\.'\\/{}\\[\\]:\"]+$",
 		//	  "type": "string"
 		//	}
-		"app_template_body": schemaAttributee7d5753deb71b212e829037e(),
+		"app_template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string containing full ResilienceHub app template body.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +73,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute6d5fed00948f750b1dac97b3(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "App description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DriftStatus
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +89,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"drift_status": schemaAttribute7dff9c5de3a37a2271802bb2(),
+		"drift_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if compliance drifts (deviations) were detected while running an assessment for your application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventSubscriptions
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +131,29 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"event_subscriptions": schemaAttribute05a5a4b5ffa6ee09b9b8eb7d(),
+		"event_subscriptions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventType
+					"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of event you would like to subscribe and get notification for.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Unique name to identify an event subscription.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SnsTopicArn
+					"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of events you would like to subscribe and get notification for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +162,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute15c23d91a72e1c09f6264330(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the app.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionModel
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +202,28 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"permission_model": schemaAttribute0ab1a6cce74929abf90fa16c(),
+		"permission_model": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossAccountRoleArns
+				"cross_account_role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InvokerRoleName
+				"invoker_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResiliencyPolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +232,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"resiliency_policy_arn": schemaAttribute41077b7d0e2dd13efdd32523(),
+		"resiliency_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceMappings
 		// CloudFormation resource type schema:
 		//
@@ -414,7 +300,56 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"resource_mappings": schemaAttribute08af1b80db4f7de439d3fff0(),
+		"resource_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EksSourceName
+					"eks_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalStackName
+					"logical_stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: MappingType
+					"mapping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: PhysicalResourceId
+					"physical_resource_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AwsAccountId
+							"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: AwsRegion
+							"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Identifier
+							"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceName
+					"resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TerraformSourceName
+					"terraform_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of ResourceMapping objects.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -428,7 +363,11 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute3329de3dc4f7779e1aae3478(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

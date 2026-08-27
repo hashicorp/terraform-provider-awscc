@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributebc04956ded115a40cbd915dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_queue_fleet_association", queueFleetAssociationDataSource)
 }
@@ -35,7 +29,9 @@ func queueFleetAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schemaAttributebc04956ded115a40cbd915dc(),
+		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FleetId
 		// CloudFormation resource type schema:
 		//
@@ -43,7 +39,9 @@ func queueFleetAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^fleet-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"fleet_id": schemaAttributebc04956ded115a40cbd915dc(),
+		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueueId
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +49,9 @@ func queueFleetAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^queue-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"queue_id": schemaAttributebc04956ded115a40cbd915dc(),
+		"queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

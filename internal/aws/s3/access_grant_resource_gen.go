@@ -22,181 +22,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute1803aa6e4ac98f6c627306a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The custom S3 location to be accessed by the grantee",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25779abb70b366efcf2784b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GranteeIdentifier
-			"grantee_identifier": schemaAttributedc0519c88188d5942d5a9ee1(),
-			// Property: GranteeType
-			"grantee_type": schemaAttributefc2bf14b381526e2326e05d7(),
-		}, /*END SCHEMA*/
-		Description: "The principal who will be granted permission to access S3.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2817cbd64dbe75ba9da14e00() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb02a526769968844d45957d2(),
-				// Property: Value
-				"value": schemaAttributeb02a526769968844d45957d2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-			setplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute682683d5ba139f6e36899ed7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 sub prefix of a registered location in your S3 Access Grants instance",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ff5602ea9981f17c6544228() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The level of access to be afforded to the grantee",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"READ",
-				"WRITE",
-				"READWRITE",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb02a526769968844d45957d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0f5be226d2cd78a182e9556() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID assigned to this access grant.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaa4e38e4af4c2844b5b3b41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 path of the data to which you are granting access. It is a combination of the S3 path of the registered location and the subprefix.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3494d939e902a775ebc6e94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the specified access grant.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb249c0ff21ffe0320e90442() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of S3SubPrefix.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"Object",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// S3PrefixType is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0b6f87549a3190ec02ae0e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the application grantees will use to access the location",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc0519c88188d5942d5a9ee1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Grantee",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef31b7c1c9ebbc776078e6b33() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3SubPrefix
-			"s3_sub_prefix": schemaAttribute682683d5ba139f6e36899ed7(),
-		}, /*END SCHEMA*/
-		Description: "The configuration options of the grant location, which is the S3 path to the data to which you are granting access.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc2bf14b381526e2326e05d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configures the transfer acceleration state for an Amazon S3 bucket.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"IAM",
-				"DIRECTORY_USER",
-				"DIRECTORY_GROUP",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_s3_access_grant", accessGrantResource)
 	registry.AddListResourceFactory("awscc_s3_access_grant", generic.NewListResource(accessGrantResource))
@@ -213,7 +38,13 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the specified access grant.",
 		//	  "type": "string"
 		//	}
-		"access_grant_arn": schemaAttributec3494d939e902a775ebc6e94(),
+		"access_grant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified access grant.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantId
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +55,13 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_grant_id": schemaAttributeb0f5be226d2cd78a182e9556(),
+		"access_grant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID assigned to this access grant.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantsLocationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +79,28 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"access_grants_location_configuration": schemaAttributef31b7c1c9ebbc776078e6b33(),
+		"access_grants_location_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3SubPrefix
+				"s3_sub_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 sub prefix of a registered location in your S3 Access Grants instance",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options of the grant location, which is the S3 path to the data to which you are granting access.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccessGrantsLocationId
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +111,10 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_grants_location_id": schemaAttribute1803aa6e4ac98f6c627306a2(),
+		"access_grants_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The custom S3 location to be accessed by the grantee",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +122,14 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the application grantees will use to access the location",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttributed0b6f87549a3190ec02ae0e4(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the application grantees will use to access the location",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GrantScope
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +137,13 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The S3 path of the data to which you are granting access. It is a combination of the S3 path of the registered location and the subprefix.",
 		//	  "type": "string"
 		//	}
-		"grant_scope": schemaAttributebaa4e38e4af4c2844b5b3b41(),
+		"grant_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The S3 path of the data to which you are granting access. It is a combination of the S3 path of the registered location and the subprefix.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Grantee
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +171,29 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"grantee": schemaAttribute25779abb70b366efcf2784b4(),
+		"grantee": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GranteeIdentifier
+				"grantee_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The unique identifier of the Grantee",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GranteeType
+				"grantee_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures the transfer acceleration state for an Amazon S3 bucket.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IAM",
+							"DIRECTORY_USER",
+							"DIRECTORY_GROUP",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The principal who will be granted permission to access S3.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permission
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +206,17 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"permission": schemaAttribute6ff5602ea9981f17c6544228(),
+		"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The level of access to be afforded to the grantee",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"READ",
+					"WRITE",
+					"READWRITE",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: S3PrefixType
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +227,21 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"s3_prefix_type": schemaAttributecb249c0ff21ffe0320e90442(),
+		"s3_prefix_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of S3SubPrefix.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Object",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// S3PrefixType is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +266,40 @@ func accessGrantResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute2817cbd64dbe75ba9da14e00(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

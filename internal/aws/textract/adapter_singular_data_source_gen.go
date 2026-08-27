@@ -16,86 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute29e7fea527f85a110c9068d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description to be assigned to the adapter being created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a75c45431285636a9eb9e4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the adapter resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73b341897c57fe711c101e9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e9e85d4986a336f8e4170ee() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef7757b64be636f79a651db58(),
-				// Property: Value
-				"value": schemaAttribute73b341897c57fe711c101e9a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to be added to the adapter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0ca029d95fb08c998bc2f03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the adapter was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7f104df84863d0fbf6760de() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The type of feature that the adapter is being trained on. Currently, supported feature types are: QUERIES",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda32655406a11ee41012e4f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the adapter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf1a6dfcb37ddcc5ed00673e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name to be assigned to the adapter being created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb441792364516ff5d2a2eec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Controls whether or not the adapter should automatically update.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7757b64be636f79a651db58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_textract_adapter", adapterDataSource)
 }
@@ -113,7 +33,10 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"adapter_id": schemaAttribute2a75c45431285636a9eb9e4a(),
+		"adapter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the adapter resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AdapterName
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +47,10 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"adapter_name": schemaAttributedf1a6dfcb37ddcc5ed00673e(),
+		"adapter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name to be assigned to the adapter being created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +58,10 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the adapter.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeda32655406a11ee41012e4f0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the adapter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoUpdate
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +73,10 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auto_update": schemaAttributeeb441792364516ff5d2a2eec(),
+		"auto_update": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Controls whether or not the adapter should automatically update.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +85,11 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributea0ca029d95fb08c998bc2f03(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the adapter was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +100,10 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'\u0026\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~\u003e\u003c]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute29e7fea527f85a110c9068d9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description to be assigned to the adapter being created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FeatureTypes
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +120,11 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"feature_types": schemaAttributec7f104df84863d0fbf6760de(),
+		"feature_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The type of feature that the adapter is being trained on. Currently, supported feature types are: QUERIES",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +158,24 @@ func adapterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute9e9e85d4986a336f8e4170ee(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to be added to the adapter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

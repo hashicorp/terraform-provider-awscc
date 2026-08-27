@@ -14,105 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15c955a973154104801f4145() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42f324172a59653f0387d9f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "destination arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b8b9afa09bb7bc50e989d76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AccountId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66794535539dc12f46ec21b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6987c22411b5e82b0160367e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverQueryLogConfigName",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute751ed8cfc536841507633699() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute908a4dce511b1d06df8cfab2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8b4614214ada7ab8e24d70a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba9d4ac429088d748c8b987c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResourceId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb1234c1f3ae6d5064a5fd58() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute66794535539dc12f46ec21b5(),
-				// Property: Value
-				"value": schemaAttribute908a4dce511b1d06df8cfab2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb19fc8e2696a30a0cdf3c96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece7253e64a34636150a12b0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rfc3339TimeString",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3fb4284603405b5a8f12553() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the creator request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigDataSource)
 }
@@ -130,7 +31,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb8b4614214ada7ab8e24d70a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationCount
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +42,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "Count",
 		//	  "type": "integer"
 		//	}
-		"association_count": schemaAttribute15c955a973154104801f4145(),
+		"association_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +55,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributece7253e64a34636150a12b0c(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorRequestId
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +68,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"creator_request_id": schemaAttributef3fb4284603405b5a8f12553(),
+		"creator_request_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the creator request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationArn
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +81,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"destination_arn": schemaAttribute42f324172a59653f0387d9f1(),
+		"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "destination arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +94,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_query_logging_config_id": schemaAttributeba9d4ac429088d748c8b987c(),
+		"resolver_query_logging_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +108,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6987c22411b5e82b0160367e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverQueryLogConfigName",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +121,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute4b8b9afa09bb7bc50e989d76(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AccountId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ShareStatus
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +137,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"share_status": schemaAttributecb19fc8e2696a30a0cdf3c96(),
+		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +154,10 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute751ed8cfc536841507633699(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +190,24 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributebb1234c1f3ae6d5064a5fd58(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

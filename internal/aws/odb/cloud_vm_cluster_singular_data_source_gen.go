@@ -15,506 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02523c902177aad903ac95b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Oracle license model applied to the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute02efdaaa8804f9354e1e8083() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03c9e746e09f3a075e1df980() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the DB system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute077be9e8edad09e111adfad1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the OCI resource anchor for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0cba054b7359a300d2341bfe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d661d329fe57670d3916e15() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Property description not available.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f385c925dc1ed7736da255f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the second VNIC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14591eb1863866a0b8f1662d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTPS link to the VM cluster in OCI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14d2780dd55992a8a646c462() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores enabled on the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute153bf8c34a00887610746d9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16b954c85fc207456a4f615f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether database backups to local Exadata storage is enabled for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d0f400f29412dcbc6af0491() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e945ca824276a3949a60243() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The host name for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21ee7a421a6ce1458e33b89b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute248c1bdf9d79aa48361db978() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the VM cluster is configured with a sparse disk group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26c8c596cff7dae587d14ef5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c720870ec3efb09e4dad9f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user-friendly name for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cd76bc232f40d39a739c8d4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsDiagnosticsEventsEnabled
-			"is_diagnostics_events_enabled": schemaAttribute39c38058406ff86a9d4d1098(),
-			// Property: IsHealthMonitoringEnabled
-			"is_health_monitoring_enabled": schemaAttribute8aa60e6d039ed7931336546d(),
-			// Property: IsIncidentLogsEnabled
-			"is_incident_logs_enabled": schemaAttributeb37c4c120b4d4868da86b2e2(),
-		}, /*END SCHEMA*/
-		Description: "The set of diagnostic collection options enabled for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30656f9dba4313c86043389b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute323b95752b7d997870fd3a86() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute153bf8c34a00887610746d9c(),
-				// Property: Value
-				"value": schemaAttribute406733720a9c0d31823188fb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38957bcc51074502a7ca2c61() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The virtual IP (VIP) addresses that are associated with the VM cluster. Oracle's Cluster Ready Services (CRS) creates and maintains one VIP address for each node in the VM cluster to enable failover. If one node fails, the VIP is reassigned to another active node in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39200a19ec45b0675c7772a0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39c38058406ff86a9d4d1098() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether diagnostic collection is enabled for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute406733720a9c0d31823188fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute531c19697222e1da35912444() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ae8b66b767d98c65f2f6821() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The hardware model name of the Exadata infrastructure that's running the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c586e3bcb9574cfd9cc1699() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operating system version of the image chosen for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c8cf05b16123675d7917ba2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60462b2cedd91a35bc5dac33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69d2d5ced62336fd7441de30() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The OCID of the SCAN IP addresses that are associated with the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a50b7333c936aa9a0c7b917() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f6b5332638899821b99fa9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77073d106c732041cfda63c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ad2c95a1d19c21a5bcf5f14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute848a764411aef40e21889b5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the ODB network for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute861e7206d2f0c348e1b335cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Exadata infrastructure that this VM cluster belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f923366e0e06245be5ec74() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89728c8b172c822b9d8274e4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of nodes in the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8aa60e6d039ed7931336546d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether health monitoring is enabled for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8af677dc9b8c7fe5ede2a435() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone of the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96fc3fb883adceb4db04d09c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The host name for the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98f93649b10948f41e7d9c8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the database server that's associated with the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea864c90c643c3161a4a9554d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf51c8576180c545323afaf5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores enabled on the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb37c4c120b4d4868da86b2e2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether incident logs are enabled for the cloud VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb394da34716be20e259b5841() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb58c51432c107b13a6f03e69() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb730d02f659cda08d692ce6f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of database servers for the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb59eb6a36d25fcd46319d02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Grid Infrastructure (GI) cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec126f036fdf2a87488c24f92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the VNIC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6ace676c19b56679842cf69() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The public key portion of one or more key pairs used for SSH access to the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec770834287ee92f5f53c9593() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca851138cfacf730f9b0f488() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccd1ca127dbe6f9dbc881670() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute153bf8c34a00887610746d9c(),
-				// Property: Value
-				"value": schemaAttribute406733720a9c0d31823188fb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the Vm Cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed70ea0b84572091ac039aee4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AwsIntegration
-				"aws_integration": schemaAttribute6a50b7333c936aa9a0c7b917(),
-				// Property: IamRoleArn
-				"iam_role_arn": schemaAttribute21ee7a421a6ce1458e33b89b(),
-				// Property: Status
-				"status": schemaAttributeb394da34716be20e259b5841(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7956395686e19c478c49cf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7a4358d8e247d666919cff7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BackupIpId
-				"backup_ip_id": schemaAttribute6f6b5332638899821b99fa9a(),
-				// Property: BackupVnic2Id
-				"backup_vnic_2_id": schemaAttributeee9ad85ddf1fab09377f9a9d(),
-				// Property: CpuCoreCount
-				"cpu_core_count": schemaAttribute14d2780dd55992a8a646c462(),
-				// Property: DbNodeArn
-				"db_node_arn": schemaAttribute0cba054b7359a300d2341bfe(),
-				// Property: DbNodeId
-				"db_node_id": schemaAttribute02efdaaa8804f9354e1e8083(),
-				// Property: DbNodeStorageSizeInGBs
-				"db_node_storage_size_in_g_bs": schemaAttribute39200a19ec45b0675c7772a0(),
-				// Property: DbServerId
-				"db_server_id": schemaAttribute98f93649b10948f41e7d9c8a(),
-				// Property: DbSystemId
-				"db_system_id": schemaAttribute03c9e746e09f3a075e1df980(),
-				// Property: HostIpId
-				"host_ip_id": schemaAttributee0d5ced69a56c89b262f70f4(),
-				// Property: Hostname
-				"hostname": schemaAttribute96fc3fb883adceb4db04d09c(),
-				// Property: MemorySizeInGBs
-				"memory_size_in_g_bs": schemaAttributeb58c51432c107b13a6f03e69(),
-				// Property: Ocid
-				"ocid": schemaAttribute531c19697222e1da35912444(),
-				// Property: Status
-				"status": schemaAttributec770834287ee92f5f53c9593(),
-				// Property: Tags
-				"tags": schemaAttribute323b95752b7d997870fd3a86(),
-				// Property: Vnic2Id
-				"vnic_2_id": schemaAttribute0f385c925dc1ed7736da255f(),
-				// Property: VnicId
-				"vnic_id": schemaAttributec126f036fdf2a87488c24f92(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddb195bb73e6f7c310caa54c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number configured for the listener on the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee040e7e5954e40a016122d7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain of the VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0d5ced69a56c89b262f70f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the host IP address that's associated with the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee9ad85ddf1fab09377f9a9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_odb_cloud_vm_cluster", cloudVmClusterDataSource)
 }
@@ -530,7 +30,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The unique identifier of the Exadata infrastructure that this VM cluster belongs to.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_id": schemaAttribute861e7206d2f0c348e1b335cd(),
+		"cloud_exadata_infrastructure_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the Exadata infrastructure that this VM cluster belongs to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudVmClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -538,7 +41,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon Resource Name (ARN) of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_vm_cluster_arn": schemaAttribute5c8cf05b16123675d7917ba2(),
+		"cloud_vm_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudVmClusterId
 		// CloudFormation resource type schema:
 		//
@@ -546,7 +52,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The unique identifier of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_vm_cluster_id": schemaAttribute77073d106c732041cfda63c9(),
+		"cloud_vm_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -557,7 +66,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttributebb59eb6a36d25fcd46319d02(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Grid Infrastructure (GI) cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComputeModel
 		// CloudFormation resource type schema:
 		//
@@ -565,7 +77,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
 		//	  "type": "string"
 		//	}
-		"compute_model": schemaAttribute60462b2cedd91a35bc5dac33(),
+		"compute_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CpuCoreCount
 		// CloudFormation resource type schema:
 		//
@@ -575,7 +90,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"cpu_core_count": schemaAttributeaf51c8576180c545323afaf5(),
+		"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of CPU cores enabled on the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataCollectionOptions
 		// CloudFormation resource type schema:
 		//
@@ -598,7 +116,27 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_collection_options": schemaAttribute2cd76bc232f40d39a739c8d4(),
+		"data_collection_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IsDiagnosticsEventsEnabled
+				"is_diagnostics_events_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether diagnostic collection is enabled for the VM cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsHealthMonitoringEnabled
+				"is_health_monitoring_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether health monitoring is enabled for the VM cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsIncidentLogsEnabled
+				"is_incident_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether incident logs are enabled for the cloud VM cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The set of diagnostic collection options enabled for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -606,7 +144,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.",
 		//	  "type": "number"
 		//	}
-		"data_storage_size_in_t_bs": schemaAttribute30656f9dba4313c86043389b(),
+		"data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +155,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"db_node_storage_size_in_g_bs": schemaAttribute26c8c596cff7dae587d14ef5(),
+		"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbNodes
 		// CloudFormation resource type schema:
 		//
@@ -722,7 +266,107 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"db_nodes": schemaAttributed7a4358d8e247d666919cff7(),
+		"db_nodes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackupIpId
+					"backup_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupVnic2Id
+					"backup_vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CpuCoreCount
+					"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of CPU cores enabled on the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeArn
+					"db_node_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeId
+					"db_node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeStorageSizeInGBs
+					"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbServerId
+					"db_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the database server that's associated with the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbSystemId
+					"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the DB system.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HostIpId
+					"host_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the host IP address that's associated with the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Hostname
+					"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The host name for the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MemorySizeInGBs
+					"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ocid
+					"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Vnic2Id
+					"vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the second VNIC.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VnicId
+					"vnic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the VNIC.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbServers
 		// CloudFormation resource type schema:
 		//
@@ -734,7 +378,11 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"db_servers": schemaAttributeb730d02f659cda08d692ce6f(),
+		"db_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of database servers for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DiskRedundancy
 		// CloudFormation resource type schema:
 		//
@@ -742,7 +390,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.",
 		//	  "type": "string"
 		//	}
-		"disk_redundancy": schemaAttributed7956395686e19c478c49cf9(),
+		"disk_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -753,7 +404,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute2c720870ec3efb09e4dad9f9(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user-friendly name for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -761,7 +415,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The domain of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"domain": schemaAttributee040e7e5954e40a016122d7b(),
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain of the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GiVersion
 		// CloudFormation resource type schema:
 		//
@@ -771,7 +428,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"gi_version": schemaAttribute7ad2c95a1d19c21a5bcf5f14(),
+		"gi_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Hostname
 		// CloudFormation resource type schema:
 		//
@@ -782,7 +442,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"hostname": schemaAttribute1e945ca824276a3949a60243(),
+		"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The host name for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoles
 		// CloudFormation resource type schema:
 		//
@@ -811,7 +474,29 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"iam_roles": schemaAttributed70ea0b84572091ac039aee4(),
+		"iam_roles": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsIntegration
+					"aws_integration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IamRoleArn
+					"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsLocalBackupEnabled
 		// CloudFormation resource type schema:
 		//
@@ -819,7 +504,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether database backups to local Exadata storage is enabled for the VM cluster.",
 		//	  "type": "boolean"
 		//	}
-		"is_local_backup_enabled": schemaAttribute16b954c85fc207456a4f615f(),
+		"is_local_backup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether database backups to local Exadata storage is enabled for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsSparseDiskgroupEnabled
 		// CloudFormation resource type schema:
 		//
@@ -827,7 +515,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether the VM cluster is configured with a sparse disk group.",
 		//	  "type": "boolean"
 		//	}
-		"is_sparse_diskgroup_enabled": schemaAttribute248c1bdf9d79aa48361db978(),
+		"is_sparse_diskgroup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the VM cluster is configured with a sparse disk group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -839,7 +530,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"license_model": schemaAttribute02523c902177aad903ac95b4(),
+		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Oracle license model applied to the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ListenerPort
 		// CloudFormation resource type schema:
 		//
@@ -847,7 +541,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The port number configured for the listener on the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"listener_port": schemaAttributeddb195bb73e6f7c310caa54c(),
+		"listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number configured for the listener on the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemorySizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -855,7 +552,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"memory_size_in_g_bs": schemaAttribute1d0f400f29412dcbc6af0491(),
+		"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeCount
 		// CloudFormation resource type schema:
 		//
@@ -863,7 +563,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The number of nodes in the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"node_count": schemaAttribute89728c8b172c822b9d8274e4(),
+		"node_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of nodes in the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OciResourceAnchorName
 		// CloudFormation resource type schema:
 		//
@@ -871,7 +574,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the OCI resource anchor for the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"oci_resource_anchor_name": schemaAttribute077be9e8edad09e111adfad1(),
+		"oci_resource_anchor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the OCI resource anchor for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OciUrl
 		// CloudFormation resource type schema:
 		//
@@ -879,7 +585,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The HTTPS link to the VM cluster in OCI.",
 		//	  "type": "string"
 		//	}
-		"oci_url": schemaAttribute14591eb1863866a0b8f1662d(),
+		"oci_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The HTTPS link to the VM cluster in OCI.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ocid
 		// CloudFormation resource type schema:
 		//
@@ -887,7 +596,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The OCID of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"ocid": schemaAttributeca851138cfacf730f9b0f488(),
+		"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OCID of the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -895,7 +607,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The unique identifier of the ODB network for the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"odb_network_id": schemaAttribute848a764411aef40e21889b5d(),
+		"odb_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the ODB network for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScanDnsName
 		// CloudFormation resource type schema:
 		//
@@ -903,7 +618,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"scan_dns_name": schemaAttributea864c90c643c3161a4a9554d(),
+		"scan_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScanIpIds
 		// CloudFormation resource type schema:
 		//
@@ -915,7 +633,11 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"scan_ip_ids": schemaAttribute69d2d5ced62336fd7441de30(),
+		"scan_ip_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The OCID of the SCAN IP addresses that are associated with the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScanListenerPortTcp
 		// CloudFormation resource type schema:
 		//
@@ -925,7 +647,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"scan_listener_port_tcp": schemaAttribute0d661d329fe57670d3916e15(),
+		"scan_listener_port_tcp": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Property description not available.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Shape
 		// CloudFormation resource type schema:
 		//
@@ -933,7 +658,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The hardware model name of the Exadata infrastructure that's running the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"shape": schemaAttribute5ae8b66b767d98c65f2f6821(),
+		"shape": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The hardware model name of the Exadata infrastructure that's running the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SshPublicKeys
 		// CloudFormation resource type schema:
 		//
@@ -945,7 +673,11 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ssh_public_keys": schemaAttributec6ace676c19b56679842cf69(),
+		"ssh_public_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The public key portion of one or more key pairs used for SSH access to the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -953,7 +685,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"storage_size_in_g_bs": schemaAttribute86f923366e0e06245be5ec74(),
+		"storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SystemVersion
 		// CloudFormation resource type schema:
 		//
@@ -963,7 +698,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"system_version": schemaAttribute5c586e3bcb9574cfd9cc1699(),
+		"system_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The operating system version of the image chosen for the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -995,7 +733,24 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributeccd1ca127dbe6f9dbc881670(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the Vm Cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -1005,7 +760,10 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"time_zone": schemaAttribute8af677dc9b8c7fe5ede2a435(),
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone of the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VipIds
 		// CloudFormation resource type schema:
 		//
@@ -1017,7 +775,11 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vip_ids": schemaAttribute38957bcc51074502a7ca2c61(),
+		"vip_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The virtual IP (VIP) addresses that are associated with the VM cluster. Oracle's Cluster Ready Services (CRS) creates and maintains one VIP address for each node in the VM cluster to enable failover. If one node fails, the VIP is reassigned to another active node in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

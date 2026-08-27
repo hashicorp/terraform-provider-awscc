@@ -15,427 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0069c8848360659eed9b615b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of coordinates of rectangles to be ignored during visual testing",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute014c6324b54da0e4d196d55d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DurationInSeconds
-			"duration_in_seconds": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: Expression
-			"expression": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: RetryConfig
-			"retry_config": schemaAttributecddc93129b0fa2522f4ae657(),
-		}, /*END SCHEMA*/
-		Description: "Frequency to run your canaries",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0418e60623324ca680528dcd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the screenshot to be used as base reference for visual testing",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0737b5e16d01f93612066a5d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IgnoreCoordinates
-				"ignore_coordinates": schemaAttribute0069c8848360659eed9b615b(),
-				// Property: ScreenshotName
-				"screenshot_name": schemaAttribute0418e60623324ca680528dcd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of screenshots used as base reference for visual testing",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c6afe3a56dac121f23fdf34() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Retention period of successful canary runs represented in number of days",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e46800a5f39c2b85701811c() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Environment variable key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25469e13791e74ecbec64439() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a5991d85f07ac3efadcea08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the canary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b5dada8db7fba675c80c9b7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Runs canary if set to True. Default is False",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3174c0036aa978f58b88b5a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute358d608f71d46e32c0d30a15() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Encryption
-			"s3_encryption": schemaAttributec16a2fdb506b136213c8dbe4(),
-		}, /*END SCHEMA*/
-		Description: "Provide artifact configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bbc221ca91b7ff3bdd9da26() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Provide maximum memory available for canary in MB",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d4ddf903b159867f378b1e8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Ipv6AllowedForDualStack
-			"ipv_6_allowed_for_dual_stack": schemaAttributebdea3fc0f0944388b27b7331(),
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttribute6e0826898d81af770dae51e5(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute6e0826898d81af770dae51e5(),
-			// Property: VpcId
-			"vpc_id": schemaAttributee812b0ccd41ec99255a30c8b(),
-		}, /*END SCHEMA*/
-		Description: "Provide VPC Configuration if enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e0f71bbea79f4c29f0970df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the canary.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4083b7a23b0ddeac54d8aa51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Runtime version of Synthetics Library",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a27244308ccda9d732e4b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActiveTracing
-			"active_tracing": schemaAttribute95aed376b2f5de252b089d20(),
-			// Property: EnvironmentVariables
-			"environment_variables": schemaAttribute1e46800a5f39c2b85701811c(),
-			// Property: EphemeralStorage
-			"ephemeral_storage": schemaAttributee7fe296f34284350f80e74c7(),
-			// Property: MemoryInMB
-			"memory_in_mb": schemaAttribute3bbc221ca91b7ff3bdd9da26(),
-			// Property: TimeoutInSeconds
-			"timeout_in_seconds": schemaAttributeaf2125d4690db2c9166cb9be(),
-		}, /*END SCHEMA*/
-		Description: "Provide canary run configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4772f73c8e0840b31f04437b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BrowserType
-				"browser_type": schemaAttributee812b0ccd41ec99255a30c8b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of browser configurations for the canary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute484c3c1cd2361663b45d9bd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS key Arn for encrypting artifacts when uploading to S3. You must specify KMS key Arn for SSE_KMS encryption mode only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b0fa560d54a9890df548425() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Reference
-				"reference": schemaAttributecb1a154dfb387239cbff4bbc(),
-				// Property: Type
-				"type": schemaAttribute8faf0e5134c6320677ecdabc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Lambda layers to attach to the canary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e0826898d81af770dae51e5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7188133e7ed604dd7ff54a44() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BaseCanaryRunId
-				"base_canary_run_id": schemaAttributeae9abbed093080306845dae4(),
-				// Property: BaseScreenshots
-				"base_screenshots": schemaAttribute0737b5e16d01f93612066a5d(),
-				// Property: BrowserType
-				"browser_type": schemaAttributee812b0ccd41ec99255a30c8b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of visual references for the canary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8faf0e5134c6320677ecdabc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of dependency",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92eec3cce659336fea81a112() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95aed376b2f5de252b089d20() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enable active tracing if set to true",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea41b360fa26f79d74fe86282() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of resources which canary tags should be replicated to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa52181902f411daccafdc61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Encryption mode for encrypting artifacts when uploading to S3. Valid values: SSE_S3 and SSE_KMS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae9abbed093080306845dae4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Canary run id to be used as base reference for visual testing",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf2125d4690db2c9166cb9be() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Provide maximum canary timeout per run in seconds",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafc38a6eea0ee5770d43d602() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Lambda Execution role used to run your canaries",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb50b52aea51c864e938dbf56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd733848bacf650099a26349() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BlueprintTypes
-			"blueprint_types": schemaAttribute6e0826898d81af770dae51e5(),
-			// Property: Dependencies
-			"dependencies": schemaAttribute6b0fa560d54a9890df548425(),
-			// Property: Handler
-			"handler": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: S3Bucket
-			"s3_bucket": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: S3Key
-			"s3_key": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: S3ObjectVersion
-			"s3_object_version": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: Script
-			"script": schemaAttributee812b0ccd41ec99255a30c8b(),
-			// Property: SourceLocationArn
-			"source_location_arn": schemaAttributee812b0ccd41ec99255a30c8b(),
-		}, /*END SCHEMA*/
-		Description: "Provide the canary script source",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdea3fc0f0944388b27b7331() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0bfd17e644d180e1e988c64() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "maximum times the canary will be retried upon the scheduled run failure",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec16a2fdb506b136213c8dbe4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionMode
-			"encryption_mode": schemaAttributeaa52181902f411daccafdc61(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute484c3c1cd2361663b45d9bd6(),
-		}, /*END SCHEMA*/
-		Description: "Encryption configuration for uploading artifacts to S3",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7b16d3a6c94c3db8cfe76d6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Retention period of failed canary runs represented in number of days",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca954e002f7baf0cfb5ccb2f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb1a154dfb387239cbff4bbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the Lambda layer",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecddc93129b0fa2522f4ae657() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxRetries
-			"max_retries": schemaAttributec0bfd17e644d180e1e988c64(),
-		}, /*END SCHEMA*/
-		Description: "Provide canary auto retry configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed983ace525efc90709f6ca68() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb50b52aea51c864e938dbf56(),
-				// Property: Value
-				"value": schemaAttribute3174c0036aa978f58b88b5a6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7fe296f34284350f80e74c7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Provide ephemeralStorage available for canary in MB",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee812b0ccd41ec99255a30c8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef68b4e7b1bb5acce2eb6692() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the canary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2e978f80825b602299b956a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provide the s3 bucket output location for test results",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef519040d3aea17d5b1cbfccf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BaseCanaryRunId
-			"base_canary_run_id": schemaAttributeae9abbed093080306845dae4(),
-			// Property: BaseScreenshots
-			"base_screenshots": schemaAttribute0737b5e16d01f93612066a5d(),
-			// Property: BrowserType
-			"browser_type": schemaAttributee812b0ccd41ec99255a30c8b(),
-		}, /*END SCHEMA*/
-		Description: "Visual reference configuration for visual testing",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_synthetics_canary", canaryDataSource)
 }
@@ -469,7 +48,29 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"artifact_config": schemaAttribute358d608f71d46e32c0d30a15(),
+		"artifact_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Encryption
+				"s3_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionMode
+						"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Encryption mode for encrypting artifacts when uploading to S3. Valid values: SSE_S3 and SSE_KMS.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "KMS key Arn for encrypting artifacts when uploading to S3. You must specify KMS key Arn for SSE_KMS encryption mode only.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Encryption configuration for uploading artifacts to S3",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provide artifact configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactS3Location
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +79,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(s3|S3)://",
 		//	  "type": "string"
 		//	}
-		"artifact_s3_location": schemaAttributef2e978f80825b602299b956a(),
+		"artifact_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provide the s3 bucket output location for test results",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BrowserConfigs
 		// CloudFormation resource type schema:
 		//
@@ -504,7 +108,18 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"browser_configs": schemaAttribute4772f73c8e0840b31f04437b(),
+		"browser_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BrowserType
+					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of browser configurations for the canary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -596,7 +211,60 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"code": schemaAttributebd733848bacf650099a26349(),
+		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlueprintTypes
+				"blueprint_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Dependencies
+				"dependencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Reference
+							"reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of the Lambda layer",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of dependency",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of Lambda layers to attach to the canary",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Handler
+				"handler": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Key
+				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectVersion
+				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Script
+				"script": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceLocationArn
+				"source_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provide the canary script source",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteLambdaResourcesOnCanaryDeletion
 		// CloudFormation resource type schema:
 		//
@@ -604,7 +272,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
 		//	  "type": "boolean"
 		//	}
-		"delete_lambda_resources_on_canary_deletion": schemaAttribute92eec3cce659336fea81a112(),
+		"delete_lambda_resources_on_canary_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DryRunAndUpdate
 		// CloudFormation resource type schema:
 		//
@@ -612,7 +283,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
 		//	  "type": "boolean"
 		//	}
-		"dry_run_and_update": schemaAttributeca954e002f7baf0cfb5ccb2f(),
+		"dry_run_and_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -620,7 +294,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Lambda Execution role used to run your canaries",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttributeafc38a6eea0ee5770d43d602(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Lambda Execution role used to run your canaries",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -628,7 +305,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Retention period of failed canary runs represented in number of days",
 		//	  "type": "integer"
 		//	}
-		"failure_retention_period": schemaAttributec7b16d3a6c94c3db8cfe76d6(),
+		"failure_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Retention period of failed canary runs represented in number of days",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -636,7 +316,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Id of the canary",
 		//	  "type": "string"
 		//	}
-		"canary_id": schemaAttribute2a5991d85f07ac3efadcea08(),
+		"canary_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the canary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -645,7 +328,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_\\-]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3e0f71bbea79f4c29f0970df(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the canary.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedResourceCleanup
 		// CloudFormation resource type schema:
 		//
@@ -657,7 +343,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provisioned_resource_cleanup": schemaAttribute25469e13791e74ecbec64439(),
+		"provisioned_resource_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcesToReplicateTags
 		// CloudFormation resource type schema:
 		//
@@ -673,7 +362,11 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resources_to_replicate_tags": schemaAttributea41b360fa26f79d74fe86282(),
+		"resources_to_replicate_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of resources which canary tags should be replicated to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RunConfig
 		// CloudFormation resource type schema:
 		//
@@ -710,7 +403,39 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"run_config": schemaAttribute45a27244308ccda9d732e4b4(),
+		"run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActiveTracing
+				"active_tracing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enable active tracing if set to true",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnvironmentVariables
+				"environment_variables": // Pattern: ""
+				schema.MapAttribute{     /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Environment variable key-value pairs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EphemeralStorage
+				"ephemeral_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Provide ephemeralStorage available for canary in MB",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MemoryInMB
+				"memory_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Provide maximum memory available for canary in MB",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutInSeconds
+				"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Provide maximum canary timeout per run in seconds",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provide canary run configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuntimeVersion
 		// CloudFormation resource type schema:
 		//
@@ -718,7 +443,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Runtime version of Synthetics Library",
 		//	  "type": "string"
 		//	}
-		"runtime_version": schemaAttribute4083b7a23b0ddeac54d8aa51(),
+		"runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Runtime version of Synthetics Library",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -752,7 +480,32 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schedule": schemaAttribute014c6324b54da0e4d196d55d(),
+		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DurationInSeconds
+				"duration_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Expression
+				"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryConfig
+				"retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxRetries
+						"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "maximum times the canary will be retried upon the scheduled run failure",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Provide canary auto retry configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Frequency to run your canaries",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartCanaryAfterCreation
 		// CloudFormation resource type schema:
 		//
@@ -760,7 +513,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Runs canary if set to True. Default is False",
 		//	  "type": "boolean"
 		//	}
-		"start_canary_after_creation": schemaAttribute2b5dada8db7fba675c80c9b7(),
+		"start_canary_after_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Runs canary if set to True. Default is False",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -768,7 +524,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "State of the canary",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributeef68b4e7b1bb5acce2eb6692(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the canary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SuccessRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -776,7 +535,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Retention period of successful canary runs represented in number of days",
 		//	  "type": "integer"
 		//	}
-		"success_retention_period": schemaAttribute0c6afe3a56dac121f23fdf34(),
+		"success_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Retention period of successful canary runs represented in number of days",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -807,7 +569,23 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributed983ace525efc90709f6ca68(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VPCConfig
 		// CloudFormation resource type schema:
 		//
@@ -841,7 +619,31 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_config": schemaAttribute3d4ddf903b159867f378b1e8(),
+		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6AllowedForDualStack
+				"ipv_6_allowed_for_dual_stack": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provide VPC Configuration if enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VisualReference
 		// CloudFormation resource type schema:
 		//
@@ -890,7 +692,41 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"visual_reference": schemaAttributef519040d3aea17d5b1cbfccf(),
+		"visual_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BaseCanaryRunId
+				"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Canary run id to be used as base reference for visual testing",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BaseScreenshots
+				"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IgnoreCoordinates
+							"ignore_coordinates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of coordinates of rectangles to be ignored during visual testing",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ScreenshotName
+							"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the screenshot to be used as base reference for visual testing",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of screenshots used as base reference for visual testing",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BrowserType
+				"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Visual reference configuration for visual testing",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VisualReferences
 		// CloudFormation resource type schema:
 		//
@@ -944,7 +780,43 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"visual_references": schemaAttribute7188133e7ed604dd7ff54a44(),
+		"visual_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BaseCanaryRunId
+					"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Canary run id to be used as base reference for visual testing",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BaseScreenshots
+					"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IgnoreCoordinates
+								"ignore_coordinates": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of coordinates of rectangles to be ignored during visual testing",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ScreenshotName
+								"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Name of the screenshot to be used as base reference for visual testing",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of screenshots used as base reference for visual testing",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BrowserType
+					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of visual references for the canary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

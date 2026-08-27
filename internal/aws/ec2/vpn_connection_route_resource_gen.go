@@ -17,26 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute13377f58c6b30434dcaef3a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPN connection.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4d18c60bfdf301d10ea4075() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block associated with the local subnet of the customer network.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpn_connection_route", vPNConnectionRouteResource)
 	registry.AddListResourceFactory("awscc_ec2_vpn_connection_route", generic.NewListResource(vPNConnectionRouteResource))
@@ -53,7 +33,13 @@ func vPNConnectionRouteResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The CIDR block associated with the local subnet of the customer network.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schemaAttributed4d18c60bfdf301d10ea4075(),
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The CIDR block associated with the local subnet of the customer network.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpnConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -61,7 +47,13 @@ func vPNConnectionRouteResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The ID of the VPN connection.",
 		//	  "type": "string"
 		//	}
-		"vpn_connection_id": schemaAttribute13377f58c6b30434dcaef3a5(),
+		"vpn_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPN connection.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

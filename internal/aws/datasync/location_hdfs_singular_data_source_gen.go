@@ -15,248 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0d64929733664cb2eca7ffe6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication mode used to determine identity of user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute181aef12f16b2acebd3e9866() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute199c6ce4e86c39528b92dfc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the HDFS location that was described.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24f9b24166e42948b08a5483() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute267204f3c7ac950e36fcefcb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user name that has read and write permissions on the specified HDFS cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42fe042049533f09035b5aaa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the HDFS location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4390feea5b5abdf107a1e8ee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttribute95c698d685ffde1f755332bc(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute482062ebd6f44f91a1144fc7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port on which the Name Node is listening on for client requests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ae763edff84d18851d49d0f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of copies of each block that exists inside the HDFS cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53249fe629ffb201fce82cb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58f8e34c8a0f36f61d8dae3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cdf4f837c2e4d7876374b09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Base64 string representation of the Keytab file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62ae681817ce1455dd5e2c16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63689c67849fe075fb8eaa00() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute24f9b24166e42948b08a5483(),
-				// Property: Value
-				"value": schemaAttribute53249fe629ffb201fce82cb5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute796e29ac3ccbafdc99c13b27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute868e775daed44a41b889fcf7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87fd01024b81f5fc931610f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d5570630f01a3001bdcded0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "ARN(s) of the agent(s) to use for an HDFS location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95c698d685ffde1f755332bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for an AWS Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea13546b37521c5512ec1272b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configuration for Data Transfer Protection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea592114f788982c279a2af6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1a1d04501e54ea443cef019() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb582e0d75bf9440f06ad53ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6661a2de294d2ac33d179b3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretAccessRoleArn
-			"secret_access_role_arn": schemaAttribute796e29ac3ccbafdc99c13b27(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute62ae681817ce1455dd5e2c16(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7a3c5f6251534a663540289() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configuration for RPC Protection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8a7c29e293503ecfe9ac512() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identity, or principal, to which Kerberos can assign tickets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec55a1ee037e036506f812546() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataTransferProtection
-			"data_transfer_protection": schemaAttributea13546b37521c5512ec1272b(),
-			// Property: RpcProtection
-			"rpc_protection": schemaAttributeb7a3c5f6251534a663540289(),
-		}, /*END SCHEMA*/
-		Description: "Configuration information for RPC Protection and Data Transfer Protection. These parameters can be set to AUTHENTICATION, INTEGRITY, or PRIVACY. The default value is PRIVACY.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee18ab183d803c88f8b34c539() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Hostname
-				"hostname": schemaAttributeb582e0d75bf9440f06ad53ca(),
-				// Property: Port
-				"port": schemaAttribute482062ebd6f44f91a1144fc7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of Name Node(s) of the HDFS location.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed61ade98491ad97fc948427() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute58f8e34c8a0f36f61d8dae3b(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute181aef12f16b2acebd3e9866(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_hdfs", locationHDFSDataSource)
 }
@@ -280,7 +38,11 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"agent_arns": schemaAttribute8d5570630f01a3001bdcded0(),
+		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARN(s) of the agent(s) to use for an HDFS location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +54,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authentication_type": schemaAttribute0d64929733664cb2eca7ffe6(),
+		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The authentication mode used to determine identity of user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockSize
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +68,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1048576,
 		//	  "type": "integer"
 		//	}
-		"block_size": schemaAttribute868e775daed44a41b889fcf7(),
+		"block_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CmkSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +94,22 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cmk_secret_config": schemaAttributeed61ade98491ad97fc948427(),
+		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -353,7 +136,22 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_secret_config": schemaAttributeb6661a2de294d2ac33d179b3(),
+		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretAccessRoleArn
+				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KerberosKeytab
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +160,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 87384,
 		//	  "type": "string"
 		//	}
-		"kerberos_keytab": schemaAttribute5cdf4f837c2e4d7876374b09(),
+		"kerberos_keytab": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Base64 string representation of the Keytab file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KerberosKrb5Conf
 		// CloudFormation resource type schema:
 		//
@@ -371,7 +172,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 174764,
 		//	  "type": "string"
 		//	}
-		"kerberos_krb_5_conf": schemaAttributeb1a1d04501e54ea443cef019(),
+		"kerberos_krb_5_conf": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KerberosPrincipal
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +186,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"kerberos_principal": schemaAttributeb8a7c29e293503ecfe9ac512(),
+		"kerberos_principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identity, or principal, to which Kerberos can assign tickets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyProviderUri
 		// CloudFormation resource type schema:
 		//
@@ -393,7 +200,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^kms:\\/\\/http[s]?@(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(;(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9]))*:[0-9]{1,5}\\/kms$",
 		//	  "type": "string"
 		//	}
-		"kms_key_provider_uri": schemaAttributea592114f788982c279a2af6c(),
+		"kms_key_provider_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +213,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schemaAttribute42fe042049533f09035b5aaa(),
+		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the HDFS location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -413,7 +226,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs)://[a-zA-Z0-9.:/\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schemaAttribute199c6ce4e86c39528b92dfc7(),
+		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the HDFS location that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -433,7 +249,17 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"managed_secret_config": schemaAttribute4390feea5b5abdf107a1e8ee(),
+		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NameNodes
 		// CloudFormation resource type schema:
 		//
@@ -466,7 +292,24 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"name_nodes": schemaAttributee18ab183d803c88f8b34c539(),
+		"name_nodes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Hostname
+					"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Port
+					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The port on which the Name Node is listening on for client requests.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of Name Node(s) of the HDFS location.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QopConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -499,7 +342,22 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"qop_configuration": schemaAttributec55a1ee037e036506f812546(),
+		"qop_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataTransferProtection
+				"data_transfer_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configuration for Data Transfer Protection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RpcProtection
+				"rpc_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configuration for RPC Protection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration information for RPC Protection and Data Transfer Protection. These parameters can be set to AUTHENTICATION, INTEGRITY, or PRIVACY. The default value is PRIVACY.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationFactor
 		// CloudFormation resource type schema:
 		//
@@ -511,7 +369,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"replication_factor": schemaAttribute4ae763edff84d18851d49d0f(),
+		"replication_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Number of copies of each block that exists inside the HDFS cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SimpleUser
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +383,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[_.A-Za-z0-9][-_.A-Za-z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"simple_user": schemaAttribute267204f3c7ac950e36fcefcb(),
+		"simple_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user name that has read and write permissions on the specified HDFS cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -532,7 +396,10 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schemaAttribute87fd01024b81f5fc931610f7(),
+		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -566,7 +433,24 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute63689c67849fe075fb8eaa00(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

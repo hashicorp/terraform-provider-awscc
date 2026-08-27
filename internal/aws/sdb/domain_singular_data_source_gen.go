@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2e4df28bab7e8b230b03ddfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about the SimpleDB domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute738b2b313bd265402e999e8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the domain to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sdb_domain", domainDataSource)
 }
@@ -43,7 +29,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Information about the SimpleDB domain.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2e4df28bab7e8b230b03ddfd(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Information about the SimpleDB domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the domain to create.",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttribute738b2b313bd265402e999e8a(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the domain to create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

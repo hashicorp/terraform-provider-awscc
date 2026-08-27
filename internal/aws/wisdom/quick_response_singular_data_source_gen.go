@@ -15,172 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0ad2cd1a9161b68f3d9c0e7a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The media type of the quick response content.\n- Use application/x.quickresponse;format=plain for quick response written in plain text.\n- Use application/x.quickresponse;format=markdown for quick response written in richtext.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13e0beebcb4c381f75165512() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The criteria used for grouping Amazon Q in Connect users.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2828ee72996f0bf1a8de72ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c2017de9887df2aa40fd7d2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Amazon Connect contact channels this quick response applies to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c6201b729b46047be7808c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the knowledge base.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33ae624411fa4a7e216a7541() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the quick response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute384098ae91d5786f17830fb5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the quick response is active.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fc0b6c8142ab91f4dcd0fbe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the quick response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d1be7057723ada5a369179b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code value for the language in which the quick response is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51a97218f14638e3799e8c48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the quick response data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e26b3d05e11195892e77ca2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the quick response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ee90aa07982bd763ec3bcb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The shortcut key of the quick response. The value should be unique across the knowledge base.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76962b8047b77170f3834285() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8457c3e03612a2faccea74fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the quick response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7b5e93ceea1b9677cbb3e7d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Markdown
-			"markdown": schemaAttributecc429410498b4dc496c5bf83(),
-			// Property: PlainText
-			"plain_text": schemaAttributecc429410498b4dc496c5bf83(),
-		}, /*END SCHEMA*/
-		Description: "The content of the quick response stored in different media types.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc429410498b4dc496c5bf83() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Content
-			"content": schemaAttribute8457c3e03612a2faccea74fc(),
-		}, /*END SCHEMA*/
-		Description: "The container of quick response content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbbc9dabbc9e138df0d68875() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the quick response.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc9194d3cc6c42422b610157() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of values that define different groups of Amazon Q in Connect users.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9c0beabe3507fcc05b964f9() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2828ee72996f0bf1a8de72ed(),
-				// Property: Value
-				"value": schemaAttribute76962b8047b77170f3834285(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefea62cfc91acafaadb7e8d36() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Criteria
-			"criteria": schemaAttribute13e0beebcb4c381f75165512(),
-			// Property: Values
-			"values": schemaAttributedc9194d3cc6c42422b610157(),
-		}, /*END SCHEMA*/
-		Description: "The configuration information of the user groups that the quick response is accessible to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_quick_response", quickResponseDataSource)
 }
@@ -203,7 +37,11 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"channels": schemaAttribute2c2017de9887df2aa40fd7d2(),
+		"channels": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The Amazon Connect contact channels this quick response applies to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +58,17 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"content": schemaAttributecc429410498b4dc496c5bf83(),
+		"content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The content of the quick response.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The container of quick response content.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContentType
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +77,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(application/x\\.quickresponse;format=(plain|markdown))$",
 		//	  "type": "string"
 		//	}
-		"content_type": schemaAttribute0ad2cd1a9161b68f3d9c0e7a(),
+		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The media type of the quick response content.\n- Use application/x.quickresponse;format=plain for quick response written in plain text.\n- Use application/x.quickresponse;format=markdown for quick response written in richtext.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Contents
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +117,36 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"contents": schemaAttributeb7b5e93ceea1b9677cbb3e7d(),
+		"contents": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Markdown
+				"markdown": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Content
+						"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The content of the quick response.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The container of quick response content.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PlainText
+				"plain_text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Content
+						"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The content of the quick response.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The container of quick response content.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The content of the quick response stored in different media types.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +156,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributedbbc9dabbc9e138df0d68875(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the quick response.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +192,23 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"grouping_configuration": schemaAttributefea62cfc91acafaadb7e8d36(),
+		"grouping_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Criteria
+				"criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The criteria used for grouping Amazon Q in Connect users.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Values
+				"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of values that define different groups of Amazon Q in Connect users.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration information of the user groups that the quick response is accessible to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsActive
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +216,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Whether the quick response is active.",
 		//	  "type": "boolean"
 		//	}
-		"is_active": schemaAttribute384098ae91d5786f17830fb5(),
+		"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the quick response is active.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseArn
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +228,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_arn": schemaAttribute2c6201b729b46047be7808c6(),
+		"knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the knowledge base.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Language
 		// CloudFormation resource type schema:
 		//
@@ -336,7 +241,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"language": schemaAttribute4d1be7057723ada5a369179b(),
+		"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code value for the language in which the quick response is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +254,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3fc0b6c8142ab91f4dcd0fbe(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the quick response.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuickResponseArn
 		// CloudFormation resource type schema:
 		//
@@ -355,7 +266,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
 		//	  "type": "string"
 		//	}
-		"quick_response_arn": schemaAttribute5e26b3d05e11195892e77ca2(),
+		"quick_response_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the quick response.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuickResponseId
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +278,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"quick_response_id": schemaAttribute33ae624411fa4a7e216a7541(),
+		"quick_response_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the quick response.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ShortcutKey
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +291,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"shortcut_key": schemaAttribute5ee90aa07982bd763ec3bcb0(),
+		"shortcut_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The shortcut key of the quick response. The value should be unique across the knowledge base.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -392,7 +312,10 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute51a97218f14638e3799e8c48(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the quick response data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -426,7 +349,24 @@ func quickResponseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef9c0beabe3507fcc05b964f9(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

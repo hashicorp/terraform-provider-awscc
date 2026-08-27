@@ -14,120 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute059050443e54358c43f07aa9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The environment ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0bb8110eb1892dc494e743e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1dc62779122f7de6d62ff65f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37c7cdb51d434bc01fa1a718() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deployment strategy ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43fab9d6c490d60df2ddac93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration version to deploy. If deploying an AWS AppConfig hosted configuration version, you can specify either the version number or version label. For all other configurations, you must specify the version number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52d93a1e7d381379deab4fe1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The sequence number of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69b06d055615052ded42ebbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration profile ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7a7943aa49efb4c85fd8c1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec690a2c2b033601f130d1e83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecea7fc15c14ee15dbfc5b355() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The application ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed60329076268d7cb185ee940() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExtensionReference
-				"extension_reference": schemaAttributea7a7943aa49efb4c85fd8c1a(),
-				// Property: ParameterName
-				"parameter_name": schemaAttributea7a7943aa49efb4c85fd8c1a(),
-				// Property: ParameterValue
-				"parameter_value": schemaAttributea7a7943aa49efb4c85fd8c1a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee52ac19ea91df83c8c900342() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key-value string map. The valid character set is [a-zA-Z1-9+-=._:/]. The tag key can be up to 128 characters and must not start with aws:.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef77f037f54ca2216696baf71() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee52ac19ea91df83c8c900342(),
-				// Property: Value
-				"value": schemaAttributef8a4f81e1bd47da213c00c4b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8a4f81e1bd47da213c00c4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value can be up to 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appconfig_deployment", deploymentDataSource)
 }
@@ -143,7 +29,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The application ID.",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttributecea7fc15c14ee15dbfc5b355(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The application ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationProfileId
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +40,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The configuration profile ID.",
 		//	  "type": "string"
 		//	}
-		"configuration_profile_id": schemaAttribute69b06d055615052ded42ebbd(),
+		"configuration_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The configuration profile ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationVersion
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +51,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The configuration version to deploy. If deploying an AWS AppConfig hosted configuration version, you can specify either the version number or version label. For all other configurations, you must specify the version number.",
 		//	  "type": "string"
 		//	}
-		"configuration_version": schemaAttribute43fab9d6c490d60df2ddac93(),
+		"configuration_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The configuration version to deploy. If deploying an AWS AppConfig hosted configuration version, you can specify either the version number or version label. For all other configurations, you must specify the version number.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentNumber
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +62,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The sequence number of the deployment.",
 		//	  "type": "string"
 		//	}
-		"deployment_number": schemaAttribute52d93a1e7d381379deab4fe1(),
+		"deployment_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The sequence number of the deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentStrategyId
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +73,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The deployment strategy ID.",
 		//	  "type": "string"
 		//	}
-		"deployment_strategy_id": schemaAttribute37c7cdb51d434bc01fa1a718(),
+		"deployment_strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deployment strategy ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +84,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the deployment.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute0bb8110eb1892dc494e743e1(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DynamicExtensionParameters
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +110,25 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"dynamic_extension_parameters": schemaAttributed60329076268d7cb185ee940(),
+		"dynamic_extension_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ExtensionReference
+					"extension_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterName
+					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterValue
+					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +136,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The environment ID.",
 		//	  "type": "string"
 		//	}
-		"environment_id": schemaAttribute059050443e54358c43f07aa9(),
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The environment ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +147,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schemaAttributec690a2c2b033601f130d1e83(),
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +167,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute1dc62779122f7de6d62ff65f(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +195,24 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef77f037f54ca2216696baf71(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key-value string map. The valid character set is [a-zA-Z1-9+-=._:/]. The tag key can be up to 128 characters and must not start with aws:.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value can be up to 256 characters.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

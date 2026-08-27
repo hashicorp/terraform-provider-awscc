@@ -14,165 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04d1768512785390c48096f4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea774963772468b5ad858b6d7(),
-				// Property: Value
-				"value": schemaAttribute52d6887aa6e4a928d3dd8b8b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08aa81d763617164ac8e2bed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d3d70da01f60a89fed6f88e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the quick connect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute343dd42e886bceeb945474aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52d6887aa6e4a928d3dd8b8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute621b215a32f6b5c21dbf4592() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContactFlowArn
-			"contact_flow_arn": schemaAttributeba89d2ba818ed2ed2e021415(),
-			// Property: QueueArn
-			"queue_arn": schemaAttributebf90b1b0606b231bbf875761(),
-		}, /*END SCHEMA*/
-		Description: "The queue configuration. This is required only if QuickConnectType is QUEUE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69a8d2b4b63281a19da6d223() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContactFlowArn
-			"contact_flow_arn": schemaAttributeba89d2ba818ed2ed2e021415(),
-		}, /*END SCHEMA*/
-		Description: "The flow configuration. This is required only if QuickConnectType is FLOW.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97bcca4c47cd60d8d552c560() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PhoneNumber
-			"phone_number": schemaAttributeed207f33f0197bd30676aa86(),
-		}, /*END SCHEMA*/
-		Description: "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea04b944cd8eb5bea9f3eec31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContactFlowArn
-			"contact_flow_arn": schemaAttributeba89d2ba818ed2ed2e021415(),
-			// Property: UserArn
-			"user_arn": schemaAttribute08aa81d763617164ac8e2bed(),
-		}, /*END SCHEMA*/
-		Description: "The user configuration. This is required only if QuickConnectType is USER.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea774963772468b5ad858b6d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba89d2ba818ed2ed2e021415() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the contact flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf90b1b0606b231bbf875761() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed859a4eb560e0e3c84528322() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the quick connect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed207f33f0197bd30676aa86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The phone number in E.164 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeed8d5df253d8798328b0ab3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7395083331b2961f2182f79() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FlowConfig
-			"flow_config": schemaAttribute69a8d2b4b63281a19da6d223(),
-			// Property: PhoneConfig
-			"phone_config": schemaAttribute97bcca4c47cd60d8d552c560(),
-			// Property: QueueConfig
-			"queue_config": schemaAttribute621b215a32f6b5c21dbf4592(),
-			// Property: QuickConnectType
-			"quick_connect_type": schemaAttribute343dd42e886bceeb945474aa(),
-			// Property: UserConfig
-			"user_config": schemaAttributea04b944cd8eb5bea9f3eec31(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for the quick connect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd1680352ab4bf79875a24e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the quick connect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_quick_connect", quickConnectDataSource)
 }
@@ -190,7 +31,10 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributefd1680352ab4bf79875a24e0(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the quick connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +43,10 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttributeeed8d5df253d8798328b0ab3(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +56,10 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1d3d70da01f60a89fed6f88e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the quick connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuickConnectArn
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +68,10 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"quick_connect_arn": schemaAttributed859a4eb560e0e3c84528322(),
+		"quick_connect_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the quick connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuickConnectConfig
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +167,75 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"quick_connect_config": schemaAttributef7395083331b2961f2182f79(),
+		"quick_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FlowConfig
+				"flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContactFlowArn
+						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the contact flow.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The flow configuration. This is required only if QuickConnectType is FLOW.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PhoneConfig
+				"phone_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PhoneNumber
+						"phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The phone number in E.164 format.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: QueueConfig
+				"queue_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContactFlowArn
+						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the contact flow.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueueArn
+						"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier for the queue.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The queue configuration. This is required only if QuickConnectType is QUEUE.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: QuickConnectType
+				"quick_connect_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserConfig
+				"user_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContactFlowArn
+						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the contact flow.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UserArn
+						"user_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the user.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The user configuration. This is required only if QuickConnectType is USER.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration settings for the quick connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuickConnectType
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +249,10 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"quick_connect_type": schemaAttribute343dd42e886bceeb945474aa(),
+		"quick_connect_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +286,24 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute04d1768512785390c48096f4(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -17,36 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01ad0e967a6f54bc7f429810() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the route table.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0641ffeddea4d7ae33dc79cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The route table association ID.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb11ef07042049b41ee99ba37() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the public IPv4 pool.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ip_pool_route_table_association", ipPoolRouteTableAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_ip_pool_route_table_association", generic.NewListResource(ipPoolRouteTableAssociationResource))
@@ -63,7 +33,13 @@ func ipPoolRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The route table association ID.",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute0641ffeddea4d7ae33dc79cc(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The route table association ID.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PublicIpv4Pool
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +47,13 @@ func ipPoolRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the public IPv4 pool.",
 		//	  "type": "string"
 		//	}
-		"public_ipv_4_pool": schemaAttributeb11ef07042049b41ee99ba37(),
+		"public_ipv_4_pool": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the public IPv4 pool.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +61,13 @@ func ipPoolRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the route table.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schemaAttribute01ad0e967a6f54bc7f429810(),
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the route table.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -16,70 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e2d6f777f239389ab02ee86() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
-				// Property: Value
-				"value": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ab37ff9b9588462c2272c03() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
-				// Property: IpRange
-				"ip_range": schemaAttributeb94d536d71cd998ef6963d0f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c9b75508ecc2d224412fa44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99a03b845e2cfbcae1bc9e0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb94d536d71cd998ef6963d0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A single IP address or an IP address range in CIDR notation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5d35662628884943a636561() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa3cac5ff4cb493eb821d176() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesweb_ip_access_settings", ipAccessSettingsDataSource)
 }
@@ -103,7 +39,11 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": schemaAttributec5d35662628884943a636561(),
+		"additional_encryption_context": // Pattern: ""
+		schema.MapAttribute{             /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedPortalArns
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +57,10 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"associated_portal_arns": schemaAttributefa3cac5ff4cb493eb821d176(),
+		"associated_portal_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +68,10 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date": schemaAttribute1c9b75508ecc2d224412fa44(),
+		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomerManagedKey
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +81,9 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"customer_managed_key": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
+		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +93,9 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +105,9 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAccessSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +117,9 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"ip_access_settings_arn": schemaAttribute99a03b845e2cfbcae1bc9e0c(),
+		"ip_access_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpRules
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +148,22 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"ip_rules": schemaAttribute1ab37ff9b9588462c2272c03(),
+		"ip_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: IpRange
+					"ip_range": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A single IP address or an IP address range in CIDR notation",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +195,21 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute0e2d6f777f239389ab02ee86(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

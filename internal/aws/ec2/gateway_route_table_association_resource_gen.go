@@ -17,33 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributea5f8135c1c50dfb91abe28cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The route table association ID.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb10d518c35dce99d951c004c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the route table.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebae520126cc668132e92107c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the gateway.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_gateway_route_table_association", gatewayRouteTableAssociationResource)
 }
@@ -59,7 +32,13 @@ func gatewayRouteTableAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The route table association ID.",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttributea5f8135c1c50dfb91abe28cb(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The route table association ID.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +46,13 @@ func gatewayRouteTableAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the gateway.",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schemaAttributebae520126cc668132e92107c(),
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the gateway.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +60,10 @@ func gatewayRouteTableAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The ID of the route table.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schemaAttributeb10d518c35dce99d951c004c(),
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the route table.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

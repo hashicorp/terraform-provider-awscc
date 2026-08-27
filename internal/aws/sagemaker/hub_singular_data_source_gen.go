@@ -16,104 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute237fd1d7fc673fe99f579758() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25479d328a2b425feb3a122c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute480aed433e9a22e8663fab92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 bucket prefix for hosting hub content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82cf029297fa47f710d41956() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea360b49a519ce2800d7677d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea974af41d82a58390d48e603() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The searchable keywords for the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf8757e828755b0f6d6c1a02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the hub was last modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed21ce55114eff8045ae2a878() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3OutputPath
-			"s3_output_path": schemaAttribute480aed433e9a22e8663fab92(),
-		}, /*END SCHEMA*/
-		Description: "The Amazon S3 storage configuration for the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8bfeaf0c7166da725818b60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name of the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf8e864821c8ef7bc13769fe() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributefbe014ffc99cabf9baa7b2f7(),
-				// Property: Value
-				"value": schemaAttributefbe014ffc99cabf9baa7b2f7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to associate with the hub.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee075e88a953676ca5a2389c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time that the hub was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbe014ffc99cabf9baa7b2f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_hub", hubDataSource)
 }
@@ -130,7 +32,11 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributee075e88a953676ca5a2389c6(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the hub was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HubArn
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +46,10 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"hub_arn": schemaAttribute237fd1d7fc673fe99f579758(),
+		"hub_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HubDescription
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +60,10 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"hub_description": schemaAttribute82cf029297fa47f710d41956(),
+		"hub_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HubDisplayName
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +74,10 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"hub_display_name": schemaAttributed8bfeaf0c7166da725818b60(),
+		"hub_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name of the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HubName
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +88,10 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"hub_name": schemaAttribute25479d328a2b425feb3a122c(),
+		"hub_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HubSearchKeywords
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +108,11 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"hub_search_keywords": schemaAttributea974af41d82a58390d48e603(),
+		"hub_search_keywords": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The searchable keywords for the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HubStatus
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +129,10 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"hub_status": schemaAttributea360b49a519ce2800d7677d1(),
+		"hub_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +141,11 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttributecf8757e828755b0f6d6c1a02(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time that the hub was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3StorageConfig
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +163,17 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"s3_storage_config": schemaAttributed21ce55114eff8045ae2a878(),
+		"s3_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3OutputPath
+				"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 bucket prefix for hosting hub content.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Amazon S3 storage configuration for the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +204,22 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributedf8e864821c8ef7bc13769fe(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to associate with the hub.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

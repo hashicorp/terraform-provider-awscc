@@ -15,47 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute60a17d724974858cf5ea3531() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A Base62 ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7885ce4df38f15499ae9408a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute929e7f9eea0df0601e3e4557() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7885ce4df38f15499ae9408a(),
-				// Property: Value
-				"value": schemaAttribute7885ce4df38f15499ae9408a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9327aab602934dc7417f899() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee025e8d98bf50ef7eb8f22e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_fms_resource_set", resourceSetDataSource)
 }
@@ -72,7 +31,9 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]*)$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7885ce4df38f15499ae9408a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -83,7 +44,10 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-z0-9A-Z]*)$",
 		//	  "type": "string"
 		//	}
-		"resource_set_id": schemaAttribute60a17d724974858cf5ea3531(),
+		"resource_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A Base62 ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +57,9 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7885ce4df38f15499ae9408a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTypeList
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +75,10 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resource_type_list": schemaAttributeee025e8d98bf50ef7eb8f22e(),
+		"resource_type_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Resources
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +94,10 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resources": schemaAttributea9327aab602934dc7417f899(),
+		"resources": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +128,21 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute929e7f9eea0df0601e3e4557(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

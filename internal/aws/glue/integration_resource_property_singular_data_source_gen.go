@@ -14,112 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2067924eb936d6c42c33a2a4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConnectionName
-			"connection_name": schemaAttributec82f00fa3903c04f9a09ee86(),
-			// Property: EventBusArn
-			"event_bus_arn": schemaAttributef5b68a2cff3e201c7ba1b5a7(),
-			// Property: KmsArn
-			"kms_arn": schemaAttribute7d78490f784a3f1e14b517ec(),
-			// Property: RoleArn
-			"role_arn": schemaAttributeeafa5d34f5f4e8579bba10b7(),
-		}, /*END SCHEMA*/
-		Description: "The resource properties associated with the integration target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25a3411c1b9e72a9955a5146() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed56a51af5164b23d73051625(),
-				// Property: Value
-				"value": schemaAttributecb0a8236778d779e0c45d6e8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57ccfafbb9c1f6c0893b69bd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttributecaaa1b7b1eba7120882ca5c4(),
-		}, /*END SCHEMA*/
-		Description: "The resource properties associated with the integration source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d78490f784a3f1e14b517ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key used for encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93b1c33a912a5f8c603a5690() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection ARN of the source, or the database ARN of the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4127b7652b06d26e54864d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The integration resource property ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec82f00fa3903c04f9a09ee86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Glue network connection to configure the Glue job running in the customer VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaaa1b7b1eba7120882ca5c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM role to access the Glue connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb0a8236778d779e0c45d6e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed56a51af5164b23d73051625() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeafa5d34f5f4e8579bba10b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM role to access the Glue database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5b68a2cff3e201c7ba1b5a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of an Eventbridge event bus to receive the integration status notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_integration_resource_property", integrationResourcePropertyDataSource)
 }
@@ -136,7 +30,10 @@ func integrationResourcePropertyDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttribute93b1c33a912a5f8c603a5690(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The connection ARN of the source, or the database ARN of the target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcePropertyArn
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +42,10 @@ func integrationResourcePropertyDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "arn:aws:glue:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"resource_property_arn": schemaAttributea4127b7652b06d26e54864d8(),
+		"resource_property_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The integration resource property ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceProcessingProperties
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +64,17 @@ func integrationResourcePropertyDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_processing_properties": schemaAttribute57ccfafbb9c1f6c0893b69bd(),
+		"source_processing_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IAM role to access the Glue connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The resource properties associated with the integration source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +107,24 @@ func integrationResourcePropertyDataSource(ctx context.Context) (datasource.Data
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute25a3411c1b9e72a9955a5146(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetProcessingProperties
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +160,32 @@ func integrationResourcePropertyDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_processing_properties": schemaAttribute2067924eb936d6c42c33a2a4(),
+		"target_processing_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectionName
+				"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Glue network connection to configure the Glue job running in the customer VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventBusArn
+				"event_bus_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of an Eventbridge event bus to receive the integration status notification.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsArn
+				"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the KMS key used for encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IAM role to access the Glue database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The resource properties associated with the integration target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,119 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute055cb5b5b629a9f0d5759f29() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d635fee6e9126ee4b262690() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17a787b284cd1e44fa57b0cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bea32e5491ce49d7cc689c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The trust store's name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ca3c7530d31cf369f53d1eb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6fca72a6b7266c3fc3d799fb(),
-				// Property: Value
-				"value": schemaAttribute87627792550c07b798ea2a8a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A complex type that contains zero or more ``Tag`` elements.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57f665f8672ad86d598f5c76() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute0d635fee6e9126ee4b262690(),
-			// Property: Key
-			"key": schemaAttributefc5bfbc6b3b59b9efae0d104(),
-			// Property: Region
-			"region": schemaAttribute96970c76168b6b6264bf033a(),
-			// Property: Version
-			"version": schemaAttributec8c79d03bb257d92b07af02a(),
-		}, /*END SCHEMA*/
-		Description: "The CA certificates bundle location in Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fca72a6b7266c3fc3d799fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81e175d1a763b18a21189fe5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CaCertificatesBundleS3Location
-			"ca_certificates_bundle_s3_location": schemaAttribute57f665f8672ad86d598f5c76(),
-		}, /*END SCHEMA*/
-		Description: "A CA certificates bundle source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute832cb9dae3eaf660cbb093b8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87627792550c07b798ea2a8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96970c76168b6b6264bf033a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8c79d03bb257d92b07af02a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc5bfbc6b3b59b9efae0d104() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_trust_store", trustStoreDataSource)
 }
@@ -143,7 +30,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]+)*:cloudfront::[0-9]{12}:trust-store/[A-Za-z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute17a787b284cd1e44fa57b0cf(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CaCertificatesBundleSource
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +75,39 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ca_certificates_bundle_source": schemaAttribute81e175d1a763b18a21189fe5(),
+		"ca_certificates_bundle_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CaCertificatesBundleS3Location
+				"ca_certificates_bundle_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3 bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location's key.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location's Region.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location's version.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The CA certificates bundle location in Amazon S3.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A CA certificates bundle source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +115,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"e_tag": schemaAttribute17a787b284cd1e44fa57b0cf(),
+		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +126,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"trust_store_id": schemaAttribute17a787b284cd1e44fa57b0cf(),
+		"trust_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +137,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttribute17a787b284cd1e44fa57b0cf(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +148,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The trust store's name.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2bea32e5491ce49d7cc689c5(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The trust store's name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumberOfCaCertificates
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +159,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "integer"
 		//	}
-		"number_of_ca_certificates": schemaAttribute055cb5b5b629a9f0d5759f29(),
+		"number_of_ca_certificates": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +175,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute17a787b284cd1e44fa57b0cf(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +212,24 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute3ca3c7530d31cf369f53d1eb(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UseClientCertificateOCSPEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -280,7 +237,10 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
 		//	  "type": "boolean"
 		//	}
-		"use_client_certificate_ocsp_endpoint": schemaAttribute832cb9dae3eaf660cbb093b8(),
+		"use_client_certificate_ocsp_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

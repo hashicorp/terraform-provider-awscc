@@ -14,659 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03309a89cefffe0174e49cd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, PCAshort defaults to the ``EndEntityCertificate/V1`` template. For more information about PCAshort templates, see [Using Templates](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0806002225b316f339c39fd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies an OID value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c531152ab956e4332da5bb2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the critical flag of the X.509 extension.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0df1db72aeac0cbb635603e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Concatenation that typically contains the first letter of the *GivenName*, the first letter of the middle name if one exists, and the first letter of the *Surname*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f2dd51f56553dd99eb347d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a custom ``ExtendedKeyUsage`` with an object identifier (OID).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f7fb6490ba3a81a216bd296() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ObjectIdentifier
-				"object_identifier": schemaAttributee6896550ba7a1c8fa6b88b83(),
-				// Property: Value
-				"value": schemaAttribute4c7457374edce33ee9c3fc9c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST?s definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).\n  Custom attributes cannot be used in combination with standard attributes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d1c6927c2114086f32f96a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute241080739272230382fd2aaa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the party name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f1b484bc7528b692e22761c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Extensions
-			"extensions": schemaAttribute3b4149c746a1528d393f858c(),
-			// Property: Subject
-			"subject": schemaAttribute5d89861c62ed7640d50339a7(),
-		}, /*END SCHEMA*/
-		Description: "Specifies X.509 certificate information to be included in the issued certificate. An ``APIPassthrough`` or ``APICSRPassthrough`` template variant must be selected, or else this parameter is ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f2312d5bbbaaaa147a6a4ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Legal name of the organization with which the certificate subject is affiliated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31b78655d4d00e29c2becee0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST's definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3606d5ca401d3cb410900097() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the ``Value`` parameter represents days, months, or years.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b4149c746a1528d393f858c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CertificatePolicies
-			"certificate_policies": schemaAttribute797cdd2c682a82334f6a5a70(),
-			// Property: CustomExtensions
-			"custom_extensions": schemaAttribute8a24ed933dacc01a3e7aa8e6(),
-			// Property: ExtendedKeyUsage
-			"extended_key_usage": schemaAttributea9dc65618ce4b0dcd4d00fc3(),
-			// Property: KeyUsage
-			"key_usage": schemaAttribute4f2a56dafcaa38e3f05643e0(),
-			// Property: SubjectAlternativeNames
-			"subject_alternative_names": schemaAttribute4fc0867b400dd103287c2874(),
-		}, /*END SCHEMA*/
-		Description: "Specifies X.509 extension information for a certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42db77e19877655ea782a8c7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute3606d5ca401d3cb410900097(),
-			// Property: Value
-			"value": schemaAttributedfbacf076153ea8096e41ab1(),
-		}, /*END SCHEMA*/
-		Description: "The period of time during which the certificate will be valid.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute433c68eee8abbdffeb1e99a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains a pointer to a certification practice statement (CPS) published by the CA.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4787877648b1b0c99f0345f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NameAssigner
-			"name_assigner": schemaAttribute81286680d4e08fd49cb43f67(),
-			// Property: PartyName
-			"party_name": schemaAttribute241080739272230382fd2aaa(),
-		}, /*END SCHEMA*/
-		Description: "Represents ``GeneralName`` as an ``EdiPartyName`` object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c7457374edce33ee9c3fc9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the attribute value of relative distinguished name (RDN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dff7b0e18e990d6db9c049e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents ``GeneralName`` as an [RFC 822](https://docs.aws.amazon.com/https://datatracker.ietf.org/doc/html/rfc822) email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f2a56dafcaa38e3f05643e0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CRLSign
-			"crl_sign": schemaAttributebca322328038e13d75fb38a3(),
-			// Property: DataEncipherment
-			"data_encipherment": schemaAttributeba9bca377bc4d3a7254e358e(),
-			// Property: DecipherOnly
-			"decipher_only": schemaAttribute82aae6fd38b071e8580ced10(),
-			// Property: DigitalSignature
-			"digital_signature": schemaAttributeb265b79c617e6faf7b0ee0e4(),
-			// Property: EncipherOnly
-			"encipher_only": schemaAttribute673199ad0f677c1495fb821c(),
-			// Property: KeyAgreement
-			"key_agreement": schemaAttribute9beda058803bf2cd6af6ee25(),
-			// Property: KeyCertSign
-			"key_cert_sign": schemaAttribute9986582f36d0c7bde52952c4(),
-			// Property: KeyEncipherment
-			"key_encipherment": schemaAttributed6012721396d7fa6e4d2fbd9(),
-			// Property: NonRepudiation
-			"non_repudiation": schemaAttributeafcbd3f1f6838899ffc4808a(),
-		}, /*END SCHEMA*/
-		Description: "Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f2c942a3c3fb5075cef0f2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the object identifier (OID) of the X.509 extension. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fc0867b400dd103287c2874() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DirectoryName
-				"directory_name": schemaAttribute77d7381cc92400d90fa84207(),
-				// Property: DnsName
-				"dns_name": schemaAttributee3c63de02f60890c78ec2367(),
-				// Property: EdiPartyName
-				"edi_party_name": schemaAttribute4787877648b1b0c99f0345f2(),
-				// Property: IpAddress
-				"ip_address": schemaAttributeb12c1c902063714e40424f34(),
-				// Property: OtherName
-				"other_name": schemaAttributec6516168d5a71893b7702c86(),
-				// Property: RegisteredId
-				"registered_id": schemaAttributed1d05e66bb1a168065719ee7(),
-				// Property: Rfc822Name
-				"rfc_822_name": schemaAttribute4dff7b0e18e990d6db9c049e(),
-				// Property: UniformResourceIdentifier
-				"uniform_resource_identifier": schemaAttributedfc93dabf6da208763d04dee(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The subject alternative name extension allows identities to be bound to the subject of the certificate. These identities may be included in addition to or in place of the identity in the subject field of the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d89861c62ed7640d50339a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CommonName
-			"common_name": schemaAttributed50e7f280da2939436e3bed6(),
-			// Property: Country
-			"country": schemaAttribute8892ba0522801771a22cbf5d(),
-			// Property: CustomAttributes
-			"custom_attributes": schemaAttribute0f7fb6490ba3a81a216bd296(),
-			// Property: DistinguishedNameQualifier
-			"distinguished_name_qualifier": schemaAttributed1b2f555591ccca45b5c1314(),
-			// Property: GenerationQualifier
-			"generation_qualifier": schemaAttribute79195d9ec1637283640efaa0(),
-			// Property: GivenName
-			"given_name": schemaAttributef764d49bee4d8fd3cc0555a9(),
-			// Property: Initials
-			"initials": schemaAttribute0df1db72aeac0cbb635603e7(),
-			// Property: Locality
-			"locality": schemaAttributedbd737d11d198ec6d96ea23d(),
-			// Property: Organization
-			"organization": schemaAttribute2f2312d5bbbaaaa147a6a4ca(),
-			// Property: OrganizationalUnit
-			"organizational_unit": schemaAttribute1d1c6927c2114086f32f96a1(),
-			// Property: Pseudonym
-			"pseudonym": schemaAttributeb4ad71816d99336973f11f5e(),
-			// Property: SerialNumber
-			"serial_number": schemaAttributeb50472fb8bc73f30a7929c35(),
-			// Property: State
-			"state": schemaAttributef5977070bd7f7a58959c02e0(),
-			// Property: Surname
-			"surname": schemaAttributef45f6e4e5c79305730d9d98b(),
-			// Property: Title
-			"title": schemaAttribute6f71b1b8dc487117cd92a0df(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about the certificate subject. The Subject field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The Subject must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute673199ad0f677c1495fb821c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used only to encipher data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a323eb9b42ee33a720cef16() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PolicyQualifierId
-				"policy_qualifier_id": schemaAttributefb913825a88132d32c9d1839(),
-				// Property: Qualifier
-				"qualifier": schemaAttribute7c0fa8d0adb72fcc36c1e24d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Modifies the given ``CertPolicyId`` with a qualifier. AWS Private CA supports the certification practice statement (CPS) qualifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b617c1c39c9e7abdd70491c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate signing request (CSR) for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f71b1b8dc487117cd92a0df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77d7381cc92400d90fa84207() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CommonName
-			"common_name": schemaAttributed50e7f280da2939436e3bed6(),
-			// Property: Country
-			"country": schemaAttribute8892ba0522801771a22cbf5d(),
-			// Property: CustomAttributes
-			"custom_attributes": schemaAttribute0f7fb6490ba3a81a216bd296(),
-			// Property: DistinguishedNameQualifier
-			"distinguished_name_qualifier": schemaAttributed1b2f555591ccca45b5c1314(),
-			// Property: GenerationQualifier
-			"generation_qualifier": schemaAttribute79195d9ec1637283640efaa0(),
-			// Property: GivenName
-			"given_name": schemaAttributef764d49bee4d8fd3cc0555a9(),
-			// Property: Initials
-			"initials": schemaAttribute0df1db72aeac0cbb635603e7(),
-			// Property: Locality
-			"locality": schemaAttributedbd737d11d198ec6d96ea23d(),
-			// Property: Organization
-			"organization": schemaAttribute2f2312d5bbbaaaa147a6a4ca(),
-			// Property: OrganizationalUnit
-			"organizational_unit": schemaAttribute1d1c6927c2114086f32f96a1(),
-			// Property: Pseudonym
-			"pseudonym": schemaAttributeb4ad71816d99336973f11f5e(),
-			// Property: SerialNumber
-			"serial_number": schemaAttributeb50472fb8bc73f30a7929c35(),
-			// Property: State
-			"state": schemaAttributef5977070bd7f7a58959c02e0(),
-			// Property: Surname
-			"surname": schemaAttributef45f6e4e5c79305730d9d98b(),
-			// Property: Title
-			"title": schemaAttribute6f71b1b8dc487117cd92a0df(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The Subject field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The Subject must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79195d9ec1637283640efaa0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute797cdd2c682a82334f6a5a70() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertPolicyId
-				"cert_policy_id": schemaAttribute31b78655d4d00e29c2becee0(),
-				// Property: PolicyQualifiers
-				"policy_qualifiers": schemaAttribute6a323eb9b42ee33a720cef16(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. For more information, see NIST's definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).\n In an end-entity certificate, these terms indicate the policy under which the certificate was issued and the purposes for which it may be used. In a CA certificate, these terms limit the set of policies for certification paths that include this certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c0fa8d0adb72fcc36c1e24d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CpsUri
-			"cps_uri": schemaAttribute433c68eee8abbdffeb1e99a3(),
-		}, /*END SCHEMA*/
-		Description: "Defines the qualifier type. AWS Private CA supports the use of a URI for a CPS qualifier in this field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81286680d4e08fd49cb43f67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name assigner.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82aae6fd38b071e8580ced10() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used only to decipher data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8892ba0522801771a22cbf5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Two-digit code that specifies the country in which the certificate subject located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a24ed933dacc01a3e7aa8e6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Critical
-				"critical": schemaAttribute0c531152ab956e4332da5bb2(),
-				// Property: ObjectIdentifier
-				"object_identifier": schemaAttribute4f2c942a3c3fb5075cef0f2c(),
-				// Property: Value
-				"value": schemaAttributebf618f1786f0472563251a2f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f1f4ee4d2d63b447fc53776() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a standard ``ExtendedKeyUsage`` as defined as in [RFC 5280](https://docs.aws.amazon.com/https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute922346633d976d259587342a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the private CA issues the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9986582f36d0c7bde52952c4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used to sign certificates.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9beda058803bf2cd6af6ee25() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used in a key-agreement protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9dc65618ce4b0dcd4d00fc3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExtendedKeyUsageObjectIdentifier
-				"extended_key_usage_object_identifier": schemaAttribute0f2dd51f56553dd99eb347d9(),
-				// Property: ExtendedKeyUsageType
-				"extended_key_usage_type": schemaAttribute8f1f4ee4d2d63b447fc53776(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the ``KeyUsage`` extension.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafcbd3f1f6838899ffc4808a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used for non-repudiation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb12c1c902063714e40424f34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents ``GeneralName`` as an IPv4 or IPv6 address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb265b79c617e6faf7b0ee0e4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used for digital signing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4ad71816d99336973f11f5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Typically a shortened version of a longer *GivenName*. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb50472fb8bc73f30a7929c35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate serial number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba9bca377bc4d3a7254e358e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used to decipher data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb8fa81a34402c702545b3e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies an OID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebca322328038e13d75fb38a3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used to sign CRLs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf618f1786f0472563251a2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the base64-encoded value of the X.509 extension.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3758878d355d515e38c6fbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6516168d5a71893b7702c86() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TypeId
-			"type_id": schemaAttributebb8fa81a34402c702545b3e9(),
-			// Property: Value
-			"value": schemaAttribute0806002225b316f339c39fd4(),
-		}, /*END SCHEMA*/
-		Description: "Represents ``GeneralName`` using an ``OtherName`` object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6c5dc1e15d1a5ddb2aa666d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the algorithm that will be used to sign the certificate to be issued. \n This parameter should not be confused with the ``SigningAlgorithm`` parameter used to sign a CSR in the ``CreateCertificateAuthority`` action.\n  The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1b2f555591ccca45b5c1314() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Disambiguating information for the certificate subject.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1d05e66bb1a168065719ee7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents ``GeneralName`` as an object identifier (OID).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed50e7f280da2939436e3bed6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit.\n Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6012721396d7fa6e4d2fbd9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Key can be used to encipher data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbd737d11d198ec6d96ea23d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The locality (such as a city or town) in which the certificate subject is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfbacf076153ea8096e41ab1() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "A long integer interpreted according to the value of ``Type``, below.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfc93dabf6da208763d04dee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents ``GeneralName`` as a URI.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3c63de02f60890c78ec2367() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents ``GeneralName`` as a DNS name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6896550ba7a1c8fa6b88b83() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9a7e53678f339f32371a450() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttribute3606d5ca401d3cb410900097(),
-			// Property: Value
-			"value": schemaAttributedfbacf076153ea8096e41ab1(),
-		}, /*END SCHEMA*/
-		Description: "Information describing the start of the validity period of the certificate. This parameter sets the ?Not Before\" date for the certificate.\n By default, when issuing a certificate, PCAshort sets the \"Not Before\" date to the issuance time minus 60 minutes. This compensates for clock inconsistencies across computer systems. The ``ValidityNotBefore`` parameter can be used to customize the ?Not Before? value. \n Unlike the ``Validity`` parameter, the ``ValidityNotBefore`` parameter is optional.\n The ``ValidityNotBefore`` value is expressed as an explicit date and time, using the ``Validity`` type value ``ABSOLUTE``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef45f6e4e5c79305730d9d98b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5977070bd7f7a58959c02e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State in which the subject of the certificate is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef729ce003fefd8827318782d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef764d49bee4d8fd3cc0555a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "First name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb913825a88132d32c9d1839() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies the qualifier modifying a ``CertPolicyId``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_acmpca_certificate", certificateDataSource)
 }
@@ -1082,14 +429,423 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"api_passthrough": schemaAttribute2f1b484bc7528b692e22761c(),
+		"api_passthrough": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Extensions
+				"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificatePolicies
+						"certificate_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CertPolicyId
+									"cert_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST's definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PolicyQualifiers
+									"policy_qualifiers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: PolicyQualifierId
+												"policy_qualifier_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Identifies the qualifier modifying a ``CertPolicyId``.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Qualifier
+												"qualifier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CpsUri
+														"cps_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Contains a pointer to a certification practice statement (CPS) published by the CA.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Defines the qualifier type. AWS Private CA supports the use of a URI for a CPS qualifier in this field.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "Modifies the given ``CertPolicyId`` with a qualifier. AWS Private CA supports the certification practice statement (CPS) qualifier.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Contains a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. For more information, see NIST's definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).\n In an end-entity certificate, these terms indicate the policy under which the certificate was issued and the purposes for which it may be used. In a CA certificate, these terms limit the set of policies for certification paths that include this certificate.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomExtensions
+						"custom_extensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Critical
+									"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the critical flag of the X.509 extension.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ObjectIdentifier
+									"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the object identifier (OID) of the X.509 extension. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the base64-encoded value of the X.509 extension.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExtendedKeyUsage
+						"extended_key_usage": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ExtendedKeyUsageObjectIdentifier
+									"extended_key_usage_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies a custom ``ExtendedKeyUsage`` with an object identifier (OID).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ExtendedKeyUsageType
+									"extended_key_usage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies a standard ``ExtendedKeyUsage`` as defined as in [RFC 5280](https://docs.aws.amazon.com/https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the ``KeyUsage`` extension.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyUsage
+						"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CRLSign
+								"crl_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used to sign CRLs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataEncipherment
+								"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used to decipher data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DecipherOnly
+								"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used only to decipher data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DigitalSignature
+								"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used for digital signing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EncipherOnly
+								"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used only to encipher data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyAgreement
+								"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used in a key-agreement protocol.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyCertSign
+								"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used to sign certificates.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyEncipherment
+								"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used to encipher data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NonRepudiation
+								"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Key can be used for non-repudiation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubjectAlternativeNames
+						"subject_alternative_names": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DirectoryName
+									"directory_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CommonName
+											"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit.\n Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Country
+											"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Two-digit code that specifies the country in which the certificate subject located.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: CustomAttributes
+											"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ObjectIdentifier
+														"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies the attribute value of relative distinguished name (RDN).",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST?s definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).\n  Custom attributes cannot be used in combination with standard attributes.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DistinguishedNameQualifier
+											"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Disambiguating information for the certificate subject.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: GenerationQualifier
+											"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: GivenName
+											"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "First name.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Initials
+											"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Concatenation that typically contains the first letter of the *GivenName*, the first letter of the middle name if one exists, and the first letter of the *Surname*.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Locality
+											"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The locality (such as a city or town) in which the certificate subject is located.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Organization
+											"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Legal name of the organization with which the certificate subject is affiliated.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: OrganizationalUnit
+											"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Pseudonym
+											"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Typically a shortened version of a longer *GivenName*. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SerialNumber
+											"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The certificate serial number.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: State
+											"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "State in which the subject of the certificate is located.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Surname
+											"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Title
+											"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The Subject field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The Subject must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DnsName
+									"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Represents ``GeneralName`` as a DNS name.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EdiPartyName
+									"edi_party_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: NameAssigner
+											"name_assigner": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the name assigner.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: PartyName
+											"party_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the party name.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Represents ``GeneralName`` as an ``EdiPartyName`` object.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: IpAddress
+									"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Represents ``GeneralName`` as an IPv4 or IPv6 address.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OtherName
+									"other_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: TypeId
+											"type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies an OID.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies an OID value.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Represents ``GeneralName`` using an ``OtherName`` object.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RegisteredId
+									"registered_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Represents ``GeneralName`` as an object identifier (OID).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Rfc822Name
+									"rfc_822_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Represents ``GeneralName`` as an [RFC 822](https://docs.aws.amazon.com/https://datatracker.ietf.org/doc/html/rfc822) email address.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UniformResourceIdentifier
+									"uniform_resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Represents ``GeneralName`` as a URI.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The subject alternative name extension allows identities to be bound to the subject of the certificate. These identities may be included in addition to or in place of the identity in the subject field of the certificate.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies X.509 extension information for a certificate.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Subject
+				"subject": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CommonName
+						"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit.\n Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Country
+						"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Two-digit code that specifies the country in which the certificate subject located.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomAttributes
+						"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ObjectIdentifier
+									"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the attribute value of relative distinguished name (RDN).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST?s definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).\n  Custom attributes cannot be used in combination with standard attributes.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DistinguishedNameQualifier
+						"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Disambiguating information for the certificate subject.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GenerationQualifier
+						"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GivenName
+						"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "First name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Initials
+						"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Concatenation that typically contains the first letter of the *GivenName*, the first letter of the middle name if one exists, and the first letter of the *Surname*.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locality
+						"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The locality (such as a city or town) in which the certificate subject is located.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Organization
+						"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Legal name of the organization with which the certificate subject is affiliated.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OrganizationalUnit
+						"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Pseudonym
+						"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Typically a shortened version of a longer *GivenName*. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SerialNumber
+						"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The certificate serial number.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "State in which the subject of the certificate is located.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Surname
+						"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Title
+						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information about the certificate subject. The Subject field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The Subject must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies X.509 certificate information to be included in the issued certificate. An ``APIPassthrough`` or ``APICSRPassthrough`` template variant must be selected, or else this parameter is ignored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef729ce003fefd8827318782d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Certificate
 		// CloudFormation resource type schema:
 		//
@@ -1097,7 +853,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"certificate": schemaAttributec3758878d355d515e38c6fbf(),
+		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthorityArn
 		// CloudFormation resource type schema:
 		//
@@ -1105,7 +864,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the private CA issues the certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_arn": schemaAttribute922346633d976d259587342a(),
+		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the private CA issues the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateSigningRequest
 		// CloudFormation resource type schema:
 		//
@@ -1114,7 +876,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"certificate_signing_request": schemaAttribute6b617c1c39c9e7abdd70491c(),
+		"certificate_signing_request": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate signing request (CSR) for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SigningAlgorithm
 		// CloudFormation resource type schema:
 		//
@@ -1122,7 +887,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the algorithm that will be used to sign the certificate to be issued. \n This parameter should not be confused with the ``SigningAlgorithm`` parameter used to sign a CSR in the ``CreateCertificateAuthority`` action.\n  The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key.",
 		//	  "type": "string"
 		//	}
-		"signing_algorithm": schemaAttributec6c5dc1e15d1a5ddb2aa666d(),
+		"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the algorithm that will be used to sign the certificate to be issued. \n This parameter should not be confused with the ``SigningAlgorithm`` parameter used to sign a CSR in the ``CreateCertificateAuthority`` action.\n  The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -1130,7 +898,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, PCAshort defaults to the ``EndEntityCertificate/V1`` template. For more information about PCAshort templates, see [Using Templates](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html).",
 		//	  "type": "string"
 		//	}
-		"template_arn": schemaAttribute03309a89cefffe0174e49cd1(),
+		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, PCAshort defaults to the ``EndEntityCertificate/V1`` template. For more information about PCAshort templates, see [Using Templates](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Validity
 		// CloudFormation resource type schema:
 		//
@@ -1153,7 +924,22 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"validity": schemaAttribute42db77e19877655ea782a8c7(),
+		"validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the ``Value`` parameter represents days, months, or years.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "A long integer interpreted according to the value of ``Type``, below.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The period of time during which the certificate will be valid.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ValidityNotBefore
 		// CloudFormation resource type schema:
 		//
@@ -1176,7 +962,22 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"validity_not_before": schemaAttributee9a7e53678f339f32371a450(),
+		"validity_not_before": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the ``Value`` parameter represents days, months, or years.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "A long integer interpreted according to the value of ``Type``, below.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information describing the start of the validity period of the certificate. This parameter sets the ?Not Before\" date for the certificate.\n By default, when issuing a certificate, PCAshort sets the \"Not Before\" date to the issuance time minus 60 minutes. This compensates for clock inconsistencies across computer systems. The ``ValidityNotBefore`` parameter can be used to customize the ?Not Before? value. \n Unlike the ``Validity`` parameter, the ``ValidityNotBefore`` parameter is optional.\n The ``ValidityNotBefore`` value is expressed as an explicit date and time, using the ``Validity`` type value ``ABSOLUTE``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

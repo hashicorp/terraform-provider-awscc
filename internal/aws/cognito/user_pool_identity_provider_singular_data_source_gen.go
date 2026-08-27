@@ -15,28 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3adebb27636b617fa4ec71ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed568e1c8a99d96ffa454f975() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee715a515407e6d377c9bd9c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_identity_provider", userPoolIdentityProviderDataSource)
 }
@@ -57,7 +35,11 @@ func userPoolIdentityProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"attribute_mapping": schemaAttributed568e1c8a99d96ffa454f975(),
+		"attribute_mapping": // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdpIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +49,10 @@ func userPoolIdentityProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "array"
 		//	}
-		"idp_identifiers": schemaAttributeee715a515407e6d377c9bd9c(),
+		"idp_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderDetails
 		// CloudFormation resource type schema:
 		//
@@ -80,28 +65,38 @@ func userPoolIdentityProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_details": schemaAttributed568e1c8a99d96ffa454f975(),
+		"provider_details":  // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"provider_name": schemaAttribute3adebb27636b617fa4ec71ac(),
+		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderType
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"provider_type": schemaAttribute3adebb27636b617fa4ec71ac(),
+		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttribute3adebb27636b617fa4ec71ac(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

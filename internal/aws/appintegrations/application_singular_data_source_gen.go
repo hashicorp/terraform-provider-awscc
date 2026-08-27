@@ -15,169 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute011660f0ba6805a98916652d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Allow
-			"allow": schemaAttribute27db042375c9eb5d73972cc1(),
-			// Property: Sandbox
-			"sandbox": schemaAttribute27db042375c9eb5d73972cc1(),
-		}, /*END SCHEMA*/
-		Description: "The iframe configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute094835895531c130869e1649() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The application description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a442ef3a65079c624e110f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16aa5c71e0cf321111922781() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessUrl
-			"access_url": schemaAttribute0a442ef3a65079c624e110f2(),
-			// Property: ApprovedOrigins
-			"approved_origins": schemaAttribute27db042375c9eb5d73972cc1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b777166eff916aac1ec6e76() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute84ff3191f7665e3165ae6668(),
-				// Property: Value
-				"value": schemaAttribute1e361d752eeb795b540614d0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags (keys and values) associated with the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e361d752eeb795b540614d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Corresponding tag value for the key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27db042375c9eb5d73972cc1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute292ce8a485883a8bbb94f10f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The initialization timeout in milliseconds. Required when IsService is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute511ae76e5a023353d054457d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79e982b590e096f4b1bcd1b6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExternalUrlConfig
-			"external_url_config": schemaAttribute16aa5c71e0cf321111922781(),
-		}, /*END SCHEMA*/
-		Description: "Application source config",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84ff3191f7665e3165ae6668() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A key to identify the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute853f553b05079d10100c5660() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of application",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f11dda1177211feec83425() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Scope
-			"scope": schemaAttribute0a442ef3a65079c624e110f2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d454dafc8d778690cdc1313() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7339a3ea457c359cfbf78dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb78012d47f0e3ce2279cb1f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4a41dbf318cb2093ef5985f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates if the application is a service",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf069d66173c81d88e03029c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The configuration of events or requests that the application has access to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef5aa3b02fc47272819e2b62() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContactHandling
-			"contact_handling": schemaAttribute86f11dda1177211feec83425(),
-		}, /*END SCHEMA*/
-		Description: "The application configuration. Cannot be used when IsService is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appintegrations_application", applicationDataSource)
 }
@@ -196,7 +33,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:app-integrations:[-a-z0-9]*:[0-9]{12}:application/[-a-zA-Z0-9]*",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttribute511ae76e5a023353d054457d(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationConfig
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +63,22 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"application_config": schemaAttributeef5aa3b02fc47272819e2b62(),
+		"application_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContactHandling
+				"contact_handling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Scope
+						"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The application configuration. Cannot be used when IsService is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +119,27 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"application_source_config": schemaAttribute79e982b590e096f4b1bcd1b6(),
+		"application_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExternalUrlConfig
+				"external_url_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessUrl
+						"access_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ApprovedOrigins
+						"approved_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Application source config",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationType
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +152,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"application_type": schemaAttribute853f553b05079d10100c5660(),
+		"application_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of application",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +165,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute094835895531c130869e1649(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The application description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +179,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute8d454dafc8d778690cdc1313(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IframeConfig
 		// CloudFormation resource type schema:
 		//
@@ -323,7 +207,22 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"iframe_config": schemaAttribute011660f0ba6805a98916652d(),
+		"iframe_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Allow
+				"allow": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Sandbox
+				"sandbox": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The iframe configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InitializationTimeout
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +230,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The initialization timeout in milliseconds. Required when IsService is true.",
 		//	  "type": "integer"
 		//	}
-		"initialization_timeout": schemaAttribute292ce8a485883a8bbb94f10f(),
+		"initialization_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The initialization timeout in milliseconds. Required when IsService is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsService
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +242,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates if the application is a service",
 		//	  "type": "boolean"
 		//	}
-		"is_service": schemaAttributec4a41dbf318cb2093ef5985f(),
+		"is_service": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if the application is a service",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +256,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\/\\._ \\-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea7339a3ea457c359cfbf78dc(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +270,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 		//	  "type": "string"
 		//	}
-		"namespace": schemaAttributeb78012d47f0e3ce2279cb1f8(),
+		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The namespace of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -379,7 +290,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"permissions": schemaAttributecf069d66173c81d88e03029c(),
+		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The configuration of events or requests that the application has access to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -413,7 +328,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute1b777166eff916aac1ec6e76(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A key to identify the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Corresponding tag value for the key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

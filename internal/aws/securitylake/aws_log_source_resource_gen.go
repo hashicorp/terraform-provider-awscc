@@ -23,59 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributeb21478ea0b966687b2a40353() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "AWS account where you want to collect logs from.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb9c98cfee16de9fced57dca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for a AWS source. This must be a Regionally unique value.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec02d3fe80117ebb133c21f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the data lake.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef20214f8357e1dfe9e939528() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version for a AWS source. This must be a Regionally unique value.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^(latest|[0-9]\\.[0-9])$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_securitylake_aws_log_source", awsLogSourceResource)
 	registry.AddListResourceFactory("awscc_securitylake_aws_log_source", generic.NewListResource(awsLogSourceResource))
@@ -98,7 +45,20 @@ func awsLogSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"accounts": schemaAttributeb21478ea0b966687b2a40353(),
+		"accounts": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "AWS account where you want to collect logs from.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataLakeArn
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +68,16 @@ func awsLogSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_lake_arn": schemaAttributeec02d3fe80117ebb133c21f2(),
+		"data_lake_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the data lake.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceName
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +85,13 @@ func awsLogSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name for a AWS source. This must be a Regionally unique value.",
 		//	  "type": "string"
 		//	}
-		"source_name": schemaAttributebb9c98cfee16de9fced57dca(),
+		"source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for a AWS source. This must be a Regionally unique value.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceVersion
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +100,16 @@ func awsLogSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(latest|[0-9]\\.[0-9])$",
 		//	  "type": "string"
 		//	}
-		"source_version": schemaAttributef20214f8357e1dfe9e939528(),
+		"source_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version for a AWS source. This must be a Regionally unique value.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(latest|[0-9]\\.[0-9])$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

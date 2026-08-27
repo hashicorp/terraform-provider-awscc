@@ -14,290 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute066a94f02104612e9f0a6cfa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AccountId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute119e1d6bb95240e067aea1bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the creator request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14e00011f935df0906eb4200() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rfc3339TimeString",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute355b0419ab20982796872cc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Qtype",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37ada9235f79a3072228f476() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The threat category value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b398146559b6238c3d7ec3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "BlockOverrideDnsType",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e6b9f76188917f6444a14ad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirewallAdvancedContentCategory
-			"firewall_advanced_content_category": schemaAttribute77d6de0c1c0913c23111f07c(),
-			// Property: FirewallAdvancedThreatCategory
-			"firewall_advanced_threat_category": schemaAttributefe1113a980b2c584664d6f66(),
-			// Property: PartnerThreatProtection
-			"partner_threat_protection": schemaAttributef18e148b513794461f802390(),
-		}, /*END SCHEMA*/
-		Description: "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4651bcf562761a51a237a42c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Count",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b52e0ac89c0fc089bbd5b31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "BlockResponse",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52be30d5f0c0bac3e724a671() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Rule Priority",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ba6f7add33bf5bf156ed342() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the firewall rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute602aa063a8774a266fc5f985() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ConfidenceThreshold",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f6bf899e38ce6bb1233961e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74da8bdd7e275123a7ab006e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "BlockOverrideDomain",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77d6de0c1c0913c23111f07c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Category
-			"category": schemaAttributee78b50611b56f834d9b71f5e(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an advanced content category rule type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c7212c7849e1ff02b5462c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResourceId",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8315dab63d0713d599bd007b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedf8119931af036a873cb0947(),
-				// Property: Value
-				"value": schemaAttribute90acd34ea5601c0feb7bb28a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89fb72f722bdc6a0c38b34aa() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "BlockOverrideTtl",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b89526086e6704e2aca86ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallRuleGroupStatus",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90acd34ea5601c0feb7bb28a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97dcc505f5f9c20a4980b9fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallDomainRedirectionAction",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab6d83897be68bea5e906a23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "DnsThreatProtection",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6dcd249ede7f993f22a2499() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb87d40f43a6e168f0d3ec737() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttributed41e6471bb5aaf9db9b122b6(),
-				// Property: BlockOverrideDnsType
-				"block_override_dns_type": schemaAttribute3b398146559b6238c3d7ec3e(),
-				// Property: BlockOverrideDomain
-				"block_override_domain": schemaAttribute74da8bdd7e275123a7ab006e(),
-				// Property: BlockOverrideTtl
-				"block_override_ttl": schemaAttribute89fb72f722bdc6a0c38b34aa(),
-				// Property: BlockResponse
-				"block_response": schemaAttribute4b52e0ac89c0fc089bbd5b31(),
-				// Property: ConfidenceThreshold
-				"confidence_threshold": schemaAttribute602aa063a8774a266fc5f985(),
-				// Property: DnsThreatProtection
-				"dns_threat_protection": schemaAttributeab6d83897be68bea5e906a23(),
-				// Property: FirewallDomainListId
-				"firewall_domain_list_id": schemaAttribute7c7212c7849e1ff02b5462c6(),
-				// Property: FirewallDomainRedirectionAction
-				"firewall_domain_redirection_action": schemaAttribute97dcc505f5f9c20a4980b9fa(),
-				// Property: FirewallRuleType
-				"firewall_rule_type": schemaAttribute3e6b9f76188917f6444a14ad(),
-				// Property: FirewallThreatProtectionId
-				"firewall_threat_protection_id": schemaAttribute7c7212c7849e1ff02b5462c6(),
-				// Property: Priority
-				"priority": schemaAttribute52be30d5f0c0bac3e724a671(),
-				// Property: Qtype
-				"qtype": schemaAttribute355b0419ab20982796872cc0(),
-				// Property: Status
-				"status": schemaAttribute5ba6f7add33bf5bf156ed342(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "FirewallRules",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed03f76751a3e7b1322fdf727() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The partner identifier value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed41e6471bb5aaf9db9b122b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rule Action",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf8119931af036a873cb0947() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee102ff0c8fcf018e71d8419e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FirewallRuleGroupName",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee78b50611b56f834d9b71f5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content category value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef18e148b513794461f802390() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Partner
-			"partner": schemaAttributed03f76751a3e7b1322fdf727(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a partner threat protection rule type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6d8c8f681bac78ce2bf14d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe1113a980b2c584664d6f66() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Category
-			"category": schemaAttribute37ada9235f79a3072228f476(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for an advanced threat category rule type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_firewall_rule_group", firewallRuleGroupDataSource)
 }
@@ -315,7 +31,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6f6bf899e38ce6bb1233961e(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +44,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute14e00011f935df0906eb4200(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorRequestId
 		// CloudFormation resource type schema:
 		//
@@ -335,7 +57,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"creator_request_id": schemaAttribute119e1d6bb95240e067aea1bb(),
+		"creator_request_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the creator request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallRules
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +247,122 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"firewall_rules": schemaAttributeb87d40f43a6e168f0d3ec737(),
+		"firewall_rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Rule Action",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BlockOverrideDnsType
+					"block_override_dns_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "BlockOverrideDnsType",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BlockOverrideDomain
+					"block_override_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "BlockOverrideDomain",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BlockOverrideTtl
+					"block_override_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "BlockOverrideTtl",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BlockResponse
+					"block_response": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "BlockResponse",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ConfidenceThreshold
+					"confidence_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ConfidenceThreshold",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DnsThreatProtection
+					"dns_threat_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "DnsThreatProtection",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallDomainListId
+					"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ResourceId",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallDomainRedirectionAction
+					"firewall_domain_redirection_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallRuleType
+					"firewall_rule_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FirewallAdvancedContentCategory
+							"firewall_advanced_content_category": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Category
+									"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The content category value.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for an advanced content category rule type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FirewallAdvancedThreatCategory
+							"firewall_advanced_threat_category": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Category
+									"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The threat category value.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for an advanced threat category rule type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PartnerThreatProtection
+							"partner_threat_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Partner
+									"partner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The partner identifier value.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for a partner threat protection rule type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallThreatProtectionId
+					"firewall_threat_protection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ResourceId",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Priority
+					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Rule Priority",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Qtype
+					"qtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Qtype",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the firewall rule.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "FirewallRules",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -532,7 +372,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firewall_rule_group_id": schemaAttribute7c7212c7849e1ff02b5462c6(),
+		"firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -542,7 +385,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"modification_time": schemaAttribute14e00011f935df0906eb4200(),
+		"modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -553,7 +399,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee102ff0c8fcf018e71d8419e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallRuleGroupName",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -563,7 +412,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute066a94f02104612e9f0a6cfa(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AccountId",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleCount
 		// CloudFormation resource type schema:
 		//
@@ -571,7 +423,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "Count",
 		//	  "type": "integer"
 		//	}
-		"rule_count": schemaAttribute4651bcf562761a51a237a42c(),
+		"rule_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Count",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ShareStatus
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +439,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"share_status": schemaAttributef6d8c8f681bac78ce2bf14d1(),
+		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -598,7 +456,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeb6dcd249ede7f993f22a2499(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -606,7 +467,10 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "FirewallRuleGroupStatus",
 		//	  "type": "string"
 		//	}
-		"status_message": schemaAttribute8b89526086e6704e2aca86ac(),
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallRuleGroupStatus",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -639,7 +503,24 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute8315dab63d0713d599bd007b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

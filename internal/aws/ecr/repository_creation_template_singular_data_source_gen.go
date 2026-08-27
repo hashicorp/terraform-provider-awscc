@@ -15,134 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute214ab2ad2f238f106cca5370() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute275232a46c483fc1af9b28c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The repository namespace prefix associated with the repository creation template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ebd7c44933887988f6ab427() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description associated with the repository creation template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4601a5f36921ccba0dec3852() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If you use the ``KMS`` encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed KMS key for Amazon ECR will be used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7331eeeaf3d9550361b9be82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute790df384143bd6f86c66d1e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The lifecycle policy to use for repositories created using the template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e3fbf2addef3902e3aa85d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86aee4e66cfe8cfe931a4595() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec11cc54641fa3bb737aa688d(),
-				// Property: Value
-				"value": schemaAttributecde075c5f1fa667ad64d8c33(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The metadata to apply to the repository to help you categorize and organize. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94f394be0fd0a3471be64419() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionType
-			"encryption_type": schemaAttribute9fb0eb7e1bde41c96903dfad(),
-			// Property: KmsKey
-			"kms_key": schemaAttribute4601a5f36921ccba0dec3852(),
-		}, /*END SCHEMA*/
-		Description: "The encryption configuration associated with the repository creation template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6f8a6f5827d287dd7da4dd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ImageTagMutabilityExclusionFilterType
-				"image_tag_mutability_exclusion_filter_type": schemaAttribute7e3fbf2addef3902e3aa85d3(),
-				// Property: ImageTagMutabilityExclusionFilterValue
-				"image_tag_mutability_exclusion_filter_value": schemaAttribute7e3fbf2addef3902e3aa85d3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of filters that specify which image tags are excluded from the repository creation template's image tag mutability setting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fb0eb7e1bde41c96903dfad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption type to use.\n If you use the ``KMS`` encryption type, the contents of the repository will be encrypted using server-side encryption with KMSlong key stored in KMS. When you use KMS to encrypt your data, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you already created.\n If you use the ``KMS_DSSE`` encryption type, the contents of the repository will be encrypted with two layers of encryption using server-side encryption with the KMS Management Service key stored in KMS. Similar to the ``KMS`` encryption type, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you've already created. \n If you use the ``AES256`` encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES256 encryption algorithm.\n For more information, see [Amazon ECR encryption at rest](https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html) in the *Amazon Elastic Container Registry User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec11cc54641fa3bb737aa688d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecde075c5f1fa667ad64d8c33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A ``value`` acts as a descriptor within a tag category (key).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2f31e2e9b4d6451f52c4fb4() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and CREATE_ON_PUSH",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe9dab86da49435e858d913f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_repository_creation_template", repositoryCreationTemplateDataSource)
 }
@@ -169,7 +41,11 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"applied_for": schemaAttributed2f31e2e9b4d6451f52c4fb4(),
+		"applied_for": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and CREATE_ON_PUSH",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +53,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute7e3fbf2addef3902e3aa85d3(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +66,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role/[A-Za-z0-9+=,-.@_]*$",
 		//	  "type": "string"
 		//	}
-		"custom_role_arn": schemaAttributefe9dab86da49435e858d913f(),
+		"custom_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +79,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2ebd7c44933887988f6ab427(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description associated with the repository creation template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +111,22 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schemaAttribute94f394be0fd0a3471be64419(),
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionType
+				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The encryption type to use.\n If you use the ``KMS`` encryption type, the contents of the repository will be encrypted using server-side encryption with KMSlong key stored in KMS. When you use KMS to encrypt your data, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you already created.\n If you use the ``KMS_DSSE`` encryption type, the contents of the repository will be encrypted with two layers of encryption using server-side encryption with the KMS Management Service key stored in KMS. Similar to the ``KMS`` encryption type, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you've already created. \n If you use the ``AES256`` encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES256 encryption algorithm.\n For more information, see [Amazon ECR encryption at rest](https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html) in the *Amazon Elastic Container Registry User Guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKey
+				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If you use the ``KMS`` encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed KMS key for Amazon ECR will be used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption configuration associated with the repository creation template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTagMutability
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +140,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"image_tag_mutability": schemaAttribute214ab2ad2f238f106cca5370(),
+		"image_tag_mutability": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTagMutabilityExclusionFilters
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +179,24 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"image_tag_mutability_exclusion_filters": schemaAttribute9b6f8a6f5827d287dd7da4dd(),
+		"image_tag_mutability_exclusion_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ImageTagMutabilityExclusionFilterType
+					"image_tag_mutability_exclusion_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageTagMutabilityExclusionFilterValue
+					"image_tag_mutability_exclusion_filter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of filters that specify which image tags are excluded from the repository creation template's image tag mutability setting.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicy
 		// CloudFormation resource type schema:
 		//
@@ -286,7 +206,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 100,
 		//	  "type": "string"
 		//	}
-		"lifecycle_policy": schemaAttribute790df384143bd6f86c66d1e5(),
+		"lifecycle_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The lifecycle policy to use for repositories created using the template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Prefix
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +220,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
-		"prefix": schemaAttribute275232a46c483fc1af9b28c4(),
+		"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The repository namespace prefix associated with the repository creation template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryPolicy
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +231,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
 		//	  "type": "string"
 		//	}
-		"repository_policy": schemaAttribute7331eeeaf3d9550361b9be82(),
+		"repository_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +268,24 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resource_tags": schemaAttribute86aee4e66cfe8cfe931a4595(),
+		"resource_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A ``value`` acts as a descriptor within a tag category (key).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The metadata to apply to the repository to help you categorize and organize. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -347,7 +293,10 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute7e3fbf2addef3902e3aa85d3(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

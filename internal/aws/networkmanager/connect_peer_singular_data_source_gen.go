@@ -15,203 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05f57921cdac44ab72943491() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The address of a core network Connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0741bf2a097e7d4662ab18b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subnet ARN for the connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute097f99b133dde3ae57cabdbb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address of a core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b8fb4639aa24d0c56f3dc29() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d0bda81c8f1a2181bff1ccb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The inside IP addresses used for a Connect peer configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f04e08c7480702947f783f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address of the Connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute170d0d0a31590874f42340a8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CoreNetworkAddress
-				"core_network_address": schemaAttribute415cfb4a3c2076ad78e5c003(),
-				// Property: CoreNetworkAsn
-				"core_network_asn": schemaAttribute980b89694984aec75beca361(),
-				// Property: PeerAddress
-				"peer_address": schemaAttribute05f57921cdac44ab72943491(),
-				// Property: PeerAsn
-				"peer_asn": schemaAttributeea54fdbd91b13fb4adbd4cdd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30578091d5f6b8466b967f03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40891792872bcbcc30fd26c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute415cfb4a3c2076ad78e5c003() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The address of a core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44b174f2fd5d4c93d01b56ea() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Errors from the last modification of the connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b2c0972f02192af241f47c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77718020ef720f05d3eca7a6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PeerAsn
-			"peer_asn": schemaAttribute0b8fb4639aa24d0c56f3dc29(),
-		}, /*END SCHEMA*/
-		Description: "Bgp options for connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute980b89694984aec75beca361() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ASN of the Coret Network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9afb45c4ce23bd3d4d388d96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol used for a Connect peer configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdf751142ee3a3d729be425c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the attachment to connect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec69298c22ae3ee3c3e791c48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7c6f0485335336dd5b3e197() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec69298c22ae3ee3c3e791c48(),
-				// Property: Value
-				"value": schemaAttribute40891792872bcbcc30fd26c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec97e9d5eef575e69019db2c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Connect peer Regions where edges are located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1f8e1f4cfd64bdecf5e0560() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Connect peer creation time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5188dccf5cf34883fcac2a7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BgpConfigurations
-			"bgp_configurations": schemaAttribute170d0d0a31590874f42340a8(),
-			// Property: CoreNetworkAddress
-			"core_network_address": schemaAttribute097f99b133dde3ae57cabdbb(),
-			// Property: InsideCidrBlocks
-			"inside_cidr_blocks": schemaAttribute0d0bda81c8f1a2181bff1ccb(),
-			// Property: PeerAddress
-			"peer_address": schemaAttribute0f04e08c7480702947f783f6(),
-			// Property: Protocol
-			"protocol": schemaAttribute9afb45c4ce23bd3d4d388d96(),
-		}, /*END SCHEMA*/
-		Description: "Configuration of the connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea54fdbd91b13fb4adbd4cdd() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ASN of the Connect peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef292b6e6bd5ea0d427cabd34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_connect_peer", connectPeerDataSource)
 }
@@ -233,7 +36,16 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"bgp_options": schemaAttribute77718020ef720f05d3eca7a6(),
+		"bgp_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PeerAsn
+				"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Bgp options for connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +103,61 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttributed5188dccf5cf34883fcac2a7(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BgpConfigurations
+				"bgp_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CoreNetworkAddress
+							"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The address of a core network.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CoreNetworkAsn
+							"core_network_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The ASN of the Coret Network.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PeerAddress
+							"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The address of a core network Connect peer.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PeerAsn
+							"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The ASN of the Connect peer.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CoreNetworkAddress
+				"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP address of a core network.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InsideCidrBlocks
+				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The inside IP addresses used for a Connect peer configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PeerAddress
+				"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP address of the Connect peer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The protocol used for a Connect peer configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration of the connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +165,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the attachment to connect.",
 		//	  "type": "string"
 		//	}
-		"connect_attachment_id": schemaAttributebdf751142ee3a3d729be425c(),
+		"connect_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the attachment to connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectPeerId
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +176,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the Connect peer.",
 		//	  "type": "string"
 		//	}
-		"connect_peer_id": schemaAttribute30578091d5f6b8466b967f03(),
+		"connect_peer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkAddress
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +187,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IP address of a core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_address": schemaAttribute097f99b133dde3ae57cabdbb(),
+		"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address of a core network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -323,7 +198,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schemaAttributef292b6e6bd5ea0d427cabd34(),
+		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the core network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +209,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Connect peer creation time.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributed1f8e1f4cfd64bdecf5e0560(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Connect peer creation time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EdgeLocation
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +220,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Connect peer Regions where edges are located.",
 		//	  "type": "string"
 		//	}
-		"edge_location": schemaAttributec97e9d5eef575e69019db2c4(),
+		"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Connect peer Regions where edges are located.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InsideCidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -351,7 +235,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"inside_cidr_blocks": schemaAttribute0d0bda81c8f1a2181bff1ccb(),
+		"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The inside IP addresses used for a Connect peer configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModificationErrors
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +250,11 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"last_modification_errors": schemaAttribute44b174f2fd5d4c93d01b56ea(),
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +262,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IP address of the Connect peer.",
 		//	  "type": "string"
 		//	}
-		"peer_address": schemaAttribute0f04e08c7480702947f783f6(),
+		"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address of the Connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +273,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "State of the connect peer.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute5b2c0972f02192af241f47c5(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetArn
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +284,10 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The subnet ARN for the connect peer.",
 		//	  "type": "string"
 		//	}
-		"subnet_arn": schemaAttribute0741bf2a097e7d4662ab18b8(),
+		"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subnet ARN for the connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -415,7 +316,24 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributec7c6f0485335336dd5b3e197(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

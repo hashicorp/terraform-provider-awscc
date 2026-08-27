@@ -14,13 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute396c2ebdbbe74bbd57d8ddd9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM principal to remove from the pull time update exclusion list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_pull_time_update_exclusion", pullTimeUpdateExclusionDataSource)
 }
@@ -38,7 +31,10 @@ func pullTimeUpdateExclusionDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:(role|user)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$",
 		//	  "type": "string"
 		//	}
-		"principal_arn": schemaAttribute396c2ebdbbe74bbd57d8ddd9(),
+		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM principal to remove from the pull time update exclusion list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

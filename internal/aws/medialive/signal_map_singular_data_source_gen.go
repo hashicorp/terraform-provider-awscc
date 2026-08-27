@@ -16,214 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute255f7ed7be745347d62403e1() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destinations
-				"destinations": schemaAttributee9ad7361db9ea0ca7cb492c6(),
-				// Property: Name
-				"name": schemaAttribute96adf9b20acdd1478c2eac21(),
-				// Property: Sources
-				"sources": schemaAttributee9ad7361db9ea0ca7cb492c6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A map representing an incomplete AWS media workflow as a graph.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3213303ef64cb06c752a80df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A signal map's ARN (Amazon Resource Name)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32865d024c0e70280e137c18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39383053c7c61359cae96be3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5958d31dedfec3d5b906acf6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource's optional description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute602f4d2d0a3aeb78a607451e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A signal map's monitor deployment status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69118c93abff15dd20e36515() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DetailsUri
-			"details_uri": schemaAttribute832caf51e7fdf59b1cff8947(),
-			// Property: Status
-			"status": schemaAttribute602f4d2d0a3aeb78a607451e(),
-		}, /*END SCHEMA*/
-		Description: "Represents the latest successful monitor deployment of a signal map.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ca417cf85fa04b4b9f51226() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Error message associated with a failed creation or failed update attempt of a signal map.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f89f774e1345267ce09ff74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A signal map's current status which is dependent on its lifecycle actions or associated jobs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute832caf51e7fdf59b1cff8947() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URI associated with a signal map's monitor deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96adf9b20acdd1478c2eac21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logical name of an AWS media resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute998b3baa5c5895eb614aa256() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DetailsUri
-			"details_uri": schemaAttribute832caf51e7fdf59b1cff8947(),
-			// Property: ErrorMessage
-			"error_message": schemaAttributecaeb277495337b7e81161cec(),
-			// Property: Status
-			"status": schemaAttribute602f4d2d0a3aeb78a607451e(),
-		}, /*END SCHEMA*/
-		Description: "Represents the latest monitor deployment of a signal map.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c492f2fdf47d682c9b4f397() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destinations
-				"destinations": schemaAttributee9ad7361db9ea0ca7cb492c6(),
-				// Property: Name
-				"name": schemaAttribute96adf9b20acdd1478c2eac21(),
-				// Property: Sources
-				"sources": schemaAttributee9ad7361db9ea0ca7cb492c6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A map representing an AWS media workflow as a graph.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2fe0dec1b80ecb0b8cd6c20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A signal map's id.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3743a02a1bb331ee571890b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, there are pending monitor changes for this signal map that can be deployed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec390bbda97c49fcfb36eeb0c() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5fbdffd37f833a607b43e4b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaeb277495337b7e81161cec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Error message associated with a failed monitor deployment of a signal map.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee48c22c485bc73c8ac1d859f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a resource used in AWS media workflows.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5a96f1cd8ab363fd3ca41d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A top-level supported AWS resource ARN to discovery a signal map from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9ad7361db9ea0ca7cb492c6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schemaAttributee48c22c485bc73c8ac1d859f(),
-				// Property: Name
-				"name": schemaAttribute96adf9b20acdd1478c2eac21(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef367c453f354d13bbaa59e69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5772e62c1428f6c290ccf6a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents the tags associated with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_signal_map", signalMapDataSource)
 }
@@ -240,7 +32,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+:medialive:.+:signal-map:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3213303ef64cb06c752a80df(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A signal map's ARN (Amazon Resource Name)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchAlarmTemplateGroupIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +46,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"cloudwatch_alarm_template_group_identifiers": schemaAttributec390bbda97c49fcfb36eeb0c(),
+		"cloudwatch_alarm_template_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudWatchAlarmTemplateGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +62,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"cloudwatch_alarm_template_group_ids": schemaAttributec390bbda97c49fcfb36eeb0c(),
+		"cloudwatch_alarm_template_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +73,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute32865d024c0e70280e137c18(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +86,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5958d31dedfec3d5b906acf6(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource's optional description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DiscoveryEntryPointArn
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +99,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"discovery_entry_point_arn": schemaAttributee5a96f1cd8ab363fd3ca41d4(),
+		"discovery_entry_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A top-level supported AWS resource ARN to discovery a signal map from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ErrorMessage
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +112,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"error_message": schemaAttribute6ca417cf85fa04b4b9f51226(),
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Error message associated with a failed creation or failed update attempt of a signal map.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBridgeRuleTemplateGroupIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +126,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"event_bridge_rule_template_group_identifiers": schemaAttributec390bbda97c49fcfb36eeb0c(),
+		"event_bridge_rule_template_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBridgeRuleTemplateGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +142,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"event_bridge_rule_template_group_ids": schemaAttributec390bbda97c49fcfb36eeb0c(),
+		"event_bridge_rule_template_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailedMediaResourceMap
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +221,56 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"failed_media_resource_map": schemaAttribute255f7ed7be745347d62403e1(),
+		"failed_media_resource_map": // Pattern: ""
+		schema.MapNestedAttribute{   /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destinations
+					"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of a resource used in AWS media workflows.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The logical name of an AWS media resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The logical name of an AWS media resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Sources
+					"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of a resource used in AWS media workflows.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The logical name of an AWS media resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A map representing an incomplete AWS media workflow as a graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ForceRediscovery
 		// CloudFormation resource type schema:
 		//
@@ -411,7 +279,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.",
 		//	  "type": "boolean"
 		//	}
-		"force_rediscovery": schemaAttributec5fbdffd37f833a607b43e4b(),
+		"force_rediscovery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -422,14 +293,19 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"signal_map_id": schemaAttributec2fe0dec1b80ecb0b8cd6c20(),
+		"signal_map_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A signal map's id.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identifier": schemaAttribute39383053c7c61359cae96be3(),
+		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastDiscoveredAt
 		// CloudFormation resource type schema:
 		//
@@ -437,7 +313,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_discovered_at": schemaAttribute32865d024c0e70280e137c18(),
+		"last_discovered_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastSuccessfulMonitorDeployment
 		// CloudFormation resource type schema:
 		//
@@ -474,7 +353,22 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"last_successful_monitor_deployment": schemaAttribute69118c93abff15dd20e36515(),
+		"last_successful_monitor_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DetailsUri
+				"details_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URI associated with a signal map's monitor deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A signal map's monitor deployment status.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the latest successful monitor deployment of a signal map.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MediaResourceMap
 		// CloudFormation resource type schema:
 		//
@@ -550,7 +444,56 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"media_resource_map": schemaAttribute9c492f2fdf47d682c9b4f397(),
+		"media_resource_map":      // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destinations
+					"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of a resource used in AWS media workflows.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The logical name of an AWS media resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The logical name of an AWS media resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Sources
+					"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of a resource used in AWS media workflows.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The logical name of an AWS media resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A map representing an AWS media workflow as a graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -558,7 +501,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schemaAttribute32865d024c0e70280e137c18(),
+		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorChangesPendingDeployment
 		// CloudFormation resource type schema:
 		//
@@ -567,7 +513,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If true, there are pending monitor changes for this signal map that can be deployed.",
 		//	  "type": "boolean"
 		//	}
-		"monitor_changes_pending_deployment": schemaAttributec3743a02a1bb331ee571890b(),
+		"monitor_changes_pending_deployment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, there are pending monitor changes for this signal map that can be deployed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorDeployment
 		// CloudFormation resource type schema:
 		//
@@ -609,7 +558,27 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"monitor_deployment": schemaAttribute998b3baa5c5895eb614aa256(),
+		"monitor_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DetailsUri
+				"details_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URI associated with a signal map's monitor deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ErrorMessage
+				"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Error message associated with a failed monitor deployment of a signal map.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A signal map's monitor deployment status.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the latest monitor deployment of a signal map.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -620,7 +589,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef367c453f354d13bbaa59e69(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -639,7 +611,10 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute6f89f774e1345267ce09ff74(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A signal map's current status which is dependent on its lifecycle actions or associated jobs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -653,7 +628,12 @@ func signalMapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributef5772e62c1428f6c290ccf6a(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Represents the tags associated with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

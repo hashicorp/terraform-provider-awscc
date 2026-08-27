@@ -14,288 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0671123212991da1fb7fba67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the calculated attribute definition was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1582e369619e3cd4ac29c40c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ObjectCount
-			"object_count": schemaAttribute96bc288957d3d1a928c379be(),
-			// Property: Range
-			"range": schemaAttributed955061395504b502a90c4b9(),
-			// Property: Threshold
-			"threshold": schemaAttribute24903a6a9eab4fbbb30a7863(),
-		}, /*END SCHEMA*/
-		Description: "The conditions including range, object count, and threshold for the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2478614b1f5121884c478ceb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to use historical data for the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24903a6a9eab4fbbb30a7863() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Operator
-			"operator": schemaAttributea7b78e7d981844679a82287d(),
-			// Property: Value
-			"value": schemaAttributef6ec44689a130516079e62ef(),
-		}, /*END SCHEMA*/
-		Description: "The threshold for the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3561175bcf6ea535bf3dc2c5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time of the specified unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39e4e25506708dd669387797() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the calculated attribute definition was most recently edited.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a7efa0834ad02c3fb2456d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47328e9d2c8e76082ec5ba50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \\\"{ObjectTypeName.<Location of timestamp field in JSON pointer format>}\\\". E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"1737587945945\"}}, then TimestampSource should be \"{MyType.generatedAt.timestamp}\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b099c5a6b0cc3b0d779807a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unit of time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f838c338b8f98a1a107f71e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \"{ObjectTypeName.AttributeName}\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute553c01526a3e890d131b9322() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Message
-			"message": schemaAttributee5365d13b89920ad15c40ae2(),
-			// Property: ProgressPercentage
-			"progress_percentage": schemaAttribute579ef7bfeafe483f7690c073(),
-		}, /*END SCHEMA*/
-		Description: "The readiness status of the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute579ef7bfeafe483f7690c073() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The progress percentage for including historical data in your calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60074b11eea008b745da0db6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75050212b33e489f4ba78ca9() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute8dd0a2e0ca7112aa5b1a537d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of attribute items specified in the mathematical expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bcad23c415f08538d7e7a6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name of the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cd35564c1f25a402827377a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The aggregation operation to perform for the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dd0a2e0ca7112aa5b1a537d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an attribute defined in a profile object type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96bc288957d3d1a928c379be() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of profile objects used for the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea17e8448e9b295314f4dfd61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the calculated attribute definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea18acec1e324e04b91fd824d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7b78e7d981844679a82287d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operator of the threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeada6f67360601ff7174a8492() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"2001-07-04T12:08:56.235Z\"}}, then TimestampFormat should be \"ISO_8601\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3ad42e6e701761ea0adaea0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec208b66a0020853dbb8c9e94() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec294ff8b66d8c0fbcfc917ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2e878fcbd810bc0f3ba7952() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Attributes
-			"attributes": schemaAttribute75050212b33e489f4ba78ca9(),
-			// Property: Expression
-			"expression": schemaAttribute4f838c338b8f98a1a107f71e(),
-		}, /*END SCHEMA*/
-		Description: "Mathematical expression and a list of attribute items specified in that expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1aa15c9380b31fb8f802522() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb3ad42e6e701761ea0adaea0(),
-				// Property: Value
-				"value": schemaAttributec294ff8b66d8c0fbcfc917ff(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed955061395504b502a90c4b9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TimestampFormat
-			"timestamp_format": schemaAttributeada6f67360601ff7174a8492(),
-			// Property: TimestampSource
-			"timestamp_source": schemaAttribute47328e9d2c8e76082ec5ba50(),
-			// Property: Unit
-			"unit": schemaAttribute4b099c5a6b0cc3b0d779807a(),
-			// Property: Value
-			"value": schemaAttribute3561175bcf6ea535bf3dc2c5(),
-			// Property: ValueRange
-			"value_range": schemaAttributee1c4a4d1f0b8b41a1a3d7d28(),
-		}, /*END SCHEMA*/
-		Description: "The relative time period over which data is included in the aggregation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1c4a4d1f0b8b41a1a3d7d28() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: End
-			"end": schemaAttributec208b66a0020853dbb8c9e94(),
-			// Property: Start
-			"start": schemaAttribute60074b11eea008b745da0db6(),
-		}, /*END SCHEMA*/
-		Description: "A structure specifying the endpoints of the relative time period over which data is included in the aggregation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5365d13b89920ad15c40ae2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Any information pertaining to the status of the calculated attribute if required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6ec44689a130516079e62ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9e00b691adfff8462987321() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the calculated attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_calculated_attribute_definition", calculatedAttributeDefinitionDataSource)
 }
@@ -349,7 +67,31 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"attribute_details": schemaAttributec2e878fcbd810bc0f3ba7952(),
+		"attribute_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attributes
+				"attributes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of an attribute defined in a profile object type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of attribute items specified in the mathematical expression.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Expression
+				"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \"{ObjectTypeName.AttributeName}\".",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Mathematical expression and a list of attribute items specified in that expression.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CalculatedAttributeName
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +102,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"calculated_attribute_name": schemaAttributef9e00b691adfff8462987321(),
+		"calculated_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
@@ -462,7 +207,78 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "object"
 		//	}
-		"conditions": schemaAttribute1582e369619e3cd4ac29c40c(),
+		"conditions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ObjectCount
+				"object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of profile objects used for the calculated attribute.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Range
+				"range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TimestampFormat
+						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The format the timestamp field in your JSON object is specified. This value should be one of EPOCHMILLI or ISO_8601. E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"2001-07-04T12:08:56.235Z\"}}, then TimestampFormat should be \"ISO_8601\".",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TimestampSource
+						"timestamp_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An expression specifying the field in your JSON object from which the date should be parsed. The expression should follow the structure of \\\"{ObjectTypeName.<Location of timestamp field in JSON pointer format>}\\\". E.g. if your object type is MyType and source JSON is {\"generatedAt\": {\"timestamp\": \"1737587945945\"}}, then TimestampSource should be \"{MyType.generatedAt.timestamp}\".",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The unit of time.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The amount of time of the specified unit.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ValueRange
+						"value_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: End
+								"end": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The ending point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Start
+								"start": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The starting point for this range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A structure specifying the endpoints of the relative time period over which data is included in the aggregation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The relative time period over which data is included in the aggregation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Threshold
+				"threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Operator
+						"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The operator of the threshold.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The value of the threshold.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The threshold for the calculated attribute.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The conditions including range, object count, and threshold for the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -470,7 +286,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The timestamp of when the calculated attribute definition was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute0671123212991da1fb7fba67(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the calculated attribute definition was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -480,7 +299,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3a7efa0834ad02c3fb2456d8(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -491,7 +313,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-\\s]*$",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute8bcad23c415f08538d7e7a6c(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name of the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +327,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttributea18acec1e324e04b91fd824d(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -510,7 +338,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The timestamp of when the calculated attribute definition was most recently edited.",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute39e4e25506708dd669387797(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the calculated attribute definition was most recently edited.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Readiness
 		// CloudFormation resource type schema:
 		//
@@ -531,7 +362,22 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "object"
 		//	}
-		"readiness": schemaAttribute553c01526a3e890d131b9322(),
+		"readiness": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Any information pertaining to the status of the calculated attribute if required.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProgressPercentage
+				"progress_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The progress percentage for including historical data in your calculated attribute.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The readiness status of the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -549,7 +395,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"statistic": schemaAttribute8cd35564c1f25a402827377a(),
+		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The aggregation operation to perform for the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -563,7 +412,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributea17e8448e9b295314f4dfd61(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the calculated attribute definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -598,7 +450,24 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed1aa15c9380b31fb8f802522(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UseHistoricalData
 		// CloudFormation resource type schema:
 		//
@@ -606,7 +475,10 @@ func calculatedAttributeDefinitionDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "Whether to use historical data for the calculated attribute.",
 		//	  "type": "boolean"
 		//	}
-		"use_historical_data": schemaAttribute2478614b1f5121884c478ceb(),
+		"use_historical_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to use historical data for the calculated attribute.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

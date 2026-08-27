@@ -14,40 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute329add8a0679144923b6256a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35548587c7e8a7060a096a29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c965cfd183b368254c17415() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPAM Pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65ac707b0f2ee987756af11c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the allocation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bc6476b337a9db5935deadd() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam_allocation", iPAMAllocationDataSource)
 }
@@ -63,14 +29,19 @@ func iPAMAllocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
 		//	  "type": "string"
 		//	}
-		"cidr": schemaAttribute329add8a0679144923b6256a(),
+		"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute35548587c7e8a7060a096a29(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPoolAllocationId
 		// CloudFormation resource type schema:
 		//
@@ -78,7 +49,10 @@ func iPAMAllocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Id of the allocation.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_allocation_id": schemaAttribute65ac707b0f2ee987756af11c(),
+		"ipam_pool_allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the allocation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -86,7 +60,10 @@ func iPAMAllocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Id of the IPAM Pool.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_id": schemaAttribute3c965cfd183b368254c17415(),
+		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPAM Pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +71,10 @@ func iPAMAllocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
 		//	  "type": "integer"
 		//	}
-		"netmask_length": schemaAttribute9bc6476b337a9db5935deadd(),
+		"netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

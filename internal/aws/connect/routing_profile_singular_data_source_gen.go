@@ -14,190 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0138fe56df013ae3b489357b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03c21ae72c7d34ada439c8a7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: QueueReference
-				"queue_reference": schemaAttributeaf3ab29514843dcc0d76b97b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The manual assignment queues to associate with this routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17ef8d013b296606f5de64d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cdf78363ad1bd204cd123ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40e674804c0f72f92108a72e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The delay, in seconds, a contact should wait in the queue before they are routed to an available agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51f54c65940a6071ddbd6345() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53e9cb2f20fc8910dac4d846() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the default outbound queue for this routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute657aa8f59c57c91b5ff4b973() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of contacts an agent can have on a channel simultaneously.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86ad8695359170e1b8f266f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8840702b6bd73c306a4887d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bde3dead132f5f7d0822eab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BehaviorType
-			"behavior_type": schemaAttributec0a917ea6bcd5211ec337f10(),
-		}, /*END SCHEMA*/
-		Description: "Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be offered a contact from a different channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5029c71211da58798867813() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Delay
-				"delay": schemaAttribute40e674804c0f72f92108a72e(),
-				// Property: Priority
-				"priority": schemaAttributeb0b267c9da0621a1585abf47(),
-				// Property: QueueReference
-				"queue_reference": schemaAttributeaf3ab29514843dcc0d76b97b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The queues to associate with this routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf3ab29514843dcc0d76b97b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Channel
-			"channel": schemaAttribute86ad8695359170e1b8f266f3(),
-			// Property: QueueArn
-			"queue_arn": schemaAttribute8840702b6bd73c306a4887d9(),
-		}, /*END SCHEMA*/
-		Description: "Contains the channel and queue identifier for a routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0b267c9da0621a1585abf47() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The order in which contacts are to be handled for the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb76db7d02f24035d8e216981() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcbbc38f60bb6e87a3429f4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0a917ea6bcd5211ec337f10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the other channels that can be routed to an agent handling their current channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4afccceff2be3155ef08fce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca3581441b70ca4451593dd1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Channel
-				"channel": schemaAttribute86ad8695359170e1b8f266f3(),
-				// Property: Concurrency
-				"concurrency": schemaAttribute657aa8f59c57c91b5ff4b973(),
-				// Property: CrossChannelBehavior
-				"cross_channel_behavior": schemaAttribute9bde3dead132f5f7d0822eab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec6bf5ac1192e7aef1f4585d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute51f54c65940a6071ddbd6345(),
-				// Property: Value
-				"value": schemaAttribute0138fe56df013ae3b489357b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_routing_profile", routingProfileDataSource)
 }
@@ -217,7 +33,10 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"agent_availability_timer": schemaAttributebcbbc38f60bb6e87a3429f4e(),
+		"agent_availability_timer": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultOutboundQueueArn
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +45,10 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"default_outbound_queue_arn": schemaAttribute53e9cb2f20fc8910dac4d846(),
+		"default_outbound_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the default outbound queue for this routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +58,10 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec4afccceff2be3155ef08fce(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +70,10 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute3cdf78363ad1bd204cd123ad(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManualAssignmentQueueConfigs
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +120,31 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"manual_assignment_queue_configs": schemaAttribute03c21ae72c7d34ada439c8a7(),
+		"manual_assignment_queue_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: QueueReference
+					"queue_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Channel
+							"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: QueueArn
+							"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) for the queue.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains the channel and queue identifier for a routing profile.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The manual assignment queues to associate with this routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MediaConcurrencies
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +198,36 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"media_concurrencies": schemaAttributeca3581441b70ca4451593dd1(),
+		"media_concurrencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Concurrency
+					"concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of contacts an agent can have on a channel simultaneously.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CrossChannelBehavior
+					"cross_channel_behavior": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BehaviorType
+							"behavior_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the other channels that can be routed to an agent handling their current channel.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be offered a contact from a different channel.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +237,10 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute17ef8d013b296606f5de64d7(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueueConfigs
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +300,41 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"queue_configs": schemaAttributea5029c71211da58798867813(),
+		"queue_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Delay
+					"delay": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The delay, in seconds, a contact should wait in the queue before they are routed to an available agent.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Priority
+					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The order in which contacts are to be handled for the queue.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: QueueReference
+					"queue_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Channel
+							"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: QueueArn
+							"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) for the queue.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains the channel and queue identifier for a routing profile.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The queues to associate with this routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -425,7 +343,10 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/routing-profile/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"routing_profile_arn": schemaAttributeb76db7d02f24035d8e216981(),
+		"routing_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -459,7 +380,24 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeec6bf5ac1192e7aef1f4585d(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

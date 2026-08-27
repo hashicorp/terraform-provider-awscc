@@ -15,230 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06f3742f8b5518bf0abada60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for ``TagValue``, you must also specify a value for ``TagKey``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a6d7ff11680447f176b8ae0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11561694f3265909e228b44d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of the event, such as an AWS service, that triggers CC to evaluate your AWS resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19aa23fd8e333b556223e4f6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The boolean expression for enabling debug logging for your CC Custom Policy rule. The default value is ``false``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c8cac0d074fdb013dd4cbdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string, in JSON format, that is passed to the CC rule Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e045a19c7da247ac4a9d8d0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomPolicyDetails
-			"custom_policy_details": schemaAttribute9d5a4b1f0110ea8069c22478(),
-			// Property: Owner
-			"owner": schemaAttribute789aa6d3d2587af05d14d582(),
-			// Property: SourceDetails
-			"source_details": schemaAttribute6338c111fcb6620825b640f9(),
-			// Property: SourceIdentifier
-			"source_identifier": schemaAttribute7ea62ecea0b8e7b8637a5973(),
-		}, /*END SCHEMA*/
-		Description: "Provides the rule owner (```` for managed rules, ``CUSTOM_POLICY`` for Custom Policy rules, and ``CUSTOM_LAMBDA`` for Custom Lambda rules), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5654a863fde8b3bff5526f82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The runtime system for your CC Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by CC Custom Policy rules. For more information about Guard, see the [Guard GitHub Repository](https://docs.aws.amazon.com/https://github.com/aws-cloudformation/cloudformation-guard).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute590116dfdadf3ad6b27639ed() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Mode
-				"mode": schemaAttribute71102a8d652e9391bdf42a6e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The modes the CC rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute618df0dbcae2ae5783026d0a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttributed1968f08ff49e906aa9e7dc9(),
-		}, /*END SCHEMA*/
-		Description: "Indicates whether an AWS resource or CC rule is compliant and provides the number of contributors that affect the compliance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6338c111fcb6620825b640f9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventSource
-				"event_source": schemaAttribute11561694f3265909e228b44d(),
-				// Property: MaximumExecutionFrequency
-				"maximum_execution_frequency": schemaAttribute668c230a9b76d1f8d2be38e6(),
-				// Property: MessageType
-				"message_type": schemaAttributebe9390b826bb265e56bf0d3d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Provides the source and the message types that cause CC to evaluate your AWS resources against a rule. It also provides the frequency with which you want CC to run evaluations for the rule if the trigger type is periodic.\n If the owner is set to ``CUSTOM_POLICY``, the only acceptable values for the CC rule trigger message type are ``ConfigurationItemChangeNotification`` and ``OversizedConfigurationItemChangeNotification``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute668c230a9b76d1f8d2be38e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The frequency at which you want CC to run evaluations for a custom rule with a periodic trigger. If you specify a value for ``MaximumExecutionFrequency``, then ``MessageType`` must use the ``ScheduledNotification`` value.\n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.\n Based on the valid value you choose, CC runs evaluations once for each valid value. For example, if you choose ``Three_Hours``, CC runs evaluations once every three hours. In this case, ``Three_Hours`` is the frequency of this rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71102a8d652e9391bdf42a6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mode of an evaluation. The valid values are Detective or Proactive.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute789aa6d3d2587af05d14d582() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether AWS or the customer owns and manages the CC rule.\n CC Managed Rules are predefined rules owned by AWS. For more information, see [Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html) in the *developer guide*.\n CC Custom Rules are rules that you can develop either with Guard (``CUSTOM_POLICY``) or LAMlong (``CUSTOM_LAMBDA``). For more information, see [Custom Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html) in the *developer guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ea62ecea0b8e7b8637a5973() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For CC Managed rules, a predefined identifier from a list. For example, ``IAM_PASSWORD_POLICY`` is a managed rule. To reference a managed rule, see [List of Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).\n For CC Custom Lambda rules, the identifier is the Amazon Resource Name (ARN) of the rule's LAMlong function, such as ``arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name``.\n For CC Custom Policy rules, this field will be ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ce3829ea92fdd6228efe7a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum frequency with which CC runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:\n  +  You are using an AWS managed rule that is triggered at a periodic frequency.\n  +  Your custom rule is triggered when CC delivers the configuration snapshot. For more information, see [ConfigSnapshotDeliveryProperties](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigSnapshotDeliveryProperties.html).\n  \n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d5a4b1f0110ea8069c22478() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableDebugLogDelivery
-			"enable_debug_log_delivery": schemaAttribute19aa23fd8e333b556223e4f6(),
-			// Property: PolicyRuntime
-			"policy_runtime": schemaAttribute5654a863fde8b3bff5526f82(),
-			// Property: PolicyText
-			"policy_text": schemaAttributee8f82f9af04d15afa6dd285f(),
-		}, /*END SCHEMA*/
-		Description: "Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to ``CUSTOM_POLICY``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3feb364a28d9957b350d047() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description that you provide for the CC rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe9390b826bb265e56bf0d3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of notification that triggers CC to run an evaluation for a rule. You can specify the following notification types:\n  +  ``ConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers a configuration item as a result of a resource change.\n  +  ``OversizedConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers an oversized configuration item. CC may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.\n  +  ``ScheduledNotification`` - Triggers a periodic evaluation at the frequency specified for ``MaximumExecutionFrequency``.\n  +  ``ConfigurationSnapshotDeliveryCompleted`` - Triggers a periodic evaluation when CC delivers a configuration snapshot.\n  \n If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ``ConfigurationItemChangeNotification`` and one for ``OversizedConfigurationItemChangeNotification``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf7e01012b587779106cecc0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ``ComplianceResourceId``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1968f08ff49e906aa9e7dc9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Compliance type determined by the Config rule",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee674759f0eed9615068b42d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8f82f9af04d15afa6dd285f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The policy definition containing the logic for your CC Custom Policy rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0c804959bdc5b7a31ade642() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the CC rule. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the rule name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef109b00709224aa00c510b0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ``ComplianceResourceTypes``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef709e38a8055288b90d7f830() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ComplianceResourceId
-			"compliance_resource_id": schemaAttributef109b00709224aa00c510b0c(),
-			// Property: ComplianceResourceTypes
-			"compliance_resource_types": schemaAttributecf7e01012b587779106cecc0(),
-			// Property: TagKey
-			"tag_key": schemaAttribute0a6d7ff11680447f176b8ae0(),
-			// Property: TagValue
-			"tag_value": schemaAttribute06f3742f8b5518bf0abada60(),
-		}, /*END SCHEMA*/
-		Description: "Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_config_config_rule", configRuleDataSource)
 }
@@ -254,7 +30,10 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee674759f0eed9615068b42d5(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Compliance
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +48,17 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"compliance": schemaAttribute618df0dbcae2ae5783026d0a(),
+		"compliance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Compliance type determined by the Config rule",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Indicates whether an AWS resource or CC rule is compliant and provides the number of contributors that affect the compliance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigRuleId
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +66,10 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"config_rule_id": schemaAttributee674759f0eed9615068b42d5(),
+		"config_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigRuleName
 		// CloudFormation resource type schema:
 		//
@@ -285,7 +77,10 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name for the CC rule. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the rule name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).",
 		//	  "type": "string"
 		//	}
-		"config_rule_name": schemaAttributef0c804959bdc5b7a31ade642(),
+		"config_rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the CC rule. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the rule name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +88,10 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description that you provide for the CC rule.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributea3feb364a28d9957b350d047(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description that you provide for the CC rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationModes
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +111,19 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"evaluation_modes": schemaAttribute590116dfdadf3ad6b27639ed(),
+		"evaluation_modes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Mode
+					"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The mode of an evaluation. The valid values are Detective or Proactive.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The modes the CC rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputParameters
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +131,10 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A string, in JSON format, that is passed to the CC rule Lambda function.",
 		//	  "type": "string"
 		//	}
-		"input_parameters": schemaAttribute2c8cac0d074fdb013dd4cbdf(),
+		"input_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string, in JSON format, that is passed to the CC rule Lambda function.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumExecutionFrequency
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +142,10 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum frequency with which CC runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:\n  +  You are using an AWS managed rule that is triggered at a periodic frequency.\n  +  Your custom rule is triggered when CC delivers the configuration snapshot. For more information, see [ConfigSnapshotDeliveryProperties](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigSnapshotDeliveryProperties.html).\n  \n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.",
 		//	  "type": "string"
 		//	}
-		"maximum_execution_frequency": schemaAttribute9ce3829ea92fdd6228efe7a2(),
+		"maximum_execution_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maximum frequency with which CC runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:\n  +  You are using an AWS managed rule that is triggered at a periodic frequency.\n  +  Your custom rule is triggered when CC delivers the configuration snapshot. For more information, see [ConfigSnapshotDeliveryProperties](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigSnapshotDeliveryProperties.html).\n  \n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +176,33 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scope": schemaAttributef709e38a8055288b90d7f830(),
+		"scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComplianceResourceId
+				"compliance_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ``ComplianceResourceTypes``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComplianceResourceTypes
+				"compliance_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ``ComplianceResourceId``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TagKey
+				"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TagValue
+				"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for ``TagValue``, you must also specify a value for ``TagKey``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -429,7 +271,68 @@ func configRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source": schemaAttribute4e045a19c7da247ac4a9d8d0(),
+		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomPolicyDetails
+				"custom_policy_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableDebugLogDelivery
+						"enable_debug_log_delivery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "The boolean expression for enabling debug logging for your CC Custom Policy rule. The default value is ``false``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PolicyRuntime
+						"policy_runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The runtime system for your CC Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by CC Custom Policy rules. For more information about Guard, see the [Guard GitHub Repository](https://docs.aws.amazon.com/https://github.com/aws-cloudformation/cloudformation-guard).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PolicyText
+						"policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The policy definition containing the logic for your CC Custom Policy rule.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to ``CUSTOM_POLICY``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Owner
+				"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether AWS or the customer owns and manages the CC rule.\n CC Managed Rules are predefined rules owned by AWS. For more information, see [Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html) in the *developer guide*.\n CC Custom Rules are rules that you can develop either with Guard (``CUSTOM_POLICY``) or LAMlong (``CUSTOM_LAMBDA``). For more information, see [Custom Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html) in the *developer guide*.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceDetails
+				"source_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EventSource
+							"event_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The source of the event, such as an AWS service, that triggers CC to evaluate your AWS resources.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaximumExecutionFrequency
+							"maximum_execution_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The frequency at which you want CC to run evaluations for a custom rule with a periodic trigger. If you specify a value for ``MaximumExecutionFrequency``, then ``MessageType`` must use the ``ScheduledNotification`` value.\n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.\n Based on the valid value you choose, CC runs evaluations once for each valid value. For example, if you choose ``Three_Hours``, CC runs evaluations once every three hours. In this case, ``Three_Hours`` is the frequency of this rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MessageType
+							"message_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of notification that triggers CC to run an evaluation for a rule. You can specify the following notification types:\n  +  ``ConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers a configuration item as a result of a resource change.\n  +  ``OversizedConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers an oversized configuration item. CC may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.\n  +  ``ScheduledNotification`` - Triggers a periodic evaluation at the frequency specified for ``MaximumExecutionFrequency``.\n  +  ``ConfigurationSnapshotDeliveryCompleted`` - Triggers a periodic evaluation when CC delivers a configuration snapshot.\n  \n If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ``ConfigurationItemChangeNotification`` and one for ``OversizedConfigurationItemChangeNotification``.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Provides the source and the message types that cause CC to evaluate your AWS resources against a rule. It also provides the frequency with which you want CC to run evaluations for the rule if the trigger type is periodic.\n If the owner is set to ``CUSTOM_POLICY``, the only acceptable values for the CC rule trigger message type are ``ConfigurationItemChangeNotification`` and ``OversizedConfigurationItemChangeNotification``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceIdentifier
+				"source_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For CC Managed rules, a predefined identifier from a list. For example, ``IAM_PASSWORD_POLICY`` is a managed rule. To reference a managed rule, see [List of Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).\n For CC Custom Lambda rules, the identifier is the Amazon Resource Name (ARN) of the rule's LAMlong function, such as ``arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name``.\n For CC Custom Policy rules, this field will be ignored.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Provides the rule owner (```` for managed rules, ``CUSTOM_POLICY`` for Custom Policy rules, and ``CUSTOM_LAMBDA`` for Custom Lambda rules), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

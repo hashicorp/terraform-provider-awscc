@@ -16,134 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute028d611c6745fe92a23e0d6a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of datapoints within the evaluation period that must be breaching to trigger the alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05858973eed160828cfbb95d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource's optional description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0905d0379130b1b5f759d21b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource type this template should dynamically generate cloudwatch metric alarms for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27eedaefc3d6bba58bf188ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f8719261202413e6ea00d9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50d33b8774212dea3122681d() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Represents the tags associated with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53095f1543bd7894cbfa8d75() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The threshold value to compare with the specified statistic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64b5a21f378374eb785688da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how missing data points are treated when evaluating the alarm's condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65845c22cec95bee1391497d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cloudwatch alarm template group's identifier. Can be either be its id or current name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80b8af2e946b8b89d07ea34c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The statistic to apply to the alarm's metric data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8711ed180f5ca67c517771c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea012d2902750c5495a440679() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The comparison operator used to compare the specified statistic and the threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec753e6eb56d88b24f3e04f51() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The period, in seconds, over which the specified statistic is applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0c91232ba536824801f4de1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric associated with the alarm. Must be compatible with targetResourceType.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1a61ed96f449c699bf43397() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3b4288498010da467db82d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede7b40debd2b267cabab7f51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cloudwatch alarm template's ARN (Amazon Resource Name)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef35f461ef4b5152768f0e14e() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of periods over which data is compared to the specified threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_cloudwatch_alarm_template", cloudWatchAlarmTemplateDataSource)
 }
@@ -160,7 +32,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:.+:medialive:.+:cloudwatch-alarm-template:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributede7b40debd2b267cabab7f51(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A cloudwatch alarm template's ARN (Amazon Resource Name)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComparisonOperator
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +49,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"comparison_operator": schemaAttributea012d2902750c5495a440679(),
+		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The comparison operator used to compare the specified statistic and the threshold.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +60,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributed1a61ed96f449c699bf43397(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatapointsToAlarm
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +73,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"datapoints_to_alarm": schemaAttribute028d611c6745fe92a23e0d6a(),
+		"datapoints_to_alarm": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of datapoints within the evaluation period that must be breaching to trigger the alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +86,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute05858973eed160828cfbb95d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource's optional description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationPeriods
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +99,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"evaluation_periods": schemaAttributef35f461ef4b5152768f0e14e(),
+		"evaluation_periods": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of periods over which data is compared to the specified threshold.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +113,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttribute27eedaefc3d6bba58bf188ad(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +125,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"group_identifier": schemaAttribute65845c22cec95bee1391497d(),
+		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A cloudwatch alarm template group's identifier. Can be either be its id or current name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -243,14 +139,19 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"cloudwatch_alarm_template_id": schemaAttribute8711ed180f5ca67c517771c6(),
+		"cloudwatch_alarm_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identifier": schemaAttribute3f8719261202413e6ea00d9a(),
+		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricName
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +161,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"metric_name": schemaAttributed0c91232ba536824801f4de1(),
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the metric associated with the alarm. Must be compatible with targetResourceType.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +172,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schemaAttributed1a61ed96f449c699bf43397(),
+		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +186,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed3b4288498010da467db82d4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Period
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +200,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 10,
 		//	  "type": "number"
 		//	}
-		"period": schemaAttributec753e6eb56d88b24f3e04f51(),
+		"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The period, in seconds, over which the specified statistic is applied.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +218,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"statistic": schemaAttribute80b8af2e946b8b89d07ea34c(),
+		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The statistic to apply to the alarm's metric data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +235,12 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute50d33b8774212dea3122681d(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Represents the tags associated with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetResourceType
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +259,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_resource_type": schemaAttribute0905d0379130b1b5f759d21b(),
+		"target_resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource type this template should dynamically generate cloudwatch metric alarms for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -347,7 +271,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The threshold value to compare with the specified statistic.",
 		//	  "type": "number"
 		//	}
-		"threshold": schemaAttribute53095f1543bd7894cbfa8d75(),
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The threshold value to compare with the specified statistic.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TreatMissingData
 		// CloudFormation resource type schema:
 		//
@@ -361,7 +288,10 @@ func cloudWatchAlarmTemplateDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"treat_missing_data": schemaAttribute64b5a21f378374eb785688da(),
+		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies how missing data points are treated when evaluating the alarm's condition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -17,28 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0765d7555453fed145661254() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The security configuration details in JSON format.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d248fb60f60434ec509bf31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the security configuration.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_emr_security_configuration", securityConfigurationResource)
 	registry.AddListResourceFactory("awscc_emr_security_configuration", generic.NewListResource(securityConfigurationResource))
@@ -55,7 +33,15 @@ func securityConfigurationResource(ctx context.Context) (resource.Resource, erro
 		//	  "description": "The name of the security configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute4d248fb60f60434ec509bf31(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the security configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -63,7 +49,13 @@ func securityConfigurationResource(ctx context.Context) (resource.Resource, erro
 		//	  "description": "The security configuration details in JSON format.",
 		//	  "type": "string"
 		//	}
-		"security_configuration": schemaAttribute0765d7555453fed145661254(),
+		"security_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The security configuration details in JSON format.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

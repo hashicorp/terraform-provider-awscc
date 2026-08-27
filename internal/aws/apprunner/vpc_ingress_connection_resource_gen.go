@@ -21,122 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f14015e3419f65706eff752() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47bcf5a5c8e5393a9e28627b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute674deef337390d8269a71a16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC that the VPC endpoint is used in.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85717d19d15d433bab41d7a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC endpoint that your App Runner service connects to.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute914925c07169868b4e9a1caa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the service.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 1011),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97cb107a18a7d5b83df6b1ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer-provided Vpc Ingress Connection name.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(4, 40),
-			stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98965b1b1f023db8dbcdc026() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcEndpointId
-			"vpc_endpoint_id": schemaAttribute85717d19d15d433bab41d7a6(),
-			// Property: VpcId
-			"vpc_id": schemaAttribute674deef337390d8269a71a16(),
-		}, /*END SCHEMA*/
-		Description: "The configuration of customer?s VPC and related VPC endpoint",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b3e540f76b37352165fdc9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute47bcf5a5c8e5393a9e28627b(),
-				// Property: Value
-				"value": schemaAttribute47bcf5a5c8e5393a9e28627b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-			listplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// Tags is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee119663028be324e1262ff86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the VpcIngressConnection.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef27bf0b742241af95766abba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Domain name associated with the VPC Ingress Connection.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_apprunner_vpc_ingress_connection", vpcIngressConnectionResource)
 	registry.AddListResourceFactory("awscc_apprunner_vpc_ingress_connection", generic.NewListResource(vpcIngressConnectionResource))
@@ -156,7 +40,13 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "[A-Za-z0-9*.-]{1,255}",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttributef27bf0b742241af95766abba(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Domain name associated with the VPC Ingress Connection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IngressVpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +69,22 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ingress_vpc_configuration": schemaAttribute98965b1b1f023db8dbcdc026(),
+		"ingress_vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcEndpointId
+				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the VPC endpoint that your App Runner service connects to.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the VPC that the VPC endpoint is used in.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration of customer?s VPC and related VPC endpoint",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceArn
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +95,16 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_arn": schemaAttribute914925c07169868b4e9a1caa(),
+		"service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the service.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1011),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +122,13 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee119663028be324e1262ff86(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the VpcIngressConnection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +147,35 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributed5b3e540f76b37352165fdc9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: VpcIngressConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +186,13 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"vpc_ingress_connection_arn": schemaAttribute0f14015e3419f65706eff752(),
+		"vpc_ingress_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcIngressConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +203,19 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}",
 		//	  "type": "string"
 		//	}
-		"vpc_ingress_connection_name": schemaAttribute97cb107a18a7d5b83df6b1ba(),
+		"vpc_ingress_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer-provided Vpc Ingress Connection name.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(4, 40),
+				stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

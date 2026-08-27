@@ -14,56 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute16a82f80cde840d2492e97dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The region authorized to collect aggregated data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ae77b93a61b863fe66d50f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The 12-digit account ID of the account authorized to aggregate data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b7f2918f01ad15104aad190() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AggregationAuthorization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec15fa3b2197744e6dfd37f43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc54f4956e894a1c12278051() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4461cb25e5c241ea0b099e1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec15fa3b2197744e6dfd37f43(),
-				// Property: Value
-				"value": schemaAttributedc54f4956e894a1c12278051(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the AggregationAuthorization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_config_aggregation_authorization", aggregationAuthorizationDataSource)
 }
@@ -79,7 +29,10 @@ func aggregationAuthorizationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The ARN of the AggregationAuthorization.",
 		//	  "type": "string"
 		//	}
-		"aggregation_authorization_arn": schemaAttribute8b7f2918f01ad15104aad190(),
+		"aggregation_authorization_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AggregationAuthorization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizedAccountId
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +41,10 @@ func aggregationAuthorizationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"authorized_account_id": schemaAttribute3ae77b93a61b863fe66d50f5(),
+		"authorized_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The 12-digit account ID of the account authorized to aggregate data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizedAwsRegion
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +54,10 @@ func aggregationAuthorizationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"authorized_aws_region": schemaAttribute16a82f80cde840d2492e97dd(),
+		"authorized_aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The region authorized to collect aggregated data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +91,24 @@ func aggregationAuthorizationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef4461cb25e5c241ea0b099e1(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the AggregationAuthorization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

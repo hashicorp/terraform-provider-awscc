@@ -15,100 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0fb15ed522ca2fdfe097d084() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12da30c222788c03acb6116b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a4612261e4500a832826881() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables use of a user role requirement in your chat configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2867da624296b78109ee0be3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the Slack workspace",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3aa3936a31981b9028efe3a4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f8928f4351bd3e8d964cd94() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeac90e89b51541a04489df14d(),
-				// Property: Value
-				"value": schemaAttributeac90e89b51541a04489df14d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to add to the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cadfe4b479953a8801208e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the Slack channel",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa0aba359326b554e04d1067() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac90e89b51541a04489df14d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb123b7e74e68ac08daf6a7f0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7be7d5997e5be37f876c6a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbc602ffec1f6c6695259961() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_chatbot_slack_channel_configuration", slackChannelConfigurationDataSource)
 }
@@ -125,7 +31,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributed7be7d5997e5be37f876c6a4(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +45,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[A-Za-z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"configuration_name": schemaAttributeaa0aba359326b554e04d1067(),
+		"configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomizationResourceArns
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +61,11 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "array"
 		//	}
-		"customization_resource_arns": schemaAttribute0fb15ed522ca2fdfe097d084(),
+		"customization_resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailPolicies
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +78,11 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "array"
 		//	}
-		"guardrail_policies": schemaAttribute3aa3936a31981b9028efe3a4(),
+		"guardrail_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +91,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"iam_role_arn": schemaAttribute12da30c222788c03acb6116b(),
+		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingLevel
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +104,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^(ERROR|INFO|NONE)$",
 		//	  "type": "string"
 		//	}
-		"logging_level": schemaAttributedbc602ffec1f6c6695259961(),
+		"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SlackChannelId
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +118,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"slack_channel_id": schemaAttribute9cadfe4b479953a8801208e9(),
+		"slack_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the Slack channel",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SlackWorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +132,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[0-9A-Z]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"slack_workspace_id": schemaAttribute2867da624296b78109ee0be3(),
+		"slack_workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the Slack workspace",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnsTopicArns
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +148,11 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "array"
 		//	}
-		"sns_topic_arns": schemaAttributeb123b7e74e68ac08daf6a7f0(),
+		"sns_topic_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +182,22 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute8f8928f4351bd3e8d964cd94(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to add to the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserRoleRequired
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +206,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Enables use of a user role requirement in your chat configuration",
 		//	  "type": "boolean"
 		//	}
-		"user_role_required": schemaAttribute1a4612261e4500a832826881(),
+		"user_role_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables use of a user role requirement in your chat configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

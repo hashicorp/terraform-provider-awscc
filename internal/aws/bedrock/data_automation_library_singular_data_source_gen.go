@@ -16,130 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0db741cb84b971694f583e71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the DataAutomationLibrary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e552d99d4e035c064d3ebc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time Stamp",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41c377c08f05af58277e66c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45c6bfac0a9cc7625bc1f8ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS Key Identifier",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fa5980083be3a35d1d4b33a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Entity types supported in DataAutomationLibraries",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60330c8d5086400d9465c16a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "KMS Encryption Context",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76e673f0f6f7a28e5f738d67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the DataAutomationLibrary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fdd228fb5d9dadc77b2a1fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN generated at the server side when a DataAutomationLibrary is created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute853e3f21e017afd7baa5a6be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7a209ef532cc8f18d07749a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of DataAutomationLibrary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8d536b5c134001d65ab735a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EntityMetadata
-				"entity_metadata": schemaAttributede08093819d3dee99dc6faa4(),
-				// Property: EntityType
-				"entity_type": schemaAttribute5fa5980083be3a35d1d4b33a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of info for each entity type in the DataAutomationLibrary",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb3807c3734d75a5ce32b15a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute41c377c08f05af58277e66c3(),
-				// Property: Value
-				"value": schemaAttribute853e3f21e017afd7baa5a6be(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede08093819d3dee99dc6faa4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "JSON string representing relevant metadata for the entity type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8d16c9c0b6106f8fac4cbbf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsEncryptionContext
-			"kms_encryption_context": schemaAttribute60330c8d5086400d9465c16a(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute45c6bfac0a9cc7625bc1f8ef(),
-		}, /*END SCHEMA*/
-		Description: "KMS Encryption Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_data_automation_library", dataAutomationLibraryDataSource)
 }
@@ -156,7 +32,11 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute2e552d99d4e035c064d3ebc2(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +71,24 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schemaAttributee8d16c9c0b6106f8fac4cbbf(),
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsEncryptionContext
+				"kms_encryption_context": // Pattern: ""
+				schema.MapAttribute{      /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "KMS Encryption Context",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Identifier",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "KMS Encryption Configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntityTypes
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +117,24 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"entity_types": schemaAttributec8d536b5c134001d65ab735a(),
+		"entity_types": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EntityMetadata
+					"entity_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "JSON string representing relevant metadata for the entity type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EntityType
+					"entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Entity types supported in DataAutomationLibraries",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of info for each entity type in the DataAutomationLibrary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LibraryArn
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +144,10 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:aws(|-cn|-iso|-iso-[a-z]|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:data-automation-library/[a-zA-Z0-9-]{12,36}$",
 		//	  "type": "string"
 		//	}
-		"library_arn": schemaAttribute7fdd228fb5d9dadc77b2a1fa(),
+		"library_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN generated at the server side when a DataAutomationLibrary is created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LibraryDescription
 		// CloudFormation resource type schema:
 		//
@@ -240,7 +157,10 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"library_description": schemaAttribute76e673f0f6f7a28e5f738d67(),
+		"library_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the DataAutomationLibrary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LibraryName
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +171,10 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"library_name": schemaAttribute0db741cb84b971694f583e71(),
+		"library_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the DataAutomationLibrary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +186,10 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributec7a209ef532cc8f18d07749a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of DataAutomationLibrary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +224,24 @@ func dataAutomationLibraryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributecb3807c3734d75a5ce32b15a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

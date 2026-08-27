@@ -15,329 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute074d2b2697b800204efc0ef1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OnFailure
-				"on_failure": schemaAttribute6a78e31c3259f8b1b38ba609(),
-				// Property: ParallelGroup
-				"parallel_group": schemaAttribute09af99e9da7812371b883d3c(),
-				// Property: Parameters
-				"parameters": schemaAttribute5b23060527af9aa007d79c6d(),
-				// Property: WorkflowArn
-				"workflow_arn": schemaAttributead30e92c8c6ca32ef2fb8d08(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Workflows to define the image build process",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09af99e9da7812371b883d3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The parallel group name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a4deaf60dc8fe6cefcd2239() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute259c0dd7a6a88988806b4cb6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute276ec9a76d6d868d121110bc() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags of this image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b4aaff37d3a7b15c4b64ff8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deployment ID of the pipeline, used for resource create/update triggers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute404fe31101cd7726afb1c8c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The execution role name/ARN for the image build, if provided",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b23060527af9aa007d79c6d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributeb2da1ce030794fd1d707d21f(),
-				// Property: Value
-				"value": schemaAttributecb36d02f8109d5d4736b116b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The parameters associated with the workflow",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62d78c5f2935bbe108315ce7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FailureCount
-			"failure_count": schemaAttributee665c31e2d9202e3631ae5f6(),
-		}, /*END SCHEMA*/
-		Description: "The auto-disable policy for the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute697b2f4f13c9e1980b908ec4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The condition configures when the pipeline should trigger a new image build.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute698cf34d8a979f281dc3e1ac() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a78e31c3259f8b1b38ba609() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Define execution decision in case of workflow failure",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b2660b752553310780391da() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EcrConfiguration
-			"ecr_configuration": schemaAttributee980acf5c2a90d956de86021(),
-			// Property: ImageScanningEnabled
-			"image_scanning_enabled": schemaAttribute698cf34d8a979f281dc3e1ac(),
-		}, /*END SCHEMA*/
-		Description: "Contains settings for vulnerability scans.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6dc18a6b1892bfae26c9af3c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ImageLogGroupName
-			"image_log_group_name": schemaAttributea38c7c0a86500981623cf6ca(),
-			// Property: PipelineLogGroupName
-			"pipeline_log_group_name": schemaAttribute9a4c79d4721441f955f87433(),
-		}, /*END SCHEMA*/
-		Description: "The logging configuration settings for the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7108418e501ce199bd406303() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags to be applied to images created by this pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute824b63be72307fe46a253cf4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95fa96e7a495b8d58e3311a9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum time in minutes that tests are permitted to run.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a4c79d4721441f955f87433() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the log group for pipeline execution logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea38c7c0a86500981623cf6ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the log group for image build logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea88049162f3f19990d4a8500() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead30e92c8c6ca32ef2fb8d08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the workflow",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2da1ce030794fd1d707d21f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd68d41ab5837b00a5bd7676() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0909af3c126767ce94f70f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec360b41ed07eac44eb371a05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3a8e5910810b090302e028e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb36d02f8109d5d4736b116b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecdd3c5ffe1100b65b75ef4ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecde870bd77353ff0fbf67a55() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoDisablePolicy
-			"auto_disable_policy": schemaAttribute62d78c5f2935bbe108315ce7(),
-			// Property: PipelineExecutionStartCondition
-			"pipeline_execution_start_condition": schemaAttribute697b2f4f13c9e1980b908ec4(),
-			// Property: ScheduleExpression
-			"schedule_expression": schemaAttribute259c0dd7a6a88988806b4cb6(),
-			// Property: Timezone
-			"timezone": schemaAttributec360b41ed07eac44eb371a05(),
-		}, /*END SCHEMA*/
-		Description: "The schedule of the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4be147d321ea0326d912df8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don't provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed89b3a7a0dba5b899cce5fa5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Collects additional information about the image being created, including the operating system (OS) version and package list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee00946561dbd8e7923647b99() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines if tests should be executed when building this image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee665c31e2d9202e3631ae5f6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of consecutive failures after which the pipeline should be automatically disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee980acf5c2a90d956de86021() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerTags
-			"container_tags": schemaAttributef6daff2fca34c1a26095973f(),
-			// Property: RepositoryName
-			"repository_name": schemaAttributed4be147d321ea0326d912df8(),
-		}, /*END SCHEMA*/
-		Description: "Contains ECR settings for vulnerability scans.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea66f15dce3bbb3cf2ebea87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2fc06b3a8e82a86c1245a86() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ImageTestsEnabled
-			"image_tests_enabled": schemaAttributee00946561dbd8e7923647b99(),
-			// Property: TimeoutMinutes
-			"timeout_minutes": schemaAttribute95fa96e7a495b8d58e3311a9(),
-		}, /*END SCHEMA*/
-		Description: "The image tests configuration of the image pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6daff2fca34c1a26095973f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_image_pipeline", imagePipelineDataSource)
 }
@@ -354,7 +31,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-pipeline/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributebd68d41ab5837b00a5bd7676(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContainerRecipeArn
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +42,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 		//	  "type": "string"
 		//	}
-		"container_recipe_arn": schemaAttributea88049162f3f19990d4a8500(),
+		"container_recipe_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +53,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The deployment ID of the pipeline, used for resource create/update triggers.",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schemaAttribute3b4aaff37d3a7b15c4b64ff8(),
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deployment ID of the pipeline, used for resource create/update triggers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +64,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The description of the image pipeline.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributecdd3c5ffe1100b65b75ef4ac(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DistributionConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +75,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
 		//	  "type": "string"
 		//	}
-		"distribution_configuration_arn": schemaAttribute824b63be72307fe46a253cf4(),
+		"distribution_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnhancedImageMetadataEnabled
 		// CloudFormation resource type schema:
 		//
@@ -394,7 +86,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
 		//	  "type": "boolean"
 		//	}
-		"enhanced_image_metadata_enabled": schemaAttributed89b3a7a0dba5b899cce5fa5(),
+		"enhanced_image_metadata_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Collects additional information about the image being created, including the operating system (OS) version and package list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +97,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The execution role name/ARN for the image build, if provided",
 		//	  "type": "string"
 		//	}
-		"execution_role": schemaAttribute404fe31101cd7726afb1c8c0(),
+		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role name/ARN for the image build, if provided",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageRecipeArn
 		// CloudFormation resource type schema:
 		//
@@ -410,7 +108,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
 		//	  "type": "string"
 		//	}
-		"image_recipe_arn": schemaAttribute1a4deaf60dc8fe6cefcd2239(),
+		"image_recipe_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageScanningConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -444,7 +145,35 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"image_scanning_configuration": schemaAttribute6b2660b752553310780391da(),
+		"image_scanning_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EcrConfiguration
+				"ecr_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerTags
+						"container_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RepositoryName
+						"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don't provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains ECR settings for vulnerability scans.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageScanningEnabled
+				"image_scanning_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains settings for vulnerability scans.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTags
 		// CloudFormation resource type schema:
 		//
@@ -458,7 +187,12 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"image_tags": schemaAttribute7108418e501ce199bd406303(),
+		"image_tags":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags to be applied to images created by this pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTestsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -479,7 +213,22 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"image_tests_configuration": schemaAttributef2fc06b3a8e82a86c1245a86(),
+		"image_tests_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageTestsEnabled
+				"image_tests_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines if tests should be executed when building this image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutMinutes
+				"timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum time in minutes that tests are permitted to run.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The image tests configuration of the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InfrastructureConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -487,7 +236,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
 		//	  "type": "string"
 		//	}
-		"infrastructure_configuration_arn": schemaAttributeea66f15dce3bbb3cf2ebea87(),
+		"infrastructure_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -506,7 +258,22 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schemaAttribute6dc18a6b1892bfae26c9af3c(),
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageLogGroupName
+				"image_log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the log group for image build logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PipelineLogGroupName
+				"pipeline_log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the log group for pipeline execution logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +281,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the image pipeline.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec0909af3c126767ce94f70f6(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -559,7 +329,39 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schemaAttributecde870bd77353ff0fbf67a55(),
+		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoDisablePolicy
+				"auto_disable_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FailureCount
+						"failure_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of consecutive failures after which the pipeline should be automatically disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The auto-disable policy for the image pipeline.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PipelineExecutionStartCondition
+				"pipeline_execution_start_condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The condition configures when the pipeline should trigger a new image build.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduleExpression
+				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Timezone
+				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The schedule of the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -571,7 +373,10 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributec3a8e5910810b090302e028e(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -585,7 +390,12 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute276ec9a76d6d868d121110bc(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags of this image pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Workflows
 		// CloudFormation resource type schema:
 		//
@@ -640,7 +450,47 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"workflows": schemaAttribute074d2b2697b800204efc0ef1(),
+		"workflows": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: OnFailure
+					"on_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Define execution decision in case of workflow failure",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParallelGroup
+					"parallel_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The parallel group name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Parameters
+					"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The parameters associated with the workflow",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: WorkflowArn
+					"workflow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the workflow",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Workflows to define the image build process",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

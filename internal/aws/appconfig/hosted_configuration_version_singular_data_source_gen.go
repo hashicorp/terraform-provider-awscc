@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1d322705bafb30b948fa7e6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A user-defined label for an AWS AppConfig hosted configuration version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute265f29962846eeb627aad985() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the configuration or the configuration data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55e10881cb75d6b0230092b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration profile ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6dd0b6ad9639596b0441c735() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The application ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76a9e755be0254d626cb5e76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current version number of hosted configuration version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93a7cb922269bf7db921ffcd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A standard MIME type describing the format of the configuration content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebc99e60207a016fb8441dc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the hosted configuration version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef34febb6d399b2ef3e9cd39b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appconfig_hosted_configuration_version", hostedConfigurationVersionDataSource)
 }
@@ -86,7 +30,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute6dd0b6ad9639596b0441c735(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The application ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationProfileId
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +42,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"configuration_profile_id": schemaAttribute55e10881cb75d6b0230092b8(),
+		"configuration_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The configuration profile ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +53,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The content of the configuration or the configuration data.",
 		//	  "type": "string"
 		//	}
-		"content": schemaAttribute265f29962846eeb627aad985(),
+		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content of the configuration or the configuration data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContentType
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +66,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"content_type": schemaAttribute93a7cb922269bf7db921ffcd(),
+		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A standard MIME type describing the format of the configuration content.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +79,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeebc99e60207a016fb8441dc2(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the hosted configuration version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatestVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +90,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.",
 		//	  "type": "integer"
 		//	}
-		"latest_version_number": schemaAttributef34febb6d399b2ef3e9cd39b(),
+		"latest_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionLabel
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +104,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^$|.*[^0-9].*",
 		//	  "type": "string"
 		//	}
-		"version_label": schemaAttribute1d322705bafb30b948fa7e6d(),
+		"version_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A user-defined label for an AWS AppConfig hosted configuration version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +115,10 @@ func hostedConfigurationVersionDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "Current version number of hosted configuration version.",
 		//	  "type": "string"
 		//	}
-		"version_number": schemaAttribute76a9e755be0254d626cb5e76(),
+		"version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current version number of hosted configuration version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

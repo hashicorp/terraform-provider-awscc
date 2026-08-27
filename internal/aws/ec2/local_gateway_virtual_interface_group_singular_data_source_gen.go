@@ -15,92 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04f53d85b42f29d7d49be756() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the local gateway virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b4c0c0d34edd5bba27bdf5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e01d16519db8ddc902c637b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f30416c28f3240514303505() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute422d4a58e503f96da4a9453f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute454dc2c233d2b5b166351d1e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IDs of the virtual interfaces",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c727082c19ff38b1b2d405e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ddb7847911a6bb15a8b16a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Number (ARN) of the local gateway virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0e38e139c3e9769a3e1e1da() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The extended 32-bit ASN for the local BGP configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee68ded3dc86be7c2605b96f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5870180ebc7a37f0125217c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3f30416c28f3240514303505(),
-				// Property: Value
-				"value": schemaAttribute422d4a58e503f96da4a9453f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_local_gateway_virtual_interface_group", localGatewayVirtualInterfaceGroupDataSource)
 }
@@ -116,7 +30,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "description": "The current state of the local gateway virtual interface group",
 		//	  "type": "string"
 		//	}
-		"configuration_state": schemaAttribute04f53d85b42f29d7d49be756(),
+		"configuration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the local gateway virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalBgpAsn
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +41,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "description": "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
 		//	  "type": "integer"
 		//	}
-		"local_bgp_asn": schemaAttribute1e01d16519db8ddc902c637b(),
+		"local_bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalBgpAsnExtended
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +53,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"local_bgp_asn_extended": schemaAttributee0e38e139c3e9769a3e1e1da(),
+		"local_bgp_asn_extended": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The extended 32-bit ASN for the local BGP configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +64,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "description": "The ID of the local gateway",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttributee68ded3dc86be7c2605b96f5(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +75,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "description": "The Amazon Resource Number (ARN) of the local gateway virtual interface group",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_group_arn": schemaAttribute8ddb7847911a6bb15a8b16a0(),
+		"local_gateway_virtual_interface_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Number (ARN) of the local gateway virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceGroupId
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +86,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "description": "The ID of the virtual interface group",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_group_id": schemaAttribute1b4c0c0d34edd5bba27bdf5d(),
+		"local_gateway_virtual_interface_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceIds
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +102,11 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"local_gateway_virtual_interface_ids": schemaAttribute454dc2c233d2b5b166351d1e(),
+		"local_gateway_virtual_interface_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IDs of the virtual interfaces",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +114,10 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "description": "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute4c727082c19ff38b1b2d405e(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +148,24 @@ func localGatewayVirtualInterfaceGroupDataSource(ctx context.Context) (datasourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributef5870180ebc7a37f0125217c(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

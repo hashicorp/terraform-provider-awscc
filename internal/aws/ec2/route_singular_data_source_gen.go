@@ -14,125 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute43ddb0714cbdcf93fb11cf9e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute451feebbf112d144eb431e39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a19d4f3e47d802147b245b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the ODB network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute719e120f3071fa65fe8413d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a prefix list used for the destination match.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86bfd55af74ce2d2c3ce3ffe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a network interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b208e99563d7da2acb27cf3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92b11fbd3c4f10a45e235e21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an internet gateway or virtual private gateway attached to your VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute949b61c5a39430ef57481eb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the route table for the route.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute967b76b67e26c2479f6d4fe6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the carrier gateway.\n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ac5f353e9ee59335d9767d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadb6cb2cc2f5c6b9e6862eba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a VPC peering connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb24032cf10fd6836c6fc87ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[IPv6 traffic only] The ID of an egress-only internet gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed98e7e29dd1364f510d54d85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5307b8a18d437527f109653() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee59663924ec28fc016f569e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[IPv4 traffic only] The ID of a NAT gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7f72b5f2d6efddbdc5ede59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the core network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeebf6f11c2213b7f1af4458c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_route", routeDataSource)
 }
@@ -148,7 +29,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the carrier gateway.\n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
 		//	  "type": "string"
 		//	}
-		"carrier_gateway_id": schemaAttribute967b76b67e26c2479f6d4fe6(),
+		"carrier_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the carrier gateway.\n You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +40,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"cidr_block": schemaAttribute8b208e99563d7da2acb27cf3(),
+		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +51,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_arn": schemaAttributee7f72b5f2d6efddbdc5ede59(),
+		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the core network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +62,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schemaAttribute9ac5f353e9ee59335d9767d6(),
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationIpv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +73,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
 		//	  "type": "string"
 		//	}
-		"destination_ipv_6_cidr_block": schemaAttribute43ddb0714cbdcf93fb11cf9e(),
+		"destination_ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationPrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +84,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of a prefix list used for the destination match.",
 		//	  "type": "string"
 		//	}
-		"destination_prefix_list_id": schemaAttribute719e120f3071fa65fe8413d0(),
+		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a prefix list used for the destination match.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EgressOnlyInternetGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +95,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[IPv6 traffic only] The ID of an egress-only internet gateway.",
 		//	  "type": "string"
 		//	}
-		"egress_only_internet_gateway_id": schemaAttributeb24032cf10fd6836c6fc87ba(),
+		"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[IPv6 traffic only] The ID of an egress-only internet gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +106,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of an internet gateway or virtual private gateway attached to your VPC.",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schemaAttribute92b11fbd3c4f10a45e235e21(),
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an internet gateway or virtual private gateway attached to your VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +117,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute451feebbf112d144eb431e39(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a NAT instance in your VPC. The operation fails if you specify an instance ID unless exactly one network interface is attached.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +128,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the local gateway.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttributee5307b8a18d437527f109653(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +139,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[IPv4 traffic only] The ID of a NAT gateway.",
 		//	  "type": "string"
 		//	}
-		"nat_gateway_id": schemaAttributee59663924ec28fc016f569e4(),
+		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[IPv4 traffic only] The ID of a NAT gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +150,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of a network interface.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttribute86bfd55af74ce2d2c3ce3ffe(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +161,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the ODB network.",
 		//	  "type": "string"
 		//	}
-		"odb_network_arn": schemaAttribute6a19d4f3e47d802147b245b7(),
+		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the ODB network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +172,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the route table for the route.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schemaAttribute949b61c5a39430ef57481eb2(),
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the route table for the route.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +183,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of a transit gateway.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttributed98e7e29dd1364f510d54d85(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +194,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_id": schemaAttributeeebf6f11c2213b7f1af4458c(),
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcPeeringConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +205,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of a VPC peering connection.",
 		//	  "type": "string"
 		//	}
-		"vpc_peering_connection_id": schemaAttributeadb6cb2cc2f5c6b9e6862eba(),
+		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a VPC peering connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

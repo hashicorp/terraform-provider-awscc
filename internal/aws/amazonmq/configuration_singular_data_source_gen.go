@@ -14,90 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1bd726decd46c101de1086ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ff3c81cbd6a95cb665191b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of broker engine. Note: Currently, Amazon MQ only supports ACTIVEMQ for creating and editing broker configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3567ef4c022ee551f73ffde8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The base64-encoded XML configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48fce9fdaad940895178056d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute557fe0f60d263190ce9c3cd9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the broker engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cbe2c1aa4f9f89d7cfb40c4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1bd726decd46c101de1086ef(),
-				// Property: Value
-				"value": schemaAttribute1bd726decd46c101de1086ef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Create tags when creating the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78afceb419a0bb555df908ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute854d2708748115739350c41c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon MQ configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute916cd10e0eebceae15e83403() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon MQ configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3ec9faf55436e876ea82ffd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication strategy associated with the configuration. The default is SIMPLE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef19780c6f811d4b9c9a414a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The revision number of the configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_amazonmq_configuration", configurationDataSource)
 }
@@ -113,7 +29,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon MQ configuration.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute854d2708748115739350c41c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Amazon MQ configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationStrategy
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +40,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The authentication strategy associated with the configuration. The default is SIMPLE.",
 		//	  "type": "string"
 		//	}
-		"authentication_strategy": schemaAttributea3ec9faf55436e876ea82ffd(),
+		"authentication_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The authentication strategy associated with the configuration. The default is SIMPLE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +51,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The base64-encoded XML configuration.",
 		//	  "type": "string"
 		//	}
-		"data": schemaAttribute3567ef4c022ee551f73ffde8(),
+		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The base64-encoded XML configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +62,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The description of the configuration.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute48fce9fdaad940895178056d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineType
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +73,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The type of broker engine. Note: Currently, Amazon MQ only supports ACTIVEMQ for creating and editing broker configurations.",
 		//	  "type": "string"
 		//	}
-		"engine_type": schemaAttribute2ff3c81cbd6a95cb665191b1(),
+		"engine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of broker engine. Note: Currently, Amazon MQ only supports ACTIVEMQ for creating and editing broker configurations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +84,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The version of the broker engine.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute557fe0f60d263190ce9c3cd9(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the broker engine.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +95,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the Amazon MQ configuration.",
 		//	  "type": "string"
 		//	}
-		"configuration_id": schemaAttribute916cd10e0eebceae15e83403(),
+		"configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon MQ configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +106,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute78afceb419a0bb555df908ff(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Revision
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +117,10 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The revision number of the configuration.",
 		//	  "type": "string"
 		//	}
-		"revision": schemaAttributef19780c6f811d4b9c9a414a6(),
+		"revision": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The revision number of the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +145,22 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute5cbe2c1aa4f9f89d7cfb40c4(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Create tags when creating the configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

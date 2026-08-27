@@ -20,124 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute368ff99a2cf8513eb35f0df0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fcb9b6d97518809c7df7032() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c80ca67612c0ea256dbe22a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the repository that is being synced to.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5093f2268839b640e1e57442() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source provider repository path of the sync configuration file of the respective SyncType.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56614d46a0a4ecd398e54fe2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the branch of the repository from which resources are to be synchronized,",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8be08bf8d3983be75980780c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "the ID of the entity that owns the repository.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91a62184ab048939cb121b72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When to trigger Git sync to begin the stack update.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ANY_CHANGE",
-				"FILE_CHANGE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9aaef611f1584fb1baa45803() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the external provider where your third-party code repository is configured.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0f2591dd9cb111412b6ea66() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A UUID that uniquely identifies the RepositoryLink that the SyncConfig is associated with.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5e08264b1e54eb0a13c3790() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the resource that is being synchronized to the repository.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-za-z0-9_\\.-]+"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef417b234dd203c1640c3b52e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to enable or disable publishing of deployment status to source providers.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_codestarconnections_sync_configuration", syncConfigurationResource)
 	registry.AddListResourceFactory("awscc_codestarconnections_sync_configuration", generic.NewListResource(syncConfigurationResource))
@@ -154,7 +36,10 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the branch of the repository from which resources are to be synchronized,",
 		//	  "type": "string"
 		//	}
-		"branch": schemaAttribute56614d46a0a4ecd398e54fe2(),
+		"branch": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the branch of the repository from which resources are to be synchronized,",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigFile
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +47,10 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The source provider repository path of the sync configuration file of the respective SyncType.",
 		//	  "type": "string"
 		//	}
-		"config_file": schemaAttribute5093f2268839b640e1e57442(),
+		"config_file": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source provider repository path of the sync configuration file of the respective SyncType.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +59,13 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute8be08bf8d3983be75980780c(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "the ID of the entity that owns the repository.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProviderType
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +80,13 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provider_type": schemaAttribute9aaef611f1584fb1baa45803(),
+		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the external provider where your third-party code repository is configured.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PublishDeploymentStatus
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +98,20 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"publish_deployment_status": schemaAttributef417b234dd203c1640c3b52e(),
+		"publish_deployment_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to enable or disable publishing of deployment status to source providers.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryLinkId
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +120,13 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 		//	  "type": "string"
 		//	}
-		"repository_link_id": schemaAttributec0f2591dd9cb111412b6ea66(),
+		"repository_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A UUID that uniquely identifies the RepositoryLink that the SyncConfig is associated with.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RepositoryName
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +135,13 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"repository_name": schemaAttribute4c80ca67612c0ea256dbe22a(),
+		"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the repository that is being synced to.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceName
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +150,16 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"resource_name": schemaAttributee5e08264b1e54eb0a13c3790(),
+		"resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the resource that is being synchronized to the repository.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-za-z0-9_\\.-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +167,10 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute3fcb9b6d97518809c7df7032(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SyncType
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +178,13 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.",
 		//	  "type": "string"
 		//	}
-		"sync_type": schemaAttribute368ff99a2cf8513eb35f0df0(),
+		"sync_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TriggerResourceUpdateOn
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +196,20 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"trigger_resource_update_on": schemaAttribute91a62184ab048939cb121b72(),
+		"trigger_resource_update_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When to trigger Git sync to begin the stack update.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ANY_CHANGE",
+					"FILE_CHANGE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

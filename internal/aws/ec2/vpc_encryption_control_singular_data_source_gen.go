@@ -14,169 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0afd999ea7ea64feb9057dfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC on which this VPC encryption control is applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ecc3e8ca26ff1720d44c0c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: State
-			"state": schemaAttribute5c392fd67355ba71abe2fbae(),
-			// Property: StateMessage
-			"state_message": schemaAttribute5c392fd67355ba71abe2fbae(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f071b7e6c4d29154bba1027() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec4e057bae3dc6e89435ee8f4(),
-				// Property: Value
-				"value": schemaAttributef40a9608b0510c40179ca8a6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to assign to the VPC encryption control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b93c742517515a12a8f0ad2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable Vpc Lattice exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ba8dfaf5f17b31b05bac191() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC encryption control resource id.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5634be837700ad000615d572() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC encryption control mode, either monitor or enforce.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c392fd67355ba71abe2fbae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70c6f8587da40f2b9f78c8ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the VPC encryption control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute713daa51b84e1facdb762632() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable Lambda exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute756771a7cde94bedb6a15c39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable IGW exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76587899d22b587b4c1d6827() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides additional context on the state of the VPC encryption control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8293c1d3e471994e9c4d579() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EgressOnlyInternetGateway
-			"egress_only_internet_gateway": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: ElasticFileSystem
-			"elastic_file_system": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: InternetGateway
-			"internet_gateway": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: Lambda
-			"lambda": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: NatGateway
-			"nat_gateway": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: VirtualPrivateGateway
-			"virtual_private_gateway": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: VpcLattice
-			"vpc_lattice": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-			// Property: VpcPeering
-			"vpc_peering": schemaAttribute0ecc3e8ca26ff1720d44c0c6(),
-		}, /*END SCHEMA*/
-		Description: "Enumerates the states of all the VPC encryption control resource exclusions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec06a535104334c0e7a568cb6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable EFS exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4e057bae3dc6e89435ee8f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5d560a881884aded3d9d812() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable EIGW exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddce23ef1cb80ab669210c58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable VGW exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee11188b737e9db4155fb8da8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable VPC peering exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef334c587dcc55749fe2f1242() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Used to enable or disable Nat gateway exclusion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef40a9608b0510c40179ca8a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpc_encryption_control", vPCEncryptionControlDataSource)
 }
@@ -196,7 +33,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"egress_only_internet_gateway_exclusion_input": schemaAttributed5d560a881884aded3d9d812(),
+		"egress_only_internet_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable EIGW exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticFileSystemExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +48,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"elastic_file_system_exclusion_input": schemaAttributec06a535104334c0e7a568cb6(),
+		"elastic_file_system_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable EFS exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InternetGatewayExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +63,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"internet_gateway_exclusion_input": schemaAttribute756771a7cde94bedb6a15c39(),
+		"internet_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable IGW exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LambdaExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +78,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"lambda_exclusion_input": schemaAttribute713daa51b84e1facdb762632(),
+		"lambda_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable Lambda exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +93,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttribute5634be837700ad000615d572(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC encryption control mode, either monitor or enforce.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +108,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"nat_gateway_exclusion_input": schemaAttributef334c587dcc55749fe2f1242(),
+		"nat_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable Nat gateway exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceExclusions
 		// CloudFormation resource type schema:
 		//
@@ -363,7 +218,124 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_exclusions": schemaAttributeb8293c1d3e471994e9c4d579(),
+		"resource_exclusions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressOnlyInternetGateway
+				"egress_only_internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ElasticFileSystem
+				"elastic_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InternetGateway
+				"internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Lambda
+				"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NatGateway
+				"nat_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VirtualPrivateGateway
+				"virtual_private_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcLattice
+				"vpc_lattice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcPeering
+				"vpc_peering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: State
+						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StateMessage
+						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Enumerates the states of all the VPC encryption control resource exclusions",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +354,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute70c6f8587da40f2b9f78c8ef(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the VPC encryption control.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StateMessage
 		// CloudFormation resource type schema:
 		//
@@ -390,7 +365,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Provides additional context on the state of the VPC encryption control.",
 		//	  "type": "string"
 		//	}
-		"state_message": schemaAttribute76587899d22b587b4c1d6827(),
+		"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provides additional context on the state of the VPC encryption control.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -423,7 +401,24 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute0f071b7e6c4d29154bba1027(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to assign to the VPC encryption control.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VirtualPrivateGatewayExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -435,7 +430,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"virtual_private_gateway_exclusion_input": schemaAttributeddce23ef1cb80ab669210c58(),
+		"virtual_private_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable VGW exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEncryptionControlId
 		// CloudFormation resource type schema:
 		//
@@ -443,7 +441,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The VPC encryption control resource id.",
 		//	  "type": "string"
 		//	}
-		"vpc_encryption_control_id": schemaAttribute4ba8dfaf5f17b31b05bac191(),
+		"vpc_encryption_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC encryption control resource id.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -451,7 +452,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The VPC on which this VPC encryption control is applied.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute0afd999ea7ea64feb9057dfd(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC on which this VPC encryption control is applied.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcLatticeExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -463,7 +467,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vpc_lattice_exclusion_input": schemaAttribute3b93c742517515a12a8f0ad2(),
+		"vpc_lattice_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable Vpc Lattice exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcPeeringExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -475,7 +482,10 @@ func vPCEncryptionControlDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vpc_peering_exclusion_input": schemaAttributee11188b737e9db4155fb8da8(),
+		"vpc_peering_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Used to enable or disable VPC peering exclusion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

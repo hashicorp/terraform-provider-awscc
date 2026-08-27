@@ -14,103 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4092d99053421de8b68af483() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48547219c20c76f191927cf6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify this tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute517f7dcb2b8b57847a494602() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute48547219c20c76f191927cf6(),
-				// Property: Value
-				"value": schemaAttributec4a92e9da6515133e32b2610(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for labeling the FAQ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ebe2649e7e6bb6bb9535204() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Index ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62ed9f7001d2ceb9249486f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FAQ name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cc4cb949349865d6a9c9914() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FAQ file format",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute859238e5868706fe323b856f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FAQ description",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea722b157764c996b147387e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "FAQ role ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb89f4c579cd7c7d56acd88b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique ID of the FAQ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd07de4884928fadf38898f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute4092d99053421de8b68af483(),
-			// Property: Key
-			"key": schemaAttribute4092d99053421de8b68af483(),
-		}, /*END SCHEMA*/
-		Description: "FAQ S3 path",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4a92e9da6515133e32b2610() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebc6a81709569047eeec3f1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The code for a language.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kendra_faq", faqDataSource)
 }
@@ -126,7 +29,9 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4092d99053421de8b68af483(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +41,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute859238e5868706fe323b856f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FAQ description",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileFormat
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +57,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"file_format": schemaAttribute7cc4cb949349865d6a9c9914(),
+		"file_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FAQ file format",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +70,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"faq_id": schemaAttributeb89f4c579cd7c7d56acd88b9(),
+		"faq_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique ID of the FAQ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexId
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +83,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 36,
 		//	  "type": "string"
 		//	}
-		"index_id": schemaAttribute5ebe2649e7e6bb6bb9535204(),
+		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Index ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LanguageCode
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +97,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z-]*",
 		//	  "type": "string"
 		//	}
-		"language_code": schemaAttributeebc6a81709569047eeec3f1c(),
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +110,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute62ed9f7001d2ceb9249486f7(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FAQ name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +124,10 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributea722b157764c996b147387e5(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FAQ role ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3Path
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +153,20 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"s3_path": schemaAttributebd07de4884928fadf38898f1(),
+		"s3_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "FAQ S3 path",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +198,24 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute517f7dcb2b8b57847a494602(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string used to identify this tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string containing the value for the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for labeling the FAQ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

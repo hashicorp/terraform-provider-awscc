@@ -14,107 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0993ba9cfffd7dfb3ba49bd0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Kms Key Identifier used to encrypt events at rest in the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23bb884b7c6a96840daf6ae2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55402aefa6794e5a09cdc978() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7434e59d0dc39345636b6bf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ba0fb0ddb12b134216c2480() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7434e59d0dc39345636b6bf9(),
-				// Property: Value
-				"value": schemaAttribute7434e59d0dc39345636b6bf9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Any tags assigned to the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8248343df569a1cf7cb65afb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute883c840a9d48019889ff0198() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncludeDetail
-			"include_detail": schemaAttribute8248343df569a1cf7cb65afb(),
-			// Property: Level
-			"level": schemaAttribute23bb884b7c6a96840daf6ae2(),
-		}, /*END SCHEMA*/
-		Description: "The logging configuration settings for vended logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute898bcc7e761b3acb95560839() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e036532a8e7e96c7ddf472b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea23370778bdef866a2dc4152() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A JSON string that describes the permission policy statement for the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8aee16388446d9aa1f9564d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute7434e59d0dc39345636b6bf9(),
-		}, /*END SCHEMA*/
-		Description: "Dead Letter Queue for the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3dc3948eb5895488ab7b0c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_events_event_bus", eventBusDataSource)
 }
@@ -130,7 +29,10 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the event bus.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute9e036532a8e7e96c7ddf472b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeadLetterConfig
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +46,16 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dead_letter_config": schemaAttributea8aee16388446d9aa1f9564d(),
+		"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Dead Letter Queue for the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +63,10 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the event bus.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef3dc3948eb5895488ab7b0c1(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventSourceName
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +74,10 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.",
 		//	  "type": "string"
 		//	}
-		"event_source_name": schemaAttribute898bcc7e761b3acb95560839(),
+		"event_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +85,10 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Kms Key Identifier used to encrypt events at rest in the event bus.",
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schemaAttribute0993ba9cfffd7dfb3ba49bd0(),
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Kms Key Identifier used to encrypt events at rest in the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogConfig
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +117,22 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"log_config": schemaAttribute883c840a9d48019889ff0198(),
+		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncludeDetail
+				"include_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Level
+				"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for vended logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +140,10 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the event bus.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute55402aefa6794e5a09cdc978(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +151,10 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A JSON string that describes the permission policy statement for the event bus.",
 		//	  "type": "string"
 		//	}
-		"policy": schemaAttributea23370778bdef866a2dc4152(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A JSON string that describes the permission policy statement for the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +179,22 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute7ba0fb0ddb12b134216c2480(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags assigned to the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

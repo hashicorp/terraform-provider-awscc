@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute68ad2b8e5a9ce8661a0061ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa25c64a863a80848da19330() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the SourceCredential resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb76cb7f0ac9c7e2c89149b6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdecfa74d90ec5b21c4e4c0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee47e73382ebfdb54abdf1c6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codebuild_source_credential", sourceCredentialDataSource)
 }
@@ -64,7 +29,10 @@ func sourceCredentialDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN of the SourceCredential resource.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeaa25c64a863a80848da19330(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the SourceCredential resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthType
 		// CloudFormation resource type schema:
 		//
@@ -72,7 +40,10 @@ func sourceCredentialDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. ",
 		//	  "type": "string"
 		//	}
-		"auth_type": schemaAttributeb76cb7f0ac9c7e2c89149b6f(),
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerType
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +51,10 @@ func sourceCredentialDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.",
 		//	  "type": "string"
 		//	}
-		"server_type": schemaAttributee47e73382ebfdb54abdf1c6e(),
+		"server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Token
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +62,10 @@ func sourceCredentialDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.",
 		//	  "type": "string"
 		//	}
-		"token": schemaAttributebdecfa74d90ec5b21c4e4c0d(),
+		"token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +73,10 @@ func sourceCredentialDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": " The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections.",
 		//	  "type": "string"
 		//	}
-		"username": schemaAttribute68ad2b8e5a9ce8661a0061ba(),
+		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: " The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

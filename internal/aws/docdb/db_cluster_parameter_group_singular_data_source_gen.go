@@ -15,64 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute101fc2da2e4b4092f303715a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2638d2ec32e20d9b26e1033f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee21dd712cd75c0530558df8f(),
-				// Property: Value
-				"value": schemaAttribute101fc2da2e4b4092f303715a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute550f2f3c26beb8c7b9ce9b62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DB cluster parameter group family name (e.g. docdb5.0).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69652289f623f30b10b5cf6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DB cluster parameter group. If omitted, CloudFormation generates a unique name. The name is stored as lowercase.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfb72023d56b72b506f1bc0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "An object containing key-value pairs of parameters to set for the DB cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee21dd712cd75c0530558df8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1f8fdfb2866ddbc5bd49589() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description for the DB cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_docdb_db_cluster_parameter_group", dBClusterParameterGroupDataSource)
 }
@@ -90,7 +32,10 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef1f8fdfb2866ddbc5bd49589(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description for the DB cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Family
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +45,10 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"family": schemaAttribute550f2f3c26beb8c7b9ce9b62(),
+		"family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DB cluster parameter group family name (e.g. docdb5.0).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +59,10 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "[a-zA-Z0-9-]*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute69652289f623f30b10b5cf6f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the DB cluster parameter group. If omitted, CloudFormation generates a unique name. The name is stored as lowercase.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +70,11 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "An object containing key-value pairs of parameters to set for the DB cluster parameter group.",
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttributebfb72023d56b72b506f1bc0f(),
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "An object containing key-value pairs of parameters to set for the DB cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +103,24 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute2638d2ec32e20d9b26e1033f(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

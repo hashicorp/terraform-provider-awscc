@@ -24,172 +24,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01f3aa4b172de235cf87c429() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the application.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18cc1dbfb42086273834a65b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A local text file that contains the license of the app.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// LicenseBody is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32764402cd6d13b7385cb36e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time this resource was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute522dcd1a8296d86ee37273db() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the author of this application has been verified.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66504b837c6fcc825fa051e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A text readme file in Markdown language that contains a more detailed description of the application.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// ReadmeBody is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute762407de4882ff135716d56c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the application.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86cde7899a89ed96171042ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The semantic version of the application.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// SemanticVersion is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8163cca441f40c303c5940b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The local raw packaged AWS SAM template file of your application.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// TemplateBody is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecabc75934d2562a67144bb24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 140),
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\-]+"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfe8bfbdeef15099074a3795() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the author publishing the app.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 127),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2018abb467d60682f2ddc82() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Labels to improve discovery of apps in search results.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(10),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6589b6bf89ca6b806af8a84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A link to a public repository for the source code of your application.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// SourceCodeUrl is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec1038141727673f6715a5de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A valid identifier from https://spdx.org/licenses/.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5300843888be6046c1c152f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A URL with more information about the application.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_serverlessrepo_application", applicationResource)
 	registry.AddListResourceFactory("awscc_serverlessrepo_application", generic.NewListResource(applicationResource))
@@ -206,7 +40,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the application.",
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute762407de4882ff135716d56c(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the application.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Author
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +56,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"author": schemaAttributedfe8bfbdeef15099074a3795(),
+		"author": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the author publishing the app.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 127),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +70,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The date and time this resource was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute32764402cd6d13b7385cb36e(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time this resource was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +86,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute01f3aa4b172de235cf87c429(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the application.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HomePageUrl
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +100,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A URL with more information about the application.",
 		//	  "type": "string"
 		//	}
-		"home_page_url": schemaAttributef5300843888be6046c1c152f(),
+		"home_page_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A URL with more information about the application.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IsVerifiedAuthor
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +115,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Whether the author of this application has been verified.",
 		//	  "type": "boolean"
 		//	}
-		"is_verified_author": schemaAttribute522dcd1a8296d86ee37273db(),
+		"is_verified_author": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the author of this application has been verified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Labels
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +133,18 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"labels": schemaAttributee2018abb467d60682f2ddc82(),
+		"labels": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Labels to improve discovery of apps in search results.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseBody
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +152,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A local text file that contains the license of the app.",
 		//	  "type": "string"
 		//	}
-		"license_body": schemaAttribute18cc1dbfb42086273834a65b(),
+		"license_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A local text file that contains the license of the app.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// LicenseBody is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +172,17 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-zA-Z0-9\\-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecabc75934d2562a67144bb24(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 140),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReadmeBody
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +190,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A text readme file in Markdown language that contains a more detailed description of the application.",
 		//	  "type": "string"
 		//	}
-		"readme_body": schemaAttribute66504b837c6fcc825fa051e6(),
+		"readme_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A text readme file in Markdown language that contains a more detailed description of the application.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ReadmeBody is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SemanticVersion
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +206,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The semantic version of the application.",
 		//	  "type": "string"
 		//	}
-		"semantic_version": schemaAttribute86cde7899a89ed96171042ae(),
+		"semantic_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The semantic version of the application.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// SemanticVersion is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SourceCodeUrl
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +223,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A link to a public repository for the source code of your application.",
 		//	  "type": "string"
 		//	}
-		"source_code_url": schemaAttributee6589b6bf89ca6b806af8a84(),
+		"source_code_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A link to a public repository for the source code of your application.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// SourceCodeUrl is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SpdxLicenseId
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +240,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A valid identifier from https://spdx.org/licenses/.",
 		//	  "type": "string"
 		//	}
-		"spdx_license_id": schemaAttributeec1038141727673f6715a5de(),
+		"spdx_license_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A valid identifier from https://spdx.org/licenses/.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +256,16 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The local raw packaged AWS SAM template file of your application.",
 		//	  "type": "string"
 		//	}
-		"template_body": schemaAttributeb8163cca441f40c303c5940b(),
+		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The local raw packaged AWS SAM template file of your application.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// TemplateBody is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

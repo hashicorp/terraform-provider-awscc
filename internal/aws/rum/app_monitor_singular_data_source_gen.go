@@ -15,364 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1c00b9f9ff8d8b6216597157() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b9263f51a69b4024fbe6061() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttribute8415a134ddb0e0846a2093af(),
-				// Property: DestinationArn
-				"destination_arn": schemaAttributea049cfd0218d3552a557869e(),
-				// Property: IamRoleArn
-				"iam_role_arn": schemaAttributed147cf6909264015c324a11b(),
-				// Property: MetricDefinitions
-				"metric_definitions": schemaAttribute8d4795d31bf8bb40f0360e75(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of structures which define the destinations and the metrics that you want to send.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e68eabe86da4f0244555e6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nWebVitalsInteractionToNextPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount\n\nPageViewCount\n\nHttp4xxCount\n\nHttp5xxCount\n\nSessionDuration\n\nPageViewCountPerSession\n\nJsErrorCountPerSession\n\nHttp4xxCountPerSession\n\nHttp5xxCountPerSession\n\nJsErrorCountPerPageView\n\nHttp4xxCountPerPageView\n\nHttp5xxCountPerPageView\n\nTimeOnPage\n\nColdLaunchTime\n\nWarmLaunchTime\n\nCrashCount\n\nANRCount\n\nAppHangCount\n\nScreenLoadCount\n\nScreenLoadTime\n\nNetworkLatency\n\nSpanPayloadSize\n\nLogEventPayloadSize",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31faf6cde8f9debe6c32849b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33b0ae3bde32a0d6f59970fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. \n\n When you assign a policy revision ID, then later requests about that policy will be rejected with an InvalidPolicyRevisionIdException error if they don't provide the correct current revision ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute351615e56b4597d26b7bd7ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute383650a1bb9f286f3087404b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e67226e25383ece54cc9ff8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute491304aa59c843241e22dd89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the app monitor",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49d65e9ccb6d29fdc8b8f3ed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PolicyDocument
-			"policy_document": schemaAttributeeb5581e239f200d1ddcde705(),
-			// Property: PolicyRevisionId
-			"policy_revision_id": schemaAttribute33b0ae3bde32a0d6f59970fc(),
-		}, /*END SCHEMA*/
-		Description: "A structure that defines resource policy attached to your app monitor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b59c4ff625f94da1f4a8d7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e7ac2412413f62f85e6495a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute628bc3e19e2c93f4deb842e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72116629b7937eae3b0ef1cb() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4b59c4ff625f94da1f4a8d7e(),
-				// Property: Value
-				"value": schemaAttribute1c00b9f9ff8d8b6216597157(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Assigns one or more tags (key-value pairs) to the app monitor. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.You can associate as many as 50 tags with an app monitor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c218b0d28f964456970c642() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8415a134ddb0e0846a2093af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. Note: Evidently has been discontinued and is no longer supported - requests with Evidently will be rejected.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d4795d31bf8bb40f0360e75() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DimensionKeys
-				"dimension_keys": schemaAttribute5e7ac2412413f62f85e6495a(),
-				// Property: EventPattern
-				"event_pattern": schemaAttributeebc08f51d2af1658c7a77d1b(),
-				// Property: Name
-				"name": schemaAttribute2e68eabe86da4f0244555e6e(),
-				// Property: Namespace
-				"namespace": schemaAttributef5c9da38e267b07da7533354(),
-				// Property: UnitLabel
-				"unit_label": schemaAttribute383650a1bb9f286f3087404b(),
-				// Property: ValueKey
-				"value_key": schemaAttribute9bc3cea271b38d38a9eb5395(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of structures which define the metrics that you want to send.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91ff339a484a6f03a54ba584() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: JavaScriptSourceMaps
-			"java_script_source_maps": schemaAttributec6412b9818acac219bd70546(),
-		}, /*END SCHEMA*/
-		Description: "A structure that contains the configuration for how an app monitor can deobfuscate stack traces.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bc3cea271b38d38a9eb5395() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event. Note: Evidently has been discontinued.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea049cfd0218d3552a557869e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea288e1dcbbdfab32a75326f5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea99ef98790d994c219360261() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether AppMonitor accepts custom events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaa51c87c2862e6b54c695ab() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of URLs in your website or application to exclude from RUM data collection. You can't include both ExcludedPages and IncludedPages in the same operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb5170d85fd778bd25936911() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the identity pool that is used to authorize the sending of data to RUM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3c877d4288aa7ddc775f8c4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of pages in the RUM console that are to be displayed with a favorite icon.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec55edfd42c8978a80a924003() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Status
-			"status": schemaAttributea99ef98790d994c219360261(),
-		}, /*END SCHEMA*/
-		Description: "AppMonitor custom events configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6412b9818acac219bd70546() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Uri
-			"s3_uri": schemaAttribute3e67226e25383ece54cc9ff8(),
-			// Property: Status
-			"status": schemaAttributefd6a5992b08083a3779a62d1(),
-		}, /*END SCHEMA*/
-		Description: "A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd833c18eb154a1e55083f73() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you set this to true, the RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed147cf6909264015c324a11b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed17049baf5f79d99697a4860() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee593c94135e4ca63d1acf823() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you set this to true, RUM enables xray tracing for the user sessions that RUM samples. RUM adds an xray trace header to allowed HTTP requests. It also records an xray segment for allowed HTTP requests. You can see traces and segments from these user sessions in the xray console and the CW ServiceLens console.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb5581e239f200d1ddcde705() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON to use as the resource policy. The document can be up to 4 KB in size. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebc08f51d2af1658c7a77d1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.\n\nWhen you define extended metrics, the metric definition is not valid if EventPattern is omitted.\n\nExample event patterns:\n\n'{ \"event_type\": [\"com.amazon.rum.js_error_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Firefox\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"<\", 2000 ] }] } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], \"countryCode\": [ \"US\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \">=\", 2000, \"<\", 8000 ] }] } }'\n\nIf the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee3c50cdb2adbd431554ed4d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. You can't include both ExcludedPages and IncludedPages in the same operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef72abf5203af6389dfbf4db() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An array that lists the types of telemetry data that this app monitor is to collect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1ae9750d3c1c3b5de59963f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowCookies
-			"allow_cookies": schemaAttributecd833c18eb154a1e55083f73(),
-			// Property: EnableXRay
-			"enable_x_ray": schemaAttributee593c94135e4ca63d1acf823(),
-			// Property: ExcludedPages
-			"excluded_pages": schemaAttributeaaa51c87c2862e6b54c695ab(),
-			// Property: FavoritePages
-			"favorite_pages": schemaAttributec3c877d4288aa7ddc775f8c4(),
-			// Property: GuestRoleArn
-			"guest_role_arn": schemaAttribute628bc3e19e2c93f4deb842e9(),
-			// Property: IdentityPoolId
-			"identity_pool_id": schemaAttributebb5170d85fd778bd25936911(),
-			// Property: IncludedPages
-			"included_pages": schemaAttributeee3c50cdb2adbd431554ed4d(),
-			// Property: MetricDestinations
-			"metric_destinations": schemaAttribute2b9263f51a69b4024fbe6061(),
-			// Property: SessionSampleRate
-			"session_sample_rate": schemaAttributed17049baf5f79d99697a4860(),
-			// Property: Telemetries
-			"telemetries": schemaAttributeef72abf5203af6389dfbf4db(),
-		}, /*END SCHEMA*/
-		Description: "AppMonitor configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef31b9e792ad29c2dff806ffd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID of the new app monitor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5c9da38e267b07da7533354() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace used by CloudWatch Metrics for the metric that is defined in this structure",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd6a5992b08083a3779a62d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be DISABLED",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rum_app_monitor", appMonitorDataSource)
 }
@@ -567,7 +209,126 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"app_monitor_configuration": schemaAttributef1ae9750d3c1c3b5de59963f(),
+		"app_monitor_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowCookies
+				"allow_cookies": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If you set this to true, the RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnableXRay
+				"enable_x_ray": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If you set this to true, RUM enables xray tracing for the user sessions that RUM samples. RUM adds an xray trace header to allowed HTTP requests. It also records an xray segment for allowed HTTP requests. You can see traces and segments from these user sessions in the xray console and the CW ServiceLens console.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExcludedPages
+				"excluded_pages": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of URLs in your website or application to exclude from RUM data collection. You can't include both ExcludedPages and IncludedPages in the same operation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FavoritePages
+				"favorite_pages": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of pages in the RUM console that are to be displayed with a favorite icon.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GuestRoleArn
+				"guest_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdentityPoolId
+				"identity_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the identity pool that is used to authorize the sending of data to RUM.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludedPages
+				"included_pages": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. You can't include both ExcludedPages and IncludedPages in the same operation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricDestinations
+				"metric_destinations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Destination
+							"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. Note: Evidently has been discontinued and is no longer supported - requests with Evidently will be rejected.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DestinationArn
+							"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IamRoleArn
+							"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MetricDefinitions
+							"metric_definitions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DimensionKeys
+										"dimension_keys":    // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: EventPattern
+										"event_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.\n\nWhen you define extended metrics, the metric definition is not valid if EventPattern is omitted.\n\nExample event patterns:\n\n'{ \"event_type\": [\"com.amazon.rum.js_error_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Firefox\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \"<\", 2000 ] }] } }'\n\n'{ \"event_type\": [\"com.amazon.rum.performance_navigation_event\"], \"metadata\": { \"browserName\": [ \"Chrome\", \"Safari\" ], \"countryCode\": [ \"US\" ] }, \"event_details\": { \"duration\": [{ \"numeric\": [ \">=\", 2000, \"<\", 8000 ] }] } }'\n\nIf the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nWebVitalsInteractionToNextPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount\n\nPageViewCount\n\nHttp4xxCount\n\nHttp5xxCount\n\nSessionDuration\n\nPageViewCountPerSession\n\nJsErrorCountPerSession\n\nHttp4xxCountPerSession\n\nHttp5xxCountPerSession\n\nJsErrorCountPerPageView\n\nHttp4xxCountPerPageView\n\nHttp5xxCountPerPageView\n\nTimeOnPage\n\nColdLaunchTime\n\nWarmLaunchTime\n\nCrashCount\n\nANRCount\n\nAppHangCount\n\nScreenLoadCount\n\nScreenLoadTime\n\nNetworkLatency\n\nSpanPayloadSize\n\nLogEventPayloadSize",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Namespace
+										"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The namespace used by CloudWatch Metrics for the metric that is defined in this structure",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: UnitLabel
+										"unit_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ValueKey
+										"value_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event. Note: Evidently has been discontinued.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "An array of structures which define the metrics that you want to send.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array of structures which define the destinations and the metrics that you want to send.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SessionSampleRate
+				"session_sample_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Telemetries
+				"telemetries": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "An array that lists the types of telemetry data that this app monitor is to collect.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AppMonitor configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomEvents
 		// CloudFormation resource type schema:
 		//
@@ -586,7 +347,17 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"custom_events": schemaAttributec55edfd42c8978a80a924003(),
+		"custom_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether AppMonitor accepts custom events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AppMonitor custom events configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CwLogEnabled
 		// CloudFormation resource type schema:
 		//
@@ -594,7 +365,10 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false",
 		//	  "type": "boolean"
 		//	}
-		"cw_log_enabled": schemaAttribute7c218b0d28f964456970c642(),
+		"cw_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeobfuscationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -628,7 +402,29 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deobfuscation_configuration": schemaAttribute91ff339a484a6f03a54ba584(),
+		"deobfuscation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JavaScriptSourceMaps
+				"java_script_source_maps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be DISABLED",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that contains the configuration for how an app monitor can deobfuscate stack traces.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -639,7 +435,10 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"domain": schemaAttribute31faf6cde8f9debe6c32849b(),
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainList
 		// CloudFormation resource type schema:
 		//
@@ -655,7 +454,11 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"domain_list": schemaAttributea288e1dcbbdfab32a75326f5(),
+		"domain_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -666,7 +469,10 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"app_monitor_id": schemaAttributef31b9e792ad29c2dff806ffd(),
+		"app_monitor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID of the new app monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -677,7 +483,10 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute491304aa59c843241e22dd89(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the app monitor",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Platform
 		// CloudFormation resource type schema:
 		//
@@ -689,7 +498,9 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"platform": schemaAttribute351615e56b4597d26b7bd7ca(),
+		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -713,7 +524,22 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"resource_policy": schemaAttribute49d65e9ccb6d29fdc8b8f3ed(),
+		"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyDocument
+				"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The JSON to use as the resource policy. The document can be up to 4 KB in size. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PolicyRevisionId
+				"policy_revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. \n\n When you assign a policy revision ID, then later requests about that policy will be rejected with an InvalidPolicyRevisionIdException error if they don't provide the correct current revision ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that defines resource policy attached to your app monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -747,7 +573,24 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute72116629b7937eae3b0ef1cb(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Assigns one or more tags (key-value pairs) to the app monitor. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.You can associate as many as 50 tags with an app monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

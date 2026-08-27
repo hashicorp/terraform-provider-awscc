@@ -14,77 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1738290b117d3f12eea0b1bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e28e9cec0ce2133fd978cef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute401cb1c6520887fef69cd67f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed8951bc7db20edcc8004118a(),
-				// Property: Value
-				"value": schemaAttribute1e28e9cec0ce2133fd978cef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with a repository association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50d3f070d5b630865ea3b2d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the repository to be associated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bcdf85940d29070bcfbb9f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the repository association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f3c2a6033d646729250915() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of repository to be associated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c6eb628b94b63f75908ddc3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc9a4dd4c37c4639f5fa3e7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8951bc7db20edcc8004118a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codegurureviewer_repository_association", repositoryAssociationDataSource)
 }
@@ -103,7 +32,10 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"association_arn": schemaAttribute6bcdf85940d29070bcfbb9f9(),
+		"association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the repository association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketName
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +46,10 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^\\S(.*\\S)?$",
 		//	  "type": "string"
 		//	}
-		"bucket_name": schemaAttributecc9a4dd4c37c4639f5fa3e7b(),
+		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +60,10 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"connection_arn": schemaAttribute9c6eb628b94b63f75908ddc3(),
+		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +74,10 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^\\S[\\w.-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute50d3f070d5b630865ea3b2d0(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the repository to be associated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +88,10 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^\\S(.*\\S)?$",
 		//	  "type": "string"
 		//	}
-		"owner": schemaAttribute1738290b117d3f12eea0b1bc(),
+		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +124,24 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute401cb1c6520887fef69cd67f(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with a repository association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +155,10 @@ func repositoryAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute86f3c2a6033d646729250915(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of repository to be associated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

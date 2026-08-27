@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06cf4fdbf8b39f0065337221() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource to be provisioned to, only aws account now",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21bf0ff0e8796dfab3ce7d52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The assignee's type, user/group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22a06abbc6a2ecaeceb17cb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The assignee's identifier, user id/group id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fe0c54964650f556a643891() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The sso instance that the permission set is owned.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute833babd4d6b165fefad7e607() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The permission set that the assignment will be assigned",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec8904f9c2d07c4bf0f35789() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account id to be provisioned.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sso_assignment", assignmentDataSource)
 }
@@ -74,7 +32,10 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute7fe0c54964650f556a643891(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The sso instance that the permission set is owned.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionSetArn
 		// CloudFormation resource type schema:
 		//
@@ -85,7 +46,10 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 		//	  "type": "string"
 		//	}
-		"permission_set_arn": schemaAttribute833babd4d6b165fefad7e607(),
+		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The permission set that the assignment will be assigned",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrincipalId
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +60,10 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"principal_id": schemaAttribute22a06abbc6a2ecaeceb17cb5(),
+		"principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The assignee's identifier, user id/group id",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrincipalType
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +75,10 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"principal_type": schemaAttribute21bf0ff0e8796dfab3ce7d52(),
+		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The assignee's type, user/group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetId
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +87,10 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\d{12}",
 		//	  "type": "string"
 		//	}
-		"target_id": schemaAttributeec8904f9c2d07c4bf0f35789(),
+		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The account id to be provisioned.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +101,10 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_type": schemaAttribute06cf4fdbf8b39f0065337221(),
+		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of resource to be provisioned to, only aws account now",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

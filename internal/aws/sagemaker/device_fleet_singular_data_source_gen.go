@@ -14,83 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute11faf79c6fd412b57ac19c73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cee2c2e65dd821f102b56da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description for the edge device fleet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7483afeaff7579cd437777fa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributeb6144c437b6aec7ddcbaaa10(),
-			// Property: S3OutputLocation
-			"s3_output_location": schemaAttribute98ec8539fe784dc19b3ff947(),
-		}, /*END SCHEMA*/
-		Description: "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84e678d8facffd43f7b6f3c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ff040e81e5e11ea1e66a302() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the edge device fleet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98ec8539fe784dc19b3ff947() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Simple Storage (S3) bucket URI",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead6421323fda3b213313a070() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Role associated with the device fleet",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6144c437b6aec7ddcbaaa10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key id used for encryption on the S3 bucket",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeefdde1d5323fdf78b3ed23c3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute11faf79c6fd412b57ac19c73(),
-				// Property: Value
-				"value": schemaAttribute84e678d8facffd43f7b6f3c1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Associate tags with the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_device_fleet", deviceFleetDataSource)
 }
@@ -109,7 +32,10 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\S\\s]+",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute6cee2c2e65dd821f102b56da(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description for the edge device fleet",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceFleetName
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +46,10 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"device_fleet_name": schemaAttribute8ff040e81e5e11ea1e66a302(),
+		"device_fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the edge device fleet",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +76,22 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"output_config": schemaAttribute7483afeaff7579cd437777fa(),
+		"output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS key id used for encryption on the S3 bucket",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3OutputLocation
+				"s3_output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Simple Storage (S3) bucket URI",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +102,10 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributead6421323fda3b213313a070(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Role associated with the device fleet",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +138,24 @@ func deviceFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeefdde1d5323fdf78b3ed23c3(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Associate tags with the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0353fa7b7c04a00f260acf54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_queue_limit_association", queueLimitAssociationDataSource)
 }
@@ -35,7 +29,9 @@ func queueLimitAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schemaAttribute0353fa7b7c04a00f260acf54(),
+		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LimitId
 		// CloudFormation resource type schema:
 		//
@@ -43,7 +39,9 @@ func queueLimitAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^limit-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"limit_id": schemaAttribute0353fa7b7c04a00f260acf54(),
+		"limit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueueId
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +49,9 @@ func queueLimitAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^queue-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"queue_id": schemaAttribute0353fa7b7c04a00f260acf54(),
+		"queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

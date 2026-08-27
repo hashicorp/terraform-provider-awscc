@@ -15,249 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute067093ae7d2e78fe6c0d0ae8() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of actions that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0afb5bbd0d7a4f78e3982acf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FilteringCriteria
-			"filtering_criteria": schemaAttributec943924170d1d9eb0e963275(),
-			// Property: StackNames
-			"stack_names": schemaAttribute1488151a885f406f0ee2303c(),
-			// Property: StackRoles
-			"stack_roles": schemaAttribute1e3198e8cc7faebf5fdb2672(),
-		}, /*END SCHEMA*/
-		Description: "Filters to allow hooks to target specific stack attributes",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1450637dc8e3d7f3639d352e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute528e870388b2dea689ce6557(),
-				// Property: InvocationPoint
-				"invocation_point": schemaAttribute2995cf519f5a04493f7768d0(),
-				// Property: TargetName
-				"target_name": schemaAttribute5d88e7a3f2cea5412c5c1b89(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of hook targets",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1488151a885f406f0ee2303c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Exclude
-			"exclude": schemaAttributefcae306479cb37319964ce46(),
-			// Property: Include
-			"include": schemaAttribute29bb789e656ee92be5e2c886(),
-		}, /*END SCHEMA*/
-		Description: "List of stack names as filters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e3198e8cc7faebf5fdb2672() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Exclude
-			"exclude": schemaAttributef328bd1d91952552b0ee73a9(),
-			// Property: Include
-			"include": schemaAttribute77881a3c8d91a7022ff7bee9(),
-		}, /*END SCHEMA*/
-		Description: "List of stack roles that are performing the stack operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2995cf519f5a04493f7768d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Invocation points are the point in provisioning workflow where hooks will be executed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29bb789e656ee92be5e2c886() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack names that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bd8d2c76908535f340e7dde() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d9397485abf5844df26468e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attribute to specify CloudFormation behavior on hook failure.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3825d05b705f565558017a0c() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of type names that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute383229e2800c5d602c668f31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the activated hook",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47077ae2d3a94c630a55cb93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute528e870388b2dea689ce6557() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Target actions are the type of operation hooks will be executed at.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute576ce771c83c643094717f9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogGroupName
-			"log_group_name": schemaAttribute47077ae2d3a94c630a55cb93(),
-			// Property: LogRoleArn
-			"log_role_arn": schemaAttribute72cb7cb87c1aeaafd15bf307(),
-		}, /*END SCHEMA*/
-		Description: "Contains logging configuration information for the hook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c7612e15850a390c00b2a65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The typename alias for the hook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d88e7a3f2cea5412c5c1b89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type name of hook target. Hook targets are the destination where hooks will be invoked against.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72cb7cb87c1aeaafd15bf307() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77881a3c8d91a7022ff7bee9() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack roles that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79164216018b9b1cc29668ba() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of invocation points that the hook is going to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79b7c6bf827dbc040e8cfae5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Which operations should this Hook run against? Resource changes, stacks or change sets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadcc0031468451d5d1f59f6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attribute to specify which stacks this hook applies to or should get invoked for",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec02ec1f969bf31353fb42f27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The execution role ARN assumed by Hooks to invoke Lambda.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3da91c1a89278948749bc90() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Actions
-			"actions": schemaAttribute067093ae7d2e78fe6c0d0ae8(),
-			// Property: InvocationPoints
-			"invocation_points": schemaAttribute79164216018b9b1cc29668ba(),
-			// Property: TargetNames
-			"target_names": schemaAttribute3825d05b705f565558017a0c(),
-			// Property: Targets
-			"targets": schemaAttribute1450637dc8e3d7f3639d352e(),
-		}, /*END SCHEMA*/
-		Description: "Attribute to specify which targets should invoke the hook",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec943924170d1d9eb0e963275() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Attribute to specify the filtering behavior. ANY will make the Hook pass if one filter matches. ALL will make the Hook pass if all filters match",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb7e2cf1eeaf6f7153aa80f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN), Partial ARN, name, version, or alias of the Lambda function to invoke with this hook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef328bd1d91952552b0ee73a9() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack roles that the hook is going to be excluded from",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcae306479cb37319964ce46() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stack names that the hook is going to be excluded from",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_lambda_hook", lambdaHookDataSource)
 }
@@ -274,7 +31,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"alias": schemaAttribute5c7612e15850a390c00b2a65(),
+		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The typename alias for the hook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoUpdate
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +43,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
 		//	  "type": "boolean"
 		//	}
-		"auto_update": schemaAttribute2bd8d2c76908535f340e7dde(),
+		"auto_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +56,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"execution_role": schemaAttributec02ec1f969bf31353fb42f27(),
+		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role ARN assumed by Hooks to invoke Lambda.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureMode
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +71,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"failure_mode": schemaAttribute2d9397485abf5844df26468e(),
+		"failure_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Attribute to specify CloudFormation behavior on hook failure.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HookArn
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +83,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"hook_arn": schemaAttribute383229e2800c5d602c668f31(),
+		"hook_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the activated hook",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HookStatus
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +99,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"hook_status": schemaAttributeadcc0031468451d5d1f59f6f(),
+		"hook_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Attribute to specify which stacks this hook applies to or should get invoked for",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LambdaFunction
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +113,10 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
 		//	  "type": "string"
 		//	}
-		"lambda_function": schemaAttributedb7e2cf1eeaf6f7153aa80f4(),
+		"lambda_function": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN), Partial ARN, name, version, or alias of the Lambda function to invoke with this hook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfig
 		// CloudFormation resource type schema:
 		//
@@ -367,7 +145,22 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"logging_config": schemaAttribute576ce771c83c643094717f9b(),
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupName
+				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogRoleArn
+				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains logging configuration information for the hook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackFilters
 		// CloudFormation resource type schema:
 		//
@@ -466,7 +259,55 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stack_filters": schemaAttribute0afb5bbd0d7a4f78e3982acf(),
+		"stack_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FilteringCriteria
+				"filtering_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Attribute to specify the filtering behavior. ANY will make the Hook pass if one filter matches. ALL will make the Hook pass if all filters match",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StackNames
+				"stack_names": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack names that the hook is going to be excluded from",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack names that the hook is going to target",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "List of stack names as filters",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StackRoles
+				"stack_roles": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Exclude
+						"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack roles that the hook is going to be excluded from",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Include
+						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of stack roles that the hook is going to target",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "List of stack roles that are performing the stack operations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Filters to allow hooks to target specific stack attributes",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetFilters
 		// CloudFormation resource type schema:
 		//
@@ -565,7 +406,54 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"target_filters": schemaAttributec3da91c1a89278948749bc90(),
+		"target_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of actions that the hook is going to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InvocationPoints
+				"invocation_points": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of invocation points that the hook is going to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetNames
+				"target_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of type names that the hook is going to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Targets
+				"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Action
+							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Target actions are the type of operation hooks will be executed at.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InvocationPoint
+							"invocation_point": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Invocation points are the point in provisioning workflow where hooks will be executed.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetName
+							"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type name of hook target. Hook targets are the destination where hooks will be invoked against.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of hook targets",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Attribute to specify which targets should invoke the hook",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetOperations
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +472,11 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_operations": schemaAttribute79b7c6bf827dbc040e8cfae5(),
+		"target_operations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Which operations should this Hook run against? Resource changes, stacks or change sets.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

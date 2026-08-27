@@ -15,123 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2c4f884a171cacd9acef2575() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeDE
-			"de_de": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: EnUS
-			"en_us": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: EsES
-			"es_es": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: FrFR
-			"fr_fr": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: IdID
-			"id_id": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: ItIT
-			"it_it": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: JaJP
-			"ja_jp": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: KoKR
-			"ko_kr": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: PtBR
-			"pt_br": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: ZhCN
-			"zh_cn": schemaAttribute64e3e70c3d527b38921ff0ef(),
-			// Property: ZhTW
-			"zh_tw": schemaAttribute64e3e70c3d527b38921ff0ef(),
-		}, /*END SCHEMA*/
-		Description: "The content of the notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ab50a7a27646b6209ebff96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute440d36d00b2b472aac02c2f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time a notification will expire",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute464a32d6eb520c4726ea1b20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The priority of the notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f7a153bd0bef4f155c06488() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64e3e70c3d527b38921ff0ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Localized notification content",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d4a122252e908430ce4b688() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time a notification was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8153eddf8fa91cf1435adc2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e2f7be1bcd741007468d3c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb29002d53e4910a84d89d946() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The recipients of the notification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6e9d40a2fe6ee620f4a90c8() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed746358eaa49d51e7e7e6ad9(),
-				// Property: Value
-				"value": schemaAttribute8e2f7be1bcd741007468d3c4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed746358eaa49d51e7e7e6ad9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_notification", notificationDataSource)
 }
@@ -148,7 +31,10 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/notification/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8153eddf8fa91cf1435adc2b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the notification.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +100,67 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"content": schemaAttribute2c4f884a171cacd9acef2575(),
+		"content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeDE
+				"de_de": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnUS
+				"en_us": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EsES
+				"es_es": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FrFR
+				"fr_fr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdID
+				"id_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ItIT
+				"it_it": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JaJP
+				"ja_jp": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KoKR
+				"ko_kr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PtBR
+				"pt_br": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ZhCN
+				"zh_cn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ZhTW
+				"zh_tw": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Localized notification content",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The content of the notification.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +169,10 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute6d4a122252e908430ce4b688(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time a notification was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExpiresAt
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +181,10 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"expires_at": schemaAttribute440d36d00b2b472aac02c2f7(),
+		"expires_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time a notification will expire",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +193,10 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^.{0,256}$",
 		//	  "type": "string"
 		//	}
-		"notification_id": schemaAttribute5f7a153bd0bef4f155c06488(),
+		"notification_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the notification.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +205,10 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute3ab50a7a27646b6209ebff96(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +220,10 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"priority": schemaAttribute464a32d6eb520c4726ea1b20(),
+		"priority": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The priority of the notification.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Recipients
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +239,11 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"recipients": schemaAttributeb29002d53e4910a84d89d946(),
+		"recipients": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The recipients of the notification.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +277,24 @@ func notificationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed6e9d40a2fe6ee620f4a90c8(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

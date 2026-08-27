@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e4b8ccbbffbe831cdb26944() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The team ID in Slack, which uniquely identifies a workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2615a9927fc4b7f9ebc7be06() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The channel name in Slack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute306c6f36bd3d4a1cc7a567ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The channel ID in Slack, which identifies a channel within a workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute889f26c61a929b72a6f96b3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9041a9a61746401c474ba178() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to notify when a case is resolved.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbed0a938ad685da17a73d4d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to notify when a correspondence is added to a case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5beaf706929a416b1ff703d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The severity level of a support case that a customer wants to get notified for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeead2537417556b3862a87a1e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to notify when a case is created or reopened.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_supportapp_slack_channel_configuration", slackChannelConfigurationDataSource)
 }
@@ -88,7 +32,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"channel_id": schemaAttribute306c6f36bd3d4a1cc7a567ac(),
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The channel ID in Slack, which identifies a channel within a workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -99,7 +46,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schemaAttribute2615a9927fc4b7f9ebc7be06(),
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The channel name in Slack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +60,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$",
 		//	  "type": "string"
 		//	}
-		"channel_role_arn": schemaAttribute889f26c61a929b72a6f96b3e(),
+		"channel_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnAddCorrespondenceToCase
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +71,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Whether to notify when a correspondence is added to a case.",
 		//	  "type": "boolean"
 		//	}
-		"notify_on_add_correspondence_to_case": schemaAttributebbed0a938ad685da17a73d4d(),
+		"notify_on_add_correspondence_to_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to notify when a correspondence is added to a case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnCaseSeverity
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +87,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"notify_on_case_severity": schemaAttributed5beaf706929a416b1ff703d(),
+		"notify_on_case_severity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The severity level of a support case that a customer wants to get notified for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnCreateOrReopenCase
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +98,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Whether to notify when a case is created or reopened.",
 		//	  "type": "boolean"
 		//	}
-		"notify_on_create_or_reopen_case": schemaAttributeead2537417556b3862a87a1e(),
+		"notify_on_create_or_reopen_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to notify when a case is created or reopened.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnResolveCase
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +109,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Whether to notify when a case is resolved.",
 		//	  "type": "boolean"
 		//	}
-		"notify_on_resolve_case": schemaAttribute9041a9a61746401c474ba178(),
+		"notify_on_resolve_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to notify when a case is resolved.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamId
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +123,10 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"team_id": schemaAttribute0e4b8ccbbffbe831cdb26944(),
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The team ID in Slack, which uniquely identifies a workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

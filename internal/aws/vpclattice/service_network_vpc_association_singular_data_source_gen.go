@@ -15,51 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0901a7a55d0d466d3f2d0f23() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7c97bb161ee05d2f9934f890(),
-				// Property: Value
-				"value": schemaAttribute7c97bb161ee05d2f9934f890(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4588c53cd9bf3826636187dc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c97bb161ee05d2f9934f890() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeb49b35a6ea467006534a78() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PrivateDnsPreference
-			"private_dns_preference": schemaAttribute7c97bb161ee05d2f9934f890(),
-			// Property: PrivateDnsSpecifiedDomains
-			"private_dns_specified_domains": schemaAttributee3f9d97fbc8edbdedde2a5d1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3f9d97fbc8edbdedde2a5d1() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_vpclattice_service_network_vpc_association", serviceNetworkVpcAssociationDataSource)
 }
@@ -77,14 +32,18 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkvpcassociation/snva-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DnsOptions
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +74,20 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dns_options": schemaAttributeaeb49b35a6ea467006534a78(),
+		"dns_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrivateDnsPreference
+				"private_dns_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsSpecifiedDomains
+				"private_dns_specified_domains": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -125,14 +97,18 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^snva-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"service_network_vpc_association_id": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"service_network_vpc_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateDnsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"private_dns_enabled": schemaAttribute4588c53cd9bf3826636187dc(),
+		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +123,10 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schemaAttributee3f9d97fbc8edbdedde2a5d1(),
+		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +136,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetwork/sn-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"service_network_arn": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"service_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +148,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^sn-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"service_network_id": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"service_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceNetworkIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +160,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^((sn-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetwork/sn-[0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
-		"service_network_identifier": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"service_network_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceNetworkName
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +172,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_network_name": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"service_network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +189,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +222,21 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute0901a7a55d0d466d3f2d0f23(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +246,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +258,9 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
-		"vpc_identifier": schemaAttribute7c97bb161ee05d2f9934f890(),
+		"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

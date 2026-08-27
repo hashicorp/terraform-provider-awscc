@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2c86491f0cbfdb0797d7b22a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e22c908e4459c51d442a99c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC that you associated the Resolver rule with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa4b3ef50ce4ab65fc75288f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4ba4fa1a9bd91441a8a7885() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_rule_association", resolverRuleAssociationDataSource)
 }
@@ -57,7 +29,10 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef4ba4fa1a9bd91441a8a7885(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolverRuleAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"resolver_rule_association_id": schemaAttributeaa4b3ef50ce4ab65fc75288f(),
+		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolverRuleId
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 		//	  "type": "string"
 		//	}
-		"resolver_rule_id": schemaAttribute2c86491f0cbfdb0797d7b22a(),
+		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VPCId
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the VPC that you associated the Resolver rule with.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute4e22c908e4459c51d442a99c(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC that you associated the Resolver rule with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

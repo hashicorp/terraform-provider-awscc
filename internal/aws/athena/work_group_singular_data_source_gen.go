@@ -15,570 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05f43b6c43486da76237b01a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06939f38b277d7eea28f2277() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalConfiguration
-			"additional_configuration": schemaAttributee679cb083eca54afa70ea696(),
-			// Property: BytesScannedCutoffPerQuery
-			"bytes_scanned_cutoff_per_query": schemaAttribute05f43b6c43486da76237b01a(),
-			// Property: CustomerContentEncryptionConfiguration
-			"customer_content_encryption_configuration": schemaAttribute95d68060179543cd5d7ba2ca(),
-			// Property: EnforceWorkGroupConfiguration
-			"enforce_work_group_configuration": schemaAttributef330f6651edd3641870b9469(),
-			// Property: EngineConfiguration
-			"engine_configuration": schemaAttribute069e0cee0eda78cc66e82d5f(),
-			// Property: EngineVersion
-			"engine_version": schemaAttributeb61b429d10fa8c9b748636a9(),
-			// Property: ExecutionRole
-			"execution_role": schemaAttribute4be8fdef0243d2973cd6a242(),
-			// Property: ManagedQueryResultsConfiguration
-			"managed_query_results_configuration": schemaAttribute892f6abf94c1df1c0008b683(),
-			// Property: MonitoringConfiguration
-			"monitoring_configuration": schemaAttribute8c7f60484c0fba153cb23485(),
-			// Property: PublishCloudWatchMetricsEnabled
-			"publish_cloudwatch_metrics_enabled": schemaAttribute3a35724c894be1be2f2b1ed1(),
-			// Property: RemoveBytesScannedCutoffPerQuery
-			"remove_bytes_scanned_cutoff_per_query": schemaAttribute386e07662b7486e4123ff73d(),
-			// Property: RemoveCustomerContentEncryptionConfiguration
-			"remove_customer_content_encryption_configuration": schemaAttribute68fb6945ea322fba40fddcad(),
-			// Property: RequesterPaysEnabled
-			"requester_pays_enabled": schemaAttribute9e2070c657d9123f93ab90c5(),
-			// Property: ResultConfigurationUpdates
-			"result_configuration_updates": schemaAttributebef98ff2ba648c4beb050b70(),
-		}, /*END SCHEMA*/
-		Description: "The workgroup configuration update object",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute069e0cee0eda78cc66e82d5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalConfigs
-			"additional_configs": schemaAttribute1d882a73a55d98895f980cec(),
-			// Property: Classifications
-			"classifications": schemaAttributefc93873049d80132cc31762c(),
-			// Property: CoordinatorDpuSize
-			"coordinator_dpu_size": schemaAttribute13f1a4a563acf07b9e7f4f8c(),
-			// Property: DefaultExecutorDpuSize
-			"default_executor_dpu_size": schemaAttributeb28518f991c731a8ab6ac7fa(),
-			// Property: MaxConcurrentDpus
-			"max_concurrent_dpus": schemaAttributee74f0473cdd3c188d37a0c22(),
-			// Property: SparkProperties
-			"spark_properties": schemaAttribute108b4e2e13be63d95edec2b3(),
-		}, /*END SCHEMA*/
-		Description: "The engine configuration for running queries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a9e6599104d1d6cb7de1c97() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute2a6984df1c2628c16ad6b353(),
-			// Property: LogGroup
-			"log_group": schemaAttributea80c15930ae3d7ae4e31dc8b(),
-			// Property: LogStreamNamePrefix
-			"log_stream_name_prefix": schemaAttributecbaf1a2621ef6f3d053f5008(),
-			// Property: LogTypes
-			"log_types": schemaAttributeb3d867a4949da07dc9210035(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute108b4e2e13be63d95edec2b3() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12b3b762763a81d427d11179() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables S3 log delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13f1a4a563acf07b9e7f4f8c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d882a73a55d98895f980cec() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2640933ac11841aac78acf59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute270717989d0d80b48387ed5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration classification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2943705dd9c60b4f529e4557() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The workgroup description.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a6984df1c2628c16ad6b353() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables CloudWatch logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute348623d6b4782fc23c3baebe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AclConfiguration
-			"acl_configuration": schemaAttribute640dcc3b9234bb44d2e4e6b8(),
-			// Property: EncryptionConfiguration
-			"encryption_configuration": schemaAttributebf3946901335b9abba799056(),
-			// Property: ExpectedBucketOwner
-			"expected_bucket_owner": schemaAttributeebd377a0e78d0e490f121076(),
-			// Property: OutputLocation
-			"output_location": schemaAttributeb2a65aa0b6696e7530cda80d(),
-		}, /*END SCHEMA*/
-		Description: "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute386e07662b7486e4123ff73d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that the data usage control limit per query is removed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a129cd0633f4bd3f5402e1a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables managed log persistence.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a35724c894be1be2f2b1ed1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e6e2054f478949d2c2776af() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalConfiguration
-			"additional_configuration": schemaAttributee679cb083eca54afa70ea696(),
-			// Property: BytesScannedCutoffPerQuery
-			"bytes_scanned_cutoff_per_query": schemaAttribute05f43b6c43486da76237b01a(),
-			// Property: CustomerContentEncryptionConfiguration
-			"customer_content_encryption_configuration": schemaAttribute95d68060179543cd5d7ba2ca(),
-			// Property: EnforceWorkGroupConfiguration
-			"enforce_work_group_configuration": schemaAttributef330f6651edd3641870b9469(),
-			// Property: EngineConfiguration
-			"engine_configuration": schemaAttribute069e0cee0eda78cc66e82d5f(),
-			// Property: EngineVersion
-			"engine_version": schemaAttributeb61b429d10fa8c9b748636a9(),
-			// Property: ExecutionRole
-			"execution_role": schemaAttribute4be8fdef0243d2973cd6a242(),
-			// Property: ManagedQueryResultsConfiguration
-			"managed_query_results_configuration": schemaAttribute892f6abf94c1df1c0008b683(),
-			// Property: MonitoringConfiguration
-			"monitoring_configuration": schemaAttribute8c7f60484c0fba153cb23485(),
-			// Property: PublishCloudWatchMetricsEnabled
-			"publish_cloudwatch_metrics_enabled": schemaAttribute3a35724c894be1be2f2b1ed1(),
-			// Property: RequesterPaysEnabled
-			"requester_pays_enabled": schemaAttribute9e2070c657d9123f93ab90c5(),
-			// Property: ResultConfiguration
-			"result_configuration": schemaAttribute348623d6b4782fc23c3baebe(),
-		}, /*END SCHEMA*/
-		Description: "The workgroup configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4be8fdef0243d2973cd6a242() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute531d2d18715a39eed2d9d801() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key ARN to encrypt the logs stored in managed log persistence.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b064384a5e25a5538b262be() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A set of properties specified within a configuration classification.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute640dcc3b9234bb44d2e4e6b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3AclOption
-			"s3_acl_option": schemaAttribute2640933ac11841aac78acf59(),
-		}, /*END SCHEMA*/
-		Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68fb6945ea322fba40fddcad() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69807d9f19a13ce8efe40bc9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time the workgroup was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79c4023b2c88c3154f755b7f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute3a129cd0633f4bd3f5402e1a(),
-			// Property: KmsKey
-			"kms_key": schemaAttribute531d2d18715a39eed2d9d801(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for managed log persistence.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a8a930fab67ffd06935153e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88dad56b3c82975a7727c36c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7a8a930fab67ffd06935153e(),
-				// Property: Value
-				"value": schemaAttribute7a8a930fab67ffd06935153e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute892f6abf94c1df1c0008b683() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute68fb6945ea322fba40fddcad(),
-			// Property: EncryptionConfiguration
-			"encryption_configuration": schemaAttributeccc05a4c843627dfb89ea29b(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c7f60484c0fba153cb23485() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatchLoggingConfiguration
-			"cloudwatch_logging_configuration": schemaAttribute0a9e6599104d1d6cb7de1c97(),
-			// Property: ManagedLoggingConfiguration
-			"managed_logging_configuration": schemaAttribute79c4023b2c88c3154f755b7f(),
-			// Property: S3LoggingConfiguration
-			"s3_logging_configuration": schemaAttributec277f02d3eb5435fa66bad98(),
-		}, /*END SCHEMA*/
-		Description: "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e59d559fca23733c3149abf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93a195a3c3ac245b2da8a2a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the workgroup: ENABLED or DISABLED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95d68060179543cd5d7ba2ca() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKey
-			"kms_key": schemaAttributed94bbc57451d589c690cf910(),
-		}, /*END SCHEMA*/
-		Description: "Indicates the KMS key for encrypting notebook content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e2070c657d9123f93ab90c5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6d10daefec4afb8de8d4473() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The workGroup name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea80c15930ae3d7ae4e31dc8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb28518f991c731a8ab6ac7fa() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2a65aa0b6696e7530cda80d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3d867a4949da07dc9210035() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.ListType{ElemType: types.StringType},
-		Description: "The types of logs that you want to publish to CloudWatch.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb61b429d10fa8c9b748636a9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EffectiveEngineVersion
-			"effective_engine_version": schemaAttributebb50c903d7ec3c9e2a222763(),
-			// Property: SelectedEngineVersion
-			"selected_engine_version": schemaAttributefa7800a28e5a54d387c470c1(),
-		}, /*END SCHEMA*/
-		Description: "The Athena engine version for running queries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb50c903d7ec3c9e2a222763() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebef98ff2ba648c4beb050b70() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AclConfiguration
-			"acl_configuration": schemaAttribute640dcc3b9234bb44d2e4e6b8(),
-			// Property: EncryptionConfiguration
-			"encryption_configuration": schemaAttributebf3946901335b9abba799056(),
-			// Property: ExpectedBucketOwner
-			"expected_bucket_owner": schemaAttributeebd377a0e78d0e490f121076(),
-			// Property: OutputLocation
-			"output_location": schemaAttributeb2a65aa0b6696e7530cda80d(),
-			// Property: RemoveAclConfiguration
-			"remove_acl_configuration": schemaAttribute68fb6945ea322fba40fddcad(),
-			// Property: RemoveEncryptionConfiguration
-			"remove_encryption_configuration": schemaAttribute68fb6945ea322fba40fddcad(),
-			// Property: RemoveExpectedBucketOwner
-			"remove_expected_bucket_owner": schemaAttribute68fb6945ea322fba40fddcad(),
-			// Property: RemoveOutputLocation
-			"remove_output_location": schemaAttribute68fb6945ea322fba40fddcad(),
-		}, /*END SCHEMA*/
-		Description: "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf3946901335b9abba799056() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionOption
-			"encryption_option": schemaAttributed1287441da3c55e6c2cd1e56(),
-			// Property: KmsKey
-			"kms_key": schemaAttributed94bbc57451d589c690cf910(),
-		}, /*END SCHEMA*/
-		Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0de50b520b8bb2f056c518f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 destination URI for log publishing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec277f02d3eb5435fa66bad98() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute12b3b762763a81d427d11179(),
-			// Property: KmsKey
-			"kms_key": schemaAttributeebb57c93d78a9c786455bd4a(),
-			// Property: LogLocation
-			"log_location": schemaAttributec0de50b520b8bb2f056c518f(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for delivering logs to Amazon S3 buckets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbaf1a2621ef6f3d053f5008() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Prefix for the CloudWatch log stream name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccc05a4c843627dfb89ea29b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKey
-			"kms_key": schemaAttributed94bbc57451d589c690cf910(),
-		}, /*END SCHEMA*/
-		Description: "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1287441da3c55e6c2cd1e56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed94bbc57451d589c690cf910() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee679cb083eca54afa70ea696() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee74f0473cdd3c188d37a0c22() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of DPUs that can run concurrently.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebb57c93d78a9c786455bd4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebd377a0e78d0e490f121076() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the owner of S3 bucket where query results are stored",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef330f6651edd3641870b9469() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa7800a28e5a54d387c470c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc93873049d80132cc31762c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute270717989d0d80b48387ed5c(),
-				// Property: Properties
-				"properties": schemaAttribute5b064384a5e25a5538b262be(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The configuration classifications that can be specified for the engine.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_athena_work_group", workGroupDataSource)
 }
@@ -594,7 +30,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time the workgroup was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute69807d9f19a13ce8efe40bc9(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time the workgroup was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -604,7 +43,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2943705dd9c60b4f529e4557(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The workgroup description.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -613,7 +55,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9._-]{1,128}",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea6d10daefec4afb8de8d4473(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The workGroup name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecursiveDeleteOption
 		// CloudFormation resource type schema:
 		//
@@ -621,7 +66,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
 		//	  "type": "boolean"
 		//	}
-		"recursive_delete_option": schemaAttribute8e59d559fca23733c3149abf(),
+		"recursive_delete_option": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -633,7 +81,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute93a195a3c3ac245b2da8a2a2(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the workgroup: ENABLED or DISABLED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -662,7 +113,22 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute88dad56b3c82975a7727c36c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkGroupConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -941,7 +407,272 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"work_group_configuration": schemaAttribute3e6e2054f478949d2c2776af(),
+		"work_group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdditionalConfiguration
+				"additional_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BytesScannedCutoffPerQuery
+				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomerContentEncryptionConfiguration
+				"customer_content_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKey
+						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Indicates the KMS key for encrypting notebook content.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnforceWorkGroupConfiguration
+				"enforce_work_group_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EngineConfiguration
+				"engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalConfigs
+						"additional_configs": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Classifications
+						"classifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Properties
+									"properties":        // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "A set of properties specified within a configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The configuration classifications that can be specified for the engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CoordinatorDpuSize
+						"coordinator_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultExecutorDpuSize
+						"default_executor_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxConcurrentDpus
+						"max_concurrent_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of DPUs that can run concurrently.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SparkProperties
+						"spark_properties":  // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The engine configuration for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EngineVersion
+				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EffectiveEngineVersion
+						"effective_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelectedEngineVersion
+						"selected_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Athena engine version for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedQueryResultsConfiguration
+				"managed_query_results_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitoringConfiguration
+				"monitoring_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLoggingConfiguration
+						"cloudwatch_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables CloudWatch logging.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroup
+								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogStreamNamePrefix
+								"log_stream_name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Prefix for the CloudWatch log stream name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogTypes
+								"log_types":         // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.ListType{ElemType: types.StringType},
+									Description: "The types of logs that you want to publish to CloudWatch.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedLoggingConfiguration
+						"managed_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs stored in managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for managed log persistence.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3LoggingConfiguration
+						"s3_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables S3 log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogLocation
+								"log_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 destination URI for log publishing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon S3 buckets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublishCloudWatchMetricsEnabled
+				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RequesterPaysEnabled
+				"requester_pays_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResultConfiguration
+				"result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AclConfiguration
+						"acl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3AclOption
+								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionOption
+								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExpectedBucketOwner
+						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS account ID of the owner of S3 bucket where query results are stored",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputLocation
+						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The workgroup configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkGroupConfigurationUpdates
 		// CloudFormation resource type schema:
 		//
@@ -1239,7 +970,297 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"work_group_configuration_updates": schemaAttribute06939f38b277d7eea28f2277(),
+		"work_group_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdditionalConfiguration
+				"additional_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BytesScannedCutoffPerQuery
+				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomerContentEncryptionConfiguration
+				"customer_content_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKey
+						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Indicates the KMS key for encrypting notebook content.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnforceWorkGroupConfiguration
+				"enforce_work_group_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EngineConfiguration
+				"engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalConfigs
+						"additional_configs": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Classifications
+						"classifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Properties
+									"properties":        // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "A set of properties specified within a configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The configuration classifications that can be specified for the engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CoordinatorDpuSize
+						"coordinator_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultExecutorDpuSize
+						"default_executor_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxConcurrentDpus
+						"max_concurrent_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of DPUs that can run concurrently.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SparkProperties
+						"spark_properties":  // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The engine configuration for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EngineVersion
+				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EffectiveEngineVersion
+						"effective_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelectedEngineVersion
+						"selected_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Athena engine version for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedQueryResultsConfiguration
+				"managed_query_results_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates the encryption configuration for Athena Managed Storage. If not setting this field, Managed Storage will encrypt the query results with Athena's encryption key",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitoringConfiguration
+				"monitoring_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLoggingConfiguration
+						"cloudwatch_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables CloudWatch logging.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroup
+								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogStreamNamePrefix
+								"log_stream_name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Prefix for the CloudWatch log stream name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogTypes
+								"log_types":         // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.ListType{ElemType: types.StringType},
+									Description: "The types of logs that you want to publish to CloudWatch.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedLoggingConfiguration
+						"managed_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs stored in managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for managed log persistence.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3LoggingConfiguration
+						"s3_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables S3 log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogLocation
+								"log_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 destination URI for log publishing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon S3 buckets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublishCloudWatchMetricsEnabled
+				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RemoveBytesScannedCutoffPerQuery
+				"remove_bytes_scanned_cutoff_per_query": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates that the data usage control limit per query is removed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RemoveCustomerContentEncryptionConfiguration
+				"remove_customer_content_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RequesterPaysEnabled
+				"requester_pays_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResultConfigurationUpdates
+				"result_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AclConfiguration
+						"acl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3AclOption
+								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionOption
+								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExpectedBucketOwner
+						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS account ID of the owner of S3 bucket where query results are stored",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputLocation
+						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveAclConfiguration
+						"remove_acl_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveEncryptionConfiguration
+						"remove_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveExpectedBucketOwner
+						"remove_expected_bucket_owner": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveOutputLocation
+						"remove_output_location": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The workgroup configuration update object",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,439 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02aa2be8e0202015e735e85e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b86e730b7ea8594dbbe0302() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Version of the tools descriptor schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c67d0159ef0114608e6fa58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the registry record was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f28a78b51a0d3c6f6f4fcc2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SkillMd
-			"skill_md": schemaAttribute91fc5819f06eebcfe1b5c7ce(),
-		}, /*END SCHEMA*/
-		Description: "Additional data associated with an agent skills definition descriptor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13a771a5c73c728858021cc3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14bd778ef4b8935491c416cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17b433977e25ce8c88027bff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CredentialProviderConfigurations
-			"credential_provider_configurations": schemaAttributeed8e92bde583957fa46daf13(),
-			// Property: Url
-			"url": schemaAttribute42258515164162fed2a9a41b(),
-		}, /*END SCHEMA*/
-		Description: "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute195fa265a26c65c99d5e62f3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalData
-			"additional_data": schemaAttributea966532b9a7872c5d70e3a3b(),
-			// Property: Data
-			"data": schemaAttribute9717d36271fd5a183f3d4c44(),
-			// Property: DataSchemaVersion
-			"data_schema_version": schemaAttribute2303d826b0fac47acf2a3186(),
-			// Property: Source
-			"source": schemaAttribute598c88ce85d0cf150eb870fe(),
-		}, /*END SCHEMA*/
-		Description: "The MCP server descriptor, populated when the record type is MCP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute220a7773fc4f11439e45b48a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: A2aAgentCard
-			"a2_a_agent_card": schemaAttributeb7957dce604bde9cd3e45d48(),
-			// Property: AgentSkillsDefinition
-			"agent_skills_definition": schemaAttribute6c238c8ef8f9661c237e5879(),
-			// Property: Custom
-			"custom": schemaAttributea2d0a78dca1f5fcd0f804937(),
-			// Property: McpServer
-			"mcp_server": schemaAttribute195fa265a26c65c99d5e62f3(),
-		}, /*END SCHEMA*/
-		Description: "The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2303d826b0fac47acf2a3186() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Version of the descriptor type schema.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27336697141a4a75ada82193() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IamCredentialProvider
-			"iam_credential_provider": schemaAttribute351be5b89f2fc0d102ae2d12(),
-			// Property: OauthCredentialProvider
-			"oauth_credential_provider": schemaAttributedcd2bdaf75aa5c032ee30c06(),
-		}, /*END SCHEMA*/
-		Description: "The credential provider details. Specify exactly one member.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ad113fac3068b66fe1af56f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Data
-			"data": schemaAttribute9717d36271fd5a183f3d4c44(),
-			// Property: DataSchemaVersion
-			"data_schema_version": schemaAttribute0b86e730b7ea8594dbbe0302(),
-		}, /*END SCHEMA*/
-		Description: "The MCP tools descriptor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute351be5b89f2fc0d102ae2d12() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Region
-			"region": schemaAttributea7863db3971f7459b20fe10d(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute84d284b51f0409a87c59e451(),
-			// Property: Service
-			"service": schemaAttribute38e9722da5b2468215ed3d8b(),
-		}, /*END SCHEMA*/
-		Description: "IAM credential provider configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38e9722da5b2468215ed3d8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SigV4 signing service name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42258515164162fed2a9a41b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL source for descriptor content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57a7f481371d559b58709ed8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "OAuth scopes to request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute598c88ce85d0cf150eb870fe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FromUrl
-			"from_url": schemaAttribute17b433977e25ce8c88027bff(),
-		}, /*END SCHEMA*/
-		Description: "The source configuration that defines where descriptor content is retrieved from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cab37fb4acd24d076539814() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL source for the SkillMd document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c238c8ef8f9661c237e5879() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalData
-			"additional_data": schemaAttribute0f28a78b51a0d3c6f6f4fcc2(),
-			// Property: Data
-			"data": schemaAttribute9717d36271fd5a183f3d4c44(),
-			// Property: DataSchemaVersion
-			"data_schema_version": schemaAttribute2303d826b0fac47acf2a3186(),
-		}, /*END SCHEMA*/
-		Description: "The agent skills definition descriptor, populated when the record type is SKILL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78055fbfaa2cdd0d0c607bbf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Url
-			"url": schemaAttribute5cab37fb4acd24d076539814(),
-		}, /*END SCHEMA*/
-		Description: "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d8a677ab3177fb04bf9fdf6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FromUrl
-			"from_url": schemaAttribute78055fbfaa2cdd0d0c607bbf(),
-		}, /*END SCHEMA*/
-		Description: "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82fdd13c52685e9b025ef3aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the registry record was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84d284b51f0409a87c59e451() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85a006f1f22aa2fe9c863837() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The human-readable display name of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91fc5819f06eebcfe1b5c7ce() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Data
-			"data": schemaAttribute9717d36271fd5a183f3d4c44(),
-			// Property: DataSchemaVersion
-			"data_schema_version": schemaAttribute2303d826b0fac47acf2a3186(),
-			// Property: Source
-			"source": schemaAttribute7d8a677ab3177fb04bf9fdf6(),
-		}, /*END SCHEMA*/
-		Description: "Markdown-format descriptor containing an agent skills document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9717d36271fd5a183f3d4c44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Descriptor payload data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2d0a78dca1f5fcd0f804937() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Data
-			"data": schemaAttribute9717d36271fd5a183f3d4c44(),
-		}, /*END SCHEMA*/
-		Description: "The custom descriptor, populated when the record type is CUSTOM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7863db3971f7459b20fe10d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SigV4 signing region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea966532b9a7872c5d70e3a3b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Tools
-			"tools": schemaAttribute2ad113fac3068b66fe1af56f(),
-		}, /*END SCHEMA*/
-		Description: "Additional data associated with an MCP server descriptor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa51b6530d4d7d4218bdce5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7957dce604bde9cd3e45d48() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Data
-			"data": schemaAttribute9717d36271fd5a183f3d4c44(),
-			// Property: DataSchemaVersion
-			"data_schema_version": schemaAttribute2303d826b0fac47acf2a3186(),
-			// Property: Source
-			"source": schemaAttribute598c88ce85d0cf150eb870fe(),
-		}, /*END SCHEMA*/
-		Description: "The A2A agent card descriptor, populated when the record type is AGENT.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec403bbbc005bb87bf48f3772() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeedb6fe051057b1a0f74d8cd0(),
-				// Property: Value
-				"value": schemaAttributef3bb6217613f50067544792c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec55960dd57f0ded51e72877a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The lifecycle status of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca2d757d614e1b724d224406() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the registry containing the record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4b686d8bbccbc275fc58580() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the OAuth credential provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed673bd6e8b23a23a8dc0f1cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the registry containing the record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcd2bdaf75aa5c032ee30c06() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomParameters
-			"custom_parameters": schemaAttributef7fcb7cc0ab43f2cf06859ae(),
-			// Property: GrantType
-			"grant_type": schemaAttributee7fd5ef592d4e07df23da1b8(),
-			// Property: ProviderArn
-			"provider_arn": schemaAttributed4b686d8bbccbc275fc58580(),
-			// Property: Scopes
-			"scopes": schemaAttribute57a7f481371d559b58709ed8(),
-		}, /*END SCHEMA*/
-		Description: "OAuth credential provider configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7fd5ef592d4e07df23da1b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea967ccd1a7d79cd05c2375b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed8e92bde583957fa46daf13() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CredentialProvider
-				"credential_provider": schemaAttribute27336697141a4a75ada82193(),
-				// Property: CredentialProviderType
-				"credential_provider_type": schemaAttributee7fd5ef592d4e07df23da1b8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The credential providers used to authenticate when fetching descriptor content from the source URL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedb6fe051057b1a0f74d8cd0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3bb6217613f50067544792c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7fcb7cc0ab43f2cf06859ae() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Additional custom parameters for the OAuth flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa47543b58dae4600d2b1450() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the registry record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_agentregistry_registry_record", registryRecordDataSource)
 }
@@ -465,7 +32,11 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute82fdd13c52685e9b025ef3aa(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the registry record was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -475,7 +46,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributefa47543b58dae4600d2b1450(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Descriptors
 		// CloudFormation resource type schema:
 		//
@@ -876,7 +450,322 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"descriptors": schemaAttribute220a7773fc4f11439e45b48a(),
+		"descriptors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: A2aAgentCard
+				"a2_a_agent_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Data
+						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Descriptor payload data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataSchemaVersion
+						"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Version of the descriptor type schema.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Source
+						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FromUrl
+								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CredentialProviderConfigurations
+										"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CredentialProvider
+													"credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: IamCredentialProvider
+															"iam_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Region
+																	"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The SigV4 signing region.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RoleArn
+																	"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the IAM role.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Service
+																	"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The SigV4 signing service name.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "IAM credential provider configuration.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: OauthCredentialProvider
+															"oauth_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomParameters
+																	"custom_parameters": // Pattern: ""
+																	schema.MapAttribute{ /*START ATTRIBUTE*/
+																		ElementType: types.StringType,
+																		Description: "Additional custom parameters for the OAuth flow.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: GrantType
+																	"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ProviderArn
+																	"provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the OAuth credential provider.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Scopes
+																	"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																		ElementType: types.StringType,
+																		Description: "OAuth scopes to request.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "OAuth credential provider configuration.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The credential provider details. Specify exactly one member.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: CredentialProviderType
+													"credential_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The credential providers used to authenticate when fetching descriptor content from the source URL.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Url
+										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "URL source for descriptor content.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The source configuration that defines where descriptor content is retrieved from.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The A2A agent card descriptor, populated when the record type is AGENT.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AgentSkillsDefinition
+				"agent_skills_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalData
+						"additional_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SkillMd
+								"skill_md": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Data
+										"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Descriptor payload data.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DataSchemaVersion
+										"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Version of the descriptor type schema.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Source
+										"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FromUrl
+												"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Url
+														"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "URL source for the SkillMd document.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Markdown-format descriptor containing an agent skills document.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Additional data associated with an agent skills definition descriptor.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Data
+						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Descriptor payload data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataSchemaVersion
+						"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Version of the descriptor type schema.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The agent skills definition descriptor, populated when the record type is SKILL.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Custom
+				"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Data
+						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Descriptor payload data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The custom descriptor, populated when the record type is CUSTOM.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: McpServer
+				"mcp_server": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalData
+						"additional_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Tools
+								"tools": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Data
+										"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Descriptor payload data.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DataSchemaVersion
+										"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Version of the tools descriptor schema.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The MCP tools descriptor.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Additional data associated with an MCP server descriptor.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Data
+						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Descriptor payload data.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataSchemaVersion
+						"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Version of the descriptor type schema.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Source
+						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FromUrl
+								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CredentialProviderConfigurations
+										"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CredentialProvider
+													"credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: IamCredentialProvider
+															"iam_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Region
+																	"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The SigV4 signing region.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RoleArn
+																	"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the IAM role.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Service
+																	"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The SigV4 signing service name.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "IAM credential provider configuration.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: OauthCredentialProvider
+															"oauth_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomParameters
+																	"custom_parameters": // Pattern: ""
+																	schema.MapAttribute{ /*START ATTRIBUTE*/
+																		ElementType: types.StringType,
+																		Description: "Additional custom parameters for the OAuth flow.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: GrantType
+																	"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ProviderArn
+																	"provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ARN of the OAuth credential provider.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Scopes
+																	"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+																		ElementType: types.StringType,
+																		Description: "OAuth scopes to request.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "OAuth credential provider configuration.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The credential provider details. Specify exactly one member.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: CredentialProviderType
+													"credential_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The credential providers used to authenticate when fetching descriptor content from the source URL.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Url
+										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "URL source for descriptor content.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The source configuration that defines where descriptor content is retrieved from.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The MCP server descriptor, populated when the record type is MCP.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -886,7 +775,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute85a006f1f22aa2fe9c863837(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The human-readable display name of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -897,7 +789,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute13a771a5c73c728858021cc3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordArn
 		// CloudFormation resource type schema:
 		//
@@ -908,7 +803,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}/record/[a-zA-Z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"record_arn": schemaAttribute14bd778ef4b8935491c416cb(),
+		"record_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordId
 		// CloudFormation resource type schema:
 		//
@@ -919,7 +817,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"record_id": schemaAttribute02aa2be8e0202015e735e85e(),
+		"record_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordType
 		// CloudFormation resource type schema:
 		//
@@ -933,7 +834,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"record_type": schemaAttributeea967ccd1a7d79cd05c2375b(),
+		"record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordVersion
 		// CloudFormation resource type schema:
 		//
@@ -944,7 +848,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9.-]+$",
 		//	  "type": "string"
 		//	}
-		"record_version": schemaAttributeaa51b6530d4d7d4218bdce5d(),
+		"record_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistryArn
 		// CloudFormation resource type schema:
 		//
@@ -955,7 +862,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
-		"registry_arn": schemaAttributeca2d757d614e1b724d224406(),
+		"registry_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the registry containing the record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistryId
 		// CloudFormation resource type schema:
 		//
@@ -966,7 +876,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schemaAttributed673bd6e8b23a23a8dc0f1cc(),
+		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the registry containing the record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -985,7 +898,10 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributec55960dd57f0ded51e72877a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The lifecycle status of the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1020,7 +936,24 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributec403bbbc005bb87bf48f3772(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the registry record.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1029,7 +962,11 @@ func registryRecordDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute0c67d0159ef0114608e6fa58(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the registry record was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

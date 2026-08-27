@@ -20,84 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2fa569a3c5966e9dd9e6c0bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address that is associated with the AWS account that is designated as the management account for the organization.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute457283345d4cfedfb0760c94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier (ID) of an organization.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cca8cf628f5a0a14916ea17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier (ID) of the management account of an organization.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3ea298d72bfa07375b8b258() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1d45f26b50602db160da71d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier (ID) for the root.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee2308b16917da2f52d168f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.",
-		Optional:    true,
-		Computed:    true,
-		Default:     stringdefault.StaticString("ALL"),
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ALL",
-				"CONSOLIDATED_BILLING",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefaae316a28566d5bb39dcc22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an organization.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_organizations_organization", organizationResource)
 	registry.AddListResourceFactory("awscc_organizations_organization", generic.NewListResource(organizationResource))
@@ -115,7 +37,13 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:organization\\/o-[a-z0-9]{10,32}",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributefaae316a28566d5bb39dcc22(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FeatureSet
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +56,21 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"feature_set": schemaAttributeee2308b16917da2f52d168f0(),
+		"feature_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("ALL"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ALL",
+					"CONSOLIDATED_BILLING",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +79,13 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^o-[a-z0-9]{10,32}$",
 		//	  "type": "string"
 		//	}
-		"organization_id": schemaAttribute457283345d4cfedfb0760c94(),
+		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier (ID) of an organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountArn
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +94,13 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:account\\/o-[a-z0-9]{10,32}\\/\\d{12}",
 		//	  "type": "string"
 		//	}
-		"management_account_arn": schemaAttributea3ea298d72bfa07375b8b258(),
+		"management_account_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountEmail
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +111,13 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+",
 		//	  "type": "string"
 		//	}
-		"management_account_email": schemaAttribute2fa569a3c5966e9dd9e6c0bd(),
+		"management_account_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The email address that is associated with the AWS account that is designated as the management account for the organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountId
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +126,13 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"management_account_id": schemaAttribute8cca8cf628f5a0a14916ea17(),
+		"management_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier (ID) of the management account of an organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RootId
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +142,13 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^r-[0-9a-z]{4,32}$",
 		//	  "type": "string"
 		//	}
-		"root_id": schemaAttributec1d45f26b50602db160da71d(),
+		"root_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier (ID) for the root.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

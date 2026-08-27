@@ -16,168 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0c698f4952cc4878e967cfc3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the parallel data resource was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15827894905fa1a910531b4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A custom description for the parallel data resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2003c6778eba29db2f14cf46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2217f2c24cea0015c9bbbef3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of encryption key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22c8e49562823b3a71e3e75d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of records successfully imported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute247cb713d621b85be7ff47da() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of items skipped during import.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25bbdf34c770946c6329b175() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Id
-			"id": schemaAttributea5a73800b14691af20526869(),
-			// Property: Type
-			"type": schemaAttribute2217f2c24cea0015c9bbbef3(),
-		}, /*END SCHEMA*/
-		Description: "The encryption key used to encrypt this object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute368d5aa798da67e961e173ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the parallel data resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bc436a823a3b6822f1d0df4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URI of the Amazon S3 folder that contains the parallel data input file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cc6c09c16298b64aa07685f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the parallel data resource was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d086605b78694cef572158d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The language codes for the target languages available in the parallel data file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute645288004e1bfbf96f6652c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A custom name for the parallel data resource. Must be unique in the account and region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77d859d5254bf192200965d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the parallel data input file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78fb54509c6f7c4c52a5551c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source language of the translations in the parallel data file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea374658a8a049c31f16f3e73() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of records unsuccessfully imported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5a73800b14691af20526869() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the encryption key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcf5351b7da37ff5d2c598ad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Format
-			"format": schemaAttribute77d859d5254bf192200965d5(),
-			// Property: S3Uri
-			"s3_uri": schemaAttribute3bc436a823a3b6822f1d0df4(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the format and S3 location of the parallel data input file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7432f6965adb92958a06ca7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of UTF-8 characters imported from the parallel data input file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed95d19d0fd95fe518c2ba977() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2003c6778eba29db2f14cf46(),
-				// Property: Value
-				"value": schemaAttribute2003c6778eba29db2f14cf46(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with the parallel data resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee065347d6e94f87b7f910548() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the parallel data resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_translate_parallel_data", parallelDataDataSource)
 }
@@ -195,7 +33,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee065347d6e94f87b7f910548(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the parallel data resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +45,11 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute3cc6c09c16298b64aa07685f(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the parallel data resource was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +58,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute15827894905fa1a910531b4a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A custom description for the parallel data resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +90,22 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_key": schemaAttribute25bbdf34c770946c6329b175(),
+		"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the encryption key.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of encryption key.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption key used to encrypt this object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailedRecordCount
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +113,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The number of records unsuccessfully imported.",
 		//	  "type": "integer"
 		//	}
-		"failed_record_count": schemaAttributea374658a8a049c31f16f3e73(),
+		"failed_record_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of records unsuccessfully imported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImportedDataSize
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +124,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The number of UTF-8 characters imported from the parallel data input file.",
 		//	  "type": "integer"
 		//	}
-		"imported_data_size": schemaAttributed7432f6965adb92958a06ca7(),
+		"imported_data_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of UTF-8 characters imported from the parallel data input file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImportedRecordCount
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +135,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The number of records successfully imported.",
 		//	  "type": "integer"
 		//	}
-		"imported_record_count": schemaAttribute22c8e49562823b3a71e3e75d(),
+		"imported_record_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of records successfully imported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +147,11 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute0c698f4952cc4878e967cfc3(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the parallel data resource was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -286,7 +162,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^([A-Za-z0-9-]_?)+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute645288004e1bfbf96f6652c3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A custom name for the parallel data resource. Must be unique in the account and region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParallelDataConfig
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +195,22 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"parallel_data_config": schemaAttributebcf5351b7da37ff5d2c598ad(),
+		"parallel_data_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Format
+				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The format of the parallel data input file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Uri
+				"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URI of the Amazon S3 folder that contains the parallel data input file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the format and S3 location of the parallel data input file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SkippedRecordCount
 		// CloudFormation resource type schema:
 		//
@@ -324,7 +218,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The number of items skipped during import.",
 		//	  "type": "integer"
 		//	}
-		"skipped_record_count": schemaAttribute247cb713d621b85be7ff47da(),
+		"skipped_record_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of items skipped during import.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceLanguageCode
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +231,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"source_language_code": schemaAttribute78fb54509c6f7c4c52a5551c(),
+		"source_language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source language of the translations in the parallel data file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +249,10 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute368d5aa798da67e961e173ed(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the parallel data resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +281,22 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributed95d19d0fd95fe518c2ba977(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with the parallel data resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetLanguageCodes
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +309,11 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"target_language_codes": schemaAttribute3d086605b78694cef572158d(),
+		"target_language_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The language codes for the target languages available in the parallel data file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

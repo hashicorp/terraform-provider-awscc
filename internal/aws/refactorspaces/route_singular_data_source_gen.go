@@ -15,82 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08be9f6392db2080c8f07a42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ee20072822a43504aa7e475() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActivationState
-			"activation_state": schemaAttribute08be9f6392db2080c8f07a42(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f399c81bf1ade335e8d8c60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the value for the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b2bee02481d77e615af3d09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string used to identify this tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute868f5e40935a4c1e3e780b09() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7b2bee02481d77e615af3d09(),
-				// Property: Value
-				"value": schemaAttribute0f399c81bf1ade335e8d8c60(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95785c506e3cd5d1ed8b12ae() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec48d623ac1f6a4c22233f3c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef58bbc32a6ceb397147d9c09() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActivationState
-			"activation_state": schemaAttribute08be9f6392db2080c8f07a42(),
-			// Property: AppendSourcePath
-			"append_source_path": schemaAttributeec48d623ac1f6a4c22233f3c(),
-			// Property: IncludeChildPaths
-			"include_child_paths": schemaAttributeec48d623ac1f6a4c22233f3c(),
-			// Property: Methods
-			"methods": schemaAttribute95785c506e3cd5d1ed8b12ae(),
-			// Property: SourcePath
-			"source_path": schemaAttribute08be9f6392db2080c8f07a42(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_refactorspaces_route", routeDataSource)
 }
@@ -108,7 +32,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^app-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"application_identifier": schemaAttribute08be9f6392db2080c8f07a42(),
+		"application_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +44,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute08be9f6392db2080c8f07a42(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultRoute
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +66,15 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"default_route": schemaAttribute0ee20072822a43504aa7e475(),
+		"default_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActivationState
+				"activation_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -148,14 +84,18 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^env-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schemaAttribute08be9f6392db2080c8f07a42(),
+		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PathResourceToId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"path_resource_to_id": schemaAttribute08be9f6392db2080c8f07a42(),
+		"path_resource_to_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +105,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^rte-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"route_identifier": schemaAttribute08be9f6392db2080c8f07a42(),
+		"route_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteType
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +118,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"route_type": schemaAttribute08be9f6392db2080c8f07a42(),
+		"route_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +130,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^svc-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"service_identifier": schemaAttribute08be9f6392db2080c8f07a42(),
+		"service_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +165,24 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute868f5e40935a4c1e3e780b09(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string used to identify this tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string containing the value for the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UriPathRoute
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +230,32 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"uri_path_route": schemaAttributef58bbc32a6ceb397147d9c09(),
+		"uri_path_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActivationState
+				"activation_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AppendSourcePath
+				"append_source_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeChildPaths
+				"include_child_paths": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Methods
+				"methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourcePath
+				"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

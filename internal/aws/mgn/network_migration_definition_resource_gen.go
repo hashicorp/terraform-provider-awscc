@@ -26,331 +26,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute04319cb47c708c3e4f550fdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ab280185cac5b647c7871c3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InboundCidr
-			"inbound_cidr": schemaAttribute6f3ff0dd4eb5c55c76518b08(),
-			// Property: InspectionCidr
-			"inspection_cidr": schemaAttribute694d09ab30ae3c4c375acaf2(),
-			// Property: OutboundCidr
-			"outbound_cidr": schemaAttributea8fa6d9541005b2c1fc23828(),
-			// Property: Topology
-			"topology": schemaAttribute23e22482ca212cf188d54787(),
-		}, /*END SCHEMA*/
-		Description: "The target network configuration including topology and CIDR ranges.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1342fab44a4218ca9cfc756b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the network migration definition.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s\\x00]( *[^\\s\\x00])*$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21cf08e20cd103ec32885032() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the network migration definition.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23e22482ca212cf188d54787() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network topology type for the target environment.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ISOLATED_VPC",
-				"HUB_AND_SPOKE",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3646fc4b8cf722325896784c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute04319cb47c708c3e4f550fdf(),
-				// Property: Value
-				"value": schemaAttribute3f9bcef1ebfbe01b9260975f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the network migration definition.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f9bcef1ebfbe01b9260975f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40eaacbf55e5c3726bb5ce91() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceEnvironment
-				"source_environment": schemaAttributecd4331e738205568318d4864(),
-				// Property: SourceS3Configuration
-				"source_s3_configuration": schemaAttributedbed4f1cae7a3dc5ba6d5042(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of source configurations for the network migration.",
-		Required:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(0, 2),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45676cc1a828611b2fb7328d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the network migration definition.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 600),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x00]*$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a54a8eb3ed220a2e60e5a4d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the network migration definition.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e8d3e41eae831c12e32133a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket containing source data.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.\\-_]{1,255}$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50fa7db8daba46769adc4bf0() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Scope tags for the network migration definition.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute694d09ab30ae3c4c375acaf2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for inspection traffic in the target network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(9, 18),
-			stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f3ff0dd4eb5c55c76518b08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for inbound traffic in the target network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(9, 18),
-			stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80b128b12a81b444dbf2b99f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket for target artifacts.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.\\-_]{1,255}$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bb4fe3d6a06bf6dde330595() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the network migration definition was last updated.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9457887b31f92e5d5491706c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 key (path) for the source data.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a8091a242ea573f3f2f0682() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The target deployment configuration for the migrated network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"SINGLE_ACCOUNT",
-				"MULTI_ACCOUNT",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c6d82731adf58f3dcd61fbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID of the S3 bucket owner.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(12, 12),
-			stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12,}"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8fa6d9541005b2c1fc23828() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for outbound traffic in the target network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(9, 18),
-			stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd4331e738205568318d4864() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source environment type.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"NSX",
-				"VSPHERE",
-				"FORTIGATE_FIREWALL",
-				"PALO_ALTO_FIREWALL",
-				"CISCO_ACI",
-				"LOGICAL_MODEL",
-				"MODELIZE_IT",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed41e77e970475dac72cad0b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the network migration definition was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbed4f1cae7a3dc5ba6d5042() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute4e8d3e41eae831c12e32133a(),
-			// Property: S3BucketOwner
-			"s3_bucket_owner": schemaAttribute9c6d82731adf58f3dcd61fbf(),
-			// Property: S3Key
-			"s3_key": schemaAttribute9457887b31f92e5d5491706c(),
-		}, /*END SCHEMA*/
-		Description: "S3 configuration for source network data.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefeb538e5b57da6d3e1322821() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Bucket
-			"s3_bucket": schemaAttribute80b128b12a81b444dbf2b99f(),
-			// Property: S3BucketOwner
-			"s3_bucket_owner": schemaAttribute9c6d82731adf58f3dcd61fbf(),
-		}, /*END SCHEMA*/
-		Description: "The S3 configuration for storing the target network artifacts.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_mgn_network_migration_definition", networkMigrationDefinitionResource)
 	registry.AddListResourceFactory("awscc_mgn_network_migration_definition", generic.NewListResource(networkMigrationDefinitionResource))
@@ -369,7 +44,13 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4a54a8eb3ed220a2e60e5a4d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the network migration definition.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +59,14 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributed41e77e970475dac72cad0b5(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the network migration definition was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -389,7 +77,18 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^[^\\x00]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute45676cc1a828611b2fb7328d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the network migration definition.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 600),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x00]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -400,7 +99,14 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1342fab44a4218ca9cfc756b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the network migration definition.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s\\x00]( *[^\\s\\x00])*$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkMigrationDefinitionID
 		// CloudFormation resource type schema:
 		//
@@ -411,7 +117,13 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^nmd-[0-9a-zA-Z]{17}$",
 		//	  "type": "string"
 		//	}
-		"network_migration_definition_id": schemaAttribute21cf08e20cd103ec32885032(),
+		"network_migration_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the network migration definition.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScopeTags
 		// CloudFormation resource type schema:
 		//
@@ -427,7 +139,16 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scope_tags": schemaAttribute50fa7db8daba46769adc4bf0(),
+		"scope_tags":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Scope tags for the network migration definition.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -490,7 +211,62 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"source_configurations": schemaAttribute40eaacbf55e5c3726bb5ce91(),
+		"source_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SourceEnvironment
+					"source_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The source environment type.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"NSX",
+								"VSPHERE",
+								"FORTIGATE_FIREWALL",
+								"PALO_ALTO_FIREWALL",
+								"CISCO_ACI",
+								"LOGICAL_MODEL",
+								"MODELIZE_IT",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SourceS3Configuration
+					"source_s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: S3Bucket
+							"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the S3 bucket containing source data.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.\\-_]{1,255}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: S3BucketOwner
+							"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS account ID of the S3 bucket owner.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(12, 12),
+									stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12,}"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: S3Key
+							"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The S3 key (path) for the source data.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "S3 configuration for source network data.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of source configurations for the network migration.",
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 2),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -523,7 +299,44 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3646fc4b8cf722325896784c(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the network migration definition.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TargetDeployment
 		// CloudFormation resource type schema:
 		//
@@ -535,7 +348,20 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_deployment": schemaAttribute9a8091a242ea573f3f2f0682(),
+		"target_deployment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The target deployment configuration for the migrated network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SINGLE_ACCOUNT",
+					"MULTI_ACCOUNT",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TargetNetwork
 		// CloudFormation resource type schema:
 		//
@@ -578,7 +404,62 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_network": schemaAttribute0ab280185cac5b647c7871c3(),
+		"target_network": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InboundCidr
+				"inbound_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR block for inbound traffic in the target network.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(9, 18),
+						stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InspectionCidr
+				"inspection_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR block for inspection traffic in the target network.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(9, 18),
+						stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OutboundCidr
+				"outbound_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CIDR block for outbound traffic in the target network.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(9, 18),
+						stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])/(1[6-9]|2[0-8])$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Topology
+				"topology": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network topology type for the target environment.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ISOLATED_VPC",
+							"HUB_AND_SPOKE",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The target network configuration including topology and CIDR ranges.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetS3Configuration
 		// CloudFormation resource type schema:
 		//
@@ -605,7 +486,29 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_s3_configuration": schemaAttributefeb538e5b57da6d3e1322821(),
+		"target_s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket for target artifacts.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.\\-_]{1,255}$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3BucketOwner
+				"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS account ID of the S3 bucket owner.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(12, 12),
+						stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12,}"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The S3 configuration for storing the target network artifacts.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +517,14 @@ func networkMigrationDefinitionResource(ctx context.Context) (resource.Resource,
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute8bb4fe3d6a06bf6dde330595(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the network migration definition was last updated.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

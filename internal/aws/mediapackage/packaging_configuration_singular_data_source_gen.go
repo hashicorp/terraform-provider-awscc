@@ -15,442 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01b49ff6f0f949ad82eb3015() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PresetSpeke20Audio
-			"preset_speke_20_audio": schemaAttributed736f1bbc86adfdf5c1020e7(),
-			// Property: PresetSpeke20Video
-			"preset_speke_20_video": schemaAttribute6ae60225e2d4ae3419e26630(),
-		}, /*END SCHEMA*/
-		Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06b5caf622d75d4bf3bf8afa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConstantInitializationVector
-			"constant_initialization_vector": schemaAttribute50dca3704ec47fc2cf063028(),
-			// Property: EncryptionMethod
-			"encryption_method": schemaAttribute32a9f45543d2a2e68013a4ce(),
-			// Property: SpekeKeyProvider
-			"speke_key_provider": schemaAttribute2bd306c18a81fec743182290(),
-		}, /*END SCHEMA*/
-		Description: "An HTTP Live Streaming (HLS) encryption configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08703806497296faaa89b958() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A directive that determines the order of streams in the output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1381bca0546ffa4a9bfb6625() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encryption
-			"encryption": schemaAttribute93c4d0a096e69663cd28f12a(),
-			// Property: HlsManifests
-			"hls_manifests": schemaAttribute54c6499fdd2a5bec027fbd3c(),
-			// Property: IncludeEncoderConfigurationInSegments
-			"include_encoder_configuration_in_segments": schemaAttributeeb4b291ec14856d4358066b8(),
-			// Property: SegmentDurationSeconds
-			"segment_duration_seconds": schemaAttribute8a2dbe18a0784c71f3e21d79(),
-		}, /*END SCHEMA*/
-		Description: "A CMAF packaging configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute181eac43ceb5524cc699b0cf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19a905951a17377b7d4dfa31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxVideoBitsPerSecond
-			"max_video_bits_per_second": schemaAttributeab3dce2500bf961227372366(),
-			// Property: MinVideoBitsPerSecond
-			"min_video_bits_per_second": schemaAttributeffe1365b221759dcb92c3c62(),
-			// Property: StreamOrder
-			"stream_order": schemaAttribute08703806497296faaa89b958(),
-		}, /*END SCHEMA*/
-		Description: "A StreamSelection configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19e7ad3b195b159d8fffb5fa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef83a53570c5ced8d804990a2(),
-				// Property: Value
-				"value": schemaAttributef83a53570c5ced8d804990a2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of tags associated with a resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2425aeb44cf1cf105c792690() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DashManifests
-			"dash_manifests": schemaAttribute2cf388086278ebc9dc4e686f(),
-			// Property: Encryption
-			"encryption": schemaAttribute838f4e345ba9c001455d87fe(),
-			// Property: IncludeEncoderConfigurationInSegments
-			"include_encoder_configuration_in_segments": schemaAttributeeb4b291ec14856d4358066b8(),
-			// Property: IncludeIframeOnlyStream
-			"include_iframe_only_stream": schemaAttribute40e35175a97b140830757f4f(),
-			// Property: PeriodTriggers
-			"period_triggers": schemaAttribute6529221c52bc5bea4373b060(),
-			// Property: SegmentDurationSeconds
-			"segment_duration_seconds": schemaAttribute8a2dbe18a0784c71f3e21d79(),
-			// Property: SegmentTemplateFormat
-			"segment_template_format": schemaAttributef84c43d2068658cf11f5c67a(),
-		}, /*END SCHEMA*/
-		Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute248b4bfaee6abcc51d670955() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bd306c18a81fec743182290() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionContractConfiguration
-			"encryption_contract_configuration": schemaAttribute01b49ff6f0f949ad82eb3015(),
-			// Property: RoleArn
-			"role_arn": schemaAttributeca30fdd8d070479734ea1a90(),
-			// Property: SystemIds
-			"system_ids": schemaAttribute920f6537f919a5a1a2358d88(),
-			// Property: Url
-			"url": schemaAttributef4879a1c075c6cebb84899bc(),
-		}, /*END SCHEMA*/
-		Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cf388086278ebc9dc4e686f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ManifestLayout
-				"manifest_layout": schemaAttributeaf9c9b9da1fc6d61e885d682(),
-				// Property: ManifestName
-				"manifest_name": schemaAttribute80edf5697e7559cb21e69c27(),
-				// Property: MinBufferTimeSeconds
-				"min_buffer_time_seconds": schemaAttribute248b4bfaee6abcc51d670955(),
-				// Property: Profile
-				"profile": schemaAttribute33c751cd0d0cd026be7c0a3a(),
-				// Property: ScteMarkersSource
-				"scte_markers_source": schemaAttributed7b532f884c97951db67f2bc(),
-				// Property: StreamSelection
-				"stream_selection": schemaAttribute19a905951a17377b7d4dfa31(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of DASH manifest configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32a9f45543d2a2e68013a4ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption method to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33c751cd0d0cd026be7c0a3a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dbc60ad3180caa3d69a01fb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40e35175a97b140830757f4f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When enabled, an I-Frame only stream will be included in the output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41a3fee0161cf45fa44ceeaf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the PackagingConfiguration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50dca3704ec47fc2cf063028() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An HTTP Live Streaming (HLS) encryption configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54c6499fdd2a5bec027fbd3c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AdMarkers
-				"ad_markers": schemaAttributed040423f29c90eac356d793a(),
-				// Property: IncludeIframeOnlyStream
-				"include_iframe_only_stream": schemaAttribute40e35175a97b140830757f4f(),
-				// Property: ManifestName
-				"manifest_name": schemaAttribute80edf5697e7559cb21e69c27(),
-				// Property: ProgramDateTimeIntervalSeconds
-				"program_date_time_interval_seconds": schemaAttribute5b9da171a992e1f1db28a912(),
-				// Property: RepeatExtXKey
-				"repeat_ext_x_key": schemaAttribute3dbc60ad3180caa3d69a01fb(),
-				// Property: StreamSelection
-				"stream_selection": schemaAttribute19a905951a17377b7d4dfa31(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of HLS manifest configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b9da171a992e1f1db28a912() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6529221c52bc5bea4373b060() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ae60225e2d4ae3419e26630() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A collection of video encryption presets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute728684199e352c6452099b3b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When enabled, audio streams will be placed in rendition groups in the output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80edf5697e7559cb21e69c27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional string to include in the name of the manifest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute838f4e345ba9c001455d87fe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SpekeKeyProvider
-			"speke_key_provider": schemaAttribute2bd306c18a81fec743182290(),
-		}, /*END SCHEMA*/
-		Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute891d7c95c97db5a9767604c5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encryption
-			"encryption": schemaAttribute06b5caf622d75d4bf3bf8afa(),
-			// Property: HlsManifests
-			"hls_manifests": schemaAttribute54c6499fdd2a5bec027fbd3c(),
-			// Property: IncludeDvbSubtitles
-			"include_dvb_subtitles": schemaAttribute181eac43ceb5524cc699b0cf(),
-			// Property: SegmentDurationSeconds
-			"segment_duration_seconds": schemaAttribute8a2dbe18a0784c71f3e21d79(),
-			// Property: UseAudioRenditionGroup
-			"use_audio_rendition_group": schemaAttribute728684199e352c6452099b3b(),
-		}, /*END SCHEMA*/
-		Description: "An HTTP Live Streaming (HLS) packaging configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a2dbe18a0784c71f3e21d79() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9119343555e16eef0d6b87df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the PackagingConfiguration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute920f6537f919a5a1a2358d88() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The system IDs to include in key requests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93c4d0a096e69663cd28f12a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SpekeKeyProvider
-			"speke_key_provider": schemaAttribute2bd306c18a81fec743182290(),
-		}, /*END SCHEMA*/
-		Description: "A CMAF encryption configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab3dce2500bf961227372366() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum video bitrate (bps) to include in output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf9c9b9da1fc6d61e885d682() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1c406a77b3d6f0da9326e8c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Encryption
-			"encryption": schemaAttribute93c4d0a096e69663cd28f12a(),
-			// Property: MssManifests
-			"mss_manifests": schemaAttributec27ad424870b8a923d51f615(),
-			// Property: SegmentDurationSeconds
-			"segment_duration_seconds": schemaAttribute8a2dbe18a0784c71f3e21d79(),
-		}, /*END SCHEMA*/
-		Description: "A Microsoft Smooth Streaming (MSS) PackagingConfiguration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec27ad424870b8a923d51f615() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ManifestName
-				"manifest_name": schemaAttribute80edf5697e7559cb21e69c27(),
-				// Property: StreamSelection
-				"stream_selection": schemaAttribute19a905951a17377b7d4dfa31(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of MSS manifest configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca30fdd8d070479734ea1a90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed040423f29c90eac356d793a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed736f1bbc86adfdf5c1020e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A collection of audio encryption presets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7b532f884c97951db67f2bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb4b291ec14856d4358066b8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4879a1c075c6cebb84899bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the external key provider service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5c6c92d58613357bee61b2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a PackagingGroup.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef83a53570c5ced8d804990a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef84c43d2068658cf11f5c67a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffe1365b221759dcb92c3c62() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum video bitrate (bps) to include in output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackage_packaging_configuration", packagingConfigurationDataSource)
 }
@@ -466,7 +30,10 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ARN of the PackagingConfiguration.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute9119343555e16eef0d6b87df(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the PackagingConfiguration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CmafPackage
 		// CloudFormation resource type schema:
 		//
@@ -623,7 +190,125 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cmaf_package": schemaAttribute1381bca0546ffa4a9bfb6625(),
+		"cmaf_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A CMAF encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HlsManifests
+				"hls_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdMarkers
+							"ad_markers": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IncludeIframeOnlyStream
+							"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "When enabled, an I-Frame only stream will be included in the output.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestName
+							"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An optional string to include in the name of the manifest.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProgramDateTimeIntervalSeconds
+							"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RepeatExtXKey
+							"repeat_ext_x_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StreamSelection
+							"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MaxVideoBitsPerSecond
+									"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MinVideoBitsPerSecond
+									"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The minimum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StreamOrder
+									"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A directive that determines the order of streams in the output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A StreamSelection configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of HLS manifest configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeEncoderConfigurationInSegments
+				"include_encoder_configuration_in_segments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A CMAF packaging configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DashPackage
 		// CloudFormation resource type schema:
 		//
@@ -810,7 +495,141 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"dash_package": schemaAttribute2425aeb44cf1cf105c792690(),
+		"dash_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DashManifests
+				"dash_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ManifestLayout
+							"manifest_layout": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestName
+							"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An optional string to include in the name of the manifest.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MinBufferTimeSeconds
+							"min_buffer_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Profile
+							"profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ScteMarkersSource
+							"scte_markers_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StreamSelection
+							"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MaxVideoBitsPerSecond
+									"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MinVideoBitsPerSecond
+									"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The minimum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StreamOrder
+									"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A directive that determines the order of streams in the output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A StreamSelection configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of DASH manifest configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeEncoderConfigurationInSegments
+				"include_encoder_configuration_in_segments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeIframeOnlyStream
+				"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, an I-Frame only stream will be included in the output.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PeriodTriggers
+				"period_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentTemplateFormat
+				"segment_template_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HlsPackage
 		// CloudFormation resource type schema:
 		//
@@ -983,7 +802,140 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"hls_package": schemaAttribute891d7c95c97db5a9767604c5(),
+		"hls_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConstantInitializationVector
+						"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An HTTP Live Streaming (HLS) encryption configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionMethod
+						"encryption_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The encryption method to use.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An HTTP Live Streaming (HLS) encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HlsManifests
+				"hls_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdMarkers
+							"ad_markers": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IncludeIframeOnlyStream
+							"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "When enabled, an I-Frame only stream will be included in the output.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestName
+							"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An optional string to include in the name of the manifest.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProgramDateTimeIntervalSeconds
+							"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RepeatExtXKey
+							"repeat_ext_x_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StreamSelection
+							"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MaxVideoBitsPerSecond
+									"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MinVideoBitsPerSecond
+									"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The minimum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StreamOrder
+									"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A directive that determines the order of streams in the output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A StreamSelection configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of HLS manifest configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeDvbSubtitles
+				"include_dvb_subtitles": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseAudioRenditionGroup
+				"use_audio_rendition_group": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, audio streams will be placed in rendition groups in the output.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An HTTP Live Streaming (HLS) packaging configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -991,7 +943,10 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the PackagingConfiguration.",
 		//	  "type": "string"
 		//	}
-		"packaging_configuration_id": schemaAttribute41a3fee0161cf45fa44ceeaf(),
+		"packaging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the PackagingConfiguration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MssPackage
 		// CloudFormation resource type schema:
 		//
@@ -1123,7 +1078,100 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"mss_package": schemaAttributec1c406a77b3d6f0da9326e8c(),
+		"mss_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A CMAF encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MssManifests
+				"mss_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ManifestName
+							"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An optional string to include in the name of the manifest.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StreamSelection
+							"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MaxVideoBitsPerSecond
+									"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MinVideoBitsPerSecond
+									"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The minimum video bitrate (bps) to include in output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StreamOrder
+									"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A directive that determines the order of streams in the output.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A StreamSelection configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of MSS manifest configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Microsoft Smooth Streaming (MSS) PackagingConfiguration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackagingGroupId
 		// CloudFormation resource type schema:
 		//
@@ -1131,7 +1179,10 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of a PackagingGroup.",
 		//	  "type": "string"
 		//	}
-		"packaging_group_id": schemaAttributef5c6c92d58613357bee61b2b(),
+		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a PackagingGroup.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1156,7 +1207,22 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute19e7ad3b195b159d8fffb5fa(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

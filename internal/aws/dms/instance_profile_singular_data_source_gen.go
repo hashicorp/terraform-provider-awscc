@@ -15,113 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e1439b0259829b8079f99e3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes the publicly accessible of the instance profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a54248c6214ab987449b959() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an ARN of the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27b71f92c936f52cb1e4b43e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes a name for the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4209a75772933aa0cfef1afc() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The property describes vps security groups for the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54eb58aa144870815d048b30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6155a885030a11ab29ff2791() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an availability zone of the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7895e96840f80a783eeef28e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The optional description of the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7be4f5a696d4a181efa7241c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes a network type for the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86a5da3a9f63957d293c4b3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes an identifier for the instance profile. It is used for describing/deleting/modifying. Can be name/arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2eb7ab24575e4ab8968660e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes a subnet group identifier for the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb079c9723dff35326322765a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes a creating time of the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1deece0feea5ce2d50967a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed18649612898958738c4f78a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec1deece0feea5ce2d50967a6(),
-				// Property: Value
-				"value": schemaAttribute54eb58aa144870815d048b30(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5259caa2fd1c18f151fc816() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property describes kms key arn for the instance profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_instance_profile", instanceProfileDataSource)
 }
@@ -139,7 +32,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute6155a885030a11ab29ff2791(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an availability zone of the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +45,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7895e96840f80a783eeef28e(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The optional description of the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +58,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_arn": schemaAttribute1a54248c6214ab987449b959(),
+		"instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an ARN of the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileCreationTime
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +71,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_creation_time": schemaAttributeb079c9723dff35326322765a(),
+		"instance_profile_creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes a creating time of the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +84,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_identifier": schemaAttribute86a5da3a9f63957d293c4b3e(),
+		"instance_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes an identifier for the instance profile. It is used for describing/deleting/modifying. Can be name/arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceProfileName
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +97,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_profile_name": schemaAttribute27b71f92c936f52cb1e4b43e(),
+		"instance_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes a name for the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +110,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schemaAttributee5259caa2fd1c18f151fc816(),
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes kms key arn for the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +125,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttribute7be4f5a696d4a181efa7241c(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes a network type for the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +137,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The property describes the publicly accessible of the instance profile",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttribute0e1439b0259829b8079f99e3(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes the publicly accessible of the instance profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetGroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +150,10 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"subnet_group_identifier": schemaAttributea2eb7ab24575e4ab8968660e(),
+		"subnet_group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The property describes a subnet group identifier for the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +186,24 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed18649612898958738c4f78a(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +216,11 @@ func instanceProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"vpc_security_groups": schemaAttribute4209a75772933aa0cfef1afc(),
+		"vpc_security_groups": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The property describes vps security groups for the instance profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

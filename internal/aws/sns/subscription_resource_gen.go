@@ -18,137 +18,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2de037950990351834f82724() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon SNS resends the notification to the subscription when a message's attribute changes.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3309c8b67f3d801b33733131() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This property applies only to Amazon Data Firehose delivery stream subscriptions.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34e684f5519c99ddb3614e20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This attribute lets you choose the filtering scope by using one of the following string value types: MessageAttributes (default) and MessageBody.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4201df3eb065a4fc0ef6edf6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The delivery policy JSON assigned to the subscription. Enables the subscriber to define the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to the topic.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45b67c64063a50ec3814d0c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Region is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6517d098f1cef473a13dd5ee() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, enables raw message delivery. Raw messages don't contain any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7655751f401977256c22631b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors are held in the dead-letter queue for further analysis or reprocessing.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8571966bb016060864348017() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the subscription",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4e65789afce188fbed976b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the topic to subscribe to.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb9f20495db471782db0ab4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subscription's endpoint. The endpoint value depends on the protocol that you specify. ",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf8ab4fbfdbb804a7d576b98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subscription's protocol.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed740224273ab6f453c47a6fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter policy JSON assigned to the subscription. Enables the subscriber to filter out unwanted messages.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_sns_subscription", subscriptionResource)
 	registry.AddListResourceFactory("awscc_sns_subscription", generic.NewListResource(subscriptionResource))
@@ -165,7 +34,13 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Arn of the subscription",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8571966bb016060864348017(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the subscription",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryPolicy
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +48,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The delivery policy JSON assigned to the subscription. Enables the subscriber to define the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to the topic.",
 		//	  "type": "string"
 		//	}
-		"delivery_policy": schemaAttribute4201df3eb065a4fc0ef6edf6(),
+		"delivery_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The delivery policy JSON assigned to the subscription. Enables the subscriber to define the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to the topic.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +63,15 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The subscription's endpoint. The endpoint value depends on the protocol that you specify. ",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttributecb9f20495db471782db0ab4c(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subscription's endpoint. The endpoint value depends on the protocol that you specify. ",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPolicy
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +79,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The filter policy JSON assigned to the subscription. Enables the subscriber to filter out unwanted messages.",
 		//	  "type": "string"
 		//	}
-		"filter_policy": schemaAttributed740224273ab6f453c47a6fb(),
+		"filter_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The filter policy JSON assigned to the subscription. Enables the subscriber to filter out unwanted messages.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPolicyScope
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +94,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "This attribute lets you choose the filtering scope by using one of the following string value types: MessageAttributes (default) and MessageBody.",
 		//	  "type": "string"
 		//	}
-		"filter_policy_scope": schemaAttribute34e684f5519c99ddb3614e20(),
+		"filter_policy_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This attribute lets you choose the filtering scope by using one of the following string value types: MessageAttributes (default) and MessageBody.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +109,13 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The subscription's protocol.",
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttributecf8ab4fbfdbb804a7d576b98(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subscription's protocol.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RawMessageDelivery
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +123,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "When set to true, enables raw message delivery. Raw messages don't contain any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints.",
 		//	  "type": "boolean"
 		//	}
-		"raw_message_delivery": schemaAttribute6517d098f1cef473a13dd5ee(),
+		"raw_message_delivery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When set to true, enables raw message delivery. Raw messages don't contain any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RedrivePolicy
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +138,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors are held in the dead-letter queue for further analysis or reprocessing.",
 		//	  "type": "string"
 		//	}
-		"redrive_policy": schemaAttribute7655751f401977256c22631b(),
+		"redrive_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors are held in the dead-letter queue for further analysis or reprocessing.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +153,15 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
 		//	  "type": "string"
 		//	}
-		"region": schemaAttribute45b67c64063a50ec3814d0c1(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For cross-region subscriptions, the region in which the topic resides.If no region is specified, AWS CloudFormation uses the region of the caller as the default.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Region is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ReplayPolicy
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +169,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies whether Amazon SNS resends the notification to the subscription when a message's attribute changes.",
 		//	  "type": "string"
 		//	}
-		"replay_policy": schemaAttribute2de037950990351834f82724(),
+		"replay_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether Amazon SNS resends the notification to the subscription when a message's attribute changes.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SubscriptionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +184,14 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "This property applies only to Amazon Data Firehose delivery stream subscriptions.",
 		//	  "type": "string"
 		//	}
-		"subscription_role_arn": schemaAttribute3309c8b67f3d801b33733131(),
+		"subscription_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This property applies only to Amazon Data Firehose delivery stream subscriptions.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TopicArn
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +199,13 @@ func subscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the topic to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"topic_arn": schemaAttributeb4e65789afce188fbed976b4(),
+		"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the topic to subscribe to.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

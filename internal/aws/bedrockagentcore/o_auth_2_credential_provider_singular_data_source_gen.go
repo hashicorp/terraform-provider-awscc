@@ -16,729 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0054824777fc28a9d9691aaf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttribute7ca99dc21883e0480d04e005(),
-			// Property: Issuer
-			"issuer": schemaAttribute60bfb07a5c498f1c31b2a2f8(),
-			// Property: ResponseTypes
-			"response_types": schemaAttribute034a0ea488202356a4f0dfd3(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttribute09b1b19282c1363f1ba26d0b(),
-		}, /*END SCHEMA*/
-		Description: "Authorization server metadata for the OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0311b325bb7b192a3eb1d283() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientAuthenticationMethod
-			"client_authentication_method": schemaAttribute5bf432745caf4f0471add61a(),
-			// Property: ClientId
-			"client_id": schemaAttribute43046c96f36de10562bbc5da(),
-			// Property: ClientSecret
-			"client_secret": schemaAttributec0174ff84dda57041a31f97a(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute6d28904f80b6fe4acefe1870(),
-			// Property: OauthDiscovery
-			"oauth_discovery": schemaAttribute237350ac394bdd4c90d5e1bd(),
-			// Property: OnBehalfOfTokenExchangeConfig
-			"on_behalf_of_token_exchange_config": schemaAttributea8f5e0bd4a3682524bd4bd41(),
-			// Property: PrivateEndpoint
-			"private_endpoint": schemaAttribute250325d5e61ce41d6fb1d33d(),
-			// Property: PrivateEndpointOverrides
-			"private_endpoint_overrides": schemaAttribute301cf9cb5af51ab125b50c7f(),
-			// Property: PrivateKeyJwtConfig
-			"private_key_jwt_config": schemaAttributeadec60d728b4120bb1270478(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a custom OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute034a0ea488202356a4f0dfd3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The supported response types",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute041aa1ce1459d97be5ba76cd() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tags to apply to the managed VPC Lattice resource gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09b1b19282c1363f1ba26d0b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The token endpoint URL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e82dc5dd53ad4f71e7b266a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the OAuth2 credential provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16725e306e3a807e0dabc69a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a Slack OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d928426a83ce18debb49325() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The actor token content type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1deed0f9b07dc5d26630ac84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC that contains your private resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22311ab1163643afa61ca378() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The algorithm used to sign the JWT client assertion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute237350ac394bdd4c90d5e1bd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationServerMetadata
-			"authorization_server_metadata": schemaAttribute0054824777fc28a9d9691aaf(),
-			// Property: DiscoveryUrl
-			"discovery_url": schemaAttributed0a3c4d78367efcdee9d8a95(),
-		}, /*END SCHEMA*/
-		Description: "Discovery information for an OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute250325d5e61ce41d6fb1d33d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ManagedVpcResource
-			"managed_vpc_resource": schemaAttribute9ab86cf309128587b9b6f04b(),
-			// Property: SelfManagedLatticeResource
-			"self_managed_lattice_resource": schemaAttribute388313c379f13b10fdc659eb(),
-		}, /*END SCHEMA*/
-		Description: "The private endpoint configuration for connecting to private resources in your VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute301cf9cb5af51ab125b50c7f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Domain
-				"domain": schemaAttribute8729ae9c917aa07f6263b06a(),
-				// Property: PrivateEndpoint
-				"private_endpoint": schemaAttribute250325d5e61ce41d6fb1d33d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of private endpoint overrides. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute340b98df652d16dfc751458e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the credential provider was created",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37ee594ab99e16b92e6dcd6e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a LinkedIn OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute388313c379f13b10fdc659eb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourceConfigurationIdentifier
-			"resource_configuration_identifier": schemaAttribute8f0d3a8fec33621f5fae797b(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39ad78d922f42dea920d3402() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f501aa8f52a0a6bff74b83f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the secret in AWS Secrets Manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f634dd644a4819a4a91827d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the client secret value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute415e8282b48f5dc7c2083e8b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: TenantId
-			"tenant_id": schemaAttributec7e2a8b3d7b8478bb5beb028(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a Microsoft OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43046c96f36de10562bbc5da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client ID for the custom OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48c3c0c60514ab8f1f02968b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The JSON key within the secret that contains the credential value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f57612078570ffb0cfaa0d2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeySource
-			"kms_key_source": schemaAttribute8cdbf839c96a3da797935c3e(),
-		}, /*END SCHEMA*/
-		Description: "Contains the private key source configuration for a JWT client assertion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute574efb730011002cc515c490() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The actor token scopes. Only valid when ActorTokenContent is M2M.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5924aeed295935ab9e607cbd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: JsonKey
-			"json_key": schemaAttribute48c3c0c60514ab8f1f02968b(),
-			// Property: SecretId
-			"secret_id": schemaAttributefeb1bbec432cafd12d90e2cb(),
-		}, /*END SCHEMA*/
-		Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bf432745caf4f0471add61a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client authentication method to use when authenticating with the token endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f8067e7084a1884a276f097() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of additional claims to include in the JWT client assertion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60bfb07a5c498f1c31b2a2f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The issuer URL for the OAuth2 authorization server",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute639656382dc9332c1c369dd8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The security group IDs to associate with the VPC Lattice resource gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69801bb221b878e25aa30d51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d28904f80b6fe4acefe1870() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of the client secret",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute779dae5d2f4b29ff7b8ac8ff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for an Atlassian OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77fa716a665b5aab1586526e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the credential provider was last updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a1a921f6970e584f89d8bef() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c3c543948b62e17ff67140b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttribute7e16dcdf90c87472fa81a01f(),
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: Issuer
-			"issuer": schemaAttributebedc4eada4e03b0b674748b0(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttributee22de871367dfa99286c983c(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a supported non-custom OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ca99dc21883e0480d04e005() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization endpoint URL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ce5cbbabd37b6cf1ec5dda7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActorTokenContent
-			"actor_token_content": schemaAttribute1d928426a83ce18debb49325(),
-			// Property: ActorTokenScopes
-			"actor_token_scopes": schemaAttribute574efb730011002cc515c490(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for RFC 8693 Token Exchange",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e16dcdf90c87472fa81a01f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "OAuth2 authorization endpoint for your isolated OAuth2 application tenant",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f78c47f63d3fa99ff24b73e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the OAuth2 credential provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86ad3f186d7d2a0041d5a9f1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Domain
-				"domain": schemaAttribute8729ae9c917aa07f6263b06a(),
-				// Property: PrivateEndpoint
-				"private_endpoint": schemaAttribute250325d5e61ce41d6fb1d33d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of private endpoint overrides for the OAuth2 provider. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8729ae9c917aa07f6263b06a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain to override with a private endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8cdbf839c96a3da797935c3e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttributeef3cd6e7088ad224c2e6d733(),
-		}, /*END SCHEMA*/
-		Description: "Contains the KMS key configuration for a JWT client assertion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f0d3a8fec33621f5fae797b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN or ID of the VPC Lattice resource configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f598d4d5e73fc8937a2b906() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The grant type for on-behalf-of token exchange",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9036eefb191e30a7f63dd466() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client authentication method used when authenticating with the token endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute936a325e0dcda1dc9500e330() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address type for the resource configuration endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97f69ea92dc5855a51f25a80() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a Google OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ab86cf309128587b9b6f04b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndpointIpAddressType
-			"endpoint_ip_address_type": schemaAttribute936a325e0dcda1dc9500e330(),
-			// Property: RoutingDomain
-			"routing_domain": schemaAttribute39ad78d922f42dea920d3402(),
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttribute639656382dc9332c1c369dd8(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttribute7a1a921f6970e584f89d8bef(),
-			// Property: Tags
-			"tags": schemaAttribute041aa1ce1459d97be5ba76cd(),
-			// Property: VpcIdentifier
-			"vpc_identifier": schemaAttribute1deed0f9b07dc5d26630ac84(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea06d45d3da534f6967561ad2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a GitHub OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea226fbe87f2d6c7c1320f2db() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute69801bb221b878e25aa30d51(),
-				// Property: Value
-				"value": schemaAttribute69801bb221b878e25aa30d51(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the OAuth2 credential provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8f5e0bd4a3682524bd4bd41() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GrantType
-			"grant_type": schemaAttribute8f598d4d5e73fc8937a2b906(),
-			// Property: TokenExchangeGrantTypeConfig
-			"token_exchange_grant_type_config": schemaAttribute7ce5cbbabd37b6cf1ec5dda7(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for on-behalf-of token exchange",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadec60d728b4120bb1270478() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalHeaderClaims
-			"additional_header_claims": schemaAttribute5f8067e7084a1884a276f097(),
-			// Property: AdditionalPayloadClaims
-			"additional_payload_claims": schemaAttribute5f8067e7084a1884a276f097(),
-			// Property: PrivateKeySource
-			"private_key_source": schemaAttribute4f57612078570ffb0cfaa0d2(),
-			// Property: SigningAlgorithm
-			"signing_algorithm": schemaAttribute22311ab1163643afa61ca378(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for private_key_jwt client authentication (RFC 7523)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebedc4eada4e03b0b674748b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Token issuer of your isolated OAuth2 application tenant",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0174ff84dda57041a31f97a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client secret for the custom OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec35f553a6a2ac6b16f4574b0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AtlassianOauth2ProviderConfig
-			"atlassian_oauth_2_provider_config": schemaAttribute779dae5d2f4b29ff7b8ac8ff(),
-			// Property: CustomOauth2ProviderConfig
-			"custom_oauth_2_provider_config": schemaAttribute0311b325bb7b192a3eb1d283(),
-			// Property: GithubOauth2ProviderConfig
-			"github_oauth_2_provider_config": schemaAttributea06d45d3da534f6967561ad2(),
-			// Property: GoogleOauth2ProviderConfig
-			"google_oauth_2_provider_config": schemaAttribute97f69ea92dc5855a51f25a80(),
-			// Property: IncludedOauth2ProviderConfig
-			"included_oauth_2_provider_config": schemaAttribute7c3c543948b62e17ff67140b(),
-			// Property: LinkedinOauth2ProviderConfig
-			"linkedin_oauth_2_provider_config": schemaAttribute37ee594ab99e16b92e6dcd6e(),
-			// Property: MicrosoftOauth2ProviderConfig
-			"microsoft_oauth_2_provider_config": schemaAttribute415e8282b48f5dc7c2083e8b(),
-			// Property: SalesforceOauth2ProviderConfig
-			"salesforce_oauth_2_provider_config": schemaAttributefa55cb6d411b88009e9360f6(),
-			// Property: SlackOauth2ProviderConfig
-			"slack_oauth_2_provider_config": schemaAttribute16725e306e3a807e0dabc69a(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for the OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7e2a8b3d7b8478bb5beb028() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Microsoft Entra ID tenant ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbccfd301917eac652332eac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the OAuth2 credential provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0a3c4d78367efcdee9d8a95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The discovery URL for the OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8a3497381f6908bdbd9026d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientAuthenticationMethod
-			"client_authentication_method": schemaAttribute9036eefb191e30a7f63dd466(),
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: OauthDiscovery
-			"oauth_discovery": schemaAttribute237350ac394bdd4c90d5e1bd(),
-			// Property: OnBehalfOfTokenExchangeConfig
-			"on_behalf_of_token_exchange_config": schemaAttributea8f5e0bd4a3682524bd4bd41(),
-			// Property: PrivateEndpoint
-			"private_endpoint": schemaAttribute250325d5e61ce41d6fb1d33d(),
-			// Property: PrivateEndpointOverrides
-			"private_endpoint_overrides": schemaAttribute86ad3f186d7d2a0041d5a9f1(),
-			// Property: PrivateKeyJwtConfig
-			"private_key_jwt_config": schemaAttributeadec60d728b4120bb1270478(),
-		}, /*END SCHEMA*/
-		Description: "The output configuration for the OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1881fec37261e9dd3f0b115() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The callback URL for the OAuth2 authorization flow",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee22de871367dfa99286c983c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "OAuth2 token endpoint for your isolated OAuth2 application tenant",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5d9023ba67ea10f08bf0844() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The vendor of the OAuth2 credential provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef3cd6e7088ad224c2e6d733() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef74055bd463901a606719cf3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttribute3f501aa8f52a0a6bff74b83f(),
-		}, /*END SCHEMA*/
-		Description: "The ARN of the client secret in AWS Secrets Manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa55cb6d411b88009e9360f6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClientId
-			"client_id": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute69801bb221b878e25aa30d51(),
-			// Property: ClientSecretConfig
-			"client_secret_config": schemaAttribute5924aeed295935ab9e607cbd(),
-			// Property: ClientSecretSource
-			"client_secret_source": schemaAttribute69801bb221b878e25aa30d51(),
-		}, /*END SCHEMA*/
-		Description: "Input configuration for a Salesforce OAuth2 provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefeb1bbec432cafd12d90e2cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the secret in AWS Secrets Manager",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_o_auth_2_credential_provider", oAuth2CredentialProviderDataSource)
 }
@@ -754,7 +31,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The callback URL for the OAuth2 authorization flow",
 		//	  "type": "string"
 		//	}
-		"callback_url": schemaAttributee1881fec37261e9dd3f0b115(),
+		"callback_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The callback URL for the OAuth2 authorization flow",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSecretArn
 		// CloudFormation resource type schema:
 		//
@@ -773,7 +53,17 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"client_secret_arn": schemaAttributef74055bd463901a606719cf3(),
+		"client_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the secret in AWS Secrets Manager",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ARN of the client secret in AWS Secrets Manager",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSecretJsonKey
 		// CloudFormation resource type schema:
 		//
@@ -783,7 +73,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_secret_json_key": schemaAttribute3f634dd644a4819a4a91827d(),
+		"client_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The JSON key within the secret that contains the client secret value",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSecretSource
 		// CloudFormation resource type schema:
 		//
@@ -795,7 +88,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"client_secret_source": schemaAttribute6d28904f80b6fe4acefe1870(),
+		"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source of the client secret",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -804,7 +100,11 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute340b98df652d16dfc751458e(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the credential provider was created",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialProviderArn
 		// CloudFormation resource type schema:
 		//
@@ -813,7 +113,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:(aws|aws-us-gov):bedrock-agentcore:[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/oauth2credentialprovider/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"credential_provider_arn": schemaAttribute0e82dc5dd53ad4f71e7b266a(),
+		"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the OAuth2 credential provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CredentialProviderVendor
 		// CloudFormation resource type schema:
 		//
@@ -848,7 +151,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"credential_provider_vendor": schemaAttributee5d9023ba67ea10f08bf0844(),
+		"credential_provider_vendor": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The vendor of the OAuth2 credential provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -857,7 +163,11 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute77fa716a665b5aab1586526e(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the credential provider was last updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -868,7 +178,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-zA-Z0-9\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7f78c47f63d3fa99ff24b73e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the OAuth2 credential provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Oauth2ProviderConfigInput
 		// CloudFormation resource type schema:
 		//
@@ -1710,7 +1023,613 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"oauth_2_provider_config_input": schemaAttributec35f553a6a2ac6b16f4574b0(),
+		"oauth_2_provider_config_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AtlassianOauth2ProviderConfig
+				"atlassian_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for an Atlassian OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomOauth2ProviderConfig
+				"custom_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientAuthenticationMethod
+						"client_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The client authentication method to use when authenticating with the token endpoint",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The client ID for the custom OAuth2 provider",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The client secret for the custom OAuth2 provider",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the client secret",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OauthDiscovery
+						"oauth_discovery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AuthorizationServerMetadata
+								"authorization_server_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthorizationEndpoint
+										"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The authorization endpoint URL",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Issuer
+										"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The issuer URL for the OAuth2 authorization server",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ResponseTypes
+										"response_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The supported response types",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenEndpoint
+										"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The token endpoint URL",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Authorization server metadata for the OAuth2 provider",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DiscoveryUrl
+								"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The discovery URL for the OAuth2 provider",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Discovery information for an OAuth2 provider",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OnBehalfOfTokenExchangeConfig
+						"on_behalf_of_token_exchange_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GrantType
+								"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The grant type for on-behalf-of token exchange",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenExchangeGrantTypeConfig
+								"token_exchange_grant_type_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActorTokenContent
+										"actor_token_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The actor token content type",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ActorTokenScopes
+										"actor_token_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The actor token scopes. Only valid when ActorTokenContent is M2M.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for RFC 8693 Token Exchange",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for on-behalf-of token exchange",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpoint
+						"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedVpcResource
+								"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EndpointIpAddressType
+										"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The IP address type for the resource configuration endpoint",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RoutingDomain
+										"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroupIds
+										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetIds
+										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags":              // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Tags to apply to the managed VPC Lattice resource gateway",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: VpcIdentifier
+										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ID of the VPC that contains your private resource",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelfManagedLatticeResource
+								"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceConfigurationIdentifier
+										"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN or ID of the VPC Lattice resource configuration",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The private endpoint configuration for connecting to private resources in your VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpointOverrides
+						"private_endpoint_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Domain
+									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The domain to override with a private endpoint",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PrivateEndpoint
+									"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ManagedVpcResource
+											"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EndpointIpAddressType
+													"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The IP address type for the resource configuration endpoint",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: RoutingDomain
+													"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SecurityGroupIds
+													"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SubnetIds
+													"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Tags
+													"tags":              // Pattern: ""
+													schema.MapAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "Tags to apply to the managed VPC Lattice resource gateway",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: VpcIdentifier
+													"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ID of the VPC that contains your private resource",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SelfManagedLatticeResource
+											"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ResourceConfigurationIdentifier
+													"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN or ID of the VPC Lattice resource configuration",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The private endpoint configuration for connecting to private resources in your VPC",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of private endpoint overrides. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKeyJwtConfig
+						"private_key_jwt_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdditionalHeaderClaims
+								"additional_header_claims": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map of additional claims to include in the JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AdditionalPayloadClaims
+								"additional_payload_claims": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map of additional claims to include in the JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateKeySource
+								"private_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KmsKeySource
+										"kms_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KmsKeyArn
+												"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Contains the KMS key configuration for a JWT client assertion",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Contains the private key source configuration for a JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SigningAlgorithm
+								"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The algorithm used to sign the JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for private_key_jwt client authentication (RFC 7523)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a custom OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GithubOauth2ProviderConfig
+				"github_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a GitHub OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GoogleOauth2ProviderConfig
+				"google_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a Google OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludedOauth2ProviderConfig
+				"included_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthorizationEndpoint
+						"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "OAuth2 authorization endpoint for your isolated OAuth2 application tenant",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Issuer
+						"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Token issuer of your isolated OAuth2 application tenant",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TokenEndpoint
+						"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "OAuth2 token endpoint for your isolated OAuth2 application tenant",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a supported non-custom OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LinkedinOauth2ProviderConfig
+				"linkedin_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a LinkedIn OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MicrosoftOauth2ProviderConfig
+				"microsoft_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TenantId
+						"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Microsoft Entra ID tenant ID",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a Microsoft OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SalesforceOauth2ProviderConfig
+				"salesforce_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a Salesforce OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SlackOauth2ProviderConfig
+				"slack_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientId
+						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecret
+						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input configuration for a Slack OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for the OAuth2 provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Oauth2ProviderConfigOutput
 		// CloudFormation resource type schema:
 		//
@@ -2086,7 +2005,270 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"oauth_2_provider_config_output": schemaAttributed8a3497381f6908bdbd9026d(),
+		"oauth_2_provider_config_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientAuthenticationMethod
+				"client_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client authentication method used when authenticating with the token endpoint",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientId
+				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OauthDiscovery
+				"oauth_discovery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthorizationServerMetadata
+						"authorization_server_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AuthorizationEndpoint
+								"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The authorization endpoint URL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Issuer
+								"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The issuer URL for the OAuth2 authorization server",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResponseTypes
+								"response_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The supported response types",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TokenEndpoint
+								"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The token endpoint URL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Authorization server metadata for the OAuth2 provider",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DiscoveryUrl
+						"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The discovery URL for the OAuth2 provider",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Discovery information for an OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OnBehalfOfTokenExchangeConfig
+				"on_behalf_of_token_exchange_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GrantType
+						"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The grant type for on-behalf-of token exchange",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TokenExchangeGrantTypeConfig
+						"token_exchange_grant_type_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ActorTokenContent
+								"actor_token_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The actor token content type",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ActorTokenScopes
+								"actor_token_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The actor token scopes. Only valid when ActorTokenContent is M2M.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for RFC 8693 Token Exchange",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for on-behalf-of token exchange",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateEndpoint
+				"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ManagedVpcResource
+						"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EndpointIpAddressType
+								"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The IP address type for the resource configuration endpoint",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoutingDomain
+								"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecurityGroupIds
+								"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubnetIds
+								"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Tags
+								"tags":              // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Tags to apply to the managed VPC Lattice resource gateway",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: VpcIdentifier
+								"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID of the VPC that contains your private resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelfManagedLatticeResource
+						"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceConfigurationIdentifier
+								"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN or ID of the VPC Lattice resource configuration",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The private endpoint configuration for connecting to private resources in your VPC",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateEndpointOverrides
+				"private_endpoint_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Domain
+							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The domain to override with a private endpoint",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PrivateEndpoint
+							"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ManagedVpcResource
+									"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EndpointIpAddressType
+											"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The IP address type for the resource configuration endpoint",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RoutingDomain
+											"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SecurityGroupIds
+											"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SubnetIds
+											"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Tags
+											"tags":              // Pattern: ""
+											schema.MapAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "Tags to apply to the managed VPC Lattice resource gateway",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: VpcIdentifier
+											"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the VPC that contains your private resource",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SelfManagedLatticeResource
+									"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ResourceConfigurationIdentifier
+											"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ARN or ID of the VPC Lattice resource configuration",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The private endpoint configuration for connecting to private resources in your VPC",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of private endpoint overrides for the OAuth2 provider. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateKeyJwtConfig
+				"private_key_jwt_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalHeaderClaims
+						"additional_header_claims": // Pattern: ""
+						schema.MapAttribute{        /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A map of additional claims to include in the JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AdditionalPayloadClaims
+						"additional_payload_claims": // Pattern: ""
+						schema.MapAttribute{         /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A map of additional claims to include in the JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKeySource
+						"private_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeySource
+								"kms_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KmsKeyArn
+										"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Contains the KMS key configuration for a JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains the private key source configuration for a JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SigningAlgorithm
+						"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The algorithm used to sign the JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for private_key_jwt client authentication (RFC 7523)",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The output configuration for the OAuth2 provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -2103,7 +2285,10 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributecbccfd301917eac652332eac(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the OAuth2 credential provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2135,7 +2320,22 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributea226fbe87f2d6c7c1320f2db(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the OAuth2 credential provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

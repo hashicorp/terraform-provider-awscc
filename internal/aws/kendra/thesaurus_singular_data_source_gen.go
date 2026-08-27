@@ -14,104 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute21c3e5288f2341cde55b1186() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An IAM role that gives Amazon Kendra permissions to access the thesaurus file specified in SourceS3Path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute386bda9fd1ba40a46a04f771() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value associated with the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43d3cad0e445eb7ce177dc0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the thesaurus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a6801d7b0c36ab8dfecdd81() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec4cebc3b7a8191003f1914f5(),
-				// Property: Value
-				"value": schemaAttribute386bda9fd1ba40a46a04f771(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that identify or categorize the thesaurus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b1bd3d4d5064c44610d0134() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the thesaurus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80d3e3d1cdbaedd6865e5331() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the thesaurus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute817701d6c80a6d260847a52d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the index for the thesaurus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6a15719f01c965caa3188e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttributee3dd597b6912c7b095ad52d5(),
-			// Property: Key
-			"key": schemaAttributefc77bfa37af383be1172c245(),
-		}, /*END SCHEMA*/
-		Description: "Information required to find a specific file in an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4cebc3b7a8191003f1914f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee05af0e87ed3b58d370e7434() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the thesaurus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3dd597b6912c7b095ad52d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket that contains the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc77bfa37af383be1172c245() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kendra_thesaurus", thesaurusDataSource)
 }
@@ -128,7 +30,10 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z0-9-]+:kendra:[a-z0-9-]+:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9-]*/thesaurus/[a-zA-Z0-9][a-zA-Z0-9_-]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee05af0e87ed3b58d370e7434(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the thesaurus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +44,10 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\P{C}*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute80d3e3d1cdbaedd6865e5331(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the thesaurus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +58,10 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
 		//	  "type": "string"
 		//	}
-		"thesaurus_id": schemaAttribute43d3cad0e445eb7ce177dc0d(),
+		"thesaurus_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the thesaurus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexId
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +72,10 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"index_id": schemaAttribute817701d6c80a6d260847a52d(),
+		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the index for the thesaurus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +86,10 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7b1bd3d4d5064c44610d0134(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the thesaurus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +100,10 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute21c3e5288f2341cde55b1186(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An IAM role that gives Amazon Kendra permissions to access the thesaurus file specified in SourceS3Path.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceS3Path
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +131,22 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_s3_path": schemaAttribute9b6a15719f01c965caa3188e(),
+		"source_s3_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket that contains the file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information required to find a specific file in an Amazon S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +179,24 @@ func thesaurusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute7a6801d7b0c36ab8dfecdd81(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value associated with the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that identify or categorize the thesaurus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

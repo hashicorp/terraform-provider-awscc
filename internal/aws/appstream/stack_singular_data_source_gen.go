@@ -15,378 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute037b5171d6a96afec0ce60f7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The URLs that are denied for redirection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08a00135c0d844b3dfea61ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL that users are redirected to after their streaming session ends.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10d948ca356871285ca5400d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HostToClient
-			"host_to_client": schemaAttribute6c02819c82ba2f883894b9fb(),
-		}, /*END SCHEMA*/
-		Description: "The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute132297ed5fcebd881b3d3d81() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndpointType
-				"endpoint_type": schemaAttributef052cea6a421df8244ff1582(),
-				// Property: VpceId
-				"vpce_id": schemaAttribute17d6a4b68b3d94f1f3b4911e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14d7d99f0a0c0aecb34a4994() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PreferredProtocol
-			"preferred_protocol": schemaAttribute52eaea85fa13cade00661c63(),
-		}, /*END SCHEMA*/
-		Description: "The streaming protocol that you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17d6a4b68b3d94f1f3b4911e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier (ID) of the VPC in which the interface endpoint is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute191efe5028e62507faad8d91() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bc8bcc78f524d04e59db9d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f0679820bea01f9409caaac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The URLs that are allowed for redirection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a3ccbcc79aaeaed430c1403() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables or disables persistent application settings for users during their streaming sessions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3757573eb69dc25fd2d80a44() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The screen resolution for the agent streaming environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4308340b86804a65bd8f7f09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action that is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44c75d5810e0873904c865a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45bb0ba6a5c1c207ca806f08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f29cd4c1262096e7b96ee61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path prefix for the S3 bucket where users' persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f7ef273b3a2eb5bb2075371() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52eaea85fa13cade00661c63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The preferred protocol that you want to use while streaming your application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c02819c82ba2f883894b9fb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedUrls
-			"allowed_urls": schemaAttribute1f0679820bea01f9409caaac(),
-			// Property: DeniedUrls
-			"denied_urls": schemaAttribute037b5171d6a96afec0ce60f7(),
-			// Property: Enabled
-			"enabled": schemaAttributef7ce7182c4eb75663633605b(),
-		}, /*END SCHEMA*/
-		Description: "The URL redirection configuration from the streaming session host to the client.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93dec818fc99375dfa1e8ffb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9471c517d6e578dffb468a3c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AgentAction
-				"agent_action": schemaAttribute44c75d5810e0873904c865a1(),
-				// Property: Permission
-				"permission": schemaAttributed390fc1048b3560e270e6a94(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of agent access settings that define permissions for each agent action. You must specify at least one setting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cb4ffcd47b653eed7d42891() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef2e03d068bacdaf23cb36181(),
-				// Property: Value
-				"value": schemaAttribute1bc8bcc78f524d04e59db9d7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea34b8279b63401d9031366b6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3BucketArn
-			"s3_bucket_arn": schemaAttribute45bb0ba6a5c1c207ca806f08(),
-			// Property: ScreenImageFormat
-			"screen_image_format": schemaAttributedcbaaffdc8e5796d66759985(),
-			// Property: ScreenResolution
-			"screen_resolution": schemaAttribute3757573eb69dc25fd2d80a44(),
-			// Property: ScreenshotsUploadEnabled
-			"screenshots_upload_enabled": schemaAttributeffa2f2e61e00833b5654f6f0(),
-			// Property: Settings
-			"settings": schemaAttribute9471c517d6e578dffb468a3c(),
-			// Property: UserControlMode
-			"user_control_mode": schemaAttribute93dec818fc99375dfa1e8ffb(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for agent access on the stack. If specified, agent access is enabled for the stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea953319f10b008b9e91dcfa4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The names of the domains for the account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab50c9b3cbecdbea5dc7ab17() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttribute4308340b86804a65bd8f7f09(),
-				// Property: MaximumLength
-				"maximum_length": schemaAttributef404838647e295c004ba314a(),
-				// Property: Permission
-				"permission": schemaAttributeecb7f8ff06e84e76b4933fca(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec808173510daffdb9ea2bbfa() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter has been deprecated. Deletes the storage connectors currently enabled for the stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1a57aa2633b6922b771f0a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed390fc1048b3560e270e6a94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the agent action is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b3a6c9705168054a209c30() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectorType
-				"connector_type": schemaAttributef4c55924fe9b9867eb233210(),
-				// Property: Domains
-				"domains": schemaAttributea953319f10b008b9e91dcfa4(),
-				// Property: ResourceIdentifier
-				"resource_identifier": schemaAttributeffde62495bc851f7462db94e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The storage connectors to enable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7941b288a21af40a20d65fc() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The stack attributes to delete.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcbaaffdc8e5796d66759985() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The image format for agent screen captures.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede7c4b8abb7d2d6d63d4c0d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The stack name to display.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecb7f8ff06e84e76b4933fca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the action is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeece9e282bb85370e3ffe5830() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute2a3ccbcc79aaeaed430c1403(),
-			// Property: SettingsGroup
-			"settings_group": schemaAttribute4f29cd4c1262096e7b96ee61(),
-		}, /*END SCHEMA*/
-		Description: "The persistent application settings for users of the stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef052cea6a421df8244ff1582() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of interface endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1044aa261422b32d2dc520d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description to display.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2e03d068bacdaf23cb36181() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef404838647e295c004ba314a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of characters that can be copied by end users from the local device to the remote session, and to the local device from the remote session. This can be specified only for the CLIPBOARD_COPY_FROM_LOCAL_DEVICE and CLIPBOARD_COPY_TO_LOCAL_DEVICE actions. This defaults to 20,971,520 (20 MB) when unspecified and the permission is ENABLED. This can't be specified when the permission is DISABLED. The value can be between 1 and 20,971,520 (20 MB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4c55924fe9b9867eb233210() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of storage connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7ce7182c4eb75663633605b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether URL redirection is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffa2f2e61e00833b5654f6f0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffde62495bc851f7462db94e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the storage connector.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_stack", stackDataSource)
 }
@@ -422,7 +50,24 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"access_endpoints": schemaAttribute132297ed5fcebd881b3d3d81(),
+		"access_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EndpointType
+					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of interface endpoint.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VpceId
+					"vpce_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier (ID) of the VPC in which the interface endpoint is used.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentAccessConfig
 		// CloudFormation resource type schema:
 		//
@@ -483,7 +128,56 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"agent_access_config": schemaAttributea34b8279b63401d9031366b6(),
+		"agent_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3BucketArn
+				"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenImageFormat
+				"screen_image_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The image format for agent screen captures.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenResolution
+				"screen_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The screen resolution for the agent streaming environment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenshotsUploadEnabled
+				"screenshots_upload_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Settings
+				"settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AgentAction
+							"agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Permission
+							"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether the agent action is enabled or disabled.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of agent access settings that define permissions for each agent action. You must specify at least one setting.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserControlMode
+				"user_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for agent access on the stack. If specified, agent access is enabled for the stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationSettings
 		// CloudFormation resource type schema:
 		//
@@ -505,7 +199,22 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"application_settings": schemaAttributeece9e282bb85370e3ffe5830(),
+		"application_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables or disables persistent application settings for users during their streaming sessions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SettingsGroup
+				"settings_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The path prefix for the S3 bucket where users' persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The persistent application settings for users of the stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttributesToDelete
 		// CloudFormation resource type schema:
 		//
@@ -517,7 +226,11 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"attributes_to_delete": schemaAttributed7941b288a21af40a20d65fc(),
+		"attributes_to_delete": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The stack attributes to delete.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContentRedirection
 		// CloudFormation resource type schema:
 		//
@@ -558,7 +271,36 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"content_redirection": schemaAttribute10d948ca356871285ca5400d(),
+		"content_redirection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HostToClient
+				"host_to_client": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowedUrls
+						"allowed_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The URLs that are allowed for redirection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeniedUrls
+						"denied_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The URLs that are denied for redirection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether URL redirection is enabled or disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The URL redirection configuration from the streaming session host to the client.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteStorageConnectors
 		// CloudFormation resource type schema:
 		//
@@ -566,7 +308,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "This parameter has been deprecated. Deletes the storage connectors currently enabled for the stack.",
 		//	  "type": "boolean"
 		//	}
-		"delete_storage_connectors": schemaAttributec808173510daffdb9ea2bbfa(),
+		"delete_storage_connectors": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter has been deprecated. Deletes the storage connectors currently enabled for the stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -574,7 +319,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description to display.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef1044aa261422b32d2dc520d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description to display.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -582,7 +330,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The stack name to display.",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttributede7c4b8abb7d2d6d63d4c0d5(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The stack name to display.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EmbedHostDomains
 		// CloudFormation resource type schema:
 		//
@@ -594,7 +345,11 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"embed_host_domains": schemaAttribute191efe5028e62507faad8d91(),
+		"embed_host_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FeedbackURL
 		// CloudFormation resource type schema:
 		//
@@ -602,7 +357,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.",
 		//	  "type": "string"
 		//	}
-		"feedback_url": schemaAttributed1a57aa2633b6922b771f0a7(),
+		"feedback_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -610,7 +368,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the stack.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute4f7ef273b3a2eb5bb2075371(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RedirectURL
 		// CloudFormation resource type schema:
 		//
@@ -618,7 +379,10 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The URL that users are redirected to after their streaming session ends.",
 		//	  "type": "string"
 		//	}
-		"redirect_url": schemaAttribute08a00135c0d844b3dfea61ef(),
+		"redirect_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL that users are redirected to after their streaming session ends.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageConnectors
 		// CloudFormation resource type schema:
 		//
@@ -653,7 +417,30 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"storage_connectors": schemaAttributed5b3a6c9705168054a209c30(),
+		"storage_connectors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ConnectorType
+					"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of storage connector.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Domains
+					"domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The names of the domains for the account.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceIdentifier
+					"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the storage connector.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The storage connectors to enable.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamingExperienceSettings
 		// CloudFormation resource type schema:
 		//
@@ -668,7 +455,17 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"streaming_experience_settings": schemaAttribute14d7d99f0a0c0aecb34a4994(),
+		"streaming_experience_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PreferredProtocol
+				"preferred_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The preferred protocol that you want to use while streaming your application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The streaming protocol that you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -696,7 +493,24 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute9cb4ffcd47b653eed7d42891(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserSettings
 		// CloudFormation resource type schema:
 		//
@@ -728,7 +542,29 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"user_settings": schemaAttributeab50c9b3cbecdbea5dc7ab17(),
+		"user_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The action that is enabled or disabled.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MaximumLength
+					"maximum_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the number of characters that can be copied by end users from the local device to the remote session, and to the local device from the remote session. This can be specified only for the CLIPBOARD_COPY_FROM_LOCAL_DEVICE and CLIPBOARD_COPY_TO_LOCAL_DEVICE actions. This defaults to 20,971,520 (20 MB) when unspecified and the permission is ENABLED. This can't be specified when the permission is DISABLED. The value can be between 1 and 20,971,520 (20 MB).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Permission
+					"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Indicates whether the action is enabled or disabled.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

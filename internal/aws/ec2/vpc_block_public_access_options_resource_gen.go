@@ -19,39 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute17f1d1198913ac38b1dcc73e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab0c7125a2cafb4184df09eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified AWS account.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef96a4eae6c04f2e461c468ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The desired Block Public Access mode for Internet Gateways in your account. We do not allow to create in a off mode as this is the default value",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"block-bidirectional",
-				"block-ingress",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_block_public_access_options", vPCBlockPublicAccessOptionsResource)
 }
@@ -67,7 +34,13 @@ func vPCBlockPublicAccessOptionsResource(ctx context.Context) (resource.Resource
 		//	  "description": "The identifier for the specified AWS account.",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributeab0c7125a2cafb4184df09eb(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the specified AWS account.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExclusionsAllowed
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +48,13 @@ func vPCBlockPublicAccessOptionsResource(ctx context.Context) (resource.Resource
 		//	  "description": "Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed.",
 		//	  "type": "string"
 		//	}
-		"exclusions_allowed": schemaAttribute17f1d1198913ac38b1dcc73e(),
+		"exclusions_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InternetGatewayBlockMode
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +66,16 @@ func vPCBlockPublicAccessOptionsResource(ctx context.Context) (resource.Resource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"internet_gateway_block_mode": schemaAttributef96a4eae6c04f2e461c468ca(),
+		"internet_gateway_block_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The desired Block Public Access mode for Internet Gateways in your account. We do not allow to create in a off mode as this is the default value",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"block-bidirectional",
+					"block-ingress",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

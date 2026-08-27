@@ -15,554 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02a4c4c44ce2f1da8e759980() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute02ea9448f7206ecc9754b9c4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Aggregation
-				"aggregation": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: AllowedAggregations
-				"allowed_aggregations": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: CalculatedFieldDescription
-				"calculated_field_description": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: CalculatedFieldName
-				"calculated_field_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: CalculatedFieldSynonyms
-				"calculated_field_synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: CellValueSynonyms
-				"cell_value_synonyms": schemaAttribute81570670da5cdc4f770484e3(),
-				// Property: ColumnDataRole
-				"column_data_role": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: ComparativeOrder
-				"comparative_order": schemaAttributebc5ce16059bddd08f76118b7(),
-				// Property: DefaultFormatting
-				"default_formatting": schemaAttributee0277b4fe14de25ad529ccc0(),
-				// Property: DisableIndexing
-				"disable_indexing": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: Expression
-				"expression": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: IsIncludedInTopic
-				"is_included_in_topic": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: NeverAggregateInFilter
-				"never_aggregate_in_filter": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: NonAdditive
-				"non_additive": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: NotAllowedAggregations
-				"not_allowed_aggregations": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: SemanticType
-				"semantic_type": schemaAttribute0c5615f8a893c667ebf26f26(),
-				// Property: TimeGranularity
-				"time_granularity": schemaAttribute6d531c37d062432d29eed55b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c5615f8a893c667ebf26f26() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FalseyCellValue
-			"falsey_cell_value": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: FalseyCellValueSynonyms
-			"falsey_cell_value_synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-			// Property: SubTypeName
-			"sub_type_name": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: TruthyCellValue
-			"truthy_cell_value": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: TruthyCellValueSynonyms
-			"truthy_cell_value_synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-			// Property: TypeName
-			"type_name": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: TypeParameters
-			"type_parameters": schemaAttributedcf409d1c8930b8e2fc20fc2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute145e8e274ebb26f8d4828c5b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CategoryFilterFunction
-			"category_filter_function": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: CategoryFilterType
-			"category_filter_type": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: Constant
-			"constant": schemaAttributec12d28da48359e3977ba7d43(),
-			// Property: Inverse
-			"inverse": schemaAttributee0eaaca8797a8eb6219027a1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d5ac5ef42be66f1f43640ca() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BlankCellFormat
-			"blank_cell_format": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: CurrencySymbol
-			"currency_symbol": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: DateFormat
-			"date_format": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: DecimalSeparator
-			"decimal_separator": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: FractionDigits
-			"fraction_digits": schemaAttribute02a4c4c44ce2f1da8e759980(),
-			// Property: GroupingSeparator
-			"grouping_separator": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: NegativeFormat
-			"negative_format": schemaAttributebfa733d0f43a4df282fdc016(),
-			// Property: Prefix
-			"prefix": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: Suffix
-			"suffix": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: UnitScaler
-			"unit_scaler": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: UseBlankCellFormat
-			"use_blank_cell_format": schemaAttributee0eaaca8797a8eb6219027a1(),
-			// Property: UseGrouping
-			"use_grouping": schemaAttributee0eaaca8797a8eb6219027a1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ff25cbd8b8a40de8eeed1de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute268f76726fa6676bf8737c8e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Maximum
-			"maximum": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: Minimum
-			"minimum": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute270a4210c2c10969c4db1e8a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CategoryFilter
-				"category_filter": schemaAttribute145e8e274ebb26f8d4828c5b(),
-				// Property: DateRangeFilter
-				"date_range_filter": schemaAttributec2634d3588fbb4cb081f6222(),
-				// Property: FilterClass
-				"filter_class": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: FilterDescription
-				"filter_description": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: FilterName
-				"filter_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: FilterSynonyms
-				"filter_synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: FilterType
-				"filter_type": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: NumericEqualityFilter
-				"numeric_equality_filter": schemaAttributef142eb95d09c8f0a94d0643e(),
-				// Property: NumericRangeFilter
-				"numeric_range_filter": schemaAttributec73838e8df2eec47bd9f97fd(),
-				// Property: OperandFieldName
-				"operand_field_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: RelativeDateFilter
-				"relative_date_filter": schemaAttributedb47d85ca91e0be8866af81f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27e9a9c5e319cbcca02f6670() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: QBusinessInsightsEnabled
-			"q_business_insights_enabled": schemaAttributee0eaaca8797a8eb6219027a1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute365a3dec5430c98e8d0cdfd8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ce710cedb3c6b47675e8d7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f9e4d9affc06df28e4c4ed7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ValueList
-			"value_list": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute637de63b8a446b81c5b2b4ce() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Definition
-				"definition": schemaAttribute8937a713a0082389035cf3ca(),
-				// Property: EntityDescription
-				"entity_description": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: EntityName
-				"entity_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: EntitySynonyms
-				"entity_synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: SemanticEntityType
-				"semantic_entity_type": schemaAttribute837a3a4e38bf3fd7da26f097(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute648597c5ac4a884c21a12461() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Aggregation
-			"aggregation": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: AggregationFunctionParameters
-			"aggregation_function_parameters": schemaAttributedcf409d1c8930b8e2fc20fc2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66e624a771f2b2e04d3034ea() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CalculatedFields
-				"calculated_fields": schemaAttribute02ea9448f7206ecc9754b9c4(),
-				// Property: Columns
-				"columns": schemaAttributec8586150159158a0b5337de2(),
-				// Property: DataAggregation
-				"data_aggregation": schemaAttributec777aa2c30668bd27e80a19d(),
-				// Property: DatasetArn
-				"dataset_arn": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: DatasetDescription
-				"dataset_description": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: DatasetName
-				"dataset_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: Filters
-				"filters": schemaAttribute270a4210c2c10969c4db1e8a(),
-				// Property: NamedEntities
-				"named_entities": schemaAttribute637de63b8a446b81c5b2b4ce(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d531c37d062432d29eed55b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81570670da5cdc4f770484e3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CellValue
-				"cell_value": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: Synonyms
-				"synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute837a3a4e38bf3fd7da26f097() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SubTypeName
-			"sub_type_name": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: TypeName
-			"type_name": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: TypeParameters
-			"type_parameters": schemaAttributedcf409d1c8930b8e2fc20fc2(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8937a713a0082389035cf3ca() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FieldName
-				"field_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: Metric
-				"metric": schemaAttribute648597c5ac4a884c21a12461(),
-				// Property: PropertyName
-				"property_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: PropertyRole
-				"property_role": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: PropertyUsage
-				"property_usage": schemaAttribute6d531c37d062432d29eed55b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute951c289f5255e366a3788536() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A text field for providing additional guidance or context for response generation.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98e8f8c86c2ad24d39679a31() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConstantType
-			"constant_type": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: RangeConstant
-			"range_constant": schemaAttribute268f76726fa6676bf8737c8e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d7fbc2cdd479ac18697e03e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomInstructionsString
-			"custom_instructions_string": schemaAttribute951c289f5255e366a3788536(),
-		}, /*END SCHEMA*/
-		Description: "<p>Instructions that provide additional guidance and context for response generation.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaad7d2d73c436e36a50c90d9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3ce710cedb3c6b47675e8d7b(),
-				// Property: Value
-				"value": schemaAttribute1ff25cbd8b8a40de8eeed1de(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc5ce16059bddd08f76118b7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SpecifedOrder
-			"specifed_order": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-			// Property: TreatUndefinedSpecifiedValues
-			"treat_undefined_specified_values": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: UseOrdering
-			"use_ordering": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfa733d0f43a4df282fdc016() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Prefix
-			"prefix": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: Suffix
-			"suffix": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec12d28da48359e3977ba7d43() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CollectiveConstant
-			"collective_constant": schemaAttribute3f9e4d9affc06df28e4c4ed7(),
-			// Property: ConstantType
-			"constant_type": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: SingularConstant
-			"singular_constant": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2634d3588fbb4cb081f6222() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Constant
-			"constant": schemaAttribute98e8f8c86c2ad24d39679a31(),
-			// Property: Inclusive
-			"inclusive": schemaAttributee0eaaca8797a8eb6219027a1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec73838e8df2eec47bd9f97fd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Aggregation
-			"aggregation": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: Constant
-			"constant": schemaAttribute98e8f8c86c2ad24d39679a31(),
-			// Property: Inclusive
-			"inclusive": schemaAttributee0eaaca8797a8eb6219027a1(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec777aa2c30668bd27e80a19d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DatasetRowDateGranularity
-			"dataset_row_date_granularity": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: DefaultDateColumnName
-			"default_date_column_name": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8586150159158a0b5337de2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Aggregation
-				"aggregation": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: AllowedAggregations
-				"allowed_aggregations": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: CellValueSynonyms
-				"cell_value_synonyms": schemaAttribute81570670da5cdc4f770484e3(),
-				// Property: ColumnDataRole
-				"column_data_role": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: ColumnDescription
-				"column_description": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: ColumnFriendlyName
-				"column_friendly_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: ColumnName
-				"column_name": schemaAttribute6d531c37d062432d29eed55b(),
-				// Property: ColumnSynonyms
-				"column_synonyms": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: ComparativeOrder
-				"comparative_order": schemaAttributebc5ce16059bddd08f76118b7(),
-				// Property: DefaultFormatting
-				"default_formatting": schemaAttributee0277b4fe14de25ad529ccc0(),
-				// Property: DisableIndexing
-				"disable_indexing": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: IsIncludedInTopic
-				"is_included_in_topic": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: NeverAggregateInFilter
-				"never_aggregate_in_filter": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: NonAdditive
-				"non_additive": schemaAttributee0eaaca8797a8eb6219027a1(),
-				// Property: NotAllowedAggregations
-				"not_allowed_aggregations": schemaAttribute365a3dec5430c98e8d0cdfd8(),
-				// Property: SemanticType
-				"semantic_type": schemaAttribute0c5615f8a893c667ebf26f26(),
-				// Property: TimeGranularity
-				"time_granularity": schemaAttribute6d531c37d062432d29eed55b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb47d85ca91e0be8866af81f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Constant
-			"constant": schemaAttributef69724413793973321794d1e(),
-			// Property: RelativeDateFilterFunction
-			"relative_date_filter_function": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: TimeGranularity
-			"time_granularity": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcf409d1c8930b8e2fc20fc2() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0277b4fe14de25ad529ccc0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DisplayFormat
-			"display_format": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: DisplayFormatOptions
-			"display_format_options": schemaAttribute1d5ac5ef42be66f1f43640ca(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0eaaca8797a8eb6219027a1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef142eb95d09c8f0a94d0643e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Aggregation
-			"aggregation": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: Constant
-			"constant": schemaAttributef69724413793973321794d1e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef69724413793973321794d1e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConstantType
-			"constant_type": schemaAttribute6d531c37d062432d29eed55b(),
-			// Property: SingularConstant
-			"singular_constant": schemaAttribute6d531c37d062432d29eed55b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_topic", topicDataSource)
 }
@@ -577,7 +29,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6d531c37d062432d29eed55b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -587,7 +41,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute6d531c37d062432d29eed55b(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigOptions
 		// CloudFormation resource type schema:
 		//
@@ -600,7 +56,15 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"config_options": schemaAttribute27e9a9c5e319cbcca02f6670(),
+		"config_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QBusinessInsightsEnabled
+				"q_business_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomInstructions
 		// CloudFormation resource type schema:
 		//
@@ -620,7 +84,17 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_instructions": schemaAttribute9d7fbc2cdd479ac18697e03e(),
+		"custom_instructions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomInstructionsString
+				"custom_instructions_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>A text field for providing additional guidance or context for response generation.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Instructions that provide additional guidance and context for response generation.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSets
 		// CloudFormation resource type schema:
 		//
@@ -1737,7 +1211,742 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"data_sets": schemaAttribute66e624a771f2b2e04d3034ea(),
+		"data_sets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CalculatedFields
+					"calculated_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Aggregation
+								"aggregation": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AllowedAggregations
+								"allowed_aggregations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CalculatedFieldDescription
+								"calculated_field_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CalculatedFieldName
+								"calculated_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CalculatedFieldSynonyms
+								"calculated_field_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CellValueSynonyms
+								"cell_value_synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CellValue
+											"cell_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Synonyms
+											"synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ColumnDataRole
+								"column_data_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ComparativeOrder
+								"comparative_order": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SpecifedOrder
+										"specifed_order": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TreatUndefinedSpecifiedValues
+										"treat_undefined_specified_values": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: UseOrdering
+										"use_ordering": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DefaultFormatting
+								"default_formatting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DisplayFormat
+										"display_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: DisplayFormatOptions
+										"display_format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: BlankCellFormat
+												"blank_cell_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: CurrencySymbol
+												"currency_symbol": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: DateFormat
+												"date_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: DecimalSeparator
+												"decimal_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FractionDigits
+												"fraction_digits": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: GroupingSeparator
+												"grouping_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: NegativeFormat
+												"negative_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Prefix
+														"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Suffix
+														"suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Prefix
+												"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Suffix
+												"suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UnitScaler
+												"unit_scaler": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UseBlankCellFormat
+												"use_blank_cell_format": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UseGrouping
+												"use_grouping": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Expression
+								"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsIncludedInTopic
+								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NeverAggregateInFilter
+								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotAllowedAggregations
+								"not_allowed_aggregations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SemanticType
+								"semantic_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FalseyCellValue
+										"falsey_cell_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FalseyCellValueSynonyms
+										"falsey_cell_value_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubTypeName
+										"sub_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TruthyCellValue
+										"truthy_cell_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TruthyCellValueSynonyms
+										"truthy_cell_value_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeName
+										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeParameters
+										"type_parameters":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TimeGranularity
+								"time_granularity": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Columns
+					"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Aggregation
+								"aggregation": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AllowedAggregations
+								"allowed_aggregations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CellValueSynonyms
+								"cell_value_synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CellValue
+											"cell_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Synonyms
+											"synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ColumnDataRole
+								"column_data_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ColumnDescription
+								"column_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ColumnFriendlyName
+								"column_friendly_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ColumnName
+								"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ColumnSynonyms
+								"column_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ComparativeOrder
+								"comparative_order": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SpecifedOrder
+										"specifed_order": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TreatUndefinedSpecifiedValues
+										"treat_undefined_specified_values": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: UseOrdering
+										"use_ordering": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DefaultFormatting
+								"default_formatting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DisplayFormat
+										"display_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: DisplayFormatOptions
+										"display_format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: BlankCellFormat
+												"blank_cell_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: CurrencySymbol
+												"currency_symbol": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: DateFormat
+												"date_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: DecimalSeparator
+												"decimal_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FractionDigits
+												"fraction_digits": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: GroupingSeparator
+												"grouping_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: NegativeFormat
+												"negative_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Prefix
+														"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Suffix
+														"suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Prefix
+												"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Suffix
+												"suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UnitScaler
+												"unit_scaler": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UseBlankCellFormat
+												"use_blank_cell_format": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: UseGrouping
+												"use_grouping": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsIncludedInTopic
+								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NeverAggregateInFilter
+								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotAllowedAggregations
+								"not_allowed_aggregations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SemanticType
+								"semantic_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FalseyCellValue
+										"falsey_cell_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FalseyCellValueSynonyms
+										"falsey_cell_value_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubTypeName
+										"sub_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TruthyCellValue
+										"truthy_cell_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TruthyCellValueSynonyms
+										"truthy_cell_value_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeName
+										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeParameters
+										"type_parameters":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TimeGranularity
+								"time_granularity": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataAggregation
+					"data_aggregation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DatasetRowDateGranularity
+							"dataset_row_date_granularity": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultDateColumnName
+							"default_date_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DatasetArn
+					"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DatasetDescription
+					"dataset_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DatasetName
+					"dataset_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Filters
+					"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CategoryFilter
+								"category_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CategoryFilterFunction
+										"category_filter_function": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: CategoryFilterType
+										"category_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Constant
+										"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CollectiveConstant
+												"collective_constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ValueList
+														"value_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ConstantType
+												"constant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SingularConstant
+												"singular_constant": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Inverse
+										"inverse": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DateRangeFilter
+								"date_range_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Constant
+										"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ConstantType
+												"constant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: RangeConstant
+												"range_constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Maximum
+														"maximum": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Minimum
+														"minimum": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Inclusive
+										"inclusive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FilterClass
+								"filter_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FilterDescription
+								"filter_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FilterName
+								"filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FilterSynonyms
+								"filter_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FilterType
+								"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NumericEqualityFilter
+								"numeric_equality_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Aggregation
+										"aggregation": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Constant
+										"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ConstantType
+												"constant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SingularConstant
+												"singular_constant": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NumericRangeFilter
+								"numeric_range_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Aggregation
+										"aggregation": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Constant
+										"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ConstantType
+												"constant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: RangeConstant
+												"range_constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Maximum
+														"maximum": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Minimum
+														"minimum": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Inclusive
+										"inclusive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OperandFieldName
+								"operand_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: RelativeDateFilter
+								"relative_date_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Constant
+										"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ConstantType
+												"constant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SingularConstant
+												"singular_constant": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RelativeDateFilterFunction
+										"relative_date_filter_function": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TimeGranularity
+										"time_granularity": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: NamedEntities
+					"named_entities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Definition
+								"definition": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FieldName
+											"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Aggregation
+													"aggregation": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: AggregationFunctionParameters
+													"aggregation_function_parameters": // Pattern: ""
+													schema.MapAttribute{               /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: PropertyName
+											"property_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: PropertyRole
+											"property_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: PropertyUsage
+											"property_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: EntityDescription
+								"entity_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: EntityName
+								"entity_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: EntitySynonyms
+								"entity_synonyms": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SemanticEntityType
+								"semantic_entity_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SubTypeName
+										"sub_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeName
+										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeParameters
+										"type_parameters":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1746,7 +1955,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute6d531c37d062432d29eed55b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FolderArns
 		// CloudFormation resource type schema:
 		//
@@ -1758,7 +1969,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"folder_arns": schemaAttribute365a3dec5430c98e8d0cdfd8(),
+		"folder_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1767,7 +1981,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6d531c37d062432d29eed55b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1799,7 +2015,23 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeaad7d2d73c436e36a50c90d9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TopicId
 		// CloudFormation resource type schema:
 		//
@@ -1809,7 +2041,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9-_.\\\\+]*$",
 		//	  "type": "string"
 		//	}
-		"topic_id": schemaAttribute6d531c37d062432d29eed55b(),
+		"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserExperienceVersion
 		// CloudFormation resource type schema:
 		//
@@ -1820,7 +2054,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"user_experience_version": schemaAttribute6d531c37d062432d29eed55b(),
+		"user_experience_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

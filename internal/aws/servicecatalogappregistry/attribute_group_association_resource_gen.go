@@ -20,43 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4d870f20bb480468c2c3bc2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or the Id of the AttributeGroup.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8164bdef13bb0a8743de1474() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or the Id of the Application.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcd376d85fff1fd8201d8593() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalogappregistry_attribute_group_association", attributeGroupAssociationResource)
 }
@@ -75,7 +38,17 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "\\w+|[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"application": schemaAttribute8164bdef13bb0a8743de1474(),
+		"application": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name or the Id of the Application.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -83,7 +56,12 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"application_arn": schemaAttributefcd376d85fff1fd8201d8593(),
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AttributeGroup
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +72,17 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "\\w+|[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"attribute_group": schemaAttribute4d870f20bb480468c2c3bc2c(),
+		"attribute_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name or the Id of the AttributeGroup.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AttributeGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +90,12 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"attribute_group_arn": schemaAttributefcd376d85fff1fd8201d8593(),
+		"attribute_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -14,94 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3cfb5427da6f48c6ddda4001() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Encoder configuration name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute418ceaa75d1425f3d2188477() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55901688aeccecdaa9056309() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bitrate
-			"bitrate": schemaAttributec98a378bf7247cdec8cb4e7c(),
-			// Property: Framerate
-			"framerate": schemaAttributed2eb47d0132bcb49ad1a2740(),
-			// Property: Height
-			"height": schemaAttributef4aa8efb203ea5959799c004(),
-			// Property: Width
-			"width": schemaAttributef6fff7c11770455c8efc9a70(),
-		}, /*END SCHEMA*/
-		Description: "Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73ead5be81674ca390d0d8b2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute418ceaa75d1425f3d2188477(),
-				// Property: Value
-				"value": schemaAttributedf6e76404c3e4a13b9e91eb8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c34e201834a8049f5e8d858() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Encoder configuration identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec98a378bf7247cdec8cb4e7c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Bitrate for generated output, in bps. Default: 2500000.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2eb47d0132bcb49ad1a2740() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Video frame rate, in fps. Default: 30.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf6e76404c3e4a13b9e91eb8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4aa8efb203ea5959799c004() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Video-resolution height. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6fff7c11770455c8efc9a70() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Video-resolution width. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_encoder_configuration", encoderConfigurationDataSource)
 }
@@ -120,7 +32,10 @@ func encoderConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:encoder-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8c34e201834a8049f5e8d858(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Encoder configuration identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +46,10 @@ func encoderConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3cfb5427da6f48c6ddda4001(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Encoder configuration name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +83,24 @@ func encoderConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute73ead5be81674ca390d0d8b2(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Video
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +139,32 @@ func encoderConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"video": schemaAttribute55901688aeccecdaa9056309(),
+		"video": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bitrate
+				"bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Bitrate for generated output, in bps. Default: 2500000.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Framerate
+				"framerate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Video frame rate, in fps. Default: 30.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Height
+				"height": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Video-resolution height. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Width
+				"width": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Video-resolution width. This must be an even number. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30 fps",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

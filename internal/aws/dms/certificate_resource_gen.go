@@ -17,54 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute5130263428e3a46743ddfa0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Arn",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cbaa6a12b91b187bf8a5aa0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Wallet",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// CertificateWallet is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0f317e144ca30adad184841() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Identifier",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedd79bfec57a4a2b4a61bdc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The certificate Pem",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// CertificatePem is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_dms_certificate", certificateResource)
 	registry.AddListResourceFactory("awscc_dms_certificate", generic.NewListResource(certificateResource))
@@ -82,7 +34,13 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):dms:[\\w-]+:[0-9]+:cert:[A-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schemaAttribute5130263428e3a46743ddfa0f(),
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Arn",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -90,7 +48,15 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The certificate Identifier",
 		//	  "type": "string"
 		//	}
-		"certificate_identifier": schemaAttributec0f317e144ca30adad184841(),
+		"certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Identifier",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CertificatePem
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +64,16 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The certificate Pem",
 		//	  "type": "string"
 		//	}
-		"certificate_pem": schemaAttributeedd79bfec57a4a2b4a61bdc7(),
+		"certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Pem",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// CertificatePem is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateWallet
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +81,16 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The certificate Wallet",
 		//	  "type": "string"
 		//	}
-		"certificate_wallet": schemaAttribute6cbaa6a12b91b187bf8a5aa0(),
+		"certificate_wallet": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The certificate Wallet",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// CertificateWallet is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

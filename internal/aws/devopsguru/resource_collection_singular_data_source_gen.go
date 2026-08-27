@@ -15,75 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute003fb4e8f2e8f39f01a2e09d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of ResourceCollection",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute00e4d4e28689e8b58f9c141f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AppBoundaryKey
-				"app_boundary_key": schemaAttribute9729e50a24f1b08e4d9b38ba(),
-				// Property: TagValues
-				"tag_values": schemaAttribute89259915776e88314614edac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tagged resources for DevOps Guru to monitor",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89259915776e88314614edac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tag values of DevOps Guru app boundary.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute917253d0f2c29fd0b0f4a20e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StackNames
-			"stack_names": schemaAttributeadb3178a1dc101cdd3451baa(),
-		}, /*END SCHEMA*/
-		Description: "CloudFormation resource for DevOps Guru to monitor",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9729e50a24f1b08e4d9b38ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A Tag key for DevOps Guru app boundary.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadb3178a1dc101cdd3451baa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An array of CloudFormation stack names.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba28c032bb732c22f26e2ec8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudFormation
-			"cloudformation": schemaAttribute917253d0f2c29fd0b0f4a20e(),
-			// Property: Tags
-			"tags": schemaAttribute00e4d4e28689e8b58f9c141f(),
-		}, /*END SCHEMA*/
-		Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsguru_resource_collection", resourceCollectionDataSource)
 }
@@ -152,7 +83,45 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_collection_filter": schemaAttributeba28c032bb732c22f26e2ec8(),
+		"resource_collection_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudFormation
+				"cloudformation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: StackNames
+						"stack_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "An array of CloudFormation stack names.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "CloudFormation resource for DevOps Guru to monitor",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AppBoundaryKey
+							"app_boundary_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A Tag key for DevOps Guru app boundary.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TagValues
+							"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Tag values of DevOps Guru app boundary.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Tagged resources for DevOps Guru to monitor",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceCollectionType
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +133,10 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_collection_type": schemaAttribute003fb4e8f2e8f39f01a2e09d(),
+		"resource_collection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of ResourceCollection",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

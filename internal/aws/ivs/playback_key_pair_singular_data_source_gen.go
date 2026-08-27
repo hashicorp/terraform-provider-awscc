@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute12e9f9b6dbc6f3a145014806() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38a6d989bac3c184e9330378() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute12e9f9b6dbc6f3a145014806(),
-				// Property: Value
-				"value": schemaAttribute12e9f9b6dbc6f3a145014806(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb48ea84251101e5826df16c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Key-pair identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca87eafc8648f66e9697cad8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc19020b73d8871f4a51f56c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_playback_key_pair", playbackKeyPairDataSource)
 }
@@ -74,7 +32,10 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:playback-key/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb48ea84251101e5826df16c5(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Key-pair identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Fingerprint
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +43,10 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Key-pair identifier.",
 		//	  "type": "string"
 		//	}
-		"fingerprint": schemaAttributeb48ea84251101e5826df16c5(),
+		"fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Key-pair identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +57,10 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecc19020b73d8871f4a51f56c(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicKeyMaterial
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +68,10 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
 		//	  "type": "string"
 		//	}
-		"public_key_material": schemaAttributeca87eafc8648f66e9697cad8(),
+		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PlaybackKeyPair resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +102,22 @@ func playbackKeyPairDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute38a6d989bac3c184e9330378(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

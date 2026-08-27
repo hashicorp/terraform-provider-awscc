@@ -23,197 +23,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute242f0e7c20b33061a7070b9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source of the data.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"EVENT",
-				"EXTERNAL_MODEL_SCORE",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29c95a8de1f53c6f69661f6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2aa6d055464c3a53246854fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cd3757f72974d3112701fd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default value for the variable when no value is received.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39eb6d154ce114f92d4b0cba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the variable.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z_][a-z0-9_]{0,99}?$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute401c01072e7de18d7ff2d9af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6acdff6df0331593b6776024() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"STRING",
-				"INTEGER",
-				"FLOAT",
-				"BOOLEAN",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cff61415409887c8001b8a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the variable was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d872479c4eb02b785c11b82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the variable.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab8f0aede486a1a437381565() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"AUTH_CODE",
-				"AVS",
-				"BILLING_ADDRESS_L1",
-				"BILLING_ADDRESS_L2",
-				"BILLING_CITY",
-				"BILLING_COUNTRY",
-				"BILLING_NAME",
-				"BILLING_PHONE",
-				"BILLING_STATE",
-				"BILLING_ZIP",
-				"CARD_BIN",
-				"CATEGORICAL",
-				"CURRENCY_CODE",
-				"EMAIL_ADDRESS",
-				"FINGERPRINT",
-				"FRAUD_LABEL",
-				"FREE_FORM_TEXT",
-				"IP_ADDRESS",
-				"NUMERIC",
-				"ORDER_ID",
-				"PAYMENT_TYPE",
-				"PHONE_NUMBER",
-				"PRICE",
-				"PRODUCT_CATEGORY",
-				"SHIPPING_ADDRESS_L1",
-				"SHIPPING_ADDRESS_L2",
-				"SHIPPING_CITY",
-				"SHIPPING_COUNTRY",
-				"SHIPPING_NAME",
-				"SHIPPING_PHONE",
-				"SHIPPING_STATE",
-				"SHIPPING_ZIP",
-				"USERAGENT",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb94c1a0afc380d7d0eadaa24() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute401c01072e7de18d7ff2d9af(),
-				// Property: Value
-				"value": schemaAttribute29c95a8de1f53c6f69661f6c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with this variable.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc2d5b67cda56e1fa51aad22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time when the variable was last updated.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_frauddetector_variable", variableResource)
 	registry.AddListResourceFactory("awscc_frauddetector_variable", generic.NewListResource(variableResource))
@@ -230,7 +39,13 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the variable.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8d872479c4eb02b785c11b82(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the variable.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +53,13 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The time when the variable was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute7cff61415409887c8001b8a3(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time when the variable was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataSource
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +71,16 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_source": schemaAttribute242f0e7c20b33061a7070b9c(),
+		"data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source of the data.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"EVENT",
+					"EXTERNAL_MODEL_SCORE",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataType
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +94,18 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_type": schemaAttribute6acdff6df0331593b6776024(),
+		"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The data type.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"STRING",
+					"INTEGER",
+					"FLOAT",
+					"BOOLEAN",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultValue
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +113,10 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The default value for the variable when no value is received.",
 		//	  "type": "string"
 		//	}
-		"default_value": schemaAttribute2cd3757f72974d3112701fd6(),
+		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default value for the variable when no value is received.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +126,17 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2aa6d055464c3a53246854fc(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +144,13 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The time when the variable was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributebc2d5b67cda56e1fa51aad22(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time when the variable was last updated.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +159,16 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z_][a-z0-9_]{0,99}?$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute39eb6d154ce114f92d4b0cba(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the variable.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z_][a-z0-9_]{0,99}?$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +199,46 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributeb94c1a0afc380d7d0eadaa24(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with this variable.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VariableType
 		// CloudFormation resource type schema:
 		//
@@ -373,7 +281,51 @@ func variableResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"variable_type": schemaAttributeab8f0aede486a1a437381565(),
+		"variable_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"AUTH_CODE",
+					"AVS",
+					"BILLING_ADDRESS_L1",
+					"BILLING_ADDRESS_L2",
+					"BILLING_CITY",
+					"BILLING_COUNTRY",
+					"BILLING_NAME",
+					"BILLING_PHONE",
+					"BILLING_STATE",
+					"BILLING_ZIP",
+					"CARD_BIN",
+					"CATEGORICAL",
+					"CURRENCY_CODE",
+					"EMAIL_ADDRESS",
+					"FINGERPRINT",
+					"FRAUD_LABEL",
+					"FREE_FORM_TEXT",
+					"IP_ADDRESS",
+					"NUMERIC",
+					"ORDER_ID",
+					"PAYMENT_TYPE",
+					"PHONE_NUMBER",
+					"PRICE",
+					"PRODUCT_CATEGORY",
+					"SHIPPING_ADDRESS_L1",
+					"SHIPPING_ADDRESS_L2",
+					"SHIPPING_CITY",
+					"SHIPPING_COUNTRY",
+					"SHIPPING_NAME",
+					"SHIPPING_PHONE",
+					"SHIPPING_STATE",
+					"SHIPPING_ZIP",
+					"USERAGENT",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -19,72 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0332d8a1795f2127a969ee7f() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1fd3203b737710ff324c3a17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a748e8b675612eada2bbbfe() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttribute1fd3203b737710ff324c3a17(),
-				// Property: Resources
-				"resources": schemaAttribute94674138a252823f12d47dcb(),
-				// Property: TieringDownSettingsInDays
-				"tiering_down_settings_in_days": schemaAttribute8f732d58b87b5a8d50f8cb65(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Required: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40d45b2f6f590d23044a191e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f732d58b87b5a8d50f8cb65() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Required: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94674138a252823f12d47dcb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefab31637b885a10ad9350991() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_backup_tiering_configuration", tieringConfigurationResource)
 	registry.AddListResourceFactory("awscc_backup_tiering_configuration", generic.NewListResource(tieringConfigurationResource))
@@ -100,21 +34,33 @@ func tieringConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"backup_vault_name": schemaAttribute1fd3203b737710ff324c3a17(),
+		"backup_vault_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute40d45b2f6f590d23044a191e(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute40d45b2f6f590d23044a191e(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceSelection
 		// CloudFormation resource type schema:
 		//
@@ -146,21 +92,50 @@ func tieringConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resource_selection": schemaAttribute3a748e8b675612eada2bbbfe(),
+		"resource_selection": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Resources
+					"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TieringDownSettingsInDays
+					"tiering_down_settings_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Required: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TieringConfigurationArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"tiering_configuration_arn": schemaAttribute40d45b2f6f590d23044a191e(),
+		"tiering_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TieringConfigurationName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"tiering_configuration_name": schemaAttributefab31637b885a10ad9350991(),
+		"tiering_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TieringConfigurationTags
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +148,15 @@ func tieringConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tiering_configuration_tags": schemaAttribute0332d8a1795f2127a969ee7f(),
+		"tiering_configuration_tags": // Pattern: ""
+		schema.MapAttribute{          /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

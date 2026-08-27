@@ -15,69 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3a06935a700927f166b0d51b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Claim
-				"claim": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-				// Property: MatchType
-				"match_type": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-				// Property: RoleARN
-				"role_arn": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-				// Property: Value
-				"value": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fe62b5689dae5647c0f4d8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99739e62675fff78a6bcbe0c() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4a4fd553e832663781ff676() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rules
-			"rules": schemaAttribute3a06935a700927f166b0d51b(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed02c7361e9ba8d17c96692a1() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AmbiguousRoleResolution
-				"ambiguous_role_resolution": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-				// Property: IdentityProvider
-				"identity_provider": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-				// Property: RulesConfiguration
-				"rules_configuration": schemaAttributec4a4fd553e832663781ff676(),
-				// Property: Type
-				"type": schemaAttribute3fe62b5689dae5647c0f4d8b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_identity_pool_role_attachment", identityPoolRoleAttachmentDataSource)
 }
@@ -92,14 +29,18 @@ func identityPoolRoleAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	{
 		//	  "type": "string"
 		//	}
-		"identity_pool_role_attachment_id": schemaAttribute3fe62b5689dae5647c0f4d8b(),
+		"identity_pool_role_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identity_pool_id": schemaAttribute3fe62b5689dae5647c0f4d8b(),
+		"identity_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleMappings
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +105,56 @@ func identityPoolRoleAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	    }
 		//	  }
 		//	}
-		"role_mappings": schemaAttributed02c7361e9ba8d17c96692a1(),
+		"role_mappings":           // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AmbiguousRoleResolution
+					"ambiguous_role_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: IdentityProvider
+					"identity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: RulesConfiguration
+					"rules_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Rules
+							"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Claim
+										"claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: MatchType
+										"match_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RoleARN
+										"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Roles
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +166,11 @@ func identityPoolRoleAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	    }
 		//	  }
 		//	}
-		"roles": schemaAttribute99739e62675fff78a6bcbe0c(),
+		"roles":             // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

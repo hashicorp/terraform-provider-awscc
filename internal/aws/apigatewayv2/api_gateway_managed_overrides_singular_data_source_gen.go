@@ -15,247 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute13aa9a265e098107742e8a23() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1571954a25ff48a764f99ef5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the throttling burst limit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17ceb364f3621756755ca242() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operation name for the route.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2134b907b63761028a2ffc03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A TPS Code is automatically generated on creation and assigned as the unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24aaa5e45f60b0d4b60d5f4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the integration's HTTP method type. For WebSocket APIs, if you use a Lambda integration, you must set the integration method to POST.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2738e3787a79b60744b8e686() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DetailedMetricsEnabled
-				"detailed_metrics_enabled": schemaAttributeffd9110dc93a57cfef367728(),
-				// Property: ThrottlingBurstLimit
-				"throttling_burst_limit": schemaAttribute1571954a25ff48a764f99ef5(),
-				// Property: ThrottlingRateLimit
-				"throttling_rate_limit": schemaAttribute9d648bf616ee3b37ad27c2b0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Route settings for the stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fa5ad6a66cc39e4edc7eb41() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationScopes
-			"authorization_scopes": schemaAttributeb284ec46b5f4f4f838e54bed(),
-			// Property: AuthorizationType
-			"authorization_type": schemaAttributec5a57ccee1b5f9e33b53c7ab(),
-			// Property: AuthorizerId
-			"authorizer_id": schemaAttributeec9ea1941b59b00c352593e9(),
-			// Property: OperationName
-			"operation_name": schemaAttribute17ceb364f3621756755ca242(),
-			// Property: Target
-			"target": schemaAttribute70eec56a0e7516e9fefd6fbc(),
-		}, /*END SCHEMA*/
-		Description: "Overrides the route configuration for an API Gateway-managed route.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3693fa575a7bf44a34c8b20f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the CloudWatch Logs log group to receive access logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43f6cc8bc493517269985854() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute496ddf8ced654d02b603af89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66bd5876f4c4d94934a14790() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute670b275de886b84114288718() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Description
-			"description": schemaAttribute496ddf8ced654d02b603af89(),
-			// Property: IntegrationMethod
-			"integration_method": schemaAttribute24aaa5e45f60b0d4b60d5f4e(),
-			// Property: PayloadFormatVersion
-			"payload_format_version": schemaAttributef76534185ca9c2263b867b2a(),
-			// Property: TimeoutInMillis
-			"timeout_in_millis": schemaAttribute43f6cc8bc493517269985854(),
-		}, /*END SCHEMA*/
-		Description: "Overrides the integration configuration for an API Gateway-managed integration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70eec56a0e7516e9fefd6fbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78dd565057a0416420920739() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description for the API stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7df4f9fd92c4d6d65c2c936a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether updates to an API automatically trigger a new deployment. The default value is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute934b738e15cb38919094a573() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationArn
-			"destination_arn": schemaAttribute3693fa575a7bf44a34c8b20f(),
-			// Property: Format
-			"format": schemaAttribute66bd5876f4c4d94934a14790(),
-		}, /*END SCHEMA*/
-		Description: "Settings for logging access in a stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d648bf616ee3b37ad27c2b0() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the throttling rate limit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea863a3a76181b54317bcdff8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DetailedMetricsEnabled
-			"detailed_metrics_enabled": schemaAttributeffd9110dc93a57cfef367728(),
-			// Property: ThrottlingBurstLimit
-			"throttling_burst_limit": schemaAttribute1571954a25ff48a764f99ef5(),
-			// Property: ThrottlingRateLimit
-			"throttling_rate_limit": schemaAttribute9d648bf616ee3b37ad27c2b0(),
-		}, /*END SCHEMA*/
-		Description: "The default route settings for the stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb284ec46b5f4f4f838e54bed() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The authorization scopes supported by this route.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5a57ccee1b5f9e33b53c7ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization type for the route. To learn more, see AuthorizationType.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec79ab4f44ba2fd9677c2770f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the API for which to override the configuration of API Gateway-managed resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9a2fdb5c67caa7c55d5f646() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessLogSettings
-			"access_log_settings": schemaAttribute934b738e15cb38919094a573(),
-			// Property: AutoDeploy
-			"auto_deploy": schemaAttribute7df4f9fd92c4d6d65c2c936a(),
-			// Property: DefaultRouteSettings
-			"default_route_settings": schemaAttributea863a3a76181b54317bcdff8(),
-			// Property: Description
-			"description": schemaAttribute78dd565057a0416420920739(),
-			// Property: RouteSettings
-			"route_settings": schemaAttribute2738e3787a79b60744b8e686(),
-			// Property: StageVariables
-			"stage_variables": schemaAttribute13aa9a265e098107742e8a23(),
-		}, /*END SCHEMA*/
-		Description: "Overrides the stage configuration for an API Gateway-managed stage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec9ea1941b59b00c352593e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Authorizer resource to be associated with this route. The authorizer identifier is generated by API Gateway when you created the authorizer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef76534185ca9c2263b867b2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the format of the payload sent to an integration. Required for HTTP APIs. For HTTP APIs, supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffd9110dc93a57cfef367728() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether detailed metrics are enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_api_gateway_managed_overrides", apiGatewayManagedOverridesDataSource)
 }
@@ -271,7 +30,10 @@ func apiGatewayManagedOverridesDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the API for which to override the configuration of API Gateway-managed resources.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttributec79ab4f44ba2fd9677c2770f(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the API for which to override the configuration of API Gateway-managed resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +41,10 @@ func apiGatewayManagedOverridesDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "A TPS Code is automatically generated on creation and assigned as the unique identifier.",
 		//	  "type": "string"
 		//	}
-		"api_gateway_managed_overrides_id": schemaAttribute2134b907b63761028a2ffc03(),
+		"api_gateway_managed_overrides_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A TPS Code is automatically generated on creation and assigned as the unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Integration
 		// CloudFormation resource type schema:
 		//
@@ -306,7 +71,32 @@ func apiGatewayManagedOverridesDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"integration": schemaAttribute670b275de886b84114288718(),
+		"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The description of the integration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IntegrationMethod
+				"integration_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the integration's HTTP method type. For WebSocket APIs, if you use a Lambda integration, you must set the integration method to POST.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PayloadFormatVersion
+				"payload_format_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the format of the payload sent to an integration. Required for HTTP APIs. For HTTP APIs, supported values for Lambda proxy integrations are 1.0 and 2.0. For all other integrations, 1.0 is the only supported value",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutInMillis
+				"timeout_in_millis": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Overrides the integration configuration for an API Gateway-managed integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Route
 		// CloudFormation resource type schema:
 		//
@@ -341,7 +131,38 @@ func apiGatewayManagedOverridesDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"route": schemaAttribute2fa5ad6a66cc39e4edc7eb41(),
+		"route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizationScopes
+				"authorization_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The authorization scopes supported by this route.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthorizationType
+				"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The authorization type for the route. To learn more, see AuthorizationType.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthorizerId
+				"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier of the Authorizer resource to be associated with this route. The authorizer identifier is generated by API Gateway when you created the authorizer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OperationName
+				"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The operation name for the route.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Target
+				"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For HTTP integrations, specify a fully qualified URL. For Lambda integrations, specify a function ARN. The type of the integration will be HTTP_PROXY or AWS_PROXY, respectively.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Overrides the route configuration for an API Gateway-managed route.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -429,7 +250,93 @@ func apiGatewayManagedOverridesDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"stage": schemaAttributee9a2fdb5c67caa7c55d5f646(),
+		"stage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessLogSettings
+				"access_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DestinationArn
+						"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the CloudWatch Logs log group to receive access logs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Format
+						"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for logging access in a stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AutoDeploy
+				"auto_deploy": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether updates to an API automatically trigger a new deployment. The default value is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultRouteSettings
+				"default_route_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetailedMetricsEnabled
+						"detailed_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether detailed metrics are enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ThrottlingBurstLimit
+						"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the throttling burst limit.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ThrottlingRateLimit
+						"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Specifies the throttling rate limit.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The default route settings for the stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The description for the API stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RouteSettings
+				"route_settings":          // Pattern: ""
+				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DetailedMetricsEnabled
+							"detailed_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether detailed metrics are enabled.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ThrottlingBurstLimit
+							"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the throttling burst limit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ThrottlingRateLimit
+							"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the throttling rate limit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Route settings for the stage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StageVariables
+				"stage_variables":   // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Overrides the stage configuration for an API Gateway-managed stage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

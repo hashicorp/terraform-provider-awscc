@@ -14,99 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute21059d24a309baf78bebcd4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3203c741e16afc36eb4ef514() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the public namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a024504fcba786047e95cbb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TTL
-			"ttl": schemaAttributea320f69b26af68fd534c222c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c3a8b2734ef0d9765d3968e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name that you want to assign to this namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ce7ea293a8b4b54b32659ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea320f69b26af68fd534c222c() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb01e6e0e684d3940ffb57e00() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc2bca2392e6c5e0946c7620() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DnsProperties
-			"dns_properties": schemaAttributec221d93ec30331f10220bd04(),
-		}, /*END SCHEMA*/
-		Description: "Properties for the public DNS namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec221d93ec30331f10220bd04() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SOA
-			"soa": schemaAttribute5a024504fcba786047e95cbb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca334d2b8c7b033f44ae39bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the public namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7eec683d9095788edbebaab() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9ce7ea293a8b4b54b32659ab(),
-				// Property: Value
-				"value": schemaAttribute9ce7ea293a8b4b54b32659ab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicediscovery_public_dns_namespace", publicDnsNamespaceDataSource)
 }
@@ -123,7 +30,10 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws[-a-z]*:servicediscovery:[a-z0-9-]+:[0-9]{12}:namespace/ns-[a-z0-9]{16}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeca334d2b8c7b033f44ae39bf(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the public namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +42,10 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute21059d24a309baf78bebcd4a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +53,10 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.",
 		//	  "type": "string"
 		//	}
-		"hosted_zone_id": schemaAttributeb01e6e0e684d3940ffb57e00(),
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +64,10 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ID of the public namespace.",
 		//	  "type": "string"
 		//	}
-		"public_dns_namespace_id": schemaAttribute3203c741e16afc36eb4ef514(),
+		"public_dns_namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the public namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +77,10 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7c3a8b2734ef0d9765d3968e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name that you want to assign to this namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Properties
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +108,28 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"properties": schemaAttributebc2bca2392e6c5e0946c7620(),
+		"properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsProperties
+				"dns_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SOA
+						"soa": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TTL
+								"ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Properties for the public DNS namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +155,22 @@ func publicDnsNamespaceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributef7eec683d9095788edbebaab(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

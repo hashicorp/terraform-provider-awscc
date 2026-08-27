@@ -25,198 +25,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute11f384e63141ca1c34a1b91b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compute and memory capacity of the nodes in the multi region cluster.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20f369f2cb065f1dc606144c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the multi region cluster. For example, Available, Updating, Creating.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b0bbd7a680e6d4a5020f036() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the multi region cluster.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38c9586caf0c87ddb1139a9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group associated with the multi region cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3924adbd0deb39e2cfa7a589() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value. May be null.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48bef307e3b1c94eae427032() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of shards the multi region cluster will contain.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a271ddadcc1edef69f08752() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The engine type used by the multi region cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88f808ba4cfe266a8ccffba3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Redis engine version used by the multi region cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6d6862a36fef317e8998c18() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for the tag. May not be null.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea951b1ead3e7e51c64ef5a0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Multi Region cluster. This value must be unique as it also serves as the multi region cluster identifier.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("[a-z][a-z0-9\\-]*"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// MultiRegionClusterNameSuffix is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb15489eb06d4d071ca276813() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An enum string value that determines the update strategy for scaling. Possible values are 'COORDINATED' and 'UNCOORDINATED'. Default is 'COORDINATED'.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"COORDINATED",
-				"UNCOORDINATED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// UpdateStrategy is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece40c98a069e5bd0e9d923dc() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea6d6862a36fef317e8998c18(),
-				// Property: Value
-				"value": schemaAttribute3924adbd0deb39e2cfa7a589(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this multi region cluster.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeAtMost(50),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf30bb260aefd9a3679a4f8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the multi region cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed558251e8f0ca2b8bb6010d8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag that enables in-transit encryption when set to true.\n\nYou cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-			boolplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7ecf51c4704074d3202c715() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Global Datastore, it is generated by MemoryDB adding a prefix to MultiRegionClusterNameSuffix.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_memorydb_multi_region_cluster", multiRegionClusterResource)
 	registry.AddListResourceFactory("awscc_memorydb_multi_region_cluster", generic.NewListResource(multiRegionClusterResource))
@@ -233,7 +41,13 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the multi region cluster.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute2b0bbd7a680e6d4a5020f036(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the multi region cluster.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +55,14 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "Description of the multi region cluster.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributecf30bb260aefd9a3679a4f8c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the multi region cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +70,14 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The engine type used by the multi region cluster.",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttribute6a271ddadcc1edef69f08752(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine type used by the multi region cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +85,15 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The Redis engine version used by the multi region cluster.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute88f808ba4cfe266a8ccffba3(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Redis engine version used by the multi region cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionClusterName
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +101,13 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The name of the Global Datastore, it is generated by MemoryDB adding a prefix to MultiRegionClusterNameSuffix.",
 		//	  "type": "string"
 		//	}
-		"multi_region_cluster_name": schemaAttributef7ecf51c4704074d3202c715(),
+		"multi_region_cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Global Datastore, it is generated by MemoryDB adding a prefix to MultiRegionClusterNameSuffix.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionClusterNameSuffix
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +116,19 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "[a-z][a-z0-9\\-]*",
 		//	  "type": "string"
 		//	}
-		"multi_region_cluster_name_suffix": schemaAttributea951b1ead3e7e51c64ef5a0a(),
+		"multi_region_cluster_name_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Multi Region cluster. This value must be unique as it also serves as the multi region cluster identifier.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-z][a-z0-9\\-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// MultiRegionClusterNameSuffix is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +136,15 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The name of the parameter group associated with the multi region cluster.",
 		//	  "type": "string"
 		//	}
-		"multi_region_parameter_group_name": schemaAttribute38c9586caf0c87ddb1139a9c(),
+		"multi_region_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group associated with the multi region cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NodeType
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +152,10 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The compute and memory capacity of the nodes in the multi region cluster.",
 		//	  "type": "string"
 		//	}
-		"node_type": schemaAttribute11f384e63141ca1c34a1b91b(),
+		"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compute and memory capacity of the nodes in the multi region cluster.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumShards
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +163,14 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The number of shards the multi region cluster will contain.",
 		//	  "type": "integer"
 		//	}
-		"num_shards": schemaAttribute48bef307e3b1c94eae427032(),
+		"num_shards": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of shards the multi region cluster will contain.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -306,7 +178,13 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The status of the multi region cluster. For example, Available, Updating, Creating.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute20f369f2cb065f1dc606144c(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the multi region cluster. For example, Available, Updating, Creating.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TLSEnabled
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +192,15 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "A flag that enables in-transit encryption when set to true.\n\nYou cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.",
 		//	  "type": "boolean"
 		//	}
-		"tls_enabled": schemaAttributed558251e8f0ca2b8bb6010d8(),
+		"tls_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag that enables in-transit encryption when set to true.\n\nYou cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +236,47 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributece40c98a069e5bd0e9d923dc(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for the tag. May not be null.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value. May be null.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this multi region cluster.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateStrategy
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +288,21 @@ func multiRegionClusterResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"update_strategy": schemaAttributeb15489eb06d4d071ca276813(),
+		"update_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An enum string value that determines the update strategy for scaling. Possible values are 'COORDINATED' and 'UNCOORDINATED'. Default is 'COORDINATED'.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"COORDINATED",
+					"UNCOORDINATED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// UpdateStrategy is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -15,149 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute030072c7be078204465d4c89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b48f639e92d57b2167ed9f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute118e69c720a056b96804a95b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a7c438e066edded64957686() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the framework was most recently updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bfad4ffeb57a0dfa6bcfa86() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d367539181b2a1b658b099e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the control set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56fe7e1a0a5d04f35791d0c7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Controls
-				"controls": schemaAttribute74ad7031f3df8d303d3611c2(),
-				// Property: Name
-				"name": schemaAttribute4d367539181b2a1b658b099e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The control sets that are associated with the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74ad7031f3df8d303d3611c2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Id
-				"id": schemaAttribute904a9ce33b500c90c3ad2916(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of controls within the control set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74b058ff52fd7da8022c9385() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the framework was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bb61cca2ab5ce5d55f28c4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute904a9ce33b500c90c3ad2916() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea15d2132b5f9beb58197ab88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5d7c8934b7ebc2db3a633cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compliance type that the framework supports, such as CIS or HIPAA.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec19410a7f9ea958ca0fd0d7a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The framework type, such as a standard framework or a custom framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed162452b623e14e277c6f892() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user or role that most recently updated the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda3c269cc028db6dab96c90f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user or role that created the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc76737b760fa02ea6e99f61() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8bb61cca2ab5ce5d55f28c4b(),
-				// Property: Value
-				"value": schemaAttribute4bfad4ffeb57a0dfa6bcfa86(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with the framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_auditmanager_assessment_framework", assessmentFrameworkDataSource)
 }
@@ -176,7 +33,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:.*:auditmanager:",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute0b48f639e92d57b2167ed9f1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComplianceType
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +47,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[\\w\\W\\s\\S]*$",
 		//	  "type": "string"
 		//	}
-		"compliance_type": schemaAttributeb5d7c8934b7ebc2db3a633cd(),
+		"compliance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compliance type that the framework supports, such as CIS or HIPAA.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ControlSets
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +99,33 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"control_sets": schemaAttribute56fe7e1a0a5d04f35791d0c7(),
+		"control_sets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Controls
+					"controls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Id
+								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The unique identifier of the control.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The list of controls within the control set.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the control set.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The control sets that are associated with the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +134,11 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute74b058ff52fd7da8022c9385(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the framework was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +149,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttributeda3c269cc028db6dab96c90f(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user or role that created the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +163,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[\\w\\W\\s\\S]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute030072c7be078204465d4c89(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FrameworkId
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +177,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"framework_id": schemaAttributea15d2132b5f9beb58197ab88(),
+		"framework_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +189,11 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute2a7c438e066edded64957686(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the framework was most recently updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedBy
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +204,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$",
 		//	  "type": "string"
 		//	}
-		"last_updated_by": schemaAttributed162452b623e14e277c6f892(),
+		"last_updated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user or role that most recently updated the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +218,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[^\\\\]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute118e69c720a056b96804a95b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +254,24 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributefc76737b760fa02ea6e99f61(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with the framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -354,7 +283,10 @@ func assessmentFrameworkDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributec19410a7f9ea958ca0fd0d7a(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The framework type, such as a standard framework or a custom framework.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

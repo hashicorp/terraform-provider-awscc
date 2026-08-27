@@ -17,67 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute13b7de252b25fe89ce444d82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A JSON-formatted string with key-value pairs specifying the properties of the associated resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2180d3e49ae017beae75369d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the  profile that you associated the resource to that is specified by ResourceArn.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72d0682c2cb0334f857d000b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an association between the  Profile and resource.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2150f4d24e046feb76d61bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the resource that you associated to the  Profile.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb155cf9b388500b1ab34c5b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Primary Identifier for  Profile Resource Association",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc4b1531df38a48181245e06() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the resource associated to the  Profile.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_route53profiles_profile_resource_association", profileResourceAssociationResource)
 }
@@ -93,7 +32,13 @@ func profileResourceAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "Primary Identifier for  Profile Resource Association",
 		//	  "type": "string"
 		//	}
-		"profile_resource_association_id": schemaAttributeb155cf9b388500b1ab34c5b4(),
+		"profile_resource_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Primary Identifier for  Profile Resource Association",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +46,13 @@ func profileResourceAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The name of an association between the  Profile and resource.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute72d0682c2cb0334f857d000b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an association between the  Profile and resource.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +60,13 @@ func profileResourceAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The ID of the  profile that you associated the resource to that is specified by ResourceArn.",
 		//	  "type": "string"
 		//	}
-		"profile_id": schemaAttribute2180d3e49ae017beae75369d(),
+		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the  profile that you associated the resource to that is specified by ResourceArn.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -117,7 +74,13 @@ func profileResourceAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The arn of the resource that you associated to the  Profile.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttributea2150f4d24e046feb76d61bb(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the resource that you associated to the  Profile.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceProperties
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +88,14 @@ func profileResourceAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "A JSON-formatted string with key-value pairs specifying the properties of the associated resource.",
 		//	  "type": "string"
 		//	}
-		"resource_properties": schemaAttribute13b7de252b25fe89ce444d82(),
+		"resource_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A JSON-formatted string with key-value pairs specifying the properties of the associated resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +103,13 @@ func profileResourceAssociationResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The type of the resource associated to the  Profile.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttributecc4b1531df38a48181245e06(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the resource associated to the  Profile.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

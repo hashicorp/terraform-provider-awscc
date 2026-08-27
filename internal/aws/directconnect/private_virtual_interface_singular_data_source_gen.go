@@ -14,169 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute022a5cc41861da81117e60b0() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed9e7da796ae053ca46dd9daa(),
-				// Property: Value
-				"value": schemaAttributec97888b06e1b9f59c8a1c403(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with the private virtual interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2af56b454aa78893c5f63bf1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address assigned to the Amazon interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48a1b3a446c2dd33749d412c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute527429af828aaf474622ad6f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to enable or disable SiteLink.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77a84e53e4819ba1afc312fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b423245831e57755b4a47b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the virtual private gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cf788f35240979580b10a7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the virtual interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82a6a67cebc84ead508297bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the Direct Connect gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89f076a14ba7770d92e76b22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID or ARN of the connection or LAG.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ee7c3aa07a549b2146fd08d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fe3ac6905629bb92ada75fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The address family for the BGP peer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf939a95442f2d5f630b5661() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the role to allocate the private virtual interface. Needs directconnect:AllocatePrivateVirtualInterface permissions and tag permissions if applicable.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7d6ef779d032cd73b6d5459() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec97888b06e1b9f59c8a1c403() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb18ff40fa4ef0d3aa4cdb51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximum length of 80 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed04f8c50d548698a9357155c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address assigned to the customer interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4f932c0e2f223505c1b33b9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VLAN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9e7da796ae053ca46dd9daa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb654cc40fd157da2eeca7f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef30883a46161e6ea251ea36() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AddressFamily
-				"address_family": schemaAttribute9fe3ac6905629bb92ada75fe(),
-				// Property: AmazonAddress
-				"amazon_address": schemaAttribute2af56b454aa78893c5f63bf1(),
-				// Property: Asn
-				"asn": schemaAttributeeb654cc40fd157da2eeca7f4(),
-				// Property: AuthKey
-				"auth_key": schemaAttributecb18ff40fa4ef0d3aa4cdb51(),
-				// Property: BgpPeerId
-				"bgp_peer_id": schemaAttribute48a1b3a446c2dd33749d412c(),
-				// Property: CustomerAddress
-				"customer_address": schemaAttributed04f8c50d548698a9357155c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The BGP peers configured on this virtual interface.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_directconnect_private_virtual_interface", privateVirtualInterfaceDataSource)
 }
@@ -193,7 +30,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:aws[a-z-]*:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"allocate_private_virtual_interface_role_arn": schemaAttributeaf939a95442f2d5f630b5661(),
+		"allocate_private_virtual_interface_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the role to allocate the private virtual interface. Needs directconnect:AllocatePrivateVirtualInterface permissions and tag permissions if applicable.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BgpPeers
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +85,43 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bgp_peers": schemaAttributeef30883a46161e6ea251ea36(),
+		"bgp_peers": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AddressFamily
+					"address_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The address family for the BGP peer.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AmazonAddress
+					"amazon_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IP address assigned to the Amazon interface.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Asn
+					"asn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AuthKey
+					"auth_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximum length of 80 characters.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BgpPeerId
+					"bgp_peer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: CustomerAddress
+					"customer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IP address assigned to the customer interface.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The BGP peers configured on this virtual interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +136,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^((arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:(dxcon/dxcon|dxlag/dxlag))|dx(con|lag))-[a-z0-9A-Z]{8,21}$",
 		//	  "type": "string"
 		//	}
-		"connection_id": schemaAttribute89f076a14ba7770d92e76b22(),
+		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID or ARN of the connection or LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectConnectGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +152,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(arn:aws[a-z-]*:directconnect::[0-9]{12}:dx-gateway/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"direct_connect_gateway_id": schemaAttribute82a6a67cebc84ead508297bf(),
+		"direct_connect_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID or ARN of the Direct Connect gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableSiteLink
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +163,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Indicates whether to enable or disable SiteLink.",
 		//	  "type": "boolean"
 		//	}
-		"enable_site_link": schemaAttribute527429af828aaf474622ad6f(),
+		"enable_site_link": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to enable or disable SiteLink.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mtu
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +174,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.",
 		//	  "type": "integer"
 		//	}
-		"mtu": schemaAttribute9ee7c3aa07a549b2146fd08d(),
+		"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RateLimit
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +186,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$",
 		//	  "type": "string"
 		//	}
-		"rate_limit": schemaAttribute77a84e53e4819ba1afc312fb(),
+		"rate_limit": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +223,24 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute022a5cc41861da81117e60b0(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with the private virtual interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VirtualGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -341,7 +249,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(arn:aws[a-z-]*:ec2:[a-z0-9-]+:[0-9]{12}:vpn-gateway/)?vgw-[a-zA-Z0-9]{8,32}$",
 		//	  "type": "string"
 		//	}
-		"virtual_gateway_id": schemaAttribute7b423245831e57755b4a47b4(),
+		"virtual_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID or ARN of the virtual private gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VirtualInterfaceArn
 		// CloudFormation resource type schema:
 		//
@@ -350,7 +261,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:dxvif/dxvif-[a-z0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"virtual_interface_arn": schemaAttribute7cf788f35240979580b10a7f(),
+		"virtual_interface_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VirtualInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +273,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^dxvif-[a-z0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"virtual_interface_id": schemaAttribute7cf788f35240979580b10a7f(),
+		"virtual_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VirtualInterfaceName
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +285,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[\\w \\-_,\\/]{1,100}$",
 		//	  "type": "string"
 		//	}
-		"virtual_interface_name": schemaAttributec7d6ef779d032cd73b6d5459(),
+		"virtual_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Vlan
 		// CloudFormation resource type schema:
 		//
@@ -378,7 +298,10 @@ func privateVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"vlan": schemaAttributed4f932c0e2f223505c1b33b9(),
+		"vlan": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VLAN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

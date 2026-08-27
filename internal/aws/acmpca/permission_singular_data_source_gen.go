@@ -15,35 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributedaf90b4e2a98019d1a7d4d67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedef07d6317eebbf4984006dc() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee82d82e523eb2a70713932ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the calling account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1d8243651bf1ef0c0a582a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_acmpca_permission", permissionDataSource)
 }
@@ -63,7 +34,11 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"actions": schemaAttributedef07d6317eebbf4984006dc(),
+		"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthorityArn
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +46,10 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_arn": schemaAttributef1d8243651bf1ef0c0a582a5(),
+		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +57,10 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.",
 		//	  "type": "string"
 		//	}
-		"principal": schemaAttributedaf90b4e2a98019d1a7d4d67(),
+		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceAccount
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +68,10 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the calling account.",
 		//	  "type": "string"
 		//	}
-		"source_account": schemaAttributee82d82e523eb2a70713932ae(),
+		"source_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the calling account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

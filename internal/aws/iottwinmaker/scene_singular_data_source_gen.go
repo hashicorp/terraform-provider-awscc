@@ -16,88 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01975624c696461429194656() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the scene.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute02487601cfdc2895154cdaf8() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of capabilities that the scene uses to render.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a3885208f8f99fcba960c76() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5da3296a7fa34eaae39559fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time when the scene was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute655e6b2a4c01706d41d99012() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair of scene metadata for the scene.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77948da02eab036ca4391116() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time of the current update.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d5b00540c78c125b550f9e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The relative path that specifies the location of the content definition file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94b0e3c46df0e17c9ff7cf8a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair of generated scene metadata for the scene.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95d468fae36c81ce1391d811() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the scene.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01bebeea31278abdce9b68c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the scene.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iottwinmaker_scene", sceneDataSource)
 }
@@ -116,7 +34,10 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee01bebeea31278abdce9b68c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Capabilities
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +55,11 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"capabilities": schemaAttribute02487601cfdc2895154cdaf8(),
+		"capabilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of capabilities that the scene uses to render.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContentLocation
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +70,10 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[sS]3://[A-Za-z0-9._/-]+",
 		//	  "type": "string"
 		//	}
-		"content_location": schemaAttribute7d5b00540c78c125b550f9e3(),
+		"content_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The relative path that specifies the location of the content definition file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationDateTime
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +82,11 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date_time": schemaAttribute5da3296a7fa34eaae39559fe(),
+		"creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the scene was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +96,10 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute01975624c696461429194656(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GeneratedSceneMetadata
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +117,12 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"generated_scene_metadata": schemaAttribute94b0e3c46df0e17c9ff7cf8a(),
+		"generated_scene_metadata": // Pattern: ""
+		schema.MapAttribute{        /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair of generated scene metadata for the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SceneId
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +133,10 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"scene_id": schemaAttribute95d468fae36c81ce1391d811(),
+		"scene_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SceneMetadata
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +154,12 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scene_metadata": schemaAttribute655e6b2a4c01706d41d99012(),
+		"scene_metadata":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair of scene metadata for the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +175,12 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute2a3885208f8f99fcba960c76(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateDateTime
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +189,11 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"update_date_time": schemaAttribute77948da02eab036ca4391116(),
+		"update_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time of the current update.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +204,10 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schemaAttribute95d468fae36c81ce1391d811(),
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

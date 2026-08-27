@@ -15,146 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute145cf8d37335fb8fbf448751() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of programs in the multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a9a56c044fc9546cf8d71aa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MultiplexMediaConnectOutputDestinationSettings
-				"multiplex_media_connect_output_destination_settings": schemaAttribute580890b95013bc2d3971adcc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of the multiplex output destinations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48865b7975a6646d89b193b3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Transport stream ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5263d6944df35a27d249d60b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7a33dffa7ad3794ba3b1d33e(),
-				// Property: Value
-				"value": schemaAttribute7a33dffa7ad3794ba3b1d33e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute580890b95013bc2d3971adcc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EntitlementArn
-			"entitlement_arn": schemaAttribute88ffcee3cdc5c626a2878256(),
-		}, /*END SCHEMA*/
-		Description: "Multiplex MediaConnect output destination settings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e77d2e9c961ed02a9662eb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique id of the multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a33dffa7ad3794ba3b1d33e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88ffcee3cdc5c626a2878256() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MediaConnect entitlement ARN available as a Flow source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute986db3c0378a747c59f4ffd3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of availability zones for the multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb31ea930b1b6702ed21dcf4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique arn of the multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec17575f8b66b18c761dc891e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum video buffer delay in milliseconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed125322ed0497e0baa7af7a4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of currently healthy pipelines.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed26dfda394c08cca5443a4c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea2b9bd9405a248650ff61ac() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Transport stream bit rate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef347b7df87cff900aac70654() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Transport stream reserved bit rate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4095921f45595a3709fee91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumVideoBufferDelayMilliseconds
-			"maximum_video_buffer_delay_milliseconds": schemaAttributec17575f8b66b18c761dc891e(),
-			// Property: TransportStreamBitrate
-			"transport_stream_bitrate": schemaAttributeea2b9bd9405a248650ff61ac(),
-			// Property: TransportStreamId
-			"transport_stream_id": schemaAttribute48865b7975a6646d89b193b3(),
-			// Property: TransportStreamReservedBitrate
-			"transport_stream_reserved_bitrate": schemaAttributef347b7df87cff900aac70654(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a multiplex event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_multiplex", multiplexDataSource)
 }
@@ -170,7 +30,10 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique arn of the multiplex.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb31ea930b1b6702ed21dcf4a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique arn of the multiplex.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +45,11 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"availability_zones": schemaAttribute986db3c0378a747c59f4ffd3(),
+		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of availability zones for the multiplex.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Destinations
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +76,26 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"destinations": schemaAttribute1a9a56c044fc9546cf8d71aa(),
+		"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MultiplexMediaConnectOutputDestinationSettings
+					"multiplex_media_connect_output_destination_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EntitlementArn
+							"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The MediaConnect entitlement ARN available as a Flow source.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Multiplex MediaConnect output destination settings.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of the multiplex output destinations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +103,10 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique id of the multiplex.",
 		//	  "type": "string"
 		//	}
-		"multiplex_id": schemaAttribute6e77d2e9c961ed02a9662eb0(),
+		"multiplex_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique id of the multiplex.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiplexSettings
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +145,32 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"multiplex_settings": schemaAttributef4095921f45595a3709fee91(),
+		"multiplex_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaximumVideoBufferDelayMilliseconds
+				"maximum_video_buffer_delay_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum video buffer delay in milliseconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TransportStreamBitrate
+				"transport_stream_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Transport stream bit rate.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TransportStreamId
+				"transport_stream_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Transport stream ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TransportStreamReservedBitrate
+				"transport_stream_reserved_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Transport stream reserved bit rate.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for a multiplex event.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +178,10 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of multiplex.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed26dfda394c08cca5443a4c8(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of multiplex.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelinesRunningCount
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +189,10 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of currently healthy pipelines.",
 		//	  "type": "integer"
 		//	}
-		"pipelines_running_count": schemaAttributed125322ed0497e0baa7af7a4(),
+		"pipelines_running_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of currently healthy pipelines.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProgramCount
 		// CloudFormation resource type schema:
 		//
@@ -280,7 +200,10 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of programs in the multiplex.",
 		//	  "type": "integer"
 		//	}
-		"program_count": schemaAttribute145cf8d37335fb8fbf448751(),
+		"program_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of programs in the multiplex.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +221,9 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute7a33dffa7ad3794ba3b1d33e(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +245,22 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute5263d6944df35a27d249d60b(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of key-value pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

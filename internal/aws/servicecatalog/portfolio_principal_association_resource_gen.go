@@ -20,56 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute240e3aefb14547b6bf5375bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// AcceptLanguage is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ff4465549300f0f4bcb1861() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The portfolio identifier.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b317929cdacd59bba44c237() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b70784f3fbcce51ee1cc1a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the principal (user, role, or group).",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role|user|group)\\/.*"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_portfolio_principal_association", portfolioPrincipalAssociationResource)
 }
@@ -85,7 +35,16 @@ func portfolioPrincipalAssociationResource(ctx context.Context) (resource.Resour
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schemaAttribute240e3aefb14547b6bf5375bf(),
+		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// AcceptLanguage is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +52,15 @@ func portfolioPrincipalAssociationResource(ctx context.Context) (resource.Resour
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schemaAttribute5ff4465549300f0f4bcb1861(),
+		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The portfolio identifier.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrincipalARN
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +69,18 @@ func portfolioPrincipalAssociationResource(ctx context.Context) (resource.Resour
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role|user|group)\\/.*",
 		//	  "type": "string"
 		//	}
-		"principal_arn": schemaAttribute8b70784f3fbcce51ee1cc1a2(),
+		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the principal (user, role, or group).",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role|user|group)\\/.*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrincipalType
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +88,13 @@ func portfolioPrincipalAssociationResource(ctx context.Context) (resource.Resour
 		//	  "description": "The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters.",
 		//	  "type": "string"
 		//	}
-		"principal_type": schemaAttribute8b317929cdacd59bba44c237(),
+		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

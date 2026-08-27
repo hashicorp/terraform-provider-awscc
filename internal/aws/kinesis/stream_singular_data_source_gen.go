@@ -15,157 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f99df8835c2e99ae25ae9f8() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The final list of shard-level metrics",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute130c91073f32137654abe666() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Current warm throughput in MiB/s",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16f72bc25fe4b1bb9cc10f02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f98c79d737741efa05339fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c73b6a9c9cd27eddf6d70cc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum size of a data record in KiB allowed to be put into Kinesis stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32f2f53df2280963cad699ca() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a822f312d0cd30fb41a8dd8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Kinesis stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d32c15ed4df400c9cb817c4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionType
-			"encryption_type": schemaAttribute68745d836ef7127668af4ac8(),
-			// Property: KeyId
-			"key_id": schemaAttribute1f98c79d737741efa05339fb(),
-		}, /*END SCHEMA*/
-		Description: "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6388145bb6557bb086d4ee0e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute16f72bc25fe4b1bb9cc10f02(),
-				// Property: Value
-				"value": schemaAttribute63abc4e4929eb436b5ccb48f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An arbitrary set of tags (key-value pairs) to associate with the Kinesis stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63abc4e4929eb436b5ccb48f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68745d836ef7127668af4ac8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption type to use. The only valid value is KMS. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72a77bfc359df71b05885e40() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Target warm throughput in MiB/s for the stream. This property can ONLY be set when StreamMode is ON_DEMAND.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8029c240f7275aa1d2bafbeb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) of the Kinesis stream",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a33079179fdd09bcea69d8f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of hours for the data records that are stored in shards to remain accessible.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2bcb69961c03158b5fd7991() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CurrentMiBps
-			"current_mi_bps": schemaAttribute130c91073f32137654abe666(),
-			// Property: TargetMiBps
-			"target_mi_bps": schemaAttributecb1d6c1804a18def7090655d(),
-		}, /*END SCHEMA*/
-		Description: "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec27c03e2576d646d2777b8f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mode of the stream",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2ab665868f69d3f8d3e467a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StreamMode
-			"stream_mode": schemaAttributec27c03e2576d646d2777b8f0(),
-		}, /*END SCHEMA*/
-		Description: "The mode in which the stream is running.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb1d6c1804a18def7090655d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Target warm throughput in MiB/s that a customer can write to a stream at any given time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kinesis_stream", streamDataSource)
 }
@@ -181,7 +30,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon resource name (ARN) of the Kinesis stream",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8029c240f7275aa1d2bafbeb(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon resource name (ARN) of the Kinesis stream",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DesiredShardLevelMetrics
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +59,11 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"desired_shard_level_metrics": schemaAttribute0f99df8835c2e99ae25ae9f8(),
+		"desired_shard_level_metrics": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The final list of shard-level metrics",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxRecordSizeInKiB
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +73,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"max_record_size_in_ki_b": schemaAttribute2c73b6a9c9cd27eddf6d70cc(),
+		"max_record_size_in_ki_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Maximum size of a data record in KiB allowed to be put into Kinesis stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +87,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute4a822f312d0cd30fb41a8dd8(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Kinesis stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetentionPeriodHours
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +99,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 24,
 		//	  "type": "integer"
 		//	}
-		"retention_period_hours": schemaAttribute8a33079179fdd09bcea69d8f(),
+		"retention_period_hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of hours for the data records that are stored in shards to remain accessible.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ShardCount
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +111,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"shard_count": schemaAttribute32f2f53df2280963cad699ca(),
+		"shard_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamEncryption
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +146,22 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stream_encryption": schemaAttribute4d32c15ed4df400c9cb817c4(),
+		"stream_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionType
+				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The encryption type to use. The only valid value is KMS. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyId
+				"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamModeDetails
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +186,17 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stream_mode_details": schemaAttributec2ab665868f69d3f8d3e467a(),
+		"stream_mode_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StreamMode
+				"stream_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of the stream",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The mode in which the stream is running.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +230,24 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute6388145bb6557bb086d4ee0e(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) to associate with the Kinesis stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WarmThroughputMiBps
 		// CloudFormation resource type schema:
 		//
@@ -345,7 +255,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Target warm throughput in MiB/s for the stream. This property can ONLY be set when StreamMode is ON_DEMAND.",
 		//	  "type": "integer"
 		//	}
-		"warm_throughput_mi_bps": schemaAttribute72a77bfc359df71b05885e40(),
+		"warm_throughput_mi_bps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Target warm throughput in MiB/s for the stream. This property can ONLY be set when StreamMode is ON_DEMAND.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WarmThroughputObject
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +277,22 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"warm_throughput_object": schemaAttributea2bcb69961c03158b5fd7991(),
+		"warm_throughput_object": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CurrentMiBps
+				"current_mi_bps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Current warm throughput in MiB/s",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetMiBps
+				"target_mi_bps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Target warm throughput in MiB/s that a customer can write to a stream at any given time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

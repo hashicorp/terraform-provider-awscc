@@ -15,71 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1743bab75d38150116c6c4c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2db9485f5affc8e1ccd717fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute312f8b4cd6252ffb53718df8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group family that this parameter group is compatible with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e00e9952c2ce7b2f3ff90d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value. May be null.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f2cf38606b6e217cd81d03a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6a71ff0d70bdb7247520540b(),
-				// Property: Value
-				"value": schemaAttribute4e00e9952c2ce7b2f3ff90d9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a71ff0d70bdb7247520540b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for the tag. May not be null.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1633be7d7fc7e1eaea5a45d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab83918863fbd499ace65dea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_memorydb_parameter_group", parameterGroupDataSource)
 }
@@ -95,7 +30,10 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon Resource Name (ARN) of the parameter group.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute1743bab75d38150116c6c4c0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +41,10 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A description of the parameter group.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeab83918863fbd499ace65dea(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Family
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +52,10 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the parameter group family that this parameter group is compatible with.",
 		//	  "type": "string"
 		//	}
-		"family": schemaAttribute312f8b4cd6252ffb53718df8(),
+		"family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group family that this parameter group is compatible with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +63,10 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the parameter group.",
 		//	  "type": "string"
 		//	}
-		"parameter_group_name": schemaAttributea1633be7d7fc7e1eaea5a45d(),
+		"parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -127,7 +74,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttribute2db9485f5affc8e1ccd717fd(),
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +114,24 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute4f2cf38606b6e217cd81d03a(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for the tag. May not be null.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value. May be null.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,123 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04bfef389d8f3c7db410e37d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributeb2e015ba0cadb4e37eb9ecc8(),
-			// Property: Subnets
-			"subnets": schemaAttributeb2e015ba0cadb4e37eb9ecc8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47992b8c9c186c2a827246f5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AttributeNames
-				"attribute_names": schemaAttributeb2e015ba0cadb4e37eb9ecc8(),
-				// Property: S3Uri
-				"s3_uri": schemaAttributef9a5f8619238a71710bf499d(),
-				// Property: Split
-				"split": schemaAttributef9a5f8619238a71710bf499d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute607df3abfe560e138ab26cac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: S3Uri
-			"s3_uri": schemaAttributef9a5f8619238a71710bf499d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ae3e41a88b71d4efe5d96d6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef9a5f8619238a71710bf499d(),
-				// Property: Value
-				"value": schemaAttributef9a5f8619238a71710bf499d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72dcd272e2b9bee392e4a5c2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Uri
-			"s3_uri": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: TestS3Uri
-			"test_s3_uri": schemaAttributef9a5f8619238a71710bf499d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f314e45cdda1544c587d3f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AugmentedManifests
-			"augmented_manifests": schemaAttribute47992b8c9c186c2a827246f5(),
-			// Property: DataFormat
-			"data_format": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: DocumentReaderConfig
-			"document_reader_config": schemaAttribute966e26d882fcd532b3211e3c(),
-			// Property: DocumentType
-			"document_type": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: Documents
-			"documents": schemaAttribute72dcd272e2b9bee392e4a5c2(),
-			// Property: LabelDelimiter
-			"label_delimiter": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: S3Uri
-			"s3_uri": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: TestS3Uri
-			"test_s3_uri": schemaAttributef9a5f8619238a71710bf499d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute966e26d882fcd532b3211e3c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DocumentReadAction
-			"document_read_action": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: DocumentReadMode
-			"document_read_mode": schemaAttributef9a5f8619238a71710bf499d(),
-			// Property: FeatureTypes
-			"feature_types": schemaAttributeb2e015ba0cadb4e37eb9ecc8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2e015ba0cadb4e37eb9ecc8() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9a5f8619238a71710bf499d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_comprehend_document_classifier", documentClassifierDataSource)
 }
@@ -149,7 +32,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef9a5f8619238a71710bf499d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +44,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"data_access_role_arn": schemaAttributef9a5f8619238a71710bf499d(),
+		"data_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DocumentClassifierName
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +56,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"document_classifier_name": schemaAttributef9a5f8619238a71710bf499d(),
+		"document_classifier_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputDataConfig
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +192,85 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"input_data_config": schemaAttribute8f314e45cdda1544c587d3f1(),
+		"input_data_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AugmentedManifests
+				"augmented_manifests": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AttributeNames
+							"attribute_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3Uri
+							"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Split
+							"split": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataFormat
+				"data_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentReaderConfig
+				"document_reader_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DocumentReadAction
+						"document_read_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DocumentReadMode
+						"document_read_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: FeatureTypes
+						"feature_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentType
+				"document_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Documents
+				"documents": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TestS3Uri
+						"test_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LabelDelimiter
+				"label_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Uri
+				"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TestS3Uri
+				"test_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LanguageCode
 		// CloudFormation resource type schema:
 		//
@@ -318,7 +285,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"language_code": schemaAttributef9a5f8619238a71710bf499d(),
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +298,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttributef9a5f8619238a71710bf499d(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +309,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"model_kms_key_id": schemaAttributef9a5f8619238a71710bf499d(),
+		"model_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelPolicy
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +321,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"model_policy": schemaAttributef9a5f8619238a71710bf499d(),
+		"model_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputDataConfig
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +343,19 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"output_data_config": schemaAttribute607df3abfe560e138ab26cac(),
+		"output_data_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Uri
+				"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +384,21 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute6ae3e41a88b71d4efe5d96d6(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionName
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +408,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"version_name": schemaAttributef9a5f8619238a71710bf499d(),
+		"version_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VolumeKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +419,9 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"volume_kms_key_id": schemaAttributef9a5f8619238a71710bf499d(),
+		"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -456,7 +461,21 @@ func documentClassifierDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_config": schemaAttribute04bfef389d8f3c7db410e37d(),
+		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Subnets
+				"subnets": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

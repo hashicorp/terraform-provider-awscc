@@ -15,260 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute065cad6bedf62548b3b27a1d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Description: "A control parameter that is a list of integers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17b6c329e6f02f0556a35e34() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a double.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2604c930d7cfca4952139758() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityHub
-			"security_hub": schemaAttributeb6dc26839a748a11d78b5ddd(),
-		}, /*END SCHEMA*/
-		Description: "An object that defines how Security Hub is configured.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3597c35fcf8b0026430445bf() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is an integer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute565a83294a49fc60a7001686() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The universally unique identifier (UUID) of the configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d03ea42d236b3182ee7d250() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a boolean.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a12b1b8112fe03f89706da3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the security control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81afc5a8219f2b72ffec5f27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute948846fe39124930201987d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute971b941c59381648bee8476e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security controls that are disabled in the configuration policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ea68244d34d4f8f06f0ed9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is a string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ff8e23d79ebf96e9670d0c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8ba75a536c728c52aa7413d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list that defines which security standards are enabled in the configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead6f8e8e6f7185eab440fda3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security controls that are enabled in the configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2955a0eb50e22e1694ba126() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A control parameter that is a list of enums.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6dc26839a748a11d78b5ddd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnabledStandardIdentifiers
-			"enabled_standard_identifiers": schemaAttributea8ba75a536c728c52aa7413d(),
-			// Property: SecurityControlsConfiguration
-			"security_controls_configuration": schemaAttributefefec7affc37744ee00da656(),
-			// Property: ServiceEnabled
-			"service_enabled": schemaAttributec1b54dc631fa27ff1a1b2548(),
-		}, /*END SCHEMA*/
-		Description: "An object that defines how AWS Security Hub is configured.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb76c7da4b9f8392ad95148b6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the service that the configuration policy applies to is enabled in the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1b54dc631fa27ff1a1b2548() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether Security Hub is enabled in the policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccce1ab14af59ae0db06fe10() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A control parameter that is a list of strings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5b83759ff0f07146042d010() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A control parameter that is an enum.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda669737418d497a3df420db() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5d483aa2c13559f5c12bd7f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies whether a control parameter uses a custom user-defined value or subscribes to the default AWS Security Hub behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed80aec293380f570c6e839d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time, in UTC and ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef06e9208f92743cfa7155370() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Parameters
-				"parameters": schemaAttributef710eb716ce255ee6f74bc01(),
-				// Property: SecurityControlId
-				"security_control_id": schemaAttribute7a12b1b8112fe03f89706da3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of security controls and control parameter values that are included in a configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef60e3a8feacc68e2402b0f1d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Boolean
-			"boolean": schemaAttribute6d03ea42d236b3182ee7d250(),
-			// Property: Double
-			"double": schemaAttribute17b6c329e6f02f0556a35e34(),
-			// Property: Enum
-			"enum": schemaAttributed5b83759ff0f07146042d010(),
-			// Property: EnumList
-			"enum_list": schemaAttributeb2955a0eb50e22e1694ba126(),
-			// Property: Integer
-			"integer": schemaAttribute3597c35fcf8b0026430445bf(),
-			// Property: IntegerList
-			"integer_list": schemaAttribute065cad6bedf62548b3b27a1d(),
-			// Property: String
-			"string": schemaAttribute9ea68244d34d4f8f06f0ed9b(),
-			// Property: StringList
-			"string_list": schemaAttributeccce1ab14af59ae0db06fe10(),
-		}, /*END SCHEMA*/
-		Description: "An object that includes the data type of a security control parameter and its current value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef710eb716ce255ee6f74bc01() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Value
-				"value": schemaAttributef60e3a8feacc68e2402b0f1d(),
-				// Property: ValueType
-				"value_type": schemaAttributee5d483aa2c13559f5c12bd7f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An object that specifies parameter values for a control in a configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefefec7affc37744ee00da656() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DisabledSecurityControlIdentifiers
-			"disabled_security_control_identifiers": schemaAttribute971b941c59381648bee8476e(),
-			// Property: EnabledSecurityControlIdentifiers
-			"enabled_security_control_identifiers": schemaAttributead6f8e8e6f7185eab440fda3(),
-			// Property: SecurityControlCustomParameters
-			"security_control_custom_parameters": schemaAttributef06e9208f92743cfa7155370(),
-		}, /*END SCHEMA*/
-		Description: "An object that defines which security controls are enabled in an AWS Security Hub configuration policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_configuration_policy", configurationPolicyDataSource)
 }
@@ -285,7 +31,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:configuration-policy/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute948846fe39124930201987d0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the configuration policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationPolicy
 		// CloudFormation resource type schema:
 		//
@@ -452,7 +201,128 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration_policy": schemaAttribute2604c930d7cfca4952139758(),
+		"configuration_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityHub
+				"security_hub": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnabledStandardIdentifiers
+						"enabled_standard_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list that defines which security standards are enabled in the configuration policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecurityControlsConfiguration
+						"security_controls_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DisabledSecurityControlIdentifiers
+								"disabled_security_control_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A list of security controls that are disabled in the configuration policy",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EnabledSecurityControlIdentifiers
+								"enabled_security_control_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A list of security controls that are enabled in the configuration policy.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecurityControlCustomParameters
+								"security_control_custom_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Parameters
+											"parameters":              // Pattern: ""
+											schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Value
+														"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Boolean
+																"boolean": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																	Description: "A control parameter that is a boolean.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Double
+																"double": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																	Description: "A control parameter that is a double.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Enum
+																"enum": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "A control parameter that is an enum.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: EnumList
+																"enum_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Description: "A control parameter that is a list of enums.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Integer
+																"integer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Description: "A control parameter that is an integer.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: IntegerList
+																"integer_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.Int64Type,
+																	Description: "A control parameter that is a list of integers.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: String
+																"string": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "A control parameter that is a string.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: StringList
+																"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+																	ElementType: types.StringType,
+																	Description: "A control parameter that is a list of strings.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "An object that includes the data type of a security control parameter and its current value.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: ValueType
+														"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Identifies whether a control parameter uses a custom user-defined value or subscribes to the default AWS Security Hub behavior.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "An object that specifies parameter values for a control in a configuration policy.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SecurityControlId
+											"security_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the security control.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of security controls and control parameter values that are included in a configuration policy.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "An object that defines which security controls are enabled in an AWS Security Hub configuration policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceEnabled
+						"service_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether Security Hub is enabled in the policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that defines how AWS Security Hub is configured.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object that defines how Security Hub is configured.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -460,7 +330,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The date and time, in UTC and ISO 8601 format.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeed80aec293380f570c6e839d(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time, in UTC and ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -470,7 +343,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9ff8e23d79ebf96e9670d0c3(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the configuration policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -479,7 +355,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"configuration_policy_id": schemaAttribute565a83294a49fc60a7001686(),
+		"configuration_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The universally unique identifier (UUID) of the configuration policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -489,7 +368,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute81afc5a8219f2b72ffec5f27(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the configuration policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceEnabled
 		// CloudFormation resource type schema:
 		//
@@ -497,7 +379,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Indicates whether the service that the configuration policy applies to is enabled in the policy.",
 		//	  "type": "boolean"
 		//	}
-		"service_enabled": schemaAttributeb76c7da4b9f8392ad95148b6(),
+		"service_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the service that the configuration policy applies to is enabled in the policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +399,12 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributeda669737418d497a3df420db(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +412,10 @@ func configurationPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The date and time, in UTC and ISO 8601 format.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributeed80aec293380f570c6e839d(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time, in UTC and ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

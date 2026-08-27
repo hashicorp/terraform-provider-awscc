@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute9499c5dfc769cfaffba81cff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef732a0ba1d50a5f31f938a47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn for Organizational unit to which the control needs to be applied",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_controltower_enabled_control", enabledControlDataSource)
 }
@@ -46,7 +32,10 @@ func enabledControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
 		//	  "type": "string"
 		//	}
-		"control_identifier": schemaAttribute9499c5dfc769cfaffba81cff(),
+		"control_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the control.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -57,7 +46,10 @@ func enabledControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
 		//	  "type": "string"
 		//	}
-		"target_identifier": schemaAttributef732a0ba1d50a5f31f938a47(),
+		"target_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn for Organizational unit to which the control needs to be applied",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

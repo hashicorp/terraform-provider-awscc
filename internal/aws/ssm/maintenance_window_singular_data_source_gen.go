@@ -14,112 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1d676319d62e728ad15a094a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2195d62c120c359b62efa38d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29bbefc0adac7051e84312e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44a702a2c084a3f591d5867c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The schedule of the maintenance window in the form of a cron or rate expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a5c3639dbd225c864df0b2b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9590def2b99755cf9d9eb35c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The duration of the maintenance window in hours.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8d93e2a6f3813f88c17f5e8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of hours before the end of the maintenance window that AWS Systems Manager stops scheduling new tasks for execution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec77ddda045825a3fcf42e8ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3ea7f063765e5394b580fe0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to wait to run a maintenance window after the scheduled cron expression date and time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8e71aeb4d7e9dd99417934f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda1342183eebbcc1c72d115e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0f102c9b39bd462adb53e65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee343ca22f00a65e87d80be34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4541b1cd3db4023635c4aeb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1d676319d62e728ad15a094a(),
-				// Property: Value
-				"value": schemaAttribute2195d62c120c359b62efa38d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_maintenance_window", maintenanceWindowDataSource)
 }
@@ -135,7 +29,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.",
 		//	  "type": "boolean"
 		//	}
-		"allow_unassociated_targets": schemaAttribute6a5c3639dbd225c864df0b2b(),
+		"allow_unassociated_targets": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables a maintenance window task to run on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Cutoff
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +40,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The number of hours before the end of the maintenance window that AWS Systems Manager stops scheduling new tasks for execution.",
 		//	  "type": "integer"
 		//	}
-		"cutoff": schemaAttributea8d93e2a6f3813f88c17f5e8(),
+		"cutoff": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of hours before the end of the maintenance window that AWS Systems Manager stops scheduling new tasks for execution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +51,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A description of the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee0f102c9b39bd462adb53e65(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Duration
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +62,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The duration of the maintenance window in hours.",
 		//	  "type": "integer"
 		//	}
-		"duration": schemaAttribute9590def2b99755cf9d9eb35c(),
+		"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The duration of the maintenance window in hours.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndDate
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +73,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.",
 		//	  "type": "string"
 		//	}
-		"end_date": schemaAttributec77ddda045825a3fcf42e8ec(),
+		"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +84,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The name of the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributee343ca22f00a65e87d80be34(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +95,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The schedule of the maintenance window in the form of a cron or rate expression.",
 		//	  "type": "string"
 		//	}
-		"schedule": schemaAttribute44a702a2c084a3f591d5867c(),
+		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The schedule of the maintenance window in the form of a cron or rate expression.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleOffset
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +106,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The number of days to wait to run a maintenance window after the scheduled cron expression date and time.",
 		//	  "type": "integer"
 		//	}
-		"schedule_offset": schemaAttributed3ea7f063765e5394b580fe0(),
+		"schedule_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to wait to run a maintenance window after the scheduled cron expression date and time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleTimezone
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +117,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.",
 		//	  "type": "string"
 		//	}
-		"schedule_timezone": schemaAttributed8e71aeb4d7e9dd99417934f(),
+		"schedule_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StartDate
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +128,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.",
 		//	  "type": "string"
 		//	}
-		"start_date": schemaAttribute29bbefc0adac7051e84312e2(),
+		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become active. StartDate allows you to delay activation of the maintenance window until the specified future date.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +159,24 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributee4541b1cd3db4023635c4aeb(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a maintenance window to identify the type of tasks it will run, the types of targets, and the environment it will run in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WindowId
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +184,10 @@ func maintenanceWindowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The ID of the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"window_id": schemaAttributeda1342183eebbcc1c72d115e(),
+		"window_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

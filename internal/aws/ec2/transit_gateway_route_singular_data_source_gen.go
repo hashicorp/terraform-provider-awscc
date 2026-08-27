@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute43340567a2f46a1ff7e5bf2e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR range used for destination matches. Routing decisions are based on the most specific match.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute822065391779ce90165560b0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to drop traffic that matches this route.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f3da471d6dfa83861519cd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of transit gateway attachment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea53f72b78afd5df9675dbbb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of transit gateway route table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_route", transitGatewayRouteDataSource)
 }
@@ -57,7 +29,10 @@ func transitGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Indicates whether to drop traffic that matches this route.",
 		//	  "type": "boolean"
 		//	}
-		"blackhole": schemaAttribute822065391779ce90165560b0(),
+		"blackhole": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to drop traffic that matches this route.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func transitGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The CIDR range used for destination matches. Routing decisions are based on the most specific match.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schemaAttribute43340567a2f46a1ff7e5bf2e(),
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The CIDR range used for destination matches. Routing decisions are based on the most specific match.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func transitGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schemaAttribute9f3da471d6dfa83861519cd4(),
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of transit gateway attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func transitGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of transit gateway route table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_route_table_id": schemaAttributea53f72b78afd5df9675dbbb1(),
+		"transit_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of transit gateway route table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

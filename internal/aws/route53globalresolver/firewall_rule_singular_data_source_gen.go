@@ -14,18 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute50caaf8d6723680f021954b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62f5b24293932074c7861600() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53globalresolver_firewall_rule", firewallRuleDataSource)
 }
@@ -45,7 +33,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"action": schemaAttribute50caaf8d6723680f021954b8(),
+		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockOverrideDnsType
 		// CloudFormation resource type schema:
 		//
@@ -55,7 +45,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"block_override_dns_type": schemaAttribute50caaf8d6723680f021954b8(),
+		"block_override_dns_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockOverrideDomain
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +57,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "\\*?[-a-zA-Z0-9.]+",
 		//	  "type": "string"
 		//	}
-		"block_override_domain": schemaAttribute50caaf8d6723680f021954b8(),
+		"block_override_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockOverrideTtl
 		// CloudFormation resource type schema:
 		//
@@ -74,7 +68,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"block_override_ttl": schemaAttribute62f5b24293932074c7861600(),
+		"block_override_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockResponse
 		// CloudFormation resource type schema:
 		//
@@ -86,7 +82,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"block_response": schemaAttribute50caaf8d6723680f021954b8(),
+		"block_response": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +93,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_token": schemaAttribute50caaf8d6723680f021954b8(),
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfidenceThreshold
 		// CloudFormation resource type schema:
 		//
@@ -107,14 +107,18 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"confidence_threshold": schemaAttribute50caaf8d6723680f021954b8(),
+		"confidence_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute50caaf8d6723680f021954b8(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +127,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute50caaf8d6723680f021954b8(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DnsAdvancedProtection
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +141,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"dns_advanced_protection": schemaAttribute50caaf8d6723680f021954b8(),
+		"dns_advanced_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DnsViewId
 		// CloudFormation resource type schema:
 		//
@@ -144,7 +152,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"dns_view_id": schemaAttribute50caaf8d6723680f021954b8(),
+		"dns_view_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallDomainListId
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +163,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firewall_domain_list_id": schemaAttribute50caaf8d6723680f021954b8(),
+		"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FirewallRuleId
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +174,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"firewall_rule_id": schemaAttribute50caaf8d6723680f021954b8(),
+		"firewall_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +186,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute50caaf8d6723680f021954b8(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +197,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"priority": schemaAttribute62f5b24293932074c7861600(),
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QType
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +208,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"q_type": schemaAttribute50caaf8d6723680f021954b8(),
+		"q_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueryType
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +219,9 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"query_type": schemaAttribute50caaf8d6723680f021954b8(),
+		"query_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -212,14 +234,18 @@ func firewallRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute50caaf8d6723680f021954b8(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute50caaf8d6723680f021954b8(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

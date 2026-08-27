@@ -15,51 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04342d6714b8776be37cd04d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute357b220be8ab7393af5484c9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Base
-				"base": schemaAttribute04342d6714b8776be37cd04d(),
-				// Property: CapacityProvider
-				"capacity_provider": schemaAttribute7e2ea4d218a8de0fcbf5e72c(),
-				// Property: Weight
-				"weight": schemaAttribute04342d6714b8776be37cd04d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of capacity providers to associate with the cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b2b9e23aad39a54a7da3d3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e2ea4d218a8de0fcbf5e72c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8484fbf572ef527c8daff35e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of capacity providers to associate with the cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsDataSource)
 }
@@ -84,7 +39,11 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"capacity_providers": schemaAttribute8484fbf572ef527c8daff35e(),
+		"capacity_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of capacity providers to associate with the cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Cluster
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +53,10 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster": schemaAttribute5b2b9e23aad39a54a7da3d3c(),
+		"cluster": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultCapacityProviderStrategy
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +91,27 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		//	  },
 		//	  "type": "array"
 		//	}
-		"default_capacity_provider_strategy": schemaAttribute357b220be8ab7393af5484c9(),
+		"default_capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Base
+					"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: CapacityProvider
+					"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Weight
+					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of capacity providers to associate with the cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

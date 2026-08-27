@@ -14,167 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0443a2de0e0224de50036859() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the test case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fad5d600c9c9ebc7f693ac2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ChatEntryPointParameters
-			"chat_entry_point_parameters": schemaAttributee5f5605a5593128742b97c91(),
-			// Property: Type
-			"type": schemaAttributeb8402bc125301992af254a7a(),
-			// Property: VoiceCallEntryPointParameters
-			"voice_call_entry_point_parameters": schemaAttribute8f7a9784536291728ff37189(),
-		}, /*END SCHEMA*/
-		Description: "Entry point for Testcase.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e7e5978f53736e7ce0fb970() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributed5507cc3664f368f07d7f7b5(),
-				// Property: Value
-				"value": schemaAttribute7a38fdfb3927ee0b14cd891b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d4bde75fb8f3a8152358faa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content of the test case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a38fdfb3927ee0b14cd891b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f300e06a33e1a9e96035514() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The flow id used for the TestCase",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f7a9784536291728ff37189() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationPhoneNumber
-			"destination_phone_number": schemaAttributed9f37cf22637625dc55a368d(),
-			// Property: FlowId
-			"flow_id": schemaAttribute7f300e06a33e1a9e96035514(),
-			// Property: SourcePhoneNumber
-			"source_phone_number": schemaAttributee23f0b4cfb9e34a8dae605d0(),
-		}, /*END SCHEMA*/
-		Description: "The voice call entry point parameters for the test case",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute941e1a4d38154ba8c93a8dbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the test case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96d7d7dfab34052ec396f83e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8402bc125301992af254a7a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the Entry Point",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf7fce1d128c0137674d80bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Last modified region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5507cc3664f368f07d7f7b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9f37cf22637625dc55a368d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination phonenumber of the EntryPoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcfef6c80cceec0c0d25786b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The initialization data of the test case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01b84deae3495761c654fee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the test case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee23f0b4cfb9e34a8dae605d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source phonenumber of the EntryPoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5f5605a5593128742b97c91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FlowId
-			"flow_id": schemaAttribute7f300e06a33e1a9e96035514(),
-		}, /*END SCHEMA*/
-		Description: "The chat entry point parameters for the test case",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec5878ae731629932f7d37c9() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Last modified time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0de7488afb37a69048d18e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the test case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_test_case", testCaseDataSource)
 }
@@ -192,7 +31,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"content": schemaAttribute5d4bde75fb8f3a8152358faa(),
+		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content of the test case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +44,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributee01b84deae3495761c654fee(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the test case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntryPoint
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +98,51 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"entry_point": schemaAttribute0fad5d600c9c9ebc7f693ac2(),
+		"entry_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChatEntryPointParameters
+				"chat_entry_point_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FlowId
+						"flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The flow id used for the TestCase",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The chat entry point parameters for the test case",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the Entry Point",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VoiceCallEntryPointParameters
+				"voice_call_entry_point_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DestinationPhoneNumber
+						"destination_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The destination phonenumber of the EntryPoint",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FlowId
+						"flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The flow id used for the TestCase",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourcePhoneNumber
+						"source_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source phonenumber of the EntryPoint",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The voice call entry point parameters for the test case",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Entry point for Testcase.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InitializationData
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +152,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"initialization_data": schemaAttributedcfef6c80cceec0c0d25786b(),
+		"initialization_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The initialization data of the test case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +166,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute96d7d7dfab34052ec396f83e(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +178,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schemaAttributecf7fce1d128c0137674d80bd(),
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Last modified region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +189,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Last modified time.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schemaAttributeec5878ae731629932f7d37c9(),
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Last modified time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +203,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute0443a2de0e0224de50036859(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the test case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +218,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributef0de7488afb37a69048d18e2(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the test case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +255,24 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute2e7e5978f53736e7ce0fb970(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TestCaseArn
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +283,10 @@ func testCaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/test-case/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"test_case_arn": schemaAttribute941e1a4d38154ba8c93a8dbc(),
+		"test_case_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the test case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

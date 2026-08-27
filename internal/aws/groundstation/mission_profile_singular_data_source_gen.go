@@ -14,98 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00ded4c15c9f34a422ba352b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttribute7b7c1bd69212e83c34599ddb(),
-				// Property: Source
-				"source": schemaAttribute7b7c1bd69212e83c34599ddb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ad9438b5482e60ee9495e13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37bb20949a4ef28c3d908be6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7b7c1bd69212e83c34599ddb(),
-				// Property: Value
-				"value": schemaAttribute7b7c1bd69212e83c34599ddb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f969aa1147bc44979fc9dda() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Post-pass time needed after the contact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b744270d4f852619c4e9018() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsAliasArn
-			"kms_alias_arn": schemaAttribute7b7c1bd69212e83c34599ddb(),
-			// Property: KmsAliasName
-			"kms_alias_name": schemaAttribute7b7c1bd69212e83c34599ddb(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute7b7c1bd69212e83c34599ddb(),
-		}, /*END SCHEMA*/
-		Description: "The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute659b81f67bd356945907c748() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name used to identify a mission profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b7c1bd69212e83c34599ddb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95c447bdb6e09f1b1559a6b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5435965e1d292446af3ce0f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef767b5475fbbd8bf0942cfd4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Pre-pass time needed before the contact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_groundstation_mission_profile", missionProfileDataSource)
 }
@@ -121,7 +29,9 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7b7c1bd69212e83c34599ddb(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactPostPassDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +39,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Post-pass time needed after the contact.",
 		//	  "type": "integer"
 		//	}
-		"contact_post_pass_duration_seconds": schemaAttribute4f969aa1147bc44979fc9dda(),
+		"contact_post_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Post-pass time needed after the contact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContactPrePassDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +50,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Pre-pass time needed before the contact.",
 		//	  "type": "integer"
 		//	}
-		"contact_pre_pass_duration_seconds": schemaAttributef767b5475fbbd8bf0942cfd4(),
+		"contact_pre_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Pre-pass time needed before the contact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataflowEdges
 		// CloudFormation resource type schema:
 		//
@@ -158,14 +74,31 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"dataflow_edges": schemaAttribute00ded4c15c9f34a422ba352b(),
+		"dataflow_edges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Source
+					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"mission_profile_id": schemaAttribute7b7c1bd69212e83c34599ddb(),
+		"mission_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinimumViableContactDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +106,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
 		//	  "type": "integer"
 		//	}
-		"minimum_viable_contact_duration_seconds": schemaAttributea5435965e1d292446af3ce0f(),
+		"minimum_viable_contact_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -182,14 +118,19 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute659b81f67bd356945907c748(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name used to identify a mission profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"region": schemaAttribute7b7c1bd69212e83c34599ddb(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamsKmsKey
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +170,24 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"streams_kms_key": schemaAttribute5b744270d4f852619c4e9018(),
+		"streams_kms_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsAliasArn
+				"kms_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsAliasName
+				"kms_alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamsKmsRole
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +195,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.",
 		//	  "type": "string"
 		//	}
-		"streams_kms_role": schemaAttribute1ad9438b5482e60ee9495e13(),
+		"streams_kms_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +223,21 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute37bb20949a4ef28c3d908be6(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TelemetrySinkConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +246,10 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
-		"telemetry_sink_config_arn": schemaAttribute95c447bdb6e09f1b1559a6b9(),
+		"telemetry_sink_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +257,9 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
-		"tracking_config_arn": schemaAttribute7b7c1bd69212e83c34599ddb(),
+		"tracking_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

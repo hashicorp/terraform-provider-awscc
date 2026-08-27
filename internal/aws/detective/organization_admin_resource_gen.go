@@ -20,29 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute228188c3bb97bcbf3386e2ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account ID of the account that should be registered as your Organization's delegated administrator for Detective",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e11190df5d782a38dd33bda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Detective graph ARN",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_detective_organization_admin", organizationAdminResource)
 	registry.AddListResourceFactory("awscc_detective_organization_admin", generic.NewListResource(organizationAdminResource))
@@ -60,7 +37,16 @@ func organizationAdminResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute228188c3bb97bcbf3386e2ee(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The account ID of the account that should be registered as your Organization's delegated administrator for Detective",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GraphArn
 		// CloudFormation resource type schema:
 		//
@@ -68,7 +54,13 @@ func organizationAdminResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Detective graph ARN",
 		//	  "type": "string"
 		//	}
-		"graph_arn": schemaAttribute4e11190df5d782a38dd33bda(),
+		"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Detective graph ARN",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

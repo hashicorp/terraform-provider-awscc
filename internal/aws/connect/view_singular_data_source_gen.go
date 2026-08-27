@@ -16,93 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15ba18db7affa0b7a6a0c41f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The view id of the view.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute167de0035ab67e190ff80087() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the view.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a7b74111a2fecc6e47cf5a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26154a7e0d74d0119001d15d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute277196a3a5600091869d86c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. . You can specify a value that is maximum of 256 Unicode characters",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29e6fee994931bdb33db5bb9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The template of the view as JSON.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65bb6fb2db843c964dca113a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The actions of the view in an array.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c6d878e2b819266bda349e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the view.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8442920e0e037b53e2c0e08b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the view.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94a2af1320744e0a1d51e138() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The view content hash.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf2d9b2b7a50447720da5985() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1a7b74111a2fecc6e47cf5a4(),
-				// Property: Value
-				"value": schemaAttribute277196a3a5600091869d86c3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_view", viewDataSource)
 }
@@ -126,7 +39,11 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1000,
 		//	  "type": "array"
 		//	}
-		"actions": schemaAttribute65bb6fb2db843c964dca113a(),
+		"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The actions of the view in an array.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +54,10 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute167de0035ab67e190ff80087(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the view.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +68,10 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttribute26154a7e0d74d0119001d15d(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +82,10 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@()']*)$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute8442920e0e037b53e2c0e08b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the view.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +119,24 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeaf2d9b2b7a50447720da5985(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. . You can specify a value that is maximum of 256 Unicode characters",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Template
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +144,11 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The template of the view as JSON.",
 		//	  "type": "object"
 		//	}
-		"template": schemaAttribute29e6fee994931bdb33db5bb9(),
+		"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The template of the view as JSON.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ViewArn
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +159,10 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/view/[-:$a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"view_arn": schemaAttribute7c6d878e2b819266bda349e6(),
+		"view_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the view.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ViewContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +171,10 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{64}$",
 		//	  "type": "string"
 		//	}
-		"view_content_sha_256": schemaAttribute94a2af1320744e0a1d51e138(),
+		"view_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The view content hash.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ViewId
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +185,10 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\_\\-:\\/$]+$",
 		//	  "type": "string"
 		//	}
-		"view_id": schemaAttribute15ba18db7affa0b7a6a0c41f(),
+		"view_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The view id of the view.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

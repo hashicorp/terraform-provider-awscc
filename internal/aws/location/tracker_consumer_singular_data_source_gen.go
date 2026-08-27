@@ -14,12 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributebad40a794ef0d53f7b2a72a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_location_tracker_consumer", trackerConsumerDataSource)
 }
@@ -36,7 +30,9 @@ func trackerConsumerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 		//	  "type": "string"
 		//	}
-		"consumer_arn": schemaAttributebad40a794ef0d53f7b2a72a2(),
+		"consumer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackerName
 		// CloudFormation resource type schema:
 		//
@@ -46,7 +42,9 @@ func trackerConsumerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[-._\\w]+$",
 		//	  "type": "string"
 		//	}
-		"tracker_name": schemaAttributebad40a794ef0d53f7b2a72a2(),
+		"tracker_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,63 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute203741c6582eade99c949712() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute527fd6e39ab4ceda6440e5d3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true the sender ID can't be deleted. By default this is set to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5588d1366c54a0a3bc6d2879() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78c9e6f17a53d8566e4a750f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec1b1467dab6d1a33d6584d64(),
-				// Property: Value
-				"value": schemaAttribute5588d1366c54a0a3bc6d2879(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute841cf9a3494ea1ce39e209da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The sender ID string to request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1b1467dab6d1a33d6584d64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec55865d386e0fd3f789b9322() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) associated with the SenderId.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_smsvoice_sender_id", senderIdDataSource)
 }
@@ -86,7 +29,10 @@ func senderIdDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) associated with the SenderId.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec55865d386e0fd3f789b9322(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) associated with the SenderId.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +40,10 @@ func senderIdDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When set to true the sender ID can't be deleted. By default this is set to false.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection_enabled": schemaAttribute527fd6e39ab4ceda6440e5d3(),
+		"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When set to true the sender ID can't be deleted. By default this is set to false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsoCountryCode
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +52,10 @@ func senderIdDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Z]{2}$",
 		//	  "type": "string"
 		//	}
-		"iso_country_code": schemaAttribute203741c6582eade99c949712(),
+		"iso_country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SenderId
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +64,10 @@ func senderIdDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"sender_id": schemaAttribute841cf9a3494ea1ce39e209da(),
+		"sender_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The sender ID string to request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +100,24 @@ func senderIdDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute78c9e6f17a53d8566e4a750f(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

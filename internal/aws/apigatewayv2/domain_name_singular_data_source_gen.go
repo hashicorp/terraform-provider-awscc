@@ -15,129 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b9ea73f12c505906d3c1c4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) for the public certificate issued by ACMlong. This ARN is used to validate custom domain ownership. It's required only if you configure mutual TLS and use either an ACM-imported or a private CA certificate ARN as the regionalCertificateArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20b3fdd6e9b49531ac28b211() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35b7b8f4efa00c48e29e394a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address types that can invoke the domain name. Use ``ipv4`` to allow only IPv4 addresses to invoke your domain name, or use ``dualstack`` to allow both IPv4 and IPv6 addresses to invoke your domain name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43adf2ef671260aeedc01881() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d15b647e03aebb8b77c7a98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61d054de3496f09d582b85b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6718dd5cbb7492b71ce5c0a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The routing mode API Gateway uses to route traffic to your APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f7ff3c7950305cabd0aea61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute973cffcc973e826122267dff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TruststoreUri
-			"truststore_uri": schemaAttributef097e6754490a89dbdd13cbd(),
-			// Property: TruststoreVersion
-			"truststore_version": schemaAttribute8f7ff3c7950305cabd0aea61(),
-		}, /*END SCHEMA*/
-		Description: "The mutual TLS authentication configuration for a custom domain name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbf9eaf155fd2caf7bb5328d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are ``TLS_1_0`` and ``TLS_1_2``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0f575da1346c1b36c8b9af9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user-friendly name of the certificate that will be used by the edge-optimized endpoint for this domain name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee790af216644fbde930019f3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateArn
-				"certificate_arn": schemaAttribute61d054de3496f09d582b85b1(),
-				// Property: CertificateName
-				"certificate_name": schemaAttributed0f575da1346c1b36c8b9af9(),
-				// Property: EndpointType
-				"endpoint_type": schemaAttribute5d15b647e03aebb8b77c7a98(),
-				// Property: IpAddressType
-				"ip_address_type": schemaAttribute35b7b8f4efa00c48e29e394a(),
-				// Property: OwnershipVerificationCertificateArn
-				"ownership_verification_certificate_arn": schemaAttribute0b9ea73f12c505906d3c1c4c(),
-				// Property: SecurityPolicy
-				"security_policy": schemaAttributebbf9eaf155fd2caf7bb5328d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The domain name configurations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef097e6754490a89dbdd13cbd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, ``s3://bucket-name/key-name``. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2cd5eec19042837ebcf4ad5() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The collection of tags associated with a domain name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_domain_name", domainNameDataSource)
 }
@@ -153,7 +30,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute43adf2ef671260aeedc01881(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The custom domain name for your API in Amazon API Gateway. Uppercase letters and the underscore (``_``) character are not supported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +41,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schemaAttribute20b3fdd6e9b49531ac28b211(),
+		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +84,44 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"domain_name_configurations": schemaAttributee790af216644fbde930019f3(),
+		"domain_name_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateArn
+					"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CertificateName
+					"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The user-friendly name of the certificate that will be used by the edge-optimized endpoint for this domain name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EndpointType
+					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The endpoint type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IpAddressType
+					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IP address types that can invoke the domain name. Use ``ipv4`` to allow only IPv4 addresses to invoke your domain name, or use ``dualstack`` to allow both IPv4 and IPv6 addresses to invoke your domain name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OwnershipVerificationCertificateArn
+					"ownership_verification_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon resource name (ARN) for the public certificate issued by ACMlong. This ARN is used to validate custom domain ownership. It's required only if you configure mutual TLS and use either an ACM-imported or a private CA certificate ARN as the regionalCertificateArn.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecurityPolicy
+					"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are ``TLS_1_0`` and ``TLS_1_2``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The domain name configurations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MutualTlsAuthentication
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +140,22 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"mutual_tls_authentication": schemaAttribute973cffcc973e826122267dff(),
+		"mutual_tls_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TruststoreUri
+				"truststore_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, ``s3://bucket-name/key-name``. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TruststoreVersion
+				"truststore_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The mutual TLS authentication configuration for a custom domain name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalDomainName
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +163,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"regional_domain_name": schemaAttribute20b3fdd6e9b49531ac28b211(),
+		"regional_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalHostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +174,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"regional_hosted_zone_id": schemaAttribute20b3fdd6e9b49531ac28b211(),
+		"regional_hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingMode
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +191,10 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"routing_mode": schemaAttribute6718dd5cbb7492b71ce5c0a7(),
+		"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The routing mode API Gateway uses to route traffic to your APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -264,7 +208,12 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributef2cd5eec19042837ebcf4ad5(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The collection of tags associated with a domain name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

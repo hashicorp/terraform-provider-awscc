@@ -14,138 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1bca23443fa8172c982d9b4d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Namespace
-			"namespace": schemaAttributebeca28d64a1f38800746fc35(),
-		}, /*END SCHEMA*/
-		Description: "The custom namespace configuration to use with the add-on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute229371cd2b7869cb63ee76b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IAM role to bind to the add-on's service account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25511be9672c4e9d49e89940() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of Cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35173824233b9cabe483245a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Version of Addon",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4be580f24a394b3c6d8e3d16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The configuration values to use with the add-on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute672cb970ae913c462bcf60c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the add-on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d8abc0c152a378e563222c6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9ff2a72e28f9adcbdf866047(),
-				// Property: Value
-				"value": schemaAttributef23e9fefd2eb503e08dc2c01(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82561ecd7e414c8db725c00d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of Addon",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute896314befc5bbf54503b30f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Resolve parameter value conflicts",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute997d94bdeba62a6551f565ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM role ARN that the pod identity association is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e2da6527fbd81962720489c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "PreserveOnDelete parameter value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ff2a72e28f9adcbdf866047() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6eb7a6a26e89f93b49a9dd2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RoleArn
-				"role_arn": schemaAttribute997d94bdeba62a6551f565ea(),
-				// Property: ServiceAccount
-				"service_account": schemaAttributed7afc1ece1e315792a417c09(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of pod identities to apply to this add-on.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebeca28d64a1f38800746fc35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The custom namespace for creating the add-on",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7afc1ece1e315792a417c09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Kubernetes service account that the pod identity association is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef23e9fefd2eb503e08dc2c01() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_eks_addon", addonDataSource)
 }
@@ -162,7 +30,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"addon_name": schemaAttribute82561ecd7e414c8db725c00d(),
+		"addon_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Addon",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AddonVersion
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +42,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"addon_version": schemaAttribute35173824233b9cabe483245a(),
+		"addon_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Version of Addon",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +53,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Amazon Resource Name (ARN) of the add-on",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute672cb970ae913c462bcf60c8(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the add-on",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +65,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttribute25511be9672c4e9d49e89940(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationValues
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +77,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"configuration_values": schemaAttribute4be580f24a394b3c6d8e3d16(),
+		"configuration_values": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The configuration values to use with the add-on",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NamespaceConfig
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +98,17 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"namespace_config": schemaAttribute1bca23443fa8172c982d9b4d(),
+		"namespace_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Namespace
+				"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The custom namespace for creating the add-on",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The custom namespace configuration to use with the add-on",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PodIdentityAssociations
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +138,24 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"pod_identity_associations": schemaAttributea6eb7a6a26e89f93b49a9dd2(),
+		"pod_identity_associations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IAM role ARN that the pod identity association is created for.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ServiceAccount
+					"service_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Kubernetes service account that the pod identity association is created for.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of pod identities to apply to this add-on.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreserveOnDelete
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +163,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "PreserveOnDelete parameter value",
 		//	  "type": "boolean"
 		//	}
-		"preserve_on_delete": schemaAttribute9e2da6527fbd81962720489c(),
+		"preserve_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "PreserveOnDelete parameter value",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolveConflicts
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +180,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolve_conflicts": schemaAttribute896314befc5bbf54503b30f6(),
+		"resolve_conflicts": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Resolve parameter value conflicts",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccountRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +192,10 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"service_account_role_arn": schemaAttribute229371cd2b7869cb63ee76b1(),
+		"service_account_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IAM role to bind to the add-on's service account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +228,24 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute7d8abc0c152a378e563222c6(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

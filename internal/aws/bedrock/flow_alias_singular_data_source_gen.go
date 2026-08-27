@@ -16,111 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute02d51b2adb96fa935d2fd30f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2661b27443b141df499e79df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b18341021cd831dc502d2d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the Flow Alias",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cac51fd5b0fdb6fd1bba27f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51a4d7afee86538cd38d67e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier for a flow resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0f3ebdb014dc485accc3f3b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FlowVersion
-				"flow_version": schemaAttributeea71d11072c06cd5f65e7926(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Routing configuration for a Flow alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea81c53d070a54a1f7ee01a8f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxConcurrency
-			"max_concurrency": schemaAttributeaeed8e4d8952641b33b1ff48(),
-			// Property: Type
-			"type": schemaAttribute02d51b2adb96fa935d2fd30f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeed8e4d8952641b33b1ff48() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Number of nodes executed concurrently at a time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9b27baa32a29c6748905fa8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn representation of the Flow",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf896b584e907b89588cab8f() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb0c4507d4b2adcec44f0a58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id for a Flow Alias generated at the server side.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea71d11072c06cd5f65e7926() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed94ce3f83ade7fdd6a36559() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time Stamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_flow_alias", flowAliasDataSource)
 }
@@ -138,7 +33,10 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}/alias/[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3b18341021cd831dc502d2d8(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the Flow Alias",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConcurrencyConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +62,20 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"concurrency_configuration": schemaAttributea81c53d070a54a1f7ee01a8f(),
+		"concurrency_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxConcurrency
+				"max_concurrency": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Number of nodes executed concurrently at a time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +84,11 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeed94ce3f83ade7fdd6a36559(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +98,10 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3cac51fd5b0fdb6fd1bba27f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowArn
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +111,10 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"flow_arn": schemaAttributeb9b27baa32a29c6748905fa8(),
+		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn representation of the Flow",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowId
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +123,10 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"flow_id": schemaAttribute51a4d7afee86538cd38d67e9(),
+		"flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier for a flow resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +137,10 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\bTSTALIASID\\b|[0-9a-zA-Z]+)$",
 		//	  "type": "string"
 		//	}
-		"flow_alias_id": schemaAttributedb0c4507d4b2adcec44f0a58(),
+		"flow_alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id for a Flow Alias generated at the server side.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +149,10 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2661b27443b141df499e79df(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +177,19 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"routing_configuration": schemaAttributea0f3ebdb014dc485accc3f3b(),
+		"routing_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FlowVersion
+					"flow_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Version.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Routing configuration for a Flow alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +207,12 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributecf896b584e907b89588cab8f(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +221,11 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributeed94ce3f83ade7fdd6a36559(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

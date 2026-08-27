@@ -15,28 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03a376716d6a45ac49e4a7fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arn of the cluster for the resource policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c1b479fc3daa9539acb3c73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A policy document containing permissions to add to the specified cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec49a5755f232981334525af8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current version of the policy attached to the specified cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_msk_cluster_policy", clusterPolicyDataSource)
 }
@@ -53,7 +31,10 @@ func clusterPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schemaAttribute03a376716d6a45ac49e4a7fe(),
+		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arn of the cluster for the resource policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CurrentVersion
 		// CloudFormation resource type schema:
 		//
@@ -62,7 +43,10 @@ func clusterPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"current_version": schemaAttributec49a5755f232981334525af8(),
+		"current_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current version of the policy attached to the specified cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -70,7 +54,11 @@ func clusterPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "A policy document containing permissions to add to the specified cluster.",
 		//	  "type": "object"
 		//	}
-		"policy": schemaAttribute9c1b479fc3daa9539acb3c73(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "A policy document containing permissions to add to the specified cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

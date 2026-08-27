@@ -14,105 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b185880bb8f7059bb65d114() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a1b6f8a3513e2a3535d6c74() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the pod identity association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e1c2ec2115566647c93e736() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The policy of the pod identity association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute853c9584fbbdbc2f4f71df6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IAM role ARN that the pod identity association is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d818b56f7e63656932230f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster that the pod identity association is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c10989a9107561675828f68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the pod identity association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfb46107e8867ef62cfea405() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee3b1d0a14c6b8fc6381e9e6c(),
-				// Property: Value
-				"value": schemaAttribute0b185880bb8f7059bb65d114(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec53ffa481fabbb0e5aa1522f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Kubernetes namespace that the pod identity association is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5f40222f8872c4684d5d575() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External Id of the pod identity association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8ca151a9c96093e1dd5bd63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Kubernetes service account that the pod identity association is created for.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf96ecc048810bb708ae0895() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The Disable Session Tags of the pod identity association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3b1d0a14c6b8fc6381e9e6c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef39f2580aff8d61632241a60() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Target Role Arn of the pod identity association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_eks_pod_identity_association", podIdentityAssociationDataSource)
 }
@@ -128,7 +29,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ARN of the pod identity association.",
 		//	  "type": "string"
 		//	}
-		"association_arn": schemaAttribute1a1b6f8a3513e2a3535d6c74(),
+		"association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +41,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute9c10989a9107561675828f68(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +53,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttribute8d818b56f7e63656932230f1(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster that the pod identity association is created for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisableSessionTags
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +65,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "boolean"
 		//	}
-		"disable_session_tags": schemaAttributedf96ecc048810bb708ae0895(),
+		"disable_session_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The Disable Session Tags of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExternalId
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +77,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"external_id": schemaAttributec5f40222f8872c4684d5d575(),
+		"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External Id of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +88,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The Kubernetes namespace that the pod identity association is created for.",
 		//	  "type": "string"
 		//	}
-		"namespace": schemaAttributec53ffa481fabbb0e5aa1522f(),
+		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Kubernetes namespace that the pod identity association is created for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +100,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"policy": schemaAttribute1e1c2ec2115566647c93e736(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The policy of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +111,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The IAM role ARN that the pod identity association is created for.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute853c9584fbbdbc2f4f71df6c(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM role ARN that the pod identity association is created for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccount
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +122,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The Kubernetes service account that the pod identity association is created for.",
 		//	  "type": "string"
 		//	}
-		"service_account": schemaAttributed8ca151a9c96093e1dd5bd63(),
+		"service_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Kubernetes service account that the pod identity association is created for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +158,24 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributebfb46107e8867ef62cfea405(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +184,10 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"target_role_arn": schemaAttributef39f2580aff8d61632241a60(),
+		"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Target Role Arn of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

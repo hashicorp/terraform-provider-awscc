@@ -14,119 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00ad445b2ab6723f2c583834() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttribute0f9d08a88140e2bd3f82c96a(),
-			// Property: S3DataDestination
-			"s3_data_destination": schemaAttribute3c280ef2b187fa2075935654(),
-		}, /*END SCHEMA*/
-		Description: "The output configuration details for the metric attribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f9d08a88140e2bd3f82c96a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role for the metric attribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute257fc3b43d2382d705b34d77() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventType
-				"event_type": schemaAttribute6ddd0b5884d9acef5798c219(),
-				// Property: Expression
-				"expression": schemaAttributeaf220b980a5d05c089f92fb5(),
-				// Property: MetricName
-				"metric_name": schemaAttribute7393d96a2d5c9543ccce6657(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of metric attributes for the metric attribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2db5af54e93059bb435ae7d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file path of the Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c280ef2b187fa2075935654() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttributeba1c444664f57514dbcf945e(),
-			// Property: Path
-			"path": schemaAttribute2db5af54e93059bb435ae7d3(),
-		}, /*END SCHEMA*/
-		Description: "The configuration details of an Amazon S3 output bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53c0cb1cfaa661b412a19b68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the metric attribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5dff8b60d4f7b75144244a9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the metric attribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a2f1d63a2943641cbc0d3a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the destination dataset group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ddd0b5884d9acef5798c219() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metric's event type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7393d96a2d5c9543ccce6657() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metric's name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf220b980a5d05c089f92fb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The attribute's expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba1c444664f57514dbcf945e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccb474532d0959792693976d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the metric attribution.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_personalize_metric_attribution", metricAttributionDataSource)
 }
@@ -144,7 +31,10 @@ func metricAttributionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schemaAttribute6a2f1d63a2943641cbc0d3a6(),
+		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the destination dataset group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricAttributionArn
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +44,10 @@ func metricAttributionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"metric_attribution_arn": schemaAttribute53c0cb1cfaa661b412a19b68(),
+		"metric_attribution_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the metric attribution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Metrics
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +84,29 @@ func metricAttributionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"metrics": schemaAttribute257fc3b43d2382d705b34d77(),
+		"metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventType
+					"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The metric's event type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Expression
+					"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The attribute's expression.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricName
+					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The metric's name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of metric attributes for the metric attribution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsOutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +148,34 @@ func metricAttributionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"metrics_output_config": schemaAttribute00ad445b2ab6723f2c583834(),
+		"metrics_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role for the metric attribution.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3DataDestination
+				"s3_data_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the KMS key.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Path
+						"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The file path of the Amazon S3 bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration details of an Amazon S3 output bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The output configuration details for the metric attribution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +186,10 @@ func metricAttributionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeccb474532d0959792693976d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the metric attribution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +197,10 @@ func metricAttributionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The status of the metric attribution.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute5dff8b60d4f7b75144244a9a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the metric attribution.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

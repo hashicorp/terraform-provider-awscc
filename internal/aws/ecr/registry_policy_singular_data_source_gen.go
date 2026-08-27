@@ -15,21 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute108ea6f386af1b4d9a17f40a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The JSON policy text for your registry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7e03261bd2e1d87b01403b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The registry id.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_registry_policy", registryPolicyDataSource)
 }
@@ -45,7 +30,11 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The JSON policy text for your registry.",
 		//	  "type": "object"
 		//	}
-		"policy_text": schemaAttribute108ea6f386af1b4d9a17f40a(),
+		"policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The JSON policy text for your registry.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegistryId
 		// CloudFormation resource type schema:
 		//
@@ -56,7 +45,10 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schemaAttributea7e03261bd2e1d87b01403b5(),
+		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The registry id.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

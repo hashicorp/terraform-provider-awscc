@@ -15,28 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute538b2884b26744f5f31e7fee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b60f0783227f079cd6af33d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef36e8b17bdd9382b745894ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dax_parameter_group", parameterGroupDataSource)
 }
@@ -52,7 +30,10 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A description of the parameter group.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute538b2884b26744f5f31e7fee(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -60,7 +41,10 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the parameter group.",
 		//	  "type": "string"
 		//	}
-		"parameter_group_name": schemaAttribute9b60f0783227f079cd6af33d(),
+		"parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParameterNameValues
 		// CloudFormation resource type schema:
 		//
@@ -68,7 +52,11 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.",
 		//	  "type": "object"
 		//	}
-		"parameter_name_values": schemaAttributef36e8b17bdd9382b745894ce(),
+		"parameter_name_values": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

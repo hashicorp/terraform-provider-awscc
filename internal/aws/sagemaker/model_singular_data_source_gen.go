@@ -16,363 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0dae523938a6f8140a77d9d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter is ignored for models that contain only a PrimaryContainer.\n\nWhen a ContainerDefinition is part of an inference pipeline, the value of the parameter uniquely identifies the container for the purposes of logging and metrics. For information, see [Use Logs and Metrics to Monitor an Inference Pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html). If you don't specify a value for this parameter for a ContainerDefinition that is part of an inference pipeline, a unique name is automatically assigned based on the position of the ContainerDefinition in the pipeline. If you specify a value for the ContainerHostName for any ContainerDefinition that is part of an inference pipeline, you must specify a value for the ContainerHostName parameter of every ContainerDefinition in that pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19d35b4f9c2c2ddc16db7c53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how the ML model data is prepared.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2027e28c5b5f22540a31f68e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RepositoryCredentialsProviderArn
-			"repository_credentials_provider_arn": schemaAttributeacb54dae989e444b209c7d48(),
-		}, /*END SCHEMA*/
-		Description: "Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified `Vpc` as the value for the `RepositoryAccessMode` field of the `ImageConfig` object that you passed to a call to `CreateModel` and the private Docker registry where the model image is hosted requires authentication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2703b23cedd7744027c106be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29d145c22ddd3acdb5aa7ce4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of the subnets in the VPC to which you want to connect your training job or model. For information about the availability of specific instance types, see [Supported Instance Types and Availability Zones](https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute387b2def199c117c359256a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The inference specification name in the model package version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49d6bf99c357c52de4f5014c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4abb1d94902ed9eb002b1d1f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RepositoryAccessMode
-			"repository_access_mode": schemaAttributee95db98fc4b4692a5bf99412(),
-			// Property: RepositoryAuthConfig
-			"repository_auth_config": schemaAttribute2027e28c5b5f22540a31f68e(),
-		}, /*END SCHEMA*/
-		Description: "Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e1503584505a5bd43f74998() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see [Common Parameters](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).\n\nIf you provide a value for this parameter, SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your AWS account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see [Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the AWS Identity and Access Management User Guide",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f1f6096bfad87d6d5be1b7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that you specified for the model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a36a7e9a4fc31b36130a201() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path where inference code is stored. This can be either in Amazon EC2 Container Registry or in a Docker registry that is accessible from the same VPC that you configure for your endpoint. If you are using your own custom algorithm instead of an algorithm provided by SageMaker, the inference code must meet SageMaker requirements. SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see [Using Your Own Algorithms with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute600e542a90bfea99c39bc9c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CompressionType
-			"compression_type": schemaAttribute19d35b4f9c2c2ddc16db7c53(),
-			// Property: HubAccessConfig
-			"hub_access_config": schemaAttribute7e789343a75fc89b2e952de0(),
-			// Property: ModelAccessConfig
-			"model_access_config": schemaAttributedf151bc1e151ac7553137857(),
-			// Property: S3DataType
-			"s3_data_type": schemaAttributebe0beeb1b7f855d789e625a7(),
-			// Property: S3Uri
-			"s3_uri": schemaAttributef08561e2b466a4dd9a0423d4(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the S3 location of ML model data to deploy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c06ae78c19042af09d71ba3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How containers in a multi-container are run.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute721769959e7f7c18e5a4a491() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ModelCacheSetting
-			"model_cache_setting": schemaAttributeaeff107aeca5430116747d9a(),
-		}, /*END SCHEMA*/
-		Description: "Specifies additional configuration for multi-model endpoints.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74826fa0d47815db2c2c3be1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or Amazon Resource Name (ARN) of the model package to use to create the model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a949f720f05978dc3f2fe58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the hub content for which deployment access is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e789343a75fc89b2e952de0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HubContentArn
-			"hub_content_arn": schemaAttribute7a949f720f05978dc3f2fe58(),
-		}, /*END SCHEMA*/
-		Description: "Configuration information specifying which hub contents have accessible deployment options.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fd55faf5da729adcbf690e1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerHostname
-			"container_hostname": schemaAttribute0dae523938a6f8140a77d9d4(),
-			// Property: Environment
-			"environment": schemaAttributeb7bbfba365bf2f63e988fc01(),
-			// Property: Image
-			"image": schemaAttribute5a36a7e9a4fc31b36130a201(),
-			// Property: ImageConfig
-			"image_config": schemaAttribute4abb1d94902ed9eb002b1d1f(),
-			// Property: InferenceSpecificationName
-			"inference_specification_name": schemaAttribute387b2def199c117c359256a0(),
-			// Property: Mode
-			"mode": schemaAttribute9c3aaff04d13fd9e8d49c940(),
-			// Property: ModelDataSource
-			"model_data_source": schemaAttributeac0b024a3a1449554eb06235(),
-			// Property: ModelDataUrl
-			"model_data_url": schemaAttribute4e1503584505a5bd43f74998(),
-			// Property: ModelPackageName
-			"model_package_name": schemaAttribute74826fa0d47815db2c2c3be1(),
-			// Property: MultiModelConfig
-			"multi_model_config": schemaAttribute721769959e7f7c18e5a4a491(),
-		}, /*END SCHEMA*/
-		Description: "Describes the container, as part of model definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81a0983097117f62dc895a1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the new model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85908734e03f6b4c5c7601a9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Mode
-			"mode": schemaAttribute6c06ae78c19042af09d71ba3(),
-		}, /*END SCHEMA*/
-		Description: "Specifies details about how containers in a multi-container endpoint are run.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a0883c7db04771a52ed656d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Isolates the model container. No inbound or outbound network calls can be made to or from the model container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9775b3b0d1375ccd5cd44a36() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2703b23cedd7744027c106be(),
-				// Property: Value
-				"value": schemaAttributeffe9f73418d0ac4d2c3c5159(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see [Tagging AWS Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c3aaff04d13fd9e8d49c940() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the container hosts a single model or multiple models.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2adb273ca9bee17c851c772() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContainerHostname
-				"container_hostname": schemaAttribute0dae523938a6f8140a77d9d4(),
-				// Property: Environment
-				"environment": schemaAttributeb7bbfba365bf2f63e988fc01(),
-				// Property: Image
-				"image": schemaAttribute5a36a7e9a4fc31b36130a201(),
-				// Property: ImageConfig
-				"image_config": schemaAttribute4abb1d94902ed9eb002b1d1f(),
-				// Property: InferenceSpecificationName
-				"inference_specification_name": schemaAttribute387b2def199c117c359256a0(),
-				// Property: Mode
-				"mode": schemaAttribute9c3aaff04d13fd9e8d49c940(),
-				// Property: ModelDataSource
-				"model_data_source": schemaAttributeac0b024a3a1449554eb06235(),
-				// Property: ModelDataUrl
-				"model_data_url": schemaAttribute4e1503584505a5bd43f74998(),
-				// Property: ModelPackageName
-				"model_package_name": schemaAttribute74826fa0d47815db2c2c3be1(),
-				// Property: MultiModelConfig
-				"multi_model_config": schemaAttribute721769959e7f7c18e5a4a491(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the containers in the inference pipeline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2f1b885780468c9544a3d03() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The VPC security group IDs, in the form `sg-xxxxxxxx`. Specify the security groups for the VPC that is specified in the `Subnets` field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac0b024a3a1449554eb06235() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3DataSource
-			"s3_data_source": schemaAttribute600e542a90bfea99c39bc9c6(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the location of ML model data to deploy. If specified, you must specify one and only one of the available data sources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacb54dae989e444b209c7d48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see [Create a Lambda function with the console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html) in the AWS Lambda Developer Guide",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeff107aeca5430116747d9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to `Disabled`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7bbfba365bf2f63e988fc01() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables.\n\nThe maximum length of each key and value in the Environment map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a CreateModel request, then the maximum length of all of their maps, combined, is also 32 KB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb97f9563ae8a1c6a4492d246() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies agreement to the model end-user license agreement (EULA). The `AcceptEula` value must be explicitly defined as `True` in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdbe9cae61cb59281f9ea22a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributea2f1b885780468c9544a3d03(),
-			// Property: Subnets
-			"subnets": schemaAttribute29d145c22ddd3acdb5aa7ce4(),
-		}, /*END SCHEMA*/
-		Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe0beeb1b7f855d789e625a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the type of ML model data to deploy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf151bc1e151ac7553137857() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AcceptEula
-			"accept_eula": schemaAttributeb97f9563ae8a1c6a4492d246(),
-		}, /*END SCHEMA*/
-		Description: "The access configuration file to control access to the ML model. You can explicitly accept the model end-user license agreement (EULA) within the `ModelAccessConfig`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee95db98fc4b4692a5bf99412() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this to one of the following values: Platform - The model image is hosted in Amazon ECR. Vpc - The model image is hosted in a private Docker registry in your VPC.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef08561e2b466a4dd9a0423d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the S3 path of ML model data to deploy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffe9f73418d0ac4d2c3c5159() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key. Tag keys must be unique per resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_model", modelDataSource)
 }
@@ -546,7 +189,139 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"containers": schemaAttributea2adb273ca9bee17c851c772(),
+		"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ContainerHostname
+					"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "This parameter is ignored for models that contain only a PrimaryContainer.\n\nWhen a ContainerDefinition is part of an inference pipeline, the value of the parameter uniquely identifies the container for the purposes of logging and metrics. For information, see [Use Logs and Metrics to Monitor an Inference Pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html). If you don't specify a value for this parameter for a ContainerDefinition that is part of an inference pipeline, a unique name is automatically assigned based on the position of the ContainerDefinition in the pipeline. If you specify a value for the ContainerHostName for any ContainerDefinition that is part of an inference pipeline, you must specify a value for the ContainerHostName parameter of every ContainerDefinition in that pipeline.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Environment
+					"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  jsontypes.NormalizedType{},
+						Description: "The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables.\n\nThe maximum length of each key and value in the Environment map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a CreateModel request, then the maximum length of all of their maps, combined, is also 32 KB.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Image
+					"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The path where inference code is stored. This can be either in Amazon EC2 Container Registry or in a Docker registry that is accessible from the same VPC that you configure for your endpoint. If you are using your own custom algorithm instead of an algorithm provided by SageMaker, the inference code must meet SageMaker requirements. SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see [Using Your Own Algorithms with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageConfig
+					"image_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RepositoryAccessMode
+							"repository_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Set this to one of the following values: Platform - The model image is hosted in Amazon ECR. Vpc - The model image is hosted in a private Docker registry in your VPC.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RepositoryAuthConfig
+							"repository_auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RepositoryCredentialsProviderArn
+									"repository_credentials_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see [Create a Lambda function with the console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html) in the AWS Lambda Developer Guide",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified `Vpc` as the value for the `RepositoryAccessMode` field of the `ImageConfig` object that you passed to a call to `CreateModel` and the private Docker registry where the model image is hosted requires authentication.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InferenceSpecificationName
+					"inference_specification_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The inference specification name in the model package version.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Mode
+					"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether the container hosts a single model or multiple models.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ModelDataSource
+					"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: S3DataSource
+							"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CompressionType
+									"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies how the ML model data is prepared.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: HubAccessConfig
+									"hub_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: HubContentArn
+											"hub_content_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ARN of the hub content for which deployment access is allowed.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration information specifying which hub contents have accessible deployment options.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ModelAccessConfig
+									"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AcceptEula
+											"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies agreement to the model end-user license agreement (EULA). The `AcceptEula` value must be explicitly defined as `True` in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The access configuration file to control access to the ML model. You can explicitly accept the model end-user license agreement (EULA) within the `ModelAccessConfig`.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3DataType
+									"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the type of ML model data to deploy.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the S3 path of ML model data to deploy.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the S3 location of ML model data to deploy.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies the location of ML model data to deploy. If specified, you must specify one and only one of the available data sources.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ModelDataUrl
+					"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see [Common Parameters](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).\n\nIf you provide a value for this parameter, SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your AWS account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see [Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the AWS Identity and Access Management User Guide",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ModelPackageName
+					"model_package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name or Amazon Resource Name (ARN) of the model package to use to create the model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MultiModelConfig
+					"multi_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ModelCacheSetting
+							"model_cache_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to `Disabled`.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies additional configuration for multi-model endpoints.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the containers in the inference pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableNetworkIsolation
 		// CloudFormation resource type schema:
 		//
@@ -554,7 +329,10 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Isolates the model container. No inbound or outbound network calls can be made to or from the model container.",
 		//	  "type": "boolean"
 		//	}
-		"enable_network_isolation": schemaAttribute8a0883c7db04771a52ed656d(),
+		"enable_network_isolation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Isolates the model container. No inbound or outbound network calls can be made to or from the model container.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -562,7 +340,10 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role that you specified for the model.",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttribute4f1f6096bfad87d6d5be1b7d(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM role that you specified for the model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InferenceExecutionConfig
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +365,17 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"inference_execution_config": schemaAttribute85908734e03f6b4c5c7601a9(),
+		"inference_execution_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "How containers in a multi-container are run.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies details about how containers in a multi-container endpoint are run.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelArn
 		// CloudFormation resource type schema:
 		//
@@ -592,7 +383,10 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the model.",
 		//	  "type": "string"
 		//	}
-		"model_arn": schemaAttribute49d6bf99c357c52de4f5014c(),
+		"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModelName
 		// CloudFormation resource type schema:
 		//
@@ -600,7 +394,10 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the new model.",
 		//	  "type": "string"
 		//	}
-		"model_name": schemaAttribute81a0983097117f62dc895a1d(),
+		"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the new model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrimaryContainer
 		// CloudFormation resource type schema:
 		//
@@ -760,7 +557,137 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"primary_container": schemaAttribute7fd55faf5da729adcbf690e1(),
+		"primary_container": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerHostname
+				"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This parameter is ignored for models that contain only a PrimaryContainer.\n\nWhen a ContainerDefinition is part of an inference pipeline, the value of the parameter uniquely identifies the container for the purposes of logging and metrics. For information, see [Use Logs and Metrics to Monitor an Inference Pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html). If you don't specify a value for this parameter for a ContainerDefinition that is part of an inference pipeline, a unique name is automatically assigned based on the position of the ContainerDefinition in the pipeline. If you specify a value for the ContainerHostName for any ContainerDefinition that is part of an inference pipeline, you must specify a value for the ContainerHostName parameter of every ContainerDefinition in that pipeline.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Environment
+				"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "The environment variables to set in the Docker container. Don't include any sensitive data in your environment variables.\n\nThe maximum length of each key and value in the Environment map is 1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If you pass multiple containers to a CreateModel request, then the maximum length of all of their maps, combined, is also 32 KB.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Image
+				"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The path where inference code is stored. This can be either in Amazon EC2 Container Registry or in a Docker registry that is accessible from the same VPC that you configure for your endpoint. If you are using your own custom algorithm instead of an algorithm provided by SageMaker, the inference code must meet SageMaker requirements. SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see [Using Your Own Algorithms with Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageConfig
+				"image_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RepositoryAccessMode
+						"repository_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Set this to one of the following values: Platform - The model image is hosted in Amazon ECR. Vpc - The model image is hosted in a private Docker registry in your VPC.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RepositoryAuthConfig
+						"repository_auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RepositoryCredentialsProviderArn
+								"repository_credentials_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see [Create a Lambda function with the console](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html) in the AWS Lambda Developer Guide",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified `Vpc` as the value for the `RepositoryAccessMode` field of the `ImageConfig` object that you passed to a call to `CreateModel` and the private Docker registry where the model image is hosted requires authentication.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InferenceSpecificationName
+				"inference_specification_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The inference specification name in the model package version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether the container hosts a single model or multiple models.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelDataSource
+				"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3DataSource
+						"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompressionType
+								"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies how the ML model data is prepared.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: HubAccessConfig
+								"hub_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: HubContentArn
+										"hub_content_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the hub content for which deployment access is allowed.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration information specifying which hub contents have accessible deployment options.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ModelAccessConfig
+								"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AcceptEula
+										"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies agreement to the model end-user license agreement (EULA). The `AcceptEula` value must be explicitly defined as `True` in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The access configuration file to control access to the ML model. You can explicitly accept the model end-user license agreement (EULA) within the `ModelAccessConfig`.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3DataType
+								"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the type of ML model data to deploy.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the S3 path of ML model data to deploy.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the S3 location of ML model data to deploy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the location of ML model data to deploy. If specified, you must specify one and only one of the available data sources.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelDataUrl
+				"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see [Common Parameters](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).\n\nIf you provide a value for this parameter, SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your AWS account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see [Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the AWS Identity and Access Management User Guide",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelPackageName
+				"model_package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name or Amazon Resource Name (ARN) of the model package to use to create the model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiModelConfig
+				"multi_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ModelCacheSetting
+						"model_cache_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to `Disabled`.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies additional configuration for multi-model endpoints.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the container, as part of model definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -788,7 +715,24 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute9775b3b0d1375ccd5cd44a36(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key. Tag keys must be unique per resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see [Tagging AWS Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -821,7 +765,24 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_config": schemaAttributebdbe9cae61cb59281f9ea22a(),
+		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The VPC security group IDs, in the form `sg-xxxxxxxx`. Specify the security groups for the VPC that is specified in the `Subnets` field.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Subnets
+				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The ID of the subnets in the VPC to which you want to connect your training job or model. For information about the availability of specific instance types, see [Supported Instance Types and Availability Zones](https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC](https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

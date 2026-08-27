@@ -25,686 +25,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute01dfa273382ea699e8433788() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute059a3af04f11d0ab5fdc3d98() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses for the managed Amazon S3 backup access.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute097cbd0cddfd68d5e347ffcd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint policy for the AWS KMS access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1af17643949bb1b851b79d19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// StsPolicyDocument is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e0e4853ebcf27001122ee44() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses for the Amazon S3 access.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2103e1e283e61c7c70fad148() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Security Token Service (STS) access configuration for the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// StsAccess is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22755cd4e611b8abd9a94ee0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DNS prefix to the default DNS domain name. The default DNS domain name is oraclevcn.com.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// DefaultDnsPrefix is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2baa84b333b7d78d422a3e99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS-Region for cross-Region Amazon S3 restore access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bcdf4caf39b92d735edd83d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributedc4ec0979fc125b6cb4ba255(),
-				// Property: Value
-				"value": schemaAttribute01dfa273382ea699e8433788(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to assign to the Odb Network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e56906f138094a0c7abad49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the AWS KMS access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2eeeae9f9c5b5af8e22183b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name for the AWS STS access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute380041874355b236ec4f325f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses for the AWS STS access.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ed2198466f1364b3480d0a6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv4Addresses
-				"ipv_4_addresses": schemaAttributefa807c59fc93f059ef44daf7(),
-				// Property: Region
-				"region": schemaAttribute2baa84b333b7d78d422a3e99(),
-				// Property: Status
-				"status": schemaAttributea497f5f7333aebf5030fdacb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The access configuration for the cross-Region Amazon S3 database restore source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fc4bb598bf44b6b16ef36d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name for the AWS KMS access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47ae9319920f39a8d7c08d8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the endpoint policy for Amazon S3 access from the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// S3PolicyDocument is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e976fa03c81c49f7e343a45() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to delete associated OCI networking resources along with the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// DeleteAssociatedResources is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53217a265f5d0c237ef72818() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint policy for the Amazon S3 access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53b7c23bf432d295c7d505ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the OCI resource anchor that's associated with the ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57a5dd630bf1a0f83a104c17() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainName
-			"domain_name": schemaAttribute2eeeae9f9c5b5af8e22183b5(),
-			// Property: Ipv4Addresses
-			"ipv_4_addresses": schemaAttribute380041874355b236ec4f325f(),
-			// Property: Status
-			"status": schemaAttribute6dc516d0bfcf1bde2c25932e(),
-			// Property: StsPolicyDocument
-			"sts_policy_document": schemaAttribute7e75e2fbcb3a6b06f15b1ce7(),
-		}, /*END SCHEMA*/
-		Description: "The AWS Security Token Service (STS) access configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6295eb48e9e7590e973ede3e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses for the AWS KMS access.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute642e55acd16d5b7e9bf4d2af() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the resource gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6659526b21b2e4cd32d21580() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the managed Amazon S3 backup access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6dc516d0bfcf1bde2c25932e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the AWS STS access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6de684cbe5948f8b84a2828d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the VPC endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71f598046a38f53f8063708f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the OCI network anchor for the ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute741afc1bdf8d1ee6ccc3361b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the service network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78e1c7e451c3f81fc1845820() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the VPC endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7afe2a4accaf181087c52fed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// KmsPolicyDocument is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e75e2fbcb3a6b06f15b1ce7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint policy for the AWS STS access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e9d5856b9942c0da46c292e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Zero-ETL access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80186a415d54cc2839147f00() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8706a90c7ebbe4657b2086ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Availability Zone (AZ) where the ODB network is located.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bc701ef4b4c044d80bfa9a4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CrossRegionS3RestoreSourcesAccess
-			"cross_region_s3_restore_sources_access": schemaAttribute3ed2198466f1364b3480d0a6(),
-			// Property: KmsAccess
-			"kms_access": schemaAttributec96637ac892a99721cc04a8c(),
-			// Property: ManagedS3BackupAccess
-			"managed_s3_backup_access": schemaAttribute9c8e161ee1b40ee86c808938(),
-			// Property: ManagedServicesIpv4Cidrs
-			"managed_services_ipv_4_cidrs": schemaAttributecbc81b6289cf79ce3ba34916(),
-			// Property: ResourceGatewayArn
-			"resource_gateway_arn": schemaAttribute642e55acd16d5b7e9bf4d2af(),
-			// Property: S3Access
-			"s3_access": schemaAttributea99acc0da2169103c19efc9e(),
-			// Property: ServiceNetworkArn
-			"service_network_arn": schemaAttribute741afc1bdf8d1ee6ccc3361b(),
-			// Property: ServiceNetworkEndpoint
-			"service_network_endpoint": schemaAttributea9ced8fc089f67fa5e4610ab(),
-			// Property: StsAccess
-			"sts_access": schemaAttribute57a5dd630bf1a0f83a104c17(),
-			// Property: ZeroEtlAccess
-			"zero_etl_access": schemaAttributec417a1b59447ef12078d733a(),
-		}, /*END SCHEMA*/
-		Description: "The managed services configuration for the ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c8e161ee1b40ee86c808938() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Ipv4Addresses
-			"ipv_4_addresses": schemaAttribute059a3af04f11d0ab5fdc3d98(),
-			// Property: Status
-			"status": schemaAttribute6659526b21b2e4cd32d21580(),
-		}, /*END SCHEMA*/
-		Description: "The managed Amazon S3 backup access configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dbf31173976c5045739545e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the configuration for Amazon S3 access from the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// S3Access is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ff3918022ef324a5516821b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR range of the backup subnet in the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea497f5f7333aebf5030fdacb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the cross-Region Amazon S3 restore access configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea99acc0da2169103c19efc9e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainName
-			"domain_name": schemaAttributeb814d5a18a5e7c27903cbe05(),
-			// Property: Ipv4Addresses
-			"ipv_4_addresses": schemaAttribute1e0e4853ebcf27001122ee44(),
-			// Property: S3PolicyDocument
-			"s3_policy_document": schemaAttribute53217a265f5d0c237ef72818(),
-			// Property: Status
-			"status": schemaAttributec60887ae1703d7056ae4e841(),
-		}, /*END SCHEMA*/
-		Description: "The Amazon S3 access configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9ced8fc089f67fa5e4610ab() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcEndpointId
-			"vpc_endpoint_id": schemaAttribute6de684cbe5948f8b84a2828d(),
-			// Property: VpcEndpointType
-			"vpc_endpoint_type": schemaAttribute78e1c7e451c3f81fc1845820(),
-		}, /*END SCHEMA*/
-		Description: "The service network endpoint configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaae94da8540dcf4c380c14ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the configuration for Zero-ETL access from the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// ZeroEtlAccess is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae68ac178e3d4eca9d7100e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AZ ID of the AZ where the ODB network is located.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb147201d0b2f3340db8a5daf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service (KMS) access configuration for the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-				"DISABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// KmsAccess is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb814d5a18a5e7c27903cbe05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name for the Amazon S3 access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb643c28493b2cf4d964c701() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR range of the client subnet in the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec417a1b59447ef12078d733a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cidr
-			"cidr": schemaAttributed8105c09ebccfee08f09160d(),
-			// Property: Status
-			"status": schemaAttribute7e9d5856b9942c0da46c292e(),
-		}, /*END SCHEMA*/
-		Description: "The Zero-ETL access configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec60887ae1703d7056ae4e841() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Amazon S3 access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec96637ac892a99721cc04a8c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainName
-			"domain_name": schemaAttribute3fc4bb598bf44b6b16ef36d7(),
-			// Property: Ipv4Addresses
-			"ipv_4_addresses": schemaAttribute6295eb48e9e7590e973ede3e(),
-			// Property: KmsPolicyDocument
-			"kms_policy_document": schemaAttribute097cbd0cddfd68d5e347ffcd(),
-			// Property: Status
-			"status": schemaAttribute2e56906f138094a0c7abad49(),
-		}, /*END SCHEMA*/
-		Description: "The AWS Key Management Service (KMS) access configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9d6949f06c564b1f1656434() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name to use for the resources in the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbc81b6289cf79ce3ba34916() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 CIDR blocks for the managed services.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed160a2074a84a8ff57842504() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The cross-Region Amazon S3 restore sources for the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// CrossRegionS3RestoreSources is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3726b341710c64ee3a7e39f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5266af91be84cf0652bcaa9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user-friendly name of the ODB network.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8105c09ebccfee08f09160d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The CIDR block for the Zero-ETL access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc4ec0979fc125b6cb4ba255() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9168fac70541f30f0a9e5af() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of EC2 placement group IDs associated with your ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa807c59fc93f059ef44daf7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses allowed for cross-Region Amazon S3 restore access.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd0e843efacc85700e923f2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL for the VCN that's associated with the ODB network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_odb_odb_network", odbNetworkResource)
 	registry.AddListResourceFactory("awscc_odb_odb_network", generic.NewListResource(odbNetworkResource))
@@ -723,7 +43,18 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute8706a90c7ebbe4657b2086ed(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Availability Zone (AZ) where the ODB network is located.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneId
 		// CloudFormation resource type schema:
 		//
@@ -733,7 +64,18 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone_id": schemaAttributeae68ac178e3d4eca9d7100e5(),
+		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AZ ID of the AZ where the ODB network is located.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BackupSubnetCidr
 		// CloudFormation resource type schema:
 		//
@@ -743,7 +85,18 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"backup_subnet_cidr": schemaAttribute9ff3918022ef324a5516821b(),
+		"backup_subnet_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The CIDR range of the backup subnet in the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClientSubnetCidr
 		// CloudFormation resource type schema:
 		//
@@ -753,7 +106,18 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_subnet_cidr": schemaAttributebb643c28493b2cf4d964c701(),
+		"client_subnet_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The CIDR range of the client subnet in the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CrossRegionS3RestoreSources
 		// CloudFormation resource type schema:
 		//
@@ -766,7 +130,16 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cross_region_s3_restore_sources": schemaAttributed160a2074a84a8ff57842504(),
+		"cross_region_s3_restore_sources": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The cross-Region Amazon S3 restore sources for the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// CrossRegionS3RestoreSources is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CustomDomainName
 		// CloudFormation resource type schema:
 		//
@@ -776,7 +149,18 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"custom_domain_name": schemaAttributec9d6949f06c564b1f1656434(),
+		"custom_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain name to use for the resources in the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultDnsPrefix
 		// CloudFormation resource type schema:
 		//
@@ -786,7 +170,19 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"default_dns_prefix": schemaAttribute22755cd4e611b8abd9a94ee0(),
+		"default_dns_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DNS prefix to the default DNS domain name. The default DNS domain name is oraclevcn.com.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// DefaultDnsPrefix is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteAssociatedResources
 		// CloudFormation resource type schema:
 		//
@@ -794,7 +190,15 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies whether to delete associated OCI networking resources along with the ODB network.",
 		//	  "type": "boolean"
 		//	}
-		"delete_associated_resources": schemaAttribute4e976fa03c81c49f7e343a45(),
+		"delete_associated_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to delete associated OCI networking resources along with the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeleteAssociatedResources is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -805,7 +209,17 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttributed5266af91be84cf0652bcaa9(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user-friendly name of the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ec2PlacementGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -818,7 +232,15 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ec_2_placement_group_ids": schemaAttributee9168fac70541f30f0a9e5af(),
+		"ec_2_placement_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of EC2 placement group IDs associated with your ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsAccess
 		// CloudFormation resource type schema:
 		//
@@ -830,7 +252,21 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"kms_access": schemaAttributeb147201d0b2f3340db8a5daf(),
+		"kms_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service (KMS) access configuration for the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// KmsAccess is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: KmsPolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -838,7 +274,15 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.",
 		//	  "type": "string"
 		//	}
-		"kms_policy_document": schemaAttribute7afe2a4accaf181087c52fed(),
+		"kms_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// KmsPolicyDocument is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedServices
 		// CloudFormation resource type schema:
 		//
@@ -1069,7 +513,210 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"managed_services": schemaAttribute9bc701ef4b4c044d80bfa9a4(),
+		"managed_services": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossRegionS3RestoreSourcesAccess
+				"cross_region_s3_restore_sources_access": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Ipv4Addresses
+							"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The IPv4 addresses allowed for cross-Region Amazon S3 restore access.",
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Region
+							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS-Region for cross-Region Amazon S3 restore access.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The current status of the cross-Region Amazon S3 restore access configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The access configuration for the cross-Region Amazon S3 database restore source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsAccess
+				"kms_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainName
+						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The domain name for the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the AWS KMS access.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KmsPolicyDocument
+						"kms_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The endpoint policy for the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AWS Key Management Service (KMS) access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedS3BackupAccess
+				"managed_s3_backup_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the managed Amazon S3 backup access.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the managed Amazon S3 backup access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The managed Amazon S3 backup access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedServicesIpv4Cidrs
+				"managed_services_ipv_4_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The IPv4 CIDR blocks for the managed services.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceGatewayArn
+				"resource_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the resource gateway.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Access
+				"s3_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainName
+						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The domain name for the Amazon S3 access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the Amazon S3 access.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3PolicyDocument
+						"s3_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The endpoint policy for the Amazon S3 access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the Amazon S3 access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNetworkArn
+				"service_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the service network.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNetworkEndpoint
+				"service_network_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcEndpointId
+						"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the VPC endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcEndpointType
+						"vpc_endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of the VPC endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The service network endpoint configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StsAccess
+				"sts_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainName
+						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The domain name for the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the AWS STS access.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StsPolicyDocument
+						"sts_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The endpoint policy for the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AWS Security Token Service (STS) access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ZeroEtlAccess
+				"zero_etl_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The CIDR block for the Zero-ETL access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the Zero-ETL access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Zero-ETL access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The managed services configuration for the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OciNetworkAnchorId
 		// CloudFormation resource type schema:
 		//
@@ -1079,7 +726,13 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"oci_network_anchor_id": schemaAttribute71f598046a38f53f8063708f(),
+		"oci_network_anchor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the OCI network anchor for the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OciResourceAnchorName
 		// CloudFormation resource type schema:
 		//
@@ -1087,7 +740,13 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the OCI resource anchor that's associated with the ODB network.",
 		//	  "type": "string"
 		//	}
-		"oci_resource_anchor_name": schemaAttribute53b7c23bf432d295c7d505ce(),
+		"oci_resource_anchor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the OCI resource anchor that's associated with the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OciVcnUrl
 		// CloudFormation resource type schema:
 		//
@@ -1095,7 +754,13 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The URL for the VCN that's associated with the ODB network.",
 		//	  "type": "string"
 		//	}
-		"oci_vcn_url": schemaAttributefd0e843efacc85700e923f2a(),
+		"oci_vcn_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL for the VCN that's associated with the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -1103,7 +768,13 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the ODB network.",
 		//	  "type": "string"
 		//	}
-		"odb_network_arn": schemaAttributed3726b341710c64ee3a7e39f(),
+		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -1111,7 +782,13 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier of the ODB network.",
 		//	  "type": "string"
 		//	}
-		"odb_network_id": schemaAttribute80186a415d54cc2839147f00(),
+		"odb_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: S3Access
 		// CloudFormation resource type schema:
 		//
@@ -1123,7 +800,21 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"s3_access": schemaAttribute9dbf31173976c5045739545e(),
+		"s3_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the configuration for Amazon S3 access from the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// S3Access is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: S3PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -1131,7 +822,15 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the endpoint policy for Amazon S3 access from the ODB network.",
 		//	  "type": "string"
 		//	}
-		"s3_policy_document": schemaAttribute47ae9319920f39a8d7c08d8b(),
+		"s3_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the endpoint policy for Amazon S3 access from the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// S3PolicyDocument is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: StsAccess
 		// CloudFormation resource type schema:
 		//
@@ -1143,7 +842,21 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"sts_access": schemaAttribute2103e1e283e61c7c70fad148(),
+		"sts_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Security Token Service (STS) access configuration for the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// StsAccess is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: StsPolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -1151,7 +864,15 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.",
 		//	  "type": "string"
 		//	}
-		"sts_policy_document": schemaAttribute1af17643949bb1b851b79d19(),
+		"sts_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// StsPolicyDocument is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1183,7 +904,44 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute2bcdf4caf39b92d735edd83d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the Odb Network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ZeroEtlAccess
 		// CloudFormation resource type schema:
 		//
@@ -1195,7 +953,21 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"zero_etl_access": schemaAttributeaae94da8540dcf4c380c14ee(),
+		"zero_etl_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the configuration for Zero-ETL access from the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ZeroEtlAccess is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

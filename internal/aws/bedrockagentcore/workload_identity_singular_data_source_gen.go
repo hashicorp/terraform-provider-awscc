@@ -15,63 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0716327a3a8c35cefc703397() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the workload identity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1517296739ca7b3d949bb871() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the workload identity. The name must be unique within your account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20a7c9419a17f3e19459bff2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of allowed OAuth2 return URLs for resources associated with this workload identity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute254d43ee8efc9648e3a97c8f() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the workload identity was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3296c223261bd8d5ad845bc9() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the workload identity was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90744b4a4a6f14c309e247b3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb711a9f914e5d17c95b5903d(),
-				// Property: Value
-				"value": schemaAttributeb711a9f914e5d17c95b5903d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb711a9f914e5d17c95b5903d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_workload_identity", workloadIdentityDataSource)
 }
@@ -94,7 +37,11 @@ func workloadIdentityDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"allowed_resource_oauth_2_return_urls": schemaAttribute20a7c9419a17f3e19459bff2(),
+		"allowed_resource_oauth_2_return_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of allowed OAuth2 return URLs for resources associated with this workload identity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +49,10 @@ func workloadIdentityDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The timestamp when the workload identity was created.",
 		//	  "type": "number"
 		//	}
-		"created_time": schemaAttribute254d43ee8efc9648e3a97c8f(),
+		"created_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the workload identity was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +60,10 @@ func workloadIdentityDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The timestamp when the workload identity was last updated.",
 		//	  "type": "number"
 		//	}
-		"last_updated_time": schemaAttribute3296c223261bd8d5ad845bc9(),
+		"last_updated_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the workload identity was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +74,10 @@ func workloadIdentityDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[A-Za-z0-9_.-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1517296739ca7b3d949bb871(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workload identity. The name must be unique within your account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +107,22 @@ func workloadIdentityDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute90744b4a4a6f14c309e247b3(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkloadIdentityArn
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +132,10 @@ func workloadIdentityDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"workload_identity_arn": schemaAttribute0716327a3a8c35cefc703397(),
+		"workload_identity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the workload identity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

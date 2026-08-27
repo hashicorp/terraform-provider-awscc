@@ -14,288 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04b47b432b648e1840d7987a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f832c2dc704d4790a0e89d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the VPC Interface this Source is configured with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ae85dee97f9f0d0e6d2e3de() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c714c493bf7ac868a52d9a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the bridge feeding this flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2baab35593e0b8c0c63dc008() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BridgeArn
-			"bridge_arn": schemaAttribute1c714c493bf7ac868a52d9a8(),
-			// Property: VpcInterfaceAttachment
-			"vpc_interface_attachment": schemaAttributef15b7cbeb87a9194b3f2d104(),
-		}, /*END SCHEMA*/
-		Description: "The source configuration for cloud flows receiving a stream from a bridge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30cb5f0c725b6672be535417() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute427202f2f3f6d71847841ca0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute568ebf206ce000e673e23569() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57a88c61bea90613869719e7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum latency in milliseconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c0e2e2f59c04112856e98cc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ffe1c08a4ba465831526c68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a85305ae3c95d6ad4ea0188() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e2245f1602695a68b1f1c8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b7c4912665dd212d3818028() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c9c6a177a39b7a7f17d0c02() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Algorithm
-			"algorithm": schemaAttribute04b47b432b648e1840d7987a(),
-			// Property: ConstantInitializationVector
-			"constant_initialization_vector": schemaAttribute8e2245f1602695a68b1f1c8f(),
-			// Property: DeviceId
-			"device_id": schemaAttributeedd61f1c9b8c9fded6e1b77a(),
-			// Property: KeyType
-			"key_type": schemaAttributed605d5b380517c107fc4ea04(),
-			// Property: Region
-			"region": schemaAttributebe0a61c7ee58297de4815d1f(),
-			// Property: ResourceId
-			"resource_id": schemaAttributea3f4d3ed745d0a0f9b992d87(),
-			// Property: RoleArn
-			"role_arn": schemaAttribute568ebf206ce000e673e23569(),
-			// Property: SecretArn
-			"secret_arn": schemaAttributef366c7d9c0ec30ba25881d4f(),
-			// Property: Url
-			"url": schemaAttributeaceae8d8ea9bdddf8eb6a2fd(),
-		}, /*END SCHEMA*/
-		Description: "The type of encryption that is used on the content ingested from this source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3f4d3ed745d0a0f9b992d87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea676b91797e07860bc327b7d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port that the flow will be listening on for incoming content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9d55e8262efbda805e5c9cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac5d751527be467d554b4a9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol that is used by the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaceae8d8ea9bdddf8eb6a2fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe0a61c7ee58297de4815d1f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec515381ea9ae63e3c4621d0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6aa79c98f7f7de1655d1391() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca7a48807cc356ab8fdb149e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address that the flow will be listening on for incoming content.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4be57a11cda61044b1f1649() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the VPC interface to use for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed605d5b380517c107fc4ea04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb05d6237c52c6f2cbbe05d4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea9d55e8262efbda805e5c9cb(),
-				// Property: Value
-				"value": schemaAttributea9d55e8262efbda805e5c9cb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to tag and organize this flow source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed8147c9997f5e88fb32e4bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Source IP or domain name for SRT-caller protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedd61f1c9b8c9fded6e1b77a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef15b7cbeb87a9194b3f2d104() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: VpcInterfaceName
-			"vpc_interface_name": schemaAttributed4be57a11cda61044b1f1649(),
-		}, /*END SCHEMA*/
-		Description: "The name of the VPC interface attachment to use for this bridge source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef366c7d9c0ec30ba25881d4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7121af40b6716b567ad2e97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb1187aa7c485db5be0930cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbef19b40405d2207835f73d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Source port for SRT-caller protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff78b11c853a93f0217c6e54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_flow_source", flowSourceDataSource)
 }
@@ -366,7 +84,57 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"decryption": schemaAttribute9c9c6a177a39b7a7f17d0c02(),
+		"decryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Algorithm
+				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConstantInitializationVector
+				"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceId
+				"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyType
+				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceId
+				"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Url
+				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The type of encryption that is used on the content ingested from this source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +142,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute7ffe1c08a4ba465831526c68(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntitlementArn
 		// CloudFormation resource type schema:
 		//
@@ -383,7 +154,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:entitlement:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"entitlement_arn": schemaAttributec6aa79c98f7f7de1655d1391(),
+		"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FlowArn
 		// CloudFormation resource type schema:
 		//
@@ -392,7 +166,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"flow_arn": schemaAttributef7121af40b6716b567ad2e97(),
+		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayBridgeSource
 		// CloudFormation resource type schema:
 		//
@@ -422,7 +199,29 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"gateway_bridge_source": schemaAttribute2baab35593e0b8c0c63dc008(),
+		"gateway_bridge_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BridgeArn
+				"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the bridge feeding this flow.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcInterfaceAttachment
+				"vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcInterfaceName
+						"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the VPC interface to use for this resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The name of the VPC interface attachment to use for this bridge source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source configuration for cloud flows receiving a stream from a bridge.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestIp
 		// CloudFormation resource type schema:
 		//
@@ -430,7 +229,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IP address that the flow will be listening on for incoming content.",
 		//	  "type": "string"
 		//	}
-		"ingest_ip": schemaAttributeca7a48807cc356ab8fdb149e(),
+		"ingest_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address that the flow will be listening on for incoming content.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestPort
 		// CloudFormation resource type schema:
 		//
@@ -438,7 +240,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port that the flow will be listening on for incoming content.",
 		//	  "type": "integer"
 		//	}
-		"ingest_port": schemaAttributea676b91797e07860bc327b7d(),
+		"ingest_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the flow will be listening on for incoming content.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxBitrate
 		// CloudFormation resource type schema:
 		//
@@ -446,7 +251,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
 		//	  "type": "integer"
 		//	}
-		"max_bitrate": schemaAttribute9b7c4912665dd212d3818028(),
+		"max_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxLatency
 		// CloudFormation resource type schema:
 		//
@@ -454,7 +262,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 		//	  "type": "integer"
 		//	}
-		"max_latency": schemaAttribute5c0e2e2f59c04112856e98cc(),
+		"max_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinLatency
 		// CloudFormation resource type schema:
 		//
@@ -462,7 +273,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The minimum latency in milliseconds.",
 		//	  "type": "integer"
 		//	}
-		"min_latency": schemaAttribute57a88c61bea90613869719e7(),
+		"min_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum latency in milliseconds.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -470,7 +284,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the source.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeff78b11c853a93f0217c6e54(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -486,7 +303,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttributeac5d751527be467d554b4a9f(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The protocol that is used by the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SenderControlPort
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +314,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
 		//	  "type": "integer"
 		//	}
-		"sender_control_port": schemaAttribute1ae85dee97f9f0d0e6d2e3de(),
+		"sender_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SenderIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +325,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
 		//	  "type": "string"
 		//	}
-		"sender_ip_address": schemaAttribute427202f2f3f6d71847841ca0(),
+		"sender_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
@@ -511,7 +337,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:source:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"source_arn": schemaAttribute30cb5f0c725b6672be535417(),
+		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceIngestPort
 		// CloudFormation resource type schema:
 		//
@@ -519,7 +348,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
 		//	  "type": "string"
 		//	}
-		"source_ingest_port": schemaAttribute8a85305ae3c95d6ad4ea0188(),
+		"source_ingest_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceListenerAddress
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +359,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Source IP or domain name for SRT-caller protocol.",
 		//	  "type": "string"
 		//	}
-		"source_listener_address": schemaAttributeed8147c9997f5e88fb32e4bd(),
+		"source_listener_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Source IP or domain name for SRT-caller protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceListenerPort
 		// CloudFormation resource type schema:
 		//
@@ -535,7 +370,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Source port for SRT-caller protocol.",
 		//	  "type": "integer"
 		//	}
-		"source_listener_port": schemaAttributefbef19b40405d2207835f73d(),
+		"source_listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Source port for SRT-caller protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamId
 		// CloudFormation resource type schema:
 		//
@@ -543,7 +381,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
 		//	  "type": "string"
 		//	}
-		"stream_id": schemaAttributec515381ea9ae63e3c4621d0e(),
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -568,7 +409,22 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributedb05d6237c52c6f2cbbe05d4(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag and organize this flow source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcInterfaceName
 		// CloudFormation resource type schema:
 		//
@@ -576,7 +432,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the VPC Interface this Source is configured with.",
 		//	  "type": "string"
 		//	}
-		"vpc_interface_name": schemaAttribute0f832c2dc704d4790a0e89d9(),
+		"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the VPC Interface this Source is configured with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WhitelistCidr
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +443,10 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
 		//	  "type": "string"
 		//	}
-		"whitelist_cidr": schemaAttributefb1187aa7c485db5be0930cc(),
+		"whitelist_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

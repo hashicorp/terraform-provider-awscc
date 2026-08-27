@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute18c42d152b7e79129e365542() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Current version number of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99adba756e6fee5a72a0d015() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unqualified Amazon Resource Name (ARN) of the message template version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbce7b340e3e1c2958c82fa5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unqualified Amazon Resource Name (ARN) of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1cb75061ca883d364792e15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content SHA256 of the message template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_message_template_version", messageTemplateVersionDataSource)
 }
@@ -58,7 +30,10 @@ func messageTemplateVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 		//	  "type": "string"
 		//	}
-		"message_template_arn": schemaAttributebbce7b340e3e1c2958c82fa5(),
+		"message_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unqualified Amazon Resource Name (ARN) of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -68,7 +43,10 @@ func messageTemplateVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"message_template_content_sha_256": schemaAttributee1cb75061ca883d364792e15(),
+		"message_template_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content SHA256 of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -77,7 +55,10 @@ func messageTemplateVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}):[0-9]+?$",
 		//	  "type": "string"
 		//	}
-		"message_template_version_arn": schemaAttribute99adba756e6fee5a72a0d015(),
+		"message_template_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unqualified Amazon Resource Name (ARN) of the message template version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -85,7 +66,10 @@ func messageTemplateVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Current version number of the message template.",
 		//	  "type": "number"
 		//	}
-		"message_template_version_number": schemaAttribute18c42d152b7e79129e365542(),
+		"message_template_version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Current version number of the message template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

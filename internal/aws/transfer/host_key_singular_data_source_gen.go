@@ -15,92 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2db3360097229370d6563e3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption algorithm that is used for the host key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32f81542bc9cb8b3e6b3dec4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique Amazon Resource Name (ARN) for the host key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d9a911447c09028ce169ff8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date on which the host key was added to the server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52ceb201348bc6ba144ab78d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute697ecad43e94e2146596bb6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name assigned to the tag that you create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d62058b9eaefaf60ec72e88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the server that contains the host key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8de6f6078b2bb8753b1c39f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece37da049ec6960c1d0c8736() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute697ecad43e94e2146596bb6f(),
-				// Property: Value
-				"value": schemaAttributed9ccb20358bcf07a3f321ac1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to group and search for host keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed93265f4edf4b9d1d9d4737c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the host key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9ccb20358bcf07a3f321ac1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains one or more values that you assigned to the key name you create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef461d1e5d4590a5d01c20b5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The text description for this host key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_host_key", hostKeyDataSource)
 }
@@ -119,7 +33,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:\\S+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute32f81542bc9cb8b3e6b3dec4(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique Amazon Resource Name (ARN) for the host key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DateImported
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +45,11 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"date_imported": schemaAttribute4d9a911447c09028ce169ff8(),
+		"date_imported": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date on which the host key was added to the server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +60,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef461d1e5d4590a5d01c20b5a(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The text description for this host key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostKeyBody
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +72,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 4096,
 		//	  "type": "string"
 		//	}
-		"host_key_body": schemaAttribute52ceb201348bc6ba144ab78d(),
+		"host_key_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostKeyFingerprint
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +83,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.",
 		//	  "type": "string"
 		//	}
-		"host_key_fingerprint": schemaAttribute8de6f6078b2bb8753b1c39f4(),
+		"host_key_fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostKeyId
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +97,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^hostkey-[0-9a-f]{17}$",
 		//	  "type": "string"
 		//	}
-		"host_key_id": schemaAttributed93265f4edf4b9d1d9d4737c(),
+		"host_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the host key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerId
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +111,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^s-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"server_id": schemaAttribute7d62058b9eaefaf60ec72e88(),
+		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the server that contains the host key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +146,24 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributece37da049ec6960c1d0c8736(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name assigned to the tag that you create.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Contains one or more values that you assigned to the key name you create.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for host keys.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +171,10 @@ func hostKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The encryption algorithm that is used for the host key.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute2db3360097229370d6563e3b(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The encryption algorithm that is used for the host key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

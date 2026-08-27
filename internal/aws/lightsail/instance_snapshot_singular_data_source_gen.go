@@ -14,125 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0acc761df43490d3f47e7f7b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8e8fb10c7fea4670eb6a8919(),
-				// Property: Value
-				"value": schemaAttribute750304883c3e859a7565f509(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d10f9d16025a52e415daf53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Support code to help identify any issues",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16ba3261917785b024992efd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone. Follows the format us-east-2a (case-sensitive).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18101f3e87d6fcf54b49e5da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36e176c4068657b2f24c3b5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state the snapshot is in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4487d409b165525be1ff641a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute16ba3261917785b024992efd(),
-			// Property: RegionName
-			"region_name": schemaAttribute66d47c3c0e896919a01c58fb(),
-		}, /*END SCHEMA*/
-		Description: "The region name and Availability Zone where you created the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute582bbbeb58bc2470771ad484() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f4ea3478810fcf596a2314a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size in GB of the SSD",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66d47c3c0e896919a01c58fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute750304883c3e859a7565f509() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e8fb10c7fea4670eb6a8919() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99afec68a91350a7bd48e45d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the instance from which the snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc23a2819e210ce6c9ced8ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource (usually InstanceSnapshot).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4ce1034c583cd369c0356b0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6f77987aec33b5d699207f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The instance from which the snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_instance_snapshot", instanceSnapshotDataSource)
 }
@@ -148,7 +29,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the snapshot.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute18101f3e87d6fcf54b49e5da(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromInstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +40,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the instance from which the snapshot was created.",
 		//	  "type": "string"
 		//	}
-		"from_instance_arn": schemaAttribute99afec68a91350a7bd48e45d(),
+		"from_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the instance from which the snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromInstanceName
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +51,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The instance from which the snapshot was created.",
 		//	  "type": "string"
 		//	}
-		"from_instance_name": schemaAttributef6f77987aec33b5d699207f8(),
+		"from_instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The instance from which the snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceName
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +62,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The instance from which the snapshot was created.",
 		//	  "type": "string"
 		//	}
-		"instance_name": schemaAttributef6f77987aec33b5d699207f8(),
+		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The instance from which the snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +73,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name of the snapshot.",
 		//	  "type": "string"
 		//	}
-		"instance_snapshot_name": schemaAttribute582bbbeb58bc2470771ad484(),
+		"instance_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsFromAutoSnapshot
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +84,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
 		//	  "type": "boolean"
 		//	}
-		"is_from_auto_snapshot": schemaAttributed4ce1034c583cd369c0356b0(),
+		"is_from_auto_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +106,22 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schemaAttribute4487d409b165525be1ff641a(),
+		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Availability Zone. Follows the format us-east-2a (case-sensitive).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegionName
+				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The region name and Availability Zone where you created the snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +129,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The type of resource (usually InstanceSnapshot).",
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttributebc23a2819e210ce6c9ced8ec(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of resource (usually InstanceSnapshot).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SizeInGb
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +140,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The size in GB of the SSD",
 		//	  "type": "integer"
 		//	}
-		"size_in_gb": schemaAttribute5f4ea3478810fcf596a2314a(),
+		"size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The size in GB of the SSD",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +151,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The state the snapshot is in.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute36e176c4068657b2f24c3b5c(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state the snapshot is in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +162,10 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Support code to help identify any issues",
 		//	  "type": "string"
 		//	}
-		"support_code": schemaAttribute0d10f9d16025a52e415daf53(),
+		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Support code to help identify any issues",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +197,24 @@ func instanceSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute0acc761df43490d3f47e7f7b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

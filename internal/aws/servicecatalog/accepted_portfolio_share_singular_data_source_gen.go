@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute7158f6a1d8d43eedcbbd373e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The language code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute984f80f9731e56a59ab21e35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The portfolio identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_accepted_portfolio_share", acceptedPortfolioShareDataSource)
 }
@@ -44,7 +30,10 @@ func acceptedPortfolioShareDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^(en|jp|zh)$",
 		//	  "type": "string"
 		//	}
-		"accept_language": schemaAttribute7158f6a1d8d43eedcbbd373e(),
+		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The language code.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -54,7 +43,10 @@ func acceptedPortfolioShareDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schemaAttribute984f80f9731e56a59ab21e35(),
+		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The portfolio identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

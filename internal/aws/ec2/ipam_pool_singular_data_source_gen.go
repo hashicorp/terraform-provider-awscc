@@ -14,226 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05cdad714d3feda155f1da50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPAM Pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06c6e6c502ff7f2877a64b24() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum allowed netmask length for allocations made from this pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ea6703a12ac6573e08a2815() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1827239a54adb212a588e2fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents a single IPv4 or IPv6 CIDR",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21d285032dfc4c2184d05721() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether this scope contains publicly routable space or space for a private network",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27b24086cb9ca03cbf5490df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2dc10400b79f1a39ffc87c16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The address family of the address space in this pool. Either IPv4 or IPv6.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute340b63b22d85156e39a508de() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute27b24086cb9ca03cbf5490df(),
-				// Property: Value
-				"value": schemaAttributef6e6c857aa7fc7c9ac59a3e3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "When specified, an allocation will not be allowed unless a resource has a matching set of tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38558451137ec1bcb8e1898d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b89cb9e0f0124147714d768() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c9271f1ad0226a90d0c4ed6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The region of this pool. If not set, this will default to \"None\" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ccc75d0b1205f57c00f1a8c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Limits which service in Amazon Web Services that the pool can be used in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3de5784f53201171dce7bc51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IPAM Pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d6c8e0195b1264503874c9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d3b1c90da246641295f64a3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum allowed netmask length for allocations made from this pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute605e47a1bc2d14dae335767d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourceId
-			"resource_id": schemaAttribute4d6c8e0195b1264503874c9f(),
-			// Property: ResourceOwner
-			"resource_owner": schemaAttribute4d6c8e0195b1264503874c9f(),
-			// Property: ResourceRegion
-			"resource_region": schemaAttribute4d6c8e0195b1264503874c9f(),
-			// Property: ResourceType
-			"resource_type": schemaAttribute4d6c8e0195b1264503874c9f(),
-		}, /*END SCHEMA*/
-		Description: "The resource associated with this pool's space. Depending on the ResourceType, setting a SourceResource changes which space can be provisioned in this pool and which types of resources can receive allocations",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6437a904ea0ca63a5a2ad6f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of this pool. This can be one of the following values: \"create-in-progress\", \"create-complete\", \"modify-in-progress\", \"modify-complete\", \"delete-in-progress\", or \"delete-complete\"",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6940d4120d636596d0039ed1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The depth of this pool in the source pool hierarchy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7429b7029c153ae7b36f5a65() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f08837fc1b86faf2b52a75e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the scope this pool is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c9286d3c7b6b0340a0d056e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute27b24086cb9ca03cbf5490df(),
-				// Property: Value
-				"value": schemaAttributef6e6c857aa7fc7c9ac59a3e3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb938179eec5a89517cae8fd2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Cidr
-				"cidr": schemaAttribute1827239a54adb212a588e2fc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of cidrs representing the address space available for allocation in this pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc121508df6247aab2efb37f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IPAM this pool is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda6c370bbd6abd312e0d98d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the scope this pool is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3a080b5338417b7e38898c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6714263593063b451e2c059() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An explanation of how the pool arrived at it current state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6e6c857aa7fc7c9ac59a3e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam_pool", iPAMPoolDataSource)
 }
@@ -249,7 +29,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The address family of the address space in this pool. Either IPv4 or IPv6.",
 		//	  "type": "string"
 		//	}
-		"address_family": schemaAttribute2dc10400b79f1a39ffc87c16(),
+		"address_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The address family of the address space in this pool. Either IPv4 or IPv6.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllocationDefaultNetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +40,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.",
 		//	  "type": "integer"
 		//	}
-		"allocation_default_netmask_length": schemaAttribute0ea6703a12ac6573e08a2815(),
+		"allocation_default_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllocationMaxNetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +51,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum allowed netmask length for allocations made from this pool.",
 		//	  "type": "integer"
 		//	}
-		"allocation_max_netmask_length": schemaAttribute5d3b1c90da246641295f64a3(),
+		"allocation_max_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum allowed netmask length for allocations made from this pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllocationMinNetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +62,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The minimum allowed netmask length for allocations made from this pool.",
 		//	  "type": "integer"
 		//	}
-		"allocation_min_netmask_length": schemaAttribute06c6e6c502ff7f2877a64b24(),
+		"allocation_min_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum allowed netmask length for allocations made from this pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllocationResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -306,7 +98,24 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allocation_resource_tags": schemaAttribute340b63b22d85156e39a508de(),
+		"allocation_resource_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "When specified, an allocation will not be allowed unless a resource has a matching set of tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +123,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM Pool.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3de5784f53201171dce7bc51(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IPAM Pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoImport
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +134,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.",
 		//	  "type": "boolean"
 		//	}
-		"auto_import": schemaAttribute3b89cb9e0f0124147714d768(),
+		"auto_import": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsService
 		// CloudFormation resource type schema:
 		//
@@ -334,14 +149,19 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"aws_service": schemaAttribute3ccc75d0b1205f57c00f1a8c(),
+		"aws_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Limits which service in Amazon Web Services that the pool can be used in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute4d6c8e0195b1264503874c9f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamArn
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +169,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM this pool is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_arn": schemaAttributebc121508df6247aab2efb37f(),
+		"ipam_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IPAM this pool is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -357,7 +180,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Id of the IPAM Pool.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_id": schemaAttribute05cdad714d3feda155f1da50(),
+		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPAM Pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamScopeArn
 		// CloudFormation resource type schema:
 		//
@@ -365,7 +191,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the scope this pool is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_scope_arn": schemaAttributeda6c370bbd6abd312e0d98d4(),
+		"ipam_scope_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the scope this pool is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamScopeId
 		// CloudFormation resource type schema:
 		//
@@ -373,7 +202,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of the scope this pool is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_scope_id": schemaAttribute8f08837fc1b86faf2b52a75e(),
+		"ipam_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the scope this pool is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamScopeType
 		// CloudFormation resource type schema:
 		//
@@ -385,7 +217,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ipam_scope_type": schemaAttribute21d285032dfc4c2184d05721(),
+		"ipam_scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines whether this scope contains publicly routable space or space for a private network",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Locale
 		// CloudFormation resource type schema:
 		//
@@ -393,7 +228,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The region of this pool. If not set, this will default to \"None\" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.",
 		//	  "type": "string"
 		//	}
-		"locale": schemaAttribute3c9271f1ad0226a90d0c4ed6(),
+		"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The region of this pool. If not set, this will default to \"None\" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PoolDepth
 		// CloudFormation resource type schema:
 		//
@@ -401,7 +239,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The depth of this pool in the source pool hierarchy.",
 		//	  "type": "integer"
 		//	}
-		"pool_depth": schemaAttribute6940d4120d636596d0039ed1(),
+		"pool_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The depth of this pool in the source pool hierarchy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedCidrs
 		// CloudFormation resource type schema:
 		//
@@ -425,7 +266,19 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"provisioned_cidrs": schemaAttributeb938179eec5a89517cae8fd2(),
+		"provisioned_cidrs": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Represents a single IPv4 or IPv6 CIDR",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of cidrs representing the address space available for allocation in this pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicIpSource
 		// CloudFormation resource type schema:
 		//
@@ -437,7 +290,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"public_ip_source": schemaAttribute38558451137ec1bcb8e1898d(),
+		"public_ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAdvertisable
 		// CloudFormation resource type schema:
 		//
@@ -445,7 +301,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_advertisable": schemaAttribute7429b7029c153ae7b36f5a65(),
+		"publicly_advertisable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceIpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -453,7 +312,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.",
 		//	  "type": "string"
 		//	}
-		"source_ipam_pool_id": schemaAttributee3a080b5338417b7e38898c2(),
+		"source_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceResource
 		// CloudFormation resource type schema:
 		//
@@ -482,7 +344,28 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_resource": schemaAttribute605e47a1bc2d14dae335767d(),
+		"source_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceId
+				"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceOwner
+				"resource_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceRegion
+				"resource_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceType
+				"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The resource associated with this pool's space. Depending on the ResourceType, setting a SourceResource changes which space can be provisioned in this pool and which types of resources can receive allocations",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -498,7 +381,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute6437a904ea0ca63a5a2ad6f6(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of this pool. This can be one of the following values: \"create-in-progress\", \"create-complete\", \"modify-in-progress\", \"modify-complete\", \"delete-in-progress\", or \"delete-complete\"",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StateMessage
 		// CloudFormation resource type schema:
 		//
@@ -506,7 +392,10 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An explanation of how the pool arrived at it current state.",
 		//	  "type": "string"
 		//	}
-		"state_message": schemaAttributef6714263593063b451e2c059(),
+		"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An explanation of how the pool arrived at it current state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -539,7 +428,24 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute9c9286d3c7b6b0340a0d056e(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

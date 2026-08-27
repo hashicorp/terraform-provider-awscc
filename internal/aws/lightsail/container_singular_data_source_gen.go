@@ -15,322 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01d4db85490f4cdda005c3ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The principal ARN of the container service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03e76d52052d86b0f64fecf1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Value
-				"value": schemaAttribute96e9f7ad3b9dd90f8e481e6d(),
-				// Property: Variable
-				"variable": schemaAttribute96e9f7ad3b9dd90f8e481e6d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The environment variables of the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0953b604d171519d1e4db20b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7e647db5b092f5a32539eefe(),
-				// Property: Value
-				"value": schemaAttribute2bc5410da3a47cebbba31294(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fc30547a1d3bf4111563a93() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Containers
-			"containers": schemaAttributeea144faa07a6be00a3a89abb(),
-			// Property: PublicEndpoint
-			"public_endpoint": schemaAttribute73b0d756b4452809dc2cba69(),
-		}, /*END SCHEMA*/
-		Description: "Describes a container deployment configuration of an Amazon Lightsail container service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute145863b3cc291887c473deb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bc5410da3a47cebbba31294() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d103b655583bae19a3a7a5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EcrImagePullerRole
-			"ecr_image_puller_role": schemaAttributec533b42bf565d54e9502cfad(),
-		}, /*END SCHEMA*/
-		Description: "A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fe749163bb86dee0a16a087() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The publicly accessible URL of the container service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute381d4c878e61d92d827c1ada() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value that indicates whether to activate the role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4321b5051b5f8e37afbe52e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path on the container on which to perform the health check. The default value is /.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45c8f0986159102de3da4c07() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value to indicate whether the container service is disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48eb3181d3539ee477da907d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port of the container to which traffic is forwarded to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b4c1089f07ba8ea22d438b7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66a43e9ffc896220bb267c29() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e5aa191b856c81815607453() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the image used for the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e5dcea0096443925f7bfaa3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73b0d756b4452809dc2cba69() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerName
-			"container_name": schemaAttribute7548bf9f5fa7c51ad51a64ac(),
-			// Property: ContainerPort
-			"container_port": schemaAttribute48eb3181d3539ee477da907d(),
-			// Property: HealthCheckConfig
-			"health_check_config": schemaAttribute9c124da713dac4819672d499(),
-		}, /*END SCHEMA*/
-		Description: "An object that describes the endpoint of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7548bf9f5fa7c51ad51a64ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the container for the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a29d28dffa589423a18ef48() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An object that describes the configuration for the containers of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e647db5b092f5a32539eefe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ec44200204be87198ae4727() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the container service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8886e5aeca011f750184a219() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the role, if it is activated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96e9f7ad3b9dd90f8e481e6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98adf7c1a18fc33455fd89d6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateName
-				"certificate_name": schemaAttribute96e9f7ad3b9dd90f8e481e6d(),
-				// Property: DomainNames
-				"domain_names": schemaAttribute7a29d28dffa589423a18ef48(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The public domain names to use with the container service, such as example.com and www.example.com.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b9046faeaaba9a4ed22beed() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The launch command for the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c124da713dac4819672d499() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HealthyThreshold
-			"healthy_threshold": schemaAttribute66a43e9ffc896220bb267c29(),
-			// Property: IntervalSeconds
-			"interval_seconds": schemaAttributebec33518cccb394d82ca3044(),
-			// Property: Path
-			"path": schemaAttribute4321b5051b5f8e37afbe52e1(),
-			// Property: SuccessCodes
-			"success_codes": schemaAttributed220fecd9e28b4a63cff1aff(),
-			// Property: TimeoutSeconds
-			"timeout_seconds": schemaAttribute5b4c1089f07ba8ea22d438b7(),
-			// Property: UnhealthyThreshold
-			"unhealthy_threshold": schemaAttribute6e5dcea0096443925f7bfaa3(),
-		}, /*END SCHEMA*/
-		Description: "An object that describes the health check configuration of the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7af3de38d7eb24c269f6bb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The power specification for the container service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebec33518cccb394d82ca3044() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec533b42bf565d54e9502cfad() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsActive
-			"is_active": schemaAttribute381d4c878e61d92d827c1ada(),
-			// Property: PrincipalArn
-			"principal_arn": schemaAttribute8886e5aeca011f750184a219(),
-		}, /*END SCHEMA*/
-		Description: "An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed220fecd9e28b4a63cff1aff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499. You can specify multiple values (for example, 200,202) or a range of values (for example, 200-299).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea144faa07a6be00a3a89abb() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Command
-				"command": schemaAttribute9b9046faeaaba9a4ed22beed(),
-				// Property: ContainerName
-				"container_name": schemaAttribute145863b3cc291887c473deb0(),
-				// Property: Environment
-				"environment": schemaAttribute03e76d52052d86b0f64fecf1(),
-				// Property: Image
-				"image": schemaAttribute6e5aa191b856c81815607453(),
-				// Property: Ports
-				"ports": schemaAttributef5f93389dc825305ef0cceb1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An object that describes the configuration for the containers of the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef183fcca66f1a0ee56bf5bae() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The scale specification for the container service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5f93389dc825305ef0cceb1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Port
-				"port": schemaAttribute96e9f7ad3b9dd90f8e481e6d(),
-				// Property: Protocol
-				"protocol": schemaAttribute96e9f7ad3b9dd90f8e481e6d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The open firewall ports of the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_container", containerDataSource)
 }
@@ -345,7 +29,9 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"container_arn": schemaAttribute96e9f7ad3b9dd90f8e481e6d(),
+		"container_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContainerServiceDeployment
 		// CloudFormation resource type schema:
 		//
@@ -468,7 +154,125 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"container_service_deployment": schemaAttribute0fc30547a1d3bf4111563a93(),
+		"container_service_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Containers
+				"containers": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Command
+							"command": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The launch command for the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContainerName
+							"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Environment
+							"environment": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Variable
+										"variable": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "The environment variables of the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Image
+							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the image used for the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Ports
+							"ports": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Port
+										"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Protocol
+										"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "The open firewall ports of the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An object that describes the configuration for the containers of the deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicEndpoint
+				"public_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerName
+						"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the container for the endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ContainerPort
+						"container_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The port of the container to which traffic is forwarded to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HealthCheckConfig
+						"health_check_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HealthyThreshold
+								"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntervalSeconds
+								"interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Path
+								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The path on the container on which to perform the health check. The default value is /.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SuccessCodes
+								"success_codes": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499. You can specify multiple values (for example, 200,202) or a range of values (for example, 200-299).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TimeoutSeconds
+								"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: UnhealthyThreshold
+								"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "An object that describes the health check configuration of the container.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that describes the endpoint of the deployment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes a container deployment configuration of an Amazon Lightsail container service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsDisabled
 		// CloudFormation resource type schema:
 		//
@@ -476,7 +280,10 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A Boolean value to indicate whether the container service is disabled.",
 		//	  "type": "boolean"
 		//	}
-		"is_disabled": schemaAttribute45c8f0986159102de3da4c07(),
+		"is_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean value to indicate whether the container service is disabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Power
 		// CloudFormation resource type schema:
 		//
@@ -484,7 +291,10 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The power specification for the container service.",
 		//	  "type": "string"
 		//	}
-		"power": schemaAttributea7af3de38d7eb24c269f6bb7(),
+		"power": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The power specification for the container service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrincipalArn
 		// CloudFormation resource type schema:
 		//
@@ -492,7 +302,10 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The principal ARN of the container service.",
 		//	  "type": "string"
 		//	}
-		"principal_arn": schemaAttribute01d4db85490f4cdda005c3ac(),
+		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The principal ARN of the container service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateRegistryAccess
 		// CloudFormation resource type schema:
 		//
@@ -518,7 +331,29 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"private_registry_access": schemaAttribute2d103b655583bae19a3a7a5f(),
+		"private_registry_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EcrImagePullerRole
+				"ecr_image_puller_role": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsActive
+						"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "A Boolean value that indicates whether to activate the role.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrincipalArn
+						"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the role, if it is activated.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicDomainNames
 		// CloudFormation resource type schema:
 		//
@@ -547,7 +382,24 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"public_domain_names": schemaAttribute98adf7c1a18fc33455fd89d6(),
+		"public_domain_names": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateName
+					"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DomainNames
+					"domain_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "An object that describes the configuration for the containers of the deployment.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The public domain names to use with the container service, such as example.com and www.example.com.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scale
 		// CloudFormation resource type schema:
 		//
@@ -557,7 +409,10 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"scale": schemaAttributef183fcca66f1a0ee56bf5bae(),
+		"scale": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The scale specification for the container service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceName
 		// CloudFormation resource type schema:
 		//
@@ -568,7 +423,10 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"service_name": schemaAttribute7ec44200204be87198ae4727(),
+		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the container service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -600,7 +458,24 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute0953b604d171519d1e4db20b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -608,7 +483,10 @@ func containerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The publicly accessible URL of the container service.",
 		//	  "type": "string"
 		//	}
-		"url": schemaAttribute2fe749163bb86dee0a16a087(),
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The publicly accessible URL of the container service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,192 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07670a8d8d5c44e61d3f2f2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of when the environment was updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute097622a0cc3e36b76a8de714() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the environment profile with which the Amazon DataZone environment was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e05887ebc8ad2bc2b6fa67b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The provider of the Amazon DataZone environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16a788422b1a12e18280f078() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the blueprint with which the Amazon DataZone environment was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1db6890238fbcaae545127e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS region in which the Amazon DataZone environment is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute200655adb0e6009bec4f26d3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributee3a8bb2903f9fcf517fa2c3c(),
-				// Property: Value
-				"value": schemaAttribute3004481837a4c0732946d729(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The user parameters of the Amazon DataZone environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3004481837a4c0732946d729() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of an environment parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute427f4854a9b8ab41e5b1ea1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon DataZone user who created the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50e480804e7c0c06adf3dbc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Amazon DataZone environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e45150bb909235d3864c5d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the environment would be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6aab363e9a3b7e81a4091758() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of when the environment was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f65fc327e4e2b04d44a5af2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the environment blueprint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74cc47f2e372312074717abc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account in which the Amazon DataZone environment is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f0b9afc5751af6c4a02de93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f8ecafda7907fe75024c0a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the environment is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute975708a4cbaeb785dda8414d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98980f89fe9c65cbbb579717() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the environment profile with which the Amazon DataZone environment would be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead05f31c781cd564967d2751() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone project in which the environment would be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb922548bce1c8dfb0170c892() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Environment role arn for custom aws environment permissions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7098ede9cf921c72b2ff017() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The glossary terms that can be used in the Amazon DataZone environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece5a07d93182f03ed04d2a0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the environment configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3a8bb2903f9fcf517fa2c3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an environment parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8bdbf155ec7f41fdb1c5a5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone project in which the environment is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef817aebded551dd3fd60cd8f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The deployment order for the environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffb86ac96ec64377476d753b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the Amazon DataZone environment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_environment", environmentDataSource)
 }
@@ -218,7 +32,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute74cc47f2e372312074717abc(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account in which the Amazon DataZone environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountRegion
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +44,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z]{2}-[a-z]{4,10}-\\d$",
 		//	  "type": "string"
 		//	}
-		"aws_account_region": schemaAttribute1db6890238fbcaae545127e1(),
+		"aws_account_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS region in which the Amazon DataZone environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +56,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute6aab363e9a3b7e81a4091758(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when the environment was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +68,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon DataZone user who created the environment.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute427f4854a9b8ab41e5b1ea1c(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon DataZone user who created the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentOrder
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +79,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The deployment order for the environment.",
 		//	  "type": "integer"
 		//	}
-		"deployment_order": schemaAttributef817aebded551dd3fd60cd8f(),
+		"deployment_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The deployment order for the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +91,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeffb86ac96ec64377476d753b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the Amazon DataZone environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -270,7 +103,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttribute8f8ecafda7907fe75024c0a0(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +115,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttribute5e45150bb909235d3864c5d1(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the environment would be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentAccountIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +127,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"environment_account_identifier": schemaAttribute74cc47f2e372312074717abc(),
+		"environment_account_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account in which the Amazon DataZone environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentAccountRegion
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +139,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z]{2}-[a-z]{4,10}-\\d$",
 		//	  "type": "string"
 		//	}
-		"environment_account_region": schemaAttribute1db6890238fbcaae545127e1(),
+		"environment_account_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS region in which the Amazon DataZone environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -306,7 +151,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_blueprint_id": schemaAttribute16a788422b1a12e18280f078(),
+		"environment_blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the blueprint with which the Amazon DataZone environment was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +162,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the environment blueprint.",
 		//	  "type": "string"
 		//	}
-		"environment_blueprint_identifier": schemaAttribute6f65fc327e4e2b04d44a5af2(),
+		"environment_blueprint_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentConfigurationId
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +173,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the environment configuration.",
 		//	  "type": "string"
 		//	}
-		"environment_configuration_id": schemaAttributece5a07d93182f03ed04d2a0a(),
+		"environment_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentProfileId
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +185,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{0,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_profile_id": schemaAttribute097622a0cc3e36b76a8de714(),
+		"environment_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the environment profile with which the Amazon DataZone environment was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentProfileIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +197,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{0,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_profile_identifier": schemaAttribute98980f89fe9c65cbbb579717(),
+		"environment_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the environment profile with which the Amazon DataZone environment would be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +208,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Environment role arn for custom aws environment permissions",
 		//	  "type": "string"
 		//	}
-		"environment_role_arn": schemaAttributeb922548bce1c8dfb0170c892(),
+		"environment_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Environment role arn for custom aws environment permissions",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlossaryTerms
 		// CloudFormation resource type schema:
 		//
@@ -363,7 +226,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"glossary_terms": schemaAttributec7098ede9cf921c72b2ff017(),
+		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The glossary terms that can be used in the Amazon DataZone environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +239,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schemaAttribute975708a4cbaeb785dda8414d(),
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +252,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute8f0b9afc5751af6c4a02de93(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +264,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_id": schemaAttributee8bdbf155ec7f41fdb1c5a5d(),
+		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone project in which the environment is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -400,7 +276,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_identifier": schemaAttributead05f31c781cd564967d2751(),
+		"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone project in which the environment would be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -408,7 +287,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The provider of the Amazon DataZone environment.",
 		//	  "type": "string"
 		//	}
-		"provider_name": schemaAttribute0e05887ebc8ad2bc2b6fa67b(),
+		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provider of the Amazon DataZone environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -431,7 +313,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute50e480804e7c0c06adf3dbc7(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the Amazon DataZone environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +325,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute07670a8d8d5c44e61d3f2f2f(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when the environment was updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserParameters
 		// CloudFormation resource type schema:
 		//
@@ -464,7 +353,24 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"user_parameters": schemaAttribute200655adb0e6009bec4f26d3(),
+		"user_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of an environment parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of an environment parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The user parameters of the Amazon DataZone environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

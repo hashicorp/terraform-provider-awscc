@@ -15,264 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0bfb56d08f5f7a98e7cdb59e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The expression that defines when the scheduled query runs, e.g. rate(1 minute).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c556811da3186a050578bcc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of query results that must be breaching to trigger the alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38737025c4a84e93a3c7795b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of log lines to include in alarm notifications. Valid values are 0 to 50.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a45cd12938938f48f8d9e9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d9e47c36df7881e53e66dfa() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute671c7ec524488e5275a0c667() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The query string to execute against the specified log groups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7681ed326e4cd273e2b03f4d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the specified tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bd6dab90713171c0a77abc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the log alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85b3ac273fc7651d9ddd27b4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndTimeOffset
-			"end_time_offset": schemaAttributecb5439c9014d559760baa142(),
-			// Property: ScheduleExpression
-			"schedule_expression": schemaAttribute0bfb56d08f5f7a98e7cdb59e(),
-			// Property: StartTimeOffset
-			"start_time_offset": schemaAttributea8db6137e7baa1d504551060(),
-		}, /*END SCHEMA*/
-		Description: "The schedule configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87928a308698758ac9908cf7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88e6cae8070fe5cf142adc04() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9795e9fc314e78e4ebaae838() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ceeb9424f88870d465db03d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OnlyStartEvaluatingAfterWarmUpPeriodEnds
-			"only_start_evaluating_after_warm_up_period_ends": schemaAttribute87928a308698758ac9908cf7(),
-			// Property: WarmUpPeriodDurationInMinutes
-			"warm_up_period_duration_in_minutes": schemaAttribute88e6cae8070fe5cf142adc04(),
-		}, /*END SCHEMA*/
-		Description: "The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d7de8ff239c39d49b8ee987() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of query results over which data is compared to the specified threshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3969becb6886f800ceaeefb() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef8e878ce3ba7bbfffc42fdf9(),
-				// Property: Value
-				"value": schemaAttribute7681ed326e4cd273e2b03f4d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea522cfeea9a216693b7f9ea8() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The value to compare against the results of the scheduled query evaluation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7371afd79a300fbf69d32ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea73e3663a22aabc0a2acc957() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the log alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8db6137e7baa1d504551060() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead85b40e6b57834c0bd5ffda() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae058983abba5dcf7cebc495() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that grants permissions to execute the scheduled query.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb47cda2dc12b8ae6fe14312b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the log alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb920e22060de93dfa6755599() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb96ebc0860f680411e2d02d4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef8e878ce3ba7bbfffc42fdf9(),
-				// Property: Value
-				"value": schemaAttribute7681ed326e4cd273e2b03f4d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs to associate with the log alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecad2886b585e07a2a23ddecb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The log groups to query.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb5439c9014d559760baa142() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed544bad3c767884eed243565() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AggregationExpression
-			"aggregation_expression": schemaAttributea7371afd79a300fbf69d32ab(),
-			// Property: LogGroupIdentifiers
-			"log_group_identifiers": schemaAttributecad2886b585e07a2a23ddecb(),
-			// Property: QueryString
-			"query_string": schemaAttribute671c7ec524488e5275a0c667(),
-			// Property: ScheduleConfiguration
-			"schedule_configuration": schemaAttribute85b3ac273fc7651d9ddd27b4(),
-			// Property: ScheduledQueryRoleARN
-			"scheduled_query_role_arn": schemaAttributeae058983abba5dcf7cebc495(),
-			// Property: Tags
-			"tags": schemaAttributea3969becb6886f800ceaeefb(),
-		}, /*END SCHEMA*/
-		Description: "The scheduled query configuration for the log alarm.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef7659e519a62c8143768b9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5abf9475ddc8c01e6a2e092() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The actions to execute when this alarm transitions to the OK state from any other state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8e878ce3ba7bbfffc42fdf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudwatch_log_alarm", logAlarmDataSource)
 }
@@ -290,7 +32,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"action_log_line_count": schemaAttribute38737025c4a84e93a3c7795b(),
+		"action_log_line_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of log lines to include in alarm notifications. Valid values are 0 to 50.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ActionLogLineRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -298,7 +43,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
 		//	  "type": "string"
 		//	}
-		"action_log_line_role_arn": schemaAttributeef7659e519a62c8143768b9b(),
+		"action_log_line_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ActionsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +55,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
 		//	  "type": "boolean"
 		//	}
-		"actions_enabled": schemaAttribute4d9e47c36df7881e53e66dfa(),
+		"actions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlarmActions
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +70,11 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"alarm_actions": schemaAttributead85b40e6b57834c0bd5ffda(),
+		"alarm_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlarmDescription
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +82,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the log alarm.",
 		//	  "type": "string"
 		//	}
-		"alarm_description": schemaAttribute7bd6dab90713171c0a77abc0(),
+		"alarm_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the log alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlarmName
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +95,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alarm_name": schemaAttributea73e3663a22aabc0a2acc957(),
+		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the log alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -345,7 +106,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the log alarm.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb47cda2dc12b8ae6fe14312b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the log alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComparisonOperator
 		// CloudFormation resource type schema:
 		//
@@ -353,7 +117,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
 		//	  "type": "string"
 		//	}
-		"comparison_operator": schemaAttributeb920e22060de93dfa6755599(),
+		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InsufficientDataActions
 		// CloudFormation resource type schema:
 		//
@@ -365,7 +132,11 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"insufficient_data_actions": schemaAttribute45a45cd12938938f48f8d9e9(),
+		"insufficient_data_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OKActions
 		// CloudFormation resource type schema:
 		//
@@ -377,7 +148,11 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ok_actions": schemaAttributef5abf9475ddc8c01e6a2e092(),
+		"ok_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The actions to execute when this alarm transitions to the OK state from any other state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueryResultsToAlarm
 		// CloudFormation resource type schema:
 		//
@@ -385,7 +160,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of query results that must be breaching to trigger the alarm.",
 		//	  "type": "integer"
 		//	}
-		"query_results_to_alarm": schemaAttribute2c556811da3186a050578bcc(),
+		"query_results_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of query results that must be breaching to trigger the alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueryResultsToEvaluate
 		// CloudFormation resource type schema:
 		//
@@ -393,7 +171,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of query results over which data is compared to the specified threshold.",
 		//	  "type": "integer"
 		//	}
-		"query_results_to_evaluate": schemaAttribute9d7de8ff239c39d49b8ee987(),
+		"query_results_to_evaluate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of query results over which data is compared to the specified threshold.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledQueryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -488,7 +269,74 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"scheduled_query_configuration": schemaAttributed544bad3c767884eed243565(),
+		"scheduled_query_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AggregationExpression
+				"aggregation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogGroupIdentifiers
+				"log_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The log groups to query.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: QueryString
+				"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The query string to execute against the specified log groups.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduleConfiguration
+				"schedule_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EndTimeOffset
+						"end_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScheduleExpression
+						"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The expression that defines when the scheduled query runs, e.g. rate(1 minute).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartTimeOffset
+						"start_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The schedule configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScheduledQueryRoleARN
+				"scheduled_query_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that grants permissions to execute the scheduled query.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the specified tag key.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scheduled query configuration for the log alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -522,7 +370,24 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeb96ebc0860f680411e2d02d4(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs to associate with the log alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -530,7 +395,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The value to compare against the results of the scheduled query evaluation.",
 		//	  "type": "number"
 		//	}
-		"threshold": schemaAttributea522cfeea9a216693b7f9ea8(),
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The value to compare against the results of the scheduled query evaluation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TreatMissingData
 		// CloudFormation resource type schema:
 		//
@@ -538,7 +406,10 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
 		//	  "type": "string"
 		//	}
-		"treat_missing_data": schemaAttribute9795e9fc314e78e4ebaae838(),
+		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WarmUpConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -559,7 +430,22 @@ func logAlarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"warm_up_configuration": schemaAttribute9ceeb9424f88870d465db03d(),
+		"warm_up_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnlyStartEvaluatingAfterWarmUpPeriodEnds
+				"only_start_evaluating_after_warm_up_period_ends": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WarmUpPeriodDurationInMinutes
+				"warm_up_period_duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

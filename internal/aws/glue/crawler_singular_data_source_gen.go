@@ -16,549 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute019cf08c04cb4e088abcfd78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the DynamoDB table to crawl.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute029ce9e0a7145d5338052825() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path of the Amazon DocumentDB or MongoDB target (database/collection).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute07947771bf2e74f8653bd77c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogTargets
-			"catalog_targets": schemaAttribute421db605f697c1644e8b61db(),
-			// Property: DeltaTargets
-			"delta_targets": schemaAttribute4cfce681a796fb488c178b0e(),
-			// Property: DynamoDBTargets
-			"dynamo_db_targets": schemaAttributede99e52278887ec52a7b8b38(),
-			// Property: HudiTargets
-			"hudi_targets": schemaAttributebec3b5fcffec83dadcef7d11(),
-			// Property: IcebergTargets
-			"iceberg_targets": schemaAttributeaab6345386162a04ceb53e50(),
-			// Property: JdbcTargets
-			"jdbc_targets": schemaAttribute45b0e3bf1bddb4287f5e3f80(),
-			// Property: MongoDBTargets
-			"mongo_db_targets": schemaAttributef11f2f895897919edd160177(),
-			// Property: S3Targets
-			"s3_targets": schemaAttribute103256845d966c4f2331e757(),
-		}, /*END SCHEMA*/
-		Description: "Specifies data stores to crawl.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute082ae77d5f8c97252faeb0e1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute103256845d966c4f2331e757() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttributea0411f6726877c49114e7801(),
-				// Property: DlqEventQueueArn
-				"dlq_event_queue_arn": schemaAttribute1e7dcf8b7fed2a2a535d3a87(),
-				// Property: EventQueueArn
-				"event_queue_arn": schemaAttribute4fb66a56bb37f27969fa8c62(),
-				// Property: Exclusions
-				"exclusions": schemaAttributeb632b01127475aed65bb8bb3(),
-				// Property: Path
-				"path": schemaAttribute73b5a0300a6102821a8e78ce(),
-				// Property: SampleSize
-				"sample_size": schemaAttributeab37b5e27c5aff761f644f35(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies Amazon Simple Storage Service (Amazon S3) targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b687cf9dc788ede925dac9d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bb03ff94d556dff360dd840() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database in which the crawler's output is stored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1be60c3bf94d2146cb88beb9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the crawler will create native tables, to allow integration with query engines that support querying of the Delta transaction log directly.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e7dcf8b7fed2a2a535d3a87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A valid Amazon dead-letter SQS ARN. For example, arn:aws:sqs:region:account:deadLetterQueue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2100bca45b25ef5a798a4be7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run. A value of CRAWL_EVENT_MODE specifies crawling only the changes identified by Amazon S3 events.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2bbd86c4569522623f7bc745() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to use to connect to the Delta table target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31ae44175981cc46a85264f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The update behavior when the crawler finds a changed schema. A value of LOG specifies that if a table or a partition already exists, and a change is detected, do not update it, only log that a change was detected. Add new tables and new partitions (including on existing tables). A value of UPDATE_IN_DATABASE specifies that if a table or partition already exists, and a change is detected, update it. Add new tables and partitions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32c97beb3bab4ad38d46bf20() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Specify a value of RAWTYPES or COMMENTS to enable additional metadata in table responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.\n\nIf you do not need additional metadata, keep the field empty.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute349a711c41887db6f5ffa6fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path of the JDBC target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37841fbd061f4e83f37ba0e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The tags to use with this crawler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute421db605f697c1644e8b61db() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttribute820641c3279eda21d4b85780(),
-				// Property: DatabaseName
-				"database_name": schemaAttribute4a3128527ec474eb8adbc505(),
-				// Property: DlqEventQueueArn
-				"dlq_event_queue_arn": schemaAttribute1e7dcf8b7fed2a2a535d3a87(),
-				// Property: EventQueueArn
-				"event_queue_arn": schemaAttribute4fb66a56bb37f27969fa8c62(),
-				// Property: Tables
-				"tables": schemaAttribute906e2f6ea255fa63b2a9b7fe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies AWS Glue Data Catalog targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45b0e3bf1bddb4287f5e3f80() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttributea2fca4cc1aa2bc0aa9d35e89(),
-				// Property: EnableAdditionalMetadata
-				"enable_additional_metadata": schemaAttribute32c97beb3bab4ad38d46bf20(),
-				// Property: Exclusions
-				"exclusions": schemaAttributec8a1a632d5fb4d65383ab2a9(),
-				// Property: Path
-				"path": schemaAttribute349a711c41887db6f5ffa6fe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies JDBC targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4863b268435cdc164d66177b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RecrawlBehavior
-			"recrawl_behavior": schemaAttribute2100bca45b25ef5a798a4be7(),
-		}, /*END SCHEMA*/
-		Description: "When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see Incremental Crawls in AWS Glue in the developer guide.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a3128527ec474eb8adbc505() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database to be synchronized.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cfce681a796fb488c178b0e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttribute2bbd86c4569522623f7bc745(),
-				// Property: CreateNativeDeltaTable
-				"create_native_delta_table": schemaAttribute1be60c3bf94d2146cb88beb9(),
-				// Property: DeltaTables
-				"delta_tables": schemaAttributed380bc3dc151a62387800649(),
-				// Property: WriteManifest
-				"write_manifest": schemaAttributed0cb4cc030805ad5e3471c59(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies an array of Delta data store targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fb66a56bb37f27969fa8c62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53437520b389450d6915e81f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccountId
-			"account_id": schemaAttributee412ce3ced2bec41187bdebc(),
-			// Property: UseLakeFormationCredentials
-			"use_lake_formation_credentials": schemaAttribute082ae77d5f8c97252faeb0e1(),
-		}, /*END SCHEMA*/
-		Description: "Specifies AWS Lake Formation configuration settings for the crawler",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5790c6b0e78475b331530860() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to use to connect to the Amazon DocumentDB or MongoDB target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58e982ffe3f90e2dceb40f03() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67437f84c46f76596da8e6e9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute725fead92ec3174cd2aa27cc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DeleteBehavior
-			"delete_behavior": schemaAttribute75421a0a6b8f241d3aee5283(),
-			// Property: UpdateBehavior
-			"update_behavior": schemaAttribute31ae44175981cc46a85264f5(),
-		}, /*END SCHEMA*/
-		Description: "The policy that specifies update and delete behaviors for the crawler. The policy tells the crawler what to do in the event that it detects a change in a table that already exists in the customer's database at the time of the crawl. The SchemaChangePolicy does not affect whether or how new tables and partitions are added. New tables and partitions are always created regardless of the SchemaChangePolicy on a crawler. The SchemaChangePolicy consists of two components, UpdateBehavior and DeleteBehavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7295a430a2e41c6270060c49() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.\n\nThe valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73b5a0300a6102821a8e78ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path to the Amazon S3 target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75421a0a6b8f241d3aee5283() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deletion behavior when the crawler finds a deleted object. A value of LOG specifies that if a table or partition is found to no longer exist, do not delete it, only log that it was found to no longer exist. A value of DELETE_FROM_DATABASE specifies that if a table or partition is found to have been removed, delete it from the database. A value of DEPRECATE_IN_DATABASE specifies that if a table has been found to no longer exist, to add a property to the table that says 'DEPRECATED' and includes a timestamp with the time of deprecation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute820641c3279eda21d4b85780() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a Catalog connection type paired with a NETWORK Connection type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86477d1b5f3160da6fac9608() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ScheduleExpression
-			"schedule_expression": schemaAttribute8d1c5434b8a881bc4048074b(),
-		}, /*END SCHEMA*/
-		Description: "A scheduling object using a cron statement to schedule an event.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d1c5434b8a881bc4048074b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute906e2f6ea255fa63b2a9b7fe() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of the tables to be synchronized.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0411f6726877c49114e7801() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2fca4cc1aa2bc0aa9d35e89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to use to connect to the JDBC target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6384d71f36b079da8ccaf77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the crawler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea857472da02650db2bffe357() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SecurityConfiguration structure to be used by this crawler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa8484133bd40cbe5ea71d1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix added to the names of tables that are created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaab6345386162a04ceb53e50() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttributecf62d7a4ef953b4fef60b331(),
-				// Property: Exclusions
-				"exclusions": schemaAttributedb7060211b9db7e1ec94ac46(),
-				// Property: MaximumTraversalDepth
-				"maximum_traversal_depth": schemaAttributeef565a54971bf6585458b42d(),
-				// Property: Paths
-				"paths": schemaAttributeabfd7caee7bee1c78f65e9f2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies Apache Iceberg data store targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab37b5e27c5aff761f644f35() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabfd7caee7bee1c78f65e9f2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "One or more Amazon S3 paths that contains Iceberg metadata folders as s3://bucket/prefix .",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeace0a3aff72acc7f5ff3ea98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb632b01127475aed65bb8bb3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of glob patterns used to exclude from the crawl.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb2e59977b48601f34a3a196() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of UTF-8 strings that specify the names of custom classifiers that are associated with the crawler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebec3b5fcffec83dadcef7d11() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttributeef85e57c71581ed7f7063ceb(),
-				// Property: Exclusions
-				"exclusions": schemaAttributedb7060211b9db7e1ec94ac46(),
-				// Property: MaximumTraversalDepth
-				"maximum_traversal_depth": schemaAttribute67437f84c46f76596da8e6e9(),
-				// Property: Paths
-				"paths": schemaAttribute1b687cf9dc788ede925dac9d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies Apache Hudi data store targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec49853436584a0ec6c43ac28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8a1a632d5fb4d65383ab2a9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb3ff52dec17847a59a96282() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the crawler.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf62d7a4ef953b4fef60b331() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to use to connect to the Iceberg target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0cb4cc030805ad5e3471c59() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to write the manifest files to the Delta table path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed380bc3dc151a62387800649() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb7060211b9db7e1ec94ac46() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of global patterns used to exclude from the crawl.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede99e52278887ec52a7b8b38() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Path
-				"path": schemaAttribute019cf08c04cb4e088abcfd78(),
-				// Property: ScanAll
-				"scan_all": schemaAttribute58e982ffe3f90e2dceb40f03(),
-				// Property: ScanRate
-				"scan_rate": schemaAttribute7295a430a2e41c6270060c49(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies Amazon DynamoDB targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee412ce3ced2bec41187bdebc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Required for cross account crawls. For same account crawls as the target data, this can be left as null.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef565a54971bf6585458b42d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef85e57c71581ed7f7063ceb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the connection to use to connect to the Hudi target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef11f2f895897919edd160177() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionName
-				"connection_name": schemaAttribute5790c6b0e78475b331530860(),
-				// Property: Path
-				"path": schemaAttribute029ce9e0a7145d5338052825(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of Mongo DB targets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_crawler", crawlerDataSource)
 }
@@ -578,7 +35,11 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"classifiers": schemaAttributebb2e59977b48601f34a3a196(),
+		"classifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of UTF-8 strings that specify the names of custom classifiers that are associated with the crawler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -586,7 +47,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior.",
 		//	  "type": "string"
 		//	}
-		"configuration": schemaAttributeace0a3aff72acc7f5ff3ea98(),
+		"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CrawlerSecurityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -594,7 +58,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the SecurityConfiguration structure to be used by this crawler.",
 		//	  "type": "string"
 		//	}
-		"crawler_security_configuration": schemaAttributea857472da02650db2bffe357(),
+		"crawler_security_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the SecurityConfiguration structure to be used by this crawler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -602,7 +69,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the database in which the crawler's output is stored.",
 		//	  "type": "string"
 		//	}
-		"database_name": schemaAttribute1bb03ff94d556dff360dd840(),
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database in which the crawler's output is stored.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -610,7 +80,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the crawler.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributea6384d71f36b079da8ccaf77(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the crawler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LakeFormationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -629,7 +102,22 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lake_formation_configuration": schemaAttribute53437520b389450d6915e81f(),
+		"lake_formation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountId
+				"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Required for cross account crawls. For same account crawls as the target data, this can be left as null.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseLakeFormationCredentials
+				"use_lake_formation_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether to use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies AWS Lake Formation configuration settings for the crawler",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -637,7 +125,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the crawler.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributecb3ff52dec17847a59a96282(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the crawler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecrawlPolicy
 		// CloudFormation resource type schema:
 		//
@@ -652,7 +143,17 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"recrawl_policy": schemaAttribute4863b268435cdc164d66177b(),
+		"recrawl_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RecrawlBehavior
+				"recrawl_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run. A value of CRAWL_EVENT_MODE specifies crawling only the changes identified by Amazon S3 events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see Incremental Crawls in AWS Glue in the developer guide.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -660,7 +161,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.",
 		//	  "type": "string"
 		//	}
-		"role": schemaAttributec49853436584a0ec6c43ac28(),
+		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -675,7 +179,17 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schemaAttribute86477d1b5f3160da6fac9608(),
+		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScheduleExpression
+				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A scheduling object using a cron statement to schedule an event.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SchemaChangePolicy
 		// CloudFormation resource type schema:
 		//
@@ -694,7 +208,22 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schema_change_policy": schemaAttribute725fead92ec3174cd2aa27cc(),
+		"schema_change_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeleteBehavior
+				"delete_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The deletion behavior when the crawler finds a deleted object. A value of LOG specifies that if a table or partition is found to no longer exist, do not delete it, only log that it was found to no longer exist. A value of DELETE_FROM_DATABASE specifies that if a table or partition is found to have been removed, delete it from the database. A value of DEPRECATE_IN_DATABASE specifies that if a table has been found to no longer exist, to add a property to the table that says 'DEPRECATED' and includes a timestamp with the time of deprecation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateBehavior
+				"update_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The update behavior when the crawler finds a changed schema. A value of LOG specifies that if a table or a partition already exists, and a change is detected, do not update it, only log that a change was detected. Add new tables and new partitions (including on existing tables). A value of UPDATE_IN_DATABASE specifies that if a table or partition already exists, and a change is detected, update it. Add new tables and partitions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The policy that specifies update and delete behaviors for the crawler. The policy tells the crawler what to do in the event that it detects a change in a table that already exists in the customer's database at the time of the crawl. The SchemaChangePolicy does not affect whether or how new tables and partitions are added. New tables and partitions are always created regardless of the SchemaChangePolicy on a crawler. The SchemaChangePolicy consists of two components, UpdateBehavior and DeleteBehavior.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TablePrefix
 		// CloudFormation resource type schema:
 		//
@@ -702,7 +231,10 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The prefix added to the names of tables that are created.",
 		//	  "type": "string"
 		//	}
-		"table_prefix": schemaAttributeaa8484133bd40cbe5ea71d1b(),
+		"table_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The prefix added to the names of tables that are created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -710,7 +242,11 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The tags to use with this crawler.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute37841fbd061f4e83f37ba0e7(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The tags to use with this crawler.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -982,7 +518,253 @@ func crawlerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"targets": schemaAttribute07947771bf2e74f8653bd77c(),
+		"targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CatalogTargets
+				"catalog_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a Catalog connection type paired with a NETWORK Connection type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DatabaseName
+							"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the database to be synchronized.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DlqEventQueueArn
+							"dlq_event_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A valid Amazon dead-letter SQS ARN. For example, arn:aws:sqs:region:account:deadLetterQueue.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EventQueueArn
+							"event_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tables
+							"tables": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of the tables to be synchronized.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies AWS Glue Data Catalog targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeltaTargets
+				"delta_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the Delta table target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CreateNativeDeltaTable
+							"create_native_delta_table": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether the crawler will create native tables, to allow integration with query engines that support querying of the Delta transaction log directly.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DeltaTables
+							"delta_tables": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: WriteManifest
+							"write_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether to write the manifest files to the Delta table path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies an array of Delta data store targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DynamoDBTargets
+				"dynamo_db_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Path
+							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the DynamoDB table to crawl.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ScanAll
+							"scan_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ScanRate
+							"scan_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.\n\nThe valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies Amazon DynamoDB targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HudiTargets
+				"hudi_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the Hudi target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Exclusions
+							"exclusions": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of global patterns used to exclude from the crawl.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaximumTraversalDepth
+							"maximum_traversal_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Paths
+							"paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix .",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies Apache Hudi data store targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IcebergTargets
+				"iceberg_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the Iceberg target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Exclusions
+							"exclusions": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of global patterns used to exclude from the crawl.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaximumTraversalDepth
+							"maximum_traversal_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Paths
+							"paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more Amazon S3 paths that contains Iceberg metadata folders as s3://bucket/prefix .",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies Apache Iceberg data store targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JdbcTargets
+				"jdbc_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the JDBC target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EnableAdditionalMetadata
+							"enable_additional_metadata": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Specify a value of RAWTYPES or COMMENTS to enable additional metadata in table responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.\n\nIf you do not need additional metadata, keep the field empty.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Exclusions
+							"exclusions": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Path
+							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path of the JDBC target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies JDBC targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MongoDBTargets
+				"mongo_db_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the connection to use to connect to the Amazon DocumentDB or MongoDB target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Path
+							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path of the Amazon DocumentDB or MongoDB target (database/collection).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of Mongo DB targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Targets
+				"s3_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionName
+							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DlqEventQueueArn
+							"dlq_event_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A valid Amazon dead-letter SQS ARN. For example, arn:aws:sqs:region:account:deadLetterQueue.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EventQueueArn
+							"event_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Exclusions
+							"exclusions": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of glob patterns used to exclude from the crawl.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Path
+							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path to the Amazon S3 target.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SampleSize
+							"sample_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies Amazon Simple Storage Service (Amazon S3) targets.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies data stores to crawl.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

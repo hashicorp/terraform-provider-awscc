@@ -16,149 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute020beb3c8dd1c16729819b3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of change set operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute047dc3c7dd8e0696f5612364() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines how CloudFormation handles configuration drift during deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f4a285aa6c9ec8943b05c09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description to help you identify this change set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33f843960a6d807cc12e3dcc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A structure that contains the body of the revised template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d5ace7e5e9cf83cd348be0c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Creates a change set for all nested stacks specified in the template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b9c9e13f4ac96db612368c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of an IAM role that CloudFormation assumes when executing the change set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e218e9d07582d80dae3716a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to reuse the template associated with the stack to create the change set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69a3da8c9d5da1df28f3d5a4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ARNs of Amazon SNS topics that CloudFormation associates with the stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ecfce916652b57b05aae0f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the change set. Must be unique among all change sets associated with the specified stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute712c97dfeab6cb3a246d18e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID of the stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute748126b37678ee0fca0a262d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the file that contains the revised template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e830842db98f0d078191a7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name or unique ID of the stack for which you are creating a change set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8688069b96230c5df2030d45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the change set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute923e532f68649ec396784cad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines what action will be taken if stack creation fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf293170800b7ec017f61afa() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The capabilities that are allowed in the stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed18a2a611fc04f047a3095ab() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates if the change set imports resources that already exist.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd36f1b44311e1ee7b5cee7c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef58bd7eb1a62448350ce95ab(),
-				// Property: Value
-				"value": schemaAttributef58bd7eb1a62448350ce95ab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs to associate with the change set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef58bd7eb1a62448350ce95ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff864a10cfcb973bffc61b43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the change set was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_change_set", changeSetDataSource)
 }
@@ -182,7 +39,11 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"capabilities": schemaAttributecf293170800b7ec017f61afa(),
+		"capabilities": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The capabilities that are allowed in the stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChangeSetId
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +53,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[-a-zA-Z0-9:/]*$",
 		//	  "type": "string"
 		//	}
-		"change_set_id": schemaAttribute8688069b96230c5df2030d45(),
+		"change_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the change set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChangeSetName
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +67,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"change_set_name": schemaAttribute6ecfce916652b57b05aae0f9(),
+		"change_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the change set. Must be unique among all change sets associated with the specified stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChangeSetType
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +83,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"change_set_type": schemaAttribute020beb3c8dd1c16729819b3e(),
+		"change_set_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of change set operation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +95,11 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributeff864a10cfcb973bffc61b43(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the change set was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentMode
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +110,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"deployment_mode": schemaAttribute047dc3c7dd8e0696f5612364(),
+		"deployment_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines how CloudFormation handles configuration drift during deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +123,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1f4a285aa6c9ec8943b05c09(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description to help you identify this change set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImportExistingResources
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +134,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates if the change set imports resources that already exist.",
 		//	  "type": "boolean"
 		//	}
-		"import_existing_resources": schemaAttributed18a2a611fc04f047a3095ab(),
+		"import_existing_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if the change set imports resources that already exist.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IncludeNestedStacks
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +145,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Creates a change set for all nested stacks specified in the template.",
 		//	  "type": "boolean"
 		//	}
-		"include_nested_stacks": schemaAttribute3d5ace7e5e9cf83cd348be0c(),
+		"include_nested_stacks": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Creates a change set for all nested stacks specified in the template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationARNs
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +160,11 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"notification_ar_ns": schemaAttribute69a3da8c9d5da1df28f3d5a4(),
+		"notification_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ARNs of Amazon SNS topics that CloudFormation associates with the stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OnStackFailure
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +177,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"on_stack_failure": schemaAttribute923e532f68649ec396784cad(),
+		"on_stack_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines what action will be taken if stack creation fails.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleARN
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +190,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute5b9c9e13f4ac96db612368c8(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of an IAM role that CloudFormation assumes when executing the change set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackId
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +201,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique ID of the stack.",
 		//	  "type": "string"
 		//	}
-		"stack_id": schemaAttribute712c97dfeab6cb3a246d18e6(),
+		"stack_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID of the stack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
@@ -314,7 +213,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"stack_name": schemaAttribute7e830842db98f0d078191a7b(),
+		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name or unique ID of the stack for which you are creating a change set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +245,22 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributedd36f1b44311e1ee7b5cee7c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs to associate with the change set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
 		// CloudFormation resource type schema:
 		//
@@ -352,7 +269,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_body": schemaAttribute33f843960a6d807cc12e3dcc(),
+		"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A structure that contains the body of the revised template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateURL
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +282,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_url": schemaAttribute748126b37678ee0fca0a262d(),
+		"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the file that contains the revised template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UsePreviousTemplate
 		// CloudFormation resource type schema:
 		//
@@ -370,7 +293,10 @@ func changeSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to reuse the template associated with the stack to create the change set.",
 		//	  "type": "boolean"
 		//	}
-		"use_previous_template": schemaAttribute5e218e9d07582d80dae3716a(),
+		"use_previous_template": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to reuse the template associated with the stack to create the change set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

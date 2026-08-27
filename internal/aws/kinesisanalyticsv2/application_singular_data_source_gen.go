@@ -15,975 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01e748e62ab4ae6f3f08ad4b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogConfiguration
-			"catalog_configuration": schemaAttribute9db2f6828f79a58d5804f3f8(),
-			// Property: CustomArtifactsConfiguration
-			"custom_artifacts_configuration": schemaAttribute48a5c2d8326151dea15a7052(),
-			// Property: DeployAsApplicationConfiguration
-			"deploy_as_application_configuration": schemaAttributea3f5fb4b0c362539490a4c19(),
-			// Property: MonitoringConfiguration
-			"monitoring_configuration": schemaAttributea60d1fdec142f830d697503a(),
-		}, /*END SCHEMA*/
-		Description: "The configuration parameters for a Kinesis Data Analytics Studio notebook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute023095c23ddc1de93af922b3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourceARN
-			"resource_arn": schemaAttribute5e27ab1872974861ccab8377(),
-		}, /*END SCHEMA*/
-		Description: "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute061e625049c297e2ef8a2c3e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CodeContent
-			"code_content": schemaAttributeb653c8fcd0916256139443e1(),
-			// Property: CodeContentType
-			"code_content_type": schemaAttribute8da6b1fdc5eea06b80137bff(),
-		}, /*END SCHEMA*/
-		Description: "The code location and type parameters for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute062066d600024b4bf5790ce5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowNonRestoredState
-			"allow_non_restored_state": schemaAttribute06a8a46d092cfc344a3dbe53(),
-		}, /*END SCHEMA*/
-		Description: "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06a6e8523cda8a3888bbff25() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06a8a46d092cfc344a3dbe53() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10492e4be7a580a4b0027645() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConfigurationType
-			"configuration_type": schemaAttribute158e729c2ad969a43fd7454a(),
-			// Property: LogLevel
-			"log_level": schemaAttribute1799f340cb40a48602af49c2(),
-			// Property: MetricsLevel
-			"metrics_level": schemaAttributeb852e6dcd63f4eb708f0307e(),
-		}, /*END SCHEMA*/
-		Description: "Describes configuration parameters for Amazon CloudWatch logging for an application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1146bffcd7ec6e59c891139c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationMaintenanceWindowStartTime
-			"application_maintenance_window_start_time": schemaAttributea5c970fc167a58506f622ba1(),
-		}, /*END SCHEMA*/
-		Description: "Used to configure start of maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute124d804c54c3a99cb5a6163e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file key for the object containing the application code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute124f891fe044138c14aa85d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationRestoreConfiguration
-			"application_restore_configuration": schemaAttribute267b3b605ce69befe6b860e4(),
-			// Property: FlinkRunConfiguration
-			"flink_run_configuration": schemaAttribute062066d600024b4bf5790ce5(),
-		}, /*END SCHEMA*/
-		Description: "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14edc6726e3706d471c83033() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InputLambdaProcessor
-			"input_lambda_processor": schemaAttribute023095c23ddc1de93af922b3(),
-		}, /*END SCHEMA*/
-		Description: "The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute158e729c2ad969a43fd7454a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1799f340cb40a48602af49c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes the verbosity of the CloudWatch Logs for an application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1be63749039f93b05f9f852b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Inputs
-			"inputs": schemaAttribute8f60e2213c1ea23d287ede9f(),
-		}, /*END SCHEMA*/
-		Description: "The creation and update parameters for a SQL-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e73fc2da550acd4f2a9203f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether application data is encrypted using service key: AWS_OWNED_KEY or customer key: CUSTOMER_MANAGED_KEY",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2069d6fbdd8aa0eb94151fa6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20f2dadd496d74da52103148() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute267b3b605ce69befe6b860e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationRestoreType
-			"application_restore_type": schemaAttribute72afa26c9bdd39cdf680e005(),
-			// Property: SnapshotName
-			"snapshot_name": schemaAttribute607247686516247cba56e8ac(),
-		}, /*END SCHEMA*/
-		Description: "Describes the restore behavior of a restarting application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b883fd8ad92c0143d9f3130() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourceARN
-			"resource_arn": schemaAttributed9a5a1f21b320517e3b324d5(),
-		}, /*END SCHEMA*/
-		Description: "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d470a1568f33126ce6e8a2d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RecordRowPath
-			"record_row_path": schemaAttributea3ff8b2b215fdf4918379ce6(),
-		}, /*END SCHEMA*/
-		Description: "Provides additional mapping information when JSON is the record format on the streaming source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e26f976e8db6fbf390072c3() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Describes the value of an application execution property key-value pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute31f88281544e17373ddedd51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3457a281c1bab37e6b802988() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The group ID of the Maven reference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35ea44c516ac5dd4342df28c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RecordColumnDelimiter
-			"record_column_delimiter": schemaAttribute393bba9583a0af61badc8b9d(),
-			// Property: RecordRowDelimiter
-			"record_row_delimiter": schemaAttribute20f2dadd496d74da52103148(),
-		}, /*END SCHEMA*/
-		Description: "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute361ba4285ef31229208d2a91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to `CUSTOM` in order to set the `CheckpointingEnabled`, `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute382bf7820c06550ad6d6c3a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The base path for the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute393bba9583a0af61badc8b9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3eba387128507211d24513ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute443c537806176ec0a4e04b40() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SnapshotsEnabled
-			"snapshots_enabled": schemaAttributed2471ff033ab2d448302725c(),
-		}, /*END SCHEMA*/
-		Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute445c1c18cb3a5b5358642abf() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of in-application streams to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48a5c2d8326151dea15a7052() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ArtifactType
-				"artifact_type": schemaAttributeeea86c778a5a1e00a434eb7d(),
-				// Property: MavenReference
-				"maven_reference": schemaAttributef0fc16314bea9e0cfac9fd72(),
-				// Property: S3ContentLocation
-				"s3_content_location": schemaAttributeb32068b8068bc56c710327d2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of CustomArtifactConfiguration objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cb551fe4470416554d5644f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Mapping
-				"mapping": schemaAttributef026beda4206b7871661a238(),
-				// Property: Name
-				"name": schemaAttribute6787852310e56d485687c2be(),
-				// Property: SqlType
-				"sql_type": schemaAttributec4a6b73e1a304b485ae4ef39(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of `RecordColumn` objects.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e97ab1e759c72d796aa0707() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The verbosity of the CloudWatch Logs for an application. You can set it to `INFO`, `WARN`, `ERROR`, or `DEBUG`.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5103fb46cca29613bfed4bac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to `CUSTOM` in order to change your application's `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU` properties.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54215b24675289ab785e7236() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoScalingEnabled
-			"auto_scaling_enabled": schemaAttribute06a6e8523cda8a3888bbff25(),
-			// Property: ConfigurationType
-			"configuration_type": schemaAttribute5103fb46cca29613bfed4bac(),
-			// Property: Parallelism
-			"parallelism": schemaAttributea966451fa778e2b4c22f8358(),
-			// Property: ParallelismPerKPU
-			"parallelism_per_kpu": schemaAttribute9194e9f17122cfeca8b5eb58(),
-		}, /*END SCHEMA*/
-		Description: "Describes parameters for how an application executes multiple tasks simultaneously.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5677e294938102a4449ab2d4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schemaAttribute7096910cf4bbc9c54ee20bf7(),
-				// Property: SubnetIds
-				"subnet_ids": schemaAttributedbd0eb4bdc70f643af52f7e0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The array of descriptions of VPC configurations available to the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b785541973ba7f9505a9d0c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BasePath
-			"base_path": schemaAttribute382bf7820c06550ad6d6c3a7(),
-			// Property: BucketARN
-			"bucket_arn": schemaAttributedad7cd8ee7b43ac715175eb2(),
-		}, /*END SCHEMA*/
-		Description: "The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c3aeb5aaf78527aef0d7989() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c9c77ec2f99d47dcda98a04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The runtime environment for the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e27ab1872974861ccab8377() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Amazon Lambda function that operates on records in the stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f1a6792da2623f2ca0bd38e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketARN
-			"bucket_arn": schemaAttributec97043de23594c1832eed452(),
-			// Property: FileKey
-			"file_key": schemaAttribute124d804c54c3a99cb5a6163e(),
-			// Property: ObjectVersion
-			"object_version": schemaAttributec08cfe06c474a88ba8787fde(),
-		}, /*END SCHEMA*/
-		Description: "Information about the Amazon S3 bucket that contains the application code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute607247686516247cba56e8ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63e2162349d2dba6a001d58d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the Maven reference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66b7d705dfd467096c745e28() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Describes the interval in milliseconds between checkpoint operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6787852310e56d485687c2be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the column that is created in the in-application input stream or reference table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7096910cf4bbc9c54ee20bf7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The array of SecurityGroup IDs used by the VPC configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7262a2b23b38647b67af1b23() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72afa26c9bdd39cdf680e005() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how the application should be restored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74b1b3bd1ca5dbd3fb8c4669() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DatabaseARN
-			"database_arn": schemaAttributef28d1bc08179e381accd4d29(),
-		}, /*END SCHEMA*/
-		Description: "The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77048ae5b1c6abf0e7dc75a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The zip-format code for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b37f8d80874061f83b10d36() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PropertyGroupId
-				"property_group_id": schemaAttribute92febeb9d57073d6a0e5fd3a(),
-				// Property: PropertyMap
-				"property_map": schemaAttribute2e26f976e8db6fbf390072c3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Describes the execution property groups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c695e0d97a198847527a656() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Count
-			"count": schemaAttribute445c1c18cb3a5b5358642abf(),
-		}, /*END SCHEMA*/
-		Description: "Describes the number of in-application streams to create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8da6b1fdc5eea06b80137bff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the code content is in text or zip format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f60e2213c1ea23d287ede9f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InputParallelism
-				"input_parallelism": schemaAttribute7c695e0d97a198847527a656(),
-				// Property: InputProcessingConfiguration
-				"input_processing_configuration": schemaAttribute14edc6726e3706d471c83033(),
-				// Property: InputSchema
-				"input_schema": schemaAttributeb7363d8ef9b26faecc741b5f(),
-				// Property: KinesisFirehoseInput
-				"kinesis_firehose_input": schemaAttribute2b883fd8ad92c0143d9f3130(),
-				// Property: KinesisStreamsInput
-				"kinesis_streams_input": schemaAttributeddc7ae6947c8f8b85d3aab9b(),
-				// Property: NamePrefix
-				"name_prefix": schemaAttribute31f88281544e17373ddedd51(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The array of Input objects describing the input streams used by the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9194e9f17122cfeca8b5eb58() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92febeb9d57073d6a0e5fd3a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes the key of an application execution property key-value pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96caed92d36f4b5fd96576f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CSVMappingParameters
-			"csv_mapping_parameters": schemaAttribute35ea44c516ac5dd4342df28c(),
-			// Property: JSONMappingParameters
-			"json_mapping_parameters": schemaAttribute2d470a1568f33126ce6e8a2d(),
-		}, /*END SCHEMA*/
-		Description: "When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98e9871390af9eca7ce7a1c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b6734c113a9bbe67ece2846() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MappingParameters
-			"mapping_parameters": schemaAttribute96caed92d36f4b5fd96576f2(),
-			// Property: RecordFormatType
-			"record_format_type": schemaAttributed6a7bc6f1a31825d9276fc13(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the format of the records on the streaming source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9db2f6828f79a58d5804f3f8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GlueDataCatalogConfiguration
-			"glue_data_catalog_configuration": schemaAttribute74b1b3bd1ca5dbd3fb8c4669(),
-		}, /*END SCHEMA*/
-		Description: "The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3f5fb4b0c362539490a4c19() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3ContentLocation
-			"s3_content_location": schemaAttribute5b785541973ba7f9505a9d0c(),
-		}, /*END SCHEMA*/
-		Description: "The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3ff8b2b215fdf4918379ce6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path to the top-level parent that contains the records.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5c970fc167a58506f622ba1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The start time for the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea60d1fdec142f830d697503a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogLevel
-			"log_level": schemaAttribute4e97ab1e759c72d796aa0707(),
-		}, /*END SCHEMA*/
-		Description: "The monitoring configuration of a Kinesis Data Analytics Studio notebook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea966451fa778e2b4c22f8358() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration:AutoScalingEnabled is set to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaccfc9488681be5f617dcf10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2e7ba276833570cdb3fed46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The text-format code for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb32068b8068bc56c710327d2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketARN
-			"bucket_arn": schemaAttributec97043de23594c1832eed452(),
-			// Property: FileKey
-			"file_key": schemaAttribute124d804c54c3a99cb5a6163e(),
-			// Property: ObjectVersion
-			"object_version": schemaAttributec08cfe06c474a88ba8787fde(),
-		}, /*END SCHEMA*/
-		Description: "The location of the custom artifacts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb653c8fcd0916256139443e1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3ContentLocation
-			"s3_content_location": schemaAttribute5f1a6792da2623f2ca0bd38e(),
-			// Property: TextContent
-			"text_content": schemaAttributeb2e7ba276833570cdb3fed46(),
-			// Property: ZipFileContent
-			"zip_file_content": schemaAttribute77048ae5b1c6abf0e7dc75a2(),
-		}, /*END SCHEMA*/
-		Description: "The location and type of the application code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7363d8ef9b26faecc741b5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RecordColumns
-			"record_columns": schemaAttribute4cb551fe4470416554d5644f(),
-			// Property: RecordEncoding
-			"record_encoding": schemaAttribute3eba387128507211d24513ce(),
-			// Property: RecordFormat
-			"record_format": schemaAttribute9b6734c113a9bbe67ece2846(),
-		}, /*END SCHEMA*/
-		Description: "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb852e6dcd63f4eb708f0307e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9ca0166f56cf922d41eb258() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationCodeConfiguration
-			"application_code_configuration": schemaAttribute061e625049c297e2ef8a2c3e(),
-			// Property: ApplicationEncryptionConfiguration
-			"application_encryption_configuration": schemaAttributee2437185a7326dabe44bdd65(),
-			// Property: ApplicationSnapshotConfiguration
-			"application_snapshot_configuration": schemaAttribute443c537806176ec0a4e04b40(),
-			// Property: ApplicationSystemRollbackConfiguration
-			"application_system_rollback_configuration": schemaAttributee8f6c3d6288bd6091bce5706(),
-			// Property: EnvironmentProperties
-			"environment_properties": schemaAttributed905d514b345840cb4adaa7e(),
-			// Property: FlinkApplicationConfiguration
-			"flink_application_configuration": schemaAttributeffcb5e17df83c832363d1d1e(),
-			// Property: SqlApplicationConfiguration
-			"sql_application_configuration": schemaAttribute1be63749039f93b05f9f852b(),
-			// Property: VpcConfigurations
-			"vpc_configurations": schemaAttribute5677e294938102a4449ab2d4(),
-			// Property: ZeppelinApplicationConfiguration
-			"zeppelin_application_configuration": schemaAttribute01e748e62ab4ae6f3f08ad4b(),
-		}, /*END SCHEMA*/
-		Description: "Use this parameter to configure the application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebb5a4c265185d5434177dfcd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2069d6fbdd8aa0eb94151fa6(),
-				// Property: Value
-				"value": schemaAttributee6791e1199471b91105f46d5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec02f837ae336b26d95d8ea46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS KeyId. Can be either key uuid or full key arn or key alias arn or short key alias",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec08cfe06c474a88ba8787fde() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the object containing the application code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4a6b73e1a304b485ae4ef39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of column created in the in-application input stream or reference table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec97043de23594c1832eed452() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2471ff033ab2d448302725c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6a7bc6f1a31825d9276fc13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of record format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed70ab3591747e5055c75d3d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the IAM role that the application uses to access external resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed905d514b345840cb4adaa7e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PropertyGroups
-			"property_groups": schemaAttribute7b37f8d80874061f83b10d36(),
-		}, /*END SCHEMA*/
-		Description: "Describes execution properties for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9a5a1f21b320517e3b324d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the delivery stream.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedad7cd8ee7b43ac715175eb2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbd0eb4bdc70f643af52f7e0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The array of Subnet IDs used by the VPC configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddc7ae6947c8f8b85d3aab9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ResourceARN
-			"resource_arn": schemaAttributee93f3823dfe0f909d17058fb(),
-		}, /*END SCHEMA*/
-		Description: "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2437185a7326dabe44bdd65() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KeyId
-			"key_id": schemaAttributec02f837ae336b26d95d8ea46(),
-			// Property: KeyType
-			"key_type": schemaAttribute1e73fc2da550acd4f2a9203f(),
-		}, /*END SCHEMA*/
-		Description: "Describes whether customer managed key is enabled and key details for customer data encryption",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4258df0e9b1e48d7169265e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4b472ccecfc9879afc81522() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CheckpointInterval
-			"checkpoint_interval": schemaAttribute66b7d705dfd467096c745e28(),
-			// Property: CheckpointingEnabled
-			"checkpointing_enabled": schemaAttribute5c3aeb5aaf78527aef0d7989(),
-			// Property: ConfigurationType
-			"configuration_type": schemaAttribute361ba4285ef31229208d2a91(),
-			// Property: MinPauseBetweenCheckpoints
-			"min_pause_between_checkpoints": schemaAttributefbc882e9ecae55f49d26a606(),
-		}, /*END SCHEMA*/
-		Description: "Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see Checkpoints for Fault Tolerance in the Apache Flink Documentation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6791e1199471b91105f46d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that's 0 to 256 characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7fd62035391cf2232c5ff21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The artifact ID of the Maven reference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8f6c3d6288bd6091bce5706() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RollbackEnabled
-			"rollback_enabled": schemaAttribute7262a2b23b38647b67af1b23(),
-		}, /*END SCHEMA*/
-		Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee93f3823dfe0f909d17058fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the input Kinesis data stream to read.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeea86c778a5a1e00a434eb7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this to either `UDF` or `DEPENDENCY_JAR`. `UDF` stands for user-defined functions. This type of artifact must be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef026beda4206b7871661a238() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A reference to the data element in the streaming input or the reference data source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0fc16314bea9e0cfac9fd72() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ArtifactId
-			"artifact_id": schemaAttributee7fd62035391cf2232c5ff21(),
-			// Property: GroupId
-			"group_id": schemaAttribute3457a281c1bab37e6b802988(),
-			// Property: Version
-			"version": schemaAttribute63e2162349d2dba6a001d58d(),
-		}, /*END SCHEMA*/
-		Description: "The parameters required to fully specify a Maven reference.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef28d1bc08179e381accd4d29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbc882e9ecae55f49d26a606() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see Tuning Checkpointing in the Apache Flink Documentation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffcb5e17df83c832363d1d1e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CheckpointConfiguration
-			"checkpoint_configuration": schemaAttributee4b472ccecfc9879afc81522(),
-			// Property: MonitoringConfiguration
-			"monitoring_configuration": schemaAttribute10492e4be7a580a4b0027645(),
-			// Property: ParallelismConfiguration
-			"parallelism_configuration": schemaAttribute54215b24675289ab785e7236(),
-		}, /*END SCHEMA*/
-		Description: "The creation and update parameters for a Flink-based Kinesis Data Analytics application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kinesisanalyticsv2_application", applicationDataSource)
 }
@@ -1704,7 +735,516 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"application_configuration": schemaAttributeb9ca0166f56cf922d41eb258(),
+		"application_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationCodeConfiguration
+				"application_code_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CodeContent
+						"code_content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3ContentLocation
+								"s3_content_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BucketARN
+										"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FileKey
+										"file_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The file key for the object containing the application code.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ObjectVersion
+										"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The version of the object containing the application code.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Information about the Amazon S3 bucket that contains the application code.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextContent
+								"text_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The text-format code for a Flink-based Kinesis Data Analytics application.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ZipFileContent
+								"zip_file_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The zip-format code for a Flink-based Kinesis Data Analytics application.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The location and type of the application code.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CodeContentType
+						"code_content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether the code content is in text or zip format.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The code location and type parameters for a Flink-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationEncryptionConfiguration
+				"application_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyId
+						"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "KMS KeyId. Can be either key uuid or full key arn or key alias arn or short key alias",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KeyType
+						"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether application data is encrypted using service key: AWS_OWNED_KEY or customer key: CUSTOMER_MANAGED_KEY",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes whether customer managed key is enabled and key details for customer data encryption",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationSnapshotConfiguration
+				"application_snapshot_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SnapshotsEnabled
+						"snapshots_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationSystemRollbackConfiguration
+				"application_system_rollback_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RollbackEnabled
+						"rollback_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnvironmentProperties
+				"environment_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PropertyGroups
+						"property_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PropertyGroupId
+									"property_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Describes the key of an application execution property key-value pair.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PropertyMap
+									"property_map":      // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Describes the value of an application execution property key-value pair.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Describes the execution property groups.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes execution properties for a Flink-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FlinkApplicationConfiguration
+				"flink_application_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CheckpointConfiguration
+						"checkpoint_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CheckpointInterval
+								"checkpoint_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Describes the interval in milliseconds between checkpoint operations.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CheckpointingEnabled
+								"checkpointing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConfigurationType
+								"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to `CUSTOM` in order to set the `CheckpointingEnabled`, `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MinPauseBetweenCheckpoints
+								"min_pause_between_checkpoints": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start. If a checkpoint operation takes longer than the CheckpointInterval, the application otherwise performs continual checkpoint operations. For more information, see Tuning Checkpointing in the Apache Flink Documentation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault tolerance. For more information, see Checkpoints for Fault Tolerance in the Apache Flink Documentation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MonitoringConfiguration
+						"monitoring_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ConfigurationType
+								"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes whether to use the default CloudWatch logging configuration for an application. You must set this property to CUSTOM in order to set the LogLevel or MetricsLevel parameters.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogLevel
+								"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes the verbosity of the CloudWatch Logs for an application.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MetricsLevel
+								"metrics_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Describes configuration parameters for Amazon CloudWatch logging for an application.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ParallelismConfiguration
+						"parallelism_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AutoScalingEnabled
+								"auto_scaling_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConfigurationType
+								"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Describes whether the application uses the default parallelism for the Kinesis Data Analytics service. You must set this property to `CUSTOM` in order to change your application's `AutoScalingEnabled`, `Parallelism`, or `ParallelismPerKPU` properties.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Parallelism
+								"parallelism": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. The Kinesis Data Analytics service can increase this number automatically if ParallelismConfiguration:AutoScalingEnabled is set to true.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParallelismPerKPU
+								"parallelism_per_kpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Describes parameters for how an application executes multiple tasks simultaneously.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The creation and update parameters for a Flink-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SqlApplicationConfiguration
+				"sql_application_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Inputs
+						"inputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: InputParallelism
+									"input_parallelism": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Count
+											"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of in-application streams to create.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the number of in-application streams to create.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: InputProcessingConfiguration
+									"input_processing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: InputLambdaProcessor
+											"input_lambda_processor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ResourceARN
+													"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN of the Amazon Lambda function that operates on records in the stream.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The InputProcessingConfiguration for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: InputSchema
+									"input_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: RecordColumns
+											"record_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Mapping
+														"mapping": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "A reference to the data element in the streaming input or the reference data source.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The name of the column that is created in the in-application input stream or reference table.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: SqlType
+														"sql_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The type of column created in the in-application input stream or reference table.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "A list of `RecordColumn` objects.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RecordEncoding
+											"record_encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the encoding of the records in the streaming source. For example, UTF-8.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RecordFormat
+											"record_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: MappingParameters
+													"mapping_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: CSVMappingParameters
+															"csv_mapping_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: RecordColumnDelimiter
+																	"record_column_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The column delimiter. For example, in a CSV format, a comma (\",\") is the typical column delimiter.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RecordRowDelimiter
+																	"record_row_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The row delimiter. For example, in a CSV format, '\\n' is the typical row delimiter.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Provides additional mapping information when the record format uses delimiters (for example, CSV).",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: JSONMappingParameters
+															"json_mapping_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: RecordRowPath
+																	"record_row_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The path to the top-level parent that contains the records.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Provides additional mapping information when JSON is the record format on the streaming source.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: RecordFormatType
+													"record_format_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The type of record format.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Specifies the format of the records on the streaming source.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: KinesisFirehoseInput
+									"kinesis_firehose_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ResourceARN
+											"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The Amazon Resource Name (ARN) of the delivery stream.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "If the streaming source is an Amazon Kinesis Data Firehose delivery stream, identifies the delivery stream's ARN.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: KinesisStreamsInput
+									"kinesis_streams_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ResourceARN
+											"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ARN of the input Kinesis data stream to read.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: NamePrefix
+									"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `\"MyInApplicationStream\"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `\"MyInApplicationStream_001\"`, `\"MyInApplicationStream_002\"`, and so on.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The array of Input objects describing the input streams used by the application.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The creation and update parameters for a SQL-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfigurations
+				"vpc_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecurityGroupIds
+							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The array of SecurityGroup IDs used by the VPC configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SubnetIds
+							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The array of Subnet IDs used by the VPC configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The array of descriptions of VPC configurations available to the application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ZeppelinApplicationConfiguration
+				"zeppelin_application_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogConfiguration
+						"catalog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GlueDataCatalogConfiguration
+								"glue_data_catalog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DatabaseARN
+										"database_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the database.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomArtifactsConfiguration
+						"custom_artifacts_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ArtifactType
+									"artifact_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Set this to either `UDF` or `DEPENDENCY_JAR`. `UDF` stands for user-defined functions. This type of artifact must be in an S3 bucket. A `DEPENDENCY_JAR` can be in either Maven or an S3 bucket.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MavenReference
+									"maven_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ArtifactId
+											"artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The artifact ID of the Maven reference.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: GroupId
+											"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The group ID of the Maven reference.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Version
+											"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The version of the Maven reference.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The parameters required to fully specify a Maven reference.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3ContentLocation
+									"s3_content_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BucketARN
+											"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The Amazon Resource Name (ARN) for the S3 bucket containing the application code.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: FileKey
+											"file_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The file key for the object containing the application code.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ObjectVersion
+											"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The version of the object containing the application code.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The location of the custom artifacts.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of CustomArtifactConfiguration objects.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeployAsApplicationConfiguration
+						"deploy_as_application_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3ContentLocation
+								"s3_content_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BasePath
+										"base_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The base path for the S3 bucket.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: BucketARN
+										"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the S3 bucket.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MonitoringConfiguration
+						"monitoring_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogLevel
+								"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The verbosity of the CloudWatch Logs for an application. You can set it to `INFO`, `WARN`, `ERROR`, or `DEBUG`.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The monitoring configuration of a Kinesis Data Analytics Studio notebook.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration parameters for a Kinesis Data Analytics Studio notebook.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Use this parameter to configure the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationDescription
 		// CloudFormation resource type schema:
 		//
@@ -1715,7 +1255,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"application_description": schemaAttributeaccfc9488681be5f617dcf10(),
+		"application_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationMaintenanceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1734,7 +1277,17 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"application_maintenance_configuration": schemaAttribute1146bffcd7ec6e59c891139c(),
+		"application_maintenance_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationMaintenanceWindowStartTime
+				"application_maintenance_window_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The start time for the maintenance window.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Used to configure start of maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationMode
 		// CloudFormation resource type schema:
 		//
@@ -1746,7 +1299,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"application_mode": schemaAttributee4258df0e9b1e48d7169265e(),
+		"application_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationName
 		// CloudFormation resource type schema:
 		//
@@ -1757,7 +1313,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"application_name": schemaAttribute98e9871390af9eca7ce7a1c6(),
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RunConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1805,7 +1364,41 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"run_configuration": schemaAttribute124f891fe044138c14aa85d5(),
+		"run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationRestoreConfiguration
+				"application_restore_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ApplicationRestoreType
+						"application_restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies how the application should be restored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SnapshotName
+						"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes the restore behavior of a restarting application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FlinkRunConfiguration
+				"flink_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowNonRestoredState
+						"allow_non_restored_state": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes the starting parameters for a Flink-based Kinesis Data Analytics application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuntimeEnvironment
 		// CloudFormation resource type schema:
 		//
@@ -1813,7 +1406,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The runtime environment for the application.",
 		//	  "type": "string"
 		//	}
-		"runtime_environment": schemaAttribute5c9c77ec2f99d47dcda98a04(),
+		"runtime_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The runtime environment for the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -1824,7 +1420,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*$",
 		//	  "type": "string"
 		//	}
-		"service_execution_role": schemaAttributed70ab3591747e5055c75d3d2(),
+		"service_execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the IAM role that the application uses to access external resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1859,7 +1458,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributebb5a4c265185d5434177dfcd(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that's 0 to 256 characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

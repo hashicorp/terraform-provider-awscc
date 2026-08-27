@@ -14,68 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute178caaf2538ab31c02a4ccaf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InputReferenceArn
-			"input_reference_arn": schemaAttributebc1172ea4d25664a55e80a3b(),
-			// Property: ManageResourcePolicies
-			"manage_resource_policies": schemaAttribute59bb55f30b6d155003660e34(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f4f3b2cadfcbe72e1eba123() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdMappingTableInputSource
-			"id_mapping_table_input_source": schemaAttributebaf85a5cf24aea4632d6bf67(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25556578cf414ce9743e0dab() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebc1172ea4d25664a55e80a3b(),
-				// Property: Value
-				"value": schemaAttributebc1172ea4d25664a55e80a3b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59bb55f30b6d155003660e34() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaf85a5cf24aea4632d6bf67() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IdNamespaceAssociationId
-				"id_namespace_association_id": schemaAttributebc1172ea4d25664a55e80a3b(),
-				// Property: Type
-				"type": schemaAttributebc1172ea4d25664a55e80a3b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc1172ea4d25664a55e80a3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cleanrooms_id_mapping_table", idMappingTableDataSource)
 }
@@ -91,7 +29,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CollaborationArn
 		// CloudFormation resource type schema:
 		//
@@ -99,7 +39,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"collaboration_arn": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"collaboration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CollaborationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +51,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"collaboration_identifier": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"collaboration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +62,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdMappingTableIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +74,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"id_mapping_table_identifier": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"id_mapping_table_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputReferenceConfig
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +98,19 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"input_reference_config": schemaAttribute178caaf2538ab31c02a4ccaf(),
+		"input_reference_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InputReferenceArn
+				"input_reference_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManageResourcePolicies
+				"manage_resource_policies": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputReferenceProperties
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +149,27 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"input_reference_properties": schemaAttribute1f4f3b2cadfcbe72e1eba123(),
+		"input_reference_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdMappingTableInputSource
+				"id_mapping_table_input_source": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IdNamespaceAssociationId
+							"id_namespace_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +178,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 4,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MembershipArn
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +188,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"membership_arn": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"membership_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MembershipIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +200,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"membership_identifier": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +211,9 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributebc1172ea4d25664a55e80a3b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +242,21 @@ func idMappingTableDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute25556578cf414ce9743e0dab(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

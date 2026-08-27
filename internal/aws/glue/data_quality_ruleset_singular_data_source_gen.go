@@ -15,71 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute20675b1d330bbc8fe0cac7f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description of the data quality ruleset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute388275aa580c559cab2d44fc() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute553a70376b20059ef4d986c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique name for the data quality ruleset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1765cdd119d4d0900f2a5d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique token for idempotency.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe4a89c0d84f44ab66a54038() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AWS Glue table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece0c054c0a0e5facd0654999() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A Data Quality Definition Language (DQDL) ruleset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5df3e3b11078ee4913eb12c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database where the AWS Glue table exists.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebe28625f8b3c827a6cec81a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DatabaseName
-			"database_name": schemaAttributed5df3e3b11078ee4913eb12c(),
-			// Property: TableName
-			"table_name": schemaAttributebe4a89c0d84f44ab66a54038(),
-		}, /*END SCHEMA*/
-		Description: "An object representing an AWS Glue table.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_data_quality_ruleset", dataQualityRulesetDataSource)
 }
@@ -95,7 +30,10 @@ func dataQualityRulesetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A unique token for idempotency.",
 		//	  "type": "string"
 		//	}
-		"client_token": schemaAttributeb1765cdd119d4d0900f2a5d4(),
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique token for idempotency.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +41,10 @@ func dataQualityRulesetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A description of the data quality ruleset.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute20675b1d330bbc8fe0cac7f0(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the data quality ruleset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +52,10 @@ func dataQualityRulesetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A unique name for the data quality ruleset.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute553a70376b20059ef4d986c4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique name for the data quality ruleset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ruleset
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +63,10 @@ func dataQualityRulesetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A Data Quality Definition Language (DQDL) ruleset.",
 		//	  "type": "string"
 		//	}
-		"ruleset": schemaAttributece0c054c0a0e5facd0654999(),
+		"ruleset": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A Data Quality Definition Language (DQDL) ruleset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +79,12 @@ func dataQualityRulesetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute388275aa580c559cab2d44fc(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetTable
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +107,22 @@ func dataQualityRulesetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_table": schemaAttributeebe28625f8b3c827a6cec81a(),
+		"target_table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DatabaseName
+				"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the database where the AWS Glue table exists.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TableName
+				"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the AWS Glue table.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object representing an AWS Glue table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

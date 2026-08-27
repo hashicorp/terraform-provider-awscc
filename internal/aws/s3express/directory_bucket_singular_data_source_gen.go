@@ -15,325 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05be11e651c1d5399dd78b31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Object versions to include in the inventory list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a81f634c9e8c9d2d5023f9c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10b380e473a7a568c60dcc64() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Contains the optional fields that are included in the inventory results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10e0b2d9ea03b6464ac0e872() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketAccountId
-			"bucket_account_id": schemaAttribute77b4c287adbeb765d5dc7b88(),
-			// Property: BucketArn
-			"bucket_arn": schemaAttribute6b67637714aabc1ec2b67d5c(),
-			// Property: Format
-			"format": schemaAttribute84a186c70296d7c3d99900da(),
-			// Property: Prefix
-			"prefix": schemaAttribute7671dfd83856259fb938ffd4(),
-		}, /*END SCHEMA*/
-		Description: "Specifies information about where to publish inventory reports for an Amazon S3 Express bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1dbb6047f77efa264b9b79ba() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the inventory is enabled or disabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute260d3dea92a6afff4db358bf() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AbortIncompleteMultipartUpload
-				"abort_incomplete_multipart_upload": schemaAttribute3470cdb9b04de67d3eaf9525(),
-				// Property: ExpirationInDays
-				"expiration_in_days": schemaAttribute0a81f634c9e8c9d2d5023f9c(),
-				// Property: Id
-				"id": schemaAttributea23d4956785fa9d11b443fe3(),
-				// Property: ObjectSizeGreaterThan
-				"object_size_greater_than": schemaAttributea23d4956785fa9d11b443fe3(),
-				// Property: ObjectSizeLessThan
-				"object_size_less_than": schemaAttributea23d4956785fa9d11b443fe3(),
-				// Property: Prefix
-				"prefix": schemaAttributea23d4956785fa9d11b443fe3(),
-				// Property: Status
-				"status": schemaAttributea23d4956785fa9d11b443fe3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A lifecycle rule for individual objects in an Amazon S3 Express bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a7d60ac7fa10de3ca8d29dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID used to identify the inventory configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3470cdb9b04de67d3eaf9525() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DaysAfterInitiation
-			"days_after_initiation": schemaAttribute774805d4800eac6d5711d81d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38e44fdc8bce434eed802c74() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schemaAttribute10e0b2d9ea03b6464ac0e872(),
-				// Property: Enabled
-				"enabled": schemaAttribute1dbb6047f77efa264b9b79ba(),
-				// Property: Id
-				"id": schemaAttribute2a7d60ac7fa10de3ca8d29dd(),
-				// Property: IncludedObjectVersions
-				"included_object_versions": schemaAttribute05be11e651c1d5399dd78b31(),
-				// Property: OptionalFields
-				"optional_fields": schemaAttribute10b380e473a7a568c60dcc64(),
-				// Property: Prefix
-				"prefix": schemaAttribute66368f6a0b8ca1859f55018a(),
-				// Property: ScheduleFrequency
-				"schedule_frequency": schemaAttribute77af29411065c89d0203698e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The inventory configuration for an Amazon S3 Express bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d4e2305cc52af03d1644e5c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ServerSideEncryptionConfiguration
-			"server_side_encryption_configuration": schemaAttributeadecb24e88c6ad8b5df3b8e6(),
-		}, /*END SCHEMA*/
-		Description: "Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d235312395e50bd4b800120() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. This parameter is allowed only if SSEAlgorithm is set to aws:kms. You can specify this parameter with the key ID or the Amazon Resource Name (ARN) of the KMS key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f48193637f6e90c84e80ea0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Returns the Amazon Resource Name (ARN) of the specified bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fd565e855f8af55bebdb117() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix used when evaluating a metrics filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ffde8f5ab73c2b5d0ea75ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66368f6a0b8ca1859f55018a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix that is prepended to all inventory results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b67637714aabc1ec2b67d5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the destination Amazon S3 bucket to which data is exported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7671dfd83856259fb938ffd4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute774805d4800eac6d5711d81d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77af29411065c89d0203698e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the schedule for generating inventory results.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77b4c287adbeb765d5dc7b88() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The account ID that owns the destination S3 bucket. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84131f5cc4a9020e0998767a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID used to identify the metrics configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84a186c70296d7c3d99900da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the file format used when exporting data to Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute993e7f539e0d6fcbdbb6f893() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea23d4956785fa9d11b443fe3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7e76a992f554b9c63f19ff6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The access point ARN used when evaluating a metrics filter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9b8d1fec7d497932ef24d57() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea23d4956785fa9d11b443fe3(),
-				// Property: Value
-				"value": schemaAttributea23d4956785fa9d11b443fe3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeadecb24e88c6ad8b5df3b8e6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BucketKeyEnabled
-				"bucket_key_enabled": schemaAttributee736f8ecee54e11072edab80(),
-				// Property: ServerSideEncryptionByDefault
-				"server_side_encryption_by_default": schemaAttributeb8aefbd777802b597c62bbc4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the default server-side-encryption configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb76478a5b4d625cc1de0f14b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8aefbd777802b597c62bbc4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KMSMasterKeyID
-			"kms_master_key_id": schemaAttribute5d235312395e50bd4b800120(),
-			// Property: SSEAlgorithm
-			"sse_algorithm": schemaAttributea23d4956785fa9d11b443fe3(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee736f8ecee54e11072edab80() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Amazon S3 Express One Zone uses an S3 Bucket Key with SSE-KMS and S3 Bucket Key cannot be disabled. It's only allowed to set the BucketKeyEnabled element to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec1828a8d6e7c59f24931b3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef973eb9e2b7ab226089c8048() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessPointArn
-				"access_point_arn": schemaAttributea7e76a992f554b9c63f19ff6(),
-				// Property: Id
-				"id": schemaAttribute84131f5cc4a9020e0998767a(),
-				// Property: Prefix
-				"prefix": schemaAttribute5fd565e855f8af55bebdb117(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the metrics configurations for the Amazon S3 Express bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe7f6b899dc54f588d4a5699() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rules
-			"rules": schemaAttribute260d3dea92a6afff4db358bf(),
-		}, /*END SCHEMA*/
-		Description: "Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3express_directory_bucket", directoryBucketDataSource)
 }
@@ -349,7 +30,10 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Returns the Amazon Resource Name (ARN) of the specified bucket.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5f48193637f6e90c84e80ea0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the Amazon Resource Name (ARN) of the specified bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneName
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +44,10 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"availability_zone_name": schemaAttribute5ffde8f5ab73c2b5d0ea75ad(),
+		"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the code for the Availability Zone or Local Zone where the directory bucket was created. An example for the code of an Availability Zone is 'us-east-1f'.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketEncryption
 		// CloudFormation resource type schema:
 		//
@@ -416,7 +103,42 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"bucket_encryption": schemaAttribute4d4e2305cc52af03d1644e5c(),
+		"bucket_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerSideEncryptionConfiguration
+				"server_side_encryption_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketKeyEnabled
+							"bucket_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Amazon S3 Express One Zone uses an S3 Bucket Key with SSE-KMS and S3 Bucket Key cannot be disabled. It's only allowed to set the BucketKeyEnabled element to true.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ServerSideEncryptionByDefault
+							"server_side_encryption_by_default": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: KMSMasterKeyID
+									"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. This parameter is allowed only if SSEAlgorithm is set to aws:kms. You can specify this parameter with the key ID or the Amazon Resource Name (ARN) of the KMS key",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SSEAlgorithm
+									"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies the default server-side-encryption configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketName
 		// CloudFormation resource type schema:
 		//
@@ -426,7 +148,10 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"bucket_name": schemaAttributeec1828a8d6e7c59f24931b3c(),
+		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataRedundancy
 		// CloudFormation resource type schema:
 		//
@@ -438,7 +163,10 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_redundancy": schemaAttributeb76478a5b4d625cc1de0f14b(),
+		"data_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InventoryConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -542,7 +270,72 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"inventory_configurations": schemaAttribute38e44fdc8bce434eed802c74(),
+		"inventory_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketAccountId
+							"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The account ID that owns the destination S3 bucket. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: BucketArn
+							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the destination Amazon S3 bucket to which data is exported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Format
+							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the file format used when exporting data to Amazon S3.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies information about where to publish inventory reports for an Amazon S3 Express bucket.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Enabled
+					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies whether the inventory is enabled or disabled.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the inventory configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IncludedObjectVersions
+					"included_object_versions": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Object versions to include in the inventory list.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OptionalFields
+					"optional_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Contains the optional fields that are included in the inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix that is prepended to all inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ScheduleFrequency
+					"schedule_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the schedule for generating inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The inventory configuration for an Amazon S3 Express bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LifecycleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +407,57 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lifecycle_configuration": schemaAttributefe7f6b899dc54f588d4a5699(),
+		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AbortIncompleteMultipartUpload
+							"abort_incomplete_multipart_upload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DaysAfterInitiation
+									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationInDays
+							"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeGreaterThan
+							"object_size_greater_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeLessThan
+							"object_size_less_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A lifecycle rule for individual objects in an Amazon S3 Express bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationName
 		// CloudFormation resource type schema:
 		//
@@ -622,7 +465,10 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
 		//	  "type": "string"
 		//	}
-		"location_name": schemaAttribute993e7f539e0d6fcbdbb6f893(),
+		"location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MetricsConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -654,7 +500,29 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"metrics_configurations": schemaAttributef973eb9e2b7ab226089c8048(),
+		"metrics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessPointArn
+					"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The access point ARN used when evaluating a metrics filter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the metrics configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix used when evaluating a metrics filter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the metrics configurations for the Amazon S3 Express bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -685,7 +553,21 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea9b8d1fec7d497932ef24d57(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

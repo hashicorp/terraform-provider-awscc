@@ -19,87 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0190820bdddfc7cbe7a5113c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network output's gateway network name.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute129eb00a4324a3e6c8a072b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IpAddress
-			"ip_address": schemaAttributeac9182b21d9d17286649cf22(),
-			// Property: NetworkName
-			"network_name": schemaAttribute0190820bdddfc7cbe7a5113c(),
-			// Property: Port
-			"port": schemaAttribute7ef09ecf6cf8d051856d6638(),
-			// Property: Protocol
-			"protocol": schemaAttribute4e17bbe1673592d24d432e62(),
-			// Property: Ttl
-			"ttl": schemaAttributeeb63bc87c05ace8e0e47539d(),
-		}, /*END SCHEMA*/
-		Description: "The output of the bridge.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e17bbe1673592d24d432e62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network output protocol.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"rtp-fec",
-				"rtp",
-				"udp",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ef09ecf6cf8d051856d6638() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The network output port.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab6824ab53f3cea95115b347() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Number (ARN) of the bridge.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac9182b21d9d17286649cf22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network output IP Address.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb63bc87c05ace8e0e47539d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The network output TTL.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefce68ceae20e6a51756c14dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network output name.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_mediaconnect_bridge_output", bridgeOutputResource)
 }
@@ -115,7 +34,13 @@ func bridgeOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Number (ARN) of the bridge.",
 		//	  "type": "string"
 		//	}
-		"bridge_arn": schemaAttributeab6824ab53f3cea95115b347(),
+		"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Number (ARN) of the bridge.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +48,13 @@ func bridgeOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The network output name.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributefce68ceae20e6a51756c14dd(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network output name.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkOutput
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +97,44 @@ func bridgeOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"network_output": schemaAttribute129eb00a4324a3e6c8a072b8(),
+		"network_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpAddress
+				"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network output IP Address.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkName
+				"network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network output's gateway network name.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The network output port.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The network output protocol.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"rtp-fec",
+							"rtp",
+							"udp",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Ttl
+				"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The network output TTL.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The output of the bridge.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

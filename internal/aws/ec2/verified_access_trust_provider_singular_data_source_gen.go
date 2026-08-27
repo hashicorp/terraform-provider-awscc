@@ -14,249 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute09f83d13fc2790c5eec3d692() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the Amazon Web Services Verified Access trust provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f429444f5476b2a4ce0d713() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to encrypt the policy with the provided key or disable encryption",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute349923fd8321431ccf53a86a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomerManagedKeyEnabled
-			"customer_managed_key_enabled": schemaAttribute2f429444f5476b2a4ce0d713(),
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttributeba367205ca635a21377c244a(),
-		}, /*END SCHEMA*/
-		Description: "The configuration options for customer provided KMS encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute358a0fcac1cf291ebe847e0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47270e36fba88a0393b305bb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttributea1895206b8504deb21d68f9a(),
-			// Property: ClientId
-			"client_id": schemaAttribute358a0fcac1cf291ebe847e0e(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute4cd9692af2cbdcdf0892c9e8(),
-			// Property: Issuer
-			"issuer": schemaAttributec9b6807574aa4bccd68dd384(),
-			// Property: PublicSigningKeyEndpoint
-			"public_signing_key_endpoint": schemaAttributefde5d389c257c98d99dfb806(),
-			// Property: Scope
-			"scope": schemaAttribute473eb2ca1c6699ea2f1e7c55(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttributeb298204d3b1e086e11633ccb(),
-			// Property: UserInfoEndpoint
-			"user_info_endpoint": schemaAttribute70f326fefd1bf762b01629c4(),
-		}, /*END SCHEMA*/
-		Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider for L4.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute473eb2ca1c6699ea2f1e7c55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cd9692af2cbdcdf0892c9e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f02785ad8325c017399bc95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute605be4fa8607aaaf691f5d56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of device-based trust provider. Possible values: jamf|crowdstrike",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute629e06e0505610153f47642d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL Verified Access will use to verify authenticity of the device tokens.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70f326fefd1bf762b01629c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC user info endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b5e0c3e56bbb0ab4ce14cc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The creation time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8848a3912f30e560cc196259() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PublicSigningKeyUrl
-			"public_signing_key_url": schemaAttribute629e06e0505610153f47642d(),
-			// Property: TenantId
-			"tenant_id": schemaAttributea255d7303a2692d17b12f99d(),
-		}, /*END SCHEMA*/
-		Description: "The options for device identity based trust providers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a37b19b96b2b78c195e9f9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttributea1895206b8504deb21d68f9a(),
-			// Property: ClientId
-			"client_id": schemaAttribute358a0fcac1cf291ebe847e0e(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute4cd9692af2cbdcdf0892c9e8(),
-			// Property: Issuer
-			"issuer": schemaAttributec9b6807574aa4bccd68dd384(),
-			// Property: Scope
-			"scope": schemaAttribute473eb2ca1c6699ea2f1e7c55(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttributeb298204d3b1e086e11633ccb(),
-			// Property: UserInfoEndpoint
-			"user_info_endpoint": schemaAttribute70f326fefd1bf762b01629c4(),
-		}, /*END SCHEMA*/
-		Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1895206b8504deb21d68f9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC authorization endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea255d7303a2692d17b12f99d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the tenant application with the device-identity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb298204d3b1e086e11633ccb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC token endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba367205ca635a21377c244a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS Key Arn used to encrypt the group policy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7cc15516076c3d3f030c2f1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeea97674e9ea43c9ca6fec155(),
-				// Property: Value
-				"value": schemaAttribute5f02785ad8325c017399bc95(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9b6807574aa4bccd68dd384() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC issuer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea97674e9ea43c9ca6fec155() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeedfaa9ba3dfa78a00f9ae326() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier to be used when working with policy rules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee7492042a45d4fabe1b443e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Web Services Verified Access trust provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef566e9e7cc6c54daa5b8bc52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The last updated time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9c30eeb1f13457e8e9ff1a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of device-based trust provider. Possible values: oidc|iam-identity-center",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa9b9eabba371d2c81a7704a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Type of trust provider. Possible values: user|device",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefde5d389c257c98d99dfb806() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public signing key for endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_verified_access_trust_provider", verifiedAccessTrustProviderDataSource)
 }
@@ -272,7 +29,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The creation time.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute7b5e0c3e56bbb0ab4ce14cc6(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The creation time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -280,7 +40,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "A description for the Amazon Web Services Verified Access trust provider.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute09f83d13fc2790c5eec3d692(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the Amazon Web Services Verified Access trust provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceOptions
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +62,22 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"device_options": schemaAttribute8848a3912f30e560cc196259(),
+		"device_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublicSigningKeyUrl
+				"public_signing_key_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URL Verified Access will use to verify authenticity of the device tokens.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TenantId
+				"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the tenant application with the device-identity provider.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The options for device identity based trust providers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeviceTrustProviderType
 		// CloudFormation resource type schema:
 		//
@@ -307,7 +85,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The type of device-based trust provider. Possible values: jamf|crowdstrike",
 		//	  "type": "string"
 		//	}
-		"device_trust_provider_type": schemaAttribute605be4fa8607aaaf691f5d56(),
+		"device_trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of device-based trust provider. Possible values: jamf|crowdstrike",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +96,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The last updated time.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributef566e9e7cc6c54daa5b8bc52(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The last updated time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NativeApplicationOidcOptions
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +142,52 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"native_application_oidc_options": schemaAttribute47270e36fba88a0393b305bb(),
+		"native_application_oidc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizationEndpoint
+				"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC authorization endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientId
+				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientSecret
+				"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Issuer
+				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC issuer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicSigningKeyEndpoint
+				"public_signing_key_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The public signing key for endpoint",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Scope
+				"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TokenEndpoint
+				"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC token endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserInfoEndpoint
+				"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC user info endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider for L4.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OidcOptions
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +226,47 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"oidc_options": schemaAttribute9a37b19b96b2b78c195e9f9b(),
+		"oidc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizationEndpoint
+				"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC authorization endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientId
+				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ClientSecret
+				"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Issuer
+				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC issuer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Scope
+				"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TokenEndpoint
+				"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC token endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserInfoEndpoint
+				"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The OIDC user info endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyReferenceName
 		// CloudFormation resource type schema:
 		//
@@ -405,7 +274,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The identifier to be used when working with policy rules.",
 		//	  "type": "string"
 		//	}
-		"policy_reference_name": schemaAttributeedfaa9ba3dfa78a00f9ae326(),
+		"policy_reference_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier to be used when working with policy rules.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SseSpecification
 		// CloudFormation resource type schema:
 		//
@@ -424,7 +296,22 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sse_specification": schemaAttribute349923fd8321431ccf53a86a(),
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -457,7 +344,24 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributec7cc15516076c3d3f030c2f1(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrustProviderType
 		// CloudFormation resource type schema:
 		//
@@ -465,7 +369,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "Type of trust provider. Possible values: user|device",
 		//	  "type": "string"
 		//	}
-		"trust_provider_type": schemaAttributefa9b9eabba371d2c81a7704a(),
+		"trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of trust provider. Possible values: user|device",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserTrustProviderType
 		// CloudFormation resource type schema:
 		//
@@ -473,7 +380,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The type of device-based trust provider. Possible values: oidc|iam-identity-center",
 		//	  "type": "string"
 		//	}
-		"user_trust_provider_type": schemaAttributef9c30eeb1f13457e8e9ff1a9(),
+		"user_trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of device-based trust provider. Possible values: oidc|iam-identity-center",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VerifiedAccessTrustProviderId
 		// CloudFormation resource type schema:
 		//
@@ -481,7 +391,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the Amazon Web Services Verified Access trust provider.",
 		//	  "type": "string"
 		//	}
-		"verified_access_trust_provider_id": schemaAttributeee7492042a45d4fabe1b443e(),
+		"verified_access_trust_provider_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon Web Services Verified Access trust provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

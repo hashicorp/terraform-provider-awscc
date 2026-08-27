@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute10e0435132124f5aa89128db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f3215ef9bb7097a768fa511() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The team ID in Slack, which uniquely identifies a workspace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_supportapp_slack_workspace_configuration", slackWorkspaceConfigurationDataSource)
 }
@@ -46,7 +32,10 @@ func slackWorkspaceConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"team_id": schemaAttribute3f3215ef9bb7097a768fa511(),
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The team ID in Slack, which uniquely identifies a workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -57,7 +46,10 @@ func slackWorkspaceConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"version_id": schemaAttribute10e0435132124f5aa89128db(),
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

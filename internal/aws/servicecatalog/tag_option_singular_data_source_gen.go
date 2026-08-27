@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0427dd834c9897654309e1d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The TagOption value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e0d518c441daa804395c428() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The TagOption active state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4aa91adf604a164582b62274() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The TagOption identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51d547de7f0a05e375522b6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The TagOption key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_tag_option", tagOptionDataSource)
 }
@@ -57,7 +29,10 @@ func tagOptionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The TagOption active state.",
 		//	  "type": "boolean"
 		//	}
-		"active": schemaAttribute3e0d518c441daa804395c428(),
+		"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The TagOption active state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func tagOptionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The TagOption identifier.",
 		//	  "type": "string"
 		//	}
-		"tag_option_id": schemaAttribute4aa91adf604a164582b62274(),
+		"tag_option_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The TagOption identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Key
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func tagOptionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The TagOption key.",
 		//	  "type": "string"
 		//	}
-		"key": schemaAttribute51d547de7f0a05e375522b6f(),
+		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The TagOption key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func tagOptionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The TagOption value.",
 		//	  "type": "string"
 		//	}
-		"value": schemaAttribute0427dd834c9897654309e1d7(),
+		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The TagOption value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

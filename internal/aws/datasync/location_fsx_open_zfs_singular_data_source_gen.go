@@ -15,111 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e2ad2278a9093a89c6b6493() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for an AWS resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13ad80cdf9de768372053063() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NFS
-			"nfs": schemaAttribute44852c8d251908fcc62e9469(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for an NFS or SMB protocol, currently only support NFS",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e8372882db90f21d6ca2773() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44852c8d251908fcc62e9469() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MountOptions
-			"mount_options": schemaAttributeb3c3c39bf7bbc5b8e26040a3(),
-		}, /*END SCHEMA*/
-		Description: "FSx OpenZFS file system NFS protocol information",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5192f5f75c67704c9a44b736() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A subdirectory in the location's path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53d71f92496dc77d332ab7a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon FSx OpenZFS file system location that is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78d5cd45d7cd23416f25610c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for an AWS resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91a2e6ea2802ee0694dc60b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the FSx OpenZFS file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3c3c39bf7bbc5b8e26040a3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Version
-			"version": schemaAttribute3e8372882db90f21d6ca2773(),
-		}, /*END SCHEMA*/
-		Description: "The NFS mount options that DataSync can use to mount your NFS share.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd41f3f02173687f97d54334() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea8d605a1421731a71377f0b() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0e2ad2278a9093a89c6b6493(),
-				// Property: Value
-				"value": schemaAttribute78d5cd45d7cd23416f25610c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefccf7ee1208fda3061f13d91() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the FSx OpenZFS that was described.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_fsx_open_zfs", locationFSxOpenZFSDataSource)
 }
@@ -137,7 +32,10 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
 		//	  "type": "string"
 		//	}
-		"fsx_filesystem_arn": schemaAttribute91a2e6ea2802ee0694dc60b1(),
+		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the FSx OpenZFS file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +45,10 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schemaAttribute53d71f92496dc77d332ab7a5(),
+		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Amazon FSx OpenZFS file system location that is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +58,10 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs|fsxl|fsxz)://[a-zA-Z0-9.:/\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schemaAttributefccf7ee1208fda3061f13d91(),
+		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the FSx OpenZFS that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +99,31 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"protocol": schemaAttribute13ad80cdf9de768372053063(),
+		"protocol": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NFS
+				"nfs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MountOptions
+						"mount_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Version
+								"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The NFS mount options that DataSync can use to mount your NFS share.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "FSx OpenZFS file system NFS protocol information",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration settings for an NFS or SMB protocol, currently only support NFS",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +139,11 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_arns": schemaAttributebd41f3f02173687f97d54334(),
+		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +153,10 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schemaAttribute5192f5f75c67704c9a44b736(),
+		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A subdirectory in the location's path.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +193,24 @@ func locationFSxOpenZFSDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributeea8d605a1421731a71377f0b(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for an AWS resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for an AWS resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

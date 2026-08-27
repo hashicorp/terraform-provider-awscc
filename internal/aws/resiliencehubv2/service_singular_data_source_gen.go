@@ -16,437 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b08377395df74964cc53f94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "External ID for cross-account access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0db6832860f6c2eeda595185() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeab4ab742d12502c94e2a585c(),
-				// Property: Values
-				"values": schemaAttributebaeacce648190f2f5b5964c9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Resource tags to discover resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f557f8ce786e2d7b41ba4ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of a CloudFormation stack.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute184afcaafe55070f4572f5af() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceConfiguration
-				"resource_configuration": schemaAttribute86f8c3e1f02dee36027d5bf8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Input sources for this service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b1ded4786a503e9bc20f584() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e4b9463b05fcf74b90bfc1a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CrossAccountRoleArns
-			"cross_account_role_arns": schemaAttribute5357a403cfb69897a0aa9ea8(),
-			// Property: InvokerRoleName
-			"invoker_role_name": schemaAttributeac628dd449067d9c37e3f717(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ff7dd396726cedb4776360c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef8529107c870eeb0b300c974(),
-				// Property: Value
-				"value": schemaAttribute688724804882852aa722c824(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags assigned to the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36f28c947f06c0251dd62427() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SystemArn
-				"system_arn": schemaAttribute916f1d5789637a4ece236d78(),
-				// Property: UserJourneyIds
-				"user_journey_ids": schemaAttributea95e79d43628371f7611ed4a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Systems associated with this service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3735410d1f176414df1e31be() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37f0d301f5c8ab8a4b0ac74b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL of a Terraform state file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39ce1594fd493d5a65729740() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Dependency discovery state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e6bf278f31e0eb9e5761c32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the EKS cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute468619c5ee345fe872dfb6f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 bucket path where reports will be written.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47d6c1d53093044333216198() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the resilience policy to associate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5357a403cfb69897a0aa9ea8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CrossAccountRoleArn
-				"cross_account_role_arn": schemaAttributec6668c84b3e4c0bf9369d09e(),
-				// Property: ExternalId
-				"external_id": schemaAttribute0b08377395df74964cc53f94(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Cross-account role ARNs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60103a515d48a66e7d7db2ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Account ID of the bucket owner.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62271a2d89a2b4599f14a3e0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PolicyName
-			"policy_name": schemaAttribute90fa96488e44c9a250ddc4fe(),
-			// Property: Value
-			"value": schemaAttribute9f02088308765d34c342b34a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute688724804882852aa722c824() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86f8c3e1f02dee36027d5bf8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CfnStackArn
-			"cfn_stack_arn": schemaAttribute0f557f8ce786e2d7b41ba4ae(),
-			// Property: DesignFileS3Url
-			"design_file_s3_url": schemaAttributedf11cb2c94508d672be3dce7(),
-			// Property: Eks
-			"eks": schemaAttributeba4ac57d5f1b41167ea123e3(),
-			// Property: ResourceTags
-			"resource_tags": schemaAttribute0db6832860f6c2eeda595185(),
-			// Property: TfStateFileUrl
-			"tf_state_file_url": schemaAttribute37f0d301f5c8ab8a4b0ac74b(),
-		}, /*END SCHEMA*/
-		Description: "Resource configuration for an input source. Provide exactly one field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bf1acb729d5f5d2da03b115() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PolicyName
-			"policy_name": schemaAttribute90fa96488e44c9a250ddc4fe(),
-			// Property: Value
-			"value": schemaAttribute90fa96488e44c9a250ddc4fe(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90fa96488e44c9a250ddc4fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute916f1d5789637a4ece236d78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The system ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f02088308765d34c342b34a() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0b458c8ebad1186317f98e1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "AWS regions for the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6429fa9ccb7b1afc012738e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ReportOutput
-			"report_output": schemaAttributeae0e8a8c351c5000162404aa(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for automatic report generation on a Service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea95e79d43628371f7611ed4a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "User journey IDs associated with this system.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab4ab742d12502c94e2a585c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabd30f4c3c4c1d6f9355f036() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilitySlo
-			"availability_slo": schemaAttribute62271a2d89a2b4599f14a3e0(),
-			// Property: MultiAzDrApproach
-			"multi_az_dr_approach": schemaAttribute8bf1acb729d5f5d2da03b115(),
-			// Property: MultiAzRpo
-			"multi_az_rpo": schemaAttributed7e6269c1a9bddcb2e15bf43(),
-			// Property: MultiAzRto
-			"multi_az_rto": schemaAttributed7e6269c1a9bddcb2e15bf43(),
-			// Property: MultiRegionDrApproach
-			"multi_region_dr_approach": schemaAttribute8bf1acb729d5f5d2da03b115(),
-			// Property: MultiRegionRpo
-			"multi_region_rpo": schemaAttributed7e6269c1a9bddcb2e15bf43(),
-			// Property: MultiRegionRto
-			"multi_region_rto": schemaAttributed7e6269c1a9bddcb2e15bf43(),
-		}, /*END SCHEMA*/
-		Description: "Effective policy values computed from the associated policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac628dd449067d9c37e3f717() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the invoker IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae0e8a8c351c5000162404aa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3
-				"s3": schemaAttributeb79e131b39de63ef5da960ef(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Output destinations for generated reports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb79e131b39de63ef5da960ef() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketOwner
-			"bucket_owner": schemaAttribute60103a515d48a66e7d7db2ec(),
-			// Property: BucketPath
-			"bucket_path": schemaAttribute468619c5ee345fe872dfb6f9(),
-		}, /*END SCHEMA*/
-		Description: "S3 configuration for report output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba4ac57d5f1b41167ea123e3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ClusterArn
-			"cluster_arn": schemaAttribute3e6bf278f31e0eb9e5761c32(),
-			// Property: Namespaces
-			"namespaces": schemaAttributedce85342f29c4afee6dee1ee(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebaeacce648190f2f5b5964c9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Tag values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6668c84b3e4c0bf9369d09e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the cross-account IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7e6269c1a9bddcb2e15bf43() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PolicyName
-			"policy_name": schemaAttribute90fa96488e44c9a250ddc4fe(),
-			// Property: Value
-			"value": schemaAttribute3735410d1f176414df1e31be(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed96fb975edf54c72c91e301f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The text of the assertion.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedce85342f29c4afee6dee1ee() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "EKS namespaces.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd498aaddb34a23c22e0a6d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede3fb7ec3eda0eb6a49d134f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The KMS key ID for encrypting service data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf11cb2c94508d672be3dce7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "S3 URL of a design file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeefacceaf4c619de8368822a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the service was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2c111518e32fbe40b6e9d59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the service was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef49e8e69edc684381246c4d2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Text
-				"text": schemaAttributed96fb975edf54c72c91e301f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Assertions associated with this service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7594aa5f5c6d11946dccc9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8529107c870eeb0b300c974() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_resiliencehubv2_service", serviceDataSource)
 }
@@ -480,7 +49,19 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 20,
 		//	  "type": "array"
 		//	}
-		"assertions": schemaAttributef49e8e69edc684381246c4d2(),
+		"assertions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Text
+					"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The text of the assertion.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Assertions associated with this service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociatedSystems
 		// CloudFormation resource type schema:
 		//
@@ -514,7 +95,25 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1000,
 		//	  "type": "array"
 		//	}
-		"associated_systems": schemaAttribute36f28c947f06c0251dd62427(),
+		"associated_systems": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SystemArn
+					"system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The system ARN.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UserJourneyIds
+					"user_journey_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "User journey IDs associated with this system.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Systems associated with this service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -523,7 +122,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeefacceaf4c619de8368822a9(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the service was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DependencyDiscovery
 		// CloudFormation resource type schema:
 		//
@@ -536,7 +139,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"dependency_discovery": schemaAttribute39ce1594fd493d5a65729740(),
+		"dependency_discovery": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Dependency discovery state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -545,7 +151,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 615,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1b1ded4786a503e9bc20f584(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EffectivePolicyValues
 		// CloudFormation resource type schema:
 		//
@@ -640,7 +249,110 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"effective_policy_values": schemaAttributeabd30f4c3c4c1d6f9355f036(),
+		"effective_policy_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilitySlo
+				"availability_slo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiAzDrApproach
+				"multi_az_dr_approach": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiAzRpo
+				"multi_az_rpo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiAzRto
+				"multi_az_rto": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiRegionDrApproach
+				"multi_region_dr_approach": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiRegionRpo
+				"multi_region_rpo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiRegionRto
+				"multi_region_rto": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyName
+						"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Effective policy values computed from the associated policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputSources
 		// CloudFormation resource type schema:
 		//
@@ -765,7 +477,73 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 20,
 		//	  "type": "array"
 		//	}
-		"input_sources": schemaAttribute184afcaafe55070f4572f5af(),
+		"input_sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceConfiguration
+					"resource_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CfnStackArn
+							"cfn_stack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of a CloudFormation stack.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DesignFileS3Url
+							"design_file_s3_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "S3 URL of a design file.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Eks
+							"eks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ClusterArn
+									"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "ARN of the EKS cluster.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Namespaces
+									"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "EKS namespaces.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceTags
+							"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Tag key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Tag values.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Resource tags to discover resources.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TfStateFileUrl
+							"tf_state_file_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "URL of a Terraform state file.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Resource configuration for an input source. Provide exactly one field.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Input sources for this service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -776,7 +554,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributede3fb7ec3eda0eb6a49d134f(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key ID for encrypting service data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -785,7 +566,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributedd498aaddb34a23c22e0a6d6(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PermissionModel
 		// CloudFormation resource type schema:
 		//
@@ -829,7 +613,35 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"permission_model": schemaAttribute1e4b9463b05fcf74b90bfc1a(),
+		"permission_model": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossAccountRoleArns
+				"cross_account_role_arns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CrossAccountRoleArn
+							"cross_account_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of the cross-account IAM role.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExternalId
+							"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "External ID for cross-account access.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Cross-account role ARNs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InvokerRoleName
+				"invoker_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Name of the invoker IAM role.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -838,7 +650,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schemaAttribute47d6c1d53093044333216198(),
+		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the resilience policy to associate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Regions
 		// CloudFormation resource type schema:
 		//
@@ -853,7 +668,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"regions": schemaAttributea0b458c8ebad1186317f98e1(),
+		"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "AWS regions for the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReportConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -911,7 +730,38 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"report_configuration": schemaAttributea6429fa9ccb7b1afc012738e(),
+		"report_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReportOutput
+				"report_output": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: S3
+							"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BucketOwner
+									"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Account ID of the bucket owner.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: BucketPath
+									"bucket_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "S3 bucket path where reports will be written.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "S3 configuration for report output.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Output destinations for generated reports.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for automatic report generation on a Service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceArn
 		// CloudFormation resource type schema:
 		//
@@ -920,7 +770,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_arn": schemaAttributef7594aa5f5c6d11946dccc9d(),
+		"service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -953,7 +806,24 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute2ff7dd396726cedb4776360c(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags assigned to the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -962,7 +832,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributef2c111518e32fbe40b6e9d59(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the service was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

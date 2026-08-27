@@ -15,102 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute287ed38819dd55d00787aa85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id for an Agent Alias generated at the server side.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b303e9cb7e5824e67e6cf63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Agent Version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5886c6401fc5f53b7d00f2db() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d6a13b33f12461fb628472c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndDate
-				"end_date": schemaAttribute946c71b51a78e30b0720c4fe(),
-				// Property: RoutingConfiguration
-				"routing_configuration": schemaAttribute85b88724d1afc970c5532fc0(),
-				// Property: StartDate
-				"start_date": schemaAttribute946c71b51a78e30b0720c4fe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of history events for an alias for an Agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b5c0dc444f25092dc92fcb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn representation of the Agent Alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85b88724d1afc970c5532fc0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AgentVersion
-				"agent_version": schemaAttribute4b303e9cb7e5824e67e6cf63(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Routing configuration for an Agent alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute946c71b51a78e30b0720c4fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Time Stamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabdb6bcf160478a9fbdbb3fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb214cb845da1f454f3abdf4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7c5f195b0afe1e307c590bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The statuses an Agent Alias can be in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8cb4e2d67a3203c84a90aee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_agent_alias", agentAliasDataSource)
 }
@@ -128,7 +32,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_alias_arn": schemaAttribute6b5c0dc444f25092dc92fcb5(),
+		"agent_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn representation of the Agent Alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentAliasHistoryEvents
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +83,38 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"agent_alias_history_events": schemaAttribute5d6a13b33f12461fb628472c(),
+		"agent_alias_history_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EndDate
+					"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Time Stamp.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RoutingConfiguration
+					"routing_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AgentVersion
+								"agent_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Agent Version.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Routing configuration for an Agent alias.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartDate
+					"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Time Stamp.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of history events for an alias for an Agent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentAliasId
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +125,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\bTSTALIASID\\b|[0-9a-zA-Z]+)$",
 		//	  "type": "string"
 		//	}
-		"agent_alias_id": schemaAttribute287ed38819dd55d00787aa85(),
+		"agent_alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id for an Agent Alias generated at the server side.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentAliasName
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +137,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"agent_alias_name": schemaAttributeabdb6bcf160478a9fbdbb3fd(),
+		"agent_alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentAliasStatus
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +155,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"agent_alias_status": schemaAttributed7c5f195b0afe1e307c590bf(),
+		"agent_alias_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The statuses an Agent Alias can be in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentId
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +167,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_id": schemaAttributef8cb4e2d67a3203c84a90aee(),
+		"agent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +178,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Time Stamp.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute946c71b51a78e30b0720c4fe(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +191,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeb214cb845da1f454f3abdf4f(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +221,19 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"routing_configuration": schemaAttribute85b88724d1afc970c5532fc0(),
+		"routing_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AgentVersion
+					"agent_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent Version.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Routing configuration for an Agent alias.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +251,12 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute5886c6401fc5f53b7d00f2db(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +264,10 @@ func agentAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Time Stamp.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute946c71b51a78e30b0720c4fe(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

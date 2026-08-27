@@ -14,26 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1eabc2c6a828b651e5a600e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User account id, used as part of the primary identifier for the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4874a93e05259337359ddc10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Region, used as part of the primary identifier for the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0abf240cf87ee771e019d4f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_arczonalshift_autoshift_observer_notification_status", autoshiftObserverNotificationStatusDataSource)
 }
@@ -50,7 +30,10 @@ func autoshiftObserverNotificationStatusDataSource(ctx context.Context) (datasou
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute1eabc2c6a828b651e5a600e0(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User account id, used as part of the primary identifier for the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
@@ -61,7 +44,10 @@ func autoshiftObserverNotificationStatusDataSource(ctx context.Context) (datasou
 		//	  "pattern": "^[a-z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"region": schemaAttribute4874a93e05259337359ddc10(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Region, used as part of the primary identifier for the resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +57,9 @@ func autoshiftObserverNotificationStatusDataSource(ctx context.Context) (datasou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributee0abf240cf87ee771e019d4f(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

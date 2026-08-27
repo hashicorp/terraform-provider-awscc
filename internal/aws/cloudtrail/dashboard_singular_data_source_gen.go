@@ -15,180 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05c2935b946fc99192eb56bf() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef2af1fb497fa597477ed5e0e(),
-				// Property: Value
-				"value": schemaAttribute8a60c94f415287bd957a487b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ed07dd1f6becb751361b3a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the dashboard.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38cfa681f763ac0282575aad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The frequency unit. Supported values are HOURS and DAYS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e30ae5d86a927e5c4befc52() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The placeholder keys in the QueryStatement. For example: $StartTime$, $EndTime$, $Period$.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5eaef461749782f5af29086c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the dashboard. Values are CREATING, CREATED, UPDATING, UPDATED and DELETING.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64fc71cdbcea74402b028ac6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The frequency value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72f895adac1eb148ad80d701() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: QueryParameters
-				"query_parameters": schemaAttribute4e30ae5d86a927e5c4befc52(),
-				// Property: QueryStatement
-				"query_statement": schemaAttribute7d06e91b3177e4cbd4c2be0d(),
-				// Property: ViewProperties
-				"view_properties": schemaAttributef1eb349f27d74ad3db8e1a95(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of widgets on the dashboard",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d06e91b3177e4cbd4c2be0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SQL query statement on one or more event data stores.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89e044b0243c10ac306c64ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the schedule. Supported values are ENABLED and DISABLED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a60c94f415287bd957a487b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8be351519046222c03e37916() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the dashboard. Values are CUSTOM and MANAGED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e5be3204a26ea7d46c2dcad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp showing when the dashboard was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5e83204b24e56883016faf2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Frequency
-			"frequency": schemaAttributed2cddf5b888cbecf3f61dc27(),
-			// Property: Status
-			"status": schemaAttribute89e044b0243c10ac306c64ea(),
-			// Property: TimeOfDay
-			"time_of_day": schemaAttributece86d288dfe41b2e34440294(),
-		}, /*END SCHEMA*/
-		Description: "Configures the automatic refresh schedule for the dashboard. Includes the frequency unit (DAYS or HOURS) and value, as well as the status (ENABLED or DISABLED) of the refresh schedule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9f47e9585d903e1c51bc7a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of the dashboard creation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb18ae5f57b545b06f8f610a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the dashboard.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece86d288dfe41b2e34440294() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "StartTime of the automatic schedule refresh.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2cddf5b888cbecf3f61dc27() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Unit
-			"unit": schemaAttribute38cfa681f763ac0282575aad(),
-			// Property: Value
-			"value": schemaAttribute64fc71cdbcea74402b028ac6(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1eb349f27d74ad3db8e1a95() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The view properties of the widget.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2af1fb497fa597477ed5e0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5e0ab2310d39f2227ec4433() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the dashboard is protected from termination.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudtrail_dashboard", dashboardDataSource)
 }
@@ -204,7 +30,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp of the dashboard creation.",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schemaAttributeb9f47e9585d903e1c51bc7a1(),
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of the dashboard creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DashboardArn
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +42,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9._/\\-:]+$",
 		//	  "type": "string"
 		//	}
-		"dashboard_arn": schemaAttributecb18ae5f57b545b06f8f610a(),
+		"dashboard_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the dashboard.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +54,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute0ed07dd1f6becb751361b3a3(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the dashboard.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RefreshSchedule
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +103,38 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"refresh_schedule": schemaAttributeb5e83204b24e56883016faf2(),
+		"refresh_schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Frequency
+				"frequency": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The frequency unit. Supported values are HOURS and DAYS.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The frequency value.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status of the schedule. Supported values are ENABLED and DISABLED.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeOfDay
+				"time_of_day": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "StartTime of the automatic schedule refresh.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configures the automatic refresh schedule for the dashboard. Includes the frequency unit (DAYS or HOURS) and value, as well as the status (ENABLED or DISABLED) of the refresh schedule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +149,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute5eaef461749782f5af29086c(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the dashboard. Values are CREATING, CREATED, UPDATING, UPDATED and DELETING.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +180,23 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute05c2935b946fc99192eb56bf(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TerminationProtectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +204,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the dashboard is protected from termination.",
 		//	  "type": "boolean"
 		//	}
-		"termination_protection_enabled": schemaAttributef5e0ab2310d39f2227ec4433(),
+		"termination_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the dashboard is protected from termination.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +219,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute8be351519046222c03e37916(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the dashboard. Values are CUSTOM and MANAGED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -339,7 +230,10 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp showing when the dashboard was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
 		//	  "type": "string"
 		//	}
-		"updated_timestamp": schemaAttribute9e5be3204a26ea7d46c2dcad(),
+		"updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp showing when the dashboard was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Widgets
 		// CloudFormation resource type schema:
 		//
@@ -394,7 +288,32 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"widgets": schemaAttribute72f895adac1eb148ad80d701(),
+		"widgets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: QueryParameters
+					"query_parameters": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The placeholder keys in the QueryStatement. For example: $StartTime$, $EndTime$, $Period$.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: QueryStatement
+					"query_statement": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The SQL query statement on one or more event data stores.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ViewProperties
+					"view_properties":   // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The view properties of the widget.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of widgets on the dashboard",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

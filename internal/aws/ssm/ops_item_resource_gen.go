@@ -22,187 +22,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute00f08f44281094912e9c5e64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the OpsItem was last modified.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e51a18510959ded29d03f1e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The priority of the OpsItem.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22a558d9ba6735b486236050() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user who last modified the OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute260d70b02c0afed9fee9924a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6bce3a72f7cb0fac07f7893a(),
-				// Property: Value
-				"value": schemaAttribute6bce3a72f7cb0fac07f7893a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the OpsItem.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b057fdb54dbf75799395f52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d6b2ce8203c4b080de3e328() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The origin of the OpsItem.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33f26c463e2e9c1a8063c1bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the OpsItem was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute353aed96c82b7836a7db8143() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The severity of the OpsItem.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute461f5d2192a94cb1082a1301() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user who created the OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d406939707740645fd28a24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the OpsItem.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute593a04116a84c95339ed00d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The category of the OpsItem.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bce3a72f7cb0fac07f7893a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89d51453be3c5d74d5d292a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute984add96237583db9ee83f6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The title of the OpsItem.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9aa85e32be0ab2605794a7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed84f4d51a57d273e5f5cc688() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3ebfa26a64a6f1955fb8a16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the OpsItem.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ssm_ops_item", opsItemResource)
 	registry.AddListResourceFactory("awscc_ssm_ops_item", generic.NewListResource(opsItemResource))
@@ -219,7 +38,14 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The category of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"category": schemaAttribute593a04116a84c95339ed00d2(),
+		"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The category of the OpsItem.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +53,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The user who created the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute461f5d2192a94cb1082a1301(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user who created the OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +68,14 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute33f26c463e2e9c1a8063c1bd(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the OpsItem was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +83,10 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute4d406939707740645fd28a24(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the OpsItem.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedBy
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +94,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The user who last modified the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"last_modified_by": schemaAttribute22a558d9ba6735b486236050(),
+		"last_modified_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user who last modified the OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +109,14 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schemaAttribute00f08f44281094912e9c5e64(),
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the OpsItem was last modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OpsItemArn
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +124,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"ops_item_arn": schemaAttribute89d51453be3c5d74d5d292a2(),
+		"ops_item_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OpsItemId
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +139,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(oi)-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"ops_item_id": schemaAttributef3ebfa26a64a6f1955fb8a16(),
+		"ops_item_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OpsItemType
 		// CloudFormation resource type schema:
 		//
@@ -286,7 +153,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of OpsItem.",
 		//	  "type": "string"
 		//	}
-		"ops_item_type": schemaAttribute2b057fdb54dbf75799395f52(),
+		"ops_item_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -294,7 +167,14 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The priority of the OpsItem.",
 		//	  "type": "integer"
 		//	}
-		"priority": schemaAttribute0e51a18510959ded29d03f1e(),
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The priority of the OpsItem.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Severity
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +182,14 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The severity of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"severity": schemaAttribute353aed96c82b7836a7db8143(),
+		"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The severity of the OpsItem.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +197,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The origin of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"source": schemaAttribute2d6b2ce8203c4b080de3e328(),
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The origin of the OpsItem.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -318,7 +211,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributed84f4d51a57d273e5f5cc688(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -344,7 +243,40 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute260d70b02c0afed9fee9924a(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the OpsItem.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -352,7 +284,10 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The title of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"title": schemaAttribute984add96237583db9ee83f6a(),
+		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The title of the OpsItem.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -360,7 +295,13 @@ func opsItemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"version": schemaAttributeb9aa85e32be0ab2605794a7c(),
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the OpsItem.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

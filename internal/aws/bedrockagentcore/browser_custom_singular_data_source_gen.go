@@ -16,245 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute078be7a82d03c861112d3496() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributeb7813206c29c20fd59b6f201(),
-		}, /*END SCHEMA*/
-		Description: "Browser signing configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0960af7a0a4e27f82c8df495() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Network modes supported by browser",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20df3b7a14aa2956db3563e8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21bb28c3e048b9fd0ba09a22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of browser enterprise policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c06b3faf3ed166d62ae329c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute9f7efda3ee582b34b18e70c1(),
-			// Property: Prefix
-			"prefix": schemaAttribute9f7efda3ee582b34b18e70c1(),
-		}, /*END SCHEMA*/
-		Description: "S3 Location Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute456666395d37ce9560030ec3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Location
-				"location": schemaAttributecab71d2c7ee97e2924d5920f(),
-				// Property: Type
-				"type": schemaAttribute21bb28c3e048b9fd0ba09a22(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of enterprise policy files for the browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4641e4672e1784bf19640f56() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54f9291e649f8ff654d1b49a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6590bb1255a4a23a854b0a29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6823c8436109200c8977f356() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributeb7813206c29c20fd59b6f201(),
-			// Property: S3Location
-			"s3_location": schemaAttribute3c06b3faf3ed166d62ae329c(),
-		}, /*END SCHEMA*/
-		Description: "Recording configuration for browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6aa2c4997413a357709bc9d9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NetworkMode
-			"network_mode": schemaAttribute0960af7a0a4e27f82c8df495(),
-			// Property: VpcConfig
-			"vpc_config": schemaAttribute8e50743bbdb04a9aad63b8f2(),
-		}, /*END SCHEMA*/
-		Description: "Network configuration for browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c0b098ce6bdece653fd4cc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reason for failure if the browser creation or operation failed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b69f0e8209a82ad6643564a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Secrets Manager secret ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8da8c41b0b4f09a748de7bba() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e50743bbdb04a9aad63b8f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroups
-			"security_groups": schemaAttributed6e21c3ef2c2c582dd33acd8(),
-			// Property: Subnets
-			"subnets": schemaAttributedb6cab06ec7bf34906f857e6(),
-		}, /*END SCHEMA*/
-		Description: "Network mode configuration for VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9eea5e677b39998041e05191() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateLocation
-				"certificate_location": schemaAttributeb3f83aed39f205a84bb6691b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of root CA certificates in PEM format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f7efda3ee582b34b18e70c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3f83aed39f205a84bb6691b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttribute7b69f0e8209a82ad6643564a(),
-		}, /*END SCHEMA*/
-		Description: "Certificate location in Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7813206c29c20fd59b6f201() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf9763d91836a86fc6252e12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a Browser resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecab71d2c7ee97e2924d5920f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute9f7efda3ee582b34b18e70c1(),
-			// Property: Prefix
-			"prefix": schemaAttribute9f7efda3ee582b34b18e70c1(),
-		}, /*END SCHEMA*/
-		Description: "The S3 location of the enterprise policy file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbf8b09be1a075d284709f96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6e21c3ef2c2c582dd33acd8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Security groups for VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb6cab06ec7bf34906f857e6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Subnets for VPC",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef2c69ff0ffb944f8250d96d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the browser was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef470fa506fd790638f2f3474() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the browser was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_browser_custom", browserCustomDataSource)
 }
@@ -271,7 +32,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?\\/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"browser_arn": schemaAttributebf9763d91836a86fc6252e12(),
+		"browser_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a Browser resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BrowserId
 		// CloudFormation resource type schema:
 		//
@@ -280,7 +44,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"browser_id": schemaAttribute54f9291e649f8ff654d1b49a(),
+		"browser_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BrowserSigning
 		// CloudFormation resource type schema:
 		//
@@ -295,7 +62,16 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"browser_signing": schemaAttribute078be7a82d03c861112d3496(),
+		"browser_signing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Browser signing configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Certificates
 		// CloudFormation resource type schema:
 		//
@@ -331,7 +107,26 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"certificates": schemaAttribute9eea5e677b39998041e05191(),
+		"certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateLocation
+					"certificate_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecretArn
+							"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Secrets Manager secret ARN.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Certificate location in Secrets Manager.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of root CA certificates in PEM format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +135,11 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributef470fa506fd790638f2f3474(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the browser was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +147,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The description of the browser.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributecbf8b09be1a075d284709f96(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnterprisePolicies
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +199,34 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"enterprise_policies": schemaAttribute456666395d37ce9560030ec3(),
+		"enterprise_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Location
+					"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Bucket
+							"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The S3 location of the enterprise policy file.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of browser enterprise policy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of enterprise policy files for the browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -406,7 +235,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttribute20df3b7a14aa2956db3563e8(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -414,7 +246,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The reason for failure if the browser creation or operation failed.",
 		//	  "type": "string"
 		//	}
-		"failure_reason": schemaAttribute6c0b098ce6bdece653fd4cc0(),
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for failure if the browser creation or operation failed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -423,7 +258,11 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttributeef2c69ff0ffb944f8250d96d(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the browser was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -431,7 +270,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the browser.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6590bb1255a4a23a854b0a29(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -489,7 +331,36 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"network_configuration": schemaAttribute6aa2c4997413a357709bc9d9(),
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NetworkMode
+				"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Network modes supported by browser",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfig
+				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroups
+						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network mode configuration for VPC",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Network configuration for browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordingConfig
 		// CloudFormation resource type schema:
 		//
@@ -523,7 +394,31 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"recording_config": schemaAttribute6823c8436109200c8977f356(),
+		"recording_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 Location Configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Recording configuration for browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -539,7 +434,10 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute4641e4672e1784bf19640f56(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -557,7 +455,12 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute8da8c41b0b4f09a748de7bba(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,98 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute15ffe372fce504d1cc31fb52() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6875424e17a2b1b2a058f129(),
-				// Property: Value
-				"value": schemaAttribute5ef2aa62a07b1a059aad6616(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>An optional list of metadata items that you can associate with the Proton environment account connection. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute251ec2a7346f8f498ff0469c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. AWS Proton uses this role to provision infrastructure resources in the associated environment account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e102f079058c8a3937757f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AWS Proton environment that's created in the associated management account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3190744934d5df2f1d6b4722() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM service role that AWS Proton uses when provisioning directly defined components in the associated environment account. It determines the scope of infrastructure that a component can provision in the account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute389acb5ebaae44e070cf0d82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The environment account that's connected to the environment account connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c1f67bfd7c529477682890b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the environment account connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute519314fb34f06a01a85eede3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the environment account connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ef2aa62a07b1a059aad6616() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The value of the resource tag.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6875424e17a2b1b2a058f129() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The key of the resource tag.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83f278c2b56322c4682598e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the environment account connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ee4a043e1cf34ea408103a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM service role in the environment account. AWS Proton uses this role to provision infrastructure resources using CodeBuild-based provisioning in the associated environment account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec14e29940f04c044116983c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the management account that accepts or rejects the environment account connection. You create an manage the AWS Proton environment in this account. If the management account accepts the environment account connection, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_proton_environment_account_connection", environmentAccountConnectionDataSource)
 }
@@ -121,7 +29,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Amazon Resource Name (ARN) of the environment account connection.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3c1f67bfd7c529477682890b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the environment account connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CodebuildRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +43,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/([\\w+=,.@-]{1,512}[/:])*([\\w+=,.@-]{1,64})$",
 		//	  "type": "string"
 		//	}
-		"codebuild_role_arn": schemaAttribute8ee4a043e1cf34ea408103a4(),
+		"codebuild_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM service role in the environment account. AWS Proton uses this role to provision infrastructure resources using CodeBuild-based provisioning in the associated environment account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComponentRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +57,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/([\\w+=,.@-]{1,512}[/:])*([\\w+=,.@-]{1,64})$",
 		//	  "type": "string"
 		//	}
-		"component_role_arn": schemaAttribute3190744934d5df2f1d6b4722(),
+		"component_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM service role that AWS Proton uses when provisioning directly defined components in the associated environment account. It determines the scope of infrastructure that a component can provision in the account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentAccountId
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +69,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"environment_account_id": schemaAttribute389acb5ebaae44e070cf0d82(),
+		"environment_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The environment account that's connected to the environment account connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentName
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +83,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^[0-9A-Za-z]+[0-9A-Za-z_\\-]*$",
 		//	  "type": "string"
 		//	}
-		"environment_name": schemaAttribute2e102f079058c8a3937757f3(),
+		"environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the AWS Proton environment that's created in the associated management account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +95,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"environment_account_connection_id": schemaAttribute83f278c2b56322c4682598e3(),
+		"environment_account_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the environment account connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagementAccountId
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +107,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"management_account_id": schemaAttributec14e29940f04c044116983c2(),
+		"management_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the management account that accepts or rejects the environment account connection. You create an manage the AWS Proton environment in this account. If the management account accepts the environment account connection, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +121,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):iam::\\d{12}:role/([\\w+=,.@-]{1,512}[/:])*([\\w+=,.@-]{1,64})$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute251ec2a7346f8f498ff0469c(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. AWS Proton uses this role to provision infrastructure resources in the associated environment account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +137,10 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute519314fb34f06a01a85eede3(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the environment account connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +173,24 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute15ffe372fce504d1cc31fb52(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The key of the resource tag.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The value of the resource tag.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>An optional list of metadata items that you can associate with the Proton environment account connection. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton User Guide</i>.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,107 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2198ed929fb91809b4549109() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute341f3b21ed87c36484222b05() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoAcceptSharedAssociations
-			"auto_accept_shared_associations": schemaAttributeafc44a6579bd03633802030c(),
-			// Property: Igmpv2Support
-			"igmpv_2_support": schemaAttribute4944587f0038a0a794d59bb6(),
-			// Property: StaticSourcesSupport
-			"static_sources_support": schemaAttribute77a217dcba19e5d0657728c7(),
-		}, /*END SCHEMA*/
-		Description: "The options for the transit gateway multicast domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute371b7f0d129f936883470818() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute394dfdcaafab9abb8af7e368() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute371b7f0d129f936883470818(),
-				// Property: Value
-				"value": schemaAttribute6bf23189a52ba1bd125bf85e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags for the transit gateway multicast domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4944587f0038a0a794d59bb6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bf23189a52ba1bd125bf85e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73b0e125b1c3ca30e006f4a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77a217dcba19e5d0657728c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf0de328883d4ad2173f695b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the transit gateway multicast domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafc44a6579bd03633802030c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece65a0a8418bb34d8c3789f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time the transit gateway multicast domain was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee22382f6327f69a74eb5ec8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway multicast domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_multicast_domain", transitGatewayMulticastDomainDataSource)
 }
@@ -132,7 +31,11 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttributece65a0a8418bb34d8c3789f0(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time the transit gateway multicast domain was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Options
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +58,27 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "object"
 		//	}
-		"options": schemaAttribute341f3b21ed87c36484222b05(),
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoAcceptSharedAssociations
+				"auto_accept_shared_associations": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Igmpv2Support
+				"igmpv_2_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StaticSourcesSupport
+				"static_sources_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The options for the transit gateway multicast domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +86,10 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The state of the transit gateway multicast domain.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttributeaf0de328883d4ad2173f695b(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the transit gateway multicast domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +111,24 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute394dfdcaafab9abb8af7e368(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the transit gateway multicast domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -193,7 +136,10 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The ID of the transit gateway.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schemaAttribute2198ed929fb91809b4549109(),
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayMulticastDomainArn
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +147,10 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_multicast_domain_arn": schemaAttribute73b0e125b1c3ca30e006f4a9(),
+		"transit_gateway_multicast_domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayMulticastDomainId
 		// CloudFormation resource type schema:
 		//
@@ -209,7 +158,10 @@ func transitGatewayMulticastDomainDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The ID of the transit gateway multicast domain.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_multicast_domain_id": schemaAttributee22382f6327f69a74eb5ec8f(),
+		"transit_gateway_multicast_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway multicast domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

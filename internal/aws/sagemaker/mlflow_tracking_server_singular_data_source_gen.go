@@ -14,91 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0036f007bdd7c4eb5eea3979() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag to enable Automatic SageMaker Model Registration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute123eb543e393487200497fcb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13b4911f1657ec49e2d215ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f619186fb45b7f231218831() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon S3 URI for MLFlow Tracking Server artifacts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aabfb9fe23eff1f30344cf4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8456c3292e369e00a86810bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the MLFlow Tracking Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bc0b5444be8a3b5a0b9356b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The start of the time window for maintenance of the MLFlow Tracking Server in UTC time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea93cf6441b1685847d76327d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7aabfb9fe23eff1f30344cf4(),
-				// Property: Value
-				"value": schemaAttribute13b4911f1657ec49e2d215ec(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1506e4941f1682c7c4f35f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MLFlow Version used on the MLFlow Tracking Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedde1d3730e1e51594978b1a9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the MLFlow Tracking Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe88e7584ff6aaff3efc8bb9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The size of the MLFlow Tracking Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_mlflow_tracking_server", mlflowTrackingServerDataSource)
 }
@@ -117,7 +32,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^s3:\\/\\/([^\\/]+)\\/?(.*)$",
 		//	  "type": "string"
 		//	}
-		"artifact_store_uri": schemaAttribute1f619186fb45b7f231218831(),
+		"artifact_store_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon S3 URI for MLFlow Tracking Server artifacts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutomaticModelRegistration
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +43,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "A flag to enable Automatic SageMaker Model Registration.",
 		//	  "type": "boolean"
 		//	}
-		"automatic_model_registration": schemaAttribute0036f007bdd7c4eb5eea3979(),
+		"automatic_model_registration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag to enable Automatic SageMaker Model Registration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MlflowVersion
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +57,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^\\d+(\\.\\d+)+$",
 		//	  "type": "string"
 		//	}
-		"mlflow_version": schemaAttributec1506e4941f1682c7c4f35f6(),
+		"mlflow_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The MLFlow Version used on the MLFlow Tracking Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +71,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role\\/?[a-zA-Z_0-9+=,.@\\-_\\/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute123eb543e393487200497fcb(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +107,24 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributea93cf6441b1685847d76327d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingServerArn
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +134,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-tracking-server/.*$",
 		//	  "type": "string"
 		//	}
-		"tracking_server_arn": schemaAttribute8456c3292e369e00a86810bb(),
+		"tracking_server_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the MLFlow Tracking Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingServerName
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +148,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$",
 		//	  "type": "string"
 		//	}
-		"tracking_server_name": schemaAttributedde1d3730e1e51594978b1a9(),
+		"tracking_server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the MLFlow Tracking Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingServerSize
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +164,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tracking_server_size": schemaAttributefe88e7584ff6aaff3efc8bb9(),
+		"tracking_server_size": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The size of the MLFlow Tracking Server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WeeklyMaintenanceWindowStart
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +177,10 @@ func mlflowTrackingServerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):([0-5]\\d)$",
 		//	  "type": "string"
 		//	}
-		"weekly_maintenance_window_start": schemaAttribute8bc0b5444be8a3b5a0b9356b(),
+		"weekly_maintenance_window_start": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The start of the time window for maintenance of the MLFlow Tracking Server in UTC time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

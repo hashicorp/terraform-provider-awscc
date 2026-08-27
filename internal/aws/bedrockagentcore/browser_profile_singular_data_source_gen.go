@@ -16,89 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute234b2c7534c3f4880190a6db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a BrowserProfile resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24988ff21e34dba03dc94cdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the browser profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2faa2ad895eab953f3976399() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the browser profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a285aa934ead3b539cf109b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the browser profile was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ab0759be46177255dd22c11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the browser profile was last saved.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a3521e6552a4453fbe17ff4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ID of the last saved browser.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute747c9611656dc9386f3f44d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp when the browser profile was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74d579be76540666abb26d04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the browser profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76f6f5c2839bbc5fa181a8fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of browser profile",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute790faffbb20b518535376363() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ID of the last saved browser session.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec88edd4441b5c3c10b23cd5f() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_browser_profile", browserProfileDataSource)
 }
@@ -115,7 +32,11 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute747c9611656dc9386f3f44d1(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the browser profile was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +44,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The description of the browser profile.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2faa2ad895eab953f3976399(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the browser profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastSavedAt
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +56,11 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_saved_at": schemaAttribute5ab0759be46177255dd22c11(),
+		"last_saved_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the browser profile was last saved.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastSavedBrowserId
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +69,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^((aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}))?$",
 		//	  "type": "string"
 		//	}
-		"last_saved_browser_id": schemaAttribute6a3521e6552a4453fbe17ff4(),
+		"last_saved_browser_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ID of the last saved browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastSavedBrowserSessionId
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +81,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^([0-9a-zA-Z]{1,40})?$",
 		//	  "type": "string"
 		//	}
-		"last_saved_browser_session_id": schemaAttribute790faffbb20b518535376363(),
+		"last_saved_browser_session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ID of the last saved browser session.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +93,11 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute3a285aa934ead3b539cf109b(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp when the browser profile was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +106,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute74d579be76540666abb26d04(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the browser profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +118,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:browser-profile/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"profile_arn": schemaAttribute234b2c7534c3f4880190a6db(),
+		"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a BrowserProfile resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +130,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"profile_id": schemaAttribute24988ff21e34dba03dc94cdf(),
+		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the browser profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +147,10 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute76f6f5c2839bbc5fa181a8fd(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of browser profile",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +168,12 @@ func browserProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributec88edd4441b5c3c10b23cd5f(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

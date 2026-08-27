@@ -17,53 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute092d42def7ea9cadbe932332() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. ",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute22281c114c08dde4f8a3c0c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bffd0c9fb7c7689a8ecd211() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the SourceCredential resource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69d7ef75f473c41ee64921aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: " The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Username is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c3d54b152793c63532d1d01() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.",
-		Required:    true,
-		// Token is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_codebuild_source_credential", sourceCredentialResource)
 	registry.AddListResourceFactory("awscc_codebuild_source_credential", generic.NewListResource(sourceCredentialResource))
@@ -80,7 +33,13 @@ func sourceCredentialResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the SourceCredential resource.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5bffd0c9fb7c7689a8ecd211(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the SourceCredential resource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AuthType
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +47,10 @@ func sourceCredentialResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. ",
 		//	  "type": "string"
 		//	}
-		"auth_type": schemaAttribute092d42def7ea9cadbe932332(),
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of authentication used by the credentials. Valid options are OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, or SECRETS_MANAGER. ",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerType
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +58,13 @@ func sourceCredentialResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.",
 		//	  "type": "string"
 		//	}
-		"server_type": schemaAttribute22281c114c08dde4f8a3c0c8(),
+		"server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Token
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +72,11 @@ func sourceCredentialResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.",
 		//	  "type": "string"
 		//	}
-		"token": schemaAttribute8c3d54b152793c63532d1d01(),
+		"token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket, this is either the access token or the app password. For the authType CODECONNECTIONS, this is the connectionArn. For the authType SECRETS_MANAGER, this is the secretArn.",
+			Required:    true,
+			// Token is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +84,15 @@ func sourceCredentialResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": " The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections.",
 		//	  "type": "string"
 		//	}
-		"username": schemaAttribute69d7ef75f473c41ee64921aa(),
+		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: " The Bitbucket username when the authType is BASIC_AUTH. This parameter is not valid for other types of source providers or connections.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Username is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

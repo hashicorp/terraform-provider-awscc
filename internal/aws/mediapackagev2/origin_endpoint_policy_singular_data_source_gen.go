@@ -15,40 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute183548f6a9127d49d64cea19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57f9bfe0dd825cf493a43002() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CdnIdentifierSecretArns
-			"cdn_identifier_secret_arns": schemaAttributeb099bfce80f11ec785bdcdb0(),
-			// Property: SecretsRoleArn
-			"secrets_role_arn": schemaAttribute58727ae0e32f67bb862b57e7(),
-		}, /*END SCHEMA*/
-		Description: "<p>The settings to enable CDN authorization headers in MediaPackage.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58727ae0e32f67bb862b57e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb099bfce80f11ec785bdcdb0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackagev2_origin_endpoint_policy", originEndpointPolicyDataSource)
 }
@@ -88,7 +54,23 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cdn_auth_configuration": schemaAttribute57f9bfe0dd825cf493a43002(),
+		"cdn_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CdnIdentifierSecretArns
+				"cdn_identifier_secret_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "<p>The ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsRoleArn
+				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The settings to enable CDN authorization headers in MediaPackage.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +80,9 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_group_name": schemaAttribute183548f6a9127d49d64cea19(),
+		"channel_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +92,9 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schemaAttribute183548f6a9127d49d64cea19(),
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: OriginEndpointName
 		// CloudFormation resource type schema:
 		//
@@ -118,14 +104,18 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"origin_endpoint_name": schemaAttribute183548f6a9127d49d64cea19(),
+		"origin_endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"policy": schemaAttribute183548f6a9127d49d64cea19(),
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

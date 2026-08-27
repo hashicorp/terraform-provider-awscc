@@ -21,169 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0055e91ca1e7cb4289d1b1b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The entity that created the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0993af8d98b21a1ec97f9ac2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NotAfter
-			"not_after": schemaAttribute89e473048a13206c774fe68f(),
-			// Property: NotBefore
-			"not_before": schemaAttributee01a733729138b66b81b456b(),
-		}, /*END SCHEMA*/
-		Description: "The validity period of the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute380a5caf481c554cf36b6cfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The distribution status of the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c4b045d0a5e4d9ede0f54d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the EKS cluster that the certificate authority belongs to.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 100),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5818e73a603cc0d8f2ab7b8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The signing status of the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b724c07aebacb3d708476b1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FinalAutoActivation
-			"final_auto_activation": schemaAttributebf408184db34ab7ec42dec0d(),
-			// Property: FirstAutoActivation
-			"first_auto_activation": schemaAttributed8f937a7ff15f2efc787f61c(),
-		}, /*END SCHEMA*/
-		Description: "The scheduled auto-activation events for the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute626e5c9bf44ebbe86037fa70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The entity that activated the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e89a1aba06e5519ea242216() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the certificate authority was activated.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89e473048a13206c774fe68f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The end of the validity period for the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb62ce8cc9e88ffc2e69971e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Base64 encoded certificate authority data.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb892a08dda23bcbdaa2838f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the certificate authority.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf408184db34ab7ec42dec0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The deadline by which EKS will auto-activate this certificate authority (notAfter minus 45 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed8f937a7ff15f2efc787f61c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The earliest date EKS may auto-activate this certificate authority (notAfter minus 6 months).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede20c202c480fac05180760b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether activation of this certificate authority can still be rolled back.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01a733729138b66b81b456b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The start of the validity period for the certificate authority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8afae20cb2133e048d2b7b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when the certificate authority was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_eks_certificate_authority", certificateAuthorityResource)
 }
@@ -199,7 +36,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The timestamp when the certificate authority was activated.",
 		//	  "type": "string"
 		//	}
-		"activated_at": schemaAttribute7e89a1aba06e5519ea242216(),
+		"activated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the certificate authority was activated.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ActivatedBy
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +50,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The entity that activated the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"activated_by": schemaAttribute626e5c9bf44ebbe86037fa70(),
+		"activated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The entity that activated the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +66,16 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttribute3c4b045d0a5e4d9ede0f54d7(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the EKS cluster that the certificate authority belongs to.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +83,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The timestamp when the certificate authority was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributee8afae20cb2133e048d2b7b2(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when the certificate authority was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -233,7 +97,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The entity that created the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute0055e91ca1e7cb4289d1b1b5(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The entity that created the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -241,7 +111,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The Base64 encoded certificate authority data.",
 		//	  "type": "string"
 		//	}
-		"data": schemaAttributeb62ce8cc9e88ffc2e69971e4(),
+		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Base64 encoded certificate authority data.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DistributionStatus
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +125,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The distribution status of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"distribution_status": schemaAttribute380a5caf481c554cf36b6cfd(),
+		"distribution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The distribution status of the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +139,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The unique identifier of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_id": schemaAttributeb892a08dda23bcbdaa2838f6(),
+		"certificate_authority_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RollbackAvailable
 		// CloudFormation resource type schema:
 		//
@@ -265,7 +153,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Whether activation of this certificate authority can still be rolled back.",
 		//	  "type": "boolean"
 		//	}
-		"rollback_available": schemaAttributede20c202c480fac05180760b(),
+		"rollback_available": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether activation of this certificate authority can still be rolled back.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduledEvents
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +178,25 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scheduled_events": schemaAttribute5b724c07aebacb3d708476b1(),
+		"scheduled_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FinalAutoActivation
+				"final_auto_activation": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The deadline by which EKS will auto-activate this certificate authority (notAfter minus 45 days).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FirstAutoActivation
+				"first_auto_activation": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The earliest date EKS may auto-activate this certificate authority (notAfter minus 6 months).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scheduled auto-activation events for the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SigningStatus
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +204,13 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The signing status of the certificate authority.",
 		//	  "type": "string"
 		//	}
-		"signing_status": schemaAttribute5818e73a603cc0d8f2ab7b8a(),
+		"signing_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The signing status of the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Validity
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +229,25 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"validity": schemaAttribute0993af8d98b21a1ec97f9ac2(),
+		"validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NotAfter
+				"not_after": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The end of the validity period for the certificate authority.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NotBefore
+				"not_before": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The start of the validity period for the certificate authority.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The validity period of the certificate authority.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

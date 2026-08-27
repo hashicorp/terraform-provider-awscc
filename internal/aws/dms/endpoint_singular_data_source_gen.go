@@ -15,2237 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0111369a2dea1e968d2346d9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to change the number of threads that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01495dde9303494b67bc8473() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication type you use to access the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0164bd01830ec2c5bf338cc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies \"kafka-default-topic\" as the migration topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0379d1e58c40d4878b08d7f6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum size (in KB) of any .csv file used to load data on an S3 bucket and transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute03e8203106282413485fa8eb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When this attribute is set to Y, AWS DMS only reads changes from transaction log backups and doesn't read from the active transaction log file during ongoing replication. Setting this parameter to Y enables you to control active transaction log file growth during full load and ongoing replication tasks. However, it can add some source latency to ongoing replication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute048aa0c29509453ed6503bcc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user name provided with the auth-role option of the AuthType setting for a Redis target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0678733a8de2e450c34f3fd9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute099658b521e6fff2f7161f30() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Cleans and recreates table metadata information on the replication instance when a mismatch occurs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a60a64f540125c4572039cf() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b0de4f80fae47a313bc63f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that enables AWS DMS to specify a predefined (canned) access control list (ACL) for objects created in an Amazon S3 bucket as .csv or .parquet files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b271a13586f96eaede28d99() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port used by the endpoint database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c37d93245b2ca8b84c77235() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user name to be used to log in to the endpoint database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ce9132c089775ce924930f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The secure user name you created when you first set up your Amazon MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f6c54e21bb79ba28a731000() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The schema in which the operational DDL database artifacts are created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f6dc8024f144894afa91ecd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Broker
-			"broker": schemaAttribute4cac07eec372300b63d2ce68(),
-			// Property: IncludeControlDetails
-			"include_control_details": schemaAttributeb06d63213b1647f8043657a6(),
-			// Property: IncludeNullAndEmpty
-			"include_null_and_empty": schemaAttribute75fe934f752caa25a2288f87(),
-			// Property: IncludePartitionValue
-			"include_partition_value": schemaAttributeebcc99d50469d0297f7190e6(),
-			// Property: IncludeTableAlterOperations
-			"include_table_alter_operations": schemaAttribute4633909824ec59024b20eaad(),
-			// Property: IncludeTransactionDetails
-			"include_transaction_details": schemaAttributec20cff9598d00e3ef9ed6030(),
-			// Property: MessageFormat
-			"message_format": schemaAttribute244bddc4eddd0bc2a10d4f6a(),
-			// Property: MessageMaxBytes
-			"message_max_bytes": schemaAttributeec33ec7a3ec824e1c3e83771(),
-			// Property: NoHexPrefix
-			"no_hex_prefix": schemaAttributeca1e05ca6f585bd030a16991(),
-			// Property: PartitionIncludeSchemaTable
-			"partition_include_schema_table": schemaAttribute67a8c98305ff162e162621c9(),
-			// Property: SaslPassword
-			"sasl_password": schemaAttribute54666b83ac09f73c87594d22(),
-			// Property: SaslUserName
-			"sasl_user_name": schemaAttribute0ce9132c089775ce924930f9(),
-			// Property: SecurityProtocol
-			"security_protocol": schemaAttribute6e472c51096eb80e783bb7f5(),
-			// Property: SslCaCertificateArn
-			"ssl_ca_certificate_arn": schemaAttributeac3c5c9e615e6448177a4c4d(),
-			// Property: SslClientCertificateArn
-			"ssl_client_certificate_arn": schemaAttributee3083457d732ace420fc0122(),
-			// Property: SslClientKeyArn
-			"ssl_client_key_arn": schemaAttributea0745703ccbd633fa026efc7(),
-			// Property: SslClientKeyPassword
-			"ssl_client_key_password": schemaAttribute402c19d15693b5dc2d947977(),
-			// Property: Topic
-			"topic": schemaAttribute0164bd01830ec2c5bf338cc8(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the target Apache Kafka endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fa69a94f804a6ea5f4c10ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute107a35824bff14e3f2de154b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user name you use to access the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1311097303541d99dccfee1e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Sets the WAL heartbeat frequency (in minutes).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13e8497bc76163d393e1fddd() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1405a77a1d95d9e73a344bfd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password to be used to log in to the endpoint database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16c67c930a4c104527e77a78() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AfterConnectScript
-			"after_connect_script": schemaAttribute1f5351213b73e671ff3c741c(),
-			// Property: BabelfishDatabaseName
-			"babelfish_database_name": schemaAttribute90121524eb768621f067c8c4(),
-			// Property: CaptureDdls
-			"capture_ddls": schemaAttributedd045f3996330e89b2964775(),
-			// Property: DatabaseMode
-			"database_mode": schemaAttribute3c89f864ce1930a3f48c4cd6(),
-			// Property: DdlArtifactsSchema
-			"ddl_artifacts_schema": schemaAttribute0f6c54e21bb79ba28a731000(),
-			// Property: ExecuteTimeout
-			"execute_timeout": schemaAttribute9d83b8095e81304f4f540597(),
-			// Property: FailTasksOnLobTruncation
-			"fail_tasks_on_lob_truncation": schemaAttributed1c9d732e74984778a1769c7(),
-			// Property: HeartbeatEnable
-			"heartbeat_enable": schemaAttribute571389a241bef0ca6de7b296(),
-			// Property: HeartbeatFrequency
-			"heartbeat_frequency": schemaAttribute1311097303541d99dccfee1e(),
-			// Property: HeartbeatSchema
-			"heartbeat_schema": schemaAttribute6c0530d9d58c832bf2921ee5(),
-			// Property: MapBooleanAsBoolean
-			"map_boolean_as_boolean": schemaAttribute4db7b8d190bdb6d1287cc88d(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute3033e5b0985bc3cead7e1638(),
-			// Property: PluginName
-			"plugin_name": schemaAttribute47a2a7df49423d832f7a5c17(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttribute0678733a8de2e450c34f3fd9(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttributef4cd16524b488fd9d7d6a089(),
-			// Property: SlotName
-			"slot_name": schemaAttribute40c15f723547b0122ed714bb(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target PostgreSQL endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19825f03a2b6af797d77e1dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. The role must allow the iam:PassRole action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a505231294e76364ca444a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If you are using SSE_KMS for the EncryptionMode, provide the AWS KMS key ID. The key that you use needs an attached policy that enables IAM user permissions and allows use of the key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a6a87cce6e48fdbe1e9377d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of one data page in bytes. This parameter defaults to 1024 * 1024 bytes (1 MiB). This number is used for .parquet file format only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bedd15a4a7e680ca6f29892() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Endpoint TCP port.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c908ba1eb4a6607f6e6c309() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The external table definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ce52f0855cf1cc8648102a1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthMechanism
-			"auth_mechanism": schemaAttributee4c9d7a77d32d95a705ca485(),
-			// Property: AuthSource
-			"auth_source": schemaAttributef766e55b438e483c20568c4d(),
-			// Property: AuthType
-			"auth_type": schemaAttribute01495dde9303494b67bc8473(),
-			// Property: DatabaseName
-			"database_name": schemaAttributed3d627698d439afe41f0dcfa(),
-			// Property: DocsToInvestigate
-			"docs_to_investigate": schemaAttribute61d5317982da77bbe087c53e(),
-			// Property: ExtractDocId
-			"extract_doc_id": schemaAttribute4ee593f37b09ba5a6a4a8628(),
-			// Property: NestingLevel
-			"nesting_level": schemaAttribute7fe334860b082695373399c1(),
-			// Property: Password
-			"password": schemaAttribute41ec997b3b212842e875d3e3(),
-			// Property: Port
-			"port": schemaAttributece1ea8aeaaddf3424752d36f(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttributea4a037b25ba979cdfbec0182(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute97205b39d6e94e1398e7a763(),
-			// Property: ServerName
-			"server_name": schemaAttribute7430cc5b77c2cc43bbe79407(),
-			// Property: Username
-			"username": schemaAttribute107a35824bff14e3f2de154b(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source MongoDB endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f21def3b285053654370e20() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When this attribute is set to Y, DMS processes third-party transaction log backups if they are created in native format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f5351213b73e671ff3c741c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute216c72f6825aa1c0d49740ea() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies the precision of any TIMESTAMP column values that are written to an Amazon S3 object file in .parquet format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2201cfa6a254b649bc23ab5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the Oracle endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute244bddc4eddd0bc2a10d4f6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute286881ec21ed163d0ba67dac() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This setting applies if the S3 output files during a change data capture (CDC) load are written in .csv format. If this setting is set to true for columns not included in the supplemental log, AWS DMS uses the value specified by CsvNoSupValue. If this setting isn't set or is set to false, AWS DMS uses the null value for these columns.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28f04661fcbf0f683549d10a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute292aa342987c16de0bb877f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A required parameter that specifies the Amazon Resource Name (ARN) used by the service to access the IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29ccf01dda0adb9482789fc6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the IAM role that AWS DMS uses to write to the Kinesis data stream. The role must allow the iam:PassRole action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e414e2674e89932a6d19121() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3033e5b0985bc3cead7e1638() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3073ed10a19187cb0337fd9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute327082be62fbbc096abc1906() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies the maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35537799317d1738f209ffe7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the server where the endpoint database resides.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute370902e71ef9c3c53a4b894c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Endpoint connection password.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38633b75df5b795556d07692() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the SAP SAE endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39b9fb6e84722b459837b1f3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to change the number of read-ahead blocks that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3aaf6fe8fda232d8f621c7d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of authentication to perform when connecting to a Redis target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b28e704d69973fee3b8ad26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For an Oracle source endpoint, your ASM user name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c084aa80ffc331012460ece() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Fully qualified domain name of the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c56ed4503e97324080b1de4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value ofthe AWS Secrets Manager secret that allows access to the Db2 LUW endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c89f864ce1930a3f48c4cd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e824e734b5bd057d42581b0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ServiceAccessRoleArn
-			"service_access_role_arn": schemaAttributea639b19a885af5d7f8d48ece(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the target Amazon DynamoDB endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute402c19d15693b5dc2d947977() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password for the client private key used to securely connect to a Kafka target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40c15f723547b0122ed714bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4104c7252e1e619bec779c45() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Forces LOB lookup on inline LOB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4126f134d9ad479eba2ac2c2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to True to have AWS DMS use a direct path full load.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41ec997b3b212842e875d3e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password for the user account you use to access the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute425a5dcb3c16104054eb697b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If Amazon Redshift is configured to support case sensitive schema names, set CaseSensitiveNames to true. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42f63d60411de9a5ac20964f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the Apache Parquet format that you want to use: parquet_1_0 (the default) or parquet_2_0.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43522ef1409d4fd57850cc63() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43984e5955dbb0f735c8b51d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43aceac69b9442c854c7f772() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this parameter uses the task start time as the timestamp column value instead of the time data is written to target",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46022f5480e1cc5cc7c017b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional parameter that specifies how AWS DMS treats null values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4633909824ec59024b20eaad() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute474a62999575f0a8cd587532() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the length of a character column is in bytes or in characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47a2a7df49423d832f7a5c17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the plugin to use to create a replication slot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute480264d4f96ec2ae4ecef4f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthPassword
-			"auth_password": schemaAttribute3073ed10a19187cb0337fd9b(),
-			// Property: AuthType
-			"auth_type": schemaAttribute3aaf6fe8fda232d8f621c7d1(),
-			// Property: AuthUserName
-			"auth_user_name": schemaAttribute048aa0c29509453ed6503bcc(),
-			// Property: Port
-			"port": schemaAttribute73cbaf951b27dcb3d7d16096(),
-			// Property: ServerName
-			"server_name": schemaAttribute3c084aa80ffc331012460ece(),
-			// Property: SslCaCertificateArn
-			"ssl_ca_certificate_arn": schemaAttributed5103637032fe4ea51e88211(),
-			// Property: SslSecurityProtocol
-			"ssl_security_protocol": schemaAttribute6356d2380a4ae0ed4c1fa33a(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the target Redis endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4810aed38ae48a539efddac5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies to replaces the invalid characters specified in ReplaceInvalidChars, substituting the specified characters instead. The default is \"?\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4886bf769dcdb7eaea632ecc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute495e8a8542166f102195b72d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AcceptAnyDate
-			"accept_any_date": schemaAttributef20eade22bf384037728f818(),
-			// Property: AfterConnectScript
-			"after_connect_script": schemaAttribute5fda9a9cf7824f2afa40801c(),
-			// Property: BucketFolder
-			"bucket_folder": schemaAttribute605a18b758930a6abeb1d294(),
-			// Property: BucketName
-			"bucket_name": schemaAttributeb014d9be0ad84209f644628a(),
-			// Property: CaseSensitiveNames
-			"case_sensitive_names": schemaAttribute425a5dcb3c16104054eb697b(),
-			// Property: CompUpdate
-			"comp_update": schemaAttribute97bfb4ebefe2aadac25635d8(),
-			// Property: ConnectionTimeout
-			"connection_timeout": schemaAttributec091306fc2cbabebe2aa0ab1(),
-			// Property: DateFormat
-			"date_format": schemaAttributedf77cb83e5b8315ec9fe9b6e(),
-			// Property: EmptyAsNull
-			"empty_as_null": schemaAttribute928149a411ea8ce3ba91923d(),
-			// Property: EncryptionMode
-			"encryption_mode": schemaAttribute9d4f176f5e9349fd385f2a10(),
-			// Property: ExplicitIds
-			"explicit_ids": schemaAttributeae3e57a3aa2582ec378b1e8b(),
-			// Property: FileTransferUploadStreams
-			"file_transfer_upload_streams": schemaAttribute43984e5955dbb0f735c8b51d(),
-			// Property: LoadTimeout
-			"load_timeout": schemaAttribute9ee8d0ee4ee2411135f3078c(),
-			// Property: MapBooleanAsBoolean
-			"map_boolean_as_boolean": schemaAttributef75cdfd0151b9efcaaf6088b(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute0379d1e58c40d4878b08d7f6(),
-			// Property: RemoveQuotes
-			"remove_quotes": schemaAttribute7df2157de67260b56e62d09c(),
-			// Property: ReplaceChars
-			"replace_chars": schemaAttribute4810aed38ae48a539efddac5(),
-			// Property: ReplaceInvalidChars
-			"replace_invalid_chars": schemaAttributea630e60307094dc19bf7e905(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttribute0678733a8de2e450c34f3fd9(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute67b35724a761230c3e16a0c4(),
-			// Property: ServerSideEncryptionKmsKeyId
-			"server_side_encryption_kms_key_id": schemaAttribute98b3daf4b95bc4a90aa4033d(),
-			// Property: ServiceAccessRoleArn
-			"service_access_role_arn": schemaAttributed628554051b8a424a0ec784a(),
-			// Property: TimeFormat
-			"time_format": schemaAttribute8286400fd7c74d62989ce385(),
-			// Property: TrimBlanks
-			"trim_blanks": schemaAttribute78e46c4ad60ea0d9d51b5165(),
-			// Property: TruncateColumns
-			"truncate_columns": schemaAttributed20e54772e7152d62818833a(),
-			// Property: WriteBufferSize
-			"write_buffer_size": schemaAttribute6ebf6c371a97f226d777fb6d(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the Amazon Redshift endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b0d063d6036cc54773e5ad3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MicrosoftSQLServer endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bbed89514248bd39820bc69() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Minimum file size, defined in kilobytes, to reach for a file output to Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cac07eec372300b63d2ce68() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form broker-hostname-or-ip:port ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cec4cc6fdcbbc9ed22667e5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number of seconds that the system waits before resending a query.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4db7b8d190bdb6d1287cc88d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, lets PostgreSQL migrate the boolean type as boolean.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ee593f37b09ba5a6a4a8628() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the document ID. Use this setting when NestingLevel is set to \"none\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f47c59a809401e233414516() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket where AWS DMS can temporarily store migrated graph data in .csv files before bulk-loading it to the Neptune target database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fb97c1e5bbe9c3fa825fa40() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. The default is one.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute512775381052972c4f9d7bf1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of rows in a row group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute515d97c79c4c84b7c620439a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DocsToInvestigate
-			"docs_to_investigate": schemaAttributec8c6a47022e851f70b5dc44e(),
-			// Property: ExtractDocId
-			"extract_doc_id": schemaAttributeb83c409a699335896d7145fe(),
-			// Property: NestingLevel
-			"nesting_level": schemaAttribute7fe334860b082695373399c1(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttribute8b105f816a4f4b3a0f5d5047(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute8b105f816a4f4b3a0f5d5047(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target DocumentDB endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute536b40e068684739f8ba2707() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The delimiter used to separate rows in the .csv file for both source and target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53a93dbf6abdf4206631bd32() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that when nonblank causes AWS DMS to add a column with timestamp information to the endpoint data for an Amazon S3 target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54666b83ac09f73c87594d22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The secure password that you created when you first set up your Amazon MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56b71e9c71fdf206c06ac653() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Database name for the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute571389a241bef0ca6de7b296() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The write-ahead log (WAL) heartbeat feature mimics a dummy transaction.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute588e33a9ea75c2a56b77b862() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this attribute specifies a parallel load when useDirectPathFullLoad is set to Y.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58aa2b6c6ac2deb4e946881f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When this field is set to True, AWS DMS only accesses the archived redo logs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59865f65c8a9c8a77deae9d8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59de5eab44bc23fdde428e05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies the sequence of the date format to use during folder partitioning. The default value is YYYYMMDD. Use this parameter when DatePartitionedEnabled is set to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a45c6812804bd74b827f2b4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 250.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f34975145aac9215f7ea733() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum size in kilobytes of migrated graph data stored in a .csv file before AWS DMS bulk-loads the data to the Neptune target database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f67dfd6484f0be97ef91119() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on string data. The default value is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fda9a9cf7824f2afa40801c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Code to run after connecting. This parameter should contain the code itself, not the name of a file containing the code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute605a18b758930a6abeb1d294() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An S3 folder where the comma-separated-value (.csv) files are stored before being uploaded to the target Redshift cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute608a47157ef35d1df9d9dae8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61d5317982da77bbe087c53e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to \"one\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62a1fe9b2ea74fbe34221ed0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6356d2380a4ae0ed4c1fa33a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid values include plaintext and ssl-encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67a8c98305ff162e162621c9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Prefixes schema and table names to partition values, when the partition type is primary-key-type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67b35724a761230c3e16a0c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the Amazon Redshift endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c0530d9d58c832bf2921ee5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets the schema in which the heartbeat artifacts are created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6cca7051ac8283b32cc76d22() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the number scale. You can select a scale up to 38, or you can select FLOAT. By default, the NUMBER data type is converted to precision 38, scale 10.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e472c51096eb80e783bb7f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires SaslUsername and SaslPassword.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ea78384804d74ff6af15b65() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the time zone for the source MySQL database. Don't enclose time zones in single quotation marks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ebf6c371a97f226d777fb6d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk at the DMS replication instance. The default value is 1000 (buffer size is 1000KB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f751e96d6e565a5b3a7f4d5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides detailed transaction information from the source database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute716d408cf7385ae6f7eeb1f8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to True to capture change data using the Binary Reader utility.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7268168a51cfe65982d6ccb5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A folder path where you want AWS DMS to store migrated graph data in the S3 bucket specified by S3BucketName",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute726a1bfc3fc44726a6e450ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute726e355ad63638ad8fbe2062() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, AWS DMS saves any .csv files to the Db2 LUW target that were used to replicate data. DMS uses these files for analysis and troubleshooting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73cbaf951b27dcb3d7d16096() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Transmission Control Protocol (TCP) port for the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7430cc5b77c2cc43bbe79407() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the server on the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74af66a1190474b639f34bd2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BcpPacketSize
-			"bcp_packet_size": schemaAttributeb63338c13732d9a2fa3d5b18(),
-			// Property: ControlTablesFileGroup
-			"control_tables_file_group": schemaAttribute8be3c3b3fa27c37507e82a78(),
-			// Property: DatabaseName
-			"database_name": schemaAttribute56b71e9c71fdf206c06ac653(),
-			// Property: ForceLobLookup
-			"force_lob_lookup": schemaAttribute4104c7252e1e619bec779c45(),
-			// Property: Password
-			"password": schemaAttribute370902e71ef9c3c53a4b894c(),
-			// Property: Port
-			"port": schemaAttribute1bedd15a4a7e680ca6f29892(),
-			// Property: QuerySingleAlwaysOnNode
-			"query_single_always_on_node": schemaAttribute94882b59712bdb448ca74143(),
-			// Property: ReadBackupOnly
-			"read_backup_only": schemaAttribute03e8203106282413485fa8eb(),
-			// Property: SafeguardPolicy
-			"safeguard_policy": schemaAttributee813fe7e2efdc610e61405ae(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttributea4a037b25ba979cdfbec0182(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute4b0d063d6036cc54773e5ad3(),
-			// Property: ServerName
-			"server_name": schemaAttribute9873a1a1154883431e77300a(),
-			// Property: TlogAccessMode
-			"tlog_access_mode": schemaAttributecf6ec9e44b21f75c255786ef(),
-			// Property: TrimSpaceInChar
-			"trim_space_in_char": schemaAttributeb95cafbbd127aea4f47d7e47(),
-			// Property: UseBcpFullLoad
-			"use_bcp_full_load": schemaAttribute7690c2ed870924c6d61b5e1f(),
-			// Property: UseThirdPartyBackupDevice
-			"use_third_party_backup_device": schemaAttribute1f21def3b285053654370e20(),
-			// Property: Username
-			"username": schemaAttributef745697753615db49bd8948a(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target Microsoft SQL Server endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74b7cfafc0b5f131eec3876f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the time zone for the source MySQL database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75fe934f752caa25a2288f87() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Include NULL and empty columns for records migrated to the endpoint. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76654691cc61e7a61ca1999d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly specify the database using the DatabaseName request parameter on either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName when you create or modify a MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify the database only when you specify the schema in the table-mapping rules of the AWS DMS task.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7690c2ed870924c6d61b5e1f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78e46c4ad60ea0d9d51b5165() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies to remove the trailing white space characters from a VARCHAR string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7923eb3399653cfab647faaf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the endpoint database. For a MySQL source or target endpoint, don't specify DatabaseName. To migrate to a specific database, use this setting and targetDbType.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79935f1775a12414f81bca51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a1824481c70e5bd8dac401d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7df2157de67260b56e62d09c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies to remove surrounding quotation marks from strings in the incoming data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e030ce2be7f8b30baf8bfd2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the false setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7eda0862987bc0e4b5301789() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EndpointUri
-			"endpoint_uri": schemaAttributed855c6d445e213b7674c26b7(),
-			// Property: ErrorRetryDuration
-			"error_retry_duration": schemaAttribute9f16d08011c5b1f5d1bfe9f7(),
-			// Property: FullLoadErrorPercentage
-			"full_load_error_percentage": schemaAttributed0ba29e713567d49dea11702(),
-			// Property: ServiceAccessRoleArn
-			"service_access_role_arn": schemaAttributea639b19a885af5d7f8d48ece(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the target OpenSearch endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7fe334860b082695373399c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies either document or table mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81df1e9b752b32d63d654c22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "When creating an S3 target endpoint, set DatePartitionTimezone to convert the current UTC time into a specified time zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8286400fd7c74d62989ce385() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time format that you want to use. Valid values are auto (case-sensitive), 'timeformat_string', 'epochsecs', or 'epochmillisecs'.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8763f6119f3f4c32d0c612cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Required only if your Oracle endpoint uses Advanced Storage Manager (ASM).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8aeec3491fd8b3d163c5312f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b105f816a4f4b3a0f5d5047() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the DocumentDB endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8be3c3b3fa27c37507e82a78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a file group for the AWS DMS internal tables.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d927d1d2557b4cbb3ef0cb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a date separating delimiter to use during folder partitioning. The default value is SLASH. Use this parameter when DatePartitionedEnabled is set to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f79096d99c74501a06deaa5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AfterConnectScript
-			"after_connect_script": schemaAttributec2636831a8ba00286a9c8761(),
-			// Property: CleanSourceMetadataOnMismatch
-			"clean_source_metadata_on_mismatch": schemaAttribute099658b521e6fff2f7161f30(),
-			// Property: EventsPollInterval
-			"events_poll_interval": schemaAttributea0a7e239320f10a9cbabb0a3(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute43522ef1409d4fd57850cc63(),
-			// Property: ParallelLoadThreads
-			"parallel_load_threads": schemaAttributea5fa1f19a6ac44822056d399(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttribute0678733a8de2e450c34f3fd9(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttributea3cae57f8e72038621fccce5(),
-			// Property: ServerTimezone
-			"server_timezone": schemaAttribute74b7cfafc0b5f131eec3876f(),
-			// Property: TargetDbType
-			"target_db_type": schemaAttributebe393d68a275774d6a8974a3(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target MySQL endpoin",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f961d45ee4ad2bede0023ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the IBMDB2 endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90121524eb768621f067c8c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Babelfish for Aurora PostgreSQL database name for the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9074428dbe04f6cb60775dce() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AddColumnName
-			"add_column_name": schemaAttribute9dbf27642953dcc7bff4d176(),
-			// Property: AddTrailingPaddingCharacter
-			"add_trailing_padding_character": schemaAttribute5f67dfd6484f0be97ef91119(),
-			// Property: BucketFolder
-			"bucket_folder": schemaAttributec6abf88078ba83dc57a11d58(),
-			// Property: BucketName
-			"bucket_name": schemaAttribute79935f1775a12414f81bca51(),
-			// Property: CannedAclForObjects
-			"canned_acl_for_objects": schemaAttribute0b0de4f80fae47a313bc63f1(),
-			// Property: CdcInsertsAndUpdates
-			"cdc_inserts_and_updates": schemaAttribute62a1fe9b2ea74fbe34221ed0(),
-			// Property: CdcInsertsOnly
-			"cdc_inserts_only": schemaAttribute7e030ce2be7f8b30baf8bfd2(),
-			// Property: CdcMaxBatchInterval
-			"cdc_max_batch_interval": schemaAttribute8aeec3491fd8b3d163c5312f(),
-			// Property: CdcMinFileSize
-			"cdc_min_file_size": schemaAttribute4bbed89514248bd39820bc69(),
-			// Property: CdcPath
-			"cdc_path": schemaAttributeca652236b868903b9179115c(),
-			// Property: CompressionType
-			"compression_type": schemaAttributef3cf4f67719d0cce9b8d6c84(),
-			// Property: CsvDelimiter
-			"csv_delimiter": schemaAttributec83999cf628b16b7d3f72e5e(),
-			// Property: CsvNoSupValue
-			"csv_no_sup_value": schemaAttributed09c89b58502e0601a23b5db(),
-			// Property: CsvNullValue
-			"csv_null_value": schemaAttribute46022f5480e1cc5cc7c017b3(),
-			// Property: CsvRowDelimiter
-			"csv_row_delimiter": schemaAttribute536b40e068684739f8ba2707(),
-			// Property: DataFormat
-			"data_format": schemaAttribute9a2f6d3e8417418339c73c17(),
-			// Property: DataPageSize
-			"data_page_size": schemaAttribute1a6a87cce6e48fdbe1e9377d(),
-			// Property: DatePartitionDelimiter
-			"date_partition_delimiter": schemaAttribute8d927d1d2557b4cbb3ef0cb1(),
-			// Property: DatePartitionEnabled
-			"date_partition_enabled": schemaAttribute0a60a64f540125c4572039cf(),
-			// Property: DatePartitionSequence
-			"date_partition_sequence": schemaAttribute59de5eab44bc23fdde428e05(),
-			// Property: DatePartitionTimezone
-			"date_partition_timezone": schemaAttribute81df1e9b752b32d63d654c22(),
-			// Property: DictPageSizeLimit
-			"dict_page_size_limit": schemaAttributeac878a928bc300da1b647176(),
-			// Property: EnableStatistics
-			"enable_statistics": schemaAttributebad13780317f178d10fe2881(),
-			// Property: EncodingType
-			"encoding_type": schemaAttributea5d3e19d4d0f3f4762c6b956(),
-			// Property: EncryptionMode
-			"encryption_mode": schemaAttribute9d4f176f5e9349fd385f2a10(),
-			// Property: ExpectedBucketOwner
-			"expected_bucket_owner": schemaAttributec0ff961f7a948323539f1614(),
-			// Property: ExternalTableDefinition
-			"external_table_definition": schemaAttribute1c908ba1eb4a6607f6e6c309(),
-			// Property: GlueCatalogGeneration
-			"glue_catalog_generation": schemaAttributed6080c48962de099a2e1c5bd(),
-			// Property: IgnoreHeaderRows
-			"ignore_header_rows": schemaAttributebc875089c90e5bb2869fdbf0(),
-			// Property: IncludeOpForFullLoad
-			"include_op_for_full_load": schemaAttributeed58e79a2902b18dfeef7925(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute327082be62fbbc096abc1906(),
-			// Property: ParquetTimestampInMillisecond
-			"parquet_timestamp_in_millisecond": schemaAttribute216c72f6825aa1c0d49740ea(),
-			// Property: ParquetVersion
-			"parquet_version": schemaAttribute42f63d60411de9a5ac20964f(),
-			// Property: PreserveTransactions
-			"preserve_transactions": schemaAttributeb104e603b1d9362b6ff8ca85(),
-			// Property: Rfc4180
-			"rfc_4180": schemaAttributee8ef68e45490f5c4eb671b99(),
-			// Property: RowGroupLength
-			"row_group_length": schemaAttribute512775381052972c4f9d7bf1(),
-			// Property: ServerSideEncryptionKmsKeyId
-			"server_side_encryption_kms_key_id": schemaAttribute1a505231294e76364ca444a4(),
-			// Property: ServiceAccessRoleArn
-			"service_access_role_arn": schemaAttribute292aa342987c16de0bb877f9(),
-			// Property: TimestampColumnName
-			"timestamp_column_name": schemaAttribute53a93dbf6abdf4206631bd32(),
-			// Property: UseCsvNoSupValue
-			"use_csv_no_sup_value": schemaAttribute286881ec21ed163d0ba67dac(),
-			// Property: UseTaskStartTimeForFullLoadTimestamp
-			"use_task_start_time_for_full_load_timestamp": schemaAttribute43aceac69b9442c854c7f772(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target Amazon S3 endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute928149a411ea8ce3ba91923d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of true sets empty CHAR and VARCHAR fields to null. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94882b59712bdb448ca74143() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Cleans and recreates table metadata information on the replication instance when a mismatch occurs. An example is a situation where running an alter DDL statement on a table might result in different information about the table cached in the replication instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94e17b140e651da81ad63813() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute954c3e0bb993746de2a5144c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible. Or you can create your own custom function that mimics the operation of SDOGEOJSON and set SpatialDataOptionToGeoJsonFunctionName to call it instead.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95a52ed5d0d1af6363c2e320() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk on the DMS replication instance. The default value is 1024 (1 MB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute969760bce3b56be39324f751() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is none.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96c7515be0cb6922fb66ea53() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this attribute supports tablespace replication.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97205b39d6e94e1398e7a763() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MongoDB endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97bfb4ebefe2aadac25635d8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you set CompUpdate to true Amazon Redshift applies automatic compression if the table is empty.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9873a1a1154883431e77300a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server instance, this is the output of DescribeDBInstances, in the Endpoint.Address field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98b3daf4b95bc4a90aa4033d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS KMS key ID. If you are using SSE_KMS for the EncryptionMode, provide this key ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a2f6d3e8417418339c73c17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the data that you want to use for output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d4f176f5e9349fd385f2a10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of server-side encryption that you want to use for your data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d83b8095e81304f4f540597() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Sets the client statement timeout for the PostgreSQL instance, in seconds. The default value is 60 seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dbf27642953dcc7bff4d176() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional parameter that, when set to true or y, you can use to add column name information to the .csv output file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ee8d0ee4ee2411135f3078c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time to wait (in milliseconds) before timing out of operations performed by AWS DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f16d08011c5b1f5d1bfe9f7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0745703ccbd633fa026efc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0a7e239320f10a9cbabb0a3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea27e15e839c5c4bcc194fcce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3cae57f8e72038621fccce5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MySQL endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4a037b25ba979cdfbec0182() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5d3e19d4d0f3f4762c6b956() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of encoding that you're using.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5fa1f19a6ac44822056d399() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea630e60307094dc19bf7e905() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A list of characters that you want to replace. Use with ReplaceChars.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea639b19a885af5d7f8d48ece() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea839ccb8087fddde94f28ee8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncludeControlDetails
-			"include_control_details": schemaAttributefd0c5f8e2fa396d09e8520f6(),
-			// Property: IncludeNullAndEmpty
-			"include_null_and_empty": schemaAttribute75fe934f752caa25a2288f87(),
-			// Property: IncludePartitionValue
-			"include_partition_value": schemaAttribute608a47157ef35d1df9d9dae8(),
-			// Property: IncludeTableAlterOperations
-			"include_table_alter_operations": schemaAttribute4633909824ec59024b20eaad(),
-			// Property: IncludeTransactionDetails
-			"include_transaction_details": schemaAttribute6f751e96d6e565a5b3a7f4d5(),
-			// Property: MessageFormat
-			"message_format": schemaAttribute244bddc4eddd0bc2a10d4f6a(),
-			// Property: NoHexPrefix
-			"no_hex_prefix": schemaAttributedb1239c7d25b6c1de2dc44e7(),
-			// Property: PartitionIncludeSchemaTable
-			"partition_include_schema_table": schemaAttribute67a8c98305ff162e162621c9(),
-			// Property: ServiceAccessRoleArn
-			"service_access_role_arn": schemaAttribute29ccf01dda0adb9482789fc6(),
-			// Property: StreamArn
-			"stream_arn": schemaAttribute4886bf769dcdb7eaea632ecc(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8ad00efe99a9cb067cbdf13() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea90999508da970e8f8b34679() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Description: "Specifies the IDs of one more destinations for one or more archived redo logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea941cfb663a00e10f7f35ffe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A value is the optional value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac279f4133e141bb57f16099() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of times for AWS DMS to retry a bulk load of migrated graph data to the Neptune target database before raising an error. The default is 5.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac3c5c9e615e6448177a4c4d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac878a928bc300da1b647176() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum size of an encoded dictionary page of a column",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae3e57a3aa2582ec378b1e8b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This setting is only valid for a full-load migration task. Set ExplicitIds to true to have tables with IDENTITY columns override their auto-generated values with explicit values loaded from the source data files used to populate the tables. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaecf761d0f15788a987ebd2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A display name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb014d9be0ad84209f644628a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the intermediate S3 bucket used to store .csv files before uploading data to Redshift.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb06d63213b1647f8043657a6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb104e603b1d9362b6ff8ca85() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If this setting is set to true, AWS DMS saves the transaction order for a change data capture (CDC) load on the Amazon S3 target specified by CdcPath.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2a5f5e59ffab65f90f36e64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For ongoing replication (CDC), use CurrentLSN to specify a log sequence number (LSN) where you want the replication to start.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb585b68e70fe61b8f9a8e8de() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute with ArchivedLogDestId in a primary/ standby setup",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb63338c13732d9a2fa3d5b18() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum size of the packets (in bytes) used to transfer data using BCP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb64ac8eefbf5fb244d1ab4a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For an Oracle source endpoint, your ASM server address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb757c8dff3a9a04bc336cdc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A key is the required name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb77d445372ab93b7eb5fafe1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ID of the destination for the archived redo logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb83c409a699335896d7145fe() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the document ID. Use this setting when NestingLevel is set to \"none\"",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb95cafbbd127aea4f47d7e47() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use the TrimSpaceInChar source endpoint setting to right-trim data on CHAR and NCHAR data types during migration. Setting TrimSpaceInChar does not left-trim data. The default value is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebad13780317f178d10fe2881() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that enables statistics for Parquet pages and row groups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc875089c90e5bb2869fdbf0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "When this value is set to 1, AWS DMS ignores the first row header in a .csv file. A value of 1 turns on the feature; a value of 0 turns off the feature.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcb5172f718254a1c4b72569() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Additional attributes associated with the connection",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe393d68a275774d6a8974a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies where to migrate source tables on the target, either to a single database or multiple databases.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec091306fc2cbabebe2aa0ab1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A value that sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0ad63c43eb45971d354fad8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CurrentLsn
-			"current_lsn": schemaAttributeb2a5f5e59ffab65f90f36e64(),
-			// Property: KeepCsvFiles
-			"keep_csv_files": schemaAttribute726e355ad63638ad8fbe2062(),
-			// Property: LoadTimeout
-			"load_timeout": schemaAttributedaee5ec3f7635116c951c0e8(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute2e414e2674e89932a6d19121(),
-			// Property: MaxKBytesPerRead
-			"max_k_bytes_per_read": schemaAttributed0fc7583d3d232e84dbb7e09(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttribute3c56ed4503e97324080b1de4(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute8f961d45ee4ad2bede0023ae(),
-			// Property: SetDataCaptureChanges
-			"set_data_capture_changes": schemaAttributef89d88c9ab77b75d41ae1483(),
-			// Property: WriteBufferSize
-			"write_buffer_size": schemaAttribute95a52ed5d0d1af6363c2e320(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source IBM Db2 LUW endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0ff961f7a948323539f1614() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "To specify a bucket owner and prevent sniping, you can use the ExpectedBucketOwner endpoint setting.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec20cff9598d00e3ef9ed6030() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2636831a8ba00286a9c8761() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3ad0710ec8202ba0ca20e5f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AfterConnectScript
-			"after_connect_script": schemaAttributec2636831a8ba00286a9c8761(),
-			// Property: CleanSourceMetadataOnMismatch
-			"clean_source_metadata_on_mismatch": schemaAttributed87e25ff2c51a8cb4f52ff7f(),
-			// Property: DatabaseName
-			"database_name": schemaAttribute76654691cc61e7a61ca1999d(),
-			// Property: EventsPollInterval
-			"events_poll_interval": schemaAttributea0a7e239320f10a9cbabb0a3(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute43522ef1409d4fd57850cc63(),
-			// Property: ParallelLoadThreads
-			"parallel_load_threads": schemaAttribute4fb97c1e5bbe9c3fa825fa40(),
-			// Property: Password
-			"password": schemaAttribute370902e71ef9c3c53a4b894c(),
-			// Property: Port
-			"port": schemaAttribute0b271a13586f96eaede28d99(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttributee0d4a4e97b3a0c94b1918361(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttributea3cae57f8e72038621fccce5(),
-			// Property: ServerName
-			"server_name": schemaAttributef357d5f8afd0462a236e5a4c(),
-			// Property: ServerTimezone
-			"server_timezone": schemaAttribute6ea78384804d74ff6af15b65(),
-			// Property: Username
-			"username": schemaAttribute6ea78384804d74ff6af15b65(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source GCP MySQL endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6abf88078ba83dc57a11d58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional parameter to set a folder name in the S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec826f9325b94aa87d8be20a4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttributea4a037b25ba979cdfbec0182(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute38633b75df5b795556d07692(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target SAP ASE endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec83999cf628b16b7d3f72e5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The delimiter used to separate columns in the .csv file for both source and target. The default is a comma.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec88c451938c1cf9fbc9689b0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If you want IAM authorization enabled for this endpoint, set this parameter to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8b695528a00c006ce6ee042() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ErrorRetryDuration
-			"error_retry_duration": schemaAttribute5a45c6812804bd74b827f2b4(),
-			// Property: IamAuthEnabled
-			"iam_auth_enabled": schemaAttributec88c451938c1cf9fbc9689b0(),
-			// Property: MaxFileSize
-			"max_file_size": schemaAttribute5f34975145aac9215f7ea733(),
-			// Property: MaxRetryCount
-			"max_retry_count": schemaAttributeac279f4133e141bb57f16099(),
-			// Property: S3BucketFolder
-			"s3_bucket_folder": schemaAttribute7268168a51cfe65982d6ccb5(),
-			// Property: S3BucketName
-			"s3_bucket_name": schemaAttribute4f47c59a809401e233414516(),
-			// Property: ServiceAccessRoleArn
-			"service_access_role_arn": schemaAttribute19825f03a2b6af797d77e1dc(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the target Amazon Neptune endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8c6a47022e851f70b5dc44e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to \"one\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8dadd48f0b84c134f852ff3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of endpoint. Valid values are source and target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca1e05ca6f585bd030a16991() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the NoHexPrefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca652236b868903b9179115c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaa032e4495f84496a18c6b2() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb2e1c37cc0110ccd5c35748() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecda495f1d0717ec582915cad() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified LobMaxSize.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece1ea8aeaaddf3424752d36f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port value for the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf6ec9e44b21f75c255786ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the mode used to fetch CDC data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed09c89b58502e0601a23b5db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This setting only applies if your Amazon S3 output files during a change data capture (CDC) load are written in .csv format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0ba29e713567d49dea11702() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum percentage of records that can fail to be written before a full load operation stops.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0fc7583d3d232e84dbb7e09() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum number of bytes per read, as a NUMBER value. The default is 64 KB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1c9d732e74984778a1769c7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When set to true, this value causes a task to fail if the actual size of a LOB column is greater than the specified LobMaxSize.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed20e54772e7152d62818833a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that specifies to truncate data in columns to the appropriate number of characters, so that the data fits in the column.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3d627698d439afe41f0dcfa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The database name on the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3fa5afd682560317ad15262() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Use this attribute to specify a time in minutes for the delay in standby sync.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5103637032fe4ea51e88211() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5ad8b2958f29df616d0d8a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that can be used for cross-account validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6080c48962de099a2e1c5bd() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, allows AWS Glue to catalog your S3 bucket. Creating an AWS Glue catalog lets you use Athena to query your data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed628554051b8a424a0ec784a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon Redshift service. The role must allow the iam:PassRole action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7499813ddbba33e1cef7a1c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of engine for the endpoint, depending on the EndpointType value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed841f225ae8c08036be38299() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb757c8dff3a9a04bc336cdc0(),
-				// Property: Value
-				"value": schemaAttributea941cfb663a00e10f7f35ffe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags to be assigned to the endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed855c6d445e213b7674c26b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint for the OpenSearch cluster. AWS DMS uses HTTPS if a transport protocol (either HTTP or HTTPS) isn't specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed87e25ff2c51a8cb4f52ff7f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Adjusts the behavior of AWS DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need AWS DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedaee5ec3f7635116c951c0e8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time (in milliseconds) before AWS DMS times out operations performed by DMS on the Db2 target. The default value is 1200 (20 minutes).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb1239c7d25b6c1de2dc44e7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd045f3996330e89b2964775() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts. You can later remove these artifacts.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf77cb83e5b8315ec9fe9b6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date format that you are using.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0d4a4e97b3a0c94b1918361() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the MySQL endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee25f2fbcc399fc0eeb64742e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3083457d732ace420fc0122() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4c9d7a77d32d95a705ca485() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authentication mechanism you use to access the MongoDB source endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee813fe7e2efdc610e61405ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use this attribute to minimize the need to access the backup log and enable AWS DMS to prevent truncation using one of the following two methods.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8ef68e45490f5c4eb671b99() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "For an S3 source, when this value is set to true or y, each leading double quotation mark has to be followed by an ending double quotation mark.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebcc99d50469d0297f7190e6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Shows the partition value within the Kafka message output unless the partition type is schema-table-type. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec33ec7a3ec824e1c3e83771() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum size in bytes for records created on the endpoint The default is 1,000,000.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed58e79a2902b18dfeef7925() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeda369c542d908f3ec2afa6f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AccessAlternateDirectly
-			"access_alternate_directly": schemaAttributeffe1da9820826b354d44d6ec(),
-			// Property: AddSupplementalLogging
-			"add_supplemental_logging": schemaAttributea8ad00efe99a9cb067cbdf13(),
-			// Property: AdditionalArchivedLogDestId
-			"additional_archived_log_dest_id": schemaAttributeb585b68e70fe61b8f9a8e8de(),
-			// Property: AllowSelectNestedTables
-			"allow_select_nested_tables": schemaAttributefe714c12582d4e015f7bebe7(),
-			// Property: ArchivedLogDestId
-			"archived_log_dest_id": schemaAttributeb77d445372ab93b7eb5fafe1(),
-			// Property: ArchivedLogsOnly
-			"archived_logs_only": schemaAttribute58aa2b6c6ac2deb4e946881f(),
-			// Property: AsmPassword
-			"asm_password": schemaAttributea27e15e839c5c4bcc194fcce(),
-			// Property: AsmServer
-			"asm_server": schemaAttributeb64ac8eefbf5fb244d1ab4a3(),
-			// Property: AsmUser
-			"asm_user": schemaAttribute3b28e704d69973fee3b8ad26(),
-			// Property: CharLengthSemantics
-			"char_length_semantics": schemaAttribute474a62999575f0a8cd587532(),
-			// Property: DirectPathNoLog
-			"direct_path_no_log": schemaAttribute13e8497bc76163d393e1fddd(),
-			// Property: DirectPathParallelLoad
-			"direct_path_parallel_load": schemaAttribute588e33a9ea75c2a56b77b862(),
-			// Property: EnableHomogenousTablespace
-			"enable_homogenous_tablespace": schemaAttributecaa032e4495f84496a18c6b2(),
-			// Property: ExtraArchivedLogDestIds
-			"extra_archived_log_dest_ids": schemaAttributea90999508da970e8f8b34679(),
-			// Property: FailTasksOnLobTruncation
-			"fail_tasks_on_lob_truncation": schemaAttributecda495f1d0717ec582915cad(),
-			// Property: NumberDatatypeScale
-			"number_datatype_scale": schemaAttribute6cca7051ac8283b32cc76d22(),
-			// Property: OraclePathPrefix
-			"oracle_path_prefix": schemaAttribute726a1bfc3fc44726a6e450ae(),
-			// Property: ParallelAsmReadThreads
-			"parallel_asm_read_threads": schemaAttribute0111369a2dea1e968d2346d9(),
-			// Property: ReadAheadBlocks
-			"read_ahead_blocks": schemaAttribute39b9fb6e84722b459837b1f3(),
-			// Property: ReadTableSpaceName
-			"read_table_space_name": schemaAttribute96c7515be0cb6922fb66ea53(),
-			// Property: ReplacePathPrefix
-			"replace_path_prefix": schemaAttribute28f04661fcbf0f683549d10a(),
-			// Property: RetryInterval
-			"retry_interval": schemaAttribute4cec4cc6fdcbbc9ed22667e5(),
-			// Property: SecretsManagerAccessRoleArn
-			"secrets_manager_access_role_arn": schemaAttribute0678733a8de2e450c34f3fd9(),
-			// Property: SecretsManagerOracleAsmAccessRoleArn
-			"secrets_manager_oracle_asm_access_role_arn": schemaAttribute8763f6119f3f4c32d0c612cb(),
-			// Property: SecretsManagerOracleAsmSecretId
-			"secrets_manager_oracle_asm_secret_id": schemaAttribute8763f6119f3f4c32d0c612cb(),
-			// Property: SecretsManagerSecretId
-			"secrets_manager_secret_id": schemaAttribute2201cfa6a254b649bc23ab5c(),
-			// Property: SecurityDbEncryption
-			"security_db_encryption": schemaAttributee25f2fbcc399fc0eeb64742e(),
-			// Property: SecurityDbEncryptionName
-			"security_db_encryption_name": schemaAttribute0fa69a94f804a6ea5f4c10ab(),
-			// Property: SpatialDataOptionToGeoJsonFunctionName
-			"spatial_data_option_to_geo_json_function_name": schemaAttribute954c3e0bb993746de2a5144c(),
-			// Property: StandbyDelayTime
-			"standby_delay_time": schemaAttributed3fa5afd682560317ad15262(),
-			// Property: UseAlternateFolderForOnline
-			"use_alternate_folder_for_online": schemaAttribute59865f65c8a9c8a77deae9d8(),
-			// Property: UseBFile
-			"use_b_file": schemaAttribute716d408cf7385ae6f7eeb1f8(),
-			// Property: UseDirectPathFullLoad
-			"use_direct_path_full_load": schemaAttribute4126f134d9ad479eba2ac2c2(),
-			// Property: UseLogminerReader
-			"use_logminer_reader": schemaAttributef9f2d18cdcf64289a48f00df(),
-			// Property: UsePathPrefix
-			"use_path_prefix": schemaAttribute726a1bfc3fc44726a6e450ae(),
-		}, /*END SCHEMA*/
-		Description: "Settings in JSON format for the source and target Oracle endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef20eade22bf384037728f818() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A value that indicates to allow any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose true or false (the default).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef357d5f8afd0462a236e5a4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MySQL host name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3cf4f67719d0cce9b8d6c84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional parameter. When set to GZIP it enables the service to compress the target files.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4cd16524b488fd9d7d6a089() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the PostgreSQL endpoint connection details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5ebdcc953a1af5cba69c37c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint.If you don't specify a value for the KmsKeyId parameter, AWS DMS uses your default encryption key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef745697753615db49bd8948a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Endpoint connection user name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef75cdfd0151b9efcaaf6088b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as varchar(1). You must set this setting on both the source and target endpoints for it to take effect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef766e55b438e483c20568c4d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MongoDB database name. This setting isn't used when AuthType is set to \"no\".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef89d88c9ab77b75d41ae1483() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables ongoing replication (CDC) as a BOOLEAN value. The default is true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9f2d18cdcf64289a48f00df() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to True to capture change data using the Oracle LogMiner utility (the default).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd0c5f8e2fa396d09e8520f6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe714c12582d4e015f7bebe7() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffe1da9820826b354d44d6ec() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set this attribute to false in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_endpoint", endpointDataSource)
 }
@@ -2261,7 +30,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schemaAttribute94e17b140e651da81ad63813(),
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -2269,7 +41,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the endpoint database. For a MySQL source or target endpoint, don't specify DatabaseName. To migrate to a specific database, use this setting and targetDbType.",
 		//	  "type": "string"
 		//	}
-		"database_name": schemaAttribute7923eb3399653cfab647faaf(),
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the endpoint database. For a MySQL source or target endpoint, don't specify DatabaseName. To migrate to a specific database, use this setting and targetDbType.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DocDbSettings
 		// CloudFormation resource type schema:
 		//
@@ -2300,7 +75,37 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"doc_db_settings": schemaAttribute515d97c79c4c84b7c620439a(),
+		"doc_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DocsToInvestigate
+				"docs_to_investigate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to \"one\".",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExtractDocId
+				"extract_doc_id": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the document ID. Use this setting when NestingLevel is set to \"none\"",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NestingLevel
+				"nesting_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies either document or table mode.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the DocumentDB endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the DocumentDB endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target DocumentDB endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DynamoDbSettings
 		// CloudFormation resource type schema:
 		//
@@ -2315,7 +120,17 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dynamo_db_settings": schemaAttribute3e824e734b5bd057d42581b0(),
+		"dynamo_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServiceAccessRoleArn
+				"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the target Amazon DynamoDB endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticsearchSettings
 		// CloudFormation resource type schema:
 		//
@@ -2342,7 +157,32 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"elasticsearch_settings": schemaAttribute7eda0862987bc0e4b5301789(),
+		"elasticsearch_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndpointUri
+				"endpoint_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The endpoint for the OpenSearch cluster. AWS DMS uses HTTPS if a transport protocol (either HTTP or HTTPS) isn't specified.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ErrorRetryDuration
+				"error_retry_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FullLoadErrorPercentage
+				"full_load_error_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum percentage of records that can fail to be written before a full load operation stops.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceAccessRoleArn
+				"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the target OpenSearch endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -2350,7 +190,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The endpoint ARN.",
 		//	  "type": "string"
 		//	}
-		"endpoint_arn": schemaAttribute7a1824481c70e5bd8dac401d(),
+		"endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The endpoint ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -2358,7 +201,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.",
 		//	  "type": "string"
 		//	}
-		"endpoint_identifier": schemaAttributecb2e1c37cc0110ccd5c35748(),
+		"endpoint_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointType
 		// CloudFormation resource type schema:
 		//
@@ -2366,7 +212,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of endpoint. Valid values are source and target.",
 		//	  "type": "string"
 		//	}
-		"endpoint_type": schemaAttributec8dadd48f0b84c134f852ff3(),
+		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of endpoint. Valid values are source and target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineName
 		// CloudFormation resource type schema:
 		//
@@ -2374,7 +223,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of engine for the endpoint, depending on the EndpointType value.",
 		//	  "type": "string"
 		//	}
-		"engine_name": schemaAttributed7499813ddbba33e1cef7a1c(),
+		"engine_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of engine for the endpoint, depending on the EndpointType value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExternalId
 		// CloudFormation resource type schema:
 		//
@@ -2382,7 +234,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that can be used for cross-account validation.",
 		//	  "type": "string"
 		//	}
-		"external_id": schemaAttributed5ad8b2958f29df616d0d8a3(),
+		"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that can be used for cross-account validation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExtraConnectionAttributes
 		// CloudFormation resource type schema:
 		//
@@ -2390,7 +245,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Additional attributes associated with the connection",
 		//	  "type": "string"
 		//	}
-		"extra_connection_attributes": schemaAttributebcb5172f718254a1c4b72569(),
+		"extra_connection_attributes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Additional attributes associated with the connection",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GcpMySQLSettings
 		// CloudFormation resource type schema:
 		//
@@ -2453,7 +311,77 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"gcp_my_sql_settings": schemaAttributec3ad0710ec8202ba0ca20e5f(),
+		"gcp_my_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AfterConnectScript
+				"after_connect_script": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CleanSourceMetadataOnMismatch
+				"clean_source_metadata_on_mismatch": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Adjusts the behavior of AWS DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need AWS DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseName
+				"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly specify the database using the DatabaseName request parameter on either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName when you create or modify a MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify the database only when you specify the schema in the table-mapping rules of the AWS DMS task.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventsPollInterval
+				"events_poll_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParallelLoadThreads
+				"parallel_load_threads": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. The default is one.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Password
+				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Endpoint connection password.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The port used by the endpoint database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the MySQL endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MySQL endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerName
+				"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The MySQL host name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerTimezone
+				"server_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the time zone for the source MySQL database. Don't enclose time zones in single quotation marks.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Username
+				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the time zone for the source MySQL database. Don't enclose time zones in single quotation marks.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source GCP MySQL endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IbmDb2Settings
 		// CloudFormation resource type schema:
 		//
@@ -2500,7 +428,57 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ibm_db_2_settings": schemaAttributec0ad63c43eb45971d354fad8(),
+		"ibm_db_2_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CurrentLsn
+				"current_lsn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For ongoing replication (CDC), use CurrentLSN to specify a log sequence number (LSN) where you want the replication to start.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeepCsvFiles
+				"keep_csv_files": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true, AWS DMS saves any .csv files to the Db2 LUW target that were used to replicate data. DMS uses these files for analysis and troubleshooting.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LoadTimeout
+				"load_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time (in milliseconds) before AWS DMS times out operations performed by DMS on the Db2 target. The default value is 1200 (20 minutes).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxKBytesPerRead
+				"max_k_bytes_per_read": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum number of bytes per read, as a NUMBER value. The default is 64 KB.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value ofthe AWS Secrets Manager secret that allows access to the Db2 LUW endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the IBMDB2 endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SetDataCaptureChanges
+				"set_data_capture_changes": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables ongoing replication (CDC) as a BOOLEAN value. The default is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteBufferSize
+				"write_buffer_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk on the DMS replication instance. The default value is 1024 (1 MB).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source IBM Db2 LUW endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KafkaSettings
 		// CloudFormation resource type schema:
 		//
@@ -2583,7 +561,102 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"kafka_settings": schemaAttribute0f6dc8024f144894afa91ecd(),
+		"kafka_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Broker
+				"broker": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form broker-hostname-or-ip:port ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeControlDetails
+				"include_control_details": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeNullAndEmpty
+				"include_null_and_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Include NULL and empty columns for records migrated to the endpoint. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludePartitionValue
+				"include_partition_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Shows the partition value within the Kafka message output unless the partition type is schema-table-type. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeTableAlterOperations
+				"include_table_alter_operations": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeTransactionDetails
+				"include_transaction_details": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageFormat
+				"message_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageMaxBytes
+				"message_max_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum size in bytes for records created on the endpoint The default is 1,000,000.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NoHexPrefix
+				"no_hex_prefix": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the NoHexPrefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PartitionIncludeSchemaTable
+				"partition_include_schema_table": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Prefixes schema and table names to partition values, when the partition type is primary-key-type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SaslPassword
+				"sasl_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The secure password that you created when you first set up your Amazon MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SaslUserName
+				"sasl_user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The secure user name you created when you first set up your Amazon MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtocol
+				"security_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires SaslUsername and SaslPassword.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SslCaCertificateArn
+				"ssl_ca_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SslClientCertificateArn
+				"ssl_client_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SslClientKeyArn
+				"ssl_client_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SslClientKeyPassword
+				"ssl_client_key_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The password for the client private key used to securely connect to a Kafka target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Topic
+				"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies \"kafka-default-topic\" as the migration topic.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the target Apache Kafka endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KinesisSettings
 		// CloudFormation resource type schema:
 		//
@@ -2634,7 +707,62 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"kinesis_settings": schemaAttributea839ccb8087fddde94f28ee8(),
+		"kinesis_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncludeControlDetails
+				"include_control_details": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeNullAndEmpty
+				"include_null_and_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Include NULL and empty columns for records migrated to the endpoint. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludePartitionValue
+				"include_partition_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeTableAlterOperations
+				"include_table_alter_operations": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeTransactionDetails
+				"include_transaction_details": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Provides detailed transaction information from the source database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageFormat
+				"message_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NoHexPrefix
+				"no_hex_prefix": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PartitionIncludeSchemaTable
+				"partition_include_schema_table": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Prefixes schema and table names to partition values, when the partition type is primary-key-type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceAccessRoleArn
+				"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the IAM role that AWS DMS uses to write to the Kinesis data stream. The role must allow the iam:PassRole action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StreamArn
+				"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -2642,7 +770,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint.If you don't specify a value for the KmsKeyId parameter, AWS DMS uses your default encryption key.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributef5ebdcc953a1af5cba69c37c(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint.If you don't specify a value for the KmsKeyId parameter, AWS DMS uses your default encryption key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MicrosoftSqlServerSettings
 		// CloudFormation resource type schema:
 		//
@@ -2721,7 +852,97 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"microsoft_sql_server_settings": schemaAttribute74af66a1190474b639f34bd2(),
+		"microsoft_sql_server_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BcpPacketSize
+				"bcp_packet_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum size of the packets (in bytes) used to transfer data using BCP.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ControlTablesFileGroup
+				"control_tables_file_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a file group for the AWS DMS internal tables.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseName
+				"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Database name for the endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ForceLobLookup
+				"force_lob_lookup": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Forces LOB lookup on inline LOB.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Password
+				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Endpoint connection password.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Endpoint TCP port.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: QuerySingleAlwaysOnNode
+				"query_single_always_on_node": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Cleans and recreates table metadata information on the replication instance when a mismatch occurs. An example is a situation where running an alter DDL statement on a table might result in different information about the table cached in the replication instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReadBackupOnly
+				"read_backup_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When this attribute is set to Y, AWS DMS only reads changes from transaction log backups and doesn't read from the active transaction log file during ongoing replication. Setting this parameter to Y enables you to control active transaction log file growth during full load and ongoing replication tasks. However, it can add some source latency to ongoing replication.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SafeguardPolicy
+				"safeguard_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Use this attribute to minimize the need to access the backup log and enable AWS DMS to prevent truncation using one of the following two methods.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MicrosoftSQLServer endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerName
+				"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server instance, this is the output of DescribeDBInstances, in the Endpoint.Address field.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TlogAccessMode
+				"tlog_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates the mode used to fetch CDC data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrimSpaceInChar
+				"trim_space_in_char": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Use the TrimSpaceInChar source endpoint setting to right-trim data on CHAR and NCHAR data types during migration. Setting TrimSpaceInChar does not left-trim data. The default value is true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseBcpFullLoad
+				"use_bcp_full_load": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseThirdPartyBackupDevice
+				"use_third_party_backup_device": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When this attribute is set to Y, DMS processes third-party transaction log backups if they are created in native format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Username
+				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Endpoint connection user name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target Microsoft SQL Server endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MongoDbSettings
 		// CloudFormation resource type schema:
 		//
@@ -2784,7 +1005,77 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"mongo_db_settings": schemaAttribute1ce52f0855cf1cc8648102a1(),
+		"mongo_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthMechanism
+				"auth_mechanism": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The authentication mechanism you use to access the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthSource
+				"auth_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The MongoDB database name. This setting isn't used when AuthType is set to \"no\".",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthType
+				"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The authentication type you use to access the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseName
+				"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The database name on the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DocsToInvestigate
+				"docs_to_investigate": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to \"one\".",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExtractDocId
+				"extract_doc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the document ID. Use this setting when NestingLevel is set to \"none\".",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NestingLevel
+				"nesting_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies either document or table mode.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Password
+				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The password for the user account you use to access the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The port value for the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MongoDB endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerName
+				"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the server on the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Username
+				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user name you use to access the MongoDB source endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source MongoDB endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MySqlSettings
 		// CloudFormation resource type schema:
 		//
@@ -2831,7 +1122,57 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"my_sql_settings": schemaAttribute8f79096d99c74501a06deaa5(),
+		"my_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AfterConnectScript
+				"after_connect_script": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CleanSourceMetadataOnMismatch
+				"clean_source_metadata_on_mismatch": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Cleans and recreates table metadata information on the replication instance when a mismatch occurs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventsPollInterval
+				"events_poll_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParallelLoadThreads
+				"parallel_load_threads": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MySQL endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerTimezone
+				"server_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the time zone for the source MySQL database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetDbType
+				"target_db_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies where to migrate source tables on the target, either to a single database or multiple databases.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target MySQL endpoin",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NeptuneSettings
 		// CloudFormation resource type schema:
 		//
@@ -2870,7 +1211,47 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"neptune_settings": schemaAttributec8b695528a00c006ce6ee042(),
+		"neptune_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ErrorRetryDuration
+				"error_retry_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 250.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamAuthEnabled
+				"iam_auth_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If you want IAM authorization enabled for this endpoint, set this parameter to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum size in kilobytes of migrated graph data stored in a .csv file before AWS DMS bulk-loads the data to the Neptune target database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxRetryCount
+				"max_retry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of times for AWS DMS to retry a bulk load of migrated graph data to the Neptune target database before raising an error. The default is 5.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3BucketFolder
+				"s3_bucket_folder": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A folder path where you want AWS DMS to store migrated graph data in the S3 bucket specified by S3BucketName",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3BucketName
+				"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the Amazon S3 bucket where AWS DMS can temporarily store migrated graph data in .csv files before bulk-loading it to the Neptune target database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceAccessRoleArn
+				"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. The role must allow the iam:PassRole action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the target Amazon Neptune endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OracleSettings
 		// CloudFormation resource type schema:
 		//
@@ -3025,7 +1406,188 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"oracle_settings": schemaAttributeeda369c542d908f3ec2afa6f(),
+		"oracle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessAlternateDirectly
+				"access_alternate_directly": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to false in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AddSupplementalLogging
+				"add_supplemental_logging": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AdditionalArchivedLogDestId
+				"additional_archived_log_dest_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute with ArchivedLogDestId in a primary/ standby setup",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowSelectNestedTables
+				"allow_select_nested_tables": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ArchivedLogDestId
+				"archived_log_dest_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ID of the destination for the archived redo logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ArchivedLogsOnly
+				"archived_logs_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When this field is set to True, AWS DMS only accesses the archived redo logs",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AsmPassword
+				"asm_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AsmServer
+				"asm_server": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For an Oracle source endpoint, your ASM server address.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AsmUser
+				"asm_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For an Oracle source endpoint, your ASM user name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CharLengthSemantics
+				"char_length_semantics": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the length of a character column is in bytes or in characters.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DirectPathNoLog
+				"direct_path_no_log": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DirectPathParallelLoad
+				"direct_path_parallel_load": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this attribute specifies a parallel load when useDirectPathFullLoad is set to Y.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnableHomogenousTablespace
+				"enable_homogenous_tablespace": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExtraArchivedLogDestIds
+				"extra_archived_log_dest_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Description: "Specifies the IDs of one more destinations for one or more archived redo logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailTasksOnLobTruncation
+				"fail_tasks_on_lob_truncation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified LobMaxSize.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NumberDatatypeScale
+				"number_datatype_scale": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the number scale. You can select a scale up to 38, or you can select FLOAT. By default, the NUMBER data type is converted to precision 38, scale 10.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OraclePathPrefix
+				"oracle_path_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParallelAsmReadThreads
+				"parallel_asm_read_threads": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to change the number of threads that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReadAheadBlocks
+				"read_ahead_blocks": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to change the number of read-ahead blocks that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReadTableSpaceName
+				"read_table_space_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this attribute supports tablespace replication.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReplacePathPrefix
+				"replace_path_prefix": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryInterval
+				"retry_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the number of seconds that the system waits before resending a query.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerOracleAsmAccessRoleArn
+				"secrets_manager_oracle_asm_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Required only if your Oracle endpoint uses Advanced Storage Manager (ASM).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerOracleAsmSecretId
+				"secrets_manager_oracle_asm_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Required only if your Oracle endpoint uses Advanced Storage Manager (ASM).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the Oracle endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityDbEncryption
+				"security_db_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityDbEncryptionName
+				"security_db_encryption_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SpatialDataOptionToGeoJsonFunctionName
+				"spatial_data_option_to_geo_json_function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible. Or you can create your own custom function that mimics the operation of SDOGEOJSON and set SpatialDataOptionToGeoJsonFunctionName to call it instead.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StandbyDelayTime
+				"standby_delay_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Use this attribute to specify a time in minutes for the delay in standby sync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseAlternateFolderForOnline
+				"use_alternate_folder_for_online": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseBFile
+				"use_b_file": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to True to capture change data using the Binary Reader utility.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseDirectPathFullLoad
+				"use_direct_path_full_load": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to True to have AWS DMS use a direct path full load.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseLogminerReader
+				"use_logminer_reader": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this attribute to True to capture change data using the Oracle LogMiner utility (the default).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UsePathPrefix
+				"use_path_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target Oracle endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -3033,7 +1595,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The password to be used to log in to the endpoint database.",
 		//	  "type": "string"
 		//	}
-		"password": schemaAttribute1405a77a1d95d9e73a344bfd(),
+		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The password to be used to log in to the endpoint database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -3041,7 +1606,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port used by the endpoint database.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute0b271a13586f96eaede28d99(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port used by the endpoint database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PostgreSqlSettings
 		// CloudFormation resource type schema:
 		//
@@ -3116,7 +1684,92 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"postgre_sql_settings": schemaAttribute16c67c930a4c104527e77a78(),
+		"postgre_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AfterConnectScript
+				"after_connect_script": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BabelfishDatabaseName
+				"babelfish_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Babelfish for Aurora PostgreSQL database name for the endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CaptureDdls
+				"capture_ddls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts. You can later remove these artifacts.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseMode
+				"database_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DdlArtifactsSchema
+				"ddl_artifacts_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The schema in which the operational DDL database artifacts are created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExecuteTimeout
+				"execute_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Sets the client statement timeout for the PostgreSQL instance, in seconds. The default value is 60 seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailTasksOnLobTruncation
+				"fail_tasks_on_lob_truncation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this value causes a task to fail if the actual size of a LOB column is greater than the specified LobMaxSize.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HeartbeatEnable
+				"heartbeat_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "The write-ahead log (WAL) heartbeat feature mimics a dummy transaction.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HeartbeatFrequency
+				"heartbeat_frequency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Sets the WAL heartbeat frequency (in minutes).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HeartbeatSchema
+				"heartbeat_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Sets the schema in which the heartbeat artifacts are created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MapBooleanAsBoolean
+				"map_boolean_as_boolean": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, lets PostgreSQL migrate the boolean type as boolean.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PluginName
+				"plugin_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the plugin to use to create a replication slot.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the PostgreSQL endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SlotName
+				"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target PostgreSQL endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RedisSettings
 		// CloudFormation resource type schema:
 		//
@@ -3155,7 +1808,47 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"redis_settings": schemaAttribute480264d4f96ec2ae4ecef4f1(),
+		"redis_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthPassword
+				"auth_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthType
+				"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of authentication to perform when connecting to a Redis target.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AuthUserName
+				"auth_user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user name provided with the auth-role option of the AuthType setting for a Redis target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Transmission Control Protocol (TCP) port for the endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerName
+				"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Fully qualified domain name of the endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SslCaCertificateArn
+				"ssl_ca_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SslSecurityProtocol
+				"ssl_security_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid values include plaintext and ssl-encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the target Redis endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RedshiftSettings
 		// CloudFormation resource type schema:
 		//
@@ -3270,7 +1963,142 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"redshift_settings": schemaAttribute495e8a8542166f102195b72d(),
+		"redshift_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AcceptAnyDate
+				"accept_any_date": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that indicates to allow any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose true or false (the default).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AfterConnectScript
+				"after_connect_script": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Code to run after connecting. This parameter should contain the code itself, not the name of a file containing the code.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BucketFolder
+				"bucket_folder": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An S3 folder where the comma-separated-value (.csv) files are stored before being uploaded to the target Redshift cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the intermediate S3 bucket used to store .csv files before uploading data to Redshift.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CaseSensitiveNames
+				"case_sensitive_names": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If Amazon Redshift is configured to support case sensitive schema names, set CaseSensitiveNames to true. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CompUpdate
+				"comp_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If you set CompUpdate to true Amazon Redshift applies automatic compression if the table is empty.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionTimeout
+				"connection_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "A value that sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DateFormat
+				"date_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The date format that you are using.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmptyAsNull
+				"empty_as_null": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of true sets empty CHAR and VARCHAR fields to null. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionMode
+				"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of server-side encryption that you want to use for your data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExplicitIds
+				"explicit_ids": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "This setting is only valid for a full-load migration task. Set ExplicitIds to true to have tables with IDENTITY columns override their auto-generated values with explicit values loaded from the source data files used to populate the tables. The default is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FileTransferUploadStreams
+				"file_transfer_upload_streams": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LoadTimeout
+				"load_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time to wait (in milliseconds) before timing out of operations performed by AWS DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MapBooleanAsBoolean
+				"map_boolean_as_boolean": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as varchar(1). You must set this setting on both the source and target endpoints for it to take effect.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum size (in KB) of any .csv file used to load data on an S3 bucket and transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RemoveQuotes
+				"remove_quotes": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies to remove surrounding quotation marks from strings in the incoming data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReplaceChars
+				"replace_chars": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies to replaces the invalid characters specified in ReplaceInvalidChars, substituting the specified characters instead. The default is \"?\".",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReplaceInvalidChars
+				"replace_invalid_chars": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A list of characters that you want to replace. Use with ReplaceChars.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the Amazon Redshift endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerSideEncryptionKmsKeyId
+				"server_side_encryption_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS key ID. If you are using SSE_KMS for the EncryptionMode, provide this key ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceAccessRoleArn
+				"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon Redshift service. The role must allow the iam:PassRole action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeFormat
+				"time_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The time format that you want to use. Valid values are auto (case-sensitive), 'timeformat_string', 'epochsecs', or 'epochmillisecs'.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrimBlanks
+				"trim_blanks": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies to remove the trailing white space characters from a VARCHAR string.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TruncateColumns
+				"truncate_columns": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies to truncate data in columns to the appropriate number of characters, so that the data fits in the column.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteBufferSize
+				"write_buffer_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk at the DMS replication instance. The default value is 1000 (buffer size is 1000KB).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the Amazon Redshift endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -3278,7 +2106,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A display name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.",
 		//	  "type": "string"
 		//	}
-		"resource_identifier": schemaAttributeaecf761d0f15788a987ebd2c(),
+		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A display name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3Settings
 		// CloudFormation resource type schema:
 		//
@@ -3453,7 +2284,217 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"s3_settings": schemaAttribute9074428dbe04f6cb60775dce(),
+		"s3_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AddColumnName
+				"add_column_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional parameter that, when set to true or y, you can use to add column name information to the .csv output file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AddTrailingPaddingCharacter
+				"add_trailing_padding_character": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on string data. The default value is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BucketFolder
+				"bucket_folder": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional parameter to set a folder name in the S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CannedAclForObjects
+				"canned_acl_for_objects": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that enables AWS DMS to specify a predefined (canned) access control list (ACL) for objects created in an Amazon S3 bucket as .csv or .parquet files.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CdcInsertsAndUpdates
+				"cdc_inserts_and_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CdcInsertsOnly
+				"cdc_inserts_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the false setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CdcMaxBatchInterval
+				"cdc_max_batch_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CdcMinFileSize
+				"cdc_min_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Minimum file size, defined in kilobytes, to reach for a file output to Amazon S3.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CdcPath
+				"cdc_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CompressionType
+				"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional parameter. When set to GZIP it enables the service to compress the target files.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CsvDelimiter
+				"csv_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The delimiter used to separate columns in the .csv file for both source and target. The default is a comma.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CsvNoSupValue
+				"csv_no_sup_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This setting only applies if your Amazon S3 output files during a change data capture (CDC) load are written in .csv format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CsvNullValue
+				"csv_null_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional parameter that specifies how AWS DMS treats null values.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CsvRowDelimiter
+				"csv_row_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The delimiter used to separate rows in the .csv file for both source and target.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataFormat
+				"data_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The format of the data that you want to use for output.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataPageSize
+				"data_page_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The size of one data page in bytes. This parameter defaults to 1024 * 1024 bytes (1 MiB). This number is used for .parquet file format only.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatePartitionDelimiter
+				"date_partition_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies a date separating delimiter to use during folder partitioning. The default value is SLASH. Use this parameter when DatePartitionedEnabled is set to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatePartitionEnabled
+				"date_partition_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatePartitionSequence
+				"date_partition_sequence": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Identifies the sequence of the date format to use during folder partitioning. The default value is YYYYMMDD. Use this parameter when DatePartitionedEnabled is set to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatePartitionTimezone
+				"date_partition_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "When creating an S3 target endpoint, set DatePartitionTimezone to convert the current UTC time into a specified time zone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DictPageSizeLimit
+				"dict_page_size_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum size of an encoded dictionary page of a column",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnableStatistics
+				"enable_statistics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that enables statistics for Parquet pages and row groups.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncodingType
+				"encoding_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of encoding that you're using.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionMode
+				"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of server-side encryption that you want to use for your data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExpectedBucketOwner
+				"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "To specify a bucket owner and prevent sniping, you can use the ExpectedBucketOwner endpoint setting.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExternalTableDefinition
+				"external_table_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The external table definition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GlueCatalogGeneration
+				"glue_catalog_generation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, allows AWS Glue to catalog your S3 bucket. Creating an AWS Glue catalog lets you use Athena to query your data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IgnoreHeaderRows
+				"ignore_header_rows": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "When this value is set to 1, AWS DMS ignores the first row header in a .csv file. A value of 1 turns on the feature; a value of 0 turns off the feature.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeOpForFullLoad
+				"include_op_for_full_load": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxFileSize
+				"max_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies the maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParquetTimestampInMillisecond
+				"parquet_timestamp_in_millisecond": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies the precision of any TIMESTAMP column values that are written to an Amazon S3 object file in .parquet format.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParquetVersion
+				"parquet_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the Apache Parquet format that you want to use: parquet_1_0 (the default) or parquet_2_0.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveTransactions
+				"preserve_transactions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If this setting is set to true, AWS DMS saves the transaction order for a change data capture (CDC) load on the Amazon S3 target specified by CdcPath.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Rfc4180
+				"rfc_4180": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "For an S3 source, when this value is set to true or y, each leading double quotation mark has to be followed by an ending double quotation mark.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RowGroupLength
+				"row_group_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of rows in a row group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerSideEncryptionKmsKeyId
+				"server_side_encryption_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If you are using SSE_KMS for the EncryptionMode, provide the AWS KMS key ID. The key that you use needs an attached policy that enables IAM user permissions and allows use of the key.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceAccessRoleArn
+				"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A required parameter that specifies the Amazon Resource Name (ARN) used by the service to access the IAM role.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimestampColumnName
+				"timestamp_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that when nonblank causes AWS DMS to add a column with timestamp information to the endpoint data for an Amazon S3 target.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseCsvNoSupValue
+				"use_csv_no_sup_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "This setting applies if the S3 output files during a change data capture (CDC) load are written in .csv format. If this setting is set to true for columns not included in the supplemental log, AWS DMS uses the value specified by CsvNoSupValue. If this setting isn't set or is set to false, AWS DMS uses the null value for these columns.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UseTaskStartTimeForFullLoadTimestamp
+				"use_task_start_time_for_full_load_timestamp": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When set to true, this parameter uses the task start time as the timestamp column value instead of the time data is written to target",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target Amazon S3 endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerName
 		// CloudFormation resource type schema:
 		//
@@ -3461,7 +2502,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the server where the endpoint database resides.",
 		//	  "type": "string"
 		//	}
-		"server_name": schemaAttribute35537799317d1738f209ffe7(),
+		"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the server where the endpoint database resides.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SslMode
 		// CloudFormation resource type schema:
 		//
@@ -3469,7 +2513,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is none.",
 		//	  "type": "string"
 		//	}
-		"ssl_mode": schemaAttribute969760bce3b56be39324f751(),
+		"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is none.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SybaseSettings
 		// CloudFormation resource type schema:
 		//
@@ -3488,7 +2535,22 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sybase_settings": schemaAttributec826f9325b94aa87d8be20a4(),
+		"sybase_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretsManagerAccessRoleArn
+				"secrets_manager_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerSecretId
+				"secrets_manager_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the SAP SAE endpoint connection details.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings in JSON format for the source and target SAP ASE endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3516,7 +2578,24 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributed841f225ae8c08036be38299(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A key is the required name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A value is the optional value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags to be assigned to the endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -3524,7 +2603,10 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user name to be used to log in to the endpoint database.",
 		//	  "type": "string"
 		//	}
-		"username": schemaAttribute0c37d93245b2ca8b84c77235(),
+		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user name to be used to log in to the endpoint database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,62 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute207c882be30153c4be62756d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee3712a77679b703a69773887(),
-				// Property: Value
-				"value": schemaAttributee3712a77679b703a69773887(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of tags associated with a resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f6b6d8f36214b9249e17706() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the worker configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f42a7323522ff8d36a5e1ab() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The description of a revision of the worker configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead8c8281e8fcee4aa149b049() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A summary description of the worker configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3712a77679b703a69773887() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee68aaa50bbf66c04a0cb2e79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the custom configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb845f8b13aad9b28c0bd89a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Base64 encoded contents of connect-distributed.properties file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kafkaconnect_worker_configuration", workerConfigurationDataSource)
 }
@@ -86,7 +30,10 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributead8c8281e8fcee4aa149b049(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A summary description of the worker configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +43,10 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2f6b6d8f36214b9249e17706(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the worker configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PropertiesFileContent
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +54,10 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Base64 encoded contents of connect-distributed.properties file.",
 		//	  "type": "string"
 		//	}
-		"properties_file_content": schemaAttributeeb845f8b13aad9b28c0bd89a(),
+		"properties_file_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Base64 encoded contents of connect-distributed.properties file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Revision
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +66,10 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"revision": schemaAttribute9f42a7323522ff8d36a5e1ab(),
+		"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The description of a revision of the worker configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -142,7 +98,22 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute207c882be30153c4be62756d(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +122,10 @@ func workerConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
-		"worker_configuration_arn": schemaAttributee68aaa50bbf66c04a0cb2e79(),
+		"worker_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the custom configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

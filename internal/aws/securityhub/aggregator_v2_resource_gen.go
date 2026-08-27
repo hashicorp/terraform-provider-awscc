@@ -23,66 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1635198d2a33cafeb5f664ef() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of included Regions",
-		Required:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.SizeBetween(1, 50),
-			setvalidator.ValueStringsAre(
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]{1,32}$"), ""),
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute566bf5e7cf9b423954ed8fda() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A key-value pair to associate with the Security Hub V2 resource.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-			mapplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute576f2f74fa23d1ce37c0d548() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates to link a list of included Regions",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"SPECIFIED_REGIONS",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81700e267b6d561854cc03d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AggregatorV2 being created and assigned as the unique identifier",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8436f908729dccbe673bc77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The aggregation Region of the AggregatorV2",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_aggregator_v2", aggregatorV2Resource)
 	registry.AddListResourceFactory("awscc_securityhub_aggregator_v2", generic.NewListResource(aggregatorV2Resource))
@@ -100,7 +40,13 @@ func aggregatorV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
-		"aggregation_region": schemaAttributec8436f908729dccbe673bc77(),
+		"aggregation_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The aggregation Region of the AggregatorV2",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AggregatorV2Arn
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +55,13 @@ func aggregatorV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"aggregator_v2_arn": schemaAttribute81700e267b6d561854cc03d1(),
+		"aggregator_v2_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AggregatorV2 being created and assigned as the unique identifier",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LinkedRegions
 		// CloudFormation resource type schema:
 		//
@@ -125,7 +77,17 @@ func aggregatorV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"linked_regions": schemaAttribute1635198d2a33cafeb5f664ef(),
+		"linked_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of included Regions",
+			Required:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeBetween(1, 50),
+				setvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]{1,32}$"), ""),
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RegionLinkingMode
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +98,15 @@ func aggregatorV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"region_linking_mode": schemaAttribute576f2f74fa23d1ce37c0d548(),
+		"region_linking_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates to link a list of included Regions",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SPECIFIED_REGIONS",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +123,16 @@ func aggregatorV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute566bf5e7cf9b423954ed8fda(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair to associate with the Security Hub V2 resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

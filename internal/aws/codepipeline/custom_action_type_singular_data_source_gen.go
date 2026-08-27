@@ -14,207 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0dd1655a503fe8403ac275d4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of artifacts allowed for the action type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23074a2ade8ce09416af2e62() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttributecba2915bb01485266b8d934f(),
-				// Property: Key
-				"key": schemaAttribute8f6f38d26acbe10c4ecaaf6a(),
-				// Property: Name
-				"name": schemaAttributec28dec9b985b0ca9cc8ecc6e(),
-				// Property: Queryable
-				"queryable": schemaAttribute767c2f4b63a38d82ea24a3dc(),
-				// Property: Required
-				"required": schemaAttribute309b84ec3540c689c599c2fb(),
-				// Property: Secret
-				"secret": schemaAttribute698c8681d570279389d1d369(),
-				// Property: Type
-				"type": schemaAttributea0d7d2b591c82e4492e3dcaa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The configuration properties for the custom action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute309b84ec3540c689c599c2fb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the configuration property is a required value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40482eeaf10766a195f58eba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumCount
-			"maximum_count": schemaAttribute0dd1655a503fe8403ac275d4(),
-			// Property: MinimumCount
-			"minimum_count": schemaAttributec35369bd5da4982c35fa5a7d(),
-		}, /*END SCHEMA*/
-		Description: "The details of the output artifact of the action, such as its commit ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute423f31b4c5e3230c74345d67() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute565e50dd67c09a47c0f27565() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumCount
-			"maximum_count": schemaAttribute0dd1655a503fe8403ac275d4(),
-			// Property: MinimumCount
-			"minimum_count": schemaAttributec35369bd5da4982c35fa5a7d(),
-		}, /*END SCHEMA*/
-		Description: "The details of the input artifact for the action, such as its commit ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute698c8681d570279389d1d369() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the configuration property is secret. Secrets are hidden from all calls except for GetJobDetails, GetThirdPartyJobDetails, PollForJobs, and PollForThirdPartyJobs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute767c2f4b63a38d82ea24a3dc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that the property is used with PollForJobs. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83820f57455ad57ddbc5b483() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87b7b07055e43b85d5441336() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EntityUrlTemplate
-			"entity_url_template": schemaAttributeed283579978d109a467eea41(),
-			// Property: ExecutionUrlTemplate
-			"execution_url_template": schemaAttributec02a58e5a241297419514532(),
-			// Property: RevisionUrlTemplate
-			"revision_url_template": schemaAttribute83820f57455ad57ddbc5b483(),
-			// Property: ThirdPartyConfigurationUrl
-			"third_party_configuration_url": schemaAttribute90086b1dade7e1e44ef9fd78(),
-		}, /*END SCHEMA*/
-		Description: "URLs that provide users information about this custom action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f6f38d26acbe10c4ecaaf6a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the configuration property is a key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90086b1dade7e1e44ef9fd78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0d7d2b591c82e4492e3dcaa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the configuration property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec02a58e5a241297419514532() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec28dec9b985b0ca9cc8ecc6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the action configuration property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec35369bd5da4982c35fa5a7d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of artifacts allowed for the action type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecba2915bb01485266b8d934f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the action configuration property that is displayed to users. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc005fc7f16e71e54f96b419() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute423f31b4c5e3230c74345d67(),
-				// Property: Value
-				"value": schemaAttribute423f31b4c5e3230c74345d67(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Any tags assigned to the custom action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4cc9aa5e4c526a766c96799() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version identifier of the custom action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed283579978d109a467eea41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display in the pipeline. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5e9f4437a9c98270f87ed0b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The provider of the service used in the custom action, such as AWS CodeDeploy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9e5332caff63704edd6d402() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The category of the custom action, such as a build action or a test action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codepipeline_custom_action_type", customActionTypeDataSource)
 }
@@ -230,7 +29,10 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The category of the custom action, such as a build action or a test action.",
 		//	  "type": "string"
 		//	}
-		"category": schemaAttributef9e5332caff63704edd6d402(),
+		"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The category of the custom action, such as a build action or a test action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConfigurationProperties
 		// CloudFormation resource type schema:
 		//
@@ -281,14 +83,58 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"configuration_properties": schemaAttribute23074a2ade8ce09416af2e62(),
+		"configuration_properties": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The description of the action configuration property that is displayed to users. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Key
+					"key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether the configuration property is a key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the action configuration property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Queryable
+					"queryable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Indicates that the property is used with PollForJobs. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Required
+					"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether the configuration property is a required value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Secret
+					"secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether the configuration property is secret. Secrets are hidden from all calls except for GetJobDetails, GetThirdPartyJobDetails, PollForJobs, and PollForThirdPartyJobs.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of the configuration property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The configuration properties for the custom action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"custom_action_type_id": schemaAttribute423f31b4c5e3230c74345d67(),
+		"custom_action_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputArtifactDetails
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +157,22 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"input_artifact_details": schemaAttribute565e50dd67c09a47c0f27565(),
+		"input_artifact_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaximumCount
+				"maximum_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of artifacts allowed for the action type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinimumCount
+				"minimum_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of artifacts allowed for the action type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The details of the input artifact for the action, such as its commit ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputArtifactDetails
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +195,22 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"output_artifact_details": schemaAttribute40482eeaf10766a195f58eba(),
+		"output_artifact_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaximumCount
+				"maximum_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of artifacts allowed for the action type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinimumCount
+				"minimum_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of artifacts allowed for the action type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The details of the output artifact of the action, such as its commit ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +218,10 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The provider of the service used in the custom action, such as AWS CodeDeploy.",
 		//	  "type": "string"
 		//	}
-		"provider_name": schemaAttributef5e9f4437a9c98270f87ed0b(),
+		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The provider of the service used in the custom action, such as AWS CodeDeploy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Settings
 		// CloudFormation resource type schema:
 		//
@@ -369,7 +248,32 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"settings": schemaAttribute87b7b07055e43b85d5441336(),
+		"settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EntityUrlTemplate
+				"entity_url_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display in the pipeline. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExecutionUrlTemplate
+				"execution_url_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RevisionUrlTemplate
+				"revision_url_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThirdPartyConfigurationUrl
+				"third_party_configuration_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "URLs that provide users information about this custom action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -395,7 +299,22 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributedc005fc7f16e71e54f96b419(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags assigned to the custom action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +322,10 @@ func customActionTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The version identifier of the custom action.",
 		//	  "type": "string"
 		//	}
-		"version": schemaAttributee4cc9aa5e4c526a766c96799(),
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version identifier of the custom action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

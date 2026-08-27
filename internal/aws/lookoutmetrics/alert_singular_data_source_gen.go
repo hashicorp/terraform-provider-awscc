@@ -14,108 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4442362cbde9661cec148d23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c64a12ba13816c0903f7268() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the alert.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b0f699ada3bf6e8ebb11ccd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaConfiguration
-			"lambda_configuration": schemaAttributeb68519c9e4122055bff75ae6(),
-			// Property: SNSConfiguration
-			"sns_configuration": schemaAttribute995c106e493f2117bcee197f(),
-		}, /*END SCHEMA*/
-		Description: "The action to be taken by the alert when an anomaly is detected.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b3f76b714044d9d6f545c78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN assigned to the alert.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61b30f709e53831763a00c2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of a Lambda to send alert notifications to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a6369972200aa6e2bf4c801() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of an SNS topic to send alert notifications to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute995c106e493f2117bcee197f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttributef61ed8feecffb939a187a65b(),
-			// Property: SnsTopicArn
-			"sns_topic_arn": schemaAttribute6a6369972200aa6e2bf4c801(),
-		}, /*END SCHEMA*/
-		Description: "Configuration options for an SNS alert action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3eb7cf3c3b2e0292a102e93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb68519c9e4122055bff75ae6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaArn
-			"lambda_arn": schemaAttribute61b30f709e53831763a00c2a(),
-			// Property: RoleArn
-			"role_arn": schemaAttributeb3eb7cf3c3b2e0292a102e93(),
-		}, /*END SCHEMA*/
-		Description: "Configuration options for a Lambda alert action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba3ea1cadcdda3b480ea06c9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8855b99ad3c195025ac729e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the alert. If not provided, a name is generated automatically.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef61ed8feecffb939a187a65b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lookoutmetrics_alert", alertDataSource)
 }
@@ -180,7 +78,46 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"action": schemaAttribute5b0f699ada3bf6e8ebb11ccd(),
+		"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LambdaConfiguration
+				"lambda_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of a Lambda to send alert notifications to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration options for a Lambda alert action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SNSConfiguration
+				"sns_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SnsTopicArn
+						"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of an SNS topic to send alert notifications to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration options for an SNS alert action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The action to be taken by the alert when an anomaly is detected.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlertDescription
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +127,10 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"alert_description": schemaAttribute4c64a12ba13816c0903f7268(),
+		"alert_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the alert.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlertName
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +141,10 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"alert_name": schemaAttributee8855b99ad3c195025ac729e(),
+		"alert_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the alert. If not provided, a name is generated automatically.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AlertSensitivityThreshold
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +154,10 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"alert_sensitivity_threshold": schemaAttributeba3ea1cadcdda3b480ea06c9(),
+		"alert_sensitivity_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyDetectorArn
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +167,10 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_arn": schemaAttribute4442362cbde9661cec148d23(),
+		"anomaly_detector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +180,10 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5b3f76b714044d9d6f545c78(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN assigned to the alert.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

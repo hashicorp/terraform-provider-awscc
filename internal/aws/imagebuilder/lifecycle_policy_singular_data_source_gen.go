@@ -15,323 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0bfa7a8de37a8b6513dccf0b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute273f241a9b2741aab89f3cdb(),
-				// Property: SemanticVersion
-				"semantic_version": schemaAttribute0e60bb2ce99fe05e30669c70(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The recipes to select.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e60bb2ce99fe05e30669c70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The recipe version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1128a878a4483753d5bcfe15() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of Image Builder resources to retain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a376d4a47bcacb6f03c045d() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The AMIs to select by tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute225e0c5a0775c0906ea9320d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23b334ca363eb203def727d2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The filter value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26d5f1b9ab3ab8bcfab05f1d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Recipes
-			"recipes": schemaAttribute0bfa7a8de37a8b6513dccf0b(),
-			// Property: TagMap
-			"tag_map": schemaAttribute5f6d58fb65f1423db3e67d7d(),
-		}, /*END SCHEMA*/
-		Description: "The resource selection of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute273f241a9b2741aab89f3cdb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The recipe name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2873f9382ee63fa0964155c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Unit
-			"unit": schemaAttribute5d6ca4fb8f42de236af93f4c(),
-			// Property: Value
-			"value": schemaAttribute97fa8247453f7cf52bd32184(),
-		}, /*END SCHEMA*/
-		Description: "Use to apply lifecycle policy actions on AMIs launched before a certain time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c3911d597190bfc379f15cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action type of the policy detail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39294431930ba92731b9f5bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute456554e8a8f8805104c6d3c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The execution role of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48c3630f218b6126334af8f9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure lifecycle actions on snapshots.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c5d7257f944bd7376ec15c4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Amis
-			"amis": schemaAttribute61fb394d5d51479b7f1e7514(),
-			// Property: TagMap
-			"tag_map": schemaAttribute8de5a112648b9c73cef86c6a(),
-		}, /*END SCHEMA*/
-		Description: "The exclusion rules to apply of the policy detail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d6ca4fb8f42de236af93f4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value's time unit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f6d58fb65f1423db3e67d7d() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Image Builder resources to select by tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60c4adbe29ca6ec92f030900() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to apply lifecycle policy actions on whether the AMI is public.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61fb394d5d51479b7f1e7514() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IsPublic
-			"is_public": schemaAttribute60c4adbe29ca6ec92f030900(),
-			// Property: LastLaunched
-			"last_launched": schemaAttribute2873f9382ee63fa0964155c6(),
-			// Property: Regions
-			"regions": schemaAttributec747a091b89a0506072937d7(),
-			// Property: SharedAccounts
-			"shared_accounts": schemaAttribute7b512dac3b3573477c118bc6(),
-			// Property: TagMap
-			"tag_map": schemaAttribute1a376d4a47bcacb6f03c045d(),
-		}, /*END SCHEMA*/
-		Description: "The AMI exclusion rules for the policy detail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6382c653c869399789a32931() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource type of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72871c3ebcf7255333950d9e() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The tags associated with the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b512dac3b3573477c118bc6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8519c35f87178c5051e9470a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The filter type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a91b6efdaa8a6dc11f3dd28() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schemaAttributea09b8db294134f36e4789b62(),
-				// Property: ExclusionRules
-				"exclusion_rules": schemaAttribute4c5d7257f944bd7376ec15c4(),
-				// Property: Filter
-				"filter": schemaAttributefc4ba71bcd38ab8a5f7ed6ba(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The policy details of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8de5a112648b9c73cef86c6a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The Image Builder tags to filter on.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97fa8247453f7cf52bd32184() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The last launched value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ca6e276fc721ff7c6fe2138() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure lifecycle actions on AMIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea09b8db294134f36e4789b62() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncludeResources
-			"include_resources": schemaAttributebed24978f59e73888e66100e(),
-			// Property: Type
-			"type": schemaAttribute2c3911d597190bfc379f15cf(),
-		}, /*END SCHEMA*/
-		Description: "The action of the policy detail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea209f8e2b5b8562672b04cc9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebed24978f59e73888e66100e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Amis
-			"amis": schemaAttribute9ca6e276fc721ff7c6fe2138(),
-			// Property: Containers
-			"containers": schemaAttributeef70356866bc40a6149f549b(),
-			// Property: Snapshots
-			"snapshots": schemaAttribute48c3630f218b6126334af8f9(),
-		}, /*END SCHEMA*/
-		Description: "The included resources of the policy detail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec747a091b89a0506072937d7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcb8e32faed3be6476b57f78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the lifecycle policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef70356866bc40a6149f549b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Use to configure lifecycle actions on containers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc4ba71bcd38ab8a5f7ed6ba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RetainAtLeast
-			"retain_at_least": schemaAttribute1128a878a4483753d5bcfe15(),
-			// Property: Type
-			"type": schemaAttribute8519c35f87178c5051e9470a(),
-			// Property: Unit
-			"unit": schemaAttribute5d6ca4fb8f42de236af93f4c(),
-			// Property: Value
-			"value": schemaAttribute23b334ca363eb203def727d2(),
-		}, /*END SCHEMA*/
-		Description: "The filters to apply of the policy detail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_lifecycle_policy", lifecyclePolicyDataSource)
 }
@@ -348,7 +31,10 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:lifecycle-policy/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea209f8e2b5b8562672b04cc9(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +42,10 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The description of the lifecycle policy.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute225e0c5a0775c0906ea9320d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +53,10 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The execution role of the lifecycle policy.",
 		//	  "type": "string"
 		//	}
-		"execution_role": schemaAttribute456554e8a8f8805104c6d3c1(),
+		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +64,10 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the lifecycle policy.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributedcb8e32faed3be6476b57f78(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDetails
 		// CloudFormation resource type schema:
 		//
@@ -546,7 +241,137 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"policy_details": schemaAttribute8a91b6efdaa8a6dc11f3dd28(),
+		"policy_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IncludeResources
+							"include_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Amis
+									"amis": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to configure lifecycle actions on AMIs.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Containers
+									"containers": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to configure lifecycle actions on containers.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Snapshots
+									"snapshots": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to configure lifecycle actions on snapshots.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The included resources of the policy detail.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The action type of the policy detail.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The action of the policy detail.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExclusionRules
+					"exclusion_rules": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Amis
+							"amis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsPublic
+									"is_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Use to apply lifecycle policy actions on whether the AMI is public.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: LastLaunched
+									"last_launched": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The value's time unit.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The last launched value.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Use to apply lifecycle policy actions on AMIs launched before a certain time.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Regions
+									"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SharedAccounts
+									"shared_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TagMap
+									"tag_map":           // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "The AMIs to select by tag.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The AMI exclusion rules for the policy detail.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TagMap
+							"tag_map":           // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The Image Builder tags to filter on.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The exclusion rules to apply of the policy detail.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Filter
+					"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RetainAtLeast
+							"retain_at_least": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The minimum number of Image Builder resources to retain.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The filter type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value's time unit.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The filter value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The filters to apply of the policy detail.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The policy details of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceSelection
 		// CloudFormation resource type schema:
 		//
@@ -591,7 +416,38 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_selection": schemaAttribute26d5f1b9ab3ab8bcfab05f1d(),
+		"resource_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Recipes
+				"recipes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The recipe name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SemanticVersion
+							"semantic_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The recipe version.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The recipes to select.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TagMap
+				"tag_map":           // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The Image Builder resources to select by tag.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The resource selection of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -603,7 +459,10 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute6382c653c869399789a32931(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource type of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -615,7 +474,10 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute39294431930ba92731b9f5bb(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -629,7 +491,12 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute72871c3ebcf7255333950d9e(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags associated with the lifecycle policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

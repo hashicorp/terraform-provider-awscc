@@ -15,213 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01722cd590d6867e5cfc9b70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute01a25b94ab8e6fab4c6bb3c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for representing FinSpace Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0388abed601eb4c0f8b03b97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Federation mode used with the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09583fbdce255f9828a3f6c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1616a4ddbefa6db5d1e21de4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Email address",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute162e981a2a452bab43342f08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17283b97aba4289477f189a9() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "ARNs of FinSpace Data Bundles to install",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d0d9ae3d7acb1507021611e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EmailAddress
-			"email_address": schemaAttribute1616a4ddbefa6db5d1e21de4(),
-			// Property: FirstName
-			"first_name": schemaAttribute915ee8c7916c5557953d8966(),
-			// Property: LastName
-			"last_name": schemaAttributef4fe604594c5fe9ca277ba76(),
-		}, /*END SCHEMA*/
-		Description: "Parameters of the first Superuser for the FinSpace Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6409f97348b357cc63bde6ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78c32de4e91d3ac5e1bbb0c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "URL used to login to the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c75ff93666bb65caad6b1c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "AWS account ID associated with the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute915ee8c7916c5557953d8966() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "First name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99e841ba181472ded9a85825() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Federation provider name to link with the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec75109783d9d4e282469c1cb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec849e0a30e930a078e54a993(),
-				// Property: Value
-				"value": schemaAttributeccc0b1f89d6f6d2b3bedbd57(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec849e0a30e930a078e54a993() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8711d93c056426e516f838f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "SageMaker Studio Domain URL associated with the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb8f1bd8fd924912a35be264() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "SAML metadata document to link the federation provider to the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc63f99027276ef3169774c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ApplicationCallBackURL
-			"application_call_back_url": schemaAttributee203836f522b0c1b31418d7b(),
-			// Property: AttributeMap
-			"attribute_map": schemaAttributee6d70a51deeb50a6c78cd2d7(),
-			// Property: FederationProviderName
-			"federation_provider_name": schemaAttribute99e841ba181472ded9a85825(),
-			// Property: FederationURN
-			"federation_urn": schemaAttributee203836f522b0c1b31418d7b(),
-			// Property: SamlMetadataDocument
-			"saml_metadata_document": schemaAttributecb8f1bd8fd924912a35be264(),
-			// Property: SamlMetadataURL
-			"saml_metadata_url": schemaAttributee203836f522b0c1b31418d7b(),
-		}, /*END SCHEMA*/
-		Description: "Additional parameters to identify Federation mode",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccc0b1f89d6f6d2b3bedbd57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed10be1f2de11c9f5d8b4a857() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ID for FinSpace created account used to store Environment artifacts",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee203836f522b0c1b31418d7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "SAML metadata URL to link with the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6d70a51deeb50a6c78cd2d7() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec849e0a30e930a078e54a993(),
-				// Property: Value
-				"value": schemaAttributeccc0b1f89d6f6d2b3bedbd57(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Attribute map for SAML configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4fe604594c5fe9ca277ba76() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Last name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef70092578c21a65f0366e568() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the Environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_finspace_environment", environmentDataSource)
 }
@@ -238,7 +31,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute7c75ff93666bb65caad6b1c9(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "AWS account ID associated with the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataBundles
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +47,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"data_bundles": schemaAttribute17283b97aba4289477f189a9(),
+		"data_bundles": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "ARNs of FinSpace Data Bundles to install",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DedicatedServiceAccountId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +60,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
 		//	  "type": "string"
 		//	}
-		"dedicated_service_account_id": schemaAttributed10be1f2de11c9f5d8b4a857(),
+		"dedicated_service_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ID for FinSpace created account used to store Environment artifacts",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +72,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute01722cd590d6867e5cfc9b70(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentArn
 		// CloudFormation resource type schema:
 		//
@@ -278,7 +84,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"environment_arn": schemaAttribute162e981a2a452bab43342f08(),
+		"environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -287,7 +96,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schemaAttribute01a25b94ab8e6fab4c6bb3c9(),
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for representing FinSpace Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentUrl
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +108,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 		//	  "type": "string"
 		//	}
-		"environment_url": schemaAttribute78c32de4e91d3ac5e1bbb0c8(),
+		"environment_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "URL used to login to the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FederationMode
 		// CloudFormation resource type schema:
 		//
@@ -308,7 +123,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"federation_mode": schemaAttribute0388abed601eb4c0f8b03b97(),
+		"federation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Federation mode used with the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FederationParameters
 		// CloudFormation resource type schema:
 		//
@@ -371,7 +189,56 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"federation_parameters": schemaAttributecc63f99027276ef3169774c6(),
+		"federation_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationCallBackURL
+				"application_call_back_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata URL to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AttributeMap
+				"attribute_map": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Attribute map for SAML configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FederationProviderName
+				"federation_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Federation provider name to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FederationURN
+				"federation_urn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata URL to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamlMetadataDocument
+				"saml_metadata_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata document to link the federation provider to the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamlMetadataURL
+				"saml_metadata_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata URL to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Additional parameters to identify Federation mode",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +247,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute6409f97348b357cc63bde6ea(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -389,7 +259,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef70092578c21a65f0366e568(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SageMakerStudioDomainUrl
 		// CloudFormation resource type schema:
 		//
@@ -398,7 +271,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"sage_maker_studio_domain_url": schemaAttributec8711d93c056426e516f838f(),
+		"sage_maker_studio_domain_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "SageMaker Studio Domain URL associated with the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -418,7 +294,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute09583fbdce255f9828a3f6c5(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of the Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SuperuserParameters
 		// CloudFormation resource type schema:
 		//
@@ -450,7 +329,27 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"superuser_parameters": schemaAttribute1d0d9ae3d7acb1507021611e(),
+		"superuser_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EmailAddress
+				"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Email address",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FirstName
+				"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "First name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LastName
+				"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Last name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Parameters of the first Superuser for the FinSpace Environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -483,7 +382,24 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributec75109783d9d4e282469c1cb(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

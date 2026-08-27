@@ -16,461 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0296b73ff2592ee43301e1cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Configuration settings for default maintenance scheduling.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute077744f3d428e1dddf5d7ab7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the flow to connect to this router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ab175eee63cc2b5c9f2918c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the router output was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c2f38139ea0cb1db3aa38ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b0386a560d94e2bba44a516() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4dddc6252ab5a8b7bc166336(),
-				// Property: Value
-				"value": schemaAttribute4dddc6252ab5a8b7bc166336(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to tag this router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33ede94461034c8ae308d49a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address of the router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute376daee2153ad123fcfe3ea4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination IP address for the RTP protocol in the router output configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b0238ad3bfe2cf956c0e7ee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionKey
-			"encryption_key": schemaAttribute9c986a16e1dd3d7de3425863(),
-		}, /*END SCHEMA*/
-		Description: "Contains the configuration settings for encrypting SRT streams, including the encryption key details and encryption parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f8476686da881430b76fe0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the network interface associated with the standard router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4be030a8b5af418795f00fbf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Day
-			"day": schemaAttribute4dddc6252ab5a8b7bc166336(),
-			// Property: Time
-			"time": schemaAttributed1cdb7a6b07fc7106476524e(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for preferred day and time maintenance settings.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dddc6252ab5a8b7bc166336() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b3fab4c1914686618e60e24() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The destination port number for the RTP protocol in the router output configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ceb09e60d72231f5a2d7ab3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum latency in milliseconds for the SRT protocol in listener mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute629e43984bfa7c8ea495b853() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MediaConnectFlow
-			"media_connect_flow": schemaAttributeeb2004c63cc96291fb39395a(),
-			// Property: MediaLiveInput
-			"media_live_input": schemaAttributec209a258c6fc22f65eb63e46(),
-			// Property: Standard
-			"standard": schemaAttributed19d815084d3869e2b4f97c0(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for a router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute673b56bc70c927c9a7776323() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationAddress
-			"destination_address": schemaAttribute7457ae6391e67a5f7c7becc0(),
-			// Property: DestinationPort
-			"destination_port": schemaAttribute827fc2023398f955f3afb734(),
-			// Property: EncryptionConfiguration
-			"encryption_configuration": schemaAttribute3b0238ad3bfe2cf956c0e7ee(),
-			// Property: MinimumLatencyMilliseconds
-			"minimum_latency_milliseconds": schemaAttributeaf958f592309d4bb3fa35881(),
-			// Property: StreamId
-			"stream_id": schemaAttributead88f25f443eb4c9dcc302c2(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in caller mode, including the destination address and port, minimum latency, stream ID, and encryption key configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b069a34863d0e2fa65ccc51() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e5004328b6b92f587fd49e6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationAddress
-			"destination_address": schemaAttribute376daee2153ad123fcfe3ea4(),
-			// Property: DestinationPort
-			"destination_port": schemaAttribute5b3fab4c1914686618e60e24(),
-			// Property: ForwardErrorCorrection
-			"forward_error_correction": schemaAttribute4dddc6252ab5a8b7bc166336(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for a router output using the RTP (Real-Time Transport Protocol) protocol, including the destination address and port, and forward error correction state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f6dffd7e44fc56418700eeb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the MediaLive input to connect to this router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7457ae6391e67a5f7c7becc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination IP address for the SRT protocol in caller mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c2a1a7ed5fc0121c2e87bf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute827fc2023398f955f3afb734() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The destination port number for the SRT protocol in caller mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e239710d6fe453940770689() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionKeyConfiguration
-			"encryption_key_configuration": schemaAttributeb2b36235fe3f26729a6f6985(),
-			// Property: EncryptionKeyType
-			"encryption_key_type": schemaAttribute4dddc6252ab5a8b7bc166336(),
-		}, /*END SCHEMA*/
-		Description: "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9495ab160bb15d17ea362f82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the flow source to connect to this router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94d92e70eef0c367b79b6adb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationAddress
-			"destination_address": schemaAttributea93264ec64c1f103424ecc09(),
-			// Property: DestinationPort
-			"destination_port": schemaAttributef94c02a3d96d64e752b205b0(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for a router output using the RIST (Reliable Internet Stream Transport) protocol, including the destination address and port.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ba4c2d88ef7883b9997f0e0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionConfiguration
-			"encryption_configuration": schemaAttribute3b0238ad3bfe2cf956c0e7ee(),
-			// Property: MinimumLatencyMilliseconds
-			"minimum_latency_milliseconds": schemaAttribute5ceb09e60d72231f5a2d7ab3(),
-			// Property: Port
-			"port": schemaAttributed605243a6b46ef8c0d9a6ab0(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and encryption key configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c986a16e1dd3d7de3425863() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttributebf2073e0fd7091ee7cc93af5(),
-			// Property: SecretArn
-			"secret_arn": schemaAttributea9c4197a0f5e4f2c555c77f3(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea32a0290138ef870e6f2c2ff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EncryptionKeyConfiguration
-			"encryption_key_configuration": schemaAttributeaa166e3f14ceaefc3b148f4b(),
-			// Property: EncryptionKeyType
-			"encryption_key_type": schemaAttribute4dddc6252ab5a8b7bc166336(),
-		}, /*END SCHEMA*/
-		Description: "The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea93264ec64c1f103424ecc09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination IP address for the RIST protocol in the router output configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9c4197a0f5e4f2c555c77f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Secrets Manager secret used for transit encryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa166e3f14ceaefc3b148f4b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Automatic
-			"automatic": schemaAttribute1c2f38139ea0cb1db3aa38ee(),
-			// Property: SecretsManager
-			"secrets_manager": schemaAttribute9c986a16e1dd3d7de3425863(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for the MediaLive transit encryption key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa693ef58f49dce051effb45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the router output was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead88f25f443eb4c9dcc302c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The stream ID for the SRT protocol in caller mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaec831970565afb62ffde817() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Default
-			"default": schemaAttribute0296b73ff2592ee43301e1cc(),
-			// Property: PreferredDayTime
-			"preferred_day_time": schemaAttribute4be030a8b5af418795f00fbf(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for maintenance operations, including preferred maintenance windows and schedules.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaf958f592309d4bb3fa35881() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum latency in milliseconds for the SRT protocol in caller mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2b36235fe3f26729a6f6985() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Automatic
-			"automatic": schemaAttribute1c2f38139ea0cb1db3aa38ee(),
-			// Property: SecretsManager
-			"secrets_manager": schemaAttribute9c986a16e1dd3d7de3425863(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for flow transit encryption keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2073e0fd7091ee7cc93af5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec209a258c6fc22f65eb63e46() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationTransitEncryption
-			"destination_transit_encryption": schemaAttributea32a0290138ef870e6f2c2ff(),
-			// Property: MediaLiveInputArn
-			"media_live_input_arn": schemaAttribute6f6dffd7e44fc56418700eeb(),
-			// Property: MediaLivePipelineId
-			"media_live_pipeline_id": schemaAttribute4dddc6252ab5a8b7bc166336(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for connecting a router output to a MediaLive input.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3d480b1a4bcfd1149983e94() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum bitrate for the router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec745046c995afd5e3a6e21ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Web Services Region for the router output. Defaults to the current region if not specified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed19d815084d3869e2b4f97c0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NetworkInterfaceArn
-			"network_interface_arn": schemaAttribute3f8476686da881430b76fe0f(),
-			// Property: Protocol
-			"protocol": schemaAttribute4dddc6252ab5a8b7bc166336(),
-			// Property: ProtocolConfiguration
-			"protocol_configuration": schemaAttributef5dc58150fac93623ebccfc2(),
-		}, /*END SCHEMA*/
-		Description: "The configuration settings for a standard router output, including the protocol, protocol-specific configuration, network interface, and availability zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1cdb7a6b07fc7106476524e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The preferred time for maintenance operations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed605243a6b46ef8c0d9a6ab0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number for the SRT protocol in listener mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb2004c63cc96291fb39395a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationTransitEncryption
-			"destination_transit_encryption": schemaAttribute8e239710d6fe453940770689(),
-			// Property: FlowArn
-			"flow_arn": schemaAttribute077744f3d428e1dddf5d7ab7(),
-			// Property: FlowSourceArn
-			"flow_source_arn": schemaAttribute9495ab160bb15d17ea362f82(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for connecting a router output to a MediaConnect flow source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5dc58150fac93623ebccfc2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rist
-			"rist": schemaAttribute94d92e70eef0c367b79b6adb(),
-			// Property: Rtp
-			"rtp": schemaAttribute6e5004328b6b92f587fd49e6(),
-			// Property: SrtCaller
-			"srt_caller": schemaAttribute673b56bc70c927c9a7776323(),
-			// Property: SrtListener
-			"srt_listener": schemaAttribute9ba4c2d88ef7883b9997f0e0(),
-		}, /*END SCHEMA*/
-		Description: "The protocol configuration settings for a router output.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef72c8436785c12d4305fb2f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef94c02a3d96d64e752b205b0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The destination port number for the RIST protocol in the router output configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_router_output", routerOutputDataSource)
 }
@@ -486,7 +31,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:routerOutput:[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +41,10 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttributef72c8436785c12d4305fb2f1(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -841,7 +391,280 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttribute629e43984bfa7c8ea495b853(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MediaConnectFlow
+				"media_connect_flow": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DestinationTransitEncryption
+						"destination_transit_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionKeyConfiguration
+								"encryption_key_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Automatic
+										"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretsManager
+										"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: RoleArn
+												"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: SecretArn
+												"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration settings for flow transit encryption keys.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionKeyType
+								"encryption_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FlowArn
+						"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the flow to connect to this router output.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FlowSourceArn
+						"flow_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the flow source to connect to this router output.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for connecting a router output to a MediaConnect flow source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MediaLiveInput
+				"media_live_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DestinationTransitEncryption
+						"destination_transit_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionKeyConfiguration
+								"encryption_key_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Automatic
+										"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretsManager
+										"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: RoleArn
+												"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: SecretArn
+												"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration settings for the MediaLive transit encryption key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionKeyType
+								"encryption_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MediaLiveInputArn
+						"media_live_input_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the MediaLive input to connect to this router output.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MediaLivePipelineId
+						"media_live_pipeline_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for connecting a router output to a MediaLive input.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Standard
+				"standard": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NetworkInterfaceArn
+						"network_interface_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the network interface associated with the standard router output.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Protocol
+						"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProtocolConfiguration
+						"protocol_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Rist
+								"rist": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationAddress
+										"destination_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The destination IP address for the RIST protocol in the router output configuration.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DestinationPort
+										"destination_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The destination port number for the RIST protocol in the router output configuration.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for a router output using the RIST (Reliable Internet Stream Transport) protocol, including the destination address and port.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Rtp
+								"rtp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationAddress
+										"destination_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The destination IP address for the RTP protocol in the router output configuration.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DestinationPort
+										"destination_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The destination port number for the RTP protocol in the router output configuration.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ForwardErrorCorrection
+										"forward_error_correction": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for a router output using the RTP (Real-Time Transport Protocol) protocol, including the destination address and port, and forward error correction state.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SrtCaller
+								"srt_caller": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationAddress
+										"destination_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The destination IP address for the SRT protocol in caller mode.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DestinationPort
+										"destination_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The destination port number for the SRT protocol in caller mode.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: EncryptionConfiguration
+										"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: EncryptionKey
+												"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: RoleArn
+														"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: SecretArn
+														"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Contains the configuration settings for encrypting SRT streams, including the encryption key details and encryption parameters.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MinimumLatencyMilliseconds
+										"minimum_latency_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minimum latency in milliseconds for the SRT protocol in caller mode.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StreamId
+										"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The stream ID for the SRT protocol in caller mode.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in caller mode, including the destination address and port, minimum latency, stream ID, and encryption key configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SrtListener
+								"srt_listener": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EncryptionConfiguration
+										"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: EncryptionKey
+												"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: RoleArn
+														"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: SecretArn
+														"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Contains the configuration settings for encrypting SRT streams, including the encryption key details and encryption parameters.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MinimumLatencyMilliseconds
+										"minimum_latency_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minimum latency in milliseconds for the SRT protocol in listener mode.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Port
+										"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The port number for the SRT protocol in listener mode.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration settings for a router output using the SRT (Secure Reliable Transport) protocol in listener mode, including the port, minimum latency, and encryption key configuration.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The protocol configuration settings for a router output.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration settings for a standard router output, including the protocol, protocol-specific configuration, network interface, and availability zone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for a router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -850,7 +673,11 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute0ab175eee63cc2b5c9f2918c(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the router output was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -858,7 +685,10 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The unique identifier of the router output.",
 		//	  "type": "string"
 		//	}
-		"router_output_id": schemaAttribute7c2a1a7ed5fc0121c2e87bf7(),
+		"router_output_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
@@ -866,7 +696,10 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The IP address of the router output.",
 		//	  "type": "string"
 		//	}
-		"ip_address": schemaAttribute33ede94461034c8ae308d49a(),
+		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address of the router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -908,7 +741,34 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"maintenance_configuration": schemaAttributeaec831970565afb62ffde817(),
+		"maintenance_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Configuration settings for default maintenance scheduling.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreferredDayTime
+				"preferred_day_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Day
+						"day": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Time
+						"time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The preferred time for maintenance operations.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for preferred day and time maintenance settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for maintenance operations, including preferred maintenance windows and schedules.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceType
 		// CloudFormation resource type schema:
 		//
@@ -919,7 +779,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"maintenance_type": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"maintenance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumBitrate
 		// CloudFormation resource type schema:
 		//
@@ -927,7 +789,10 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The maximum bitrate for the router output.",
 		//	  "type": "integer"
 		//	}
-		"maximum_bitrate": schemaAttributec3d480b1a4bcfd1149983e94(),
+		"maximum_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum bitrate for the router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -937,7 +802,10 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6b069a34863d0e2fa65ccc51(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputType
 		// CloudFormation resource type schema:
 		//
@@ -949,7 +817,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"output_type": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"output_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionName
 		// CloudFormation resource type schema:
 		//
@@ -957,7 +827,10 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Web Services Region for the router output. Defaults to the current region if not specified.",
 		//	  "type": "string"
 		//	}
-		"region_name": schemaAttributec745046c995afd5e3a6e21ad(),
+		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Web Services Region for the router output. Defaults to the current region if not specified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutedState
 		// CloudFormation resource type schema:
 		//
@@ -969,7 +842,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"routed_state": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"routed_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoutingScope
 		// CloudFormation resource type schema:
 		//
@@ -980,7 +855,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"routing_scope": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"routing_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -999,7 +876,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1024,7 +903,22 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute2b0386a560d94e2bba44a516(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag this router output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -1036,7 +930,9 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tier": schemaAttribute4dddc6252ab5a8b7bc166336(),
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1045,7 +941,11 @@ func routerOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributeaa693ef58f49dce051effb45(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the router output was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

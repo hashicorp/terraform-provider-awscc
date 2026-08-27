@@ -14,48 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute538e25aee947520cd6e5a443() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PublicKey resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute699f6abc97d03c2fde49b531() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7c2d7b5bc12ed6b86810e2e5(),
-				// Property: Value
-				"value": schemaAttribute7c2d7b5bc12ed6b86810e2e5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c2d7b5bc12ed6b86810e2e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ba5cb276f5d75a7bd77c38c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Key-pair identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcfd703a021eda2ff28ff6ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the public key to be imported. The value does not need to be unique.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_public_key", publicKeyDataSource)
 }
@@ -74,7 +32,10 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:public-key/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute8ba5cb276f5d75a7bd77c38c(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Key-pair identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Fingerprint
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +43,10 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Key-pair identifier.",
 		//	  "type": "string"
 		//	}
-		"fingerprint": schemaAttribute8ba5cb276f5d75a7bd77c38c(),
+		"fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Key-pair identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +57,10 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributefcfd703a021eda2ff28ff6ab(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the public key to be imported. The value does not need to be unique.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PublicKeyMaterial
 		// CloudFormation resource type schema:
 		//
@@ -102,7 +69,10 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "-----BEGIN PUBLIC KEY-----\\r?\\n([a-zA-Z0-9+/=\\r\\n]+)\\r?\\n-----END PUBLIC KEY-----(\\r?\\n)?",
 		//	  "type": "string"
 		//	}
-		"public_key_material": schemaAttribute538e25aee947520cd6e5a443(),
+		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The public portion of a customer-generated key pair. This field is required to create the AWS::IVS::PublicKey resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -133,7 +103,22 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute699f6abc97d03c2fde49b531(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

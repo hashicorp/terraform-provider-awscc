@@ -16,110 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e64c55affdcd8dbc1b82bd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp of LaunchWizard deployment deletion",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c45721abaa8cb876f3f517b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c7b76845d163d9f346a7f26() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fe392722f9e31baf9f133b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Workload deployment pattern name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9372c4dbc11d226083173d2b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Workload Name for LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute944a6d1fc1de79e131f63a77() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "LaunchWizard deployment specifications",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fd7908361b4f028c934cff0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Status of LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea06303925699fd991c99a309() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Timestamp of LaunchWizard deployment creation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcb725de5452dcc6c9fb3e71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee77a5b4234176b2cb1541a72() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef9f090bba45a0904d5a766d5(),
-				// Property: Value
-				"value": schemaAttribute3c7b76845d163d9f346a7f26(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecd3dcaee2b3db265a880290() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Resource Group Name created for LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2c0b18299e55e237ba24978() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Deployment ID of the LaunchWizard deployment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9f090bba45a0904d5a766d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_launchwizard_deployment", deploymentDataSource)
 }
@@ -136,7 +32,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-cn|-us-gov)?:launchwizard:[a-z0-9-]+:[0-9]{12}:deployment/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributedcb725de5452dcc6c9fb3e71(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +44,11 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributea06303925699fd991c99a309(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp of LaunchWizard deployment creation",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletedAt
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +57,11 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"deleted_at": schemaAttribute0e64c55affdcd8dbc1b82bd7(),
+		"deleted_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Timestamp of LaunchWizard deployment deletion",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +72,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schemaAttributef2c0b18299e55e237ba24978(),
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Deployment ID of the LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentPatternName
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +86,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"deployment_pattern_name": schemaAttribute5fe392722f9e31baf9f133b6(),
+		"deployment_pattern_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workload deployment pattern name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +100,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9_\\s\\.-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2c45721abaa8cb876f3f517b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceGroup
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +111,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Resource Group Name created for LaunchWizard deployment",
 		//	  "type": "string"
 		//	}
-		"resource_group": schemaAttributeecd3dcaee2b3db265a880290(),
+		"resource_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Resource Group Name created for LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Specifications
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +130,12 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"specifications": schemaAttribute944a6d1fc1de79e131f63a77(),
+		"specifications":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "LaunchWizard deployment specifications",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +154,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute9fd7908361b4f028c934cff0(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Status of LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +188,24 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributee77a5b4234176b2cb1541a72(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkloadName
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +216,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z][a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"workload_name": schemaAttribute9372c4dbc11d226083173d2b(),
+		"workload_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workload Name for LaunchWizard deployment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

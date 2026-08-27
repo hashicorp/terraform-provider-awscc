@@ -15,84 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1c0acd76ed9f6cafbb6fcd58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending real-time log data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3dc5f3c09665d355c52b373d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KinesisStreamConfig
-				"kinesis_stream_config": schemaAttributeafa43fa63b1462b7e11af29b(),
-				// Property: StreamType
-				"stream_type": schemaAttribute4f0ce568c5e4f3b75faa21ab(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f0ce568c5e4f3b75faa21ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of data stream where you are sending real-time log data. The only valid value is ``Kinesis``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f9276dc7dff5bcec13a35ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAMlong (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream.\n For more information the IAM role, see [Real-time log configuration IAM role](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role) in the *Amazon CloudFront Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa040d3ddd7dccdacf009846() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of this real-time log configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac08ad0c4d02e52ea723f5ea() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. The sampling rate is an integer between 1 and 100, inclusive.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafa43fa63b1462b7e11af29b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RoleArn
-			"role_arn": schemaAttribute4f9276dc7dff5bcec13a35ec(),
-			// Property: StreamArn
-			"stream_arn": schemaAttribute1c0acd76ed9f6cafbb6fcd58(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1e1d63d70d5aa0a8d104609() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of fields that are included in each real-time log record. In an API response, the fields are provided in the same order in which they are sent to the Amazon Kinesis data stream.\n For more information about fields, see [Real-time log configuration fields](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields) in the *Amazon CloudFront Developer Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed612de71c88fbe0ffce67f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_realtime_log_config", realtimeLogConfigDataSource)
 }
@@ -108,7 +30,10 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeed612de71c88fbe0ffce67f1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndPoints
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +77,36 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"end_points": schemaAttribute3dc5f3c09665d355c52b373d(),
+		"end_points": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: KinesisStreamConfig
+					"kinesis_stream_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of an IAMlong (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream.\n For more information the IAM role, see [Real-time log configuration IAM role](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role) in the *Amazon CloudFront Developer Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StreamArn
+							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending real-time log data.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StreamType
+					"stream_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of data stream where you are sending real-time log data. The only valid value is ``Kinesis``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Fields
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +119,11 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"fields": schemaAttributed1e1d63d70d5aa0a8d104609(),
+		"fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of fields that are included in each real-time log record. In an API response, the fields are provided in the same order in which they are sent to the Amazon Kinesis data stream.\n For more information about fields, see [Real-time log configuration fields](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields) in the *Amazon CloudFront Developer Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +131,10 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The unique name of this real-time log configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeaa040d3ddd7dccdacf009846(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of this real-time log configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SamplingRate
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +144,10 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"sampling_rate": schemaAttributeac08ad0c4d02e52ea723f5ea(),
+		"sampling_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. The sampling rate is an integer between 1 and 100, inclusive.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

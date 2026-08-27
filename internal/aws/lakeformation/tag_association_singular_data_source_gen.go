@@ -16,118 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4ef022958bf7c1fadae92fd8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogId
-			"catalog_id": schemaAttributeffe7f4ef3e88e1188def4a42(),
-			// Property: Name
-			"name": schemaAttributeffe7f4ef3e88e1188def4a42(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52f9d1694bf153a3e8d84146() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CatalogId
-				"catalog_id": schemaAttributeffe7f4ef3e88e1188def4a42(),
-				// Property: TagKey
-				"tag_key": schemaAttributeffe7f4ef3e88e1188def4a42(),
-				// Property: TagValues
-				"tag_values": schemaAttributed0548dd4317c71d2ae0d08df(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Lake Formation Tags to associate with the Lake Formation Resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute582110ad124e2b01caf024ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute887e4d24ed94f81d542cf542() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute893a214a4711edcc5b35a3bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d112953ac10cef01c049d9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogId
-			"catalog_id": schemaAttributeffe7f4ef3e88e1188def4a42(),
-			// Property: DatabaseName
-			"database_name": schemaAttributeffe7f4ef3e88e1188def4a42(),
-			// Property: Name
-			"name": schemaAttributeffe7f4ef3e88e1188def4a42(),
-			// Property: TableWildcard
-			"table_wildcard": schemaAttribute893a214a4711edcc5b35a3bb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb524d836a88e01c8007d8fb4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Catalog
-			"catalog": schemaAttribute893a214a4711edcc5b35a3bb(),
-			// Property: Database
-			"database": schemaAttribute4ef022958bf7c1fadae92fd8(),
-			// Property: Table
-			"table": schemaAttribute8d112953ac10cef01c049d9b(),
-			// Property: TableWithColumns
-			"table_with_columns": schemaAttributebf17060a1d16ee541914d55f(),
-		}, /*END SCHEMA*/
-		Description: "Resource to tag with the Lake Formation Tags",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf17060a1d16ee541914d55f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CatalogId
-			"catalog_id": schemaAttributeffe7f4ef3e88e1188def4a42(),
-			// Property: ColumnNames
-			"column_names": schemaAttributed0548dd4317c71d2ae0d08df(),
-			// Property: DatabaseName
-			"database_name": schemaAttributeffe7f4ef3e88e1188def4a42(),
-			// Property: Name
-			"name": schemaAttributeffe7f4ef3e88e1188def4a42(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0548dd4317c71d2ae0d08df() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffe7f4ef3e88e1188def4a42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lakeformation_tag_association", tagAssociationDataSource)
 }
@@ -176,7 +64,27 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"lf_tags": schemaAttribute52f9d1694bf153a3e8d84146(),
+		"lf_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CatalogId
+					"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagKey
+					"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagValues
+					"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Lake Formation Tags to associate with the Lake Formation Resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Resource
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +184,77 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource": schemaAttributeb524d836a88e01c8007d8fb4(),
+		"resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Catalog
+				"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: Database
+				"database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogId
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Table
+				"table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogId
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableWildcard
+						"table_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TableWithColumns
+				"table_with_columns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogId
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ColumnNames
+						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Resource to tag with the Lake Formation Tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +262,10 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
 		//	  "type": "string"
 		//	}
-		"resource_identifier": schemaAttribute582110ad124e2b01caf024ed(),
+		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagsIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -292,7 +273,10 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
 		//	  "type": "string"
 		//	}
-		"tags_identifier": schemaAttribute887e4d24ed94f81d542cf542(),
+		"tags_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

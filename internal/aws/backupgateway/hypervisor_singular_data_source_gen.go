@@ -14,26 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute59b367b9399cba06e68db4fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a63e25b107d19a624ff9622() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute59b367b9399cba06e68db4fc(),
-				// Property: Value
-				"value": schemaAttribute59b367b9399cba06e68db4fc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_backupgateway_hypervisor", hypervisorDataSource)
 }
@@ -51,7 +31,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"host": schemaAttribute59b367b9399cba06e68db4fc(),
+		"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: HypervisorArn
 		// CloudFormation resource type schema:
 		//
@@ -61,7 +43,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):backup-gateway(:[a-zA-Z-0-9]+){3}\\/[a-zA-Z-0-9]+$",
 		//	  "type": "string"
 		//	}
-		"hypervisor_arn": schemaAttribute59b367b9399cba06e68db4fc(),
+		"hypervisor_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +55,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schemaAttribute59b367b9399cba06e68db4fc(),
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +67,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^$|^arn:(aws|aws-cn|aws-us-gov):logs:([a-zA-Z0-9-]+):([0-9]+):log-group:[a-zA-Z0-9_\\-\\/\\.]+:\\*$",
 		//	  "type": "string"
 		//	}
-		"log_group_arn": schemaAttribute59b367b9399cba06e68db4fc(),
+		"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +79,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute59b367b9399cba06e68db4fc(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +91,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[ -~]+$",
 		//	  "type": "string"
 		//	}
-		"password": schemaAttribute59b367b9399cba06e68db4fc(),
+		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +122,21 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute7a63e25b107d19a624ff9622(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +146,9 @@ func hypervisorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$",
 		//	  "type": "string"
 		//	}
-		"username": schemaAttribute59b367b9399cba06e68db4fc(),
+		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

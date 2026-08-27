@@ -16,137 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1f6a2eb0cbf69f1e1d412d0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Code Security Integration name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute258686825dadafa03a320da7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Code Security Integration ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2592481d63d056aec5e0bb43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Authorization URL for OAuth flow",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b9d7aad1191d42e2925b02f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Creation timestamp",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f36430228acd7b151021413() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Reason for the current status",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute33cbda8729d3c23e41b8a935() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Integration Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3660d2120ea9c6838231ebee() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: gitlabSelfManaged
-			"gitlab_self_managed": schemaAttribute7855b138b7f4e4f812c878bb(),
-		}, /*END SCHEMA*/
-		Description: "Create Integration Details",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute650d90cb85ac66cef4f8c724() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute675f30e3e627021ec1830301() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: github
-			"github": schemaAttributeacdfcd1f6e19d352b8a56e91(),
-			// Property: gitlabSelfManaged
-			"gitlab_self_managed": schemaAttributea963bd631d77a13ed970efb5(),
-		}, /*END SCHEMA*/
-		Description: "Update Integration Details",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7855b138b7f4e4f812c878bb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: accessToken
-			"access_token": schemaAttributeb591f175fbd1f603ed714e39(),
-			// Property: instanceUrl
-			"instance_url": schemaAttributeb591f175fbd1f603ed714e39(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute795269c977e7c95b77c5d65d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Last update timestamp",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92db42bd3cfe493528098537() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Integration Status",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea963bd631d77a13ed970efb5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: authCode
-			"auth_code": schemaAttributeb591f175fbd1f603ed714e39(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacdfcd1f6e19d352b8a56e91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: code
-			"code": schemaAttributeb591f175fbd1f603ed714e39(),
-			// Property: installationId
-			"installation_id": schemaAttributeb591f175fbd1f603ed714e39(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb591f175fbd1f603ed714e39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_inspectorv2_code_security_integration", codeSecurityIntegrationDataSource)
 }
@@ -163,7 +32,10 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:codesecurity-integration/[a-f0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute258686825dadafa03a320da7(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Code Security Integration ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthorizationUrl
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +44,10 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"authorization_url": schemaAttribute2592481d63d056aec5e0bb43(),
+		"authorization_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Authorization URL for OAuth flow",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateIntegrationDetails
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +78,26 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"create_integration_details": schemaAttribute3660d2120ea9c6838231ebee(),
+		"create_integration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: gitlabSelfManaged
+				"gitlab_self_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: accessToken
+						"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: instanceUrl
+						"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Create Integration Details",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +106,11 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute2b9d7aad1191d42e2925b02f(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Creation timestamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -221,7 +119,11 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute795269c977e7c95b77c5d65d(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Last update timestamp",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +134,10 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[a-zA-Z0-9-_$:.]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute1f6a2eb0cbf69f1e1d412d0a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Code Security Integration name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +152,10 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute92db42bd3cfe493528098537(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Integration Status",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +163,10 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Reason for the current status",
 		//	  "type": "string"
 		//	}
-		"status_reason": schemaAttribute2f36430228acd7b151021413(),
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Reason for the current status",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +180,11 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute650d90cb85ac66cef4f8c724(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +196,10 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute33cbda8729d3c23e41b8a935(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Integration Type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdateIntegrationDetails
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +256,36 @@ func codeSecurityIntegrationDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"update_integration_details": schemaAttribute675f30e3e627021ec1830301(),
+		"update_integration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: github
+				"github": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: code
+						"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: installationId
+						"installation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: gitlabSelfManaged
+				"gitlab_self_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: authCode
+						"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Update Integration Details",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

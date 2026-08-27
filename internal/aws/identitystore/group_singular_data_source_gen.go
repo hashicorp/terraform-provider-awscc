@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1d8d1be109ba738f00a83486() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the description of the group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e5dcd436b120dcd5c22fc49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for a group in the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec617a78ab742e74b6eff4060() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The globally unique identifier for the identity store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd3583205c7afaf21823d8c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_identitystore_group", groupDataSource)
 }
@@ -60,7 +32,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute1d8d1be109ba738f00a83486(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string containing the description of the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +46,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttributedd3583205c7afaf21823d8c0(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +60,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttribute2e5dcd436b120dcd5c22fc49(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for a group in the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityStoreId
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +74,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"identity_store_id": schemaAttributec617a78ab742e74b6eff4060(),
+		"identity_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The globally unique identifier for the identity store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

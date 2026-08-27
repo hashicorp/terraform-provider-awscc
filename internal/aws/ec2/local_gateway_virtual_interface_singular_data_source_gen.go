@@ -14,119 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b28448f38cf22ea3c2a99b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current state of the local gateway virtual interface",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute231647c3ae59b221e38ac37c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute93d8904668d2b6e815c46a10(),
-				// Property: Value
-				"value": schemaAttribute597d3b2e0d462c74b0e86102(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e145e930fb5d7ceb68a3339() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the virtual interface",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42cd811f6700c66966d8fa58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Outpost LAG ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute597d3b2e0d462c74b0e86102() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d1a79109c8e00253760d444() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cf46642b023b6c229b3b95b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The peer address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87b860ebf3207b76c0aa7521() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VLAN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f96133c0dfcb1bb3af6a0a3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The peer BGP ASN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute93d8904668d2b6e815c46a10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94ec96d273d2b981cfc42b6b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3502e33be7bfb0e47ba2941() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the virtual interface group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb563945e925fec5fe8f2f035() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the local gateway",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2b7787572a927d78fd91ef0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The extended 32-bit ASN of the BGP peer for use with larger ASN values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee8a94c2b63197bfd903dd93f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The local address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_local_gateway_virtual_interface", localGatewayVirtualInterfaceDataSource)
 }
@@ -142,7 +29,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The current state of the local gateway virtual interface",
 		//	  "type": "string"
 		//	}
-		"configuration_state": schemaAttribute0b28448f38cf22ea3c2a99b6(),
+		"configuration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current state of the local gateway virtual interface",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalAddress
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +40,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The local address.",
 		//	  "type": "string"
 		//	}
-		"local_address": schemaAttributee8a94c2b63197bfd903dd93f(),
+		"local_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The local address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalBgpAsn
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +51,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
 		//	  "type": "integer"
 		//	}
-		"local_bgp_asn": schemaAttribute94ec96d273d2b981cfc42b6b(),
+		"local_bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +62,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The ID of the local gateway",
 		//	  "type": "string"
 		//	}
-		"local_gateway_id": schemaAttributeb563945e925fec5fe8f2f035(),
+		"local_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the local gateway",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceGroupId
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +73,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The ID of the virtual interface group",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_group_id": schemaAttributea3502e33be7bfb0e47ba2941(),
+		"local_gateway_virtual_interface_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocalGatewayVirtualInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +84,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The ID of the virtual interface",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_id": schemaAttribute2e145e930fb5d7ceb68a3339(),
+		"local_gateway_virtual_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the virtual interface",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutpostLagId
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +95,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Outpost LAG ID.",
 		//	  "type": "string"
 		//	}
-		"outpost_lag_id": schemaAttribute42cd811f6700c66966d8fa58(),
+		"outpost_lag_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Outpost LAG ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +106,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttribute5d1a79109c8e00253760d444(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +117,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The peer address.",
 		//	  "type": "string"
 		//	}
-		"peer_address": schemaAttribute7cf46642b023b6c229b3b95b(),
+		"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The peer address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerBgpAsn
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +128,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The peer BGP ASN.",
 		//	  "type": "integer"
 		//	}
-		"peer_bgp_asn": schemaAttribute8f96133c0dfcb1bb3af6a0a3(),
+		"peer_bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The peer BGP ASN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerBgpAsnExtended
 		// CloudFormation resource type schema:
 		//
@@ -223,7 +140,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"peer_bgp_asn_extended": schemaAttributec2b7787572a927d78fd91ef0(),
+		"peer_bgp_asn_extended": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The extended 32-bit ASN of the BGP peer for use with larger ASN values.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +174,24 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute231647c3ae59b221e38ac37c(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Vlan
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +199,10 @@ func localGatewayVirtualInterfaceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The ID of the VLAN.",
 		//	  "type": "integer"
 		//	}
-		"vlan": schemaAttribute87b860ebf3207b76c0aa7521(),
+		"vlan": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VLAN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

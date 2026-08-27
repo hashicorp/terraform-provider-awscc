@@ -15,158 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute014247ad79e490a587c0f331() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e4ef9262a0d7048291f4424() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A role used by association to take actions on your behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13a6f85372601b7a5b6887b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15c62562d839b6fc4c7181b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1856b1c820f6ac716b389045() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.ListType{ElemType: types.StringType},
-		Description: "Parameter values that the SSM document uses at runtime.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2040d5591a241be9b97823cc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d5f2bf7233b001813b34b99() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42749734272476e97e2f34d9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ae4556177a2138b4f42892b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3d5f2bf7233b001813b34b99(),
-				// Property: Values
-				"values": schemaAttribute76377fc295e74f7feb30f7e1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The targets that the SSM document sends commands to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c470e875ab85134a8652ece() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the instance that the SSM document is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76377fc295e74f7feb30f7e1() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80b6544c1eda05dc41b34c49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier of the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9330fd7937da92ffc19c63cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1e73e1d2e8f7caf520ec88c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the SSM document to associate with the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea412ff6113ec1a13b719daa5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9330fd7937da92ffc19c63cd(),
-				// Property: Value
-				"value": schemaAttribute13a6f85372601b7a5b6887b4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A key-value pair to associate with a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec80fce2c2d87b0bf267591dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the SSM document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3196fb6faa52e131e43944b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3Location
-			"s3_location": schemaAttributef76fd39706f63866229b98d8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef76fd39706f63866229b98d8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OutputS3BucketName
-			"output_s3_bucket_name": schemaAttribute3d5f2bf7233b001813b34b99(),
-			// Property: OutputS3KeyPrefix
-			"output_s3_key_prefix": schemaAttribute3d5f2bf7233b001813b34b99(),
-			// Property: OutputS3Region
-			"output_s3_region": schemaAttribute3d5f2bf7233b001813b34b99(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_association", associationDataSource)
 }
@@ -181,7 +29,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"apply_only_at_cron_interval": schemaAttribute42749734272476e97e2f34d9(),
+		"apply_only_at_cron_interval": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationDispatchAssumeRole
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +45,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"association_dispatch_assume_role": schemaAttribute0e4ef9262a0d7048291f4424(),
+		"association_dispatch_assume_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A role used by association to take actions on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -208,7 +61,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute80b6544c1eda05dc41b34c49(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier of the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationName
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +73,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
 		//	  "type": "string"
 		//	}
-		"association_name": schemaAttribute014247ad79e490a587c0f331(),
+		"association_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutomationTargetParameterName
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +85,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"automation_target_parameter_name": schemaAttribute3d5f2bf7233b001813b34b99(),
+		"automation_target_parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CalendarNames
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +106,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"calendar_names": schemaAttribute76377fc295e74f7feb30f7e1(),
+		"calendar_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComplianceSeverity
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +123,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compliance_severity": schemaAttribute3d5f2bf7233b001813b34b99(),
+		"compliance_severity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DocumentVersion
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +134,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
 		//	  "type": "string"
 		//	}
-		"document_version": schemaAttributea1e73e1d2e8f7caf520ec88c(),
+		"document_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the SSM document to associate with the target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +150,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute6c470e875ab85134a8652ece(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the instance that the SSM document is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxConcurrency
 		// CloudFormation resource type schema:
 		//
@@ -295,7 +167,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([1-9][0-9]{0,6}|[1-9][0-9]%|[1-9]%|100%)$",
 		//	  "type": "string"
 		//	}
-		"max_concurrency": schemaAttribute3d5f2bf7233b001813b34b99(),
+		"max_concurrency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxErrors
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +183,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([1-9][0-9]{0,6}|[0]|[1-9][0-9]%|[0-9]%|100%)$",
 		//	  "type": "string"
 		//	}
-		"max_errors": schemaAttribute3d5f2bf7233b001813b34b99(),
+		"max_errors": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +198,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributec80fce2c2d87b0bf267591dd(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the SSM document.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputLocation
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +235,29 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"output_location": schemaAttributee3196fb6faa52e131e43944b(),
+		"output_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OutputS3BucketName
+						"output_s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputS3KeyPrefix
+						"output_s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputS3Region
+						"output_s3_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -373,7 +274,12 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters": schemaAttribute1856b1c820f6ac716b389045(),
+		"parameters":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.ListType{ElemType: types.StringType},
+			Description: "Parameter values that the SSM document uses at runtime.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleExpression
 		// CloudFormation resource type schema:
 		//
@@ -389,7 +295,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"schedule_expression": schemaAttribute15c62562d839b6fc4c7181b3(),
+		"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScheduleOffset
 		// CloudFormation resource type schema:
 		//
@@ -398,7 +307,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"schedule_offset": schemaAttribute2040d5591a241be9b97823cc(),
+		"schedule_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SyncCompliance
 		// CloudFormation resource type schema:
 		//
@@ -409,7 +320,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"sync_compliance": schemaAttribute3d5f2bf7233b001813b34b99(),
+		"sync_compliance": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -446,7 +359,24 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributea412ff6113ec1a13b719daa5(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -481,7 +411,23 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"targets": schemaAttribute5ae4556177a2138b4f42892b(),
+		"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Values
+					"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The targets that the SSM document sends commands to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WaitForSuccessTimeoutSeconds
 		// CloudFormation resource type schema:
 		//
@@ -490,7 +436,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 15,
 		//	  "type": "integer"
 		//	}
-		"wait_for_success_timeout_seconds": schemaAttribute2040d5591a241be9b97823cc(),
+		"wait_for_success_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

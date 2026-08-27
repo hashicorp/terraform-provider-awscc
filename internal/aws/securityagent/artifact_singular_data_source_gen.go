@@ -15,56 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04fdb7cb76c5b00365c8aa27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the artifact was last updated, in ISO 8601 format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d100c8d9a2f9b4970770e22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The binary content of the artifact to upload, encoded as a Base64 string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f27c69f7ab7e2377115a18e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file type of the artifact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0163737012eb09e037085f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the artifact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba118392be5bac09130fa26b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier assigned to the uploaded artifact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec42cc5ebb3196ebb8e2061b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the agent space to add the artifact to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecebccbe565e6cf9890a55194() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file name of the artifact.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityagent_artifact", artifactDataSource)
 }
@@ -80,7 +30,10 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of the agent space to add the artifact to.",
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schemaAttributec42cc5ebb3196ebb8e2061b8(),
+		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the agent space to add the artifact to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +41,10 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the artifact.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb0163737012eb09e037085f1(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the artifact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactContent
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +52,10 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The binary content of the artifact to upload, encoded as a Base64 string.",
 		//	  "type": "string"
 		//	}
-		"artifact_content": schemaAttribute4d100c8d9a2f9b4970770e22(),
+		"artifact_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The binary content of the artifact to upload, encoded as a Base64 string.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactId
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +63,10 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier assigned to the uploaded artifact.",
 		//	  "type": "string"
 		//	}
-		"artifact_id": schemaAttributeba118392be5bac09130fa26b(),
+		"artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier assigned to the uploaded artifact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactType
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +85,10 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"artifact_type": schemaAttribute7f27c69f7ab7e2377115a18e(),
+		"artifact_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The file type of the artifact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileName
 		// CloudFormation resource type schema:
 		//
@@ -131,7 +96,10 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The file name of the artifact.",
 		//	  "type": "string"
 		//	}
-		"file_name": schemaAttributecebccbe565e6cf9890a55194(),
+		"file_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The file name of the artifact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +108,11 @@ func artifactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute04fdb7cb76c5b00365c8aa27(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the artifact was last updated, in ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

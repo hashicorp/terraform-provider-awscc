@@ -15,19 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute81f7e2277b8e954f20317603() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedde2aa44a0f5ffe407ff801c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_s3files_mount_target", mountTargetDataSource)
 }
@@ -42,7 +29,9 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"availability_zone_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: FileSystemId
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,9 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}|fs-[0-9a-f]{17,40})$",
 		//	  "type": "string"
 		//	}
-		"file_system_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -63,7 +54,9 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4Address
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +66,9 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$",
 		//	  "type": "string"
 		//	}
-		"ipv_4_address": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"ipv_4_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Address
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +77,9 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"ipv_6_address": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MountTargetId
 		// CloudFormation resource type schema:
 		//
@@ -92,14 +89,18 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^fsmt-[0-9a-f]{17,40}$",
 		//	  "type": "string"
 		//	}
-		"mount_target_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"mount_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +109,9 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((\\d{12})|(\\d{4}-\\d{4}-\\d{4}))$",
 		//	  "type": "string"
 		//	}
-		"owner_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +127,10 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_groups": schemaAttribute81f7e2277b8e954f20317603(),
+		"security_groups": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -139,14 +145,18 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status_message": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -156,14 +166,18 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^subnet-[0-9a-f]{8,40}$",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributedde2aa44a0f5ffe407ff801c(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

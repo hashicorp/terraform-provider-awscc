@@ -19,40 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributeb58f00d5f0bfb5760f3c9f28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User account id, used as part of the primary identifier for the resource",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebc7f52099d7f446c9bc14f9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Required: true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"ENABLED",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed38da3f9460dff595965d5e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Region, used as part of the primary identifier for the resource",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_arczonalshift_autoshift_observer_notification_status", autoshiftObserverNotificationStatusResource)
 	registry.AddListResourceFactory("awscc_arczonalshift_autoshift_observer_notification_status", generic.NewListResource(autoshiftObserverNotificationStatusResource))
@@ -70,7 +36,13 @@ func autoshiftObserverNotificationStatusResource(ctx context.Context) (resource.
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributeb58f00d5f0bfb5760f3c9f28(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User account id, used as part of the primary identifier for the resource",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +53,13 @@ func autoshiftObserverNotificationStatusResource(ctx context.Context) (resource.
 		//	  "pattern": "^[a-z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"region": schemaAttributed38da3f9460dff595965d5e2(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Region, used as part of the primary identifier for the resource",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +69,17 @@ func autoshiftObserverNotificationStatusResource(ctx context.Context) (resource.
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributebc7f52099d7f446c9bc14f9a(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -14,90 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute06f02a50d1248323d124af9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14fee8d1d2340e3d05839c23() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute518ed4a63c260ab42afa0ce3(),
-				// Property: Value
-				"value": schemaAttribute06f02a50d1248323d124af9f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "One or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17204c2c85b75b2f8f57fa3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the email address alias",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f9033f8d183957d06e2b476() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute518ed4a63c260ab42afa0ce3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute936ce36735b250247e41fba0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Email address to be created for this instance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94446974c3f52f6ecffd38c4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EmailAddressArn
-				"email_address_arn": schemaAttribute17204c2c85b75b2f8f57fa3e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of alias configurations for the email address",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa0b5571c197d914a7e5a26c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcd0f2edfa58d68387d43f1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff3a86cf0d41ce274ba9fb8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name for the email address.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_email_address", emailAddressDataSource)
 }
@@ -130,7 +46,19 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"alias_configurations": schemaAttribute94446974c3f52f6ecffd38c4(),
+		"alias_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EmailAddressArn
+					"email_address_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the email address alias",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of alias configurations for the email address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +69,10 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute4f9033f8d183957d06e2b476(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the email address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +83,10 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttributeff3a86cf0d41ce274ba9fb8f(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name for the email address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EmailAddress
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +97,10 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "([^\\s@]+@[^\\s@]+\\.[^\\s@]+)",
 		//	  "type": "string"
 		//	}
-		"email_address": schemaAttribute936ce36735b250247e41fba0(),
+		"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Email address to be created for this instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EmailAddressArn
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +109,10 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/email-address/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"email_address_arn": schemaAttributeaa0b5571c197d914a7e5a26c(),
+		"email_address_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the email address.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +123,10 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttributefcd0f2edfa58d68387d43f1b(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -216,7 +159,24 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute14fee8d1d2340e3d05839c23(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -20,93 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1221078b33cf2bb07cf82b02() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the agent space to add the artifact to.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c039f278bd8ec158683a099() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the artifact.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute72a452e448381425ece00be5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file type of the artifact.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"TXT",
-				"PNG",
-				"JPEG",
-				"MD",
-				"PDF",
-				"DOCX",
-				"DOC",
-				"JSON",
-				"YAML",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77cc2f1ff8aa48634478cb5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The binary content of the artifact to upload, encoded as a Base64 string.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// ArtifactContent is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bc3852b2cf859ae75fdf336() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The file name of the artifact.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb14534410bc24d548efdff84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier assigned to the uploaded artifact.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4d5df639b8631dca1062c8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the artifact was last updated, in ISO 8601 format.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_securityagent_artifact", artifactResource)
 }
@@ -122,7 +35,13 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier of the agent space to add the artifact to.",
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schemaAttribute1221078b33cf2bb07cf82b02(),
+		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the agent space to add the artifact to.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -130,7 +49,13 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the artifact.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4c039f278bd8ec158683a099(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the artifact.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactContent
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +63,16 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The binary content of the artifact to upload, encoded as a Base64 string.",
 		//	  "type": "string"
 		//	}
-		"artifact_content": schemaAttribute77cc2f1ff8aa48634478cb5e(),
+		"artifact_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The binary content of the artifact to upload, encoded as a Base64 string.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ArtifactContent is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactId
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +80,13 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier assigned to the uploaded artifact.",
 		//	  "type": "string"
 		//	}
-		"artifact_id": schemaAttributeb14534410bc24d548efdff84(),
+		"artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier assigned to the uploaded artifact.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactType
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +105,26 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"artifact_type": schemaAttribute72a452e448381425ece00be5(),
+		"artifact_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The file type of the artifact.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"TXT",
+					"PNG",
+					"JPEG",
+					"MD",
+					"PDF",
+					"DOCX",
+					"DOC",
+					"JSON",
+					"YAML",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FileName
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +132,13 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The file name of the artifact.",
 		//	  "type": "string"
 		//	}
-		"file_name": schemaAttribute7bc3852b2cf859ae75fdf336(),
+		"file_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The file name of the artifact.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +147,14 @@ func artifactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributee4d5df639b8631dca1062c8f(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the artifact was last updated, in ISO 8601 format.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

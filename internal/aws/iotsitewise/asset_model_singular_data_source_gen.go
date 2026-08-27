@@ -15,545 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0035a6a6614c47ea2e0b3247() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer provided external ID for hierarchy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute018c3e77230e686468e34acc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Attribute
-			"attribute": schemaAttribute20815b761be54a3516f7bd06(),
-			// Property: Metric
-			"metric": schemaAttribute32cbecc2eacfdb17e8715692(),
-			// Property: Transform
-			"transform": schemaAttribute0f5e440e0d0b45a0aa2fe7b8(),
-			// Property: TypeName
-			"type_name": schemaAttribute96e52d7b1772aff2483861eb(),
-		}, /*END SCHEMA*/
-		Description: "The property type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0325c618305d1ffacaebfe65() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HierarchyExternalId
-			"hierarchy_external_id": schemaAttributeaa4376dba9cc0159392af5ea(),
-			// Property: HierarchyId
-			"hierarchy_id": schemaAttribute4614a337956d46ffa14ff6eb(),
-			// Property: HierarchyLogicalId
-			"hierarchy_logical_id": schemaAttribute96e52d7b1772aff2483861eb(),
-			// Property: PropertyExternalId
-			"property_external_id": schemaAttribute42cab69981547f675a53dcda(),
-			// Property: PropertyId
-			"property_id": schemaAttributef2bf6f162ec116731d89d6d7(),
-			// Property: PropertyLogicalId
-			"property_logical_id": schemaAttribute96e52d7b1772aff2483861eb(),
-			// Property: PropertyPath
-			"property_path": schemaAttribute25be42d5aac2f3230498104e(),
-		}, /*END SCHEMA*/
-		Description: "The variable that identifies an asset property from which to use values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0aa10f43eb7c16c6f612d638() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Interval
-			"interval": schemaAttribute5ca9234148a84a121cce48b2(),
-			// Property: Offset
-			"offset": schemaAttribute170a1010bb3988f810e5e7cb(),
-		}, /*END SCHEMA*/
-		Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0bb79fe82d7ea5be35f0a82f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External ID of the composite model",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f5e440e0d0b45a0aa2fe7b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Expression
-			"expression": schemaAttributeae7d41513b606a19afad29ad(),
-			// Property: Variables
-			"variables": schemaAttributeca2efe6d96dba831b7e49ec8(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute140e1905214bba97e51d558d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChildAssetModelId
-				"child_asset_model_id": schemaAttribute896f7a7e73aa0f168fa9d949(),
-				// Property: ExternalId
-				"external_id": schemaAttribute0035a6a6614c47ea2e0b3247(),
-				// Property: Id
-				"id": schemaAttribute1f8356f4e3f72dfa12dd9f10(),
-				// Property: LogicalId
-				"logical_id": schemaAttribute2d4be4358928e43ac30cd0e2(),
-				// Property: Name
-				"name": schemaAttributee95bf84dfa7559efac55cacb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute170a1010bb3988f810e5e7cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The shift or reference point on timeline for the contiguous time intervals.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute170cb1cfe474e3942898e7b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The component model ID for which the composite model is composed of",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f8356f4e3f72dfa12dd9f10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer provided actual ID for hierarchy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute20815b761be54a3516f7bd06() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DefaultValue
-			"default_value": schemaAttribute96e52d7b1772aff2483861eb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25be42d5aac2f3230498104e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttributefd9a85c82b5b97468e67baf9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The path of the property that is trying to be referenced",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d4be4358928e43ac30cd0e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer provided logical ID for hierarchy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32cbecc2eacfdb17e8715692() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Expression
-			"expression": schemaAttribute9e856617beb9e02d6a1a5db1(),
-			// Property: Variables
-			"variables": schemaAttributeca2efe6d96dba831b7e49ec8(),
-			// Property: Window
-			"window": schemaAttribute387e3934f3356e9d29cb02cc(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34f5d6f3bb9ff94390108da9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the asset model property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3585ac6a7304fc9b27a6fe3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The friendly name of the variable to be used in the expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute387e3934f3356e9d29cb02cc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Tumbling
-			"tumbling": schemaAttribute0aa10f43eb7c16c6f612d638(),
-		}, /*END SCHEMA*/
-		Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b392198e41cade4d5fdc085() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42cab69981547f675a53dcda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External ID of the property that is trying to be referenced",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4614a337956d46ffa14ff6eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the hierarchy that is trying to be referenced",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48ed36224e470785d72228c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49c7908e69e3af75ccba1ad8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type of the structure for this property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ca9234148a84a121cce48b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time interval for the tumbling window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d52b2e9f4438b78b1b7ed8f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InterfaceAssetModelId
-				"interface_asset_model_id": schemaAttributeb00ca16932d035398b9106df(),
-				// Property: PropertyMappings
-				"property_mappings": schemaAttribute80a22c3ed3d5b472156df955(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "a list of asset model and interface relationships",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d706cb3ba41f5f45a24b2d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unit of the asset model property, such as Newtons or RPM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68d9eb496c066e7333a1f086() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ff1fe0735d6ad593d12c325() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique, friendly name for the asset composite model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7572113d4dc917f44f21c5a9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute96e52d7b1772aff2483861eb(),
-				// Property: Value
-				"value": schemaAttribute96e52d7b1772aff2483861eb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80a22c3ed3d5b472156df955() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AssetModelPropertyExternalId
-				"asset_model_property_external_id": schemaAttributece523c86653c85da0dd6afb0(),
-				// Property: AssetModelPropertyLogicalId
-				"asset_model_property_logical_id": schemaAttribute80c87c6e0c1d44d709ccf3f1(),
-				// Property: InterfaceAssetModelPropertyExternalId
-				"interface_asset_model_property_external_id": schemaAttribute9f16df6ad00940fc4fd5e7cc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains information about enforced interface property and asset model property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80c87c6e0c1d44d709ccf3f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The logical ID of the enforced asset model property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute855347849b64562da1e7e916() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External ID of the Asset Model Property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88776274fb06aef75fc44a0b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type of the asset model property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute896f7a7e73aa0f168fa9d949() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bf5f7a9932fe5fd3c876a33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Asset Model Property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d494be88910571a5396e54b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the asset composite model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96e52d7b1772aff2483861eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9e856617beb9e02d6a1a5db1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f16df6ad00940fc4fd5e7cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The external ID of the enforced interface property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9e131bfb28784ce73c49c3d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The path of the composite model. This is only for derived composite models",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa4376dba9cc0159392af5ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External ID of the hierarchy that is trying to be referenced",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae7d41513b606a19afad29ad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb00ca16932d035398b9106df() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the interface that is enforced to the asset model",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb783177b7cdf8f76e362aa8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Actual ID of the composite model",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec200dedc0eaf854adc2afc0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The parent composite model External ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca2efe6d96dba831b7e49ec8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute3585ac6a7304fc9b27a6fe3f(),
-				// Property: Value
-				"value": schemaAttribute0325c618305d1ffacaebfe65(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of variables used in the expression.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc36027dc2273469e5e39db6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComposedAssetModelId
-				"composed_asset_model_id": schemaAttribute170cb1cfe474e3942898e7b8(),
-				// Property: CompositeModelProperties
-				"composite_model_properties": schemaAttributedcb64dd49afbf8d8dec3bea9(),
-				// Property: Description
-				"description": schemaAttribute8d494be88910571a5396e54b(),
-				// Property: ExternalId
-				"external_id": schemaAttribute0bb79fe82d7ea5be35f0a82f(),
-				// Property: Id
-				"id": schemaAttributeb783177b7cdf8f76e362aa8a(),
-				// Property: Name
-				"name": schemaAttribute6ff1fe0735d6ad593d12c325(),
-				// Property: ParentAssetModelCompositeModelExternalId
-				"parent_asset_model_composite_model_external_id": schemaAttributec200dedc0eaf854adc2afc0c(),
-				// Property: Path
-				"path": schemaAttributea9e131bfb28784ce73c49c3d(),
-				// Property: Type
-				"type": schemaAttributed241450d6427347cfbd03103(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece523c86653c85da0dd6afb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The external ID of the enforced asset model property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed241450d6427347cfbd03103() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcb64dd49afbf8d8dec3bea9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataType
-				"data_type": schemaAttribute88776274fb06aef75fc44a0b(),
-				// Property: DataTypeSpec
-				"data_type_spec": schemaAttribute49c7908e69e3af75ccba1ad8(),
-				// Property: ExternalId
-				"external_id": schemaAttribute855347849b64562da1e7e916(),
-				// Property: Id
-				"id": schemaAttribute8bf5f7a9932fe5fd3c876a33(),
-				// Property: LogicalId
-				"logical_id": schemaAttributefb250d24467dad420f36bd81(),
-				// Property: Name
-				"name": schemaAttribute34f5d6f3bb9ff94390108da9(),
-				// Property: Type
-				"type": schemaAttribute018c3e77230e686468e34acc(),
-				// Property: Unit
-				"unit": schemaAttribute5d706cb3ba41f5f45a24b2d6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee30570df9e7452b6bfbc42e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The external ID of the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee444461f5272eb3f6027b9fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique, friendly name for the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee95bf84dfa7559efac55cacb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the asset model hierarchy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2bf6f162ec116731d89d6d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the property that is trying to be referenced",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef760e85a33097f435b2b1066() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the asset model, which has the following format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb250d24467dad420f36bd81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer provided Logical ID for property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd9a85c82b5b97468e67baf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_asset_model", assetModelDataSource)
 }
@@ -569,7 +30,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the asset model, which has the following format.",
 		//	  "type": "string"
 		//	}
-		"asset_model_arn": schemaAttributef760e85a33097f435b2b1066(),
+		"asset_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the asset model, which has the following format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelCompositeModels
 		// CloudFormation resource type schema:
 		//
@@ -950,7 +414,292 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_model_composite_models": schemaAttributecc36027dc2273469e5e39db6(),
+		"asset_model_composite_models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComposedAssetModelId
+					"composed_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The component model ID for which the composite model is composed of",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CompositeModelProperties
+					"composite_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataType
+								"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The data type of the asset model property.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataTypeSpec
+								"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The data type of the structure for this property.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExternalId
+								"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The External ID of the Asset Model Property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Id
+								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID of the Asset Model Property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogicalId
+								"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Customer provided Logical ID for property.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the asset model property.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Type
+								"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Attribute
+										"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: DefaultValue
+												"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Metric
+										"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Variables
+												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The friendly name of the variable to be used in the expression.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Value
+															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyExternalId
+																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyId
+																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyLogicalId
+																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyExternalId
+																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyLogicalId
+																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyPath
+																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The name of the property",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "The path of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The variable that identifies an asset property from which to use values.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The list of variables used in the expression.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Window
+												"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Tumbling
+														"tumbling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Interval
+																"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The time interval for the tumbling window.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Offset
+																"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The shift or reference point on timeline for the contiguous time intervals.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Transform
+										"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Variables
+												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The friendly name of the variable to be used in the expression.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Value
+															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyExternalId
+																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyId
+																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyLogicalId
+																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyExternalId
+																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyLogicalId
+																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyPath
+																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The name of the property",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "The path of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The variable that identifies an asset property from which to use values.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The list of variables used in the expression.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TypeName
+										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The property type",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Unit
+								"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The unit of the asset model property, such as Newtons or RPM.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description for the asset composite model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The External ID of the composite model",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Actual ID of the composite model",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique, friendly name for the asset composite model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParentAssetModelCompositeModelExternalId
+					"parent_asset_model_composite_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The parent composite model External ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Path
+					"path": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The path of the composite model. This is only for derived composite models",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelDescription
 		// CloudFormation resource type schema:
 		//
@@ -958,7 +707,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the asset model.",
 		//	  "type": "string"
 		//	}
-		"asset_model_description": schemaAttribute3b392198e41cade4d5fdc085(),
+		"asset_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelExternalId
 		// CloudFormation resource type schema:
 		//
@@ -969,7 +721,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"asset_model_external_id": schemaAttributee30570df9e7452b6bfbc42e6(),
+		"asset_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The external ID of the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelHierarchies
 		// CloudFormation resource type schema:
 		//
@@ -1018,7 +773,39 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_model_hierarchies": schemaAttribute140e1905214bba97e51d558d(),
+		"asset_model_hierarchies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ChildAssetModelId
+					"child_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided external ID for hierarchy",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual ID for hierarchy",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalId
+					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided logical ID for hierarchy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the asset model hierarchy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelId
 		// CloudFormation resource type schema:
 		//
@@ -1029,7 +816,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"asset_model_id": schemaAttribute48ed36224e470785d72228c1(),
+		"asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelName
 		// CloudFormation resource type schema:
 		//
@@ -1037,7 +827,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A unique, friendly name for the asset model.",
 		//	  "type": "string"
 		//	}
-		"asset_model_name": schemaAttributee444461f5272eb3f6027b9fd(),
+		"asset_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique, friendly name for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelProperties
 		// CloudFormation resource type schema:
 		//
@@ -1357,7 +1150,242 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_model_properties": schemaAttributedcb64dd49afbf8d8dec3bea9(),
+		"asset_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataType
+					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The data type of the asset model property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataTypeSpec
+					"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The data type of the structure for this property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The External ID of the Asset Model Property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the Asset Model Property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalId
+					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided Logical ID for property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the asset model property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Attribute
+							"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DefaultValue
+									"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Metric
+							"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Variables
+									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The friendly name of the variable to be used in the expression.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyExternalId
+														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyId
+														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyLogicalId
+														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyExternalId
+														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyId
+														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyLogicalId
+														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyPath
+														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Name
+																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the property",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The path of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The variable that identifies an asset property from which to use values.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "The list of variables used in the expression.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Window
+									"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Tumbling
+											"tumbling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Interval
+													"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The time interval for the tumbling window.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Offset
+													"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The shift or reference point on timeline for the contiguous time intervals.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Transform
+							"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Variables
+									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The friendly name of the variable to be used in the expression.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyExternalId
+														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyId
+														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyLogicalId
+														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyExternalId
+														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyId
+														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyLogicalId
+														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyPath
+														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Name
+																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the property",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The path of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The variable that identifies an asset property from which to use values.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "The list of variables used in the expression.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TypeName
+							"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The property type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Unit
+					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unit of the asset model property, such as Newtons or RPM.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelType
 		// CloudFormation resource type schema:
 		//
@@ -1365,7 +1393,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
 		//	  "type": "string"
 		//	}
-		"asset_model_type": schemaAttribute68d9eb496c066e7333a1f086(),
+		"asset_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnforcedAssetModelInterfaceRelationships
 		// CloudFormation resource type schema:
 		//
@@ -1412,7 +1443,43 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"enforced_asset_model_interface_relationships": schemaAttribute5d52b2e9f4438b78b1b7ed8f(),
+		"enforced_asset_model_interface_relationships": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InterfaceAssetModelId
+					"interface_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the interface that is enforced to the asset model",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PropertyMappings
+					"property_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AssetModelPropertyExternalId
+								"asset_model_property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The external ID of the enforced asset model property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AssetModelPropertyLogicalId
+								"asset_model_property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The logical ID of the enforced asset model property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InterfaceAssetModelPropertyExternalId
+								"interface_asset_model_property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The external ID of the enforced interface property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Contains information about enforced interface property and asset model property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "a list of asset model and interface relationships",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1437,7 +1504,22 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute7572113d4dc917f44f21c5a9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

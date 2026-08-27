@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0e920fda72a99243109a6e4e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The catalog identifier of the custom detection rule to associate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29570efd5b4ff12da9809f19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time the association was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a2e1ec969ea28aef5c351e0() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute37a837de0e1aa919c5f0ea27(),
-				// Property: Value
-				"value": schemaAttribute37a837de0e1aa919c5f0ea27(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags applied to the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37a837de0e1aa919c5f0ea27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a0a7b432c200655384bfda4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time the association was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute648ad0d07dc268fce0dd62b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service-generated unique identifier of the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7cc42271bb3f32b55e24fa11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the rule runs in LIVE mode (generates findings) or DRY_RUN mode (evaluates without generating findings).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb4db8d82b450f0ce44ef870() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID the association applies to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8541573b492783fc60433d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_guardduty_custom_detection_rule_association", customDetectionRuleAssociationDataSource)
 }
@@ -101,7 +31,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributecb4db8d82b450f0ce44ef870(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID the association applies to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +45,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^arn:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[0-9]*:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef8541573b492783fc60433d4(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +57,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute648ad0d07dc268fce0dd62b7(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service-generated unique identifier of the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +68,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The time the association was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute5a0a7b432c200655384bfda4(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time the association was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +83,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttribute7cc42271bb3f32b55e24fa11(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the rule runs in LIVE mode (generates findings) or DRY_RUN mode (evaluates without generating findings).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleId
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +97,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"rule_id": schemaAttribute0e920fda72a99243109a6e4e(),
+		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The catalog identifier of the custom detection rule to associate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +130,22 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute2a2e1ec969ea28aef5c351e0(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags applied to the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +153,10 @@ func customDetectionRuleAssociationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The time the association was last updated.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute29570efd5b4ff12da9809f19(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time the association was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

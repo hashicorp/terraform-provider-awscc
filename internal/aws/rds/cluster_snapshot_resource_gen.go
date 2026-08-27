@@ -26,264 +26,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute0f8bde17909cf569dd08c2a2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The allocated storage size of the DB cluster snapshot in gibibytes (GiB).",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fc881f62c9b52d339a7c833() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of this DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21a9f2b3a69d1469820812db() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the DB cluster snapshot is encrypted.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f4e3359713516b6ec3d2790() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the DB cluster was created, in Universal Coordinated Time (UTC).",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2fb0be6454409a416393b6b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3df895570b75a96aea84a84a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3eccaccd092f8ee694690ffb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute429643fc1355667ecc21680c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the DB cluster snapshot. Must contain from 1 to 63 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 63),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute433e91d0ee42e822f2e3300c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The license model information for this DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4751aba41789a378f0256b1b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Availability Zones where instances in the DB cluster snapshot can be restored.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5412a020ad893416737f8cff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The engine mode of the database engine for this DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70d4bed0434972086aafd4ac() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87a06ca9cdc38d55192cbc19() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the DB cluster to create a snapshot for.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ae2e9c512c47a0df28415fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the database engine for this DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d766438331de96193d815fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database engine for this DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a8a308f05fcb84c7510c1cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The master username for this DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafbf4ee3390aa457aa186621() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time when the snapshot was taken, in Universal Coordinated Time (UTC).",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2087e1b30eb64082d252f8e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resource ID of the DB cluster that this DB cluster snapshot was created from.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4c240e5419deb2e75ed56ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7d09197f5b3c32d61043490() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3eccaccd092f8ee694690ffb(),
-				// Property: Value
-				"value": schemaAttributed669159e7b8dc97cae69d5c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to be assigned to the DB cluster snapshot.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed669159e7b8dc97cae69d5c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(0, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebf3f2027ef10cc8d61aa56e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The VPC ID associated with the DB cluster snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed259566bce9d6923874d323() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port that the DB cluster was listening on at the time of the snapshot.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_rds_cluster_snapshot", clusterSnapshotResource)
 	registry.AddListResourceFactory("awscc_rds_cluster_snapshot", generic.NewListResource(clusterSnapshotResource))
@@ -300,7 +42,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The allocated storage size of the DB cluster snapshot in gibibytes (GiB).",
 		//	  "type": "integer"
 		//	}
-		"allocated_storage": schemaAttribute0f8bde17909cf569dd08c2a2(),
+		"allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The allocated storage size of the DB cluster snapshot in gibibytes (GiB).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +60,15 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"availability_zones": schemaAttribute4751aba41789a378f0256b1b(),
+		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of Availability Zones where instances in the DB cluster snapshot can be restored.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +77,14 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"cluster_create_time": schemaAttribute2f4e3359713516b6ec3d2790(),
+		"cluster_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the DB cluster was created, in Universal Coordinated Time (UTC).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +92,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The identifier of the DB cluster to create a snapshot for.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schemaAttribute87a06ca9cdc38d55192cbc19(),
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the DB cluster to create a snapshot for.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterSnapshotArn
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +106,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_snapshot_arn": schemaAttributeb4c240e5419deb2e75ed56ec(),
+		"db_cluster_snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterSnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +123,17 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"db_cluster_snapshot_identifier": schemaAttribute429643fc1355667ecc21680c(),
+		"db_cluster_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the DB cluster snapshot. Must contain from 1 to 63 letters, numbers, or hyphens. First character must be a letter. Can't end with a hyphen or contain two consecutive hyphens.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DbClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +141,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The resource ID of the DB cluster that this DB cluster snapshot was created from.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_resource_id": schemaAttributeb2087e1b30eb64082d252f8e(),
+		"db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource ID of the DB cluster that this DB cluster snapshot was created from.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +155,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the database engine for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttribute8d766438331de96193d815fe(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database engine for this DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineMode
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +169,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The engine mode of the database engine for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"engine_mode": schemaAttribute5412a020ad893416737f8cff(),
+		"engine_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine mode of the database engine for this DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +183,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of the database engine for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttribute8ae2e9c512c47a0df28415fb(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the database engine for this DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IAMDatabaseAuthenticationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -388,7 +197,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"iam_database_authentication_enabled": schemaAttribute70d4bed0434972086aafd4ac(),
+		"iam_database_authentication_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether mapping of AWS IAM accounts to database accounts is enabled.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -396,7 +211,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute2fb0be6454409a416393b6b7(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -404,7 +225,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The license model information for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"license_model": schemaAttribute433e91d0ee42e822f2e3300c(),
+		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The license model information for this DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +239,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The master username for this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttribute9a8a308f05fcb84c7510c1cf(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The master username for this DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -420,7 +253,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port that the DB cluster was listening on at the time of the snapshot.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttributeed259566bce9d6923874d323(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the DB cluster was listening on at the time of the snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -429,7 +268,14 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"snapshot_create_time": schemaAttributeafbf4ee3390aa457aa186621(),
+		"snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time when the snapshot was taken, in Universal Coordinated Time (UTC).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotType
 		// CloudFormation resource type schema:
 		//
@@ -437,7 +283,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of the DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"snapshot_type": schemaAttribute3df895570b75a96aea84a84a(),
+		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -445,7 +297,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of this DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute0fc881f62c9b52d339a7c833(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -453,7 +311,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether the DB cluster snapshot is encrypted.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schemaAttribute21a9f2b3a69d1469820812db(),
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB cluster snapshot is encrypted.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -484,7 +348,45 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeb7d09197f5b3c32d61043490(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to be assigned to the DB cluster snapshot.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -492,7 +394,13 @@ func clusterSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The VPC ID associated with the DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributeebf3f2027ef10cc8d61aa56e(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC ID associated with the DB cluster snapshot.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

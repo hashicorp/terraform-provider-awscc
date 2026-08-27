@@ -21,38 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute30f516e6fff803a2963984b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The IAM policy document defining access permissions for the knowledge base",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2cb832475822e27900f37ef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The revision identifier for the policy, used for optimistic concurrency control",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec03f0b4c0d1bcd55d28c9dcb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the knowledge base",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 10),
-			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_knowledge_base_policy", knowledgeBasePolicyResource)
 }
@@ -71,7 +39,17 @@ func knowledgeBasePolicyResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_id": schemaAttributec03f0b4c0d1bcd55d28c9dcb(),
+		"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the knowledge base",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 10),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -79,7 +57,11 @@ func knowledgeBasePolicyResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "The IAM policy document defining access permissions for the knowledge base",
 		//	  "type": "object"
 		//	}
-		"policy_document": schemaAttribute30f516e6fff803a2963984b6(),
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The IAM policy document defining access permissions for the knowledge base",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RevisionId
 		// CloudFormation resource type schema:
 		//
@@ -89,7 +71,13 @@ func knowledgeBasePolicyResource(ctx context.Context) (resource.Resource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"revision_id": schemaAttributeb2cb832475822e27900f37ef(),
+		"revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The revision identifier for the policy, used for optimistic concurrency control",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

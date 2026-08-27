@@ -17,56 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3d9cc0a81adf654493f579b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The group ID of the specified security group.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b6115245197af2627cb60f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the security group vpc association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6edbcba3f1ce6d8f21aae949() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The owner of the VPC in the security group vpc association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute987afe4c200c618078814e58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The reason for the state of the security group vpc association.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0519455ec2a983a9ccd3dd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the VPC in the security group vpc association.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_security_group_vpc_association", securityGroupVpcAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_security_group_vpc_association", generic.NewListResource(securityGroupVpcAssociationResource))
@@ -83,7 +33,13 @@ func securityGroupVpcAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The group ID of the specified security group.",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttribute3d9cc0a81adf654493f579b5(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The group ID of the specified security group.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +56,13 @@ func securityGroupVpcAssociationResource(ctx context.Context) (resource.Resource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute6b6115245197af2627cb60f5(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the security group vpc association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StateReason
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +70,13 @@ func securityGroupVpcAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The reason for the state of the security group vpc association.",
 		//	  "type": "string"
 		//	}
-		"state_reason": schemaAttribute987afe4c200c618078814e58(),
+		"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for the state of the security group vpc association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +84,13 @@ func securityGroupVpcAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the VPC in the security group vpc association.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributeb0519455ec2a983a9ccd3dd7(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC in the security group vpc association.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcOwnerId
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +98,13 @@ func securityGroupVpcAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The owner of the VPC in the security group vpc association.",
 		//	  "type": "string"
 		//	}
-		"vpc_owner_id": schemaAttribute6edbcba3f1ce6d8f21aae949(),
+		"vpc_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The owner of the VPC in the security group vpc association.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

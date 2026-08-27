@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute095a532c607f4a296e2ef78a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type definition, in GraphQL Schema Definition Language (SDL) format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute375419461b4d5a49142f18d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7357f33a5985630be190030a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The API ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4567eec02d98571b5d85c9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee995779b18ed0282c0786598() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type format: SDL or JSON.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_type", typeDataSource)
 }
@@ -64,7 +29,10 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API ID.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttribute7357f33a5985630be190030a(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The API ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -72,7 +40,10 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the type.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute375419461b4d5a49142f18d0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +51,10 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type definition, in GraphQL Schema Definition Language (SDL) format.",
 		//	  "type": "string"
 		//	}
-		"definition": schemaAttribute095a532c607f4a296e2ef78a(),
+		"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type definition, in GraphQL Schema Definition Language (SDL) format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +66,10 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"format": schemaAttributee995779b18ed0282c0786598(),
+		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type format: SDL or JSON.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +80,10 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[_A-Za-z][_0-9A-Za-z]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb4567eec02d98571b5d85c9f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

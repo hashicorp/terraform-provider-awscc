@@ -14,63 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute338811c753f1808a326336fc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Direct Connect gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3503766dcfaca68ec3f2878a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Direct Connect gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56632695c131e5d5dd195c3e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute6077be00ed844c6aa87277a5(),
-				// Property: Value
-				"value": schemaAttributefe6faa9c53cb75b0d694d6dc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with the Direct Connect gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6077be00ed844c6aa87277a5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61c8ff0fdd1bf88b8f135600() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The autonomous system number (ASN) for the Amazon side of the connection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd5b55ccaf1d563c6dd60d27() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Direct Connect gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe6faa9c53cb75b0d694d6dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_directconnect_direct_connect_gateway", directConnectGatewayDataSource)
 }
@@ -87,7 +30,10 @@ func directConnectGatewayDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[1-9][0-9]*$",
 		//	  "type": "string"
 		//	}
-		"amazon_side_asn": schemaAttribute61c8ff0fdd1bf88b8f135600(),
+		"amazon_side_asn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The autonomous system number (ASN) for the Amazon side of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectConnectGatewayArn
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +42,10 @@ func directConnectGatewayDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws[a-z-]*:directconnect::[0-9]{12}:dx-gateway/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"direct_connect_gateway_arn": schemaAttributecd5b55ccaf1d563c6dd60d27(),
+		"direct_connect_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Direct Connect gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectConnectGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +54,10 @@ func directConnectGatewayDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"direct_connect_gateway_id": schemaAttribute338811c753f1808a326336fc(),
+		"direct_connect_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Direct Connect gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DirectConnectGatewayName
 		// CloudFormation resource type schema:
 		//
@@ -114,7 +66,10 @@ func directConnectGatewayDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[\\w \\-_,\\/]{1,100}$",
 		//	  "type": "string"
 		//	}
-		"direct_connect_gateway_name": schemaAttribute3503766dcfaca68ec3f2878a(),
+		"direct_connect_gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Direct Connect gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +102,24 @@ func directConnectGatewayDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute56632695c131e5d5dd195c3e(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with the Direct Connect gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

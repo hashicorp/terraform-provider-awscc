@@ -15,63 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3c1c3ebba3aee9818a21622d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56db1e8207672d5646d80bfb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LocalDeploymentAdministrationRoleArn
-				"local_deployment_administration_role_arn": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: LocalDeploymentExecutionRoleName
-				"local_deployment_execution_role_name": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: Parameters
-				"parameters": schemaAttributee822d128417f29d17f5c343b(),
-				// Property: Type
-				"type": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: TypeVersion
-				"type_version": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: id
-				"id": schemaAttribute3c1c3ebba3aee9818a21622d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70e1e562b69bbbedd3989e4f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LastUpdatedAt
-				"last_updated_at": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: Status
-				"status": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: StatusDetails
-				"status_details": schemaAttributee822d128417f29d17f5c343b(),
-				// Property: StatusMessage
-				"status_message": schemaAttribute3c1c3ebba3aee9818a21622d(),
-				// Property: StatusType
-				"status_type": schemaAttribute3c1c3ebba3aee9818a21622d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee822d128417f29d17f5c343b() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmquicksetup_configuration_manager", configurationManagerDataSource)
 }
@@ -126,14 +69,48 @@ func configurationManagerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"configuration_definitions": schemaAttribute56db1e8207672d5646d80bfb(),
+		"configuration_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LocalDeploymentAdministrationRoleArn
+					"local_deployment_administration_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: LocalDeploymentExecutionRoleName
+					"local_deployment_execution_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Parameters
+					"parameters":        // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TypeVersion
+					"type_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute3c1c3ebba3aee9818a21622d(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -141,21 +118,27 @@ func configurationManagerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^.{0,512}$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute3c1c3ebba3aee9818a21622d(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"last_modified_at": schemaAttribute3c1c3ebba3aee9818a21622d(),
+		"last_modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagerArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"manager_arn": schemaAttribute3c1c3ebba3aee9818a21622d(),
+		"manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +146,9 @@ func configurationManagerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[ A-Za-z0-9_-]{1,50}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3c1c3ebba3aee9818a21622d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusSummaries
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +203,35 @@ func configurationManagerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"status_summaries": schemaAttribute70e1e562b69bbbedd3989e4f(),
+		"status_summaries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LastUpdatedAt
+					"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusDetails
+					"status_details":    // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusMessage
+					"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusType
+					"status_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +247,11 @@ func configurationManagerDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributee822d128417f29d17f5c343b(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

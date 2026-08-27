@@ -15,143 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b19ba95f1134dff611754b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster's identifier (ID).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13a69a0174523f0644142eae() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7e0755c3aa04003e4d2dad72(),
-				// Property: Value
-				"value": schemaAttribute3536e40f6bdebbe1770c8857(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags to apply to the CloudHSM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f026fc630b8b5b30c6ad7b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Use a value between 7 - 379.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3536e40f6bdebbe1770c8857() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f4b75f9c2bba7456fb31d77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4443dfd1b8831c95f06c2f3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The NetworkType to create a cluster with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4eec3ee8e8b2c01a6d481ed7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The identifiers (IDs) of the subnets where the cluster is created. You must specify at least one subnet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute636dad9ffbb49b942e098daf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Type
-			"type": schemaAttributed51116a2f656039540724369(),
-			// Property: Value
-			"value": schemaAttribute1f026fc630b8b5b30c6ad7b6(),
-		}, /*END SCHEMA*/
-		Description: "A policy that defines how the service retains backups.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66c73373c8852992feedfc41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier (ID) of the cluster's security group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute726d03cf352cd1f9a9cf308c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier (ID) of the virtual private cloud (VPC) that contains the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74bd974d9732162b5ca36b6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of HSM to use in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e0755c3aa04003e4d2dad72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f4c298afed1c7e4e4b553e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster's state.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2e3fefb34fc15b7c71a805e() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map from availability zone to the cluster's subnet in that availability zone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed51116a2f656039540724369() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of backup retention policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2d9498d3eb892ad1abdfb54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cluster's backup policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef4aea47beda7752fb1c5f73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The mode to use in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudhsm_cluster", clusterDataSource)
 }
@@ -167,7 +30,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3f4b75f9c2bba7456fb31d77(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupPolicy
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +44,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"backup_policy": schemaAttributee2d9498d3eb892ad1abdfb54(),
+		"backup_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster's backup policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupRetentionPolicy
 		// CloudFormation resource type schema:
 		//
@@ -203,7 +72,22 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"backup_retention_policy": schemaAttribute636dad9ffbb49b942e098daf(),
+		"backup_retention_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of backup retention policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Use a value between 7 - 379.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A policy that defines how the service retains backups.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterId
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +96,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^cluster-[2-7a-zA-Z]{11,16}$",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schemaAttribute0b19ba95f1134dff611754b0(),
+		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster's identifier (ID).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HsmType
 		// CloudFormation resource type schema:
 		//
@@ -222,7 +109,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((p|)hsm[0-9][a-z.]*\\.[a-zA-Z]+)$",
 		//	  "type": "string"
 		//	}
-		"hsm_type": schemaAttribute74bd974d9732162b5ca36b6d(),
+		"hsm_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of HSM to use in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +124,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mode": schemaAttributeef4aea47beda7752fb1c5f73(),
+		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode to use in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +139,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schemaAttribute4443dfd1b8831c95f06c2f3b(),
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The NetworkType to create a cluster with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroup
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +151,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^sg-[0-9a-fA-F]{8,17}$",
 		//	  "type": "string"
 		//	}
-		"security_group": schemaAttribute66c73373c8852992feedfc41(),
+		"security_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier (ID) of the cluster's security group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +175,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute9f4c298afed1c7e4e4b553e6(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster's state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +192,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schemaAttribute4eec3ee8e8b2c01a6d481ed7(),
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The identifiers (IDs) of the subnets where the cluster is created. You must specify at least one subnet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetMapping
 		// CloudFormation resource type schema:
 		//
@@ -304,7 +210,12 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"subnet_mapping": schemaAttributec2e3fefb34fc15b7c71a805e(),
+		"subnet_mapping":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map from availability zone to the cluster's subnet in that availability zone.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -336,7 +247,24 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute13a69a0174523f0644142eae(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to apply to the CloudHSM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -344,7 +272,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier (ID) of the virtual private cloud (VPC) that contains the cluster.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute726d03cf352cd1f9a9cf308c(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier (ID) of the virtual private cloud (VPC) that contains the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,281 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute035d30de454126ec070fb237() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Code
-			"code": schemaAttribute80629eb4e60c9b000ac9e590(),
-			// Property: Type
-			"type": schemaAttribute9f649f657c66ec4b346ef572(),
-		}, /*END SCHEMA*/
-		Description: "ICMP type and code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute084da42e3eb622a5d490d2a2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NetworkAclEntrySet
-			"network_acl_entry_set": schemaAttribute9b525a964b16f6e03d60112c(),
-		}, /*END SCHEMA*/
-		Description: "Network ACL common policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b6eb963480ae6593cf024ba() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14b331230d9649482fc403d7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NetworkAclCommonPolicy
-			"network_acl_common_policy": schemaAttribute084da42e3eb622a5d490d2a2(),
-			// Property: NetworkFirewallPolicy
-			"network_firewall_policy": schemaAttributef0ade0b1ecd725af461d0417(),
-			// Property: ThirdPartyFirewallPolicy
-			"third_party_firewall_policy": schemaAttribute64debcc3d47cd6daa8625c01(),
-		}, /*END SCHEMA*/
-		Description: "Firewall policy option.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17f7feca9e52d036288b4ba5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IPv6 CIDR block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e75dbe6f39d9630e15f4e82() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "To Port.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30189a6a5bf440edf4d80207() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Firewall policy type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute374a968730d2ecea5420391a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeda348b7251b10bfb509240e7(),
-				// Property: Value
-				"value": schemaAttributeda348b7251b10bfb509240e7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3acd7cd28d722f56f1596bb8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "From Port.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bfba37c73cd4315bfe72dfa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Firewall managed service data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a72755d167c6ce9f0f926e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64debcc3d47cd6daa8625c01() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirewallDeploymentModel
-			"firewall_deployment_model": schemaAttributee357538075b66d6382f693e5(),
-		}, /*END SCHEMA*/
-		Description: "Third party firewall policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute748d4e355456ed2d920ac425() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ACCOUNT
-			"account": schemaAttributec19d7a92dc836ad26ae0974d(),
-			// Property: ORGUNIT
-			"orgunit": schemaAttributec19d7a92dc836ad26ae0974d(),
-		}, /*END SCHEMA*/
-		Description: "An FMS includeMap or excludeMap.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80629eb4e60c9b000ac9e590() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute890f422b562caa03744a60f2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CidrBlock
-				"cidr_block": schemaAttributefcb4ea0c4e26f546a734e3dd(),
-				// Property: Egress
-				"egress": schemaAttribute91b05ea351f0f16aebd3aa3c(),
-				// Property: IcmpTypeCode
-				"icmp_type_code": schemaAttribute035d30de454126ec070fb237(),
-				// Property: Ipv6CidrBlock
-				"ipv_6_cidr_block": schemaAttribute17f7feca9e52d036288b4ba5(),
-				// Property: PortRange
-				"port_range": schemaAttributec00ebf73ab55d1bc433be9f8(),
-				// Property: Protocol
-				"protocol": schemaAttribute5a72755d167c6ce9f0f926e6(),
-				// Property: RuleAction
-				"rule_action": schemaAttributec042f1252c1d63c91e1602e4(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "NetworkAcl entry list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91b05ea351f0f16aebd3aa3c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the entry is an egress entry.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b525a964b16f6e03d60112c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirstEntries
-			"first_entries": schemaAttribute890f422b562caa03744a60f2(),
-			// Property: ForceRemediateForFirstEntries
-			"force_remediate_for_first_entries": schemaAttribute0b6eb963480ae6593cf024ba(),
-			// Property: ForceRemediateForLastEntries
-			"force_remediate_for_last_entries": schemaAttribute0b6eb963480ae6593cf024ba(),
-			// Property: LastEntries
-			"last_entries": schemaAttribute890f422b562caa03744a60f2(),
-		}, /*END SCHEMA*/
-		Description: "Network ACL entry set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f649f657c66ec4b346ef572() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0d9f7e6001b01310bee2f4b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ManagedServiceData
-			"managed_service_data": schemaAttribute4bfba37c73cd4315bfe72dfa(),
-			// Property: PolicyOption
-			"policy_option": schemaAttribute14b331230d9649482fc403d7(),
-			// Property: Type
-			"type": schemaAttribute30189a6a5bf440edf4d80207(),
-		}, /*END SCHEMA*/
-		Description: "Firewall security service policy data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec00ebf73ab55d1bc433be9f8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: From
-			"from": schemaAttribute3acd7cd28d722f56f1596bb8(),
-			// Property: To
-			"to": schemaAttribute1e75dbe6f39d9630e15f4e82(),
-		}, /*END SCHEMA*/
-		Description: "Port range.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec042f1252c1d63c91e1602e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Rule Action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec19d7a92dc836ad26ae0974d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda348b7251b10bfb509240e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee020a188e589001b602feca7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A resource ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee357538075b66d6382f693e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Firewall deployment mode.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0ade0b1ecd725af461d0417() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirewallDeploymentModel
-			"firewall_deployment_model": schemaAttributee357538075b66d6382f693e5(),
-		}, /*END SCHEMA*/
-		Description: "Network firewall policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcb4ea0c4e26f546a734e3dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "CIDR block.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefebb62d20b9e168cb793c09c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An AWS resource type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_fms_policy", policyDataSource)
 }
@@ -308,14 +33,19 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([^\\s]*)$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee020a188e589001b602feca7(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A resource ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteAllPolicyResources
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"delete_all_policy_resources": schemaAttribute0b6eb963480ae6593cf024ba(),
+		"delete_all_policy_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExcludeMap
 		// CloudFormation resource type schema:
 		//
@@ -348,14 +78,31 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"exclude_map": schemaAttribute748d4e355456ed2d920ac425(),
+		"exclude_map": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ACCOUNT
+				"account": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ORGUNIT
+				"orgunit": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An FMS includeMap or excludeMap.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExcludeResourceTags
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"exclude_resource_tags": schemaAttribute0b6eb963480ae6593cf024ba(),
+		"exclude_resource_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -365,7 +112,9 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9A-Z-]{36}$",
 		//	  "type": "string"
 		//	}
-		"policy_id": schemaAttributeda348b7251b10bfb509240e7(),
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IncludeMap
 		// CloudFormation resource type schema:
 		//
@@ -398,7 +147,22 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"include_map": schemaAttribute748d4e355456ed2d920ac425(),
+		"include_map": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ACCOUNT
+				"account": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ORGUNIT
+				"orgunit": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An FMS includeMap or excludeMap.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyDescription
 		// CloudFormation resource type schema:
 		//
@@ -407,7 +171,9 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"policy_description": schemaAttributeda348b7251b10bfb509240e7(),
+		"policy_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -417,14 +183,18 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"policy_name": schemaAttributeda348b7251b10bfb509240e7(),
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RemediationEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"remediation_enabled": schemaAttribute0b6eb963480ae6593cf024ba(),
+		"remediation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceSetIds
 		// CloudFormation resource type schema:
 		//
@@ -440,7 +210,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resource_set_ids": schemaAttributec19d7a92dc836ad26ae0974d(),
+		"resource_set_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTagLogicalOperator
 		// CloudFormation resource type schema:
 		//
@@ -451,7 +224,9 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_tag_logical_operator": schemaAttributeda348b7251b10bfb509240e7(),
+		"resource_tag_logical_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -479,7 +254,21 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"resource_tags": schemaAttribute374a968730d2ecea5420391a(),
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -490,7 +279,10 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([^\\s]*)$",
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttributefebb62d20b9e168cb793c09c(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An AWS resource type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTypeList
 		// CloudFormation resource type schema:
 		//
@@ -505,14 +297,19 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resource_type_list": schemaAttributec19d7a92dc836ad26ae0974d(),
+		"resource_type_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcesCleanUp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"resources_clean_up": schemaAttribute0b6eb963480ae6593cf024ba(),
+		"resources_clean_up": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityServicePolicyData
 		// CloudFormation resource type schema:
 		//
@@ -828,7 +625,211 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"security_service_policy_data": schemaAttributeb0d9f7e6001b01310bee2f4b(),
+		"security_service_policy_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ManagedServiceData
+				"managed_service_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Firewall managed service data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PolicyOption
+				"policy_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NetworkAclCommonPolicy
+						"network_acl_common_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: NetworkAclEntrySet
+								"network_acl_entry_set": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FirstEntries
+										"first_entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CidrBlock
+													"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "CIDR block.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Egress
+													"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Whether the entry is an egress entry.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: IcmpTypeCode
+													"icmp_type_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Code
+															"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Code.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Type
+															"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Type.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "ICMP type and code.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Ipv6CidrBlock
+													"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "IPv6 CIDR block.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: PortRange
+													"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: From
+															"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "From Port.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: To
+															"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "To Port.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Port range.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Protocol
+													"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Protocol.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: RuleAction
+													"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Rule Action.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "NetworkAcl entry list.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ForceRemediateForFirstEntries
+										"force_remediate_for_first_entries": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ForceRemediateForLastEntries
+										"force_remediate_for_last_entries": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LastEntries
+										"last_entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CidrBlock
+													"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "CIDR block.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Egress
+													"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Whether the entry is an egress entry.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: IcmpTypeCode
+													"icmp_type_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Code
+															"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Code.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Type
+															"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Type.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "ICMP type and code.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Ipv6CidrBlock
+													"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "IPv6 CIDR block.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: PortRange
+													"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: From
+															"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "From Port.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: To
+															"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "To Port.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Port range.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Protocol
+													"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Protocol.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: RuleAction
+													"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Rule Action.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "NetworkAcl entry list.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Network ACL entry set.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Network ACL common policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkFirewallPolicy
+						"network_firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FirewallDeploymentModel
+								"firewall_deployment_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Firewall deployment mode.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Network firewall policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ThirdPartyFirewallPolicy
+						"third_party_firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FirewallDeploymentModel
+								"firewall_deployment_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Firewall deployment mode.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Third party firewall policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Firewall policy option.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Firewall policy type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Firewall security service policy data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -858,7 +859,21 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute374a968730d2ecea5420391a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

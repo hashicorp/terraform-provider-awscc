@@ -14,67 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0739500198739b5df2557466() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1110b859fd769c2683ef36e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An owner account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19799a4ff8e90bef75c76c92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A package version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute420722f1a8486d7949857afc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute574690b6bae9e2ba671532d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A package ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e7e03c07e14f9cd26ef80d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "If the version was marked latest, the new version to maker as latest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b43a39ce8c4f48226a8fa09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A patch version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7531c63e7a8d13eca9c25ab() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to mark the new version as the latest version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee863393d40d3eaa84fdd434d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_panorama_package_version", packageVersionDataSource)
 }
@@ -90,7 +29,10 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"is_latest_patch": schemaAttributee863393d40d3eaa84fdd434d(),
+		"is_latest_patch": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MarkLatest
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +40,10 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Whether to mark the new version as the latest version.",
 		//	  "type": "boolean"
 		//	}
-		"mark_latest": schemaAttributec7531c63e7a8d13eca9c25ab(),
+		"mark_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to mark the new version as the latest version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +54,10 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-z\\_]+$",
 		//	  "type": "string"
 		//	}
-		"owner_account": schemaAttribute1110b859fd769c2683ef36e7(),
+		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An owner account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackageArn
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +66,9 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"package_arn": schemaAttribute420722f1a8486d7949857afc(),
+		"package_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackageId
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +79,10 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 		//	  "type": "string"
 		//	}
-		"package_id": schemaAttribute574690b6bae9e2ba671532d2(),
+		"package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A package ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackageName
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +92,9 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"package_name": schemaAttribute420722f1a8486d7949857afc(),
+		"package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PackageVersion
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +105,10 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^([0-9]+)\\.([0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"package_version": schemaAttribute19799a4ff8e90bef75c76c92(),
+		"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A package version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PatchVersion
 		// CloudFormation resource type schema:
 		//
@@ -161,14 +119,19 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"patch_version": schemaAttribute8b43a39ce8c4f48226a8fa09(),
+		"patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A patch version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegisteredTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"registered_time": schemaAttribute0739500198739b5df2557466(),
+		"registered_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +144,9 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute420722f1a8486d7949857afc(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusDescription
 		// CloudFormation resource type schema:
 		//
@@ -190,7 +155,9 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"status_description": schemaAttribute420722f1a8486d7949857afc(),
+		"status_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedLatestPatchVersion
 		// CloudFormation resource type schema:
 		//
@@ -201,7 +168,10 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"updated_latest_patch_version": schemaAttribute6e7e03c07e14f9cd26ef80d0(),
+		"updated_latest_patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "If the version was marked latest, the new version to maker as latest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,77 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1db9c9de095e514d00ae3ee7() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of partitions. Valid only when **Strategy** is set to `partition`",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2647866bbb8bc94c7880abdb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of a parent placement group. Valid for strategies that support parent group linking.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32cb4cdf6125f56ca1c50930() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute594f38958cd54b1931af6e31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9faad046baaeebbe8d6c6a8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0da216bbf239cc410a72c26() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute32cb4cdf6125f56ca1c50930(),
-				// Property: Value
-				"value": schemaAttribute594f38958cd54b1931af6e31(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6b0d200edf973abf046e0cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Group Name of Placement Group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebecce09f22ff2a11225e889() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The placement strategy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb6395b79466e198cb1a26ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the placement group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_placement_group", placementGroupDataSource)
 }
@@ -100,7 +29,10 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of the placement group.",
 		//	  "type": "string"
 		//	}
-		"group_id": schemaAttributefb6395b79466e198cb1a26ac(),
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the placement group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +40,10 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Group Name of Placement Group.",
 		//	  "type": "string"
 		//	}
-		"group_name": schemaAttributec6b0d200edf973abf046e0cd(),
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Group Name of Placement Group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParentGroupId
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +51,10 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ID of a parent placement group. Valid for strategies that support parent group linking.",
 		//	  "type": "string"
 		//	}
-		"parent_group_id": schemaAttribute2647866bbb8bc94c7880abdb(),
+		"parent_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a parent placement group. Valid for strategies that support parent group linking.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PartitionCount
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +62,10 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The number of partitions. Valid only when **Strategy** is set to `partition`",
 		//	  "type": "integer"
 		//	}
-		"partition_count": schemaAttribute1db9c9de095e514d00ae3ee7(),
+		"partition_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of partitions. Valid only when **Strategy** is set to `partition`",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpreadLevel
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +73,10 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
 		//	  "type": "string"
 		//	}
-		"spread_level": schemaAttribute9faad046baaeebbe8d6c6a8b(),
+		"spread_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Strategy
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +84,10 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The placement strategy.",
 		//	  "type": "string"
 		//	}
-		"strategy": schemaAttributeebecce09f22ff2a11225e889(),
+		"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The placement strategy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -173,7 +120,24 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributec0da216bbf239cc410a72c26(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

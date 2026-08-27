@@ -14,146 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute16d6d15332a598052f9c4730() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Last Name of the IAM User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b04a78670c700c73323c72f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the user profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37fed94129ead4f435704687() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the user profile would be created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a04a8750d25f66a7cb6e56e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The session name of the IAM User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65184a31adea948d4d743655() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the user profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66620213d160acfb788e9fee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f99333f478ec1f03bbfc5d6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FirstName
-			"first_name": schemaAttribute931c9554e4bf0b3a15d613ba(),
-			// Property: LastName
-			"last_name": schemaAttribute16d6d15332a598052f9c4730(),
-			// Property: Username
-			"username": schemaAttribute83b3bd9d5272eb9f5121c64f(),
-		}, /*END SCHEMA*/
-		Description: "The details of the SSO User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78dbb704634d36e896e08795() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon DataZone user profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83b3bd9d5272eb9f5121c64f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The username of the SSO User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute840d13149a2ba5045bdc6d9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a3f52e902ab5d9aeee2f1ed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttributefadc208273eb7bfb02f90095(),
-			// Property: GroupProfileId
-			"group_profile_id": schemaAttribute9da9eb955e9a3e4339c512b9(),
-			// Property: SessionName
-			"session_name": schemaAttribute3a04a8750d25f66a7cb6e56e(),
-		}, /*END SCHEMA*/
-		Description: "The details of the IAM User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute931c9554e4bf0b3a15d613ba() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The First Name of the IAM User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9da9eb955e9a3e4339c512b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The group profile ID of the IAM User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4eb2cce009c26688758a09c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon DataZone domain in which the user profile is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebce0c5a8dd2a7eef000ce1a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The session name of the user profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5d9e13083bf3d65a2fc9933() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Iam
-			"iam": schemaAttribute8a3f52e902ab5d9aeee2f1ed(),
-			// Property: Sso
-			"sso": schemaAttribute6f99333f478ec1f03bbfc5d6(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefadc208273eb7bfb02f90095() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM User Profile.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_user_profile", userProfileDataSource)
 }
@@ -211,7 +71,55 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"details": schemaAttributef5d9e13083bf3d65a2fc9933(),
+		"details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Iam
+				"iam": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GroupProfileId
+						"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The group profile ID of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SessionName
+						"session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The session name of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The details of the IAM User Profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Sso
+				"sso": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FirstName
+						"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The First Name of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LastName
+						"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Last Name of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Username
+						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The username of the SSO User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The details of the SSO User Profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +128,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttributea4eb2cce009c26688758a09c(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the user profile is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +140,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttribute37fed94129ead4f435704687(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon DataZone domain in which the user profile would be created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +151,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the Amazon DataZone user profile.",
 		//	  "type": "string"
 		//	}
-		"user_profile_id": schemaAttribute78dbb704634d36e896e08795(),
+		"user_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon DataZone user profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SessionName
 		// CloudFormation resource type schema:
 		//
@@ -247,7 +164,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"session_name": schemaAttributebce0c5a8dd2a7eef000ce1a1(),
+		"session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The session name of the user profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +181,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute65184a31adea948d4d743655(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the user profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +196,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute2b04a78670c700c73323c72f(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the user profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +208,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)",
 		//	  "type": "string"
 		//	}
-		"user_identifier": schemaAttribute840d13149a2ba5045bdc6d9d(),
+		"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserType
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +225,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"user_type": schemaAttribute66620213d160acfb788e9fee(),
+		"user_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,42 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1407b428e7e55458fa16ade0() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Reason
-				"reason": schemaAttributef48f541a9d1f521d2906e39b(),
-				// Property: Status
-				"status": schemaAttributef48f541a9d1f521d2906e39b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55d80d66fca904b0582678f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe325e1b17be8fac041e6ac6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef48f541a9d1f521d2906e39b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_notifications_event_rule", eventRuleDataSource)
 }
@@ -67,7 +31,9 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef48f541a9d1f521d2906e39b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +41,10 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute55d80d66fca904b0582678f1(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventPattern
 		// CloudFormation resource type schema:
 		//
@@ -84,7 +53,9 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"event_pattern": schemaAttributef48f541a9d1f521d2906e39b(),
+		"event_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventType
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +65,9 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-zA-Z0-9 \\-\\(\\)])+$",
 		//	  "type": "string"
 		//	}
-		"event_type": schemaAttributef48f541a9d1f521d2906e39b(),
+		"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedRules
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +78,10 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"managed_rules": schemaAttributebe325e1b17be8fac041e6ac6(),
+		"managed_rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +89,9 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
-		"notification_configuration_arn": schemaAttributef48f541a9d1f521d2906e39b(),
+		"notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Regions
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +104,10 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"regions": schemaAttributebe325e1b17be8fac041e6ac6(),
+		"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -136,7 +117,9 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^aws.([a-z0-9\\-])+$",
 		//	  "type": "string"
 		//	}
-		"source": schemaAttributef48f541a9d1f521d2906e39b(),
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusSummaryByRegion
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +152,22 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"status_summary_by_region": schemaAttribute1407b428e7e55458fa16ade0(),
+		"status_summary_by_region": // Pattern: ""
+		schema.MapNestedAttribute{  /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Reason
+					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

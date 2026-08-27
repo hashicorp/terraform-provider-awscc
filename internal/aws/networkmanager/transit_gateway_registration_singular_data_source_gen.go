@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute95495df1df60ac791a7a0ede() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the global network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9980dee59f6134e4b6f73104() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the transit gateway.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_transit_gateway_registration", transitGatewayRegistrationDataSource)
 }
@@ -43,7 +29,10 @@ func transitGatewayRegistrationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schemaAttribute95495df1df60ac791a7a0ede(),
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the global network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayArn
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,10 @@ func transitGatewayRegistrationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The Amazon Resource Name (ARN) of the transit gateway.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_arn": schemaAttribute9980dee59f6134e4b6f73104(),
+		"transit_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the transit gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

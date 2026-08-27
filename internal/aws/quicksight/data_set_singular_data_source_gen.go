@@ -15,828 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0a313b519954e73b70c25c9b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e5d6d4cc7755822b815bc1b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute2eb28af2fe99c264b8d796ed(),
-				// Property: Name
-				"name": schemaAttribute148d5f89032ffb9601d19bd3(),
-				// Property: Type
-				"type": schemaAttribute2342e982381f8204dabf695c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>The list of columns after all transforms. These columns are available in templates,\n            analyses, and dashboards.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12ecccccb594e41d5a1a57c7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainsHeader
-			"contains_header": schemaAttributea8a66394dac9c60141cb2ff3(),
-			// Property: Delimiter
-			"delimiter": schemaAttributef0ce96b8a5d46abad2f42af5(),
-			// Property: Format
-			"format": schemaAttribute2342e982381f8204dabf695c(),
-			// Property: StartFromRow
-			"start_from_row": schemaAttributeabbc50c80125705b790863b0(),
-			// Property: TextQualifier
-			"text_qualifier": schemaAttribute2342e982381f8204dabf695c(),
-		}, /*END SCHEMA*/
-		Description: "<p>Information about the format for a source file or files.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute148d5f89032ffb9601d19bd3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A display name for the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17cfee480b6dea8ae867eb38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Left operand.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute225e1edac068a01eb5962ad2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Columns
-			"columns": schemaAttributea6afea70a2b21d561eda5f8b(),
-			// Property: CountryCode
-			"country_code": schemaAttribute2342e982381f8204dabf695c(),
-			// Property: Name
-			"name": schemaAttributef5e008b7bb938482bf152941(),
-		}, /*END SCHEMA*/
-		Description: "<p>Geospatial column group that denotes a hierarchy.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2342e982381f8204dabf695c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2958a197998fec98569db6bc() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Columns
-				"columns": schemaAttribute3d85ea9c8c407869d972e48d(),
-				// Property: Description
-				"description": schemaAttribute2342e982381f8204dabf695c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29dfec1522ee9fe89b9f7e96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Column name.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d3d6f6266b9e359fdc5f339() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ColumnName
-			"column_name": schemaAttribute5c5de1659556eaf16cb2ff94(),
-			// Property: NewColumnName
-			"new_column_name": schemaAttributee619c63d81111740ad988af1(),
-		}, /*END SCHEMA*/
-		Description: "<p>A transform operation that renames a column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2eb28af2fe99c264b8d796ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A description for a column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f5ae6c187176ff5a3c7b201() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>On Clause.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3222f14253f3dc5ea7fa133b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute336ca5c929f1fc14ca050763() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Physical table ID.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34dacbc74ef74f41a41dfcd2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Columns
-			"columns": schemaAttribute5c33291d42a4e60b3eba5939(),
-		}, /*END SCHEMA*/
-		Description: "<p>A transform operation that creates calculated columns. Columns created in one such\n            operation form a lexical closure.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37d7cfa580ebda30fae47050() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon QuickSight\n            preserves the existing calculated column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38fbc974f3ec4e7932a28b29() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>Projected columns.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d85ea9c8c407869d972e48d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fc303c7924d83085074e50f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ProjectedColumns
-			"projected_columns": schemaAttribute38fbc974f3ec4e7932a28b29(),
-		}, /*END SCHEMA*/
-		Description: "<p>A transform operation that projects columns. Operations that come after a projection\n            can only refer to projected columns.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41adcb0a8af1351b6f997a48() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb4952663d763f9e48f2f2739(),
-				// Property: Value
-				"value": schemaAttributede124e541868c4bccfcfc37e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42fc64b5412f52d0bb07cdd4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GeoSpatialColumnGroup
-				"geo_spatial_column_group": schemaAttribute225e1edac068a01eb5962ad2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a6ecb77100d03364fe0557() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ColumnName
-			"column_name": schemaAttribute29dfec1522ee9fe89b9f7e96(),
-			// Property: Format
-			"format": schemaAttributeec37fb0f51cbad91de03369f(),
-			// Property: NewColumnType
-			"new_column_type": schemaAttribute2342e982381f8204dabf695c(),
-		}, /*END SCHEMA*/
-		Description: "<p>A transform operation that casts a column to a different type.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45e91ed824d46b5bf0d6dcd3() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttributee928f0cdf77a9a586954f054(),
-				// Property: Principal
-				"principal": schemaAttributeb54020ef89681acced679af8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>A list of resource permissions on the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4874e0c42a2cb26870653662() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't\n            imported into SPICE.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d1e8523a8d662555b37faac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A display name for the logical table.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4dae6399b108e0760c2683ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The column that this operation acts on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f1e4fed86e33e008753efe9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The name of this column in the underlying data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute562681c2e860e56d01808e58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The SQL query.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute563bd06e8c594ac99978af46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The text of a description for a column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute578ffa01de6e0bbde351a006() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute4f1e4fed86e33e008753efe9(),
-				// Property: Type
-				"type": schemaAttribute2342e982381f8204dabf695c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>The column schema from the SQL query result set.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute598a3fac817949b61f523c1c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ColumnDescription
-				"column_description": schemaAttribute83ddbd751a784e42a68b4d6e(),
-				// Property: ColumnGeographicRole
-				"column_geographic_role": schemaAttribute2342e982381f8204dabf695c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>The dataset column tag, currently only used for geospatial type tagging. .</p>\n        <note>\n            <p>This is not tags for the AWS tagging feature. .</p>\n        </note>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a3d1e7aa4bae737d948b038() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DisableUseAsDirectQuerySource
-			"disable_use_as_direct_query_source": schemaAttribute6588b5aac3290f391a369f6d(),
-			// Property: DisableUseAsImportedSource
-			"disable_use_as_imported_source": schemaAttribute6588b5aac3290f391a369f6d(),
-		}, /*END SCHEMA*/
-		Description: "<p>The dataset usage configuration for the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c2d40347adf430ea15bb484() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute0a313b519954e73b70c25c9b(),
-			// Property: FormatVersion
-			"format_version": schemaAttribute2342e982381f8204dabf695c(),
-			// Property: Namespace
-			"namespace": schemaAttributea6b95952262e884acf106c07(),
-			// Property: PermissionPolicy
-			"permission_policy": schemaAttribute2342e982381f8204dabf695c(),
-		}, /*END SCHEMA*/
-		Description: "<p>The row-level security configuration for the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c33291d42a4e60b3eba5939() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ColumnId
-				"column_id": schemaAttribute37d7cfa580ebda30fae47050(),
-				// Property: ColumnName
-				"column_name": schemaAttribute29dfec1522ee9fe89b9f7e96(),
-				// Property: Expression
-				"expression": schemaAttributef7c65b11bc6493bc17c133a2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Calculated columns to create.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c5de1659556eaf16cb2ff94() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The name of the column to be renamed.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5da434e142b8d6f126b35f9d() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomSql
-				"custom_sql": schemaAttributea01d2bf21d4dafb943f0a5d1(),
-				// Property: RelationalTable
-				"relational_table": schemaAttributec39916abfaf3893f6f050847(),
-				// Property: S3Source
-				"s3_source": schemaAttributefed3bc7b581b3efdbf694bfe(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ec645c0561e56b738aa3ee8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The amazon Resource Name (ARN) for the data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6588b5aac3290f391a369f6d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bc859190da30c77392b2bbe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The display name for the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute783e069e11b7346580ebf594() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: UniqueKey
-			"unique_key": schemaAttribute6588b5aac3290f391a369f6d(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e94a7b60fc48453c6f09697() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) for the data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83ddbd751a784e42a68b4d6e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Text
-			"text": schemaAttribute563bd06e8c594ac99978af46(),
-		}, /*END SCHEMA*/
-		Description: "<p>Metadata that contains a description for a column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85f7950efc7c47343391f00e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute4f1e4fed86e33e008753efe9(),
-				// Property: Type
-				"type": schemaAttribute2342e982381f8204dabf695c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>A physical table type for as S3 data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8640f1272e2fd9c01b799311() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The catalog associated with a table.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86a2baae704bb7e90c29199d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e612b85806b1a6fe020b622() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataSetArn
-			"data_set_arn": schemaAttributefebc164bd98508aaa2227784(),
-			// Property: JoinInstruction
-			"join_instruction": schemaAttributeb37057655a7205f3e0f501fb(),
-			// Property: PhysicalTableId
-			"physical_table_id": schemaAttribute336ca5c929f1fc14ca050763(),
-		}, /*END SCHEMA*/
-		Description: "<p>Information about the source of a logical table. This is a variant type structure. For\n            this structure to be valid, only one of the attributes can be non-null.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9eb9f108108a410d168c699f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConditionExpression
-			"condition_expression": schemaAttributed505a4d4a5a6a18c1f3bfd31(),
-		}, /*END SCHEMA*/
-		Description: "<p>A transform operation that filters rows based on a condition.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea01d2bf21d4dafb943f0a5d1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Columns
-			"columns": schemaAttribute578ffa01de6e0bbde351a006(),
-			// Property: DataSourceArn
-			"data_source_arn": schemaAttribute3222f14253f3dc5ea7fa133b(),
-			// Property: Name
-			"name": schemaAttributeab992b7a8741f280a151cb17(),
-			// Property: SqlQuery
-			"sql_query": schemaAttribute562681c2e860e56d01808e58(),
-		}, /*END SCHEMA*/
-		Description: "<p>A physical table type built from the results of the custom SQL query.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea043e13c743c9b43ef5ef9b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The last time that this dataset was updated.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6afea70a2b21d561eda5f8b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>Columns in this hierarchy.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6b95952262e884acf106c07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The namespace associated with the row-level permissions dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8a66394dac9c60141cb2ff3() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Whether the file has a header row, or the files each have a header row.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab992b7a8741f280a151cb17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A display name for the SQL query result.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabbc50c80125705b790863b0() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>A row number to start reading data from.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacc01a92348245b627dc1966() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IngestionWaitTimeInHours
-			"ingestion_wait_time_in_hours": schemaAttributec27f42e25e41f792615bb343(),
-			// Property: WaitForSpiceIngestion
-			"wait_for_spice_ingestion": schemaAttribute86a2baae704bb7e90c29199d(),
-		}, /*END SCHEMA*/
-		Description: "<p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb03c19c131d5faa25815a83c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CastColumnTypeOperation
-				"cast_column_type_operation": schemaAttribute45a6ecb77100d03364fe0557(),
-				// Property: CreateColumnsOperation
-				"create_columns_operation": schemaAttribute34dacbc74ef74f41a41dfcd2(),
-				// Property: FilterOperation
-				"filter_operation": schemaAttribute9eb9f108108a410d168c699f(),
-				// Property: ProjectOperation
-				"project_operation": schemaAttribute3fc303c7924d83085074e50f(),
-				// Property: RenameColumnOperation
-				"rename_column_operation": schemaAttribute2d3d6f6266b9e359fdc5f339(),
-				// Property: TagColumnOperation
-				"tag_column_operation": schemaAttributef0c4223a8eda7b8e157e357e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Transform operations that act on this logical table.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb37057655a7205f3e0f501fb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LeftJoinKeyProperties
-			"left_join_key_properties": schemaAttribute783e069e11b7346580ebf594(),
-			// Property: LeftOperand
-			"left_operand": schemaAttribute17cfee480b6dea8ae867eb38(),
-			// Property: OnClause
-			"on_clause": schemaAttribute2f5ae6c187176ff5a3c7b201(),
-			// Property: RightJoinKeyProperties
-			"right_join_key_properties": schemaAttribute783e069e11b7346580ebf594(),
-			// Property: RightOperand
-			"right_operand": schemaAttributef2787b4ceb0e2b6426b33e22(),
-			// Property: Type
-			"type": schemaAttribute2342e982381f8204dabf695c(),
-		}, /*END SCHEMA*/
-		Description: "<p>Join instruction.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4952663d763f9e48f2f2739() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb54020ef89681acced679af8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9fbfe4eac749bed0529cf52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf290b09f1aad1fd2cc83664() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The time that this dataset was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec27f42e25e41f792615bb343() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec39916abfaf3893f6f050847() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Catalog
-			"catalog": schemaAttribute8640f1272e2fd9c01b799311(),
-			// Property: DataSourceArn
-			"data_source_arn": schemaAttribute7e94a7b60fc48453c6f09697(),
-			// Property: InputColumns
-			"input_columns": schemaAttributee828b348fdd277c7135895b5(),
-			// Property: Name
-			"name": schemaAttributecaf4e29de97c2d8abced8b9e(),
-			// Property: Schema
-			"schema": schemaAttributee5e022347ba2f6c219b2f0e7(),
-		}, /*END SCHEMA*/
-		Description: "<p>A physical table type for relational data sources.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecaf4e29de97c2d8abced8b9e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The name of the relational table.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed505a4d4a5a6a18c1f3bfd31() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede124e541868c4bccfcfc37e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5e022347ba2f6c219b2f0e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The schema name. This name applies to certain relational database engines.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee619c63d81111740ad988af1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The new name for the column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee81dd0d07095451fac64f29a() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Alias
-				"alias": schemaAttribute4d1e8523a8d662555b37faac(),
-				// Property: DataTransforms
-				"data_transforms": schemaAttributeb03c19c131d5faa25815a83c(),
-				// Property: Source
-				"source": schemaAttribute8e612b85806b1a6fe020b622(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee828b348fdd277c7135895b5() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute4f1e4fed86e33e008753efe9(),
-				// Property: Type
-				"type": schemaAttribute2342e982381f8204dabf695c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>The column schema of the table.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee928f0cdf77a9a586954f054() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec37fb0f51cbad91de03369f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>When casting a column from string to datetime type, you can supply a string in a\n            format supported by Amazon QuickSight to denote the source data format.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0c4223a8eda7b8e157e357e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ColumnName
-			"column_name": schemaAttribute4dae6399b108e0760c2683ce(),
-			// Property: Tags
-			"tags": schemaAttribute598a3fac817949b61f523c1c(),
-		}, /*END SCHEMA*/
-		Description: "<p>A transform operation that tags a column with additional information.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0ce96b8a5d46abad2f42af5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The delimiter between values in the file.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2787b4ceb0e2b6426b33e22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Right operand.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5e008b7bb938482bf152941() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>A display name for the hierarchy.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7c65b11bc6493bc17c133a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>An expression that defines the calculated column.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdbc7d66d8f7b2bcf7e52706() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ColumnNames
-				"column_names": schemaAttribute3d85ea9c8c407869d972e48d(),
-				// Property: Principals
-				"principals": schemaAttribute3d85ea9c8c407869d972e48d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefebc164bd98508aaa2227784() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) for the dataset.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefed3bc7b581b3efdbf694bfe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataSourceArn
-			"data_source_arn": schemaAttribute5ec645c0561e56b738aa3ee8(),
-			// Property: InputColumns
-			"input_columns": schemaAttribute85f7950efc7c47343391f00e(),
-			// Property: UploadSettings
-			"upload_settings": schemaAttribute12ecccccb594e41d5a1a57c7(),
-		}, /*END SCHEMA*/
-		Description: "<p>A physical table type for as S3 data source.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_data_set", dataSetDataSource)
 }
@@ -852,7 +30,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb9fbfe4eac749bed0529cf52(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -862,7 +43,9 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute2342e982381f8204dabf695c(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ColumnGroups
 		// CloudFormation resource type schema:
 		//
@@ -911,7 +94,36 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"column_groups": schemaAttribute42fc64b5412f52d0bb07cdd4(),
+		"column_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: GeoSpatialColumnGroup
+					"geo_spatial_column_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Columns
+							"columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "<p>Columns in this hierarchy.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CountryCode
+							"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>A display name for the hierarchy.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Geospatial column group that denotes a hierarchy.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ColumnLevelPermissionRules
 		// CloudFormation resource type schema:
 		//
@@ -939,7 +151,23 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"column_level_permission_rules": schemaAttributefdbc7d66d8f7b2bcf7e52706(),
+		"column_level_permission_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ColumnNames
+					"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Principals
+					"principals": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConsumedSpiceCapacityInBytes
 		// CloudFormation resource type schema:
 		//
@@ -947,7 +175,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't\n            imported into SPICE.\u003c/p\u003e",
 		//	  "type": "number"
 		//	}
-		"consumed_spice_capacity_in_bytes": schemaAttribute4874e0c42a2cb26870653662(),
+		"consumed_spice_capacity_in_bytes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "<p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't\n            imported into SPICE.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -956,14 +187,19 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "string",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttributebf290b09f1aad1fd2cc83664(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The time that this dataset was created.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSetId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"data_set_id": schemaAttribute2342e982381f8204dabf695c(),
+		"data_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSetUsageConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -979,7 +215,20 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_set_usage_configuration": schemaAttribute5a3d1e7aa4bae737d948b038(),
+		"data_set_usage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisableUseAsDirectQuerySource
+				"disable_use_as_direct_query_source": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DisableUseAsImportedSource
+				"disable_use_as_imported_source": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The dataset usage configuration for the dataset.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FieldFolders
 		// CloudFormation resource type schema:
 		//
@@ -1006,7 +255,23 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"field_folders": schemaAttribute2958a197998fec98569db6bc(),
+		"field_folders":           // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Columns
+					"columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImportMode
 		// CloudFormation resource type schema:
 		//
@@ -1017,7 +282,9 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"import_mode": schemaAttribute2342e982381f8204dabf695c(),
+		"import_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestionWaitPolicy
 		// CloudFormation resource type schema:
 		//
@@ -1039,7 +306,22 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ingestion_wait_policy": schemaAttributeacc01a92348245b627dc1966(),
+		"ingestion_wait_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IngestionWaitTimeInHours
+				"ingestion_wait_time_in_hours": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WaitForSpiceIngestion
+				"wait_for_spice_ingestion": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Wait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -1048,7 +330,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "string",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttributea043e13c743c9b43ef5ef9b7(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The last time that this dataset was updated.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogicalTableMap
 		// CloudFormation resource type schema:
 		//
@@ -1342,7 +627,222 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logical_table_map": schemaAttributee81dd0d07095451fac64f29a(),
+		"logical_table_map":       // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Alias
+					"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>A display name for the logical table.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataTransforms
+					"data_transforms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CastColumnTypeOperation
+								"cast_column_type_operation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ColumnName
+										"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>Column name.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>When casting a column from string to datetime type, you can supply a string in a\n            format supported by Amazon QuickSight to denote the source data format.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: NewColumnType
+										"new_column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>A transform operation that casts a column to a different type.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: CreateColumnsOperation
+								"create_columns_operation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Columns
+										"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ColumnId
+													"column_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon QuickSight\n            preserves the existing calculated column.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ColumnName
+													"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Column name.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Expression
+													"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>An expression that defines the calculated column.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "<p>Calculated columns to create.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>A transform operation that creates calculated columns. Columns created in one such\n            operation form a lexical closure.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FilterOperation
+								"filter_operation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ConditionExpression
+										"condition_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>A transform operation that filters rows based on a condition.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ProjectOperation
+								"project_operation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ProjectedColumns
+										"projected_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "<p>Projected columns.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>A transform operation that projects columns. Operations that come after a projection\n            can only refer to projected columns.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RenameColumnOperation
+								"rename_column_operation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ColumnName
+										"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The name of the column to be renamed.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: NewColumnName
+										"new_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The new name for the column.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>A transform operation that renames a column.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TagColumnOperation
+								"tag_column_operation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ColumnName
+										"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The column that this operation acts on.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ColumnDescription
+													"column_description": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Text
+															"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "<p>The text of a description for a column.</p>",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "<p>Metadata that contains a description for a column.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ColumnGeographicRole
+													"column_geographic_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "<p>The dataset column tag, currently only used for geospatial type tagging. .</p>\n        <note>\n            <p>This is not tags for the AWS tagging feature. .</p>\n        </note>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>A transform operation that tags a column with additional information.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "<p>Transform operations that act on this logical table.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Source
+					"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataSetArn
+							"data_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon Resource Name (ARN) for the dataset.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: JoinInstruction
+							"join_instruction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: LeftJoinKeyProperties
+									"left_join_key_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: UniqueKey
+											"unique_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: LeftOperand
+									"left_operand": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Left operand.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OnClause
+									"on_clause": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>On Clause.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RightJoinKeyProperties
+									"right_join_key_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: UniqueKey
+											"unique_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: RightOperand
+									"right_operand": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Right operand.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>Join instruction.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PhysicalTableId
+							"physical_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Physical table ID.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Information about the source of a logical table. This is a variant type structure. For\n            this structure to be valid, only one of the attributes can be non-null.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1352,7 +852,10 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6bc859190da30c77392b2bbe(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The display name for the dataset.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutputColumns
 		// CloudFormation resource type schema:
 		//
@@ -1387,7 +890,28 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"output_columns": schemaAttribute0e5d6d4cc7755822b815bc1b(),
+		"output_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>A description for a column.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>A display name for the dataset.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>The list of columns after all transforms. These columns are available in templates,\n            analyses, and dashboards.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -1422,7 +946,25 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"permissions": schemaAttribute45e91ed824d46b5bf0d6dcd3(),
+		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>A list of resource permissions on the dataset.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PhysicalTableMap
 		// CloudFormation resource type schema:
 		//
@@ -1653,7 +1195,159 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"physical_table_map": schemaAttribute5da434e142b8d6f126b35f9d(),
+		"physical_table_map":      // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CustomSql
+					"custom_sql": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Columns
+							"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The name of this column in the underlying data source.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "<p>The column schema from the SQL query result set.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataSourceArn
+							"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>A display name for the SQL query result.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SqlQuery
+							"sql_query": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The SQL query.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>A physical table type built from the results of the custom SQL query.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RelationalTable
+					"relational_table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The catalog associated with a table.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataSourceArn
+							"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon Resource Name (ARN) for the data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputColumns
+							"input_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The name of this column in the underlying data source.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "<p>The column schema of the table.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The name of the relational table.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Schema
+							"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The schema name. This name applies to certain relational database engines.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>A physical table type for relational data sources.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Source
+					"s3_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataSourceArn
+							"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The amazon Resource Name (ARN) for the data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InputColumns
+							"input_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The name of this column in the underlying data source.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "<p>A physical table type for as S3 data source.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UploadSettings
+							"upload_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ContainsHeader
+									"contains_header": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Whether the file has a header row, or the files each have a header row.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Delimiter
+									"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>The delimiter between values in the file.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Format
+									"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: StartFromRow
+									"start_from_row": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Description: "<p>A row number to start reading data from.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TextQualifier
+									"text_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>Information about the format for a source file or files.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>A physical table type for as S3 data source.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RowLevelPermissionDataSet
 		// CloudFormation resource type schema:
 		//
@@ -1692,7 +1386,30 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"row_level_permission_data_set": schemaAttribute5c2d40347adf430ea15bb484(),
+		"row_level_permission_data_set": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FormatVersion
+				"format_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Namespace
+				"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The namespace associated with the row-level permissions dataset.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PermissionPolicy
+				"permission_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The row-level security configuration for the dataset.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1724,7 +1441,24 @@ func dataSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute41adcb0a8af1351b6f997a48(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

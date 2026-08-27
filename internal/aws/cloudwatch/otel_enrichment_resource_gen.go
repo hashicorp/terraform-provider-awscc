@@ -17,26 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute36d9c325197b161321e24692() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID. This is the primary identifier for this singleton resource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8e835363006ea77e32ee02e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of OTel enrichment (RUNNING or STOPPED).",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_cloudwatch_otel_enrichment", oTelEnrichmentResource)
 	registry.AddListResourceFactory("awscc_cloudwatch_otel_enrichment", generic.NewListResource(oTelEnrichmentResource))
@@ -53,7 +33,13 @@ func oTelEnrichmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS account ID. This is the primary identifier for this singleton resource.",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttribute36d9c325197b161321e24692(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID. This is the primary identifier for this singleton resource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +51,13 @@ func oTelEnrichmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributea8e835363006ea77e32ee02e(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current status of OTel enrichment (RUNNING or STOPPED).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

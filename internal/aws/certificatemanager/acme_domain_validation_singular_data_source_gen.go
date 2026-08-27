@@ -14,123 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute08f175018e998511a03a4840() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the ACME endpoint this domain validation is associated with.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute09de233d91367fe28c48fd49() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute54b6232dea8b30a1ce564e0b(),
-				// Property: Value
-				"value": schemaAttributedf34e813812909456a68886c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags associated with the domain validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a0e0c92b2e7f24422075512() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether certificates may be issued for subdomains of the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54b6232dea8b30a1ce564e0b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88ab5924989272c67cddf5c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether certificates may be issued for the exact domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99529f841f730c68a95ee351() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Route 53 hosted zone ID for automatic DNS record management. When provided, the service creates the validation DNS record on the customer's behalf.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea74093cea91385d957aacd79() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DnsPrevalidation
-			"dns_prevalidation": schemaAttributecbd6937da8d118267f69aaa0(),
-		}, /*END SCHEMA*/
-		Description: "Prevalidation method configuration. Currently only DNS-based prevalidation is supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5232a7c93ae52913a6515e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether wildcard certificates may be issued for the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbd6937da8d118267f69aaa0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainScope
-			"domain_scope": schemaAttributee4c63f69f34de3012263cd10(),
-			// Property: HostedZoneId
-			"hosted_zone_id": schemaAttribute99529f841f730c68a95ee351(),
-		}, /*END SCHEMA*/
-		Description: "DNS-based prevalidation options for the domain validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf34e813812909456a68886c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4c63f69f34de3012263cd10() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ExactDomain
-			"exact_domain": schemaAttribute88ab5924989272c67cddf5c1(),
-			// Property: Subdomains
-			"subdomains": schemaAttribute2a0e0c92b2e7f24422075512(),
-			// Property: Wildcards
-			"wildcards": schemaAttributeb5232a7c93ae52913a6515e2(),
-		}, /*END SCHEMA*/
-		Description: "Controls which certificate types are authorized to be issued for the domain via the ACME endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef2715a292f96f4e5fac3b76f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name to validate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3cf4fcf425a1ff29888a84f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the domain validation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_certificatemanager_acme_domain_validation", acmeDomainValidationDataSource)
 }
@@ -146,7 +29,10 @@ func acmeDomainValidationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ARN of the ACME endpoint this domain validation is associated with.",
 		//	  "type": "string"
 		//	}
-		"acme_endpoint_arn": schemaAttribute08f175018e998511a03a4840(),
+		"acme_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the ACME endpoint this domain validation is associated with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +40,10 @@ func acmeDomainValidationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the domain validation.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef3cf4fcf425a1ff29888a84f(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the domain validation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +51,10 @@ func acmeDomainValidationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The domain name to validate.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttributef2715a292f96f4e5fac3b76f(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain name to validate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrevalidationOptions
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +98,46 @@ func acmeDomainValidationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"prevalidation_options": schemaAttributea74093cea91385d957aacd79(),
+		"prevalidation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsPrevalidation
+				"dns_prevalidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainScope
+						"domain_scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ExactDomain
+								"exact_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether certificates may be issued for the exact domain.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Subdomains
+								"subdomains": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether certificates may be issued for subdomains of the domain.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Wildcards
+								"wildcards": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether wildcard certificates may be issued for the domain.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Controls which certificate types are authorized to be issued for the domain via the ACME endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostedZoneId
+						"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Route 53 hosted zone ID for automatic DNS record management. When provided, the service creates the validation DNS record on the customer's behalf.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "DNS-based prevalidation options for the domain validation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Prevalidation method configuration. Currently only DNS-based prevalidation is supported.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +169,24 @@ func acmeDomainValidationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute09de233d91367fe28c48fd49(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags associated with the domain validation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

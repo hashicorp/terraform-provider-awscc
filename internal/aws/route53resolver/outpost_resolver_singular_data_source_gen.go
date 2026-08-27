@@ -14,112 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03d9a23d3ec225032dc0da47() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05ce6dc133498fdae20eccd8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver instance type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f9ef044361a2384b23efdc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver creation time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e0e429656cfbff39bad19e5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea65540595027d2bb7901090a(),
-				// Property: Value
-				"value": schemaAttribute03d9a23d3ec225032dc0da47(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40b165f3ce1b1b008738208d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5627fcf452f98594ffe5af08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the creator request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f4217a418af7bc8ba98f4ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver status message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute791b360f043fc0c70428041d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Outpost ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ab78f6d91f97ab810e11110() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver status, possible values are CREATING, OPERATIONAL, UPDATING, DELETING, ACTION_NEEDED, FAILED_CREATION and FAILED_DELETION.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea65540595027d2bb7901090a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa7462c06171136028da3a87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver last modified time",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb8410d03908683fcd2a01779() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of OutpostResolvers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9befbb32a287a015d888f10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef312e845472b5629739ab84d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OutpostResolver ARN.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_outpost_resolver", outpostResolverDataSource)
 }
@@ -137,7 +31,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef312e845472b5629739ab84d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +44,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute0f9ef044361a2384b23efdc7(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver creation time",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatorRequestId
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +57,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"creator_request_id": schemaAttribute5627fcf452f98594ffe5af08(),
+		"creator_request_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the creator request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +70,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"outpost_resolver_id": schemaAttribute40b165f3ce1b1b008738208d(),
+		"outpost_resolver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceCount
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +83,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minimum": 4,
 		//	  "type": "integer"
 		//	}
-		"instance_count": schemaAttributeb8410d03908683fcd2a01779(),
+		"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of OutpostResolvers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +96,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"modification_time": schemaAttributeaa7462c06171136028da3a87(),
+		"modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver last modified time",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +109,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb9befbb32a287a015d888f10(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +122,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"outpost_arn": schemaAttribute791b360f043fc0c70428041d(),
+		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Outpost ARN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredInstanceType
 		// CloudFormation resource type schema:
 		//
@@ -217,7 +135,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"preferred_instance_type": schemaAttribute05ce6dc133498fdae20eccd8(),
+		"preferred_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver instance type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -234,7 +155,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute8ab78f6d91f97ab810e11110(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver status, possible values are CREATING, OPERATIONAL, UPDATING, DELETING, ACTION_NEEDED, FAILED_CREATION and FAILED_DELETION.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +166,10 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The OutpostResolver status message.",
 		//	  "type": "string"
 		//	}
-		"status_message": schemaAttribute5f4217a418af7bc8ba98f4ce(),
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The OutpostResolver status message.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -275,7 +202,24 @@ func outpostResolverDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute3e0e429656cfbff39bad19e5(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

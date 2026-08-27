@@ -14,49 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3ffabce962a1705732c5e47a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67682c5c2baa2e76aab7a64b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3e6d5cae7ca1227c30b9d5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the control.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0465cec483ba77b6cfcc851() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefded30db141003b070aa2f12() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Reason
-				"reason": schemaAttributee0465cec483ba77b6cfcc851(),
-				// Property: StandardsControlArn
-				"standards_control_arn": schemaAttributeb3e6d5cae7ca1227c30b9d5a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_standard", standardDataSource)
 }
@@ -95,7 +52,24 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"disabled_standards_controls": schemaAttributefded30db141003b070aa2f12(),
+		"disabled_standards_controls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Reason
+					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StandardsControlArn
+					"standards_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the control.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StandardsArn
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +78,10 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S",
 		//	  "type": "string"
 		//	}
-		"standards_arn": schemaAttribute3ffabce962a1705732c5e47a(),
+		"standards_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StandardsSubscriptionArn
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +90,10 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"standards_subscription_arn": schemaAttribute67682c5c2baa2e76aab7a64b(),
+		"standards_subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,18 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttributeae20255cb8685d936fe063fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfbf9139f288790807265b7a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_queue_environment", queueEnvironmentDataSource)
 }
@@ -41,14 +29,18 @@ func queueEnvironmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schemaAttributeae20255cb8685d936fe063fd(),
+		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeae20255cb8685d936fe063fd(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -57,7 +49,9 @@ func queueEnvironmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"priority": schemaAttributecfbf9139f288790807265b7a(),
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueueEnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +59,9 @@ func queueEnvironmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^queueenv-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"queue_environment_id": schemaAttributeae20255cb8685d936fe063fd(),
+		"queue_environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueueId
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +69,9 @@ func queueEnvironmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^queue-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"queue_id": schemaAttributeae20255cb8685d936fe063fd(),
+		"queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Template
 		// CloudFormation resource type schema:
 		//
@@ -82,7 +80,9 @@ func queueEnvironmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template": schemaAttributeae20255cb8685d936fe063fd(),
+		"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TemplateType
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +93,9 @@ func queueEnvironmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"template_type": schemaAttributeae20255cb8685d936fe063fd(),
+		"template_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

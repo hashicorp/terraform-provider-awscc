@@ -14,119 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01480b24a59c95d8deb30980() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05280453bc4d8184f1f50f4f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of I/O operations per second (IOPS)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c9e62c2cc8fda49c105b547() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceType
-				"resource_type": schemaAttribute01480b24a59c95d8deb30980(),
-				// Property: Tags
-				"tags": schemaAttribute7c9da630e8f8b541045f568c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags passed to EBS volume",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e23c3b83efcf83fc5eff7e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone in which to create the volume",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute234c5438377fcc6c8e58e7f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for the volume",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34944d5cce97d97b8e04d8fb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the volume should be encrypted",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36e5d914775bd813948acbc6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the volume, in GiBs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46ba53183797623a349d3a5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4775f8fb3c72b72c721fbe97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The snapshot from which to create the volume",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70bc63c8a373ba051f60da26() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The throughput to provision for a volume, with a maximum of 1,000 MiB/s",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c9da630e8f8b541045f568c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute46ba53183797623a349d3a5a(),
-				// Property: Value
-				"value": schemaAttributeb808d72bfed1ddbb9805ede5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb808d72bfed1ddbb9805ede5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed36530fc1146fbf03318968a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee96caefb9d851aaa93295320() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The volume type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesinstances_volume", volumeDataSource)
 }
@@ -143,7 +30,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z]{2}-[a-z]+-\\d[a-z](-[a-z0-9]+)?$",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute0e23c3b83efcf83fc5eff7e3(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Availability Zone in which to create the volume",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -151,7 +41,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the volume should be encrypted",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schemaAttribute34944d5cce97d97b8e04d8fb(),
+		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the volume should be encrypted",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +53,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"iops": schemaAttribute05280453bc4d8184f1f50f4f(),
+		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of I/O operations per second (IOPS)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +65,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributed36530fc1146fbf03318968a(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SizeInGB
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +77,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"size_in_gb": schemaAttribute36e5d914775bd813948acbc6(),
+		"size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The size of the volume, in GiBs",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +89,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^snap-[0-9a-zA-Z]{1,63}$",
 		//	  "type": "string"
 		//	}
-		"snapshot_id": schemaAttribute4775f8fb3c72b72c721fbe97(),
+		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The snapshot from which to create the volume",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TagSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +141,37 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 30,
 		//	  "type": "array"
 		//	}
-		"tag_specifications": schemaAttribute0c9e62c2cc8fda49c105b547(),
+		"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key name of the tag",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value for the tag",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The tags to apply to the resource",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags passed to EBS volume",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Throughput
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +180,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"throughput": schemaAttribute70bc63c8a373ba051f60da26(),
+		"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The throughput to provision for a volume, with a maximum of 1,000 MiB/s",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VolumeId
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +192,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vol-[0-9a-zA-Z]{1,63}$",
 		//	  "type": "string"
 		//	}
-		"volume_id": schemaAttribute234c5438377fcc6c8e58e7f9(),
+		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for the volume",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VolumeType
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +212,10 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"volume_type": schemaAttributee96caefb9d851aaa93295320(),
+		"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The volume type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

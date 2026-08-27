@@ -15,72 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07e1329b5d85ffdce9d022fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This value is used to complete unqualified DNS hostnames.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15bc1fdbdc8ed337f9619c1b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute195e16793925b616dd5563e4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24bd390ef8165081e6de0a0b() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute15bc1fdbdc8ed337f9619c1b(),
-				// Property: Value
-				"value": schemaAttribute15bc1fdbdc8ed337f9619c1b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Any tags assigned to the DHCP options set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6237ad91889e93c5fa81188e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The NetBIOS node type (1, 2, 4, or 8).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute62fba148be2b277cae474881() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses of up to four NetBIOS name servers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9edc1208910a1a73fc8d5bda() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec838107a1082eff67a8874d2() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The preferred Lease Time for ipV6 address in seconds.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_dhcp_options", dHCPOptionsDataSource)
 }
@@ -95,7 +29,9 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"dhcp_options_id": schemaAttribute15bc1fdbdc8ed337f9619c1b(),
+		"dhcp_options_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +39,10 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "This value is used to complete unqualified DNS hostnames.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute07e1329b5d85ffdce9d022fe(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This value is used to complete unqualified DNS hostnames.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainNameServers
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +54,11 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"domain_name_servers": schemaAttribute9edc1208910a1a73fc8d5bda(),
+		"domain_name_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6AddressPreferredLeaseTime
 		// CloudFormation resource type schema:
 		//
@@ -123,7 +66,10 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The preferred Lease Time for ipV6 address in seconds.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_address_preferred_lease_time": schemaAttributec838107a1082eff67a8874d2(),
+		"ipv_6_address_preferred_lease_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The preferred Lease Time for ipV6 address in seconds.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetbiosNameServers
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +81,11 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"netbios_name_servers": schemaAttribute62fba148be2b277cae474881(),
+		"netbios_name_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IPv4 addresses of up to four NetBIOS name servers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetbiosNodeType
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +93,10 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The NetBIOS node type (1, 2, 4, or 8).",
 		//	  "type": "integer"
 		//	}
-		"netbios_node_type": schemaAttribute6237ad91889e93c5fa81188e(),
+		"netbios_node_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The NetBIOS node type (1, 2, 4, or 8).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NtpServers
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +108,11 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ntp_servers": schemaAttribute195e16793925b616dd5563e4(),
+		"ntp_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +142,22 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute24bd390ef8165081e6de0a0b(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags assigned to the DHCP options set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

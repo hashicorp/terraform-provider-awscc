@@ -15,83 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute271d8e33fd319233ddc9d45f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2dd030a5d0811abccb29c5ea() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute271d8e33fd319233ddc9d45f(),
-				// Property: Value
-				"value": schemaAttributecf2951098879c0675333cbfa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f610fdb4ef986e7d92628b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the network analyzer configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute699db487546b086ad71c7b6f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute818822628f5ab1219e6c42dd() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca90da71ca14b30a5956ab75() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogLevel
-			"log_level": schemaAttribute699db487546b086ad71c7b6f(),
-			// Property: WirelessDeviceFrameInfo
-			"wireless_device_frame_info": schemaAttribute699db487546b086ad71c7b6f(),
-		}, /*END SCHEMA*/
-		Description: "Trace content for your wireless gateway and wireless device resources",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf2951098879c0675333cbfa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef94440a9c261aa43029b324b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn for network analyzer configuration, Returned upon successful create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa38dbfcd64715a5ed19b309() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the new resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_network_analyzer_configuration", networkAnalyzerConfigurationDataSource)
 }
@@ -107,7 +30,10 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Arn for network analyzer configuration, Returned upon successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef94440a9c261aa43029b324b(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn for network analyzer configuration, Returned upon successful create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +42,10 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributefa38dbfcd64715a5ed19b309(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the new resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +55,10 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2f610fdb4ef986e7d92628b2(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the network analyzer configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +92,24 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute2dd030a5d0811abccb29c5ea(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TraceContent
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +135,20 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"trace_content": schemaAttributeca90da71ca14b30a5956ab75(),
+		"trace_content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogLevel
+				"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WirelessDeviceFrameInfo
+				"wireless_device_frame_info": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Trace content for your wireless gateway and wireless device resources",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WirelessDevices
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +161,11 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "maxItems": 250,
 		//	  "type": "array"
 		//	}
-		"wireless_devices": schemaAttribute818822628f5ab1219e6c42dd(),
+		"wireless_devices": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WirelessGateways
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +178,11 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "maxItems": 250,
 		//	  "type": "array"
 		//	}
-		"wireless_gateways": schemaAttribute818822628f5ab1219e6c42dd(),
+		"wireless_gateways": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

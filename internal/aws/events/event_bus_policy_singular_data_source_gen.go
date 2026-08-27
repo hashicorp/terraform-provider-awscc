@@ -15,78 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2362ecc95750e17ed55d6090() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify \"*\" to permit any account to put events to your default event bus.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a64dd20c7ad5826413473cf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the value for the key. Currently, this must be the ID of the organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82ed8ed27b3a6e8e735741e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action that you are enabling the other account to perform.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94cad38e4e0f9e93f1cefd95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the event bus associated with the rule. If you omit this, the default event bus is used.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb45cb2785c2bb86c54b6d527() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An identifier string for the external account that you are granting permissions to",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeceb0a20470aafc39af388164() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "A JSON string that describes the permission policy statement. You can include a Policy parameter in the request instead of using the StatementId, Action, Principal, or Condition parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3829e3adc4b3af59d8c4e61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the key for the condition. Currently the only supported key is aws:PrincipalOrgID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea8852889083fa29a9a4a836() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Key
-			"key": schemaAttribute3a64dd20c7ad5826413473cf(),
-			// Property: Type
-			"type": schemaAttributef99c54bbb08d54819010d84a(),
-			// Property: Value
-			"value": schemaAttributee3829e3adc4b3af59d8c4e61(),
-		}, /*END SCHEMA*/
-		Description: "This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef99c54bbb08d54819010d84a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the type of condition. Currently the only supported value is StringEquals.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_events_event_bus_policy", eventBusPolicyDataSource)
 }
@@ -105,7 +33,10 @@ func eventBusPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "events:[a-zA-Z]+",
 		//	  "type": "string"
 		//	}
-		"action": schemaAttribute82ed8ed27b3a6e8e735741e4(),
+		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The action that you are enabling the other account to perform.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Condition
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +59,27 @@ func eventBusPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"condition": schemaAttributeea8852889083fa29a9a4a836(),
+		"condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the value for the key. Currently, this must be the ID of the organization.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the type of condition. Currently the only supported value is StringEquals.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the key for the condition. Currently the only supported key is aws:PrincipalOrgID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventBusName
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +90,10 @@ func eventBusPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"event_bus_name": schemaAttribute94cad38e4e0f9e93f1cefd95(),
+		"event_bus_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the event bus associated with the rule. If you omit this, the default event bus is used.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +104,10 @@ func eventBusPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "(\\d{12}|\\*)",
 		//	  "type": "string"
 		//	}
-		"principal": schemaAttribute2362ecc95750e17ed55d6090(),
+		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify \"*\" to permit any account to put events to your default event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Statement
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +115,11 @@ func eventBusPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A JSON string that describes the permission policy statement. You can include a Policy parameter in the request instead of using the StatementId, Action, Principal, or Condition parameters.",
 		//	  "type": "object"
 		//	}
-		"statement": schemaAttributeceb0a20470aafc39af388164(),
+		"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "A JSON string that describes the permission policy statement. You can include a Policy parameter in the request instead of using the StatementId, Action, Principal, or Condition parameters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatementId
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +130,10 @@ func eventBusPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-zA-Z0-9-_]+",
 		//	  "type": "string"
 		//	}
-		"statement_id": schemaAttributeb45cb2785c2bb86c54b6d527(),
+		"statement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An identifier string for the external account that you are granting permissions to",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

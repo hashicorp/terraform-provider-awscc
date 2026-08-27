@@ -16,83 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1935ce2a29268b29d4076c7d() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c594f0e116a5c6f5b115b7f() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Region-agnostic environment blueprint parameters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57fbed99b7b4dec2df95bed0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f3aabea44c6f246d855b3d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8005f156f976f99dacd18f3c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LocationRegistrationExcludeS3Locations
-			"location_registration_exclude_s3_locations": schemaAttribute8d26b6e03025c4f77ac61d53(),
-			// Property: LocationRegistrationRole
-			"location_registration_role": schemaAttribute57fbed99b7b4dec2df95bed0(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d26b6e03025c4f77ac61d53() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb730ae1e857c1dee32cfa439() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Parameters
-				"parameters": schemaAttribute1935ce2a29268b29d4076c7d(),
-				// Property: Region
-				"region": schemaAttribute57fbed99b7b4dec2df95bed0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7f579148a6bfe770fe89810() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LakeFormationConfiguration
-				"lake_formation_configuration": schemaAttribute8005f156f976f99dacd18f3c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_environment_blueprint_configuration", environmentBlueprintConfigurationDataSource)
 }
@@ -108,7 +31,10 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute7f3aabea44c6f246d855b3d1(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -116,7 +42,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +52,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnabledRegions
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +69,10 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"enabled_regions": schemaAttribute8d26b6e03025c4f77ac61d53(),
+		"enabled_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +80,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_blueprint_id": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"environment_blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +90,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_blueprint_identifier": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"environment_blueprint_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentRolePermissionBoundary
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +100,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^arn:aws[^:]*:iam::(aws|\\d{12}):policy/[\\w+=,.@-]*$",
 		//	  "type": "string"
 		//	}
-		"environment_role_permission_boundary": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"environment_role_permission_boundary": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalParameters
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +116,12 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"global_parameters": schemaAttribute2c594f0e116a5c6f5b115b7f(),
+		"global_parameters": // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Region-agnostic environment blueprint parameters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManageAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -185,7 +129,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
-		"manage_access_role_arn": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"manage_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +164,28 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"provisioning_configurations": schemaAttributee7f579148a6bfe770fe89810(),
+		"provisioning_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: LakeFormationConfiguration
+					"lake_formation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LocationRegistrationExcludeS3Locations
+							"location_registration_exclude_s3_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LocationRegistrationRole
+							"location_registration_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +193,9 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
-		"provisioning_role_arn": schemaAttribute57fbed99b7b4dec2df95bed0(),
+		"provisioning_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegionalParameters
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +223,23 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"regional_parameters": schemaAttributeb730ae1e857c1dee32cfa439(),
+		"regional_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Parameters
+					"parameters":        // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +247,10 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute7f3aabea44c6f246d855b3d1(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

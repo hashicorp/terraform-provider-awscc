@@ -15,163 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01e22856048926350b8f65b4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b93a34ad653f858c8078b63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute225a82338abfbfcea9164928() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37bb1b731969acd8351c0fb0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the root domain in Amazon Datazone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f1a1fdd3f6f34ff5929a719() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The single sign-on user assignment in Amazon DataZone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ef3ad436ac81e0ef329ea5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the AWS account that houses the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54516089e9573b5ff2c105a0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IdcInstanceArn
-			"idc_instance_arn": schemaAttributecae519ea67bc2e0e7b4865d8(),
-			// Property: Type
-			"type": schemaAttribute7ce9dc328a3497958b1ef870(),
-			// Property: UserAssignment
-			"user_assignment": schemaAttribute3f1a1fdd3f6f34ff5929a719(),
-		}, /*END SCHEMA*/
-		Description: "The single-sign on configuration of the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute581edc5cdd25c442b27c3b36() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d59961b071f4efa48df577e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The id of the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ce9dc328a3497958b1ef870() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of single sign-on in Amazon DataZone.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95b0c2652d68f15469c8dafd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp of when the Amazon DataZone domain was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9cba3efa470a3f6d4b5daa11() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead2dc7d4efa9fc9ddf2e5924() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafae703b72d6b693fd5d1d63() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the AWS Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecae519ea67bc2e0e7b4865d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AWS Identity Center instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd462246b8ef694e3e7a2114() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the data portal for this Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede816bc8d013ad47bb94855c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the AWS account that manages the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf153ef08173975945d7a83e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service role of the domain that is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee217f527e73991fb857a9a40() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe80e699c993f3380b09820e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributead2dc7d4efa9fc9ddf2e5924(),
-				// Property: Value
-				"value": schemaAttribute581edc5cdd25c442b27c3b36(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags specified for the Amazon DataZone domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_domain", domainDataSource)
 }
@@ -188,7 +31,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):datazone:\\w+(?:-\\w+)+:\\d{12}:domain/dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributee217f527e73991fb857a9a40(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -197,7 +43,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute95b0c2652d68f15469c8dafd(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when the Amazon DataZone domain was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +55,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the Amazon DataZone domain.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9cba3efa470a3f6d4b5daa11(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -214,7 +67,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_execution_role": schemaAttribute4ef3ad436ac81e0ef329ea5e(),
+		"domain_execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the AWS account that houses the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainVersion
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +82,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain_version": schemaAttribute0b93a34ad653f858c8078b63(),
+		"domain_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +94,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schemaAttribute6d59961b071f4efa48df577e(),
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The id of the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +108,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schemaAttributeafae703b72d6b693fd5d1d63(),
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the AWS Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +120,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute95b0c2652d68f15469c8dafd(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of when the Amazon DataZone domain was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedAccountId
 		// CloudFormation resource type schema:
 		//
@@ -263,7 +132,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the AWS account that manages the domain.",
 		//	  "type": "string"
 		//	}
-		"managed_account_id": schemaAttributede816bc8d013ad47bb94855c(),
+		"managed_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the AWS account that manages the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +143,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the Amazon DataZone domain.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute01e22856048926350b8f65b4(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PortalUrl
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +154,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The URL of the data portal for this Amazon DataZone domain.",
 		//	  "type": "string"
 		//	}
-		"portal_url": schemaAttributecd462246b8ef694e3e7a2114(),
+		"portal_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the data portal for this Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RootDomainUnitId
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +168,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_\\-]+$",
 		//	  "type": "string"
 		//	}
-		"root_domain_unit_id": schemaAttribute37bb1b731969acd8351c0fb0(),
+		"root_domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the root domain in Amazon Datazone.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +180,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
-		"service_role": schemaAttributedf153ef08173975945d7a83e(),
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service role of the domain that is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SingleSignOn
 		// CloudFormation resource type schema:
 		//
@@ -333,7 +217,27 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"single_sign_on": schemaAttribute54516089e9573b5ff2c105a0(),
+		"single_sign_on": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdcInstanceArn
+				"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the AWS Identity Center instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of single sign-on in Amazon DataZone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserAssignment
+				"user_assignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The single sign-on user assignment in Amazon DataZone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The single-sign on configuration of the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +253,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute225a82338abfbfcea9164928(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +289,24 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributefe80e699c993f3380b09820e(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags specified for the Amazon DataZone domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,49 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute4ab42464decace140ffe3060() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether emails sent from this account have engagement tracking enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c31b9ca4bdb8741ce4d6254() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether emails sent from this account have optimized delivery algorithm enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7026cdcf2ac6e0107f376e89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique identifier for this resource",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec81beb76cdbfb52d0c0716d8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EngagementMetrics
-			"engagement_metrics": schemaAttribute4ab42464decace140ffe3060(),
-		}, /*END SCHEMA*/
-		Description: "Preferences regarding the Dashboard feature.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb79b825c57d4d01261ff9bc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OptimizedSharedDelivery
-			"optimized_shared_delivery": schemaAttribute4c31b9ca4bdb8741ce4d6254(),
-		}, /*END SCHEMA*/
-		Description: "Preferences regarding the Guardian feature.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_vdm_attributes", vdmAttributesDataSource)
 }
@@ -80,7 +37,17 @@ func vdmAttributesDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dashboard_attributes": schemaAttributec81beb76cdbfb52d0c0716d8(),
+		"dashboard_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EngagementMetrics
+				"engagement_metrics": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether emails sent from this account have engagement tracking enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Preferences regarding the Dashboard feature.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardianAttributes
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +63,17 @@ func vdmAttributesDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"guardian_attributes": schemaAttributefb79b825c57d4d01261ff9bc(),
+		"guardian_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OptimizedSharedDelivery
+				"optimized_shared_delivery": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether emails sent from this account have optimized delivery algorithm enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Preferences regarding the Guardian feature.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VdmAttributesResourceId
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +81,10 @@ func vdmAttributesDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Unique identifier for this resource",
 		//	  "type": "string"
 		//	}
-		"vdm_attributes_resource_id": schemaAttribute7026cdcf2ac6e0107f376e89(),
+		"vdm_attributes_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for this resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

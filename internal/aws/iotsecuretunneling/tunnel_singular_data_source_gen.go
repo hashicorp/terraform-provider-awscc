@@ -15,109 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute174cc5c5000be19e019d576e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2df6c4a38842bca7f2c70707() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum amount of time (in minutes) a tunnel can remain open.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c9688ca27d45598b2c2bf0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the tunnel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute412676bde2a696c8fdc21102() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute174cc5c5000be19e019d576e(),
-				// Property: Value
-				"value": schemaAttributef98c25d01edb44a63a68da0e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of tag metadata.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50e77de2a61d7dc502b233cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the IoT thing to which you want to connect.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d539eb906741072e14ab420() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A short text description of the tunnel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ee2e0fb4970b9bce52dfb9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the tunnel. Valid values are OPEN and CLOSED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6cfb9e2c44139cb211c4832() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxLifetimeTimeoutMinutes
-			"max_lifetime_timeout_minutes": schemaAttribute2df6c4a38842bca7f2c70707(),
-		}, /*END SCHEMA*/
-		Description: "Timeout configuration for the tunnel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6531593a05e5858f9f8da6e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Services
-			"services": schemaAttributececd9eba69d39d9ab13266eb(),
-			// Property: ThingName
-			"thing_name": schemaAttribute50e77de2a61d7dc502b233cb(),
-		}, /*END SCHEMA*/
-		Description: "The destination configuration for the tunnel.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributececd9eba69d39d9ab13266eb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of service names that identify the target application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedde86fb434e6062371fcba38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique alpha-numeric tunnel ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef98c25d01edb44a63a68da0e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsecuretunneling_tunnel", tunnelDataSource)
 }
@@ -134,7 +31,10 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5d539eb906741072e14ab420(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A short text description of the tunnel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationConfig
 		// CloudFormation resource type schema:
 		//
@@ -166,7 +66,23 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"destination_config": schemaAttributec6531593a05e5858f9f8da6e(),
+		"destination_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Services
+				"services": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of service names that identify the target application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThingName
+				"thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the IoT thing to which you want to connect.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The destination configuration for the tunnel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -178,7 +94,10 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute9ee2e0fb4970b9bce52dfb9f(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the tunnel. Valid values are OPEN and CLOSED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +129,24 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute412676bde2a696c8fdc21102(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tag metadata.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeoutConfig
 		// CloudFormation resource type schema:
 		//
@@ -227,7 +163,17 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"timeout_config": schemaAttributea6cfb9e2c44139cb211c4832(),
+		"timeout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxLifetimeTimeoutMinutes
+				"max_lifetime_timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum amount of time (in minutes) a tunnel can remain open.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Timeout configuration for the tunnel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TunnelArn
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +183,10 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"tunnel_arn": schemaAttribute3c9688ca27d45598b2c2bf0d(),
+		"tunnel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the tunnel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TunnelId
 		// CloudFormation resource type schema:
 		//
@@ -246,7 +195,10 @@ func tunnelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-+=:]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"tunnel_id": schemaAttributedde86fb434e6062371fcba38(),
+		"tunnel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique alpha-numeric tunnel ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

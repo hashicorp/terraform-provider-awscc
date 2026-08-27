@@ -14,26 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute384df08783f4a7204cd493f6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute5de5ae4213025d7f836a88c0(),
-				// Property: Value
-				"value": schemaAttribute5de5ae4213025d7f836a88c0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5de5ae4213025d7f836a88c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_vpclattice_access_log_subscription", accessLogSubscriptionDataSource)
 }
@@ -51,7 +31,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:accesslogsubscription/als-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationArn
 		// CloudFormation resource type schema:
 		//
@@ -61,7 +43,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 		//	  "type": "string"
 		//	}
-		"destination_arn": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -71,7 +55,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^als-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"access_log_subscription_id": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"access_log_subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +67,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(service/svc)|(resourceconfiguration/rcfg))-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -91,7 +79,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^((sn)|(svc))-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +91,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^((((sn)|(svc)|(rcfg))-[0-9a-z]{17})|(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(resourceconfiguration/rcfg)|(service/svc))-[0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
-		"resource_identifier": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceNetworkLogType
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +104,9 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"service_network_log_type": schemaAttribute5de5ae4213025d7f836a88c0(),
+		"service_network_log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -143,7 +137,21 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute384df08783f4a7204cd493f6(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

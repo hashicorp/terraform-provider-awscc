@@ -14,98 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute119086c51b0eace090f9ad15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Stage ARN. A value other than an empty string indicates that stage is linked to IngestConfiguration. Default: \"\" (recording is disabled).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18f8a9c935f052de45609093() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b0691c2a26d13246f7242f7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IngestConfiguration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30e71baf2df66b9f77018e42() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of IngestConfiguration which determines whether IngestConfiguration is in use or not.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4900655833daaedbd6cfed0f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "IngestConfiguration ARN is automatically generated on creation and assigned as the unique identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b2a26bcae08cd580e1350d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5f60e0d41f626097455e6aa9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether ingest configuration allows insecure ingest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d3cf035c82b0982214aa573() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Ingest Protocol.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6df07c5e00b2060755b31938() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Participant Id is automatically generated on creation and assigned.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute919a1dbd15cb4a148b1dd03b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User defined indentifier for participant associated with IngestConfiguration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee931c1d8c98c12e15d515f83() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4b2a26bcae08cd580e1350d1(),
-				// Property: Value
-				"value": schemaAttribute18f8a9c935f052de45609093(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa297d6e7254ba67d1789521() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Stream-key value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_ingest_configuration", ingestConfigurationDataSource)
 }
@@ -124,7 +32,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:ingest-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute4900655833daaedbd6cfed0f(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IngestConfiguration ARN is automatically generated on creation and assigned as the unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestProtocol
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +48,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ingest_protocol": schemaAttribute6d3cf035c82b0982214aa573(),
+		"ingest_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Ingest Protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InsecureIngest
 		// CloudFormation resource type schema:
 		//
@@ -146,7 +60,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Whether ingest configuration allows insecure ingest.",
 		//	  "type": "boolean"
 		//	}
-		"insecure_ingest": schemaAttribute5f60e0d41f626097455e6aa9(),
+		"insecure_ingest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether ingest configuration allows insecure ingest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +75,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2b0691c2a26d13246f7242f7(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IngestConfiguration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ParticipantId
 		// CloudFormation resource type schema:
 		//
@@ -169,7 +89,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"participant_id": schemaAttribute6df07c5e00b2060755b31938(),
+		"participant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Participant Id is automatically generated on creation and assigned.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StageArn
 		// CloudFormation resource type schema:
 		//
@@ -181,7 +104,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"stage_arn": schemaAttribute119086c51b0eace090f9ad15(),
+		"stage_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Stage ARN. A value other than an empty string indicates that stage is linked to IngestConfiguration. Default: \"\" (recording is disabled).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +120,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute30e71baf2df66b9f77018e42(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "State of IngestConfiguration which determines whether IngestConfiguration is in use or not.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamKey
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +131,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Stream-key value.",
 		//	  "type": "string"
 		//	}
-		"stream_key": schemaAttributefa297d6e7254ba67d1789521(),
+		"stream_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Stream-key value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -235,7 +167,24 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributee931c1d8c98c12e15d515f83(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserId
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +192,10 @@ func ingestConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "User defined indentifier for participant associated with IngestConfiguration.",
 		//	  "type": "string"
 		//	}
-		"user_id": schemaAttribute919a1dbd15cb4a148b1dd03b(),
+		"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User defined indentifier for participant associated with IngestConfiguration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

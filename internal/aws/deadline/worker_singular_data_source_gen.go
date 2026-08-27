@@ -16,126 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute22170215bf071712784043b4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IpV4 address of the network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d654358eec4228a3a4560c1() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9b87c8eef15d2c3152847c14(),
-				// Property: Value
-				"value": schemaAttribute9b87c8eef15d2c3152847c14(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4280d09e92b5594c66091d3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The fleet ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4be1f8cd72d01c01a35e9f93() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user or system that created this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6af4d10536d214cbf0769f05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the worker.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b39a82ce00c1c8d7368ea1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The host name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88ba7da3c41b324ffdcdeb0d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IpV4Addresses
-			"ip_v4_addresses": schemaAttribute22170215bf071712784043b4(),
-			// Property: IpV6Addresses
-			"ip_v6_addresses": schemaAttributeb6bc44cf8e22f63c09d2d2d3(),
-		}, /*END SCHEMA*/
-		Description: "The IP addresses for a host.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b87c8eef15d2c3152847c14() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea283c85555fa501b70197e75() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the worker.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6bc44cf8e22f63c09d2d2d3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The IpV6 address for the network and node component.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec74d0b7553c29506cdca7416() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HostName
-			"host_name": schemaAttribute6b39a82ce00c1c8d7368ea1e(),
-			// Property: IpAddresses
-			"ip_addresses": schemaAttribute88ba7da3c41b324ffdcdeb0d(),
-		}, /*END SCHEMA*/
-		Description: "The IP address and host name of the worker.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed2c141c4d108795d08087137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The farm ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed97f1a67f1ecf3d0259c1de0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time the resource was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee90697af31193367826f2643() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The worker ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_worker", workerDataSource)
 }
@@ -151,7 +31,10 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the worker.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea283c85555fa501b70197e75(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the worker.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +43,11 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributed97f1a67f1ecf3d0259c1de0(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time the resource was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -168,7 +55,10 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user or system that created this resource.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute4be1f8cd72d01c01a35e9f93(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user or system that created this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FarmId
 		// CloudFormation resource type schema:
 		//
@@ -177,7 +67,10 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schemaAttributed2c141c4d108795d08087137(),
+		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The farm ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FleetId
 		// CloudFormation resource type schema:
 		//
@@ -186,7 +79,10 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^fleet-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"fleet_id": schemaAttribute4280d09e92b5594c66091d3c(),
+		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The fleet ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostProperties
 		// CloudFormation resource type schema:
 		//
@@ -225,7 +121,36 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"host_properties": schemaAttributec74d0b7553c29506cdca7416(),
+		"host_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HostName
+				"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The host name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddresses
+				"ip_addresses": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IpV4Addresses
+						"ip_v4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IpV4 address of the network.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IpV6Addresses
+						"ip_v6_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IpV6 address for the network and node component.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The IP addresses for a host.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The IP address and host name of the worker.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +168,10 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute6af4d10536d214cbf0769f05(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the worker.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +200,22 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute2d654358eec4228a3a4560c1(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerId
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +224,10 @@ func workerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^worker-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"worker_id": schemaAttributee90697af31193367826f2643(),
+		"worker_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The worker ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

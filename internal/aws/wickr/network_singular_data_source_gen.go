@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0856fcb44f22adea608587fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The access level of the network, which determines available features and capabilities.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4af798a629e349c09d53139b() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The current standing or status of the network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e734150d4df3ced9a94daf8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the network. Must be between 1 and 20 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fadce38ec8a0b919ea23ee9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba262274b419933840ff5d0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID that owns the network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbf99c17998573de05e04897() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0dc818441ce057da85af2c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_wickr_network", networkDataSource)
 }
@@ -82,7 +33,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_level": schemaAttribute0856fcb44f22adea608587fe(),
+		"access_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The access level of the network, which determines available features and capabilities.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -90,7 +44,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS account ID that owns the network.",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttributeba262274b419933840ff5d0c(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID that owns the network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MigrationState
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +55,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed).",
 		//	  "type": "integer"
 		//	}
-		"migration_state": schemaAttributecbf99c17998573de05e04897(),
+		"migration_state": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +67,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:wickr:[a-z0-9-]+:[0-9]{12}:network/[0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"network_arn": schemaAttribute8fadce38ec8a0b919ea23ee9(),
+		"network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkId
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +81,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"network_id": schemaAttributed0dc818441ce057da85af2c7(),
+		"network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkName
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +92,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the network. Must be between 1 and 20 characters.",
 		//	  "type": "string"
 		//	}
-		"network_name": schemaAttribute7e734150d4df3ced9a94daf8(),
+		"network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the network. Must be between 1 and 20 characters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Standing
 		// CloudFormation resource type schema:
 		//
@@ -134,7 +103,10 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The current standing or status of the network.",
 		//	  "type": "integer"
 		//	}
-		"standing": schemaAttribute4af798a629e349c09d53139b(),
+		"standing": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The current standing or status of the network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

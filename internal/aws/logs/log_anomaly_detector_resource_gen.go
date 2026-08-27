@@ -23,142 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute23ca0653245b5f78898f2e3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of detector",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f41a93b14f78372d4df006a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of LogAnomalyDetector",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45aab24640931ab37b46bded() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "When detector was created.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ce6134b199002232cbcecad() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(256),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fe003a9962f19917f813072() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "How often log group is evaluated",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"FIVE_MIN",
-				"TEN_MIN",
-				"FIFTEEN_MIN",
-				"THIRTY_MIN",
-				"ONE_HOUR",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85ad06dbd8161e2349b4d59f() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9dd3b5044dd7bb5aeb965e6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6c4c49096e6bb92e9f6e36e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of detector.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee173c2b1c8df3410c740d315() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "When detector was lsat modified.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-			float64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2330a884274a377c13a078f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of Arns for the given log group",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.Set{ /*START VALIDATORS*/
-			setvalidator.ValueStringsAre(
-				stringvalidator.LengthBetween(20, 2048),
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3cb1b02b7c512c29f25ac15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Account ID for owner of detector",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// AccountId is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_logs_log_anomaly_detector", logAnomalyDetectorResource)
 	registry.AddListResourceFactory("awscc_logs_log_anomaly_detector", generic.NewListResource(logAnomalyDetectorResource))
@@ -175,7 +39,15 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "Account ID for owner of detector",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributef3cb1b02b7c512c29f25ac15(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Account ID for owner of detector",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AccountId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyDetectorArn
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +55,13 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "ARN of LogAnomalyDetector",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_arn": schemaAttribute2f41a93b14f78372d4df006a(),
+		"anomaly_detector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of LogAnomalyDetector",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyDetectorStatus
 		// CloudFormation resource type schema:
 		//
@@ -191,7 +69,13 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "Current status of detector.",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_status": schemaAttributeb6c4c49096e6bb92e9f6e36e(),
+		"anomaly_detector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current status of detector.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AnomalyVisibilityTime
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +83,14 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "",
 		//	  "type": "number"
 		//	}
-		"anomaly_visibility_time": schemaAttribute85ad06dbd8161e2349b4d59f(),
+		"anomaly_visibility_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTimeStamp
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +98,13 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "When detector was created.",
 		//	  "type": "number"
 		//	}
-		"creation_time_stamp": schemaAttribute45aab24640931ab37b46bded(),
+		"creation_time_stamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "When detector was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DetectorName
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +112,14 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "Name of detector",
 		//	  "type": "string"
 		//	}
-		"detector_name": schemaAttribute23ca0653245b5f78898f2e3c(),
+		"detector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of detector",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EvaluationFrequency
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +134,23 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"evaluation_frequency": schemaAttribute6fe003a9962f19917f813072(),
+		"evaluation_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "How often log group is evaluated",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"FIVE_MIN",
+					"TEN_MIN",
+					"FIFTEEN_MIN",
+					"THIRTY_MIN",
+					"ONE_HOUR",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FilterPattern
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +159,14 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"filter_pattern": schemaAttribute9dd3b5044dd7bb5aeb965e6d(),
+		"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +175,17 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute5ce6134b199002232cbcecad(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTimeStamp
 		// CloudFormation resource type schema:
 		//
@@ -256,7 +193,13 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "When detector was lsat modified.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time_stamp": schemaAttributee173c2b1c8df3410c740d315(),
+		"last_modified_time_stamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "When detector was lsat modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupArnList
 		// CloudFormation resource type schema:
 		//
@@ -271,7 +214,20 @@ func logAnomalyDetectorResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"log_group_arn_list": schemaAttributee2330a884274a377c13a078f(),
+		"log_group_arn_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of Arns for the given log group",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(20, 2048),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

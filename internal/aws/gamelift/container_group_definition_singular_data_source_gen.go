@@ -15,449 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0952e77bc256ce866f82ebca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute106faeae73392f0d90e11266() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive label for the container definition. The container being defined depends on this container's condition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute186f8963811b74f04700c977() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the server SDK used in this container group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute249c3742ab023a7d5665f6ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The environment variable name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute250e6ed33f0726c42e0e6cc4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the image URI of this container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30807335390f5e34e2e6366f() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of Linux capabilities to add to the container's default configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute322b01c9b29bc1cba2b6a768() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39eda916da3fa50551161c16() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A starting value for the range of allowed port numbers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f9a97d9e99bd128c5b5247e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path inside the container where the mount is accessible.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41f5ffd61e1d47cfa2ef12f2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44a9096c89a070cb8abdc843() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How many seconds the process manager allows the command to run before canceling it.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4710a695bd0e9c7769ecc06d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path on the host that will be mounted in the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a573c78ffe79c43daad8a92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines the protocol of these ports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e533831481c552a2b5173b5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FromPort
-				"from_port": schemaAttribute39eda916da3fa50551161c16(),
-				// Property: Protocol
-				"protocol": schemaAttribute5a573c78ffe79c43daad8a92(),
-				// Property: ToPort
-				"to_port": schemaAttributed9779141202dae5c3de3e074(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies one or more ranges of ports on a container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a6a64d0d5142937ed788ad1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies if the container is essential. If an essential container fails a health check, then all containers in the container group will be restarted. You must specify exactly 1 essential container in a container group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ab6635378c6bf14c7d9ef64() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total memory limit of container groups following this definition in MiB",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d947d271883b0647b8ddcae() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A string array representing the command that the container runs to determine if it is healthy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute77b926d00fd78edcfb20514f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessLevel
-				"access_level": schemaAttributea51f2bb04e78089056ce0a22(),
-				// Property: ContainerPath
-				"container_path": schemaAttribute3f9a97d9e99bd128c5b5247e(),
-				// Property: InstancePath
-				"instance_path": schemaAttribute4710a695bd0e9c7769ecc06d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of mount point configurations to be used in a container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b81255752dbb59e23e88d9e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive label for the container group definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8bb4a937c27ae76c6f01a105() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute322b01c9b29bc1cba2b6a768(),
-				// Property: Value
-				"value": schemaAttribute41f5ffd61e1d47cfa2ef12f2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8da4c678e65b1b22a456106c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The digest of the container image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e4ca2f732ceae457914198d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContainerName
-				"container_name": schemaAttributee313fd3dce17a7f60a475257(),
-				// Property: DependsOn
-				"depends_on": schemaAttributec5843e71b0eea3fa64e7fb91(),
-				// Property: EnvironmentOverride
-				"environment_override": schemaAttributefea5a82ebaebb1b37accdd18(),
-				// Property: Essential
-				"essential": schemaAttribute6a6a64d0d5142937ed788ad1(),
-				// Property: HealthCheck
-				"health_check": schemaAttributeca53036d79aa137fc042da1d(),
-				// Property: ImageUri
-				"image_uri": schemaAttribute250e6ed33f0726c42e0e6cc4(),
-				// Property: LinuxCapabilities
-				"linux_capabilities": schemaAttributec179e425badcf8f7f24788d4(),
-				// Property: MemoryHardLimitMebibytes
-				"memory_hard_limit_mebibytes": schemaAttribute6ab6635378c6bf14c7d9ef64(),
-				// Property: MountPoints
-				"mount_points": schemaAttribute77b926d00fd78edcfb20514f(),
-				// Property: PortConfiguration
-				"port_configuration": schemaAttributefe1b0d18ef9cd1286a9d2571(),
-				// Property: ResolvedImageDigest
-				"resolved_image_digest": schemaAttribute8da4c678e65b1b22a456106c(),
-				// Property: Vcpu
-				"vcpu": schemaAttribute931b0b5dafbce524de6ddea7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A collection of support container definitions that define the containers in this group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute931b0b5dafbce524de6ddea7() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of virtual CPUs to give to the support group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a352729a4e37adb8334ea4a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "A specific ContainerGroupDefinition version to be updated",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea51f2bb04e78089056ce0a22() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The access permissions for the mounted path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea710beed0a1a61b937872c0b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total amount of virtual CPUs on the container group definition",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea87138e2e8bfb6a68cc5d393() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The operating system of the container group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae773aa01aa86ba2d480c9f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive label for the container definition. Container definition names must be unique with a container group definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafb9c7f5801f32f79f060f9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The scope of the container group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcaf89ab22729c477dee536b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string indicating ContainerGroupDefinition status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec179e425badcf8f7f24788d4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Include
-			"include": schemaAttribute30807335390f5e34e2e6366f(),
-		}, /*END SCHEMA*/
-		Description: "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec480ea9234f903d6dc03ed5f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How many times the process manager will retry the command after a timeout. (The first run of the command does not count as a retry.)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5843e71b0eea3fa64e7fb91() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Condition
-				"condition": schemaAttributec8b91ca0b615a3c5438d0c5e(),
-				// Property: ContainerName
-				"container_name": schemaAttribute106faeae73392f0d90e11266(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8b91ca0b615a3c5438d0c5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of dependency.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca53036d79aa137fc042da1d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Command
-			"command": schemaAttribute6d947d271883b0647b8ddcae(),
-			// Property: Interval
-			"interval": schemaAttributeebacb7803ca1c8c1778222c8(),
-			// Property: Retries
-			"retries": schemaAttributec480ea9234f903d6dc03ed5f(),
-			// Property: StartPeriod
-			"start_period": schemaAttributedcb737d043e407f02918612e(),
-			// Property: Timeout
-			"timeout": schemaAttribute44a9096c89a070cb8abdc843(),
-		}, /*END SCHEMA*/
-		Description: "Specifies how the health of the containers will be checked.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9779141202dae5c3de3e074() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcb737d043e407f02918612e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The optional grace period (in seconds) to give a container time to boostrap before teh health check is declared failed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributede73b8670860a95124148f95() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee313fd3dce17a7f60a475257() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A descriptive label for the container definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee96eff837270fde1fba9ad5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A string indicating the reason for ContainerGroupDefinition status.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebacb7803ca1c8c1778222c8() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "How often (in seconds) the health is checked.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1ab663166667c163f829dd3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The environment variable value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7bb62b3ecfb70727b8fe6e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of this version",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9926f54764809d37d1d6c51() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The version of this ContainerGroupDefinition",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefac9683909ffbf70ce313c9b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerName
-			"container_name": schemaAttributeae773aa01aa86ba2d480c9f1(),
-			// Property: DependsOn
-			"depends_on": schemaAttributec5843e71b0eea3fa64e7fb91(),
-			// Property: EnvironmentOverride
-			"environment_override": schemaAttributefea5a82ebaebb1b37accdd18(),
-			// Property: ImageUri
-			"image_uri": schemaAttribute250e6ed33f0726c42e0e6cc4(),
-			// Property: LinuxCapabilities
-			"linux_capabilities": schemaAttributec179e425badcf8f7f24788d4(),
-			// Property: MountPoints
-			"mount_points": schemaAttribute77b926d00fd78edcfb20514f(),
-			// Property: PortConfiguration
-			"port_configuration": schemaAttributefe1b0d18ef9cd1286a9d2571(),
-			// Property: ResolvedImageDigest
-			"resolved_image_digest": schemaAttribute8da4c678e65b1b22a456106c(),
-			// Property: ServerSdkVersion
-			"server_sdk_version": schemaAttribute186f8963811b74f04700c977(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the information required to run game servers with this container group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe1b0d18ef9cd1286a9d2571() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContainerPortRanges
-			"container_port_ranges": schemaAttribute5e533831481c552a2b5173b5(),
-		}, /*END SCHEMA*/
-		Description: "Defines the ports on the container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefea5a82ebaebb1b37accdd18() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schemaAttribute249c3742ab023a7d5665f6ff(),
-				// Property: Value
-				"value": schemaAttributef1ab663166667c163f829dd3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The environment variables to pass to a container.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_container_group_definition", containerGroupDefinitionDataSource)
 }
@@ -476,7 +33,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$",
 		//	  "type": "string"
 		//	}
-		"container_group_definition_arn": schemaAttributede73b8670860a95124148f95(),
+		"container_group_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container group resource and uniquely identifies it across all AWS Regions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ContainerGroupType
 		// CloudFormation resource type schema:
 		//
@@ -488,7 +48,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"container_group_type": schemaAttributeafb9c7f5801f32f79f060f9f(),
+		"container_group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The scope of the container group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -496,7 +59,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute0952e77bc256ce866f82ebca(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GameServerContainerDefinition
 		// CloudFormation resource type schema:
 		//
@@ -753,7 +319,138 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"game_server_container_definition": schemaAttributefac9683909ffbf70ce313c9b(),
+		"game_server_container_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerName
+				"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A descriptive label for the container definition. Container definition names must be unique with a container group definition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DependsOn
+				"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Condition
+							"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of dependency.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContainerName
+							"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A descriptive label for the container definition. The container being defined depends on this container's condition.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnvironmentOverride
+				"environment_override": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The environment variable name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The environment variable value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The environment variables to pass to a container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageUri
+				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the image URI of this container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LinuxCapabilities
+				"linux_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Include
+						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of Linux capabilities to add to the container's default configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MountPoints
+				"mount_points": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessLevel
+							"access_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The access permissions for the mounted path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContainerPath
+							"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path inside the container where the mount is accessible.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InstancePath
+							"instance_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The path on the host that will be mounted in the container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of mount point configurations to be used in a container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PortConfiguration
+				"port_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerPortRanges
+						"container_port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FromPort
+									"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "A starting value for the range of allowed port numbers.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Protocol
+									"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Defines the protocol of these ports.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ToPort
+									"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Specifies one or more ranges of ports on a container.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Defines the ports on the container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResolvedImageDigest
+				"resolved_image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The digest of the container image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerSdkVersion
+				"server_sdk_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the server SDK used in this container group",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the information required to run game servers with this container group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -764,7 +461,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute8b81255752dbb59e23e88d9e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A descriptive label for the container group definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OperatingSystem
 		// CloudFormation resource type schema:
 		//
@@ -775,7 +475,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"operating_system": schemaAttributea87138e2e8bfb6a68cc5d393(),
+		"operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The operating system of the container group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -784,7 +487,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"source_version_number": schemaAttribute9a352729a4e37adb8334ea4a(),
+		"source_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "A specific ContainerGroupDefinition version to be updated",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -797,7 +503,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributebcaf89ab22729c477dee536b(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string indicating ContainerGroupDefinition status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -805,7 +514,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "A string indicating the reason for ContainerGroupDefinition status.",
 		//	  "type": "string"
 		//	}
-		"status_reason": schemaAttributee96eff837270fde1fba9ad5e(),
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A string indicating the reason for ContainerGroupDefinition status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportContainerDefinitions
 		// CloudFormation resource type schema:
 		//
@@ -1127,7 +839,183 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"support_container_definitions": schemaAttribute8e4ca2f732ceae457914198d(),
+		"support_container_definitions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ContainerName
+					"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A descriptive label for the container definition.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DependsOn
+					"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Condition
+								"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of dependency.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContainerName
+								"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A descriptive label for the container definition. The container being defined depends on this container's condition.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentOverride
+					"environment_override": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The environment variable name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The environment variable value.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The environment variables to pass to a container.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Essential
+					"essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies if the container is essential. If an essential container fails a health check, then all containers in the container group will be restarted. You must specify exactly 1 essential container in a container group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HealthCheck
+					"health_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Command
+							"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A string array representing the command that the container runs to determine if it is healthy.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Interval
+							"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "How often (in seconds) the health is checked.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Retries
+							"retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "How many times the process manager will retry the command after a timeout. (The first run of the command does not count as a retry.)",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartPeriod
+							"start_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The optional grace period (in seconds) to give a container time to boostrap before teh health check is declared failed.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Timeout
+							"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "How many seconds the process manager allows the command to run before canceling it.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies how the health of the containers will be checked.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageUri
+					"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the image URI of this container.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LinuxCapabilities
+					"linux_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Include
+							"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The list of Linux capabilities to add to the container's default configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MemoryHardLimitMebibytes
+					"memory_hard_limit_mebibytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The total memory limit of container groups following this definition in MiB",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MountPoints
+					"mount_points": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessLevel
+								"access_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The access permissions for the mounted path.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContainerPath
+								"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The path inside the container where the mount is accessible.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstancePath
+								"instance_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The path on the host that will be mounted in the container.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A list of mount point configurations to be used in a container.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PortConfiguration
+					"port_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerPortRanges
+							"container_port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FromPort
+										"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "A starting value for the range of allowed port numbers.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Protocol
+										"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Defines the protocol of these ports.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ToPort
+										"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "An ending value for the range of allowed port numbers. Port numbers are end-inclusive. This value must be equal to or greater than FromPort.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Specifies one or more ranges of ports on a container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Defines the ports on the container.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResolvedImageDigest
+					"resolved_image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The digest of the container image.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Vcpu
+					"vcpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of virtual CPUs to give to the support group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of support container definitions that define the containers in this group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1164,7 +1052,24 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute8bb4a937c27ae76c6f01a105(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TotalMemoryLimitMebibytes
 		// CloudFormation resource type schema:
 		//
@@ -1174,7 +1079,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 4,
 		//	  "type": "integer"
 		//	}
-		"total_memory_limit_mebibytes": schemaAttribute6ab6635378c6bf14c7d9ef64(),
+		"total_memory_limit_mebibytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total memory limit of container groups following this definition in MiB",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TotalVcpuLimit
 		// CloudFormation resource type schema:
 		//
@@ -1184,7 +1092,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 0.125,
 		//	  "type": "number"
 		//	}
-		"total_vcpu_limit": schemaAttributea710beed0a1a61b937872c0b(),
+		"total_vcpu_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total amount of virtual CPUs on the container group definition",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionDescription
 		// CloudFormation resource type schema:
 		//
@@ -1194,7 +1105,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"version_description": schemaAttributef7bb62b3ecfb70727b8fe6e9(),
+		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of this version",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -1203,7 +1117,10 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"version_number": schemaAttributef9926f54764809d37d1d6c51(),
+		"version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version of this ContainerGroupDefinition",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

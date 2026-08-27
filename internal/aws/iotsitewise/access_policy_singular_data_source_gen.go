@@ -14,145 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2491342463341ff66abc45c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute290903e0e37f6c142f8136b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS SSO ID of the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29b77de8ce6bf16eecd92e0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30fb39052d772ee29e98ad9d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute376fac69ed4321d753d7a1f4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: arn
-			"arn": schemaAttributed9b5451e464aec5db2062fd1(),
-		}, /*END SCHEMA*/
-		Description: "Contains information for an IAM role identity in an access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52ba440a1ef0cee7f1ec2dd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the portal.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63f61022a892fd926e21e853() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the project.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64af50f930049edbb4f17b97() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: arn
-			"arn": schemaAttribute2491342463341ff66abc45c6(),
-		}, /*END SCHEMA*/
-		Description: "Contains information for an IAM user identity in an access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75e119cd455259885de1be50() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IamRole
-			"iam_role": schemaAttribute376fac69ed4321d753d7a1f4(),
-			// Property: IamUser
-			"iam_user": schemaAttribute64af50f930049edbb4f17b97(),
-			// Property: User
-			"user": schemaAttribute7f21bdccce748081410cfd9e(),
-		}, /*END SCHEMA*/
-		Description: "The identity for this access policy. Choose either a user or a group but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f21bdccce748081410cfd9e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: id
-			"id": schemaAttribute290903e0e37f6c142f8136b9(),
-		}, /*END SCHEMA*/
-		Description: "Contains information for a user identity in an access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4803a8ec7edcdc9872f6c70() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: id
-			"id": schemaAttribute52ba440a1ef0cee7f1ec2dd1(),
-		}, /*END SCHEMA*/
-		Description: "A portal resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba428bdf4039f35c051038f3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Portal
-			"portal": schemaAttributea4803a8ec7edcdc9872f6c70(),
-			// Property: Project
-			"project": schemaAttributedbe7c491cbed3f7cabefa45e(),
-		}, /*END SCHEMA*/
-		Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9b5451e464aec5db2062fd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedbe7c491cbed3f7cabefa45e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: id
-			"id": schemaAttribute63f61022a892fd926e21e853(),
-		}, /*END SCHEMA*/
-		Description: "A project resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee7e94e8e63ae7373520322c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the access policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_access_policy", accessPolicyDataSource)
 }
@@ -168,7 +29,10 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ARN of the access policy.",
 		//	  "type": "string"
 		//	}
-		"access_policy_arn": schemaAttributeee7e94e8e63ae7373520322c(),
+		"access_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the access policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +40,10 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the access policy.",
 		//	  "type": "string"
 		//	}
-		"access_policy_id": schemaAttribute29b77de8ce6bf16eecd92e0a(),
+		"access_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the access policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicyIdentity
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +87,48 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_policy_identity": schemaAttribute75e119cd455259885de1be50(),
+		"access_policy_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IamRole
+				"iam_role": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM role.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information for an IAM role identity in an access policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamUser
+				"iam_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the IAM user.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information for an IAM user identity in an access policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: User
+				"user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS SSO ID of the user.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information for a user identity in an access policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The identity for this access policy. Choose either a user or a group but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicyPermission
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +136,10 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
 		//	  "type": "string"
 		//	}
-		"access_policy_permission": schemaAttribute30fb39052d772ee29e98ad9d(),
+		"access_policy_permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicyResource
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +172,36 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_policy_resource": schemaAttributeba428bdf4039f35c051038f3(),
+		"access_policy_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Portal
+				"portal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the portal.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A portal resource.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Project
+				"project": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the project.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A project resource.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

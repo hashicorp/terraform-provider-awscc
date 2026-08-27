@@ -15,199 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05e1208741de008ecc9be917() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The path to ping on the service for health checks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06ae415077cc18369ca83db0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of health check (e.g., HTTP, HTTPS, TCP).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17ff78eef6b80a416bedbd78() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The time-to-live (TTL) for the DNS record.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ae4d51b2c4572e2543be94f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FailureThreshold
-			"failure_threshold": schemaAttributec6a9f416e961d79b1bc95282(),
-			// Property: ResourcePath
-			"resource_path": schemaAttribute05e1208741de008ecc9be917(),
-			// Property: Type
-			"type": schemaAttribute06ae415077cc18369ca83db0(),
-		}, /*END SCHEMA*/
-		Description: "Settings for health checks. Used when routing is DNS-based.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37d00c92332ea8ea69378813() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the namespace in which the service is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a943319dd674553ed678430() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of service. Supported values are HTTP or DNS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ff323588d5e659bac0de647() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the namespace for the DNS configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fb98467b6f595598ddb185d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FailureThreshold
-			"failure_threshold": schemaAttributeda842fe44379faec1b8c0975(),
-		}, /*END SCHEMA*/
-		Description: "Settings for custom health checks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute865d7969b48ba7bbf3039073() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99e067b6f474cd3a6c11819d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2fa89c6323ce024b3a7f0e9() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A string map that contains attributes and values for the service. You can specify a maximum of 30 key-value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea91d9184688bf44635829066() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbe7e31e51c6a425f3989b54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6a9f416e961d79b1bc95282() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of consecutive health check failures that must occur before declaring the service unhealthy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca5a5838c91b1bc531d6d2d0() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee140356fdbac3c4df3730a81(),
-				// Property: Value
-				"value": schemaAttributefb6f1b22c223173f0fa18327(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to associate with the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed002c024673139ad71e8ccbc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DnsRecords
-			"dns_records": schemaAttributed1ba5f6c7e0d9699031be394(),
-			// Property: NamespaceId
-			"namespace_id": schemaAttribute3ff323588d5e659bac0de647(),
-			// Property: RoutingPolicy
-			"routing_policy": schemaAttributee3d0a5c5cb5c07a705d4ad53(),
-		}, /*END SCHEMA*/
-		Description: "DNS-related configurations for the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1ba5f6c7e0d9699031be394() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TTL
-				"ttl": schemaAttribute17ff78eef6b80a416bedbd78(),
-				// Property: Type
-				"type": schemaAttributedf950ffc580a20d370ae9617(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of DNS records associated with the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda842fe44379faec1b8c0975() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of consecutive health check failures required before the service is considered unhealthy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf950ffc580a20d370ae9617() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The DNS record type (e.g., A, AAAA, SRV).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee140356fdbac3c4df3730a81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3d0a5c5cb5c07a705d4ad53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The routing policy to use for DNS queries.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb6f1b22c223173f0fa18327() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_servicediscovery_service", serviceDataSource)
 }
@@ -224,7 +31,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-zA-Z0-9-]+:servicediscovery:[a-zA-Z0-9-]+:[0-9]{12}:(service|service/[a-zA-Z0-9-_]+|service:[a-zA-Z0-9-_]+)$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea91d9184688bf44635829066(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +42,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the service.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributebbe7e31e51c6a425f3989b54(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DnsConfig
 		// CloudFormation resource type schema:
 		//
@@ -279,7 +92,41 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"dns_config": schemaAttributed002c024673139ad71e8ccbc(),
+		"dns_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsRecords
+				"dns_records": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TTL
+							"ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The time-to-live (TTL) for the DNS record.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The DNS record type (e.g., A, AAAA, SRV).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of DNS records associated with the service.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceId
+				"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the namespace for the DNS configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoutingPolicy
+				"routing_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The routing policy to use for DNS queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "DNS-related configurations for the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckConfig
 		// CloudFormation resource type schema:
 		//
@@ -305,7 +152,27 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"health_check_config": schemaAttribute2ae4d51b2c4572e2543be94f(),
+		"health_check_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureThreshold
+				"failure_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of consecutive health check failures that must occur before declaring the service unhealthy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourcePath
+				"resource_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The path to ping on the service for health checks.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of health check (e.g., HTTP, HTTPS, TCP).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings for health checks. Used when routing is DNS-based.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckCustomConfig
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +187,17 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"health_check_custom_config": schemaAttribute6fb98467b6f595598ddb185d(),
+		"health_check_custom_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureThreshold
+				"failure_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of consecutive health check failures required before the service is considered unhealthy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings for custom health checks.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +205,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the service.",
 		//	  "type": "string"
 		//	}
-		"service_id": schemaAttribute99e067b6f474cd3a6c11819d(),
+		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -336,7 +216,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the service.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute865d7969b48ba7bbf3039073(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NamespaceId
 		// CloudFormation resource type schema:
 		//
@@ -344,7 +227,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the namespace in which the service is created.",
 		//	  "type": "string"
 		//	}
-		"namespace_id": schemaAttribute37d00c92332ea8ea69378813(),
+		"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the namespace in which the service is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAttributes
 		// CloudFormation resource type schema:
 		//
@@ -358,7 +244,12 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"service_attributes": schemaAttributea2fa89c6323ce024b3a7f0e9(),
+		"service_attributes": // Pattern: ""
+		schema.MapAttribute{  /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A string map that contains attributes and values for the service. You can specify a maximum of 30 key-value pairs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -387,7 +278,24 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributeca5a5838c91b1bc531d6d2d0(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to associate with the service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -395,7 +303,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of service. Supported values are HTTP or DNS.",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute3a943319dd674553ed678430(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of service. Supported values are HTTP or DNS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

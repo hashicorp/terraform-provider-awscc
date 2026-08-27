@@ -14,69 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0c355d11825446b917c3f2a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID for an Amplify app.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c3a6bea9482c2aa03ee64bb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description for a webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44b1a5515bc05c5ded807d3d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ad2e3a73cd1c1a79a4cc428() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb46e886282c078dfc1076c33(),
-				// Property: Value
-				"value": schemaAttributeb46e886282c078dfc1076c33(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8763ae0e4f290cf297a071aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c8651e1a141713a174aef90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for a branch that is part of an Amplify app.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb46e886282c078dfc1076c33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed286314a54e5b2e534005967() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID for a webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_amplify_webhook", webhookDataSource)
 }
@@ -95,7 +32,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^d[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"app_id": schemaAttribute0c355d11825446b917c3f2a2(),
+		"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID for an Amplify app.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +44,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute44b1a5515bc05c5ded807d3d(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BranchName
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +58,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(?s).+$",
 		//	  "type": "string"
 		//	}
-		"branch_name": schemaAttribute9c8651e1a141713a174aef90(),
+		"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for a branch that is part of an Amplify app.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +70,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute2c3a6bea9482c2aa03ee64bb(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description for a webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +103,22 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute5ad2e3a73cd1c1a79a4cc428(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebhookId
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +127,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"webhook_id": schemaAttributed286314a54e5b2e534005967(),
+		"webhook_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID for a webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WebhookUrl
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +139,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"webhook_url": schemaAttribute8763ae0e4f290cf297a071aa(),
+		"webhook_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,266 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b26f2d3cb5a96ccba71123b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Content
-			"content": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: ContentType
-			"content_type": schemaAttribute681e4117620bd6fcfb603066(),
-		}, /*END SCHEMA*/
-		Description: "The payload associated with the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19820c2449a46ae34d5b1bee() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag indicating whether the command is deprecated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a023063e61de4aff5dd52ca() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: Min
-			"min": schemaAttribute681e4117620bd6fcfb603066(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a0a4828d62ffa94359b7466() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name for the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1de62662710bc328d90e85a1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute210f640aaf15cdcc5bd5f387() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2abc4597366b7abb102a9667() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: B
-			"b": schemaAttribute1de62662710bc328d90e85a1(),
-			// Property: BIN
-			"bin": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: D
-			"d": schemaAttributeeedf2a5610af73d6fc163f82(),
-			// Property: I
-			"i": schemaAttributefc8114c082cf8010c052fb41(),
-			// Property: L
-			"l": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: S
-			"s": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: UL
-			"ul": schemaAttribute681e4117620bd6fcfb603066(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37bd98abbda3205626b8ff22() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag indicating whether the command is pending deletion.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b4590b9ce8752c740fb2479() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComparisonOperator
-				"comparison_operator": schemaAttribute681e4117620bd6fcfb603066(),
-				// Property: Operand
-				"operand": schemaAttribute5772761408c631095ccfd527(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50b9197a57354edba4ab2282() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The payload template associated with the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5772761408c631095ccfd527() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Number
-			"number": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: NumberRange
-			"number_range": schemaAttribute1a023063e61de4aff5dd52ca(),
-			// Property: Numbers
-			"numbers": schemaAttribute803e014ca78f82c2da020c9a(),
-			// Property: String
-			"string": schemaAttribute681e4117620bd6fcfb603066(),
-			// Property: Strings
-			"strings": schemaAttribute803e014ca78f82c2da020c9a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5aa188f098058dc6ffad9b78() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AwsJsonSubstitution
-			"aws_json_substitution": schemaAttributeca6424b6ede733107ad86c08(),
-		}, /*END SCHEMA*/
-		Description: "The command preprocessor configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c20507407f3a97c072a9a01() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributec1c39bea650b9c417d0cfb62(),
-				// Property: Value
-				"value": schemaAttribute95453aa2958d2c0b7e8a69b2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to be associated with the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute681e4117620bd6fcfb603066() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6b637706e81f3b57cfdf2885() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time when the command was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute703c65edea3145816b3f8d01() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultValue
-				"default_value": schemaAttribute2abc4597366b7abb102a9667(),
-				// Property: Description
-				"description": schemaAttribute681e4117620bd6fcfb603066(),
-				// Property: Name
-				"name": schemaAttribute681e4117620bd6fcfb603066(),
-				// Property: Type
-				"type": schemaAttribute681e4117620bd6fcfb603066(),
-				// Property: Value
-				"value": schemaAttribute2abc4597366b7abb102a9667(),
-				// Property: ValueConditions
-				"value_conditions": schemaAttribute4b4590b9ce8752c740fb2479(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of mandatory parameters for the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute803e014ca78f82c2da020c9a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c7e822b8fa736f00a83cefe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The date and time when the command was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute903c95b596d4ef6d3294fd24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer role associated with the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95453aa2958d2c0b7e8a69b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea527cd5d29ff9f61157a2885() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The namespace to which the command belongs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1c39bea650b9c417d0cfb62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tag's key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca6424b6ede733107ad86c08() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OutputFormat
-			"output_format": schemaAttribute681e4117620bd6fcfb603066(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccd4a81fdb3d01f6e31c60c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcd5f2c9502b9c2ceaa46c54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the command.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeedf2a5610af73d6fc163f82() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefc8114c082cf8010c052fb41() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_command", commandDataSource)
 }
@@ -290,7 +30,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the command.",
 		//	  "type": "string"
 		//	}
-		"command_arn": schemaAttributeccd4a81fdb3d01f6e31c60c4(),
+		"command_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CommandId
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +44,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"command_id": schemaAttribute210f640aaf15cdcc5bd5f387(),
+		"command_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier for the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +55,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time when the command was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute8c7e822b8fa736f00a83cefe(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time when the command was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Deprecated
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +66,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A flag indicating whether the command is deprecated.",
 		//	  "type": "boolean"
 		//	}
-		"deprecated": schemaAttribute19820c2449a46ae34d5b1bee(),
+		"deprecated": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag indicating whether the command is deprecated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -326,7 +78,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2028,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributedcd5f2c9502b9c2ceaa46c54(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +89,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The display name for the command.",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttribute1a0a4828d62ffa94359b7466(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name for the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +100,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time when the command was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttribute6b637706e81f3b57cfdf2885(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time when the command was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MandatoryParameters
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +288,144 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"mandatory_parameters": schemaAttribute703c65edea3145816b3f8d01(),
+		"mandatory_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DefaultValue
+					"default_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: B
+							"b": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: BIN
+							"bin": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: D
+							"d": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: I
+							"i": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: L
+							"l": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: S
+							"s": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UL
+							"ul": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: B
+							"b": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: BIN
+							"bin": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: D
+							"d": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: I
+							"i": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: L
+							"l": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: S
+							"s": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UL
+							"ul": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ValueConditions
+					"value_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ComparisonOperator
+								"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Operand
+								"operand": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Number
+										"number": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: NumberRange
+										"number_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Max
+												"max": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Min
+												"min": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Numbers
+										"numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: String
+										"string": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Strings
+										"strings": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of mandatory parameters for the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -539,7 +437,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"namespace": schemaAttributea527cd5d29ff9f61157a2885(),
+		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The namespace to which the command belongs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Payload
 		// CloudFormation resource type schema:
 		//
@@ -557,7 +458,20 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"payload": schemaAttribute0b26f2d3cb5a96ccba71123b(),
+		"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ContentType
+				"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The payload associated with the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PayloadTemplate
 		// CloudFormation resource type schema:
 		//
@@ -566,7 +480,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 32768,
 		//	  "type": "string"
 		//	}
-		"payload_template": schemaAttribute50b9197a57354edba4ab2282(),
+		"payload_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The payload template associated with the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PendingDeletion
 		// CloudFormation resource type schema:
 		//
@@ -574,7 +491,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A flag indicating whether the command is pending deletion.",
 		//	  "type": "boolean"
 		//	}
-		"pending_deletion": schemaAttribute37bd98abbda3205626b8ff22(),
+		"pending_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A flag indicating whether the command is pending deletion.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Preprocessor
 		// CloudFormation resource type schema:
 		//
@@ -601,7 +521,22 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"preprocessor": schemaAttribute5aa188f098058dc6ffad9b78(),
+		"preprocessor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsJsonSubstitution
+				"aws_json_substitution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OutputFormat
+						"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The command preprocessor configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -611,7 +546,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute903c95b596d4ef6d3294fd24(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer role associated with the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -643,7 +581,24 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute5c20507407f3a97c072a9a01(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The tag's value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to be associated with the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

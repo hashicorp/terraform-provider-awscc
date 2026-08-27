@@ -14,76 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1db4cbd7d1f06e84f7f5ea14() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The revision of this auto scaling configuration. It's unique among all the active configurations (\"Status\": \"ACTIVE\") that share the same AutoScalingConfigurationName.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ef3a517222faa4b48d32cd8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute807aea26ef01a3eaa18a5665() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The customer-provided auto scaling configuration name.  When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration. The auto scaling configuration name can be used in multiple revisions of a configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8458aee647f7b67d9c2bac08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of this auto scaling configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute851610945a647842734cb88c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2ef3a517222faa4b48d32cd8(),
-				// Property: Value
-				"value": schemaAttribute2ef3a517222faa4b48d32cd8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dfe1e60672ec15c1e999b57() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "It's set to true for the configuration with the highest Revision among all configurations that share the same AutoScalingConfigurationName. It's set to false otherwise. App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9a15a664a2e3a5c127f81b1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of instances that an App Runner service scales up to. At most MaxSize instances actively serve traffic for your service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb66c966e7dee04528217b249() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service up to use more instances to process the requests.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee80f65af150f0f15c4a8201c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum number of instances that App Runner provisions for a service. The service always has at least MinSize provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apprunner_auto_scaling_configuration", autoScalingConfigurationDataSource)
 }
@@ -102,7 +32,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_configuration_arn": schemaAttribute8458aee647f7b67d9c2bac08(),
+		"auto_scaling_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of this auto scaling configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoScalingConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +46,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_configuration_name": schemaAttribute807aea26ef01a3eaa18a5665(),
+		"auto_scaling_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The customer-provided auto scaling configuration name.  When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration. The auto scaling configuration name can be used in multiple revisions of a configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoScalingConfigurationRevision
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +57,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The revision of this auto scaling configuration. It's unique among all the active configurations (\"Status\": \"ACTIVE\") that share the same AutoScalingConfigurationName.",
 		//	  "type": "integer"
 		//	}
-		"auto_scaling_configuration_revision": schemaAttribute1db4cbd7d1f06e84f7f5ea14(),
+		"auto_scaling_configuration_revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The revision of this auto scaling configuration. It's unique among all the active configurations (\"Status\": \"ACTIVE\") that share the same AutoScalingConfigurationName.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Latest
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +68,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "It's set to true for the configuration with the highest Revision among all configurations that share the same AutoScalingConfigurationName. It's set to false otherwise. App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.",
 		//	  "type": "boolean"
 		//	}
-		"latest": schemaAttribute8dfe1e60672ec15c1e999b57(),
+		"latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "It's set to true for the configuration with the highest Revision among all configurations that share the same AutoScalingConfigurationName. It's set to false otherwise. App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxConcurrency
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +79,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service up to use more instances to process the requests.",
 		//	  "type": "integer"
 		//	}
-		"max_concurrency": schemaAttributeb66c966e7dee04528217b249(),
+		"max_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service up to use more instances to process the requests.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +90,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The maximum number of instances that an App Runner service scales up to. At most MaxSize instances actively serve traffic for your service.",
 		//	  "type": "integer"
 		//	}
-		"max_size": schemaAttributea9a15a664a2e3a5c127f81b1(),
+		"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of instances that an App Runner service scales up to. At most MaxSize instances actively serve traffic for your service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +101,10 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The minimum number of instances that App Runner provisions for a service. The service always has at least MinSize provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.",
 		//	  "type": "integer"
 		//	}
-		"min_size": schemaAttributee80f65af150f0f15c4a8201c(),
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum number of instances that App Runner provisions for a service. The service always has at least MinSize provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +125,22 @@ func autoScalingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute851610945a647842734cb88c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

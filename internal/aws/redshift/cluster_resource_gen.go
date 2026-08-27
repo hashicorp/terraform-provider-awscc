@@ -27,720 +27,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute077e87d0525d4fbbf4ca87f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c874bc63531208cf53ee244() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute15191f5240ecb160348270e0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The weekly time range (in UTC) during which automated cluster maintenance can occur.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bed8fb3d4623473e190fca4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(64),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// MasterUserPassword is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute21048614ef41bd65a8df0d20() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27438f0583a8639f5a3ed484() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttributeccdf13334d0ab6e2bf31e9ae(),
-			// Property: LogDestinationType
-			"log_destination_type": schemaAttributeccdf13334d0ab6e2bf31e9ae(),
-			// Property: LogExports
-			"log_exports": schemaAttributeb400ac6ea39aa2fc4616a19d(),
-			// Property: S3KeyPrefix
-			"s3_key_prefix": schemaAttributeccdf13334d0ab6e2bf31e9ae(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d39cc6500bf258dbb4b1523() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d936b8a7478bdfb8c098814() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f7fbdeed5b244e4a6f4abe0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute4882c540791cd016405998ae(),
-			// Property: Port
-			"port": schemaAttribute4882c540791cd016405998ae(),
-		}, /*END SCHEMA*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-			objectplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3074f0e13bfabd168a7842b1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3199cb4a04ac73f21c981ab4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The availability zone relocation status of the cluster",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34afd2e01f9e8ba8e66f1d39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34f1ae54368ebd5075237103() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36fc5b9c98c45db637c0bc6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ce1320e83a3edd42e9bff0d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// DeferMaintenanceDuration is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fc69124d68402e649762706() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The namespace resource policy document that will be attached to a Redshift cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4882c540791cd016405998ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d834ce5f64655669eaf9a1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A timestamp indicating the start time for the deferred maintenance window.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e93751c4b1c329b566c692a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute594ccf2e977f61d1ce48882e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the cluster namespace.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a1942561fc066b74db5182d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5c32d9edcb1d8eded62bb0ec() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68667ce5472c919b30a6e196() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 127),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c013a30fb4ac97d817d6274() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating whether to enable the deferred maintenance window.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// DeferMaintenance is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute76d5ba08e8a63003dc045179() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute778e431ef28d89daf7a9417d() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// ManageMasterPassword is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f98d275b4aa103d75fc4e6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute862cda512d6b66dabcaedb8d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86505f22cd2fd1b7316ea0ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the deferred maintenance window.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ab4faa9b98784e91a1bcf39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91f30dde22ef884762a989e5() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Classic is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92f9a5465cd98f1a03ceb9fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(63),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b1de88813ff3214c5795444() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea17b47230d2587494644437c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea19e103ab3b6a6c1667a0dfe() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1bafca7afda142e151a206b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3b24f25fc8c44661a19547a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea4fb68aa659135c0730d2241() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating if we want to rotate Encryption Keys.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea86562ff25edee88d871d79e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security groups to be associated with this cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabda627dd777d96190840150() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeada3d6cb679e5025537f896a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(128),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb400ac6ea39aa2fc4616a19d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(3),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4b75ed1333f0df18dcbbc72() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a cluster subnet group to be associated with this cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb704aa443a811e256e95d425() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, the data in the cluster is encrypted at rest.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb737817d63447c23340f7ebd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute68667ce5472c919b30a6e196(),
-				// Property: Value
-				"value": schemaAttributef60aa09168182f3fcdacdb24(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of tags for the cluster parameter group.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(50),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb78cf8c1bb495a6fe8fa1b33() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9c328e4b4f9133b9d5dfca6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccdf13334d0ab6e2bf31e9ae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfaf70b441e36ba44eb559aa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// SnapshotIdentifier is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed777e314f45c28d0d12f7092() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedc4f7d33ba4b09055e838fe3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3a4acd2f095e71fa70fc005() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3b6756de3e2bef6e882ae96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4818f38761b3dd6282178de() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeAtMost(50),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5d86ef586870928b10aea3b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Elastic IP (EIP) address for the cluster.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7ab6f475ba19a0399b4f9ab() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed8721994c9dce478222b7cb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group to be associated with this cluster.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(255),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef072ae288ee58a30de4790c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef60aa09168182f3fcdacdb24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 255),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefcd3c962792eaaaaf1b29614() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, the cluster can be accessed from a public network.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_redshift_cluster", clusterResource)
 	registry.AddListResourceFactory("awscc_redshift_cluster", generic.NewListResource(clusterResource))
@@ -757,7 +43,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True",
 		//	  "type": "boolean"
 		//	}
-		"allow_version_upgrade": schemaAttribute2d936b8a7478bdfb8c098814(),
+		"allow_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AquaConfigurationStatus
 		// CloudFormation resource type schema:
 		//
@@ -765,7 +58,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
 		//	  "type": "string"
 		//	}
-		"aqua_configuration_status": schemaAttribute34afd2e01f9e8ba8e66f1d39(),
+		"aqua_configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AutomatedSnapshotRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -773,7 +73,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1",
 		//	  "type": "integer"
 		//	}
-		"automated_snapshot_retention_period": schemaAttribute862cda512d6b66dabcaedb8d(),
+		"automated_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -781,7 +88,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttributea17b47230d2587494644437c(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneRelocation
 		// CloudFormation resource type schema:
 		//
@@ -789,7 +103,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
 		//	  "type": "boolean"
 		//	}
-		"availability_zone_relocation": schemaAttribute34f1ae54368ebd5075237103(),
+		"availability_zone_relocation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneRelocationStatus
 		// CloudFormation resource type schema:
 		//
@@ -797,7 +118,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The availability zone relocation status of the cluster",
 		//	  "type": "string"
 		//	}
-		"availability_zone_relocation_status": schemaAttribute3199cb4a04ac73f21c981ab4(),
+		"availability_zone_relocation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The availability zone relocation status of the cluster",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Classic
 		// CloudFormation resource type schema:
 		//
@@ -805,7 +133,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
 		//	  "type": "boolean"
 		//	}
-		"classic": schemaAttribute91f30dde22ef884762a989e5(),
+		"classic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Classic is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -814,7 +150,18 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 63,
 		//	  "type": "string"
 		//	}
-		"cluster_identifier": schemaAttribute92f9a5465cd98f1a03ceb9fb(),
+		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(63),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterNamespaceArn
 		// CloudFormation resource type schema:
 		//
@@ -822,7 +169,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster namespace.",
 		//	  "type": "string"
 		//	}
-		"cluster_namespace_arn": schemaAttribute594ccf2e977f61d1ce48882e(),
+		"cluster_namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the cluster namespace.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -831,7 +184,17 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"cluster_parameter_group_name": schemaAttributeed8721994c9dce478222b7cb(),
+		"cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group to be associated with this cluster.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterSecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -848,7 +211,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"cluster_security_groups": schemaAttributea86562ff25edee88d871d79e(),
+		"cluster_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of security groups to be associated with this cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -856,7 +228,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of a cluster subnet group to be associated with this cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_subnet_group_name": schemaAttributeb4b75ed1333f0df18dcbbc72(),
+		"cluster_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of a cluster subnet group to be associated with this cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterType
 		// CloudFormation resource type schema:
 		//
@@ -864,7 +244,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required",
 		//	  "type": "string"
 		//	}
-		"cluster_type": schemaAttributeabda627dd777d96190840150(),
+		"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterVersion
 		// CloudFormation resource type schema:
 		//
@@ -872,7 +255,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_version": schemaAttributea1bafca7afda142e151a206b(),
+		"cluster_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBName
 		// CloudFormation resource type schema:
 		//
@@ -880,7 +270,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.",
 		//	  "type": "string"
 		//	}
-		"db_name": schemaAttributee3b6756de3e2bef6e882ae96(),
+		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenance
 		// CloudFormation resource type schema:
 		//
@@ -888,7 +284,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A boolean indicating whether to enable the deferred maintenance window.",
 		//	  "type": "boolean"
 		//	}
-		"defer_maintenance": schemaAttribute6c013a30fb4ac97d817d6274(),
+		"defer_maintenance": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating whether to enable the deferred maintenance window.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeferMaintenance is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceDuration
 		// CloudFormation resource type schema:
 		//
@@ -896,7 +300,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.",
 		//	  "type": "integer"
 		//	}
-		"defer_maintenance_duration": schemaAttribute3ce1320e83a3edd42e9bff0d(),
+		"defer_maintenance_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeferMaintenanceDuration is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceEndTime
 		// CloudFormation resource type schema:
 		//
@@ -904,7 +316,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
 		//	  "type": "string"
 		//	}
-		"defer_maintenance_end_time": schemaAttribute4e93751c4b1c329b566c692a(),
+		"defer_maintenance_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -912,7 +331,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique identifier for the deferred maintenance window.",
 		//	  "type": "string"
 		//	}
-		"defer_maintenance_identifier": schemaAttribute86505f22cd2fd1b7316ea0ac(),
+		"defer_maintenance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the deferred maintenance window.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceStartTime
 		// CloudFormation resource type schema:
 		//
@@ -920,7 +345,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A timestamp indicating the start time for the deferred maintenance window.",
 		//	  "type": "string"
 		//	}
-		"defer_maintenance_start_time": schemaAttribute4d834ce5f64655669eaf9a1d(),
+		"defer_maintenance_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A timestamp indicating the start time for the deferred maintenance window.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationRegion
 		// CloudFormation resource type schema:
 		//
@@ -928,7 +360,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
 		//	  "type": "string"
 		//	}
-		"destination_region": schemaAttribute8ab4faa9b98784e91a1bcf39(),
+		"destination_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticIp
 		// CloudFormation resource type schema:
 		//
@@ -936,7 +375,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Elastic IP (EIP) address for the cluster.",
 		//	  "type": "string"
 		//	}
-		"elastic_ip": schemaAttributee5d86ef586870928b10aea3b(),
+		"elastic_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Elastic IP (EIP) address for the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -944,7 +390,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "If true, the data in the cluster is encrypted at rest.",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schemaAttributeb704aa443a811e256e95d425(),
+		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, the data in the cluster is encrypted at rest.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -960,7 +413,29 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint": schemaAttribute2f7fbdeed5b244e4a6f4abe0(),
+		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EnhancedVpcRouting
 		// CloudFormation resource type schema:
 		//
@@ -968,7 +443,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
 		//	  "type": "boolean"
 		//	}
-		"enhanced_vpc_routing": schemaAttribute21048614ef41bd65a8df0d20(),
+		"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HsmClientCertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -976,7 +458,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM",
 		//	  "type": "string"
 		//	}
-		"hsm_client_certificate_identifier": schemaAttribute0c874bc63531208cf53ee244(),
+		"hsm_client_certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HsmConfigurationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -984,7 +473,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.",
 		//	  "type": "string"
 		//	}
-		"hsm_configuration_identifier": schemaAttributeb9c328e4b4f9133b9d5dfca6(),
+		"hsm_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoles
 		// CloudFormation resource type schema:
 		//
@@ -1001,7 +497,19 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"iam_roles": schemaAttributee4818f38761b3dd6282178de(),
+		"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -1013,7 +521,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute2d39cc6500bf258dbb4b1523(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingProperties
 		// CloudFormation resource type schema:
 		//
@@ -1040,7 +555,52 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_properties": schemaAttribute27438f0583a8639f5a3ed484(),
+		"logging_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogDestinationType
+				"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogExports
+				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(3),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3KeyPrefix
+				"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceTrackName
 		// CloudFormation resource type schema:
 		//
@@ -1048,7 +608,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
 		//	  "type": "string"
 		//	}
-		"maintenance_track_name": schemaAttribute36fc5b9c98c45db637c0bc6d(),
+		"maintenance_track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ManageMasterPassword
 		// CloudFormation resource type schema:
 		//
@@ -1056,7 +623,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
 		//	  "type": "boolean"
 		//	}
-		"manage_master_password": schemaAttribute778e431ef28d89daf7a9417d(),
+		"manage_master_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ManageMasterPassword is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ManualSnapshotRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -1064,7 +639,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
 		//	  "type": "integer"
 		//	}
-		"manual_snapshot_retention_period": schemaAttributeb78cf8c1bb495a6fe8fa1b33(),
+		"manual_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MasterPasswordSecretArn
 		// CloudFormation resource type schema:
 		//
@@ -1072,7 +654,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.",
 		//	  "type": "string"
 		//	}
-		"master_password_secret_arn": schemaAttributed777e314f45c28d0d12f7092(),
+		"master_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MasterPasswordSecretKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -1084,7 +672,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
 		//	  "type": "string"
 		//	}
-		"master_password_secret_kms_key_id": schemaAttributedc4f7d33ba4b09055e838fe3(),
+		"master_password_secret_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -1093,7 +688,18 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
-		"master_user_password": schemaAttribute1bed8fb3d4623473e190fca4(),
+		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// MasterUserPassword is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -1102,7 +708,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttributeada3d6cb679e5025537f896a(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(128),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MultiAZ
 		// CloudFormation resource type schema:
 		//
@@ -1110,7 +725,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.",
 		//	  "type": "boolean"
 		//	}
-		"multi_az": schemaAttributea19e103ab3b6a6c1667a0dfe(),
+		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NamespaceResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -1118,7 +740,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The namespace resource policy document that will be attached to a Redshift cluster.",
 		//	  "type": "object"
 		//	}
-		"namespace_resource_policy": schemaAttribute3fc69124d68402e649762706(),
+		"namespace_resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The namespace resource policy document that will be attached to a Redshift cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NodeType
 		// CloudFormation resource type schema:
 		//
@@ -1126,7 +756,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge",
 		//	  "type": "string"
 		//	}
-		"node_type": schemaAttributee3a4acd2f095e71fa70fc005(),
+		"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumberOfNodes
 		// CloudFormation resource type schema:
 		//
@@ -1134,14 +767,28 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.",
 		//	  "type": "integer"
 		//	}
-		"number_of_nodes": schemaAttribute5c32d9edcb1d8eded62bb0ec(),
+		"number_of_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"owner_account": schemaAttributef072ae288ee58a30de4790c9(),
+		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -1149,7 +796,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttributee7ab6f475ba19a0399b4f9ab(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -1157,7 +811,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The weekly time range (in UTC) during which automated cluster maintenance can occur.",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttribute15191f5240ecb160348270e0(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The weekly time range (in UTC) during which automated cluster maintenance can occur.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -1165,7 +826,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "If true, the cluster can be accessed from a public network.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttributefcd3c962792eaaaaf1b29614(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, the cluster can be accessed from a public network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceAction
 		// CloudFormation resource type schema:
 		//
@@ -1173,7 +841,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs",
 		//	  "type": "string"
 		//	}
-		"resource_action": schemaAttribute76d5ba08e8a63003dc045179(),
+		"resource_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RevisionTarget
 		// CloudFormation resource type schema:
 		//
@@ -1181,7 +856,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
 		//	  "type": "string"
 		//	}
-		"revision_target": schemaAttribute7f98d275b4aa103d75fc4e6d(),
+		"revision_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RotateEncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -1189,7 +871,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A boolean indicating if we want to rotate Encryption Keys.",
 		//	  "type": "boolean"
 		//	}
-		"rotate_encryption_key": schemaAttributea4fb68aa659135c0730d2241(),
+		"rotate_encryption_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating if we want to rotate Encryption Keys.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1197,7 +886,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.",
 		//	  "type": "string"
 		//	}
-		"snapshot_cluster_identifier": schemaAttribute077e87d0525d4fbbf4ca87f4(),
+		"snapshot_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyGrantName
 		// CloudFormation resource type schema:
 		//
@@ -1205,7 +902,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
 		//	  "type": "string"
 		//	}
-		"snapshot_copy_grant_name": schemaAttribute3074f0e13bfabd168a7842b1(),
+		"snapshot_copy_grant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyManual
 		// CloudFormation resource type schema:
 		//
@@ -1213,7 +917,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
 		//	  "type": "boolean"
 		//	}
-		"snapshot_copy_manual": schemaAttributea3b24f25fc8c44661a19547a(),
+		"snapshot_copy_manual": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -1221,7 +932,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_copy_retention_period": schemaAttribute5a1942561fc066b74db5182d(),
+		"snapshot_copy_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1229,7 +947,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.",
 		//	  "type": "string"
 		//	}
-		"snapshot_identifier": schemaAttributecfaf70b441e36ba44eb559aa(),
+		"snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// SnapshotIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1263,7 +990,48 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributeb737817d63447c23340f7ebd(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of tags for the cluster parameter group.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -1280,7 +1048,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vpc_security_group_ids": schemaAttribute9b1de88813ff3214c5795444(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

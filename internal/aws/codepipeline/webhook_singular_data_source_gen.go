@@ -14,147 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0b1e4f7730f3c094f6b02b1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e4620be37d7db1c9f7c1967() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a5ae2a0d38e867a05f990a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the action in a pipeline you want to connect to the webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d7c7adacc46532e6ce6b3a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property used to configure acceptance of webhooks in an IP address range. For IP, only the AllowedIPRange property must be set. This property must be set to a valid CIDR range.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c2cba911e875198475fbcd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A JsonPath expression that is applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the MatchEquals field. Otherwise, the request is ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute597428de7f8aa6ae022fdced() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6ac7f07c6cc0b223c0617072() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JsonPath
-				"json_path": schemaAttribute2c2cba911e875198475fbcd7(),
-				// Property: MatchEquals
-				"match_equals": schemaAttributea757a4eab250ea2db66a097c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of rules applied to the body/payload sent in the POST request to a webhook URL",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7520c668980d7c921e96d760() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute0e4620be37d7db1c9f7c1967(),
-				// Property: Value
-				"value": schemaAttribute893d6240feed8b480c450ac7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute893d6240feed8b480c450ac7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3699f679bae7664b967aeb9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllowedIPRange
-			"allowed_ip_range": schemaAttribute1d7c7adacc46532e6ce6b3a0(),
-			// Property: SecretToken
-			"secret_token": schemaAttribute0b1e4f7730f3c094f6b02b1e(),
-		}, /*END SCHEMA*/
-		Description: "Properties that configure the authentication applied to incoming webhook trigger requests",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea757a4eab250ea2db66a097c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value selected by the JsonPath expression must match what is supplied in the MatchEquals field. Otherwise, the request is ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea80d4d4c338e53e59a636d5e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "logical id of the webhook",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea94911c0e268154226762f24() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The webhook URL generated by AWS CodePipeline",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebebd87e1304c27f59152dcdb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The version number of the pipeline to be connected to the trigger request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2bdf16a60f9a3130757b17b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Configures a connection between the webhook that was created and the external tool with events to be detected.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0048c7a54b6bf2cce556026() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the webhook",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa4363356650f333ec438cf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the pipeline you want to connect to the webhook.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codepipeline_webhook", webhookDataSource)
 }
@@ -175,7 +34,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authentication": schemaAttribute597428de7f8aa6ae022fdced(),
+		"authentication": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -198,7 +60,22 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"authentication_configuration": schemaAttributea3699f679bae7664b967aeb9(),
+		"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowedIPRange
+				"allowed_ip_range": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The property used to configure acceptance of webhooks in an IP address range. For IP, only the AllowedIPRange property must be set. This property must be set to a valid CIDR range.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretToken
+				"secret_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Properties that configure the authentication applied to incoming webhook trigger requests",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Filters
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +107,24 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"filters": schemaAttribute6ac7f07c6cc0b223c0617072(),
+		"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: JsonPath
+					"json_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A JsonPath expression that is applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the MatchEquals field. Otherwise, the request is ignored.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MatchEquals
+					"match_equals": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value selected by the JsonPath expression must match what is supplied in the MatchEquals field. Otherwise, the request is ignored.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of rules applied to the body/payload sent in the POST request to a webhook URL",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +132,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "logical id of the webhook",
 		//	  "type": "string"
 		//	}
-		"webhook_id": schemaAttributea80d4d4c338e53e59a636d5e(),
+		"webhook_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "logical id of the webhook",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +146,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Za-z0-9.@\\-_]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributef0048c7a54b6bf2cce556026(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the webhook",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RegisterWithThirdParty
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +157,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Configures a connection between the webhook that was created and the external tool with events to be detected.",
 		//	  "type": "boolean"
 		//	}
-		"register_with_third_party": schemaAttributec2bdf16a60f9a3130757b17b(),
+		"register_with_third_party": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Configures a connection between the webhook that was created and the external tool with events to be detected.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +193,24 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute7520c668980d7c921e96d760(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetAction
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +221,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Za-z0-9.@\\-_]+",
 		//	  "type": "string"
 		//	}
-		"target_action": schemaAttribute1a5ae2a0d38e867a05f990a2(),
+		"target_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the action in a pipeline you want to connect to the webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetPipeline
 		// CloudFormation resource type schema:
 		//
@@ -312,7 +235,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Za-z0-9.@\\-_]+",
 		//	  "type": "string"
 		//	}
-		"target_pipeline": schemaAttributefa4363356650f333ec438cf7(),
+		"target_pipeline": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the pipeline you want to connect to the webhook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetPipelineVersion
 		// CloudFormation resource type schema:
 		//
@@ -320,7 +246,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version number of the pipeline to be connected to the trigger request.",
 		//	  "type": "integer"
 		//	}
-		"target_pipeline_version": schemaAttributebebd87e1304c27f59152dcdb(),
+		"target_pipeline_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the pipeline to be connected to the trigger request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +257,10 @@ func webhookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The webhook URL generated by AWS CodePipeline",
 		//	  "type": "string"
 		//	}
-		"url": schemaAttributea94911c0e268154226762f24(),
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The webhook URL generated by AWS CodePipeline",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

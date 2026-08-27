@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute381e532b57816d367efc2adc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the analytics data set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f3c17dbe50c33d4c9339363() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the target account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a7aa8ca6bdd2b4af223ee87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82e7174269265485a40fff39() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AWS Resource Access Manager share",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd8a5f5fdc333a0e24a9afb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Resource Access Manager share ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_data_lake_association", dataLakeAssociationDataSource)
 }
@@ -66,7 +31,10 @@ func dataLakeAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_set_id": schemaAttribute381e532b57816d367efc2adc(),
+		"data_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the analytics data set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -77,7 +45,10 @@ func dataLakeAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute5a7aa8ca6bdd2b4af223ee87(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceShareArn
 		// CloudFormation resource type schema:
 		//
@@ -86,7 +57,10 @@ func dataLakeAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"resource_share_arn": schemaAttribute82e7174269265485a40fff39(),
+		"resource_share_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AWS Resource Access Manager share",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceShareId
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +68,10 @@ func dataLakeAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The AWS Resource Access Manager share ID",
 		//	  "type": "string"
 		//	}
-		"resource_share_id": schemaAttributecd8a5f5fdc333a0e24a9afb1(),
+		"resource_share_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Resource Access Manager share ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetAccountId
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +82,10 @@ func dataLakeAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^\\d+$",
 		//	  "type": "string"
 		//	}
-		"target_account_id": schemaAttribute3f3c17dbe50c33d4c9339363(),
+		"target_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the target account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

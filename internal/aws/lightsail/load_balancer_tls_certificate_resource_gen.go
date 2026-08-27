@@ -23,93 +23,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03184b471a6e5e5e7ce4cf8d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of your load balancer.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1aca64c5537814dadffa3eca() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-			setplanmodifier.UseStateForUnknown(),
-			setplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute331ce0ec17b981d1aa761f2c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3513dd97fb00c55aa25b3dcf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3849c72b4ad5fed7fa20e215() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The SSL/TLS certificate name.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c6728cef07fa6749e5561d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute664e64b46cc7fe483153fe4a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea30511a7de9c7e1fc27dd236() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The validation status of the SSL/TLS certificate.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_load_balancer_tls_certificate", loadBalancerTlsCertificateResource)
 	registry.AddListResourceFactory("awscc_lightsail_load_balancer_tls_certificate", generic.NewListResource(loadBalancerTlsCertificateResource))
@@ -131,7 +44,16 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"certificate_alternative_names": schemaAttribute1aca64c5537814dadffa3eca(),
+		"certificate_alternative_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateDomainName
 		// CloudFormation resource type schema:
 		//
@@ -139,7 +61,13 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_domain_name": schemaAttribute3513dd97fb00c55aa25b3dcf(),
+		"certificate_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateName
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +75,13 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The SSL/TLS certificate name.",
 		//	  "type": "string"
 		//	}
-		"certificate_name": schemaAttribute3849c72b4ad5fed7fa20e215(),
+		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The SSL/TLS certificate name.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HttpsRedirectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -155,7 +89,14 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
 		//	  "type": "boolean"
 		//	}
-		"https_redirection_enabled": schemaAttribute664e64b46cc7fe483153fe4a(),
+		"https_redirection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IsAttached
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +104,14 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
 		//	  "type": "boolean"
 		//	}
-		"is_attached": schemaAttribute331ce0ec17b981d1aa761f2c(),
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerName
 		// CloudFormation resource type schema:
 		//
@@ -172,14 +120,28 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"load_balancer_name": schemaAttribute03184b471a6e5e5e7ce4cf8d(),
+		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of your load balancer.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerTlsCertificateArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"load_balancer_tls_certificate_arn": schemaAttribute4c6728cef07fa6749e5561d2(),
+		"load_balancer_tls_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +149,13 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The validation status of the SSL/TLS certificate.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributea30511a7de9c7e1fc27dd236(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The validation status of the SSL/TLS certificate.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

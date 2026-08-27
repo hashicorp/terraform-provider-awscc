@@ -15,35 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1cba6011fa9332ef6e644394() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "AWS account where you want to collect logs from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ea3574d1acbc9a43e1f5b52() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the data lake.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24a05beaffa1f540e0578a7c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version for a AWS source. This must be a Regionally unique value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39ee7051652f8bbe9559c165() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for a AWS source. This must be a Regionally unique value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securitylake_aws_log_source", awsLogSourceDataSource)
 }
@@ -65,7 +36,11 @@ func awsLogSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"accounts": schemaAttribute1cba6011fa9332ef6e644394(),
+		"accounts": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "AWS account where you want to collect logs from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataLakeArn
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +50,10 @@ func awsLogSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_lake_arn": schemaAttribute1ea3574d1acbc9a43e1f5b52(),
+		"data_lake_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the data lake.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceName
 		// CloudFormation resource type schema:
 		//
@@ -83,7 +61,10 @@ func awsLogSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name for a AWS source. This must be a Regionally unique value.",
 		//	  "type": "string"
 		//	}
-		"source_name": schemaAttribute39ee7051652f8bbe9559c165(),
+		"source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for a AWS source. This must be a Regionally unique value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceVersion
 		// CloudFormation resource type schema:
 		//
@@ -92,7 +73,10 @@ func awsLogSourceDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^(latest|[0-9]\\.[0-9])$",
 		//	  "type": "string"
 		//	}
-		"source_version": schemaAttribute24a05beaffa1f540e0578a7c(),
+		"source_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version for a AWS source. This must be a Regionally unique value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

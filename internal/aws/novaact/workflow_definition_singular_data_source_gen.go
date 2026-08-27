@@ -15,69 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute6cbac014479ca62c5e345598() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the workflow definition was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute705199f7d42e9a116d9e7092() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional prefix for Amazon S3 object keys to organize exported data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute71c545dc774468ab5e2f89f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the workflow definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b050cd61e3df5fe1355233b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description of the workflow definition's purpose and functionality.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb540570b3c501b719173e3a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the workflow definition.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9fc3ea97a2a50820fa0aa1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the workflow definition. Must be unique within your account and region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecd7a16893c60a27e6b73f694() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the Amazon S3 bucket for exporting workflow data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6ac4383f87466557f9a3a73() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3BucketName
-			"s3_bucket_name": schemaAttributecd7a16893c60a27e6b73f694(),
-			// Property: S3KeyPrefix
-			"s3_key_prefix": schemaAttribute705199f7d42e9a116d9e7092(),
-		}, /*END SCHEMA*/
-		Description: "Configuration settings for exporting workflow execution data and logs to Amazon S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_novaact_workflow_definition", workflowDefinitionDataSource)
 }
@@ -94,7 +31,10 @@ func workflowDefinitionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):nova-act:[a-z0-9-]+:[0-9]{12}:workflow-definition/[a-zA-Z0-9_-]{1,40}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute71c545dc774468ab5e2f89f4(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the workflow definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +43,11 @@ func workflowDefinitionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute6cbac014479ca62c5e345598(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the workflow definition was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +57,10 @@ func workflowDefinitionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9b050cd61e3df5fe1355233b(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description of the workflow definition's purpose and functionality.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExportConfig
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +88,22 @@ func workflowDefinitionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"export_config": schemaAttributee6ac4383f87466557f9a3a73(),
+		"export_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3BucketName
+				"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the Amazon S3 bucket for exporting workflow data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3KeyPrefix
+				"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional prefix for Amazon S3 object keys to organize exported data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration settings for exporting workflow execution data and logs to Amazon S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +114,10 @@ func workflowDefinitionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,40}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb9fc3ea97a2a50820fa0aa1d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the workflow definition. Must be unique within your account and region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +129,10 @@ func workflowDefinitionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeb540570b3c501b719173e3a4(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the workflow definition.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

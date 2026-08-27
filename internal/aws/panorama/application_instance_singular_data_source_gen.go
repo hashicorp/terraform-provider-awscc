@@ -14,111 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0572eea138acbe0b04366e6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the application instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c761f932a077860780b4db8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PayloadData
-			"payload_data": schemaAttributeddc8f4e3e7d18ac51d6f8d84(),
-		}, /*END SCHEMA*/
-		Description: "Setting overrides for the application manifest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute367f0cdfcb328365a8e22d88() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute9a92e3e0ce9abf5a7f60a4a3(),
-				// Property: Value
-				"value": schemaAttribute9a92e3e0ce9abf5a7f60a4a3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tags for the application instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51029ec5b7517679dce5b502() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The application manifest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68296c9e630b98c6a4edba69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d2dadb958077aa07b900e33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the application instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a92e3e0ce9abf5a7f60a4a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ebb68760d962788c00e0dd7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of a runtime role for the application instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecc169bb9e3c96bdbfdb19143() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device's ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0b695675ec7e1ecc07d0d2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of an application instance to replace with the new instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeddc8f4e3e7d18ac51d6f8d84() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The overrides document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3bfe809fb0f5ffe93dd647d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6a3c14fe2a0b830f9281c38() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PayloadData
-			"payload_data": schemaAttribute51029ec5b7517679dce5b502(),
-		}, /*END SCHEMA*/
-		Description: "The application's manifest document.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_panorama_application_instance", applicationInstanceDataSource)
 }
@@ -136,7 +31,9 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"application_instance_id": schemaAttribute68296c9e630b98c6a4edba69(),
+		"application_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationInstanceIdToReplace
 		// CloudFormation resource type schema:
 		//
@@ -147,7 +44,10 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"application_instance_id_to_replace": schemaAttributed0b695675ec7e1ecc07d0d2d(),
+		"application_instance_id_to_replace": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an application instance to replace with the new instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -156,14 +56,18 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute68296c9e630b98c6a4edba69(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"created_time": schemaAttributee3bfe809fb0f5ffe93dd647d(),
+		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultRuntimeContextDevice
 		// CloudFormation resource type schema:
 		//
@@ -174,7 +78,10 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"default_runtime_context_device": schemaAttributecc169bb9e3c96bdbfdb19143(),
+		"default_runtime_context_device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The device's ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultRuntimeContextDeviceName
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +91,9 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"default_runtime_context_device_name": schemaAttribute68296c9e630b98c6a4edba69(),
+		"default_runtime_context_device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +104,10 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute6d2dadb958077aa07b900e33(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the application instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HealthStatus
 		// CloudFormation resource type schema:
 		//
@@ -207,14 +119,18 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"health_status": schemaAttribute68296c9e630b98c6a4edba69(),
+		"health_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"last_updated_time": schemaAttributee3bfe809fb0f5ffe93dd647d(),
+		"last_updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManifestOverridesPayload
 		// CloudFormation resource type schema:
 		//
@@ -232,7 +148,17 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"manifest_overrides_payload": schemaAttribute2c761f932a077860780b4db8(),
+		"manifest_overrides_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PayloadData
+				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The overrides document.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Setting overrides for the application manifest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManifestPayload
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +176,17 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"manifest_payload": schemaAttributef6a3c14fe2a0b830f9281c38(),
+		"manifest_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PayloadData
+				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The application manifest.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The application's manifest document.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +197,10 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute0572eea138acbe0b04366e6a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the application instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuntimeRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -272,7 +211,10 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"runtime_role_arn": schemaAttribute9ebb68760d962788c00e0dd7(),
+		"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of a runtime role for the application instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +233,9 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute68296c9e630b98c6a4edba69(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusDescription
 		// CloudFormation resource type schema:
 		//
@@ -300,7 +244,9 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"status_description": schemaAttribute68296c9e630b98c6a4edba69(),
+		"status_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -335,7 +281,24 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute367f0cdfcb328365a8e22d88(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the application instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

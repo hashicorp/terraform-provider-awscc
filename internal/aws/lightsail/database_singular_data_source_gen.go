@@ -14,215 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1b8d9753c9d44dd8b25018fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the master user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3eb30b794513eddec4a27109() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49f78a39a04c12f2e54eaef0() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, enables automated backup retention for your database. Updates are applied during the next maintenance window because this can result in an outage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute521a5df0fd9ca0f3a3babdc8() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the accessibility options for your new database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54dcf3e3d1243958aa609107() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database to create when the Lightsail database resource is created. For MySQL, if this parameter isn't specified, no database is created in the database resource. For PostgreSQL, if this parameter isn't specified, a database named postgres is created in the database resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute582391fa8d3dfa85a7500333() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the valid data type for the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59b53168eca144ceb0fa80cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e5bf1927487402ffc24b1e9() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean value indicating whether the parameter can be modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67035512c6c65c3bfc2714d5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3eb30b794513eddec4a27109(),
-				// Property: Value
-				"value": schemaAttribute59b53168eca144ceb0fa80cd(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bcbb7d4f8cee8f76dcda476() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The bundle ID for your new database. A bundle describes the performance specifications for your database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fe432a2142d588d2da6bede() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The daily time range during which automated backups are created for your new database if automated backups are enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79348229c157962bf62a8f30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The weekly time range during which system maintenance can occur on your new database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e2d24951fb504cd898de93f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the value of the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8488ce7e102ad5c0254d6144() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the engine-specific parameter type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d36c1b1f1a9a9f3e4ca026a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provides a description of the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f0bf421d3a929bddf4c4e79() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "When true, the master user password is changed to a new strong password generated by Lightsail. Use the get relational database master user password operation to get the new password.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9a419a5fb00519c2a058c1d7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2bb86778006334e5baa961d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedValues
-				"allowed_values": schemaAttributeaeaa8512aadcb9c0376ec7de(),
-				// Property: ApplyMethod
-				"apply_method": schemaAttributeba5a983335f03e3ee7f2cb55(),
-				// Property: ApplyType
-				"apply_type": schemaAttribute8488ce7e102ad5c0254d6144(),
-				// Property: DataType
-				"data_type": schemaAttribute582391fa8d3dfa85a7500333(),
-				// Property: Description
-				"description": schemaAttribute8d36c1b1f1a9a9f3e4ca026a(),
-				// Property: IsModifiable
-				"is_modifiable": schemaAttribute5e5bf1927487402ffc24b1e9(),
-				// Property: ParameterName
-				"parameter_name": schemaAttributefd21931e5aae6e92208f84d1(),
-				// Property: ParameterValue
-				"parameter_value": schemaAttribute7e2d24951fb504cd898de93f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Update one or more parameters of the relational database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea32252d372f7bc02d26a3fc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The blueprint ID for your new database. A blueprint describes the major engine version of a database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeaa8512aadcb9c0376ec7de() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the valid range of values for the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb869492ef19c233aff53ca81() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates the certificate that needs to be associated with the database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba5a983335f03e3ee7f2cb55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates when parameter updates are applied. Can be immediate or pending-reboot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca10ee72ec777e101ff217f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone in which to create your new database. Use the us-east-2a case-sensitive format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda88fad863375786e721ac71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name to use for your new Lightsail database resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb3881dcd2b4d5e017aab06d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\". It cannot contain spaces.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd21931e5aae6e92208f84d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_database", databaseDataSource)
 }
@@ -240,7 +31,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttributeca10ee72ec777e101ff217f5(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Availability Zone in which to create your new database. Use the us-east-2a case-sensitive format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupRetention
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +42,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When true, enables automated backup retention for your database. Updates are applied during the next maintenance window because this can result in an outage.",
 		//	  "type": "boolean"
 		//	}
-		"backup_retention": schemaAttribute49f78a39a04c12f2e54eaef0(),
+		"backup_retention": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When true, enables automated backup retention for your database. Updates are applied during the next maintenance window because this can result in an outage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CaCertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -256,14 +53,19 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates the certificate that needs to be associated with the database.",
 		//	  "type": "string"
 		//	}
-		"ca_certificate_identifier": schemaAttributeb869492ef19c233aff53ca81(),
+		"ca_certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the certificate that needs to be associated with the database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatabaseArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"database_arn": schemaAttribute9a419a5fb00519c2a058c1d7(),
+		"database_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterDatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +75,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"master_database_name": schemaAttribute54dcf3e3d1243958aa609107(),
+		"master_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database to create when the Lightsail database resource is created. For MySQL, if this parameter isn't specified, no database is created in the database resource. For PostgreSQL, if this parameter isn't specified, a database named postgres is created in the database resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +88,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"master_user_password": schemaAttributedb3881dcd2b4d5e017aab06d(),
+		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\". It cannot contain spaces.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +101,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttribute1b8d9753c9d44dd8b25018fb(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the master user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredBackupWindow
 		// CloudFormation resource type schema:
 		//
@@ -301,7 +112,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The daily time range during which automated backups are created for your new database if automated backups are enabled.",
 		//	  "type": "string"
 		//	}
-		"preferred_backup_window": schemaAttribute6fe432a2142d588d2da6bede(),
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The daily time range during which automated backups are created for your new database if automated backups are enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +123,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The weekly time range during which system maintenance can occur on your new database.",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttribute79348229c157962bf62a8f30(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The weekly time range during which system maintenance can occur on your new database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +134,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the accessibility options for your new database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttribute521a5df0fd9ca0f3a3babdc8(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the accessibility options for your new database. A value of true specifies a database that is available to resources outside of your Lightsail account. A value of false specifies a database that is available only to your Lightsail resources in the same region as your database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseBlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -327,7 +147,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"relational_database_blueprint_id": schemaAttributea32252d372f7bc02d26a3fc2(),
+		"relational_database_blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The blueprint ID for your new database. A blueprint describes the major engine version of a database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseBundleId
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +160,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"relational_database_bundle_id": schemaAttribute6bcbb7d4f8cee8f76dcda476(),
+		"relational_database_bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The bundle ID for your new database. A bundle describes the performance specifications for your database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +174,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"relational_database_name": schemaAttributeda88fad863375786e721ac71(),
+		"relational_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name to use for your new Lightsail database resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseParameters
 		// CloudFormation resource type schema:
 		//
@@ -397,7 +226,54 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"relational_database_parameters": schemaAttributea2bb86778006334e5baa961d(),
+		"relational_database_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AllowedValues
+					"allowed_values": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the valid range of values for the parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ApplyMethod
+					"apply_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Indicates when parameter updates are applied. Can be immediate or pending-reboot.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ApplyType
+					"apply_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the engine-specific parameter type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DataType
+					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the valid data type for the parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Provides a description of the parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IsModifiable
+					"is_modifiable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "A Boolean value indicating whether the parameter can be modified.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterName
+					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the name of the parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterValue
+					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the value of the parameter.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Update one or more parameters of the relational database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RotateMasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -405,7 +281,10 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When true, the master user password is changed to a new strong password generated by Lightsail. Use the get relational database master user password operation to get the new password.",
 		//	  "type": "boolean"
 		//	}
-		"rotate_master_user_password": schemaAttribute8f0bf421d3a929bddf4c4e79(),
+		"rotate_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "When true, the master user password is changed to a new strong password generated by Lightsail. Use the get relational database master user password operation to get the new password.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -437,7 +316,24 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute67035512c6c65c3bfc2714d5(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

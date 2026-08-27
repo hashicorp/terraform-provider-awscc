@@ -14,56 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute183360a60540aa8047e9d974() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the project to which the dataset belongs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d4fab9aea09c26e9c009610() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c7a183fdda64f6b0514b95b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5233ed2dac59c7ee5ae79050() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98360eaba010626294f5ab32() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute2d4fab9aea09c26e9c009610(),
-				// Property: Value
-				"value": schemaAttribute5233ed2dac59c7ee5ae79050(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8d30e3011a31562666a57c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the dataset. Specify TRAIN to create a training dataset. Specify TEST to create a test dataset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rekognition_dataset", datasetDataSource)
 }
@@ -82,7 +32,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/dataset\\/(train|test)\\/[0-9]+$)$",
 		//	  "type": "string"
 		//	}
-		"dataset_arn": schemaAttribute3c7a183fdda64f6b0514b95b(),
+		"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DatasetType
 		// CloudFormation resource type schema:
 		//
@@ -94,7 +47,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"dataset_type": schemaAttributea8d30e3011a31562666a57c3(),
+		"dataset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the dataset. Specify TRAIN to create a training dataset. Specify TEST to create a test dataset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectArn
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +61,10 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$",
 		//	  "type": "string"
 		//	}
-		"project_arn": schemaAttribute183360a60540aa8047e9d974(),
+		"project_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the project to which the dataset belongs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +100,24 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute98360eaba010626294f5ab32(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

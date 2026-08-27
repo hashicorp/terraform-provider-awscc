@@ -20,63 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1982fa5f172904884b16ab70() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ID of the volume to attach to the workspace instance",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^vol-[0-9a-zA-Z]{1,63}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d5ce51060fd2aacfa59ee0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Mode to use when disassociating the volume",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"FORCE",
-				"NO_FORCE",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// DisassociateMode is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae9de560caa446551c210b87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device name for the volume attachment",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthAtMost(32),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec93bba47fcd775d76dc5aaea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ID of the workspace instance to associate with the volume",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.RegexMatches(regexp.MustCompile("^wsinst-[0-9a-zA-Z]{8,63}$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_workspacesinstances_volume_association", volumeAssociationResource)
 	registry.AddListResourceFactory("awscc_workspacesinstances_volume_association", generic.NewListResource(volumeAssociationResource))
@@ -94,7 +37,16 @@ func volumeAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 32,
 		//	  "type": "string"
 		//	}
-		"device": schemaAttributeae9de560caa446551c210b87(),
+		"device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The device name for the volume attachment",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(32),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DisassociateMode
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +58,21 @@ func volumeAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"disassociate_mode": schemaAttribute9d5ce51060fd2aacfa59ee0a(),
+		"disassociate_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Mode to use when disassociating the volume",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"FORCE",
+					"NO_FORCE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DisassociateMode is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: VolumeId
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +81,16 @@ func volumeAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^vol-[0-9a-zA-Z]{1,63}$",
 		//	  "type": "string"
 		//	}
-		"volume_id": schemaAttribute1982fa5f172904884b16ab70(),
+		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ID of the volume to attach to the workspace instance",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^vol-[0-9a-zA-Z]{1,63}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WorkspaceInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +99,16 @@ func volumeAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^wsinst-[0-9a-zA-Z]{8,63}$",
 		//	  "type": "string"
 		//	}
-		"workspace_instance_id": schemaAttributec93bba47fcd775d76dc5aaea(),
+		"workspace_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ID of the workspace instance to associate with the volume",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^wsinst-[0-9a-zA-Z]{8,63}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

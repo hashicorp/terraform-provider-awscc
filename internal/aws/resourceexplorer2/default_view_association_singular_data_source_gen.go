@@ -14,19 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute39e86c6c88fedc4958e32d9c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS principal that the default view is associated with, used as the unique identifier for this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bff537a6deffa514fe889f0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_resourceexplorer2_default_view_association", defaultViewAssociationDataSource)
 }
@@ -43,14 +30,19 @@ func defaultViewAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"associated_aws_principal": schemaAttribute39e86c6c88fedc4958e32d9c(),
+		"associated_aws_principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS principal that the default view is associated with, used as the unique identifier for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ViewArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"view_arn": schemaAttribute7bff537a6deffa514fe889f0(),
+		"view_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

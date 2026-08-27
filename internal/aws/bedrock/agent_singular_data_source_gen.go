@@ -17,675 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0022e4271c6e9efb5587b335() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Instruction for the agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute012583922bf3ec74672af002() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum number of days to store session details",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute021d81f9d629897b87526772() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to allow deleting action group while it is in use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute054d2d0b72c118737255883d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the knowledge base; whether it is enabled or disabled",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0c0f4cf2161d4bfe801b1e8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of function",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0da6a674830c20351e710bf6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String OpenAPI Payload",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute120fd21a38e738caaab61621() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Executor
-			"executor": schemaAttribute48b1859f64404519a5fa12fb(),
-		}, /*END SCHEMA*/
-		Description: "Structure for custom orchestration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute17ff483ef5a7c98a13eb41b8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Creation Mode for Prompt Configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b974ce5624a18e960b904d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23e0c488514e94cbe899b292() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Cumulative probability cutoff for token selection",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25b5f452874a2bbdef5a9713() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnabledMemoryTypes
-			"enabled_memory_types": schemaAttribute44fa804180ea1a880a348975(),
-			// Property: SessionSummaryConfiguration
-			"session_summary_configuration": schemaAttributec1341fe4dd642f1d799abe91(),
-			// Property: StorageDays
-			"storage_days": schemaAttribute012583922bf3ec74672af002(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for memory storage",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2aa6dc2e1c36a7df7de02064() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CustomControl
-			"custom_control": schemaAttribute9bc746f9f2767335a131d472(),
-			// Property: Lambda
-			"lambda": schemaAttributed239c7c7fe9b76fb4ff37417(),
-		}, /*END SCHEMA*/
-		Description: "Type of Executors for an Action Group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c726c344e45080afade601a() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Failure Reasons for Error.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f29028b60cec1c12e30a686() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN or name of a Bedrock model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3317c149f5c282d3d2f82458() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The recommended actions users can take to resolve an error in failureReasons.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3363327866b3289f0a267b38() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3BucketName
-			"s3_bucket_name": schemaAttribute52996b76ac11749255ca5e00(),
-			// Property: S3ObjectKey
-			"s3_object_key": schemaAttributec39f72eb40b031a181f09ad9(),
-		}, /*END SCHEMA*/
-		Description: "The identifier for the S3 resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bf52fd0847d280db279dcc1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier for the guardrail, could be the id or the arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d8a68a8721fedf934923f69() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Prompt State.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4174a4021bc5d3e611226249() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "State of the action group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4293d3bc52c31207a74993b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Version of the guardrail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4441afb655a685ec9b44d69f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Agent collaborator instruction",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44fa804180ea1a880a348975() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Types of session storage persisted in memory",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44fd7d7b5c48413dcaa62303() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to automatically prepare after creating or updating the agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47a715a72b2cd449f105adc8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Draft Agent Version.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48336f06b822251aa4fc88fd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn representation of the Agent.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48b1859f64404519a5fa12fb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Lambda
-			"lambda": schemaAttributed239c7c7fe9b76fb4ff37417(),
-		}, /*END SCHEMA*/
-		Description: "Types of executors for custom orchestration strategy",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cada3a7e6afb165704e262d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Prompt Type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4eec874f7023dc1e2161812c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute0c0f4cf2161d4bfe801b1e8a(),
-				// Property: Name
-				"name": schemaAttribute7aefb101372d1e3f894f3c10(),
-				// Property: Parameters
-				"parameters": schemaAttributed808b7f0e188ea0f69ac24f3(),
-				// Property: RequireConfirmation
-				"require_confirmation": schemaAttribute89989677062b0f68cb62259d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Function definitions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute522f8813395c361f7ce91b5f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Additional Model Request Fields for Prompt Configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52996b76ac11749255ca5e00() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A bucket in S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68272a4fd2ded44f1730de89() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ActionGroupExecutor
-				"action_group_executor": schemaAttribute2aa6dc2e1c36a7df7de02064(),
-				// Property: ActionGroupName
-				"action_group_name": schemaAttribute6c8a0155332b1bcfe7bce959(),
-				// Property: ActionGroupState
-				"action_group_state": schemaAttribute4174a4021bc5d3e611226249(),
-				// Property: ApiSchema
-				"api_schema": schemaAttributec69fe0b5d37809cca53ace69(),
-				// Property: Description
-				"description": schemaAttributed931bada0d5d1bd48cb984e5(),
-				// Property: FunctionSchema
-				"function_schema": schemaAttributed864520612fd17b909d8b43b(),
-				// Property: ParentActionGroupSignature
-				"parent_action_group_signature": schemaAttribute929af22995a9792f6a82f6e4(),
-				// Property: SkipResourceInUseCheckOnDelete
-				"skip_resource_in_use_check_on_delete": schemaAttribute021d81f9d629897b87526772(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of ActionGroups",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a6b55d746f2ab785bd04883() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute6a81f7e9239de49d4cab7afb(),
-				// Property: KnowledgeBaseId
-				"knowledge_base_id": schemaAttribute1b974ce5624a18e960b904d3(),
-				// Property: KnowledgeBaseState
-				"knowledge_base_state": schemaAttribute054d2d0b72c118737255883d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Agent Knowledge Bases",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a81f7e9239de49d4cab7afb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the Resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c8a0155332b1bcfe7bce959() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the action group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7aefb101372d1e3f894f3c10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name for a resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d1fb7d22d13a30e176c6fae() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of function parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89989677062b0f68cb62259d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ENUM to check if action requires user confirmation",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8e84d01f029c8037aef6128a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Types of orchestration strategy for agents",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute917bbd4fc902d18427cea0e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Schema Type for Action APIs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute929af22995a9792f6a82f6e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Action Group Signature for a BuiltIn Action",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94c3eac9f79c6f76971552b7() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum length of output",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute968411793c8638cfc35f5be3() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A map of tag keys and values",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b9c9fc7215fe8e29cc5b89b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Parameter Type",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bc746f9f2767335a131d472() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Custom control of action execution",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea289cf28d95d5a68b0be79c8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AdditionalModelRequestFields
-				"additional_model_request_fields": schemaAttribute522f8813395c361f7ce91b5f(),
-				// Property: BasePromptTemplate
-				"base_prompt_template": schemaAttributee0213c9fdaeac6ab0bd1d6b7(),
-				// Property: FoundationModel
-				"foundation_model": schemaAttribute2f29028b60cec1c12e30a686(),
-				// Property: InferenceConfiguration
-				"inference_configuration": schemaAttributef4248899f4ad08069b085dbc(),
-				// Property: ParserMode
-				"parser_mode": schemaAttribute17ff483ef5a7c98a13eb41b8(),
-				// Property: PromptCreationMode
-				"prompt_creation_mode": schemaAttribute17ff483ef5a7c98a13eb41b8(),
-				// Property: PromptState
-				"prompt_state": schemaAttribute3d8a68a8721fedf934923f69(),
-				// Property: PromptType
-				"prompt_type": schemaAttribute4cada3a7e6afb165704e262d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of BasePromptConfiguration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7bca44fbf72bba3ff547ffe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A KMS key ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac46f4f45b72a14392e6d847() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AliasArn
-			"alias_arn": schemaAttributec531284dcf523572d7ebceda(),
-		}, /*END SCHEMA*/
-		Description: "Agent descriptor for agent collaborator",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb656f8d076de5389200f53f3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GuardrailIdentifier
-			"guardrail_identifier": schemaAttribute3bf52fd0847d280db279dcc1(),
-			// Property: GuardrailVersion
-			"guardrail_version": schemaAttribute4293d3bc52c31207a74993b0(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for a guardrail.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcad14cff2bb755ab82e40e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Relay conversation history state",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1341fe4dd642f1d799abe91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaxRecentSessions
-			"max_recent_sessions": schemaAttributec7b84d94b3dfd86dabaf6e3b(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for Session Summarization",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec39f72eb40b031a181f09ad9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A object key in S3.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec525e148864a8aa4373bcb1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of a IAM role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec531284dcf523572d7ebceda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Alias ARN for agent descriptor",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec69fe0b5d37809cca53ace69() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Payload
-			"payload": schemaAttribute0da6a674830c20351e710bf6(),
-			// Property: S3
-			"s3": schemaAttribute3363327866b3289f0a267b38(),
-		}, /*END SCHEMA*/
-		Description: "Contains information about the API Schema for the Action Group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7b84d94b3dfd86dabaf6e3b() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum number of Sessions to Summarize",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca4e200afad27a5972e8d248() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Time Stamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece2031197c69d758bb94df6d() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Max Session Time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecea9401783f7643513807fbe() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AgentDescriptor
-				"agent_descriptor": schemaAttributeac46f4f45b72a14392e6d847(),
-				// Property: CollaborationInstruction
-				"collaboration_instruction": schemaAttribute4441afb655a685ec9b44d69f(),
-				// Property: CollaboratorName
-				"collaborator_name": schemaAttributef3973f358892f5153471943a(),
-				// Property: RelayConversationHistory
-				"relay_conversation_history": schemaAttributebcad14cff2bb755ab82e40e9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "List of Agent Collaborators",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf452f5e06f400d0cd91b083() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether to allow deleting agent while it is in use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed239c7c7fe9b76fb4ff37417() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of a Lambda.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed808b7f0e188ea0f69ac24f3() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schemaAttribute7d1fb7d22d13a30e176c6fae(),
-				// Property: Required
-				"required": schemaAttributeed9b826eac01c688779e602a(),
-				// Property: Type
-				"type": schemaAttribute9b9c9fc7215fe8e29cc5b89b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A map of parameter name and detail",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed864520612fd17b909d8b43b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Functions
-			"functions": schemaAttribute4eec874f7023dc1e2161812c(),
-		}, /*END SCHEMA*/
-		Description: "Schema of Functions",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed931bada0d5d1bd48cb984e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of action group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0213c9fdaeac6ab0bd1d6b7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Base Prompt Template.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4ed04c9006aca4ec88651d8() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Sample from the k most likely next tokens",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed9b826eac01c688779e602a() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about if a parameter is required for function call. Default to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef3eb4726f84acff453f923d() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "Controls randomness, higher values increase diversity",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3973f358892f5153471943a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Agent collaborator name",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4248899f4ad08069b085dbc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumLength
-			"maximum_length": schemaAttribute94c3eac9f79c6f76971552b7(),
-			// Property: StopSequences
-			"stop_sequences": schemaAttributeff7478514d55b9ef2db3ec54(),
-			// Property: Temperature
-			"temperature": schemaAttributeef3eb4726f84acff453f923d(),
-			// Property: TopK
-			"top_k": schemaAttributee4ed04c9006aca4ec88651d8(),
-			// Property: TopP
-			"top_p": schemaAttribute23e0c488514e94cbe899b292(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for inference in prompt configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef98314cf558cd09cc4cbbde2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Agent collaboration state",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe7c66fd7c0a6dfc15732fa8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OverrideLambda
-			"override_lambda": schemaAttributed239c7c7fe9b76fb4ff37417(),
-			// Property: PromptConfigurations
-			"prompt_configurations": schemaAttributea289cf28d95d5a68b0be79c8(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for prompt override.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff7478514d55b9ef2db3ec54() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "List of stop sequences",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_agent", agentDataSource)
 }
@@ -876,7 +207,141 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"action_groups": schemaAttribute68272a4fd2ded44f1730de89(),
+		"action_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ActionGroupExecutor
+					"action_group_executor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomControl
+							"custom_control": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Custom control of action execution",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Lambda
+							"lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of a Lambda.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Type of Executors for an Action Group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ActionGroupName
+					"action_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of the action group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ActionGroupState
+					"action_group_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "State of the action group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ApiSchema
+					"api_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Payload
+							"payload": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "String OpenAPI Payload",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3
+							"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3BucketName
+									"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A bucket in S3.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3ObjectKey
+									"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A object key in S3.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The identifier for the S3 resource.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains information about the API Schema for the Action Group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Description of action group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FunctionSchema
+					"function_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Functions
+							"functions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Description
+										"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Description of function",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Name for a resource.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Parameters
+										"parameters":              // Pattern: ""
+										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Description
+													"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Description of function parameter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Required
+													"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Information about if a parameter is required for function call. Default to false.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Parameter Type",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A map of parameter name and detail",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RequireConfirmation
+										"require_confirmation": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "ENUM to check if action requires user confirmation",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "List of Function definitions",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Schema of Functions",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParentActionGroupSignature
+					"parent_action_group_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Action Group Signature for a BuiltIn Action",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SkipResourceInUseCheckOnDelete
+					"skip_resource_in_use_check_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies whether to allow deleting action group while it is in use.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of ActionGroups",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentArn
 		// CloudFormation resource type schema:
 		//
@@ -886,7 +351,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent/[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_arn": schemaAttribute48336f06b822251aa4fc88fd(),
+		"agent_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn representation of the Agent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentCollaboration
 		// CloudFormation resource type schema:
 		//
@@ -899,7 +367,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"agent_collaboration": schemaAttributef98314cf558cd09cc4cbbde2(),
+		"agent_collaboration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Agent collaboration state",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentCollaborators
 		// CloudFormation resource type schema:
 		//
@@ -948,7 +419,41 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"agent_collaborators": schemaAttributecea9401783f7643513807fbe(),
+		"agent_collaborators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AgentDescriptor
+					"agent_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AliasArn
+							"alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Alias ARN for agent descriptor",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Agent descriptor for agent collaborator",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CollaborationInstruction
+					"collaboration_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent collaborator instruction",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CollaboratorName
+					"collaborator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Agent collaborator name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RelayConversationHistory
+					"relay_conversation_history": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Relay conversation history state",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Agent Collaborators",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentId
 		// CloudFormation resource type schema:
 		//
@@ -957,7 +462,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_id": schemaAttribute1b974ce5624a18e960b904d3(),
+		"agent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentName
 		// CloudFormation resource type schema:
 		//
@@ -966,7 +474,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"agent_name": schemaAttribute7aefb101372d1e3f894f3c10(),
+		"agent_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentResourceRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -975,7 +486,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"agent_resource_role_arn": schemaAttributec525e148864a8aa4373bcb1d(),
+		"agent_resource_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of a IAM role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentStatus
 		// CloudFormation resource type schema:
 		//
@@ -993,7 +507,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"agent_status": schemaAttribute917bbd4fc902d18427cea0e6(),
+		"agent_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Schema Type for Action APIs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentVersion
 		// CloudFormation resource type schema:
 		//
@@ -1004,7 +521,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^DRAFT$",
 		//	  "type": "string"
 		//	}
-		"agent_version": schemaAttribute47a715a72b2cd449f105adc8(),
+		"agent_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Draft Agent Version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoPrepare
 		// CloudFormation resource type schema:
 		//
@@ -1013,7 +533,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to automatically prepare after creating or updating the agent.",
 		//	  "type": "boolean"
 		//	}
-		"auto_prepare": schemaAttribute44fd7d7b5c48413dcaa62303(),
+		"auto_prepare": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to automatically prepare after creating or updating the agent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1022,7 +545,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributeca4e200afad27a5972e8d248(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomOrchestration
 		// CloudFormation resource type schema:
 		//
@@ -1049,7 +576,24 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"custom_orchestration": schemaAttribute120fd21a38e738caaab61621(),
+		"custom_orchestration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Executor
+				"executor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Lambda
+						"lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of a Lambda.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Types of executors for custom orchestration strategy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure for custom orchestration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomerEncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -1060,7 +604,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"customer_encryption_key_arn": schemaAttributea7bca44fbf72bba3ff547ffe(),
+		"customer_encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A KMS key ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1070,7 +617,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute6a81f7e9239de49d4cab7afb(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the Resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FailureReasons
 		// CloudFormation resource type schema:
 		//
@@ -1085,7 +635,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 2048,
 		//	  "type": "array"
 		//	}
-		"failure_reasons": schemaAttribute2c726c344e45080afade601a(),
+		"failure_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Failure Reasons for Error.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FoundationModel
 		// CloudFormation resource type schema:
 		//
@@ -1096,7 +650,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$",
 		//	  "type": "string"
 		//	}
-		"foundation_model": schemaAttribute2f29028b60cec1c12e30a686(),
+		"foundation_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN or name of a Bedrock model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GuardrailConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1118,7 +675,22 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"guardrail_configuration": schemaAttributeb656f8d076de5389200f53f3(),
+		"guardrail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GuardrailIdentifier
+				"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Identifier for the guardrail, could be the id or the arn",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GuardrailVersion
+				"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Version of the guardrail",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdleSessionTTLInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -1128,7 +700,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 60,
 		//	  "type": "number"
 		//	}
-		"idle_session_ttl_in_seconds": schemaAttributece2031197c69d758bb94df6d(),
+		"idle_session_ttl_in_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Max Session Time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Instruction
 		// CloudFormation resource type schema:
 		//
@@ -1137,7 +712,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 40,
 		//	  "type": "string"
 		//	}
-		"instruction": schemaAttribute0022e4271c6e9efb5587b335(),
+		"instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Instruction for the agent.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBases
 		// CloudFormation resource type schema:
 		//
@@ -1176,7 +754,29 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"knowledge_bases": schemaAttribute6a6b55d746f2ab785bd04883(),
+		"knowledge_bases": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Description of the Resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: KnowledgeBaseId
+					"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Identifier for a resource.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: KnowledgeBaseState
+					"knowledge_base_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "State of the knowledge base; whether it is enabled or disabled",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of Agent Knowledge Bases",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1214,7 +814,35 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"memory_configuration": schemaAttribute25b5f452874a2bbdef5a9713(),
+		"memory_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnabledMemoryTypes
+				"enabled_memory_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Types of session storage persisted in memory",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SessionSummaryConfiguration
+				"session_summary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxRecentSessions
+						"max_recent_sessions": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum number of Sessions to Summarize",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for Session Summarization",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageDays
+				"storage_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum number of days to store session details",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for memory storage",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OrchestrationType
 		// CloudFormation resource type schema:
 		//
@@ -1226,7 +854,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"orchestration_type": schemaAttribute8e84d01f029c8037aef6128a(),
+		"orchestration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Types of orchestration strategy for agents",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreparedAt
 		// CloudFormation resource type schema:
 		//
@@ -1235,7 +866,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"prepared_at": schemaAttributeca4e200afad27a5972e8d248(),
+		"prepared_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PromptOverrideConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1362,7 +997,95 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"prompt_override_configuration": schemaAttributefe7c66fd7c0a6dfc15732fa8(),
+		"prompt_override_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OverrideLambda
+				"override_lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of a Lambda.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PromptConfigurations
+				"prompt_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalModelRequestFields
+							"additional_model_request_fields": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  jsontypes.NormalizedType{},
+								Description: "Additional Model Request Fields for Prompt Configuration",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: BasePromptTemplate
+							"base_prompt_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Base Prompt Template.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FoundationModel
+							"foundation_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN or name of a Bedrock model.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: InferenceConfiguration
+							"inference_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MaximumLength
+									"maximum_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Description: "Maximum length of output",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: StopSequences
+									"stop_sequences": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of stop sequences",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Temperature
+									"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Description: "Controls randomness, higher values increase diversity",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TopK
+									"top_k": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Description: "Sample from the k most likely next tokens",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TopP
+									"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Description: "Cumulative probability cutoff for token selection",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for inference in prompt configuration",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ParserMode
+							"parser_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Creation Mode for Prompt Configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PromptCreationMode
+							"prompt_creation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Creation Mode for Prompt Configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PromptState
+							"prompt_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Prompt State.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PromptType
+							"prompt_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Prompt Type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of BasePromptConfiguration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for prompt override.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecommendedActions
 		// CloudFormation resource type schema:
 		//
@@ -1377,7 +1100,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 2048,
 		//	  "type": "array"
 		//	}
-		"recommended_actions": schemaAttribute3317c149f5c282d3d2f82458(),
+		"recommended_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The recommended actions users can take to resolve an error in failureReasons.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SkipResourceInUseCheckOnDelete
 		// CloudFormation resource type schema:
 		//
@@ -1386,7 +1113,10 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to allow deleting agent while it is in use.",
 		//	  "type": "boolean"
 		//	}
-		"skip_resource_in_use_check_on_delete": schemaAttributecf452f5e06f400d0cd91b083(),
+		"skip_resource_in_use_check_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to allow deleting agent while it is in use.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1404,7 +1134,12 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute968411793c8638cfc35f5be3(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TestAliasTags
 		// CloudFormation resource type schema:
 		//
@@ -1422,7 +1157,12 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"test_alias_tags": schemaAttribute968411793c8638cfc35f5be3(),
+		"test_alias_tags":   // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1431,7 +1171,11 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributeca4e200afad27a5972e8d248(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Time Stamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

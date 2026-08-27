@@ -15,104 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute07243d022e5f347113041f2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The private key from your external identity provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a159e1b6daa636680eef187() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute40fa8b0fba81c1fb2477ec12(),
-				// Property: Value
-				"value": schemaAttribute5bc5f1681acad608137152a1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c430bb446358e31ed2424d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Amazon Resource Name (ARN) of the SAML provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2daa156cb85713eb24e028fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40fa8b0fba81c1fb2477ec12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d7fa1471a581916dc0cb0db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The encryption setting for the SAML provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f27112576fdeac9bc20fdbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The date and time, in <a href=\\\"http://www.iso.org/iso/iso8601\\\">ISO 8601 date-time </a> format, when the private key was uploaded.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bc5f1681acad608137152a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5bd43aa551a2685a3518e6f6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier for the SAML private key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba17f06e59a478e6ae1dbe7f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KeyId
-				"key_id": schemaAttribute5bd43aa551a2685a3518e6f6(),
-				// Property: Timestamp
-				"timestamp": schemaAttribute4f27112576fdeac9bc20fdbc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec77a00d7675e4b986551b23c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier assigned to the SAML provider",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee31a71456ac56d8b203bb5d1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Key ID of the private key to remove",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iam_saml_provider", sAMLProviderDataSource)
 }
@@ -131,7 +33,10 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"add_private_key": schemaAttribute07243d022e5f347113041f2d(),
+		"add_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The private key from your external identity provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +46,10 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute1c430bb446358e31ed2424d8(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the SAML provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssertionEncryptionMode
 		// CloudFormation resource type schema:
 		//
@@ -153,7 +61,10 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"assertion_encryption_mode": schemaAttribute4d7fa1471a581916dc0cb0db(),
+		"assertion_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The encryption setting for the SAML provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +74,9 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[\\w._-]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute2daa156cb85713eb24e028fa(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateKeyList
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +108,24 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 2,
 		//	  "type": "array"
 		//	}
-		"private_key_list": schemaAttributeba17f06e59a478e6ae1dbe7f(),
+		"private_key_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: KeyId
+					"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier for the SAML private key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Timestamp
+					"timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  timetypes.RFC3339Type{},
+						Description: "The date and time, in <a href=\\\"http://www.iso.org/iso/iso8601\\\">ISO 8601 date-time </a> format, when the private key was uploaded.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RemovePrivateKey
 		// CloudFormation resource type schema:
 		//
@@ -206,7 +136,10 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[A-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"remove_private_key": schemaAttributee31a71456ac56d8b203bb5d1(),
+		"remove_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Key ID of the private key to remove",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SamlMetadataDocument
 		// CloudFormation resource type schema:
 		//
@@ -215,7 +148,9 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1000,
 		//	  "type": "string"
 		//	}
-		"saml_metadata_document": schemaAttribute2daa156cb85713eb24e028fa(),
+		"saml_metadata_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SamlProviderUUID
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +161,10 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[A-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"saml_provider_uuid": schemaAttributec77a00d7675e4b986551b23c(),
+		"saml_provider_uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier assigned to the SAML provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +196,23 @@ func sAMLProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute0a159e1b6daa636680eef187(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

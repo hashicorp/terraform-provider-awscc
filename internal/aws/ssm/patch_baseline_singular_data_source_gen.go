@@ -15,217 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute047d2285eca9752199ea09d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the patch baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute129cb849da4c808863339c4f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute257535a4d73300c1e7a01d1d(),
-				// Property: Values
-				"values": schemaAttributead1d698e37fc8f229b5f0b69(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e35593e76d082d4b14f11cb() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of explicitly rejected patches for the baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute257535a4d73300c1e7a01d1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute284bb809d399a84b54bbf2b6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4511b3e50fa1886245e1d45f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PatchFilters
-			"patch_filters": schemaAttribute129cb849da4c808863339c4f(),
-		}, /*END SCHEMA*/
-		Description: "A set of global filters used to include patches in the baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46395f2a8d20fba676618e9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The action for Patch Manager to take on patches included in the RejectedPackages list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c3a89c8c4a7cf942cffe287() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PatchFilters
-			"patch_filters": schemaAttribute129cb849da4c808863339c4f(),
-		}, /*END SCHEMA*/
-		Description: "The patch filter group that defines the criteria for the rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54318df3dbb19916da4845c2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compliance status for vendor recommended security updates that are not approved by this patch baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute615249ccf5ef54f11d43df27() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Configuration
-				"configuration": schemaAttribute257535a4d73300c1e7a01d1d(),
-				// Property: Name
-				"name": schemaAttribute257535a4d73300c1e7a01d1d(),
-				// Property: Products
-				"products": schemaAttributead1d698e37fc8f229b5f0b69(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c7958bd26e926977ac388f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the patch baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8495e575c7c4149fb777881e() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute92424bd58d04694fcbc194ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the patch baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabe6d9c0d6229ba9312b2fb8() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of explicitly approved patches for the baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead1d698e37fc8f229b5f0b69() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1b2b852cbba9585fc99d199() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba6d9a546b22cd1517a1fdd8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PatchRules
-			"patch_rules": schemaAttributecb219062431df0c436e15e50(),
-		}, /*END SCHEMA*/
-		Description: "A set of rules defining the approval rules for a patch baseline.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd3662717f0e7b53a92b8483() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Set the baseline as default baseline. Only registering to default patch baseline is allowed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec752282f39a7d081949a6b2a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines the operating system the patch baseline applies to. The Default value is WINDOWS.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb219062431df0c436e15e50() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApproveAfterDays
-				"approve_after_days": schemaAttributeb1b2b852cbba9585fc99d199(),
-				// Property: ApproveUntilDate
-				"approve_until_date": schemaAttribute257535a4d73300c1e7a01d1d(),
-				// Property: ComplianceLevel
-				"compliance_level": schemaAttribute257535a4d73300c1e7a01d1d(),
-				// Property: EnableNonSecurity
-				"enable_non_security": schemaAttribute284bb809d399a84b54bbf2b6(),
-				// Property: PatchFilterGroup
-				"patch_filter_group": schemaAttribute4c3a89c8c4a7cf942cffe287(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7377640f7481934acd412bf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef49059f7105640001a11310a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute257535a4d73300c1e7a01d1d(),
-				// Property: Value
-				"value": schemaAttribute257535a4d73300c1e7a01d1d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefdd8ebf57f3cf96d81b2708b() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "PatchGroups is used to associate instances with a specific patch baseline",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_patch_baseline", patchBaselineDataSource)
 }
@@ -339,7 +128,60 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"approval_rules": schemaAttributeba6d9a546b22cd1517a1fdd8(),
+		"approval_rules": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PatchRules
+				"patch_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ApproveAfterDays
+							"approve_after_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ApproveUntilDate
+							"approve_until_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ComplianceLevel
+							"compliance_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: EnableNonSecurity
+							"enable_non_security": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PatchFilterGroup
+							"patch_filter_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PatchFilters
+									"patch_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Values
+												"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The patch filter group that defines the criteria for the rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A set of rules defining the approval rules for a patch baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApprovedPatches
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +198,11 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"approved_patches": schemaAttributeabe6d9c0d6229ba9312b2fb8(),
+		"approved_patches": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of explicitly approved patches for the baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApprovedPatchesComplianceLevel
 		// CloudFormation resource type schema:
 		//
@@ -373,7 +219,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"approved_patches_compliance_level": schemaAttributee7377640f7481934acd412bf(),
+		"approved_patches_compliance_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApprovedPatchesEnableNonSecurity
 		// CloudFormation resource type schema:
 		//
@@ -382,7 +231,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.",
 		//	  "type": "boolean"
 		//	}
-		"approved_patches_enable_non_security": schemaAttribute8495e575c7c4149fb777881e(),
+		"approved_patches_enable_non_security": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailableSecurityUpdatesComplianceStatus
 		// CloudFormation resource type schema:
 		//
@@ -394,7 +246,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"available_security_updates_compliance_status": schemaAttribute54318df3dbb19916da4845c2(),
+		"available_security_updates_compliance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compliance status for vendor recommended security updates that are not approved by this patch baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultBaseline
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +258,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Set the baseline as default baseline. Only registering to default patch baseline is allowed.",
 		//	  "type": "boolean"
 		//	}
-		"default_baseline": schemaAttributebd3662717f0e7b53a92b8483(),
+		"default_baseline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Set the baseline as default baseline. Only registering to default patch baseline is allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -413,7 +271,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute047d2285eca9752199ea09d0(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the patch baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalFilters
 		// CloudFormation resource type schema:
 		//
@@ -472,7 +333,29 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"global_filters": schemaAttribute4511b3e50fa1886245e1d45f(),
+		"global_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PatchFilters
+				"patch_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A set of global filters used to include patches in the baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -483,7 +366,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9_\\-:/]{20,128}$",
 		//	  "type": "string"
 		//	}
-		"patch_baseline_id": schemaAttribute92424bd58d04694fcbc194ce(),
+		"patch_baseline_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the patch baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +380,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6c7958bd26e926977ac388f5(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the patch baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OperatingSystem
 		// CloudFormation resource type schema:
 		//
@@ -520,7 +409,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"operating_system": schemaAttributec752282f39a7d081949a6b2a(),
+		"operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Defines the operating system the patch baseline applies to. The Default value is WINDOWS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PatchGroups
 		// CloudFormation resource type schema:
 		//
@@ -534,7 +426,11 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"patch_groups": schemaAttributefdd8ebf57f3cf96d81b2708b(),
+		"patch_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "PatchGroups is used to associate instances with a specific patch baseline",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RejectedPatches
 		// CloudFormation resource type schema:
 		//
@@ -551,7 +447,11 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"rejected_patches": schemaAttribute1e35593e76d082d4b14f11cb(),
+		"rejected_patches": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of explicitly rejected patches for the baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RejectedPatchesAction
 		// CloudFormation resource type schema:
 		//
@@ -564,7 +464,10 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"rejected_patches_action": schemaAttribute46395f2a8d20fba676618e9f(),
+		"rejected_patches_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The action for Patch Manager to take on patches included in the RejectedPackages list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Sources
 		// CloudFormation resource type schema:
 		//
@@ -602,7 +505,27 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"sources": schemaAttribute615249ccf5ef54f11d43df27(),
+		"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Configuration
+					"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Products
+					"products": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -634,7 +557,22 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributef49059f7105640001a11310a(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

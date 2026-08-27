@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute18019ab8fa275d70964c9f3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70793beacff426175580a33f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_delegated_admin", delegatedAdminDataSource)
 }
@@ -44,7 +30,10 @@ func delegatedAdminDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"admin_account_id": schemaAttribute70793beacff426175580a33f(),
+		"admin_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DelegatedAdminIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -53,7 +42,10 @@ func delegatedAdminDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
-		"delegated_admin_identifier": schemaAttribute18019ab8fa275d70964c9f3f(),
+		"delegated_admin_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +57,10 @@ func delegatedAdminDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute18019ab8fa275d70964c9f3f(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

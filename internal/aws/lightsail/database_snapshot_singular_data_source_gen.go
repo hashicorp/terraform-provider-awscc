@@ -15,168 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute01b78362045b3721697a4b03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute058b60a4ee4720af3c20d3e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0b29561ab4a1d6655fc7165f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18b4bd3b6ca8565a2e474ebd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute274abb5a176e277ec7768f43() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the database from which the database snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2d68af15f782c2685f623ef0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The software of the database snapshot (for example, MySQL).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute342977c5ac7d76cfc0b32cbf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Availability Zone where the database snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3cc4c1be36a21ef6ab0dd901() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute449bc5a00fb127ca750882bd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the database snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6598452b3371b1c4e2d8f03b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the database on which to base your new snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c678b2a821d10cb53ab459b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of the database snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8ce762f70f7a0c082849e191() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for your new database snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9043812d4d8780267bf9ac53() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute01b78362045b3721697a4b03(),
-				// Property: Value
-				"value": schemaAttribute0b29561ab4a1d6655fc7165f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute912133d6e450ac55beba3485() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region where the database snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea77b710cf7783ca21bac62d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the database snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea86d6dd55592ce2400bb1f09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the source database from which the database snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0343dbdf8b7653a2812960f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Lightsail resource type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee685cb8b2012ab92534c7d9a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The size of the disk in GB (for example, 32) for the database snapshot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee75d7dcc6fd565507c341252() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The bundle ID of the database from which the database snapshot was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeac2dd0b087eda3e4ff191b8() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute342977c5ac7d76cfc0b32cbf(),
-			// Property: RegionName
-			"region_name": schemaAttribute912133d6e450ac55beba3485(),
-		}, /*END SCHEMA*/
-		Description: "The Region name and Availability Zone where the database snapshot is located.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef48eba9ce2b5e27aa3bb2103() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The database engine version for the database snapshot (for example, 5.7.23).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_database_snapshot", databaseSnapshotDataSource)
 }
@@ -193,7 +31,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributea77b710cf7783ca21bac62d3(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the database snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +43,11 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute449bc5a00fb127ca750882bd(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the database snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +56,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"engine": schemaAttribute2d68af15f782c2685f623ef0(),
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The software of the database snapshot (for example, MySQL).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -220,7 +68,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"engine_version": schemaAttributef48eba9ce2b5e27aa3bb2103(),
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The database engine version for the database snapshot (for example, 5.7.23).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromRelationalDatabaseArn
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +80,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"from_relational_database_arn": schemaAttribute274abb5a176e277ec7768f43(),
+		"from_relational_database_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the database from which the database snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromRelationalDatabaseBlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -237,7 +91,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.",
 		//	  "type": "string"
 		//	}
-		"from_relational_database_blueprint_id": schemaAttribute18b4bd3b6ca8565a2e474ebd(),
+		"from_relational_database_blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromRelationalDatabaseBundleId
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +102,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The bundle ID of the database from which the database snapshot was created.",
 		//	  "type": "string"
 		//	}
-		"from_relational_database_bundle_id": schemaAttributee75d7dcc6fd565507c341252(),
+		"from_relational_database_bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The bundle ID of the database from which the database snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FromRelationalDatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -254,7 +114,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"from_relational_database_name": schemaAttributea86d6dd55592ce2400bb1f09(),
+		"from_relational_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the source database from which the database snapshot was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +136,22 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schemaAttributeeac2dd0b087eda3e4ff191b8(),
+		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Availability Zone where the database snapshot was created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RegionName
+				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region where the database snapshot was created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Region name and Availability Zone where the database snapshot is located.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -282,7 +160,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^\\w[\\w\\-]*\\w$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute3cc4c1be36a21ef6ab0dd901(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -291,7 +172,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^\\w[\\w\\-]*\\w$",
 		//	  "type": "string"
 		//	}
-		"relational_database_name": schemaAttribute6598452b3371b1c4e2d8f03b(),
+		"relational_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the database on which to base your new snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RelationalDatabaseSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -302,7 +186,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^\\w[\\w\\-]*\\w$",
 		//	  "type": "string"
 		//	}
-		"relational_database_snapshot_name": schemaAttribute8ce762f70f7a0c082849e191(),
+		"relational_database_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for your new database snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +200,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttributeb0343dbdf8b7653a2812960f(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Lightsail resource type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SizeInGb
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +211,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The size of the disk in GB (for example, 32) for the database snapshot.",
 		//	  "type": "integer"
 		//	}
-		"size_in_gb": schemaAttributee685cb8b2012ab92534c7d9a(),
+		"size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The size of the disk in GB (for example, 32) for the database snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +223,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute8c678b2a821d10cb53ab459b(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the database snapshot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +234,10 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.",
 		//	  "type": "string"
 		//	}
-		"support_code": schemaAttribute058b60a4ee4720af3c20d3e7(),
+		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -371,7 +270,24 @@ func databaseSnapshotDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute9043812d4d8780267bf9ac53(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

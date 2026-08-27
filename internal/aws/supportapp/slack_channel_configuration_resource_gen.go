@@ -21,107 +21,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04157012e2925768554f2e21() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The channel ID in Slack, which identifies a channel within a workspace.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute217ab57e87224ef060a579ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The channel name in Slack.",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4243270c8dca65dc469db2b5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The severity level of a support case that a customer wants to get notified for.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"none",
-				"all",
-				"high",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e9258463f88113b4b310235() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(31, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$"), ""),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87b032c4ed41d48b6de0514c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to notify when a case is resolved.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8eced454895bcc47d044a3ea() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to notify when a correspondence is added to a case.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd7acaf922d2e9e3ab2813fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The team ID in Slack, which uniquely identifies a workspace.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef132c2164d116633fc73a2fb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to notify when a case is created or reopened.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_supportapp_slack_channel_configuration", slackChannelConfigurationResource)
 	registry.AddListResourceFactory("awscc_supportapp_slack_channel_configuration", generic.NewListResource(slackChannelConfigurationResource))
@@ -141,7 +40,17 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"channel_id": schemaAttribute04157012e2925768554f2e21(),
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The channel ID in Slack, which identifies a channel within a workspace.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +61,18 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schemaAttribute217ab57e87224ef060a579ee(),
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The channel name in Slack.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +83,14 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$",
 		//	  "type": "string"
 		//	}
-		"channel_role_arn": schemaAttribute6e9258463f88113b4b310235(),
+		"channel_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(31, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnAddCorrespondenceToCase
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +98,14 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Whether to notify when a correspondence is added to a case.",
 		//	  "type": "boolean"
 		//	}
-		"notify_on_add_correspondence_to_case": schemaAttribute8eced454895bcc47d044a3ea(),
+		"notify_on_add_correspondence_to_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to notify when a correspondence is added to a case.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnCaseSeverity
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +118,17 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"notify_on_case_severity": schemaAttribute4243270c8dca65dc469db2b5(),
+		"notify_on_case_severity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The severity level of a support case that a customer wants to get notified for.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"none",
+					"all",
+					"high",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnCreateOrReopenCase
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +136,14 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Whether to notify when a case is created or reopened.",
 		//	  "type": "boolean"
 		//	}
-		"notify_on_create_or_reopen_case": schemaAttributef132c2164d116633fc73a2fb(),
+		"notify_on_create_or_reopen_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to notify when a case is created or reopened.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NotifyOnResolveCase
 		// CloudFormation resource type schema:
 		//
@@ -200,7 +151,14 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Whether to notify when a case is resolved.",
 		//	  "type": "boolean"
 		//	}
-		"notify_on_resolve_case": schemaAttribute87b032c4ed41d48b6de0514c(),
+		"notify_on_resolve_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to notify when a case is resolved.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TeamId
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +169,17 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"team_id": schemaAttributebd7acaf922d2e9e3ab2813fe(),
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The team ID in Slack, which uniquely identifies a workspace.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

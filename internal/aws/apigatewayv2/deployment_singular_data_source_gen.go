@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute35a628991737aed81fad9c48() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The API identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute54b50286e8c432403ed27b17() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an existing stage to associate with the deployment.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74b8c0ef2fb6cb970428e724() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description for the deployment resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafd2546a06fe305a2d7c4a4b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_deployment", deploymentDataSource)
 }
@@ -57,7 +29,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schemaAttribute35a628991737aed81fad9c48(),
+		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The API identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schemaAttributeafd2546a06fe305a2d7c4a4b(),
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description for the deployment resource.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute74b8c0ef2fb6cb970428e724(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description for the deployment resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of an existing stage to associate with the deployment.",
 		//	  "type": "string"
 		//	}
-		"stage_name": schemaAttribute54b50286e8c432403ed27b17(),
+		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an existing stage to associate with the deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

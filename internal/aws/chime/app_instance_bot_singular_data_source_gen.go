@@ -15,164 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00b70399d25bfa836935d872() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets standard messages as the bot trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06da53a40a19f4cc5537eddf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the AppInstanceBot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1760a91b1f3b1bf58916f9ba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InvokedBy
-			"invoked_by": schemaAttribute6be7cbf2bcb92825f727c0ec(),
-			// Property: LexBotAliasArn
-			"lex_bot_alias_arn": schemaAttributecb8f887f9e869345a8a40e3c(),
-			// Property: LocaleId
-			"locale_id": schemaAttribute776db675cfff151f3d1c668a(),
-			// Property: RespondsTo
-			"responds_to": schemaAttributea8a3254934854c8b7f146f2c(),
-			// Property: WelcomeIntent
-			"welcome_intent": schemaAttributeca66b079b8e2af4530221b1e(),
-		}, /*END SCHEMA*/
-		Description: "The configuration for an Amazon Lex V2 bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c1a098caf7a5eb7829f0daa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Lex
-			"lex": schemaAttribute1760a91b1f3b1bf58916f9ba(),
-		}, /*END SCHEMA*/
-		Description: "A structure that contains configuration data.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e7d05ebf06abb3c335af4f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AppInstanceBot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute617ab018a406a57f0fee971f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value in a tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6be7cbf2bcb92825f727c0ec() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StandardMessages
-			"standard_messages": schemaAttribute00b70399d25bfa836935d872(),
-			// Property: TargetedMessages
-			"targeted_messages": schemaAttributed1d843e6887ca495844ad91d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the type of message that triggers a bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute776db675cfff151f3d1c668a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies the Amazon Lex V2 bot's language and locale.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89c22eba91f5c1b27173f6e4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key in a tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0f6fd22c0e977af1a746c0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea299c620b22936ee686399d2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The metadata of the AppInstanceBot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8a3254934854c8b7f146f2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac98c5d2d0ad89886058deb6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute89c22eba91f5c1b27173f6e4(),
-				// Property: Value
-				"value": schemaAttribute617ab018a406a57f0fee971f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags assigned to the AppInstanceBot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdbe679fae7010c8d6dbff45() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca66b079b8e2af4530221b1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the welcome intent configured in the Amazon Lex V2 bot.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb8f887f9e869345a8a40e3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the Amazon Lex V2 bot's alias.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed1d843e6887ca495844ad91d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Sets targeted messages as the bot trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee572ba1cb31e30cbe789855() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the AppInstance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_chime_app_instance_bot", appInstanceBotDataSource)
 }
@@ -191,7 +33,10 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_instance_arn": schemaAttributeee572ba1cb31e30cbe789855(),
+		"app_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AppInstance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AppInstanceBotArn
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +47,10 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_instance_bot_arn": schemaAttribute5e7d05ebf06abb3c335af4f3(),
+		"app_instance_bot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AppInstanceBot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +129,56 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttribute2c1a098caf7a5eb7829f0daa(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Lex
+				"lex": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvokedBy
+						"invoked_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StandardMessages
+								"standard_messages": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Sets standard messages as the bot trigger.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TargetedMessages
+								"targeted_messages": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Sets targeted messages as the bot trigger.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the type of message that triggers a bot.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LexBotAliasArn
+						"lex_bot_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the Amazon Lex V2 bot's alias.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocaleId
+						"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Identifies the Amazon Lex V2 bot's language and locale.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RespondsTo
+						"responds_to": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WelcomeIntent
+						"welcome_intent": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the welcome intent configured in the Amazon Lex V2 bot.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for an Amazon Lex V2 bot.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure that contains configuration data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +187,11 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schemaAttributea0f6fd22c0e977af1a746c0a(),
+		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +200,11 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schemaAttributebdbe679fae7010c8d6dbff45(),
+		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Metadata
 		// CloudFormation resource type schema:
 		//
@@ -310,7 +215,10 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"metadata": schemaAttributea299c620b22936ee686399d2(),
+		"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The metadata of the AppInstanceBot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +229,10 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute06da53a40a19f4cc5537eddf(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the AppInstanceBot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -353,7 +264,24 @@ func appInstanceBotDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeac98c5d2d0ad89886058deb6(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key in a tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value in a tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags assigned to the AppInstanceBot.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

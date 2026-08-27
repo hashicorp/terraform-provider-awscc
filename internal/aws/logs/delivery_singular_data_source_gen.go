@@ -15,99 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute060832e888318a42fc82a559() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique ID that identifies this delivery in your account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute206da8b12e32e6e38d7919eb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3542a5a0546ba452fa8414e1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42ae07e01c5b41e2926fafcc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The field delimiter to use between record fields when the final output format of a delivery is in Plain , W3C , or Raw format.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b23848e547c62987061bebe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the delivery destination that is associated with this delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60873287d09468d2e8131fa3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of record fields to be delivered to the destination, in order. If the delivery's log source has mandatory fields, they must be included in this list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6c75d7e030126bfde3522263() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a7ee5be9e99161a23a7158c() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef6917cc6fb18db27884b019c(),
-				// Property: Value
-				"value": schemaAttributeeab255733933f17f8cfc68f3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags that have been assigned to this delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9abecac9c3b696dd7a825f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the delivery source that is associated with this delivery.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8dbca74acde4bf38c906f53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This string allows re-configuring the S3 object prefix to contain either static or variable sections. The valid variables to use in the suffix path will vary by each log source. See ConfigurationTemplate$allowedSuffixPathFields for more info on what values are supported in the suffix path for each log source.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeab255733933f17f8cfc68f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6917cc6fb18db27884b019c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_delivery", deliveryDataSource)
 }
@@ -126,7 +33,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute6c75d7e030126bfde3522263(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryDestinationArn
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +47,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
-		"delivery_destination_arn": schemaAttribute5b23848e547c62987061bebe(),
+		"delivery_destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the delivery destination that is associated with this delivery.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryDestinationType
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +61,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
-		"delivery_destination_type": schemaAttribute3542a5a0546ba452fa8414e1(),
+		"delivery_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryId
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +75,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
-		"delivery_id": schemaAttribute060832e888318a42fc82a559(),
+		"delivery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID that identifies this delivery in your account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliverySourceName
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +89,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w-]*$",
 		//	  "type": "string"
 		//	}
-		"delivery_source_name": schemaAttributeb9abecac9c3b696dd7a825f1(),
+		"delivery_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the delivery source that is associated with this delivery.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FieldDelimiter
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +102,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"field_delimiter": schemaAttribute42ae07e01c5b41e2926fafcc(),
+		"field_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The field delimiter to use between record fields when the final output format of a delivery is in Plain , W3C , or Raw format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordFields
 		// CloudFormation resource type schema:
 		//
@@ -194,7 +119,11 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"record_fields": schemaAttribute60873287d09468d2e8131fa3(),
+		"record_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of record fields to be delivered to the destination, in order. If the delivery's log source has mandatory fields, they must be included in this list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3EnableHiveCompatiblePath
 		// CloudFormation resource type schema:
 		//
@@ -202,7 +131,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.",
 		//	  "type": "boolean"
 		//	}
-		"s3_enable_hive_compatible_path": schemaAttribute206da8b12e32e6e38d7919eb(),
+		"s3_enable_hive_compatible_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: S3SuffixPath
 		// CloudFormation resource type schema:
 		//
@@ -212,7 +144,10 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"s3_suffix_path": schemaAttributec8dbca74acde4bf38c906f53(),
+		"s3_suffix_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "This string allows re-configuring the S3 object prefix to contain either static or variable sections. The valid variables to use in the suffix path will vary by each log source. See ConfigurationTemplate$allowedSuffixPathFields for more info on what values are supported in the suffix path for each log source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +180,24 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute8a7ee5be9e99161a23a7158c(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags that have been assigned to this delivery.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,41 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute34814bea91cf3db49d0ddc57() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b6dd2b1997305d27de42898() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the dedicated IP pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3f6bafe26626f239339174c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae0807f8a5f632f413bacb5c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea3f6bafe26626f239339174c(),
-				// Property: Value
-				"value": schemaAttributea3f6bafe26626f239339174c(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags (keys and values) associated with the dedicated IP pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_dedicated_ip_pool", dedicatedIpPoolDataSource)
 }
@@ -65,7 +30,10 @@ func dedicatedIpPoolDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-z0-9_-]{0,64}$",
 		//	  "type": "string"
 		//	}
-		"pool_name": schemaAttribute3b6dd2b1997305d27de42898(),
+		"pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the dedicated IP pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScalingMode
 		// CloudFormation resource type schema:
 		//
@@ -74,7 +42,10 @@ func dedicatedIpPoolDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^(STANDARD|MANAGED)$",
 		//	  "type": "string"
 		//	}
-		"scaling_mode": schemaAttribute34814bea91cf3db49d0ddc57(),
+		"scaling_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -105,7 +76,22 @@ func dedicatedIpPoolDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributeae0807f8a5f632f413bacb5c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the dedicated IP pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

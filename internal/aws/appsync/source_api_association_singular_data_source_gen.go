@@ -15,109 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute22ae1a7875c49663d2a7a223() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the SourceApiAssociation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2969faa12c9e49fc08c1b5ee() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the source API in the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67ff8a0a9028e66824803893() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Configuration of the merged behavior for the association. For example when it could be auto or has to be manual.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a7015ca1eb3dbccf1a6878f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MergeType
-			"merge_type": schemaAttribute67ff8a0a9028e66824803893(),
-		}, /*END SCHEMA*/
-		Description: "Customized configuration for SourceApiAssociation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d9ca139740a7cbf6388af29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current SourceApiAssociation status details.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute838827375970a54cb0441383() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "GraphQLApiId of the Merged API in the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8a6e48a6143700417b49194c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier of the Source GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dca0a98f9ecc2bcf81d47ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of SourceApiAssociation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96e2b265c689fbcdbcc23e55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Date of last schema successful merge.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1ac67ee9cf7e2dd050d8b50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the Merged API in the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed205ee5377babaa9ac4ac0e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the SourceApiAssociation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed97d33aaf40b519073fb9527() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifier of the Merged GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee022ceb9857052430bb8188f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the SourceApiAssociation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef3814f5f683210fca497fa5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "GraphQLApiId of the source API in the association.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_source_api_association", sourceApiAssociationDataSource)
 }
@@ -133,7 +30,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "ARN of the SourceApiAssociation.",
 		//	  "type": "string"
 		//	}
-		"association_arn": schemaAttributee022ceb9857052430bb8188f(),
+		"association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the SourceApiAssociation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -141,7 +41,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Id of the SourceApiAssociation.",
 		//	  "type": "string"
 		//	}
-		"association_id": schemaAttribute22ae1a7875c49663d2a7a223(),
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the SourceApiAssociation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +52,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Description of the SourceApiAssociation.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributed205ee5377babaa9ac4ac0e2(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the SourceApiAssociation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastSuccessfulMergeDate
 		// CloudFormation resource type schema:
 		//
@@ -158,7 +64,11 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_successful_merge_date": schemaAttribute96e2b265c689fbcdbcc23e55(),
+		"last_successful_merge_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Date of last schema successful merge.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MergedApiArn
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +77,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"merged_api_arn": schemaAttributea1ac67ee9cf7e2dd050d8b50(),
+		"merged_api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the Merged API in the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MergedApiId
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +88,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "GraphQLApiId of the Merged API in the association.",
 		//	  "type": "string"
 		//	}
-		"merged_api_id": schemaAttribute838827375970a54cb0441383(),
+		"merged_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "GraphQLApiId of the Merged API in the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MergedApiIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +99,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Identifier of the Merged GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
 		//	  "type": "string"
 		//	}
-		"merged_api_identifier": schemaAttributed97d33aaf40b519073fb9527(),
+		"merged_api_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier of the Merged GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceApiArn
 		// CloudFormation resource type schema:
 		//
@@ -192,7 +111,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"source_api_arn": schemaAttribute2969faa12c9e49fc08c1b5ee(),
+		"source_api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the source API in the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceApiAssociationConfig
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +132,17 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    }
 		//	  }
 		//	}
-		"source_api_association_config": schemaAttribute7a7015ca1eb3dbccf1a6878f(),
+		"source_api_association_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MergeType
+				"merge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configuration of the merged behavior for the association. For example when it could be auto or has to be manual.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Customized configuration for SourceApiAssociation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceApiAssociationStatus
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +160,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_api_association_status": schemaAttribute8dca0a98f9ecc2bcf81d47ac(),
+		"source_api_association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current status of SourceApiAssociation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceApiAssociationStatusDetail
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +171,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Current SourceApiAssociation status details.",
 		//	  "type": "string"
 		//	}
-		"source_api_association_status_detail": schemaAttribute7d9ca139740a7cbf6388af29(),
+		"source_api_association_status_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current SourceApiAssociation status details.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceApiId
 		// CloudFormation resource type schema:
 		//
@@ -244,7 +182,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "GraphQLApiId of the source API in the association.",
 		//	  "type": "string"
 		//	}
-		"source_api_id": schemaAttributeef3814f5f683210fca497fa5(),
+		"source_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "GraphQLApiId of the source API in the association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceApiIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -252,7 +193,10 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Identifier of the Source GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
 		//	  "type": "string"
 		//	}
-		"source_api_identifier": schemaAttribute8a6e48a6143700417b49194c(),
+		"source_api_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Identifier of the Source GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

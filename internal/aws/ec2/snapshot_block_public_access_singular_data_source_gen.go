@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute886b3cbb3ac1f16000a88425() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The state of EBS Snapshot Block Public Access.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdb6eeb3be2a9eb1b09f7b1a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the specified AWS account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_snapshot_block_public_access", snapshotBlockPublicAccessDataSource)
 }
@@ -43,7 +29,10 @@ func snapshotBlockPublicAccessDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The identifier for the specified AWS account.",
 		//	  "type": "string"
 		//	}
-		"account_id": schemaAttributebdb6eeb3be2a9eb1b09f7b1a(),
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the specified AWS account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -55,7 +44,10 @@ func snapshotBlockPublicAccessDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute886b3cbb3ac1f16000a88425(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of EBS Snapshot Block Public Access.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

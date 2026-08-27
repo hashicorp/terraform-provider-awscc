@@ -15,435 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00c148dbbb86b959211df344() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of data storage currently in use for Autonomous Databases in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0263a0bd14f91af11131e4ff() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DaysOfWeek
-			"days_of_week": schemaAttribute6249ebca3c5f03cd30a2e21d(),
-			// Property: HoursOfDay
-			"hours_of_day": schemaAttributeecfeca0290b082a3241b3028(),
-			// Property: LeadTimeInWeeks
-			"lead_time_in_weeks": schemaAttribute7d30a60250ee1eb2e4a48f8e(),
-			// Property: Months
-			"months": schemaAttribute24f9bcdf5a5f5c480d11425e(),
-			// Property: Preference
-			"preference": schemaAttribute1f9e02bfb173ed59f7d89515(),
-			// Property: WeeksOfMonth
-			"weeks_of_month": schemaAttribute9c24055893772fe2a85c275e(),
-		}, /*END SCHEMA*/
-		Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05512034ac440704ab4b249c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether mutual TLS (mTLS) authentication is enabled for the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute05f02dcc0db8029a8231cc13() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The data storage size allocated for Autonomous Databases in the Autonomous VM cluster, in TB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute069c2d19bff0efe77b550a8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The time zone of the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0d552323f14d11b1cc16a6c5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of Autonomous CDBs currently provisioned in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11a75c6a51d15d40096fdf2e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of Autonomous CDBs that can be provisioned in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19f116a7be0f88b92910c728() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The compute model of the Autonomous VM cluster: ECPU or OCPU.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c405434f1f856562107b2a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c6d80a0fd6f91aa52545366() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total number of CPU cores in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f9e02bfb173ed59f7d89515() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The preference for the maintenance window scheduling.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24f9bcdf5a5f5c480d11425e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The months when maintenance can be performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b3b6a514a149c6bfce4ab23() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c3eb7d2e7981e6b4fde93b6() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AwsIntegration
-				"aws_integration": schemaAttribute9bf0e0e85a831e7faca86b15(),
-				// Property: IamRoleArn
-				"iam_role_arn": schemaAttributeb987c0de0c8de10df91fdd62(),
-				// Property: Status
-				"status": schemaAttribute936ad35e11782f6939f7d387(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3d56e0c9f872d9e98610fe24() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores currently provisioned in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f98e779239f57aca4e205c9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4077bc26113f473305f85e15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user-provided description of the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute447f8129f30c42fb16cc7815() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44b66357e9c6bd5a33c63c91() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total data storage allocated to the Autonomous VM cluster, in GB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4953105cd79bfbc2ad9a6b8c() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum value to which you can scale down the Exadata storage, in TB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52b25ac0c73d741ab231c898() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the ODB network associated with this Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute559051feb0e80706678b6256() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total number of Autonomous Container Databases that can be created with the allocated local storage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57815e326cd8bd203e1f00cf() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute447f8129f30c42fb16cc7815(),
-				// Property: Value
-				"value": schemaAttribute1c405434f1f856562107b2a0(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags associated with the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fd5ac0b64a270caf41ac1e3() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The list of database servers associated with the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6249ebca3c5f03cd30a2e21d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The days of the week when maintenance can be performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute69c4c8001030d2d1e3ed7993() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores available for allocation to Autonomous Databases.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a6b35bfccbf32d99daf7e78() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The shape of the Exadata infrastructure for the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d30a60250ee1eb2e4a48f8e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The lead time in weeks before the maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e2d470b332b93770fc9eb70() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores that can be reclaimed from terminated or scaled-down Autonomous Databases.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f466f838d7e9916c1aeea21() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores enabled per node in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85d8c5e1707b380df0b46f4a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of Autonomous CDBs that you can create with the currently available storage.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute936ad35e11782f6939f7d387() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9bf0e0e85a831e7faca86b15() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c24055893772fe2a85c275e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Description: "The weeks of the month when maintenance can be performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea254aa8c12c63ce4de453b52() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of database server nodes in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2e285e7a230c291700dc317() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total amount of memory allocated to the Autonomous VM cluster, in gigabytes (GB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea87dce005f42f730129a1928() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Oracle license model that applies to the Autonomous VM cluster. Valid values are LICENSE_INCLUDED or BRING_YOUR_OWN_LICENSE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead5bcb0d2fd375b6f7584485() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead9a004722f7e0ab186a52f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The display name of the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb480c0db2e4de567ac7284ba() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The SCAN listener port for non-TLS (TCP) protocol. The default is 1521.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb987c0de0c8de10df91fdd62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9e7c7fd591a2e30eecc4388() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of Autonomous CDBs that can't be provisioned because of resource constraints.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2f69a0142c93875af9c044() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec891f3551d481b16c6a5a337() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the OCI resource anchor associated with this Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb07049a097c07698c82dc76() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The percentage of total CPU cores currently in use in the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedea151d0b755c2b03726ff2e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The minimum value to which you can scale down the maximum number of Autonomous CDBs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee65ad4c90dad12b93ff4cbc9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The SCAN listener port for TLS (TCP) protocol. The default is 2484.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9d084c811c62fe338995827() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The available data storage space for Autonomous Databases in the Autonomous VM cluster, in TB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea4433457cc41902c5dfeb52() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The local node storage allocated to the Autonomous VM cluster, in gigabytes (GB).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecfeca0290b082a3241b3028() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Description: "The hours of the day when maintenance can be performed.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef414944eafc8952904ef147() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of CPU cores reserved for system operations and redundancy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9016e84718543be512ad4a0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of memory allocated per Oracle Compute Unit, in GB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa3e21a94a9088c86417a558() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL for accessing the OCI console page for this Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd2b200f2b17416119710bf7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The hostname for the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefd7147afb92e3c915f7f53b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain name for the Autonomous VM cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefe1dd8dcb10cfe6cb14a63c8() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The total data storage allocated to the Autonomous VM cluster, in TB.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_odb_cloud_autonomous_vm_cluster", cloudAutonomousVmClusterDataSource)
 }
@@ -459,7 +30,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The percentage of data storage currently in use for Autonomous Databases in the Autonomous VM cluster.",
 		//	  "type": "number"
 		//	}
-		"autonomous_data_storage_percentage": schemaAttribute00c148dbbb86b959211df344(),
+		"autonomous_data_storage_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The percentage of data storage currently in use for Autonomous Databases in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutonomousDataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -467,7 +41,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The data storage size allocated for Autonomous Databases in the Autonomous VM cluster, in TB.",
 		//	  "type": "number"
 		//	}
-		"autonomous_data_storage_size_in_t_bs": schemaAttribute05f02dcc0db8029a8231cc13(),
+		"autonomous_data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The data storage size allocated for Autonomous Databases in the Autonomous VM cluster, in TB.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailableAutonomousDataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -475,7 +52,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The available data storage space for Autonomous Databases in the Autonomous VM cluster, in TB.",
 		//	  "type": "number"
 		//	}
-		"available_autonomous_data_storage_size_in_t_bs": schemaAttributee9d084c811c62fe338995827(),
+		"available_autonomous_data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The available data storage space for Autonomous Databases in the Autonomous VM cluster, in TB.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailableContainerDatabases
 		// CloudFormation resource type schema:
 		//
@@ -483,7 +63,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of Autonomous CDBs that you can create with the currently available storage.",
 		//	  "type": "integer"
 		//	}
-		"available_container_databases": schemaAttribute85d8c5e1707b380df0b46f4a(),
+		"available_container_databases": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of Autonomous CDBs that you can create with the currently available storage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailableCpus
 		// CloudFormation resource type schema:
 		//
@@ -491,7 +74,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of CPU cores available for allocation to Autonomous Databases.",
 		//	  "type": "number"
 		//	}
-		"available_cpus": schemaAttribute69c4c8001030d2d1e3ed7993(),
+		"available_cpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of CPU cores available for allocation to Autonomous Databases.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudAutonomousVmClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -499,7 +85,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The Amazon Resource Name (ARN) for the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_autonomous_vm_cluster_arn": schemaAttribute3f98e779239f57aca4e205c9(),
+		"cloud_autonomous_vm_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudAutonomousVmClusterId
 		// CloudFormation resource type schema:
 		//
@@ -507,7 +96,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The unique identifier of the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_autonomous_vm_cluster_id": schemaAttributebf2f69a0142c93875af9c044(),
+		"cloud_autonomous_vm_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CloudExadataInfrastructureId
 		// CloudFormation resource type schema:
 		//
@@ -515,7 +107,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The unique identifier of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_id": schemaAttribute3b3b6a514a149c6bfce4ab23(),
+		"cloud_exadata_infrastructure_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the Cloud Exadata Infrastructure containing this Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ComputeModel
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +122,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compute_model": schemaAttribute19f116a7be0f88b92910c728(),
+		"compute_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compute model of the Autonomous VM cluster: ECPU or OCPU.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CpuCoreCount
 		// CloudFormation resource type schema:
 		//
@@ -535,7 +133,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The total number of CPU cores in the Autonomous VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"cpu_core_count": schemaAttribute1c6d80a0fd6f91aa52545366(),
+		"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total number of CPU cores in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CpuCoreCountPerNode
 		// CloudFormation resource type schema:
 		//
@@ -543,7 +144,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of CPU cores enabled per node in the Autonomous VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"cpu_core_count_per_node": schemaAttribute7f466f838d7e9916c1aeea21(),
+		"cpu_core_count_per_node": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of CPU cores enabled per node in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CpuPercentage
 		// CloudFormation resource type schema:
 		//
@@ -551,7 +155,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The percentage of total CPU cores currently in use in the Autonomous VM cluster.",
 		//	  "type": "number"
 		//	}
-		"cpu_percentage": schemaAttributecb07049a097c07698c82dc76(),
+		"cpu_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The percentage of total CPU cores currently in use in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -559,7 +166,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The total data storage allocated to the Autonomous VM cluster, in GB.",
 		//	  "type": "number"
 		//	}
-		"data_storage_size_in_g_bs": schemaAttribute44b66357e9c6bd5a33c63c91(),
+		"data_storage_size_in_g_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total data storage allocated to the Autonomous VM cluster, in GB.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -567,7 +177,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The total data storage allocated to the Autonomous VM cluster, in TB.",
 		//	  "type": "number"
 		//	}
-		"data_storage_size_in_t_bs": schemaAttributefe1dd8dcb10cfe6cb14a63c8(),
+		"data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total data storage allocated to the Autonomous VM cluster, in TB.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -575,7 +188,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The local node storage allocated to the Autonomous VM cluster, in gigabytes (GB).",
 		//	  "type": "integer"
 		//	}
-		"db_node_storage_size_in_g_bs": schemaAttributeea4433457cc41902c5dfeb52(),
+		"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The local node storage allocated to the Autonomous VM cluster, in gigabytes (GB).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbServers
 		// CloudFormation resource type schema:
 		//
@@ -587,7 +203,11 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"db_servers": schemaAttribute5fd5ac0b64a270caf41ac1e3(),
+		"db_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of database servers associated with the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -595,7 +215,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The user-provided description of the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute4077bc26113f473305f85e15(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user-provided description of the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -606,7 +229,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schemaAttributead9a004722f7e0ab186a52f3(),
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display name of the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -614,7 +240,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The domain name for the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"domain": schemaAttributefd7147afb92e3c915f7f53b3(),
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain name for the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExadataStorageInTBsLowestScaledValue
 		// CloudFormation resource type schema:
 		//
@@ -622,7 +251,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The minimum value to which you can scale down the Exadata storage, in TB.",
 		//	  "type": "number"
 		//	}
-		"exadata_storage_in_t_bs_lowest_scaled_value": schemaAttribute4953105cd79bfbc2ad9a6b8c(),
+		"exadata_storage_in_t_bs_lowest_scaled_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum value to which you can scale down the Exadata storage, in TB.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Hostname
 		// CloudFormation resource type schema:
 		//
@@ -630,7 +262,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The hostname for the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"hostname": schemaAttributefd2b200f2b17416119710bf7(),
+		"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The hostname for the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoles
 		// CloudFormation resource type schema:
 		//
@@ -659,7 +294,29 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"iam_roles": schemaAttribute3c3eb7d2e7981e6b4fde93b6(),
+		"iam_roles": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsIntegration
+					"aws_integration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IamRoleArn
+					"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsMtlsEnabledVmCluster
 		// CloudFormation resource type schema:
 		//
@@ -667,7 +324,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Indicates whether mutual TLS (mTLS) authentication is enabled for the Autonomous VM cluster.",
 		//	  "type": "boolean"
 		//	}
-		"is_mtls_enabled_vm_cluster": schemaAttribute05512034ac440704ab4b249c(),
+		"is_mtls_enabled_vm_cluster": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether mutual TLS (mTLS) authentication is enabled for the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -679,7 +339,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"license_model": schemaAttributea87dce005f42f730129a1928(),
+		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Oracle license model that applies to the Autonomous VM cluster. Valid values are LICENSE_INCLUDED or BRING_YOUR_OWN_LICENSE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -759,7 +422,46 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"maintenance_window": schemaAttribute0263a0bd14f91af11131e4ff(),
+		"maintenance_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DaysOfWeek
+				"days_of_week": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The days of the week when maintenance can be performed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HoursOfDay
+				"hours_of_day": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Description: "The hours of the day when maintenance can be performed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LeadTimeInWeeks
+				"lead_time_in_weeks": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The lead time in weeks before the maintenance window.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Months
+				"months": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The months when maintenance can be performed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Preference
+				"preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The preference for the maintenance window scheduling.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WeeksOfMonth
+				"weeks_of_month": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Description: "The weeks of the month when maintenance can be performed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxAcdsLowestScaledValue
 		// CloudFormation resource type schema:
 		//
@@ -767,7 +469,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The minimum value to which you can scale down the maximum number of Autonomous CDBs.",
 		//	  "type": "integer"
 		//	}
-		"max_acds_lowest_scaled_value": schemaAttributedea151d0b755c2b03726ff2e(),
+		"max_acds_lowest_scaled_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum value to which you can scale down the maximum number of Autonomous CDBs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryPerOracleComputeUnitInGBs
 		// CloudFormation resource type schema:
 		//
@@ -775,7 +480,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The amount of memory allocated per Oracle Compute Unit, in GB.",
 		//	  "type": "integer"
 		//	}
-		"memory_per_oracle_compute_unit_in_g_bs": schemaAttributef9016e84718543be512ad4a0(),
+		"memory_per_oracle_compute_unit_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount of memory allocated per Oracle Compute Unit, in GB.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemorySizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -783,7 +491,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The total amount of memory allocated to the Autonomous VM cluster, in gigabytes (GB).",
 		//	  "type": "integer"
 		//	}
-		"memory_size_in_g_bs": schemaAttributea2e285e7a230c291700dc317(),
+		"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total amount of memory allocated to the Autonomous VM cluster, in gigabytes (GB).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeCount
 		// CloudFormation resource type schema:
 		//
@@ -791,7 +502,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of database server nodes in the Autonomous VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"node_count": schemaAttributea254aa8c12c63ce4de453b52(),
+		"node_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of database server nodes in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NonProvisionableAutonomousContainerDatabases
 		// CloudFormation resource type schema:
 		//
@@ -799,7 +513,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of Autonomous CDBs that can't be provisioned because of resource constraints.",
 		//	  "type": "integer"
 		//	}
-		"non_provisionable_autonomous_container_databases": schemaAttributeb9e7c7fd591a2e30eecc4388(),
+		"non_provisionable_autonomous_container_databases": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of Autonomous CDBs that can't be provisioned because of resource constraints.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OciResourceAnchorName
 		// CloudFormation resource type schema:
 		//
@@ -807,7 +524,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The name of the OCI resource anchor associated with this Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"oci_resource_anchor_name": schemaAttributec891f3551d481b16c6a5a337(),
+		"oci_resource_anchor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the OCI resource anchor associated with this Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OciUrl
 		// CloudFormation resource type schema:
 		//
@@ -815,7 +535,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The URL for accessing the OCI console page for this Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"oci_url": schemaAttributefa3e21a94a9088c86417a558(),
+		"oci_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL for accessing the OCI console page for this Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ocid
 		// CloudFormation resource type schema:
 		//
@@ -823,7 +546,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"ocid": schemaAttributead5bcb0d2fd375b6f7584485(),
+		"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Oracle Cloud Identifier (OCID) of the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -831,7 +557,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The unique identifier of the ODB network associated with this Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"odb_network_id": schemaAttribute52b25ac0c73d741ab231c898(),
+		"odb_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the ODB network associated with this Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionableAutonomousContainerDatabases
 		// CloudFormation resource type schema:
 		//
@@ -839,7 +568,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of Autonomous CDBs that can be provisioned in the Autonomous VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"provisionable_autonomous_container_databases": schemaAttribute11a75c6a51d15d40096fdf2e(),
+		"provisionable_autonomous_container_databases": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of Autonomous CDBs that can be provisioned in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedAutonomousContainerDatabases
 		// CloudFormation resource type schema:
 		//
@@ -847,7 +579,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of Autonomous CDBs currently provisioned in the Autonomous VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"provisioned_autonomous_container_databases": schemaAttribute0d552323f14d11b1cc16a6c5(),
+		"provisioned_autonomous_container_databases": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of Autonomous CDBs currently provisioned in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedCpus
 		// CloudFormation resource type schema:
 		//
@@ -855,7 +590,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of CPU cores currently provisioned in the Autonomous VM cluster.",
 		//	  "type": "number"
 		//	}
-		"provisioned_cpus": schemaAttribute3d56e0c9f872d9e98610fe24(),
+		"provisioned_cpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of CPU cores currently provisioned in the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReclaimableCpus
 		// CloudFormation resource type schema:
 		//
@@ -863,7 +601,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of CPU cores that can be reclaimed from terminated or scaled-down Autonomous Databases.",
 		//	  "type": "number"
 		//	}
-		"reclaimable_cpus": schemaAttribute7e2d470b332b93770fc9eb70(),
+		"reclaimable_cpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of CPU cores that can be reclaimed from terminated or scaled-down Autonomous Databases.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReservedCpus
 		// CloudFormation resource type schema:
 		//
@@ -871,7 +612,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The number of CPU cores reserved for system operations and redundancy.",
 		//	  "type": "number"
 		//	}
-		"reserved_cpus": schemaAttributeef414944eafc8952904ef147(),
+		"reserved_cpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of CPU cores reserved for system operations and redundancy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScanListenerPortNonTls
 		// CloudFormation resource type schema:
 		//
@@ -881,7 +625,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"scan_listener_port_non_tls": schemaAttributeb480c0db2e4de567ac7284ba(),
+		"scan_listener_port_non_tls": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The SCAN listener port for non-TLS (TCP) protocol. The default is 1521.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ScanListenerPortTls
 		// CloudFormation resource type schema:
 		//
@@ -891,7 +638,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"scan_listener_port_tls": schemaAttributee65ad4c90dad12b93ff4cbc9(),
+		"scan_listener_port_tls": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The SCAN listener port for TLS (TCP) protocol. The default is 2484.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Shape
 		// CloudFormation resource type schema:
 		//
@@ -899,7 +649,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The shape of the Exadata infrastructure for the Autonomous VM cluster.",
 		//	  "type": "string"
 		//	}
-		"shape": schemaAttribute7a6b35bfccbf32d99daf7e78(),
+		"shape": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The shape of the Exadata infrastructure for the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -931,7 +684,24 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute57815e326cd8bd203e1f00cf(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags associated with the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -941,7 +711,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"time_zone": schemaAttribute069c2d19bff0efe77b550a8b(),
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The time zone of the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TotalContainerDatabases
 		// CloudFormation resource type schema:
 		//
@@ -949,7 +722,10 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The total number of Autonomous Container Databases that can be created with the allocated local storage.",
 		//	  "type": "integer"
 		//	}
-		"total_container_databases": schemaAttribute559051feb0e80706678b6256(),
+		"total_container_databases": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The total number of Autonomous Container Databases that can be created with the allocated local storage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

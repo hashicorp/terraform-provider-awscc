@@ -17,207 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute085042b6079fec83c90c8440() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Grants all actions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute10c5c93501d38a0141b58281() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The current status of the support permit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ab620874d8e83e7a16badef() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An explicit list of actions to grant.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2347ccb43d5da44d441e5359() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Actions
-			"actions": schemaAttribute1ab620874d8e83e7a16badef(),
-			// Property: AllActions
-			"all_actions": schemaAttribute085042b6079fec83c90c8440(),
-		}, /*END SCHEMA*/
-		Description: "The set of actions a support permit grants. Exactly one of AllActions or Actions must be provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23b1a434f5c3e9e17e7a32f9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the KMS key used to sign permit grants.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3007bd03046f64bd470f4044() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Applies to all resources in the region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b04e1cd475de7d7c0c81c5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The permit is active only after this time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4cbfeae878606375e5ffe3a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b29a4c71d00f823d5637a60() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "An explicit list of resource ARNs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e425a0d2982facba6339e6a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The service-generated identifier of the support permit (the resource segment of the ARN).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9975559e2cd8b5f578f7a600() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "An optional description of the support permit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fa31fa0025d7876a9cb954f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the support permit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea54a82a493e0852e3abeb982() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef8177bca976422cbb6ced2fe(),
-				// Property: Value
-				"value": schemaAttribute4cbfeae878606375e5ffe3a6(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabd5f5cef737ec95fec3eb5e() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowAfter
-				"allow_after": schemaAttribute4b04e1cd475de7d7c0c81c5c(),
-				// Property: AllowBefore
-				"allow_before": schemaAttributec41ffd208c1f94307044d7a3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Optional time-bound conditions (at most two).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb1e21b8250c23067addc886b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the support permit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec41ffd208c1f94307044d7a3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The permit is active only before this time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6620da842daeeab6b4e5b48() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Actions
-			"actions": schemaAttribute2347ccb43d5da44d441e5359(),
-			// Property: Conditions
-			"conditions": schemaAttributeabd5f5cef737ec95fec3eb5e(),
-			// Property: Resources
-			"resources": schemaAttributeea83e4d4ea0b52e3b2d52498(),
-		}, /*END SCHEMA*/
-		Description: "The grant definition: which actions on which resources, optionally constrained by time conditions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfbefdf2d10714a51bca186c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The time at which the support permit was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd232ac204f724a42b7627ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The support case display identifier associated with the permit. When provided, the permit is linked to the specified AWS Support case.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee4a701fe5703b36530438c68() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKey
-			"kms_key": schemaAttribute23b1a434f5c3e9e17e7a32f9(),
-		}, /*END SCHEMA*/
-		Description: "The signing key used by the permit. Exactly one key type must be provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea83e4d4ea0b52e3b2d52498() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllResourcesInRegion
-			"all_resources_in_region": schemaAttribute3007bd03046f64bd470f4044(),
-			// Property: Resources
-			"resources": schemaAttribute5b29a4c71d00f823d5637a60(),
-		}, /*END SCHEMA*/
-		Description: "The set of resources a support permit applies to. Exactly one of AllResourcesInRegion or Resources must be provided.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8177bca976422cbb6ced2fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_supportauthz_support_permit", supportPermitDataSource)
 }
@@ -236,7 +35,10 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9:/-]{1,512}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute9fa31fa0025d7876a9cb954f(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the support permit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -245,7 +47,11 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributecfbefdf2d10714a51bca186c(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The time at which the support permit was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +61,10 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute9975559e2cd8b5f578f7a600(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An optional description of the support permit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +75,10 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9]{1,256}$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb1e21b8250c23067addc886b(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the support permit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permit
 		// CloudFormation resource type schema:
 		//
@@ -354,7 +166,71 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"permit": schemaAttributec6620da842daeeab6b4e5b48(),
+		"permit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Actions
+						"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "An explicit list of actions to grant.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AllActions
+						"all_actions": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "Grants all actions.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The set of actions a support permit grants. Exactly one of AllActions or Actions must be provided.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Conditions
+				"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowAfter
+							"allow_after": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "The permit is active only after this time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AllowBefore
+							"allow_before": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "The permit is active only before this time.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Optional time-bound conditions (at most two).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Resources
+				"resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllResourcesInRegion
+						"all_resources_in_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "Applies to all resources in the region.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Resources
+						"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "An explicit list of resource ARNs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The set of resources a support permit applies to. Exactly one of AllResourcesInRegion or Resources must be provided.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The grant definition: which actions on which resources, optionally constrained by time conditions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PermitId
 		// CloudFormation resource type schema:
 		//
@@ -365,7 +241,10 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9-]{1,512}$",
 		//	  "type": "string"
 		//	}
-		"permit_id": schemaAttribute5e425a0d2982facba6339e6a(),
+		"permit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The service-generated identifier of the support permit (the resource segment of the ARN).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SigningKeyInfo
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +265,17 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"signing_key_info": schemaAttributee4a701fe5703b36530438c68(),
+		"signing_key_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKey
+				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the KMS key used to sign permit grants.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The signing key used by the permit. Exactly one key type must be provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -399,7 +288,10 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute10c5c93501d38a0141b58281(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the support permit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupportCaseDisplayId
 		// CloudFormation resource type schema:
 		//
@@ -410,7 +302,10 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z0-9:/-]{1,512}$",
 		//	  "type": "string"
 		//	}
-		"support_case_display_id": schemaAttributedd232ac204f724a42b7627ed(),
+		"support_case_display_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The support case display identifier associated with the permit. When provided, the permit is linked to the specified AWS Support case.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -446,7 +341,24 @@ func supportPermitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea54a82a493e0852e3abeb982(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

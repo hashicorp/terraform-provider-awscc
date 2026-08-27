@@ -15,57 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2ffb4f9ed8075569220c71bc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70f05dcbba8ff60459503b9e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of CIDR blocks.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute75b9af5d3b7aa2811f604e73() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "UUID of the CIDR collection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute979e6c9c1628fbc0b5f1e82f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique name for the CIDR collection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaa9157f32bdca3c677292cc7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the location that is associated with the CIDR collection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb01d6f7882550d2cae5da946() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CidrList
-				"cidr_list": schemaAttribute70f05dcbba8ff60459503b9e(),
-				// Property: LocationName
-				"location_name": schemaAttributeaa9157f32bdca3c677292cc7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A complex type that contains information about the list of CIDR locations.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_route53_cidr_collection", cidrCollectionDataSource)
 }
@@ -81,7 +30,10 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute2ffb4f9ed8075569220c71bc(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -89,7 +41,10 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "UUID of the CIDR collection.",
 		//	  "type": "string"
 		//	}
-		"cidr_collection_id": schemaAttribute75b9af5d3b7aa2811f604e73(),
+		"cidr_collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "UUID of the CIDR collection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Locations
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +79,25 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"locations": schemaAttributeb01d6f7882550d2cae5da946(),
+		"locations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CidrList
+					"cidr_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "A list of CIDR blocks.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LocationName
+					"location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the location that is associated with the CIDR collection.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A complex type that contains information about the list of CIDR locations.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +108,10 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9A-Za-z_\\-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute979e6c9c1628fbc0b5f1e82f(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique name for the CIDR collection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

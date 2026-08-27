@@ -14,104 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute323ef74c8c2b71258c3f1ff2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the S3 bucket that contains the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46f24000ba89749ea14be983() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute857cb2214dd8523530a2c5e3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the block list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute950af94a22e17bde3d046dc0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute323ef74c8c2b71258c3f1ff2(),
-			// Property: Key
-			"key": schemaAttribute46f24000ba89749ea14be983(),
-		}, /*END SCHEMA*/
-		Description: "Information required to find a specific file in an Amazon S3 bucket.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5f9df7c54241b00e64e77ea() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the block list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea885322336613f1d05fea6b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the block list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf7884067815997d450c8923() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the index for the block list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed4569f0cf61f741b4435e7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the block list text file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee5577d30713c1f3298646ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value associated with the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef5006d8d6d8c6b3d304ab7be() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the query suggestions block list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef656cfc0715eaf2ebd39e578() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb8e018b11a2c739c0ee25ca() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributef656cfc0715eaf2ebd39e578(),
-				// Property: Value
-				"value": schemaAttributeee5577d30713c1f3298646ac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that identify or categorize the block list.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_kendra_query_suggestions_block_list", querySuggestionsBlockListDataSource)
 }
@@ -127,7 +29,10 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The Amazon Resource Name (ARN) of the query suggestions block list.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributef5006d8d6d8c6b3d304ab7be(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the query suggestions block list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +43,10 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^\\P{C}*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributea885322336613f1d05fea6b3(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the block list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +57,10 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"query_suggestions_block_list_id": schemaAttribute857cb2214dd8523530a2c5e3(),
+		"query_suggestions_block_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the block list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexId
 		// CloudFormation resource type schema:
 		//
@@ -160,7 +71,10 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"index_id": schemaAttributedf7884067815997d450c8923(),
+		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the index for the block list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +85,10 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributea5f9df7c54241b00e64e77ea(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the block list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -182,7 +99,10 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttributeed4569f0cf61f741b4435e7d(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the block list text file.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceS3Path
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +130,22 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_s3_path": schemaAttribute950af94a22e17bde3d046dc0(),
+		"source_s3_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the S3 bucket that contains the file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Information required to find a specific file in an Amazon S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +178,24 @@ func querySuggestionsBlockListDataSource(ctx context.Context) (datasource.DataSo
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributefb8e018b11a2c739c0ee25ca(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value associated with the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that identify or categorize the block list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

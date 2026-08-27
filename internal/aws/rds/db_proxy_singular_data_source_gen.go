@@ -15,183 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute00895550db2a7ad8603dd234() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute19b5175ddaf3cd3c2faa48ee() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "VPC subnet IDs to associate with the new proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2757b1206ebee870232befa2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "VPC ID to associate with the new DB proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e102082e59a3ee819f1a555() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e98b94e379874f1862d9bb6() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthScheme
-				"auth_scheme": schemaAttributea6505f1f1115d61d4b787d30(),
-				// Property: ClientPasswordAuthType
-				"client_password_auth_type": schemaAttribute8c5cc96f53fca257662ac3a0(),
-				// Property: Description
-				"description": schemaAttributeda4affc077d18b040bce2169(),
-				// Property: IAMAuth
-				"iam_auth": schemaAttribute8dc15d5e5c62ec7834f10409(),
-				// Property: SecretArn
-				"secret_arn": schemaAttribute7db880a5f86b28636755f53f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The authorization mechanism that the proxy uses.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute52e6c3a78cf0b8436500450f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d5f1b47a3dcd13a6df86cfc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebf7fb4b8bcd7b49a0441e188(),
-				// Property: Value
-				"value": schemaAttributebf7fb4b8bcd7b49a0441e188(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute73cdf40c503d5287bfee3506() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7db880a5f86b28636755f53f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84cb2176e8a4286c4a239f85() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85fad199bd066f9c62875ff5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86db48a853deff3524c5eaa5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The kinds of databases that the proxy can connect to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c5cc96f53fca257662ac3a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of authentication the proxy uses for connections from clients.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8dc15d5e5c62ec7834f10409() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6505f1f1115d61d4b787d30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6d9dad87372dcb41a6ae9c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9a655eaee19baa9608ff8af() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "VPC security group IDs to associate with the new proxy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae80c0c8845c465ac4095f53() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf7fb4b8bcd7b49a0441e188() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3d429b031cc823eb3ad0e55() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda4affc077d18b040bce2169() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeedb9df610494a6b7e734bca() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Whether the proxy includes detailed information about SQL statements in its logs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_proxy", dBProxyDataSource)
 }
@@ -250,7 +73,39 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"auth": schemaAttribute4e98b94e379874f1862d9bb6(),
+		"auth": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AuthScheme
+					"auth_scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ClientPasswordAuthType
+					"client_password_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of authentication the proxy uses for connections from clients.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IAMAuth
+					"iam_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecretArn
+					"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The authorization mechanism that the proxy uses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBProxyArn
 		// CloudFormation resource type schema:
 		//
@@ -258,7 +113,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the proxy.",
 		//	  "type": "string"
 		//	}
-		"db_proxy_arn": schemaAttributea6d9dad87372dcb41a6ae9c5(),
+		"db_proxy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBProxyName
 		// CloudFormation resource type schema:
 		//
@@ -268,7 +126,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-z]*",
 		//	  "type": "string"
 		//	}
-		"db_proxy_name": schemaAttribute85fad199bd066f9c62875ff5(),
+		"db_proxy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DebugLogging
 		// CloudFormation resource type schema:
 		//
@@ -276,7 +137,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether the proxy includes detailed information about SQL statements in its logs.",
 		//	  "type": "boolean"
 		//	}
-		"debug_logging": schemaAttributeeedb9df610494a6b7e734bca(),
+		"debug_logging": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the proxy includes detailed information about SQL statements in its logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultAuthScheme
 		// CloudFormation resource type schema:
 		//
@@ -288,7 +152,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"default_auth_scheme": schemaAttribute00895550db2a7ad8603dd234(),
+		"default_auth_scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -296,7 +163,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
 		//	  "type": "string"
 		//	}
-		"endpoint": schemaAttribute2e102082e59a3ee819f1a555(),
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointNetworkType
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +179,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"endpoint_network_type": schemaAttribute73cdf40c503d5287bfee3506(),
+		"endpoint_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineFamily
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +195,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"engine_family": schemaAttribute86db48a853deff3524c5eaa5(),
+		"engine_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The kinds of databases that the proxy can connect to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdleClientTimeout
 		// CloudFormation resource type schema:
 		//
@@ -330,7 +206,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
 		//	  "type": "integer"
 		//	}
-		"idle_client_timeout": schemaAttributed3d429b031cc823eb3ad0e55(),
+		"idle_client_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RequireTLS
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +217,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
 		//	  "type": "boolean"
 		//	}
-		"require_tls": schemaAttribute84cb2176e8a4286c4a239f85(),
+		"require_tls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +228,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute52e6c3a78cf0b8436500450f(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -371,7 +256,22 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute5d5f1b47a3dcd13a6df86cfc(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetConnectionNetworkType
 		// CloudFormation resource type schema:
 		//
@@ -383,7 +283,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_connection_network_type": schemaAttributeae80c0c8845c465ac4095f53(),
+		"target_connection_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +294,10 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "VPC ID to associate with the new DB proxy.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttribute2757b1206ebee870232befa2(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "VPC ID to associate with the new DB proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -404,7 +310,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"vpc_security_group_ids": schemaAttributea9a655eaee19baa9608ff8af(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "VPC security group IDs to associate with the new proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -417,7 +327,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
-		"vpc_subnet_ids": schemaAttribute19b5175ddaf3cd3c2faa48ee(),
+		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "VPC subnet IDs to associate with the new proxy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -18,96 +18,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute205d5638772508f0a998375d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of resource, for example a VPC attachment.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3b1348c0423509ed36db5a01() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates that the resource is a transit gateway multicast group member.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40ad6f668b7899b28cb7a1fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source type.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4204a3054a5ed46034ddab6b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the subnet.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57ec247098a0cbc09407aa62() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The IP address assigned to the transit gateway multicast group.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea2c62b29cd76a3635e5adcaf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway multicast domain.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed246b4b549d49f9949a7283a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway attachment.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed80a6ebbfb35398380e9d4f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the transit gateway attachment.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf4d4f71a7f1f9ca4fc6abb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the resource.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResource)
 	registry.AddListResourceFactory("awscc_ec2_transit_gateway_multicast_group_source", generic.NewListResource(transitGatewayMulticastGroupSourceResource))
@@ -124,7 +34,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The IP address assigned to the transit gateway multicast group.",
 		//	  "type": "string"
 		//	}
-		"group_ip_address": schemaAttribute57ec247098a0cbc09407aa62(),
+		"group_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address assigned to the transit gateway multicast group.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GroupMember
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +48,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "Indicates that the resource is a transit gateway multicast group member.",
 		//	  "type": "boolean"
 		//	}
-		"group_member": schemaAttribute3b1348c0423509ed36db5a01(),
+		"group_member": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that the resource is a transit gateway multicast group member.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GroupSource
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +62,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "Indicates that the resource is a transit gateway multicast group member.",
 		//	  "type": "boolean"
 		//	}
-		"group_source": schemaAttribute3b1348c0423509ed36db5a01(),
+		"group_source": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that the resource is a transit gateway multicast group member.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +76,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The ID of the transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttributed80a6ebbfb35398380e9d4f5(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway attachment.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -156,7 +90,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The ID of the resource.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schemaAttributedf4d4f71a7f1f9ca4fc6abb7(),
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the resource.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -164,7 +104,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The type of resource, for example a VPC attachment.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schemaAttribute205d5638772508f0a998375d(),
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of resource, for example a VPC attachment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceType
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +118,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The source type.",
 		//	  "type": "string"
 		//	}
-		"source_type": schemaAttribute40ad6f668b7899b28cb7a1fe(),
+		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source type.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +132,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The ID of the subnet.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schemaAttribute4204a3054a5ed46034ddab6b(),
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the subnet.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +146,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The ID of the transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schemaAttributed246b4b549d49f9949a7283a(),
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway attachment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayMulticastDomainId
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +160,13 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		//	  "description": "The ID of the transit gateway multicast domain.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_multicast_domain_id": schemaAttributea2c62b29cd76a3635e5adcaf(),
+		"transit_gateway_multicast_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the transit gateway multicast domain.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

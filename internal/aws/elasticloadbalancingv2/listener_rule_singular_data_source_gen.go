@@ -15,768 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute051961ff14c5ff648ef0df59() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ba73a3831be0fbfcafb6441() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Host
-			"host": schemaAttributedcef9fb34212179c8489995a(),
-			// Property: Path
-			"path": schemaAttribute7a7b995cc32d630d4047bb5d(),
-			// Property: Port
-			"port": schemaAttributef8d491673f79b2665c05bc0c(),
-			// Property: Protocol
-			"protocol": schemaAttributee093b640738fb9ac6266da58(),
-			// Property: Query
-			"query": schemaAttribute25975cffa9977c2466aa72c1(),
-			// Property: StatusCode
-			"status_code": schemaAttributee3d198864e49484952ecfca0(),
-		}, /*END SCHEMA*/
-		Description: "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute111d31498a158bd0e06fff05() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the HTTP header field. The maximum size is 40 characters. The header name is case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not supported.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute116704f04cfdbc235b7ed1e6() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12daf53833219a8f361cf1ec() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18adcba33c54e19dedc4f566() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a83db1c3ab6a4c585c2577f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthenticateCognitoConfig
-				"authenticate_cognito_config": schemaAttributeed41b30fb287cac8f1f6f897(),
-				// Property: AuthenticateOidcConfig
-				"authenticate_oidc_config": schemaAttribute24b2cc43eb896b5a4b157724(),
-				// Property: FixedResponseConfig
-				"fixed_response_config": schemaAttribute3871a7b466173c9a5adb4311(),
-				// Property: ForwardConfig
-				"forward_config": schemaAttribute7d1e57640fb1b042d2122e91(),
-				// Property: JwtValidationConfig
-				"jwt_validation_config": schemaAttributef21ff5a4869cd1896e21a186(),
-				// Property: Order
-				"order": schemaAttributee01084dc5eddc4a7476e957a(),
-				// Property: RedirectConfig
-				"redirect_config": schemaAttribute0ba73a3831be0fbfcafb6441(),
-				// Property: TargetGroupArn
-				"target_group_arn": schemaAttribute8233075bdbde621cc6bd0f2c(),
-				// Property: Type
-				"type": schemaAttribute18adcba33c54e19dedc4f566(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The actions.\n The rule must include exactly one of the following types of actions: ``forward``, ``fixed-response``, or ``redirect``, and it must be the last action to be performed. If the rule is for an HTTPS listener, it can also optionally include an authentication action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e2baca7f02e1a5e27acfcdf() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute228863d5d51f030a8346c22b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key. You can omit the key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute24b2cc43eb896b5a4b157724() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationRequestExtraParams
-			"authentication_request_extra_params": schemaAttribute70b5712900bb213b69339f5b(),
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttributec85da77f9c5b9912968582e7(),
-			// Property: ClientId
-			"client_id": schemaAttributea0a812e686b828ddf95c1f7d(),
-			// Property: ClientSecret
-			"client_secret": schemaAttributec12deca5c48db65984b0d97b(),
-			// Property: Issuer
-			"issuer": schemaAttribute53499fd9e8069800056f7f6e(),
-			// Property: OnUnauthenticatedRequest
-			"on_unauthenticated_request": schemaAttributec26b863979a1f94cf3e509c6(),
-			// Property: Scope
-			"scope": schemaAttributef641317c50a65b920abec769(),
-			// Property: SessionCookieName
-			"session_cookie_name": schemaAttribute99a8049a2d6887fc610c9f1e(),
-			// Property: SessionTimeout
-			"session_timeout": schemaAttribute973f5eeffac6cbec6d66173d(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttribute5fc78c67fb43c516f708bde1(),
-			// Property: UseExistingClientSecret
-			"use_existing_client_secret": schemaAttribute12daf53833219a8f361cf1ec(),
-			// Property: UserInfoEndpoint
-			"user_info_endpoint": schemaAttributec4733e6124603557924c4983(),
-		}, /*END SCHEMA*/
-		Description: "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute25975cffa9977c2466aa72c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading \"?\", as it is automatically added. You can specify any of the reserved keywords.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3798b03b2bc0d99097707099() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The condition value. Specify only when ``Field`` is ``host-header`` or ``path-pattern``. Alternatively, to specify multiple host names or multiple path patterns, use ``HostHeaderConfig`` or ``PathPatternConfig``.\n If ``Field`` is ``host-header`` and you're not using ``HostHeaderConfig``, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters.\n  +  A-Z, a-z, 0-9\n  +  - .\n  +  * (matches 0 or more characters)\n  +  ? (matches exactly 1 character)\n  \n If ``Field`` is ``path-pattern`` and you're not using ``PathPatternConfig``, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters.\n  +  A-Z, a-z, 0-9\n  +  _ - . $ / ~ \" ' @ : +\n  +  & (using &amp;)\n  +  * (matches 0 or more characters)\n  +  ? (matches exactly 1 character)",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3871a7b466173c9a5adb4311() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentType
-			"content_type": schemaAttribute6bfc7e78775e7662004b11db(),
-			// Property: MessageBody
-			"message_body": schemaAttributeeab9c7d4492321bb67684e7e(),
-			// Property: StatusCode
-			"status_code": schemaAttribute8980419f675c7e01a01dbcca(),
-		}, /*END SCHEMA*/
-		Description: "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bcf40038cc3ec36ed747bfb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute465674cf97562b84eef5753e() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute47d879fa4e8d8603280ef591() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the claim value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53499fd9e8069800056f7f6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5659ab33e540bbaa13ccac70() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The weight. The range is 0 to 999.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57939e33c5d3076679e960c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the target group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5fc78c67fb43c516f708bde1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64b70dc201d85ea8946995d3() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6780f008d3505260e1706418() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute228863d5d51f030a8346c22b(),
-				// Property: Value
-				"value": schemaAttribute83d0c01e540fcd30d199e606(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a7468c79936c41f87ea6a7d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The rule priority. A listener can't have multiple rules with the same priority.\n If you try to reorder rules by updating their priorities, do not specify a new priority if an existing rule already uses this priority, as this can cause an error. If you need to reuse a priority with a different rule, you must remove it as a priority first, and then specify it in a subsequent update.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6bfc7e78775e7662004b11db() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content type.\n Valid Values: text/plain | text/css | text/html | application/javascript | application/json",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e07ff1af05baee0b8c269a0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute70b5712900bb213b69339f5b() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7715e1019fae416429f996dc() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether target group stickiness is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78a87dfe703421c7601ee61f() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HostHeaderRewriteConfig
-				"host_header_rewrite_config": schemaAttributeaeffdf03c15dd15abe39e707(),
-				// Property: Type
-				"type": schemaAttributee857d5327cb349885c7a0600(),
-				// Property: UrlRewriteConfig
-				"url_rewrite_config": schemaAttributeaeffdf03c15dd15abe39e707(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a7b995cc32d630d4047bb5d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The absolute path, starting with the leading \"/\". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d1e57640fb1b042d2122e91() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TargetGroupStickinessConfig
-			"target_group_stickiness_config": schemaAttributef36e9c1cbb87ace8cf48e0d4(),
-			// Property: TargetGroups
-			"target_groups": schemaAttributeda459e2f018d8d883b20ad0e(),
-		}, /*END SCHEMA*/
-		Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8233075bdbde621cc6bd0f2c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83d0c01e540fcd30d199e606() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8980419f675c7e01a01dbcca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP response code (2XX, 4XX, or 5XX).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89b6adb2d76d0de6ea22069e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the listener.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c1801882e8fbc1effb3621d() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d7e2a54443c999e73c01255() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Format
-				"format": schemaAttribute47d879fa4e8d8603280ef591(),
-				// Property: Name
-				"name": schemaAttribute6e07ff1af05baee0b8c269a0(),
-				// Property: Values
-				"values": schemaAttribute8c1801882e8fbc1effb3621d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8eca0c36c2c7caff2bd5565f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeb178b97e36774fa499e04733(),
-				// Property: Value
-				"value": schemaAttribute1e2baca7f02e1a5e27acfcdf(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9517a47a9fa9764d1d61ae12() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute973f5eeffac6cbec6d66173d() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute99a8049a2d6887fc610c9f1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0a812e686b828ddf95c1f7d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OAuth 2.0 client identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5cb2e3e17041a1d2ec932d4() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Regex
-				"regex": schemaAttributee74caa22169ee40a59142983(),
-				// Property: Replace
-				"replace": schemaAttribute051961ff14c5ff648ef0df59(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaeffdf03c15dd15abe39e707() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Rewrites
-			"rewrites": schemaAttributea5cb2e3e17041a1d2ec932d4(),
-		}, /*END SCHEMA*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb178b97e36774fa499e04733() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2ee2e999eccb0d5e58913d6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Values
-			"values": schemaAttribute6780f008d3505260e1706418(),
-		}, /*END SCHEMA*/
-		Description: "Information for a query string condition. Specify only when ``Field`` is ``query-string``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb5e2048a86f48b4d5cfb2da2() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.\n If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec12deca5c48db65984b0d97b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec26b863979a1f94cf3e509c6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The behavior if the user is not authenticated. The following are possible values:\n  +  deny```` - Return an HTTP 401 Unauthorized error.\n  +  allow```` - Allow the request to be forwarded to the target.\n  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4733e6124603557924c4983() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec85da77f9c5b9912968582e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecf445a474018520bb9769a9e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RegexValues
-			"regex_values": schemaAttributef9fb6086875fcc1caf9a98a9(),
-			// Property: Values
-			"values": schemaAttribute116704f04cfdbc235b7ed1e6(),
-		}, /*END SCHEMA*/
-		Description: "Information for a path pattern condition. Specify only when ``Field`` is ``path-pattern``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed12f817d25689de8d331e438() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IpAddressType
-			"ip_address_type": schemaAttributee857d5327cb349885c7a0600(),
-			// Property: Values
-			"values": schemaAttributeb5e2048a86f48b4d5cfb2da2(),
-		}, /*END SCHEMA*/
-		Description: "Information for a source IP condition. Specify only when ``Field`` is ``source-ip``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9c90d49fbab6c1f116a46cb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: RegexValues
-			"regex_values": schemaAttributef9fb6086875fcc1caf9a98a9(),
-			// Property: Values
-			"values": schemaAttributef541599f43ce97d3ffe65ede(),
-		}, /*END SCHEMA*/
-		Description: "Information for a host header condition. Specify only when ``Field`` is ``host-header``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda459e2f018d8d883b20ad0e() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TargetGroupArn
-				"target_group_arn": schemaAttribute57939e33c5d3076679e960c8(),
-				// Property: Weight
-				"weight": schemaAttribute5659ab33e540bbaa13ccac70(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about how traffic will be distributed between multiple target groups in a forward rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb4582147202a8d660e23181() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Values
-			"values": schemaAttributeffd480a694e2bd254bf72984(),
-		}, /*END SCHEMA*/
-		Description: "Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcef9fb34212179c8489995a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The hostname. This component is not percent-encoded. The hostname can contain #{host}.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee01084dc5eddc4a7476e957a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee093b640738fb9ac6266da58() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You can't redirect HTTPS to HTTP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3d198864e49484952ecfca0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5e4be1293728e416ff46467() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Field
-				"field": schemaAttributefb383760f4cbc966f56a56d8(),
-				// Property: HostHeaderConfig
-				"host_header_config": schemaAttributed9c90d49fbab6c1f116a46cb(),
-				// Property: HttpHeaderConfig
-				"http_header_config": schemaAttributeed1108c07d7b85bee5fe85d0(),
-				// Property: HttpRequestMethodConfig
-				"http_request_method_config": schemaAttributedb4582147202a8d660e23181(),
-				// Property: PathPatternConfig
-				"path_pattern_config": schemaAttributecf445a474018520bb9769a9e(),
-				// Property: QueryStringConfig
-				"query_string_config": schemaAttributeb2ee2e999eccb0d5e58913d6(),
-				// Property: RegexValues
-				"regex_values": schemaAttributef7584a5b19b3b032808761e3(),
-				// Property: SourceIpConfig
-				"source_ip_config": schemaAttributed12f817d25689de8d331e438(),
-				// Property: Values
-				"values": schemaAttribute3798b03b2bc0d99097707099(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The conditions.\n The rule can optionally include up to one of each of the following conditions: ``http-request-method``, ``host-header``, ``path-pattern``, and ``source-ip``. A rule can also optionally include one or more of each of the following conditions: ``http-header`` and ``query-string``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee74caa22169ee40a59142983() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee857d5327cb349885c7a0600() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeab9c7d4492321bb67684e7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb1f5749c68167f36740fd38() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Cognito user pool client.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecec73e92f9e6a5f771ee792() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed1108c07d7b85bee5fe85d0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: HttpHeaderName
-			"http_header_name": schemaAttribute111d31498a158bd0e06fff05(),
-			// Property: RegexValues
-			"regex_values": schemaAttributef9fb6086875fcc1caf9a98a9(),
-			// Property: Values
-			"values": schemaAttribute465674cf97562b84eef5753e(),
-		}, /*END SCHEMA*/
-		Description: "Information for an HTTP header condition. Specify only when ``Field`` is ``http-header``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed41b30fb287cac8f1f6f897() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationRequestExtraParams
-			"authentication_request_extra_params": schemaAttribute70b5712900bb213b69339f5b(),
-			// Property: OnUnauthenticatedRequest
-			"on_unauthenticated_request": schemaAttributec26b863979a1f94cf3e509c6(),
-			// Property: Scope
-			"scope": schemaAttributef641317c50a65b920abec769(),
-			// Property: SessionCookieName
-			"session_cookie_name": schemaAttribute99a8049a2d6887fc610c9f1e(),
-			// Property: SessionTimeout
-			"session_timeout": schemaAttribute973f5eeffac6cbec6d66173d(),
-			// Property: UserPoolArn
-			"user_pool_arn": schemaAttribute3bcf40038cc3ec36ed747bfb(),
-			// Property: UserPoolClientId
-			"user_pool_client_id": schemaAttributeeb1f5749c68167f36740fd38(),
-			// Property: UserPoolDomain
-			"user_pool_domain": schemaAttribute9517a47a9fa9764d1d61ae12(),
-		}, /*END SCHEMA*/
-		Description: "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef21ff5a4869cd1896e21a186() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalClaims
-			"additional_claims": schemaAttribute8d7e2a54443c999e73c01255(),
-			// Property: Issuer
-			"issuer": schemaAttributee857d5327cb349885c7a0600(),
-			// Property: JwksEndpoint
-			"jwks_endpoint": schemaAttributee857d5327cb349885c7a0600(),
-		}, /*END SCHEMA*/
-		Description: "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef36e9c1cbb87ace8cf48e0d4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DurationSeconds
-			"duration_seconds": schemaAttribute64b70dc201d85ea8946995d3(),
-			// Property: Enabled
-			"enabled": schemaAttribute7715e1019fae416429f996dc(),
-		}, /*END SCHEMA*/
-		Description: "Information about the target group stickiness for a rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef541599f43ce97d3ffe65ede() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef641317c50a65b920abec769() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The set of user claims to be requested from the IdP. The default is ``openid``.\n To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef7584a5b19b3b032808761e3() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8d491673f79b2665c05bc0c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The port. You can specify a value from 1 to 65535 or #{port}.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef9fb6086875fcc1caf9a98a9() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb383760f4cbc966f56a56d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the field. The possible values are:\n  +  ``http-header`` ? [ALB] Matches on an HTTP header field.\n  +  ``http-request-method`` ? [ALB] Matches on the HTTP request method.\n  +  ``host-header`` ? [ALB] Matches on the host header.\n  +  ``path-pattern`` ? [ALB] Matches on the URL path of the request.\n  +  ``query-string`` ? [ALB] Matches on a query string parameter.\n  +  ``source-ip`` ? [ALB, NLB] Matches on the source IP address. For ALB, use ``SourceIpConfig`` with ``Values`` to specify CIDR ranges. For NLB, use ``SourceIpConfig`` with ``IpAddressType`` to match the IP address type (``ipv4`` or ``ipv6``).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffd480a694e2bd254bf72984() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticloadbalancingv2_listener_rule", listenerRuleDataSource)
 }
@@ -1097,7 +335,291 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"actions": schemaAttribute1a83db1c3ab6a4c585c2577f(),
+		"actions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AuthenticateCognitoConfig
+					"authenticate_cognito_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationRequestExtraParams
+							"authentication_request_extra_params": // Pattern: ""
+							schema.MapAttribute{                   /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnUnauthenticatedRequest
+							"on_unauthenticated_request": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The behavior if the user is not authenticated. The following are possible values:\n  +  deny```` - Return an HTTP 401 Unauthorized error.\n  +  allow```` - Allow the request to be forwarded to the target.\n  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Scope
+							"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The set of user claims to be requested from the IdP. The default is ``openid``.\n To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionCookieName
+							"session_cookie_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionTimeout
+							"session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserPoolArn
+							"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Amazon Cognito user pool.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserPoolClientId
+							"user_pool_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the Amazon Cognito user pool client.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserPoolDomain
+							"user_pool_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AuthenticateOidcConfig
+					"authenticate_oidc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationRequestExtraParams
+							"authentication_request_extra_params": // Pattern: ""
+							schema.MapAttribute{                   /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AuthorizationEndpoint
+							"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ClientId
+							"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The OAuth 2.0 client identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ClientSecret
+							"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnUnauthenticatedRequest
+							"on_unauthenticated_request": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The behavior if the user is not authenticated. The following are possible values:\n  +  deny```` - Return an HTTP 401 Unauthorized error.\n  +  allow```` - Allow the request to be forwarded to the target.\n  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Scope
+							"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The set of user claims to be requested from the IdP. The default is ``openid``.\n To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionCookieName
+							"session_cookie_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionTimeout
+							"session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TokenEndpoint
+							"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UseExistingClientSecret
+							"use_existing_client_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserInfoEndpoint
+							"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FixedResponseConfig
+					"fixed_response_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContentType
+							"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The content type.\n Valid Values: text/plain | text/css | text/html | application/javascript | application/json",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MessageBody
+							"message_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The message.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusCode
+							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTP response code (2XX, 4XX, or 5XX).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ForwardConfig
+					"forward_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TargetGroupStickinessConfig
+							"target_group_stickiness_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DurationSeconds
+									"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether target group stickiness is enabled.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Information about the target group stickiness for a rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetGroups
+							"target_groups": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: TargetGroupArn
+										"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the target group.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Weight
+										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The weight. The range is 0 to 999.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Information about how traffic will be distributed between multiple target groups in a forward rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The format of the claim value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Order
+					"order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RedirectConfig
+					"redirect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The hostname. This component is not percent-encoded. The hostname can contain #{host}.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Path
+							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The absolute path, starting with the leading \"/\". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The port. You can specify a value from 1 to 65535 or #{port}.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Protocol
+							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You can't redirect HTTPS to HTTP.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Query
+							"query": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading \"?\", as it is automatically added. You can specify any of the reserved keywords.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusCode
+							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TargetGroupArn
+					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The actions.\n The rule must include exactly one of the following types of actions: ``forward``, ``fixed-response``, or ``redirect``, and it must be the last action to be performed. If the rule is for an HTTPS listener, it can also optionally include an authentication action.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
@@ -1276,7 +798,147 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"conditions": schemaAttributee5e4be1293728e416ff46467(),
+		"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Field
+					"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the field. The possible values are:\n  +  ``http-header`` ? [ALB] Matches on an HTTP header field.\n  +  ``http-request-method`` ? [ALB] Matches on the HTTP request method.\n  +  ``host-header`` ? [ALB] Matches on the host header.\n  +  ``path-pattern`` ? [ALB] Matches on the URL path of the request.\n  +  ``query-string`` ? [ALB] Matches on a query string parameter.\n  +  ``source-ip`` ? [ALB, NLB] Matches on the source IP address. For ALB, use ``SourceIpConfig`` with ``Values`` to specify CIDR ranges. For NLB, use ``SourceIpConfig`` with ``IpAddressType`` to match the IP address type (``ipv4`` or ``ipv6``).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HostHeaderConfig
+					"host_header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RegexValues
+							"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for a host header condition. Specify only when ``Field`` is ``host-header``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HttpHeaderConfig
+					"http_header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: HttpHeaderName
+							"http_header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the HTTP header field. The maximum size is 40 characters. The header name is case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not supported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RegexValues
+							"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for an HTTP header condition. Specify only when ``Field`` is ``http-header``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HttpRequestMethodConfig
+					"http_request_method_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PathPatternConfig
+					"path_pattern_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RegexValues
+							"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for a path pattern condition. Specify only when ``Field`` is ``path-pattern``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: QueryStringConfig
+					"query_string_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Values
+							"values": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The key. You can omit the key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for a query string condition. Specify only when ``Field`` is ``query-string``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RegexValues
+					"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SourceIpConfig
+					"source_ip_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IpAddressType
+							"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.\n If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for a source IP condition. Specify only when ``Field`` is ``source-ip``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Values
+					"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The condition value. Specify only when ``Field`` is ``host-header`` or ``path-pattern``. Alternatively, to specify multiple host names or multiple path patterns, use ``HostHeaderConfig`` or ``PathPatternConfig``.\n If ``Field`` is ``host-header`` and you're not using ``HostHeaderConfig``, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters.\n  +  A-Z, a-z, 0-9\n  +  - .\n  +  * (matches 0 or more characters)\n  +  ? (matches exactly 1 character)\n  \n If ``Field`` is ``path-pattern`` and you're not using ``PathPatternConfig``, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters.\n  +  A-Z, a-z, 0-9\n  +  _ - . $ / ~ \" ' @ : +\n  +  & (using &amp;)\n  +  * (matches 0 or more characters)\n  +  ? (matches exactly 1 character)",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The conditions.\n The rule can optionally include up to one of each of the following conditions: ``http-request-method``, ``host-header``, ``path-pattern``, and ``source-ip``. A rule can also optionally include one or more of each of the following conditions: ``http-header`` and ``query-string``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -1284,7 +946,10 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schemaAttributeecec73e92f9e6a5f771ee792(),
+		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ListenerArn
 		// CloudFormation resource type schema:
 		//
@@ -1292,7 +957,10 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the listener.",
 		//	  "type": "string"
 		//	}
-		"listener_arn": schemaAttribute89b6adb2d76d0de6ea22069e(),
+		"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the listener.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -1300,7 +968,10 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The rule priority. A listener can't have multiple rules with the same priority.\n If you try to reorder rules by updating their priorities, do not specify a new priority if an existing rule already uses this priority, as this can cause an error. If you need to reuse a priority with a different rule, you must remove it as a priority first, and then specify it in a subsequent update.",
 		//	  "type": "integer"
 		//	}
-		"priority": schemaAttribute6a7468c79936c41f87ea6a7d(),
+		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The rule priority. A listener can't have multiple rules with the same priority.\n If you try to reorder rules by updating their priorities, do not specify a new priority if an existing rule already uses this priority, as this can cause an error. If you need to reuse a priority with a different rule, you must remove it as a priority first, and then specify it in a subsequent update.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleArn
 		// CloudFormation resource type schema:
 		//
@@ -1308,7 +979,10 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rule_arn": schemaAttributee857d5327cb349885c7a0600(),
+		"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1337,7 +1011,24 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute8eca0c36c2c7caff2bd5565f(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Transforms
 		// CloudFormation resource type schema:
 		//
@@ -1441,7 +1132,69 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"transforms": schemaAttribute78a87dfe703421c7601ee61f(),
+		"transforms": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: HostHeaderRewriteConfig
+					"host_header_rewrite_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Rewrites
+							"rewrites": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Regex
+										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Replace
+										"replace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UrlRewriteConfig
+					"url_rewrite_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Rewrites
+							"rewrites": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Regex
+										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Replace
+										"replace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

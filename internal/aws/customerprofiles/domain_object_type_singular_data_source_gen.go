@@ -14,126 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1a73dacb8a06f02c10550f05() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeae14863de0cb62724684a073(),
-				// Property: Value
-				"value": schemaAttribute7e890991d866ce7b0364d498(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ea1b78de38be2c4fb229ebb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The target field name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute36ba63c0b400d11cc6b35a7b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content type of the field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute446299fda51be72cb99dcf41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The source field name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68a392e6ecad13034aec85f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The feature type of the field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e890991d866ce7b0364d498() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d9288aab15547175982d363() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the domain object type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f7eca88fb948b2e82a41b98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The default encryption key",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fde93d6f6aa1a46cc129040() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique name of the domain.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae14863de0cb62724684a073() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeafb2c047fecea90893216631() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the domain object type was most recently edited.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb3f580aa454260b17277de29() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContentType
-				"content_type": schemaAttribute36ba63c0b400d11cc6b35a7b(),
-				// Property: FeatureType
-				"feature_type": schemaAttribute68a392e6ecad13034aec85f8(),
-				// Property: Source
-				"source": schemaAttribute446299fda51be72cb99dcf41(),
-				// Property: Target
-				"target": schemaAttribute2ea1b78de38be2c4fb229ebb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A map of the name and ObjectType field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec67b4666ec72a510c904d9ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description of the domain object type.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef6f80bada5a8336554955ad1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp of when the domain object type was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_domain_object_type", domainObjectTypeDataSource)
 }
@@ -149,7 +29,10 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The timestamp of when the domain object type was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributef6f80bada5a8336554955ad1(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the domain object type was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +42,10 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributec67b4666ec72a510c904d9ce(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description of the domain object type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +56,10 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schemaAttribute9fde93d6f6aa1a46cc129040(),
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique name of the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -180,7 +69,10 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"encryption_key": schemaAttribute8f7eca88fb948b2e82a41b98(),
+		"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default encryption key",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Fields
 		// CloudFormation resource type schema:
 		//
@@ -230,7 +122,35 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"fields": schemaAttributeb3f580aa454260b17277de29(),
+		"fields":                  // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ContentType
+					"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The content type of the field.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FeatureType
+					"feature_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The feature type of the field.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Source
+					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The source field name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Target
+					"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The target field name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A map of the name and ObjectType field.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -238,7 +158,10 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The timestamp of when the domain object type was most recently edited.",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schemaAttributeafb2c047fecea90893216631(),
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp of when the domain object type was most recently edited.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ObjectTypeName
 		// CloudFormation resource type schema:
 		//
@@ -249,7 +172,10 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"object_type_name": schemaAttribute8d9288aab15547175982d363(),
+		"object_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the domain object type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -284,7 +210,24 @@ func domainObjectTypeDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute1a73dacb8a06f02c10550f05(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

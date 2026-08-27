@@ -15,187 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0cd0c9dff4a83ad289e48767() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Region where this resource was last modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute105844ea35c03673e830127a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12e852b6d001b52e06c7e2c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the email address",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1374582f048e154dc2871235() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The caller ID number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute16f4dcc6e5788d1510d28ba8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The outbound whisper flow to be used during an outbound call.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1c1ddd4585c119b3a0921ad5() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute105844ea35c03673e830127a(),
-				// Property: Value
-				"value": schemaAttribute2560a40408976e13433c6925(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e4acf9f4ff5767384f50386() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The quick connects available to agents who are working the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2560a40408976e13433c6925() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a68967bda30ef1717438935() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EmailAddressArn
-				"email_address_arn": schemaAttribute12e852b6d001b52e06c7e2c3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The email addresses that agents can use when replying to or initiating email contacts",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute39869b30d317cf8c9132410c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a1b2ad9074fadb969ea6e04() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OutboundEmailAddressId
-			"outbound_email_address_id": schemaAttribute51620331afcff34d632476ca(),
-		}, /*END SCHEMA*/
-		Description: "The outbound email address ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51620331afcff34d632476ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The email address connect resource ID.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53a4d9071c4939209eae7278() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e0c2afa3c1e19b134d03271() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63a47b5b624ca71107c1349a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: OutboundCallerIdName
-			"outbound_caller_id_name": schemaAttributef50c8713a6c20fd8138ed19b(),
-			// Property: OutboundCallerIdNumberArn
-			"outbound_caller_id_number_arn": schemaAttribute1374582f048e154dc2871235(),
-			// Property: OutboundFlowArn
-			"outbound_flow_arn": schemaAttribute16f4dcc6e5788d1510d28ba8(),
-		}, /*END SCHEMA*/
-		Description: "The outbound caller ID name, number, and outbound whisper flow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute775ceee6cb55bb089420d212() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The maximum number of contacts that can be in the queue before it is considered full.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeacc3fd45f0ec34f44a882d90() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb2569d79074f6978aba539b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier for the hours of operation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb73516a7a245dac3eb16278e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the queue.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea26b2bdb508ed59d4286374() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "The timestamp when this resource was last modified.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef36bd717874968e7f7fa5655() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the Amazon Connect instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef50c8713a6c20fd8138ed19b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The caller ID name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_queue", queueDataSource)
 }
@@ -229,7 +48,19 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"additional_email_addresses": schemaAttribute2a68967bda30ef1717438935(),
+		"additional_email_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EmailAddressArn
+					"email_address_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the email address",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The email addresses that agents can use when replying to or initiating email contacts",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +70,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute39869b30d317cf8c9132410c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HoursOfOperationArn
 		// CloudFormation resource type schema:
 		//
@@ -248,7 +82,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"hours_of_operation_arn": schemaAttributeb2569d79074f6978aba539b0(),
+		"hours_of_operation_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the hours of operation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +94,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schemaAttributef36bd717874968e7f7fa5655(),
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +106,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schemaAttribute0cd0c9dff4a83ad289e48767(),
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Region where this resource was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -274,7 +117,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when this resource was last modified.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schemaAttributeea26b2bdb508ed59d4286374(),
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when this resource was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxContacts
 		// CloudFormation resource type schema:
 		//
@@ -283,7 +129,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"max_contacts": schemaAttribute775ceee6cb55bb089420d212(),
+		"max_contacts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The maximum number of contacts that can be in the queue before it is considered full.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -293,7 +142,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeb73516a7a245dac3eb16278e(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutboundCallerConfig
 		// CloudFormation resource type schema:
 		//
@@ -322,7 +174,27 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"outbound_caller_config": schemaAttribute63a47b5b624ca71107c1349a(),
+		"outbound_caller_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutboundCallerIdName
+				"outbound_caller_id_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The caller ID name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OutboundCallerIdNumberArn
+				"outbound_caller_id_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The caller ID number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OutboundFlowArn
+				"outbound_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The outbound whisper flow to be used during an outbound call.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The outbound caller ID name, number, and outbound whisper flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OutboundEmailConfig
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +210,17 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"outbound_email_config": schemaAttribute4a1b2ad9074fadb969ea6e04(),
+		"outbound_email_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutboundEmailAddressId
+				"outbound_email_address_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The email address connect resource ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The outbound email address ID.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueueArn
 		// CloudFormation resource type schema:
 		//
@@ -347,7 +229,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"queue_arn": schemaAttribute5e0c2afa3c1e19b134d03271(),
+		"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: QuickConnectArns
 		// CloudFormation resource type schema:
 		//
@@ -362,7 +247,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"quick_connect_arns": schemaAttribute1e4acf9f4ff5767384f50386(),
+		"quick_connect_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The quick connects available to agents who are working the queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +263,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributeacc3fd45f0ec34f44a882d90(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -409,7 +301,24 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute1c1ddd4585c119b3a0921ad5(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -421,7 +330,10 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute53a4d9071c4939209eae7278(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

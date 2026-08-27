@@ -15,38 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute070557600becd0f0cb153b07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Region that NotificationHub is present in.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85093a89d6964ebf7b821a4c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: timetypes.RFC3339Type{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d9363e3921e605f0c7ed711() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: NotificationHubStatus
-			"notification_hub_status": schemaAttributee7c213bcdd41886c01c4d5c3(),
-			// Property: NotificationHubStatusReason
-			"notification_hub_status_reason": schemaAttributee7c213bcdd41886c01c4d5c3(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee7c213bcdd41886c01c4d5c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_notifications_notification_hub", notificationHubDataSource)
 }
@@ -62,7 +30,10 @@ func notificationHubDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute85093a89d6964ebf7b821a4c(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationHubStatusSummary
 		// CloudFormation resource type schema:
 		//
@@ -88,7 +59,19 @@ func notificationHubDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"notification_hub_status_summary": schemaAttribute8d9363e3921e605f0c7ed711(),
+		"notification_hub_status_summary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NotificationHubStatus
+				"notification_hub_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NotificationHubStatusReason
+				"notification_hub_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +81,10 @@ func notificationHubDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"region": schemaAttribute070557600becd0f0cb153b07(),
+		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Region that NotificationHub is present in.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,266 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute05b0c815f0218392f8fe6be1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MicrovmHooks
-			"microvm_hooks": schemaAttribute74e853e049b7338c3fbb2ebc(),
-			// Property: MicrovmImageHooks
-			"microvm_image_hooks": schemaAttributee616664a604090693de046b3(),
-			// Property: Port
-			"port": schemaAttribute6a6c82101cd9cef06128ff4e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a19293b81bd683e1f13f1c1() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0de4110f2ff253ba07d0c140() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Timestamp when the MicroVM image was updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute14dad8be068baafb51ab06b3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b5869f64fd3a76f1a19e351() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudWatch
-			"cloudwatch": schemaAttributec0f0b6da682c23bf7368fb46(),
-			// Property: Disabled
-			"disabled": schemaAttribute0a19293b81bd683e1f13f1c1(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for MicroVM image logging.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute371dbb7f76de6a6b95f7ef23() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MinimumMemoryInMiB
-				"minimum_memory_in_mi_b": schemaAttribute6a6c82101cd9cef06128ff4e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f6a50db4bc4b0e323218b3c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the MicroVM image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute51ab3580f2033b10994c36ec() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Architecture
-				"architecture": schemaAttribute7f99727fc36def52b52a761f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a70f7d1c8b68d1925556d3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5cc474913dd70f37bd5bc7f1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Uri
-			"uri": schemaAttribute7f99727fc36def52b52a761f(),
-		}, /*END SCHEMA*/
-		Description: "Code artifact for the active MicroVM image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute608be526d167501a877e9dc0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current state of the MicroVM image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61d352d8ab8f41721ae42658() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Human-readable description of the MicroVM image and its purpose.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a6c82101cd9cef06128ff4e() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d8c82946e3d4f0c4549b939() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unique name for the MicroVM image within the account.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute720cfa0299226bc549cddb35() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest active version of the MicroVM image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute74e853e049b7338c3fbb2ebc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Resume
-			"resume": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: ResumeTimeoutInSeconds
-			"resume_timeout_in_seconds": schemaAttribute6a6c82101cd9cef06128ff4e(),
-			// Property: Run
-			"run": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: RunTimeoutInSeconds
-			"run_timeout_in_seconds": schemaAttribute6a6c82101cd9cef06128ff4e(),
-			// Property: Suspend
-			"suspend": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: SuspendTimeoutInSeconds
-			"suspend_timeout_in_seconds": schemaAttribute6a6c82101cd9cef06128ff4e(),
-			// Property: Terminate
-			"terminate": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: TerminateTimeoutInSeconds
-			"terminate_timeout_in_seconds": schemaAttribute6a6c82101cd9cef06128ff4e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f99727fc36def52b52a761f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute822d7f060be4925cd6f83763() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Timestamp when the MicroVM image was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9250218163f44eb06d53419a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute7f99727fc36def52b52a761f(),
-				// Property: Value
-				"value": schemaAttribute7f99727fc36def52b52a761f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Environment variables to set in the container during the snapshot build.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute966d2cb6511ac8aeddb66fbb() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute14dad8be068baafb51ab06b3(),
-				// Property: Value
-				"value": schemaAttribute5a70f7d1c8b68d1925556d3f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs to associate with the MicroVM image for organization and management.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae25babd3040731218bff9a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the IAM build role.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae5b4f322117b6131bf9b5ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The latest failed version of the MicroVM image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec03b5143269baa3fc8e8a0b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN of the base MicroVM image.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0f0b6da682c23bf7368fb46() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LogGroup
-			"log_group": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: LogStream
-			"log_stream": schemaAttribute7f99727fc36def52b52a761f(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfab6cff93fa3fcc50d3cb8b() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee616664a604090693de046b3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Ready
-			"ready": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: ReadyTimeoutInSeconds
-			"ready_timeout_in_seconds": schemaAttribute6a6c82101cd9cef06128ff4e(),
-			// Property: Validate
-			"validate": schemaAttribute7f99727fc36def52b52a761f(),
-			// Property: ValidateTimeoutInSeconds
-			"validate_timeout_in_seconds": schemaAttribute6a6c82101cd9cef06128ff4e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeecdd6f72c769edefafe66c8a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specific version of the base MicroVM image to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_microvm_image", microvmImageDataSource)
 }
@@ -297,7 +37,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"additional_os_capabilities": schemaAttributedfab6cff93fa3fcc50d3cb8b(),
+		"additional_os_capabilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BaseImageArn
 		// CloudFormation resource type schema:
 		//
@@ -308,7 +51,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"base_image_arn": schemaAttributec03b5143269baa3fc8e8a0b0(),
+		"base_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the base MicroVM image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BaseImageVersion
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +65,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"base_image_version": schemaAttributeecdd6f72c769edefafe66c8a(),
+		"base_image_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specific version of the base MicroVM image to use.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BuildRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -328,7 +77,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"build_role_arn": schemaAttributeae25babd3040731218bff9a6(),
+		"build_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the IAM build role.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CodeArtifact
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +100,16 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"code_artifact": schemaAttribute5cc474913dd70f37bd5bc7f1(),
+		"code_artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Uri
+				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Code artifact for the active MicroVM image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CpuConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -372,7 +133,17 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cpu_configurations": schemaAttribute51ab3580f2033b10994c36ec(),
+		"cpu_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Architecture
+					"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +151,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Timestamp when the MicroVM image was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute822d7f060be4925cd6f83763(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Timestamp when the MicroVM image was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -388,7 +162,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Human-readable description of the MicroVM image and its purpose.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute61d352d8ab8f41721ae42658(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Human-readable description of the MicroVM image and its purpose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EgressNetworkConnectors
 		// CloudFormation resource type schema:
 		//
@@ -401,7 +178,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"egress_network_connectors": schemaAttributedfab6cff93fa3fcc50d3cb8b(),
+		"egress_network_connectors": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentVariables
 		// CloudFormation resource type schema:
 		//
@@ -433,7 +213,22 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"environment_variables": schemaAttribute9250218163f44eb06d53419a(),
+		"environment_variables": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Environment variables to set in the container during the snapshot build.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Hooks
 		// CloudFormation resource type schema:
 		//
@@ -532,7 +327,75 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"hooks": schemaAttribute05b0c815f0218392f8fe6be1(),
+		"hooks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MicrovmHooks
+				"microvm_hooks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Resume
+						"resume": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ResumeTimeoutInSeconds
+						"resume_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Run
+						"run": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RunTimeoutInSeconds
+						"run_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Suspend
+						"suspend": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SuspendTimeoutInSeconds
+						"suspend_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Terminate
+						"terminate": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TerminateTimeoutInSeconds
+						"terminate_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MicrovmImageHooks
+				"microvm_image_hooks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Ready
+						"ready": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ReadyTimeoutInSeconds
+						"ready_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Validate
+						"validate": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ValidateTimeoutInSeconds
+						"validate_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageArn
 		// CloudFormation resource type schema:
 		//
@@ -540,7 +403,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "ARN of the MicroVM image.",
 		//	  "type": "string"
 		//	}
-		"image_arn": schemaAttribute3f6a50db4bc4b0e323218b3c(),
+		"image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of the MicroVM image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatestActiveImageVersion
 		// CloudFormation resource type schema:
 		//
@@ -548,7 +414,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The latest active version of the MicroVM image.",
 		//	  "type": "string"
 		//	}
-		"latest_active_image_version": schemaAttribute720cfa0299226bc549cddb35(),
+		"latest_active_image_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The latest active version of the MicroVM image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatestFailedImageVersion
 		// CloudFormation resource type schema:
 		//
@@ -556,7 +425,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The latest failed version of the MicroVM image.",
 		//	  "type": "string"
 		//	}
-		"latest_failed_image_version": schemaAttributeae5b4f322117b6131bf9b5ca(),
+		"latest_failed_image_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The latest failed version of the MicroVM image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Logging
 		// CloudFormation resource type schema:
 		//
@@ -589,7 +461,30 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging": schemaAttribute1b5869f64fd3a76f1a19e351(),
+		"logging": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatch
+				"cloudwatch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroup
+						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogStream
+						"log_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Disabled
+				"disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for MicroVM image logging.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -600,7 +495,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6d8c82946e3d4f0c4549b939(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique name for the MicroVM image within the account.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Resources
 		// CloudFormation resource type schema:
 		//
@@ -622,7 +520,17 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resources": schemaAttribute371dbb7f76de6a6b95f7ef23(),
+		"resources": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MinimumMemoryInMiB
+					"minimum_memory_in_mi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -641,7 +549,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute608be526d167501a877e9dc0(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current state of the MicroVM image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -672,7 +583,24 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute966d2cb6511ac8aeddb66fbb(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs to associate with the MicroVM image for organization and management.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -680,7 +608,10 @@ func microvmImageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Timestamp when the MicroVM image was updated.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttribute0de4110f2ff253ba07d0c140(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Timestamp when the MicroVM image was updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

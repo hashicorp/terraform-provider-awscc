@@ -20,54 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute3c1c4bf304388497fb51adf6() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of context words.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50cd7ac37c06fe3979ebbb33() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A regular expression string that is used for detecting sensitive data in a custom pattern.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50f2e0bfc0a6d38a11381abe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "Tags to associate with the custom entity type.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-		// Tags is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4f98a27c3b23a39ad60b733() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the custom entity type.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_glue_custom_entity_type", customEntityTypeResource)
 	registry.AddListResourceFactory("awscc_glue_custom_entity_type", generic.NewListResource(customEntityTypeResource))
@@ -88,7 +40,15 @@ func customEntityTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"context_words": schemaAttribute3c1c4bf304388497fb51adf6(),
+		"context_words": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of context words.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -96,7 +56,15 @@ func customEntityTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the custom entity type.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributed4f98a27c3b23a39ad60b733(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the custom entity type.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RegexString
 		// CloudFormation resource type schema:
 		//
@@ -104,7 +72,14 @@ func customEntityTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A regular expression string that is used for detecting sensitive data in a custom pattern.",
 		//	  "type": "string"
 		//	}
-		"regex_string": schemaAttribute50cd7ac37c06fe3979ebbb33(),
+		"regex_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A regular expression string that is used for detecting sensitive data in a custom pattern.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +87,16 @@ func customEntityTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Tags to associate with the custom entity type.",
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute50f2e0bfc0a6d38a11381abe(),
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "Tags to associate with the custom entity type.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

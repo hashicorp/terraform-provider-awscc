@@ -16,496 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute075d53cb2e10ecae33fe54f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0e9513d7e6b1575dd9fbdfd5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute164a623270b0833af1186a09() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b7e387b30bd3ae87f0a5453() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Gutter
-			"gutter": schemaAttribute2caa040cfda614ab0e01f335(),
-			// Property: Margin
-			"margin": schemaAttributeab3053dadd6b015c56f7cfbc(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for the layout of tiles on a sheet.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute226bbfff429b1b8b5babd611() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Colors
-			"colors": schemaAttribute8d2298d330756dfc2787d411(),
-			// Property: EmptyFillColor
-			"empty_fill_color": schemaAttribute7bb62ed13879daba40d36b79(),
-			// Property: MinMaxGradient
-			"min_max_gradient": schemaAttributef8870b23247fdb3bee48a1c7(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2529dab3caa58fc208a717dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The description of the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute267f2cf1ee6220de91b1183c() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute26acc7ef7b80116fa62cc804() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time that the theme was last updated.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute28d80e496a70d55cc99afca6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute29a29f141465a95b2521902d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2caa040cfda614ab0e01f335() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttribute267f2cf1ee6220de91b1183c(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f92bba78b4c00fa68ff3b10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ee675ca2087f9ea63c4fdd6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time that the theme was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute41c42e27c0e6ece4007b5d20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "<p>The date and time that this theme version was created.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute421708f8b2f400a0bc29bb87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d0b7c93062f46757b214a5f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5009e29f79ed121e796187d5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56b7f0847f40cd73bbabe31b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Tile
-			"tile": schemaAttribute882f6b8e08b090745fd4c423(),
-			// Property: TileLayout
-			"tile_layout": schemaAttribute1b7e387b30bd3ae87f0a5453(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme display options for sheets. </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute682cf982e02a55b8fbb5c961() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttributee9a3146006e03229f3a4d54b(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for tile borders for visuals.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6977dd65c00cfb075f8a2591() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataColorPalette
-			"data_color_palette": schemaAttribute226bbfff429b1b8b5babd611(),
-			// Property: Sheet
-			"sheet": schemaAttribute56b7f0847f40cd73bbabe31b(),
-			// Property: Typography
-			"typography": schemaAttributeea6a43a5aff8408fc30cfdaa(),
-			// Property: UIColorPalette
-			"ui_color_palette": schemaAttributef620282cfa92080f68d840bd(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f3aca4d9426ddbc808e3992() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute710a6f6450ec888404c6676c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bb62ed13879daba40d36b79() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bd1017c9cb38d9fc2785ae4() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Description: "<p>The version number of the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute870df7d8a4501516637fb0cc() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute29a29f141465a95b2521902d(),
-				// Property: Value
-				"value": schemaAttributebf39d92ea4eb2d8f2c4032c3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute882f6b8e08b090745fd4c423() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Border
-			"border": schemaAttribute682cf982e02a55b8fbb5c961(),
-		}, /*END SCHEMA*/
-		Description: "<p>Display options related to tiles on a sheet.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8aa21b2cb2e6f79abc1fb248() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This color that applies to warning and informational messages.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8b72f001c31c8cbc0507f90e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8c98025fe6e1f117e305cb28() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d2298d330756dfc2787d411() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The hexadecimal codes for the colors.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d4b9f5e02cd217597e9e269() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9986b5561f6691646f5c6fdf() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FontFamily
-				"font_family": schemaAttribute6f3aca4d9426ddbc808e3992(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d0b3f38a8b86227ddcf2afd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea546e691e5feee31a5a2f2c5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeab3053dadd6b015c56f7cfbc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Show
-			"show": schemaAttribute4d0b7c93062f46757b214a5f(),
-		}, /*END SCHEMA*/
-		Description: "<p>The display options for margins around the outside edge of sheets.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead3f5acce92f99a6a5b5c27b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeae58543f507128578e698e64() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb4e62ab77792e11c7269d0fe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Arn
-			"arn": schemaAttribute0e9513d7e6b1575dd9fbdfd5(),
-			// Property: BaseThemeId
-			"base_theme_id": schemaAttribute8c98025fe6e1f117e305cb28(),
-			// Property: Configuration
-			"configuration": schemaAttribute6977dd65c00cfb075f8a2591(),
-			// Property: CreatedTime
-			"created_time": schemaAttribute41c42e27c0e6ece4007b5d20(),
-			// Property: Description
-			"description": schemaAttribute2529dab3caa58fc208a717dc(),
-			// Property: Errors
-			"errors": schemaAttributeb7af730b2718d712a8b0a8d2(),
-			// Property: Status
-			"status": schemaAttribute6f3aca4d9426ddbc808e3992(),
-			// Property: VersionNumber
-			"version_number": schemaAttribute7bd1017c9cb38d9fc2785ae4(),
-		}, /*END SCHEMA*/
-		Description: "<p>A version of a theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb7af730b2718d712a8b0a8d2() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Message
-				"message": schemaAttributee630721990684a0c8de4f7e7(),
-				// Property: Type
-				"type": schemaAttribute6f3aca4d9426ddbc808e3992(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Errors associated with the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf39d92ea4eb2d8f2c4032c3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec237c6e42b80c3634b445400() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeca3134ef034ecb32ccc0a535() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schemaAttribute164a623270b0833af1186a09(),
-				// Property: Principal
-				"principal": schemaAttribute2f92bba78b4c00fa68ff3b10(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecfb2980731fcf5258b09122a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfb4550e8302ec5311d7df3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color that applies to error messages.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5c6928798b52ea90b07fe61() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee630721990684a0c8de4f7e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The error message.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee9a3146006e03229f3a4d54b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>The option to enable display of borders for visuals.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea6a43a5aff8408fc30cfdaa() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FontFamilies
-			"font_families": schemaAttribute9986b5561f6691646f5c6fdf(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef470e9c63dcf9879f174990e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>This color is that applies to selected states and buttons.</p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef620282cfa92080f68d840bd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Accent
-			"accent": schemaAttributef470e9c63dcf9879f174990e(),
-			// Property: AccentForeground
-			"accent_foreground": schemaAttribute9d0b3f38a8b86227ddcf2afd(),
-			// Property: Danger
-			"danger": schemaAttributedfb4550e8302ec5311d7df3f(),
-			// Property: DangerForeground
-			"danger_foreground": schemaAttribute8b72f001c31c8cbc0507f90e(),
-			// Property: Dimension
-			"dimension": schemaAttribute075d53cb2e10ecae33fe54f5(),
-			// Property: DimensionForeground
-			"dimension_foreground": schemaAttribute28d80e496a70d55cc99afca6(),
-			// Property: Measure
-			"measure": schemaAttributead3f5acce92f99a6a5b5c27b(),
-			// Property: MeasureForeground
-			"measure_foreground": schemaAttributea546e691e5feee31a5a2f2c5(),
-			// Property: PrimaryBackground
-			"primary_background": schemaAttribute8d4b9f5e02cd217597e9e269(),
-			// Property: PrimaryForeground
-			"primary_foreground": schemaAttributee5c6928798b52ea90b07fe61(),
-			// Property: SecondaryBackground
-			"secondary_background": schemaAttribute5009e29f79ed121e796187d5(),
-			// Property: SecondaryForeground
-			"secondary_foreground": schemaAttribute421708f8b2f400a0bc29bb87(),
-			// Property: Success
-			"success": schemaAttributecfb2980731fcf5258b09122a(),
-			// Property: SuccessForeground
-			"success_foreground": schemaAttribute710a6f6450ec888404c6676c(),
-			// Property: Warning
-			"warning": schemaAttribute8aa21b2cb2e6f79abc1fb248(),
-			// Property: WarningForeground
-			"warning_foreground": schemaAttributeae58543f507128578e698e64(),
-		}, /*END SCHEMA*/
-		Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef8870b23247fdb3bee48a1c7() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_theme", themeDataSource)
 }
@@ -521,7 +31,10 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the theme.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributec237c6e42b80c3634b445400(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -531,7 +44,9 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttribute6f3aca4d9426ddbc808e3992(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BaseThemeId
 		// CloudFormation resource type schema:
 		//
@@ -541,7 +56,9 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w\\-]+$",
 		//	  "type": "string"
 		//	}
-		"base_theme_id": schemaAttribute6f3aca4d9426ddbc808e3992(),
+		"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -745,7 +262,198 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schemaAttribute6977dd65c00cfb075f8a2591(),
+		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataColorPalette
+				"data_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Colors
+						"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "<p>The hexadecimal codes for the colors.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmptyFillColor
+						"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MinMaxGradient
+						"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Sheet
+				"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Tile
+						"tile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Border
+								"border": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Show
+										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The option to enable display of borders for visuals.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for tile borders for visuals.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>Display options related to tiles on a sheet.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TileLayout
+						"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Gutter
+								"gutter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Show
+										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Margin
+								"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Show
+										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for margins around the outside edge of sheets.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The display options for the layout of tiles on a sheet.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme display options for sheets. </p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Typography
+				"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FontFamilies
+						"font_families": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FontFamily
+									"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UIColorPalette
+				"ui_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Accent
+						"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>This color is that applies to selected states and buttons.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccentForeground
+						"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Danger
+						"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to error messages.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DangerForeground
+						"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Dimension
+						"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DimensionForeground
+						"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Measure
+						"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MeasureForeground
+						"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrimaryBackground
+						"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrimaryForeground
+						"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryBackground
+						"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryForeground
+						"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Success
+						"success": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SuccessForeground
+						"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Warning
+						"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>This color that applies to warning and informational messages.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WarningForeground
+						"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -754,7 +462,11 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schemaAttribute3ee675ca2087f9ea63c4fdd6(),
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time that the theme was created.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -763,7 +475,11 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schemaAttribute26acc7ef7b80116fa62cc804(),
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time that the theme was last updated.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -772,7 +488,9 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute6f3aca4d9426ddbc808e3992(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -807,7 +525,24 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"permissions": schemaAttributeca3134ef034ecb32ccc0a535(),
+		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -839,7 +574,23 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute870df7d8a4501516637fb0cc(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ThemeId
 		// CloudFormation resource type schema:
 		//
@@ -849,7 +600,9 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w\\-]+$",
 		//	  "type": "string"
 		//	}
-		"theme_id": schemaAttribute6f3aca4d9426ddbc808e3992(),
+		"theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -861,7 +614,9 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute6f3aca4d9426ddbc808e3992(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -1135,7 +890,253 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"version": schemaAttributeb4e62ab77792e11c7269d0fe(),
+		"version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BaseThemeId
+				"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Configuration
+				"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DataColorPalette
+						"data_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Colors
+								"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "<p>The hexadecimal codes for the colors.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EmptyFillColor
+								"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MinMaxGradient
+								"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Sheet
+						"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Tile
+								"tile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Border
+										"border": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Show
+												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The option to enable display of borders for visuals.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "<p>The display options for tile borders for visuals.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>Display options related to tiles on a sheet.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TileLayout
+								"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Gutter
+										"gutter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Show
+												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Margin
+										"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Show
+												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "<p>The display options for margins around the outside edge of sheets.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "<p>The display options for the layout of tiles on a sheet.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The theme display options for sheets. </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Typography
+						"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FontFamilies
+								"font_families": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FontFamily
+											"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UIColorPalette
+						"ui_color_palette": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Accent
+								"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>This color is that applies to selected states and buttons.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AccentForeground
+								"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Danger
+								"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to error messages.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DangerForeground
+								"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Dimension
+								"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DimensionForeground
+								"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Measure
+								"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MeasureForeground
+								"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrimaryBackground
+								"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrimaryForeground
+								"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecondaryBackground
+								"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecondaryForeground
+								"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Success
+								"success": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SuccessForeground
+								"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Warning
+								"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>This color that applies to warning and informational messages.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: WarningForeground
+								"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreatedTime
+				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "<p>The date and time that this theme version was created.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The description of the theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Errors
+				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Message
+							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The error message.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "<p>Errors associated with the theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VersionNumber
+				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "<p>The version number of the theme.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>A version of a theme.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionDescription
 		// CloudFormation resource type schema:
 		//
@@ -1144,7 +1145,9 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"version_description": schemaAttribute6f3aca4d9426ddbc808e3992(),
+		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

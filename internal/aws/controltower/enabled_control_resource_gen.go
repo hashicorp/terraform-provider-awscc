@@ -20,34 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute8f7328368022d192e39b24a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn of the control.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[0-9a-zA-Z_\\-:\\/]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8b2da05a5a24ee379998cb7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Arn for Organizational unit to which the control needs to be applied",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(20, 2048),
-			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[0-9a-zA-Z_\\-:\\/]+$"), ""),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_controltower_enabled_control", enabledControlResource)
 }
@@ -66,7 +38,17 @@ func enabledControlResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
 		//	  "type": "string"
 		//	}
-		"control_identifier": schemaAttribute8f7328368022d192e39b24a8(),
+		"control_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn of the control.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[0-9a-zA-Z_\\-:\\/]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TargetIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -77,7 +59,17 @@ func enabledControlResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
 		//	  "type": "string"
 		//	}
-		"target_identifier": schemaAttributea8b2da05a5a24ee379998cb7(),
+		"target_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Arn for Organizational unit to which the control needs to be applied",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[0-9a-zA-Z_\\-:\\/]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

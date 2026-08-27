@@ -15,185 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute12abc0398b7d8c2ac3e576d2() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system. If you are setting up an agentless cross-cloud transfer, you do not need to specify a value for this parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute160ceb8ea0dba66bb8b2b5f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute221b1f0e7802422d81025183() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port that your self-managed server accepts inbound network traffic on.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute224ae4e4009aed3cc5016760() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URL of the object storage location that was described.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f707512d22bbebe600c77ca() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyArn
-			"kms_key_arn": schemaAttribute5b6935a034d05c1c85968493(),
-			// Property: SecretArn
-			"secret_arn": schemaAttribute4bfe7e5b62b9a6efca4936ab(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4a9a37b8824f9a5e5ff6d902() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bfe7e5b62b9a6efca4936ab() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4c4f3175960185caaf1d0086() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretArn
-			"secret_arn": schemaAttributeec42fc636160df66ee9e38d8(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5ae8aaead5d17d142d2f116a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute65bf7d93bb4315162a05e90a(),
-				// Property: Value
-				"value": schemaAttribute9111afc2841573863cc3972b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5b6935a034d05c1c85968493() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute60b193ef041ead0200ea09ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65bf7d93bb4315162a05e90a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key for an AWS resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8774909c29479b27bd4b3b92() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9111afc2841573863cc3972b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for an AWS resource tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b05302908fbbeecace93aa7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol that the object storage server uses to communicate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec4fdf9cd41cc62c1823dfd80() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec75bf630e6c32242ca580ef1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecretAccessRoleArn
-			"secret_access_role_arn": schemaAttribute60b193ef041ead0200ea09ca(),
-			// Property: SecretArn
-			"secret_arn": schemaAttributef1adab28d2f29f182282d85e(),
-		}, /*END SCHEMA*/
-		Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecbc475b38efade5b6d444aa0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the location that is created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec42fc636160df66ee9e38d8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for an AWS Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef4d822332b3b3c4d40afcf3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the bucket on the self-managed object storage server.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef1adab28d2f29f182282d85e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefb8367cf0be7485d143933e9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "X.509 PEM content containing a certificate authority or chain to trust.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_object_storage", locationObjectStorageDataSource)
 }
@@ -212,7 +33,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"access_key": schemaAttribute160ceb8ea0dba66bb8b2b5f5(),
+		"access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentArns
 		// CloudFormation resource type schema:
 		//
@@ -228,7 +52,11 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"agent_arns": schemaAttribute12abc0398b7d8c2ac3e576d2(),
+		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system. If you are setting up an agentless cross-cloud transfer, you do not need to specify a value for this parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BucketName
 		// CloudFormation resource type schema:
 		//
@@ -239,7 +67,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"bucket_name": schemaAttributeef4d822332b3b3c4d40afcf3(),
+		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the bucket on the self-managed object storage server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CmkSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +93,22 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cmk_secret_config": schemaAttribute3f707512d22bbebe600c77ca(),
+		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +135,22 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_secret_config": schemaAttributec75bf630e6c32242ca580ef1(),
+		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretAccessRoleArn
+				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -299,7 +160,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schemaAttributecbc475b38efade5b6d444aa0(),
+		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the location that is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -309,7 +173,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw|object-storage)://[a-zA-Z0-9./\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schemaAttribute224ae4e4009aed3cc5016760(),
+		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URL of the object storage location that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +196,17 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"managed_secret_config": schemaAttribute4c4f3175960185caaf1d0086(),
+		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecretKey
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +217,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"secret_key": schemaAttributec4fdf9cd41cc62c1823dfd80(),
+		"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerCertificate
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +229,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "maxLength": 32768,
 		//	  "type": "string"
 		//	}
-		"server_certificate": schemaAttributefb8367cf0be7485d143933e9(),
+		"server_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "X.509 PEM content containing a certificate authority or chain to trust.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerHostname
 		// CloudFormation resource type schema:
 		//
@@ -359,7 +242,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 		//	  "type": "string"
 		//	}
-		"server_hostname": schemaAttribute8774909c29479b27bd4b3b92(),
+		"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerPort
 		// CloudFormation resource type schema:
 		//
@@ -369,7 +255,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"server_port": schemaAttribute221b1f0e7802422d81025183(),
+		"server_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that your self-managed server accepts inbound network traffic on.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerProtocol
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +270,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"server_protocol": schemaAttribute9b05302908fbbeecace93aa7(),
+		"server_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The protocol that the object storage server uses to communicate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +283,10 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schemaAttribute4a9a37b8824f9a5e5ff6d902(),
+		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -427,7 +322,24 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute5ae8aaead5d17d142d2f116a(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key for an AWS resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for an AWS resource tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

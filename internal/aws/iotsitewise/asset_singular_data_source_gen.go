@@ -14,165 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0d273370d692eff49a196b20() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique, friendly name for the asset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1525265288c59b6616b257bb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Alias
-				"alias": schemaAttributecadf004d628e53da2fc405d0(),
-				// Property: ExternalId
-				"external_id": schemaAttribute987ac04be256c27f5ed9c5c7(),
-				// Property: Id
-				"id": schemaAttribute4fbb32f6c4910aadc030074c(),
-				// Property: LogicalId
-				"logical_id": schemaAttribute1d159cdc49c353f09c0d0e0d(),
-				// Property: NotificationState
-				"notification_state": schemaAttributea3e64c21781970a4843dec87(),
-				// Property: Unit
-				"unit": schemaAttributed6f00f3d6ef1693d16b5ad46(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d159cdc49c353f09c0d0e0d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer provided ID for property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute30ea74900a38b15293eb83ce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the child asset to be associated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b3cdabb494124d48f348b04() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The LogicalID of a hierarchy in the parent asset's model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f9090abe56e5915b8e46d16() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The External ID of the asset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4fbb32f6c4910aadc030074c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Customer provided actual UUID for property",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute650b3abf6423db204afe19f4() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChildAssetId
-				"child_asset_id": schemaAttribute30ea74900a38b15293eb83ce(),
-				// Property: ExternalId
-				"external_id": schemaAttribute987ac04be256c27f5ed9c5c7(),
-				// Property: Id
-				"id": schemaAttribute4fbb32f6c4910aadc030074c(),
-				// Property: LogicalId
-				"logical_id": schemaAttribute4b3cdabb494124d48f348b04(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68fba0d82c871aed84228561() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A description for the asset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute987ac04be256c27f5ed9c5c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "String-friendly customer provided external ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea106c3617da89f186a401c8b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3e64c21781970a4843dec87() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac130703a5e76a447ef4ea36() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the asset model from which to create the asset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb09fad9fcbda097621fce1eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the asset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec66cb1eb1092f2fc6b69b25c() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributea106c3617da89f186a401c8b(),
-				// Property: Value
-				"value": schemaAttributea106c3617da89f186a401c8b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of key-value pairs that contain metadata for the asset.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecadf004d628e53da2fc405d0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The property alias that identifies the property.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6f00f3d6ef1693d16b5ad46() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee78b75155103520d611ad033() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the asset",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_asset", assetDataSource)
 }
@@ -188,7 +29,10 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the asset",
 		//	  "type": "string"
 		//	}
-		"asset_arn": schemaAttributeb09fad9fcbda097621fce1eb(),
+		"asset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the asset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetDescription
 		// CloudFormation resource type schema:
 		//
@@ -196,7 +40,10 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the asset",
 		//	  "type": "string"
 		//	}
-		"asset_description": schemaAttribute68fba0d82c871aed84228561(),
+		"asset_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the asset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetExternalId
 		// CloudFormation resource type schema:
 		//
@@ -207,7 +54,10 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"asset_external_id": schemaAttribute4f9090abe56e5915b8e46d16(),
+		"asset_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External ID of the asset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetHierarchies
 		// CloudFormation resource type schema:
 		//
@@ -250,7 +100,33 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_hierarchies": schemaAttribute650b3abf6423db204afe19f4(),
+		"asset_hierarchies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ChildAssetId
+					"child_asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the child asset to be associated.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String-friendly customer provided external ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual UUID for property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalId
+					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The LogicalID of a hierarchy in the parent asset's model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetId
 		// CloudFormation resource type schema:
 		//
@@ -261,7 +137,10 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"asset_id": schemaAttributee78b75155103520d611ad033(),
+		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the asset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelId
 		// CloudFormation resource type schema:
 		//
@@ -269,7 +148,10 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the asset model from which to create the asset.",
 		//	  "type": "string"
 		//	}
-		"asset_model_id": schemaAttributeac130703a5e76a447ef4ea36(),
+		"asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the asset model from which to create the asset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetName
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +159,10 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A unique, friendly name for the asset.",
 		//	  "type": "string"
 		//	}
-		"asset_name": schemaAttribute0d273370d692eff49a196b20(),
+		"asset_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique, friendly name for the asset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetProperties
 		// CloudFormation resource type schema:
 		//
@@ -329,7 +214,43 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_properties": schemaAttribute1525265288c59b6616b257bb(),
+		"asset_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Alias
+					"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The property alias that identifies the property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String-friendly customer provided external ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual UUID for property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalId
+					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided ID for property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NotificationState
+					"notification_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Unit
+					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -355,7 +276,22 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttributec66cb1eb1092f2fc6b69b25c(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs that contain metadata for the asset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

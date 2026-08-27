@@ -15,275 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute066d7a29079c9eccffbc8cf5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13a914e672c95b33f449afd0() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute13bfa14c0eee3f7302f87450() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The amount of time [in minutes] to wait before auto stopping the Application when idle. Defaults to 15 minutes.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1b606095110146f3083987c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The cpu architecture of an application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e9c82c18901a40508d31ae0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttributedb4cb0147544a4c6d0b78f5b(),
-			// Property: IdleTimeoutMinutes
-			"idle_timeout_minutes": schemaAttribute13bfa14c0eee3f7302f87450(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for Auto Stop of Application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a84b3290b87c8f1c167305c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Enabled
-			"enabled": schemaAttribute9f0188d10ecf069b1d627e82(),
-		}, /*END SCHEMA*/
-		Description: "Configuration for Auto Start of Application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63e01c65eb0ddbccf0106560() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "EMR release label.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute747deabbd0ca1ef4c78062c1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ImageUri
-			"image_uri": schemaAttribute7e1cbe42e6b5a72926bd1424(),
-		}, /*END SCHEMA*/
-		Description: "The image configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7846bd5af9f09bf3162044c0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the EMR Serverless Application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7d87865bfa7bb202d428b934() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroupIds
-			"security_group_ids": schemaAttributeeb9dd094e5991e08582e0225(),
-			// Property: SubnetIds
-			"subnet_ids": schemaAttributed29429dc32a87a055a1592c4(),
-		}, /*END SCHEMA*/
-		Description: "Network Configuration for customer VPC connectivity.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e1cbe42e6b5a72926bd1424() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute801c56c49ce39b389d15f303() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ImageConfiguration
-				"image_configuration": schemaAttribute747deabbd0ca1ef4c78062c1(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d3ae526474b1bb49f81b229() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: WorkerConfiguration
-			"worker_configuration": schemaAttributebd735906866d0a70398087d7(),
-			// Property: WorkerCount
-			"worker_count": schemaAttribute13a914e672c95b33f449afd0(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f8ca4f03203cf2d84084269() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the application",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute920bb123bd712133223e7024() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "User friendly Application name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute981780d018c725be43256aab() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributee3e333f6aefedc8eb2c6339b(),
-				// Property: Value
-				"value": schemaAttribute8d3ae526474b1bb49f81b229(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Initial capacity initialized when an Application is started.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9f0188d10ecf069b1d627e82() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, the Application will automatically start. Defaults to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0aadee04148e2d521e31248() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the EMR Serverless Application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd735906866d0a70398087d7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cpu
-			"cpu": schemaAttributed383b036b0ad72a51390390c(),
-			// Property: Disk
-			"disk": schemaAttributec80c9be8574b0e949ad4a329(),
-			// Property: Memory
-			"memory": schemaAttributef0e3fc10a6dd89fd5de60ad9(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec3194eeedf68261a93851013() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cpu
-			"cpu": schemaAttributed383b036b0ad72a51390390c(),
-			// Property: Disk
-			"disk": schemaAttributec80c9be8574b0e949ad4a329(),
-			// Property: Memory
-			"memory": schemaAttributef0e3fc10a6dd89fd5de60ad9(),
-		}, /*END SCHEMA*/
-		Description: "Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec80c9be8574b0e949ad4a329() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed29429dc32a87a055a1592c4() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of the subnets in the VPC to which you want to connect your job or application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed383b036b0ad72a51390390c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed613bbbe49a93c33f3a31114() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute066d7a29079c9eccffbc8cf5(),
-				// Property: Value
-				"value": schemaAttributeed61540bff6c77c2193ab197(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Tag map with key and value",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb4cb0147544a4c6d0b78f5b() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If set to true, the Application will automatically stop after being idle. Defaults to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee3e333f6aefedc8eb2c6339b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Worker type for an analytics framework.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb9dd094e5991e08582e0225() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The ID of the security groups in the VPC to which you want to connect your job or application.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed61540bff6c77c2193ab197() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0e3fc10a6dd89fd5de60ad9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_emrserverless_application", applicationDataSource)
 }
@@ -301,7 +32,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"application_id": schemaAttribute7846bd5af9f09bf3162044c0(),
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the EMR Serverless Application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Architecture
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +47,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"architecture": schemaAttribute1b606095110146f3083987c7(),
+		"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cpu architecture of an application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -321,7 +58,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the EMR Serverless Application.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributeb0aadee04148e2d521e31248(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the EMR Serverless Application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoStartConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -337,7 +77,17 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"auto_start_configuration": schemaAttribute5a84b3290b87c8f1c167305c(),
+		"auto_start_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, the Application will automatically start. Defaults to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for Auto Start of Application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoStopConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -357,7 +107,22 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"auto_stop_configuration": schemaAttribute2e9c82c18901a40508d31ae0(),
+		"auto_stop_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, the Application will automatically stop after being idle. Defaults to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdleTimeoutMinutes
+				"idle_timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time [in minutes] to wait before auto stopping the Application when idle. Defaults to 15 minutes.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for Auto Stop of Application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -375,7 +140,17 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"image_configuration": schemaAttribute747deabbd0ca1ef4c78062c1(),
+		"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageUri
+				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The image configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InitialCapacity
 		// CloudFormation resource type schema:
 		//
@@ -450,7 +225,51 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"initial_capacity": schemaAttribute981780d018c725be43256aab(),
+		"initial_capacity": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Worker type for an analytics framework.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: WorkerConfiguration
+							"worker_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Cpu
+									"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Disk
+									"disk": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Memory
+									"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WorkerCount
+							"worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Initial capacity initialized when an Application is started.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumCapacity
 		// CloudFormation resource type schema:
 		//
@@ -486,7 +305,27 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"maximum_capacity": schemaAttributec3194eeedf68261a93851013(),
+		"maximum_capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cpu
+				"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Disk
+				"disk": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Per worker Disk resource. GB is the only supported unit and specifying GB is optional",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Memory
+				"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Per worker memory resource. GB is the only supported unit and specifying GB is optional.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -497,7 +336,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9._\\/#-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute920bb123bd712133223e7024(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "User friendly Application name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -538,7 +380,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_configuration": schemaAttribute7d87865bfa7bb202d428b934(),
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The ID of the security groups in the VPC to which you want to connect your job or application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The ID of the subnets in the VPC to which you want to connect your job or application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Network Configuration for customer VPC connectivity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReleaseLabel
 		// CloudFormation resource type schema:
 		//
@@ -549,7 +408,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9._/-]+$",
 		//	  "type": "string"
 		//	}
-		"release_label": schemaAttribute63e01c65eb0ddbccf0106560(),
+		"release_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "EMR release label.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -584,7 +446,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributed613bbbe49a93c33f3a31114(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tag map with key and value",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -592,7 +471,10 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the application",
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute8f8ca4f03203cf2d84084269(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the application",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerTypeSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -624,7 +506,27 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"worker_type_specifications": schemaAttribute801c56c49ce39b389d15f303(),
+		"worker_type_specifications": // Pattern: ""
+		schema.MapNestedAttribute{    /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ImageConfiguration
+					"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ImageUri
+							"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The image configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

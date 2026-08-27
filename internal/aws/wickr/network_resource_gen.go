@@ -20,79 +20,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute111d53a52b013ea49e12d4cb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The current standing or status of the network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2840043caad623cf744364c4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b727e88dc54a66bf9165b96() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed).",
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute338e78b747b86a93cb0425a8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the network. Must be between 1 and 20 characters.",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86926620dcd353237f70fe2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The access level of the network, which determines available features and capabilities.",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"STANDARD",
-				"PREMIUM",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9fcc4e9016dc1e54698f63f5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb84db285273540965ebab6a7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS account ID that owns the network.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_wickr_network", networkResource)
 	registry.AddListResourceFactory("awscc_wickr_network", generic.NewListResource(networkResource))
@@ -113,7 +40,19 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_level": schemaAttribute86926620dcd353237f70fe2f(),
+		"access_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The access level of the network, which determines available features and capabilities.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"STANDARD",
+					"PREMIUM",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -121,7 +60,13 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS account ID that owns the network.",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schemaAttributeb84db285273540965ebab6a7(),
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS account ID that owns the network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MigrationState
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +74,13 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed).",
 		//	  "type": "integer"
 		//	}
-		"migration_state": schemaAttribute2b727e88dc54a66bf9165b96(),
+		"migration_state": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -138,7 +89,13 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:wickr:[a-z0-9-]+:[0-9]{12}:network/[0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"network_arn": schemaAttribute2840043caad623cf744364c4(),
+		"network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkId
 		// CloudFormation resource type schema:
 		//
@@ -149,7 +106,13 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"network_id": schemaAttribute9fcc4e9016dc1e54698f63f5(),
+		"network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkName
 		// CloudFormation resource type schema:
 		//
@@ -157,7 +120,10 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the network. Must be between 1 and 20 characters.",
 		//	  "type": "string"
 		//	}
-		"network_name": schemaAttribute338e78b747b86a93cb0425a8(),
+		"network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the network. Must be between 1 and 20 characters.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Standing
 		// CloudFormation resource type schema:
 		//
@@ -165,7 +131,13 @@ func networkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The current standing or status of the network.",
 		//	  "type": "integer"
 		//	}
-		"standing": schemaAttribute111d53a52b013ea49e12d4cb(),
+		"standing": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The current standing or status of the network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

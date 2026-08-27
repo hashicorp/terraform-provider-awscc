@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute7e63991fe7ea5e1b08551697() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN identifier of the channel.\nExample: arn:aws:chatbot::123456789012:chat-configuration/slack-channel/security-ops",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef809d5403fa145a3830fc06d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "ARN identifier of the NotificationConfiguration.\nExample: arn:aws:notifications::123456789012:configuration/a01jes88qxwkbj05xv9c967pgm1",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_notifications_channel_association", channelAssociationDataSource)
 }
@@ -44,7 +30,10 @@ func channelAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:[a-z-]{3,10}:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7e63991fe7ea5e1b08551697(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN identifier of the channel.\nExample: arn:aws:chatbot::123456789012:chat-configuration/slack-channel/security-ops",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -53,7 +42,10 @@ func channelAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
-		"notification_configuration_arn": schemaAttributef809d5403fa145a3830fc06d(),
+		"notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN identifier of the NotificationConfiguration.\nExample: arn:aws:notifications::123456789012:configuration/a01jes88qxwkbj05xv9c967pgm1",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

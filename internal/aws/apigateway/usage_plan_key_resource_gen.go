@@ -19,51 +19,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute04d4c3c4a9e10562b07e3cbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute581e7b92f9436a2c0c593c7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5e2d7ca30df36b6afa710c29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"API_KEY",
-			),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb9c9c9b4b85379015988cfc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the UsagePlanKey resource.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_usage_plan_key", usagePlanKeyResource)
 }
@@ -79,7 +34,13 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"usage_plan_key_id": schemaAttribute581e7b92f9436a2c0c593c7e(),
+		"usage_plan_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KeyId
 		// CloudFormation resource type schema:
 		//
@@ -87,7 +48,13 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Id of the UsagePlanKey resource.",
 		//	  "type": "string"
 		//	}
-		"key_id": schemaAttributedb9c9c9b4b85379015988cfc(),
+		"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the UsagePlanKey resource.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KeyType
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +65,18 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_type": schemaAttribute5e2d7ca30df36b6afa710c29(),
+		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"API_KEY",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UsagePlanId
 		// CloudFormation resource type schema:
 		//
@@ -106,7 +84,13 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
 		//	  "type": "string"
 		//	}
-		"usage_plan_id": schemaAttribute04d4c3c4a9e10562b07e3cbc(),
+		"usage_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

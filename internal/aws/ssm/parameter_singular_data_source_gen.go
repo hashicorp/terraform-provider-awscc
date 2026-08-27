@@ -15,79 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute168ecbdafd8b1a86d9095ad8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of parameter.\n  Parameters of type ``SecureString`` are not supported by CFNlong.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2423f9ddb7e1163d725e2bd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The parameter value.\n  If type is ``StringList``, the system returns a comma-separated string with no spaces between commas in the ``Value`` field.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3168cb60caf5cfcf5028e137() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A regular expression used to validate the parameter value. For example, for ``String`` types with values restricted to numbers, you can specify the following: ``AllowedPattern=^\\d+$``",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ee1c12b6bfb73545d4fbfc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The data type of the parameter, such as ``text`` or ``aws:ec2:image``. The default is ``text``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf35ac7ee723a24c94e22e09() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec056d1b1c8dafe2ac4c09f07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about the policies assigned to a parameter.\n [Assigning parameter policies](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html) in the *User Guide*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7052daf501d502104cebba2() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a SYS parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd816f18895f554aaf3b6ea9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Information about the parameter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeead61279689009571f1e5c9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The parameter tier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed2c363d5750dfe42cb6d51a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter.\n  The reported maximum length of 2048 characters for a parameter name includes 1037 characters that are reserved for internal use by SYS. The maximum length for a parameter name that you specify is 1011 characters.\n This count of 1011 characters includes the characters in the ARN that precede the name you specify. This ARN length will vary depending on your partition and Region. For example, the following 45 characters count toward the 1011 character maximum for a parameter created in the US East (Ohio) Region: ``arn:aws:ssm:us-east-2:111122223333:parameter/``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_parameter", parameterDataSource)
 }
@@ -103,7 +30,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A regular expression used to validate the parameter value. For example, for ``String`` types with values restricted to numbers, you can specify the following: ``AllowedPattern=^\\d+$``",
 		//	  "type": "string"
 		//	}
-		"allowed_pattern": schemaAttribute3168cb60caf5cfcf5028e137(),
+		"allowed_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A regular expression used to validate the parameter value. For example, for ``String`` types with values restricted to numbers, you can specify the following: ``AllowedPattern=^\\d+$``",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -112,7 +42,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[a-z0-9-]+)*:ssm:[a-z0-9-]+:[0-9]{12}:parameter/.+",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttributebf35ac7ee723a24c94e22e09(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataType
 		// CloudFormation resource type schema:
 		//
@@ -124,7 +57,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_type": schemaAttribute9ee1c12b6bfb73545d4fbfc2(),
+		"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The data type of the parameter, such as ``text`` or ``aws:ec2:image``. The default is ``text``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -132,7 +68,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Information about the parameter.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributedd816f18895f554aaf3b6ea9(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Information about the parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -140,7 +79,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the parameter.\n  The reported maximum length of 2048 characters for a parameter name includes 1037 characters that are reserved for internal use by SYS. The maximum length for a parameter name that you specify is 1011 characters.\n This count of 1011 characters includes the characters in the ARN that precede the name you specify. This ARN length will vary depending on your partition and Region. For example, the following 45 characters count toward the 1011 character maximum for a parameter created in the US East (Ohio) Region: ``arn:aws:ssm:us-east-2:111122223333:parameter/``.",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttributeed2c363d5750dfe42cb6d51a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter.\n  The reported maximum length of 2048 characters for a parameter name includes 1037 characters that are reserved for internal use by SYS. The maximum length for a parameter name that you specify is 1011 characters.\n This count of 1011 characters includes the characters in the ARN that precede the name you specify. This ARN length will vary depending on your partition and Region. For example, the following 45 characters count toward the 1011 character maximum for a parameter created in the US East (Ohio) Region: ``arn:aws:ssm:us-east-2:111122223333:parameter/``.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Policies
 		// CloudFormation resource type schema:
 		//
@@ -148,7 +90,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Information about the policies assigned to a parameter.\n [Assigning parameter policies](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html) in the *User Guide*.",
 		//	  "type": "string"
 		//	}
-		"policies": schemaAttributec056d1b1c8dafe2ac4c09f07(),
+		"policies": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Information about the policies assigned to a parameter.\n [Assigning parameter policies](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html) in the *User Guide*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -162,7 +107,12 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttributed7052daf501d502104cebba2(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Optional metadata that you assign to a resource in the form of an arbitrary set of tags (key-value pairs). Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a SYS parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -175,7 +125,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tier": schemaAttributeead61279689009571f1e5c9a(),
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The parameter tier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -187,7 +140,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute168ecbdafd8b1a86d9095ad8(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of parameter.\n  Parameters of type ``SecureString`` are not supported by CFNlong.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
@@ -195,7 +151,10 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The parameter value.\n  If type is ``StringList``, the system returns a comma-separated string with no spaces between commas in the ``Value`` field.",
 		//	  "type": "string"
 		//	}
-		"value": schemaAttribute2423f9ddb7e1163d725e2bd1(),
+		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The parameter value.\n  If type is ``StringList``, the system returns a comma-separated string with no spaces between commas in the ``Value`` field.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

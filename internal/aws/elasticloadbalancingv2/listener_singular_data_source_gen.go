@@ -15,610 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0217b314175f2c03980d8e29() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The absolute path, starting with the leading \"/\". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute089aecfcf109625090db3b49() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute094939952ff4878e3664025a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the attribute.\n The following attribute is supported by Network Load Balancers, and Gateway Load Balancers.\n  +  ``tcp.idle_timeout.seconds`` - The tcp idle timeout value, in seconds. The valid range is 60-6000 seconds. The default is 350 seconds.\n  \n The following attributes are only supported by Application Load Balancers.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_serial_number.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Serial-Number* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_issuer.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Issuer* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_subject.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Subject* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_validity.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Validity* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_leaf.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Leaf* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert* HTTP request header.\n  +  ``routing.http.request.x_amzn_tls_version.header_name`` - Enables you to modify the header name of the *X-Amzn-Tls-Version* HTTP request header.\n  +  ``routing.http.request.x_amzn_tls_cipher_suite.header_name`` - Enables you to modify the header name of the *X-Amzn-Tls-Cipher-Suite* HTTP request header.\n  +  ``routing.http.response.server.enabled`` - Enables you to allow or remove the HTTP response server header.\n  +  ``routing.http.response.strict_transport_security.header_value`` - Informs browsers that the site should only be accessed using HTTPS, and that any future attempts to access it using HTTP should automatically be converted to HTTPS.\n  +  ``routing.http.response.access_control_allow_origin.header_value`` - Specifies which origins are allowed to access the server.\n  +  ``routing.http.response.access_control_allow_methods.header_value`` - Returns which HTTP methods are allowed when accessing the server from a different origin.\n  +  ``routing.http.response.access_control_allow_headers.header_value`` - Specifies which headers can be used during the request.\n  +  ``routing.http.response.access_control_allow_credentials.header_value`` - Indicates whether the browser should include credentials such as cookies or authentication when making requests.\n  +  ``routing.http.response.access_control_expose_headers.header_value`` - Returns which headers the browser can expose to the requesting client.\n  +  ``routing.http.response.access_control_max_age.header_value`` - Specifies how long the results of a preflight request can be cached, in seconds.\n  +  ``routing.http.response.content_security_policy.header_value`` - Specifies restrictions enforced by the browser to help minimize the risk of certain types of security threats.\n  +  ``routing.http.response.x_content_type_options.header_value`` - Indicates whether the MIME types advertised in the *Content-Type* headers should be followed and not be changed.\n  +  ``routing.http.response.x_frame_options.header_value`` - Indicates whether the browser is allowed to render a page in a *frame*, *iframe*, *embed* or *object*.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a94802faa6bc0133bb050d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The content type.\n Valid Values: text/plain | text/css | text/html | application/javascript | application/json",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11620dab77bda6808a5c423f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether expired client certificates are ignored.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bddff2da4a678a73e65ac82() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute23b44399563d6ac088e63529() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute252d24c69f0a146c6b497b71() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The hostname. This component is not percent-encoded. The hostname can contain #{host}.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2c718dc61dcdc75f0c65c2eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The behavior if the user is not authenticated. The following are possible values:\n  +  deny```` - Return an HTTP 401 Unauthorized error.\n  +  allow```` - Allow the request to be forwarded to the target.\n  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2ce34aa9c8dcb5ec0aa7ddbb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The weight. The range is 0 to 999.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute38f4890674ab7cbb49b236c0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ContentType
-			"content_type": schemaAttribute0a94802faa6bc0133bb050d9(),
-			// Property: MessageBody
-			"message_body": schemaAttribute7e7fa85ccf9f104cfe9a42b2(),
-			// Property: StatusCode
-			"status_code": schemaAttribute83248fcf81600e3696821287(),
-		}, /*END SCHEMA*/
-		Description: "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3a4494d229c36160bc61f127() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the trust store.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e1bee5c5bb1b47c45a8cdfa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e4259124c7a4e98187bda89() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48abe28c7c5379d38ae673c7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the target group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute491aaef4b686e287133956c8() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute4f2ffaac60d135d8c5f62232(),
-				// Property: Value
-				"value": schemaAttribute6f2d8756a318713e45e7dae2(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4d3ef6f4bc7c3b7ea70ca276() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the load balancer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4f2ffaac60d135d8c5f62232() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute525f648dcd4e49891f8446c6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdditionalClaims
-			"additional_claims": schemaAttributea9be85839abd129b9f8f9c24(),
-			// Property: Issuer
-			"issuer": schemaAttribute089aecfcf109625090db3b49(),
-			// Property: JwksEndpoint
-			"jwks_endpoint": schemaAttribute089aecfcf109625090db3b49(),
-		}, /*END SCHEMA*/
-		Description: "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5412cc7a71b0568edc748760() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: TargetGroupStickinessConfig
-			"target_group_stickiness_config": schemaAttribute8d775c1161226cf461f40ab3(),
-			// Property: TargetGroups
-			"target_groups": schemaAttributead2c456f6d3548af83c91d53(),
-		}, /*END SCHEMA*/
-		Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute58599b957dbf7d805cc9dca1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html) in the *Application Load Balancers Guide* and [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html) in the *Network Load Balancers Guide*.\n [HTTPS listeners] Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. To decrease the possibility of an interruption if your load balancer is handling a high volume of traffic, create an additional load balancer or request an LCU reservation.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5978b262292b9161af29cd6e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value on initial resource creation is ``off``. After mutual authentication is turned on, you must explicitly set the ``Mode`` to ``off`` to turn it off; removing the property from your template will not turn it off.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5a82f2b289cc13c81eec33b9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether trust store CA certificate names are advertised.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61d59662aa55f29dc7ddf4b6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute626fcebf30491fd507f871fe() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute649d87619e94f50399d82305() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6980cc99273e75cb14a1c5d3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading \"?\", as it is automatically added. You can specify any of the reserved keywords.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e323c23a6dae3958a009728() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateArn
-				"certificate_arn": schemaAttributeeaa32d7183226bed65300bf5(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS.\n For an HTTPS listener, update requires some interruptions. For a TLS listener, update requires no interruption.\n To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6e78bd37519423abf26ebee7() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6f2d8756a318713e45e7dae2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the tag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7948e6db41ad43fd7d834322() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You can't redirect HTTPS to HTTP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7e7fa85ccf9f104cfe9a42b2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The message.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7f56cfb22f20ad1e7fb74b98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon Cognito user pool client.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute83248fcf81600e3696821287() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The HTTP response code (2XX, 4XX, or 5XX).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84dba464b5eac7a8ea38362e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute85d0ecb5aafa65a71b05e1b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The format of the claim value.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8d775c1161226cf461f40ab3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DurationSeconds
-			"duration_seconds": schemaAttributef4e261b33cfa2ae98dffadcf(),
-			// Property: Enabled
-			"enabled": schemaAttributec01349d90e90cb1b9b52e694(),
-		}, /*END SCHEMA*/
-		Description: "Information about the target group stickiness for a rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute914b6846b946ef6fc1e37be5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97084650d287570cdaedfea1() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute094939952ff4878e3664025a(),
-				// Property: Value
-				"value": schemaAttribute9d940ada8e1e0c00921f84fa(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The listener attributes. Attributes that you do not modify retain their current values.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute98ca0ab2f33095f4d063bb37() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdvertiseTrustStoreCaNames
-			"advertise_trust_store_ca_names": schemaAttribute5a82f2b289cc13c81eec33b9(),
-			// Property: IgnoreClientCertificateExpiry
-			"ignore_client_certificate_expiry": schemaAttribute11620dab77bda6808a5c423f(),
-			// Property: Mode
-			"mode": schemaAttribute5978b262292b9161af29cd6e(),
-			// Property: TrustStoreArn
-			"trust_store_arn": schemaAttribute3a4494d229c36160bc61f127(),
-		}, /*END SCHEMA*/
-		Description: "The mutual authentication configuration information.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9d940ada8e1e0c00921f84fa() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value of the attribute.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9ef76e22c7a7c3b008fd047a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea0f7652918d15745bdbc8682() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of action.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea541536542969ae61757e0be() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea9be85839abd129b9f8f9c24() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Format
-				"format": schemaAttribute85d0ecb5aafa65a71b05e1b0(),
-				// Property: Name
-				"name": schemaAttributeb22e1a8fd2d1b833e02cc64c(),
-				// Property: Values
-				"values": schemaAttributece456d20b245fee4adf9bcac(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead2c456f6d3548af83c91d53() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TargetGroupArn
-				"target_group_arn": schemaAttribute48abe28c7c5379d38ae673c7(),
-				// Property: Weight
-				"weight": schemaAttribute2ce34aa9c8dcb5ec0aa7ddbb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Information about how traffic will be distributed between multiple target groups in a forward rule.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb22e1a8fd2d1b833e02cc64c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebbc6369fbc31f0fb1181e466() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Host
-			"host": schemaAttribute252d24c69f0a146c6b497b71(),
-			// Property: Path
-			"path": schemaAttribute0217b314175f2c03980d8e29(),
-			// Property: Port
-			"port": schemaAttributec9b88fc08c4c9ab4038c358f(),
-			// Property: Protocol
-			"protocol": schemaAttribute7948e6db41ad43fd7d834322(),
-			// Property: Query
-			"query": schemaAttribute6980cc99273e75cb14a1c5d3(),
-			// Property: StatusCode
-			"status_code": schemaAttribute61d59662aa55f29dc7ddf4b6(),
-		}, /*END SCHEMA*/
-		Description: "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec01349d90e90cb1b9b52e694() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether target group stickiness is enabled.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec2f999b6cd322879e3236c25() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec8a5a282606546b731507c3c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationRequestExtraParams
-			"authentication_request_extra_params": schemaAttribute6e78bd37519423abf26ebee7(),
-			// Property: AuthorizationEndpoint
-			"authorization_endpoint": schemaAttributeef200bfe8db13e5b152fa733(),
-			// Property: ClientId
-			"client_id": schemaAttributef105d65bc4f91ec12d563da0(),
-			// Property: ClientSecret
-			"client_secret": schemaAttribute3e4259124c7a4e98187bda89(),
-			// Property: Issuer
-			"issuer": schemaAttribute9ef76e22c7a7c3b008fd047a(),
-			// Property: OnUnauthenticatedRequest
-			"on_unauthenticated_request": schemaAttribute2c718dc61dcdc75f0c65c2eb(),
-			// Property: Scope
-			"scope": schemaAttributeda8f64d0c10e9d689ba4c487(),
-			// Property: SessionCookieName
-			"session_cookie_name": schemaAttributedb00471e86e122310117bb34(),
-			// Property: SessionTimeout
-			"session_timeout": schemaAttributec2f999b6cd322879e3236c25(),
-			// Property: TokenEndpoint
-			"token_endpoint": schemaAttribute1bddff2da4a678a73e65ac82(),
-			// Property: UseExistingClientSecret
-			"use_existing_client_secret": schemaAttribute23b44399563d6ac088e63529(),
-			// Property: UserInfoEndpoint
-			"user_info_endpoint": schemaAttribute914b6846b946ef6fc1e37be5(),
-		}, /*END SCHEMA*/
-		Description: "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec9b88fc08c4c9ab4038c358f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The port. You can specify a value from 1 to 65535 or #{port}.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece456d20b245fee4adf9bcac() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed379f84a12199ec108143cbc() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port on which the load balancer is listening. You can't specify a port for a Gateway Load Balancer.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6b654d6a6a0bef2092e0f7b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AuthenticationRequestExtraParams
-			"authentication_request_extra_params": schemaAttribute6e78bd37519423abf26ebee7(),
-			// Property: OnUnauthenticatedRequest
-			"on_unauthenticated_request": schemaAttribute2c718dc61dcdc75f0c65c2eb(),
-			// Property: Scope
-			"scope": schemaAttributeda8f64d0c10e9d689ba4c487(),
-			// Property: SessionCookieName
-			"session_cookie_name": schemaAttributedb00471e86e122310117bb34(),
-			// Property: SessionTimeout
-			"session_timeout": schemaAttributec2f999b6cd322879e3236c25(),
-			// Property: UserPoolArn
-			"user_pool_arn": schemaAttribute626fcebf30491fd507f871fe(),
-			// Property: UserPoolClientId
-			"user_pool_client_id": schemaAttribute7f56cfb22f20ad1e7fb74b98(),
-			// Property: UserPoolDomain
-			"user_pool_domain": schemaAttribute84dba464b5eac7a8ea38362e(),
-		}, /*END SCHEMA*/
-		Description: "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeda8f64d0c10e9d689ba4c487() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The set of user claims to be requested from the IdP. The default is ``openid``.\n To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb00471e86e122310117bb34() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeaa32d7183226bed65300bf5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the certificate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef200bfe8db13e5b152fa733() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef105d65bc4f91ec12d563da0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The OAuth 2.0 client identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef392e4a17b0129be6f849d70() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef4e261b33cfa2ae98dffadcf() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefea5364faa62ada8d5fcfa13() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthenticateCognitoConfig
-				"authenticate_cognito_config": schemaAttributed6b654d6a6a0bef2092e0f7b(),
-				// Property: AuthenticateOidcConfig
-				"authenticate_oidc_config": schemaAttributec8a5a282606546b731507c3c(),
-				// Property: FixedResponseConfig
-				"fixed_response_config": schemaAttribute38f4890674ab7cbb49b236c0(),
-				// Property: ForwardConfig
-				"forward_config": schemaAttribute5412cc7a71b0568edc748760(),
-				// Property: JwtValidationConfig
-				"jwt_validation_config": schemaAttribute525f648dcd4e49891f8446c6(),
-				// Property: Order
-				"order": schemaAttributef392e4a17b0129be6f849d70(),
-				// Property: RedirectConfig
-				"redirect_config": schemaAttributebbc6369fbc31f0fb1181e466(),
-				// Property: TargetGroupArn
-				"target_group_arn": schemaAttribute3e1bee5c5bb1b47c45a8cdfa(),
-				// Property: Type
-				"type": schemaAttributea0f7652918d15745bdbc8682(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The actions for the default rule. You cannot define a condition for a default rule.\n To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticloadbalancingv2_listener", listenerDataSource)
 }
@@ -637,7 +33,11 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"alpn_policy": schemaAttributea541536542969ae61757e0be(),
+		"alpn_policy": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Certificates
 		// CloudFormation resource type schema:
 		//
@@ -661,7 +61,19 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"certificates": schemaAttribute6e323c23a6dae3958a009728(),
+		"certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateArn
+					"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the certificate.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS.\n For an HTTPS listener, update requires some interruptions. For a TLS listener, update requires no interruption.\n To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultActions
 		// CloudFormation resource type schema:
 		//
@@ -974,7 +386,291 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"default_actions": schemaAttributefea5364faa62ada8d5fcfa13(),
+		"default_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AuthenticateCognitoConfig
+					"authenticate_cognito_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationRequestExtraParams
+							"authentication_request_extra_params": // Pattern: ""
+							schema.MapAttribute{                   /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnUnauthenticatedRequest
+							"on_unauthenticated_request": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The behavior if the user is not authenticated. The following are possible values:\n  +  deny```` - Return an HTTP 401 Unauthorized error.\n  +  allow```` - Allow the request to be forwarded to the target.\n  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Scope
+							"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The set of user claims to be requested from the IdP. The default is ``openid``.\n To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionCookieName
+							"session_cookie_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionTimeout
+							"session_timeout": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserPoolArn
+							"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Amazon Cognito user pool.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserPoolClientId
+							"user_pool_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the Amazon Cognito user pool client.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserPoolDomain
+							"user_pool_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AuthenticateOidcConfig
+					"authenticate_oidc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AuthenticationRequestExtraParams
+							"authentication_request_extra_params": // Pattern: ""
+							schema.MapAttribute{                   /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AuthorizationEndpoint
+							"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ClientId
+							"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The OAuth 2.0 client identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ClientSecret
+							"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnUnauthenticatedRequest
+							"on_unauthenticated_request": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The behavior if the user is not authenticated. The following are possible values:\n  +  deny```` - Return an HTTP 401 Unauthorized error.\n  +  allow```` - Allow the request to be forwarded to the target.\n  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Scope
+							"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The set of user claims to be requested from the IdP. The default is ``openid``.\n To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionCookieName
+							"session_cookie_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SessionTimeout
+							"session_timeout": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TokenEndpoint
+							"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UseExistingClientSecret
+							"use_existing_client_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserInfoEndpoint
+							"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FixedResponseConfig
+					"fixed_response_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContentType
+							"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The content type.\n Valid Values: text/plain | text/css | text/html | application/javascript | application/json",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MessageBody
+							"message_body": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The message.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusCode
+							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTP response code (2XX, 4XX, or 5XX).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ForwardConfig
+					"forward_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TargetGroupStickinessConfig
+							"target_group_stickiness_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DurationSeconds
+									"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether target group stickiness is enabled.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Information about the target group stickiness for a rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetGroups
+							"target_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: TargetGroupArn
+										"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the target group.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Weight
+										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The weight. The range is 0 to 999.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Information about how traffic will be distributed between multiple target groups in a forward rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The format of the claim value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Order
+					"order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RedirectConfig
+					"redirect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The hostname. This component is not percent-encoded. The hostname can contain #{host}.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Path
+							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The absolute path, starting with the leading \"/\". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The port. You can specify a value from 1 to 65535 or #{port}.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Protocol
+							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You can't redirect HTTPS to HTTP.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Query
+							"query": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading \"?\", as it is automatically added. You can specify any of the reserved keywords.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StatusCode
+							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TargetGroupArn
+					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of action.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The actions for the default rule. You cannot define a condition for a default rule.\n To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ListenerArn
 		// CloudFormation resource type schema:
 		//
@@ -982,7 +678,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"listener_arn": schemaAttribute089aecfcf109625090db3b49(),
+		"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ListenerAttributes
 		// CloudFormation resource type schema:
 		//
@@ -1008,7 +707,24 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"listener_attributes": schemaAttribute97084650d287570cdaedfea1(),
+		"listener_attributes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the attribute.\n The following attribute is supported by Network Load Balancers, and Gateway Load Balancers.\n  +  ``tcp.idle_timeout.seconds`` - The tcp idle timeout value, in seconds. The valid range is 60-6000 seconds. The default is 350 seconds.\n  \n The following attributes are only supported by Application Load Balancers.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_serial_number.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Serial-Number* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_issuer.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Issuer* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_subject.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Subject* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_validity.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Validity* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert_leaf.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert-Leaf* HTTP request header.\n  +  ``routing.http.request.x_amzn_mtls_clientcert.header_name`` - Enables you to modify the header name of the *X-Amzn-Mtls-Clientcert* HTTP request header.\n  +  ``routing.http.request.x_amzn_tls_version.header_name`` - Enables you to modify the header name of the *X-Amzn-Tls-Version* HTTP request header.\n  +  ``routing.http.request.x_amzn_tls_cipher_suite.header_name`` - Enables you to modify the header name of the *X-Amzn-Tls-Cipher-Suite* HTTP request header.\n  +  ``routing.http.response.server.enabled`` - Enables you to allow or remove the HTTP response server header.\n  +  ``routing.http.response.strict_transport_security.header_value`` - Informs browsers that the site should only be accessed using HTTPS, and that any future attempts to access it using HTTP should automatically be converted to HTTPS.\n  +  ``routing.http.response.access_control_allow_origin.header_value`` - Specifies which origins are allowed to access the server.\n  +  ``routing.http.response.access_control_allow_methods.header_value`` - Returns which HTTP methods are allowed when accessing the server from a different origin.\n  +  ``routing.http.response.access_control_allow_headers.header_value`` - Specifies which headers can be used during the request.\n  +  ``routing.http.response.access_control_allow_credentials.header_value`` - Indicates whether the browser should include credentials such as cookies or authentication when making requests.\n  +  ``routing.http.response.access_control_expose_headers.header_value`` - Returns which headers the browser can expose to the requesting client.\n  +  ``routing.http.response.access_control_max_age.header_value`` - Specifies how long the results of a preflight request can be cached, in seconds.\n  +  ``routing.http.response.content_security_policy.header_value`` - Specifies restrictions enforced by the browser to help minimize the risk of certain types of security threats.\n  +  ``routing.http.response.x_content_type_options.header_value`` - Indicates whether the MIME types advertised in the *Content-Type* headers should be followed and not be changed.\n  +  ``routing.http.response.x_frame_options.header_value`` - Indicates whether the browser is allowed to render a page in a *frame*, *iframe*, *embed* or *object*.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the attribute.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The listener attributes. Attributes that you do not modify retain their current values.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerArn
 		// CloudFormation resource type schema:
 		//
@@ -1016,7 +732,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the load balancer.",
 		//	  "type": "string"
 		//	}
-		"load_balancer_arn": schemaAttribute4d3ef6f4bc7c3b7ea70ca276(),
+		"load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the load balancer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MutualAuthentication
 		// CloudFormation resource type schema:
 		//
@@ -1043,7 +762,32 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"mutual_authentication": schemaAttribute98ca0ab2f33095f4d063bb37(),
+		"mutual_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdvertiseTrustStoreCaNames
+				"advertise_trust_store_ca_names": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether trust store CA certificate names are advertised.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IgnoreClientCertificateExpiry
+				"ignore_client_certificate_expiry": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether expired client certificates are ignored.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value on initial resource creation is ``off``. After mutual authentication is turned on, you must explicitly set the ``Mode`` to ``off`` to turn it off; removing the property from your template will not turn it off.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TrustStoreArn
+				"trust_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the trust store.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The mutual authentication configuration information.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -1051,7 +795,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port on which the load balancer is listening. You can't specify a port for a Gateway Load Balancer.",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttributed379f84a12199ec108143cbc(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port on which the load balancer is listening. You can't specify a port for a Gateway Load Balancer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -1059,7 +806,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
 		//	  "type": "string"
 		//	}
-		"protocol": schemaAttribute649d87619e94f50399d82305(),
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SslPolicy
 		// CloudFormation resource type schema:
 		//
@@ -1067,7 +817,10 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html) in the *Application Load Balancers Guide* and [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html) in the *Network Load Balancers Guide*.\n [HTTPS listeners] Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. To decrease the possibility of an interruption if your load balancer is handling a high volume of traffic, create an additional load balancer or request an LCU reservation.",
 		//	  "type": "string"
 		//	}
-		"ssl_policy": schemaAttribute58599b957dbf7d805cc9dca1(),
+		"ssl_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html) in the *Application Load Balancers Guide* and [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html) in the *Network Load Balancers Guide*.\n [HTTPS listeners] Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. To decrease the possibility of an interruption if your load balancer is handling a high volume of traffic, create an additional load balancer or request an LCU reservation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1096,7 +849,24 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute491aaef4b686e287133956c8(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

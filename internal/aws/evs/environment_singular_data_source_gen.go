@@ -15,212 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute34a41ce16241c06cd0c54f05() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SolutionKey
-			"solution_key": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: VsanKey
-			"vsan_key": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-		}, /*END SCHEMA*/
-		Description: "The license information for an EVS environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c593f7f5bd35ec479294a85() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3e15b49a58dfe0ffa81f8ec0() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute470b371a8f41de7f7190b649() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EdgeVTep
-			"edge_v_tep": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: ExpansionVlan1
-			"expansion_vlan_1": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: ExpansionVlan2
-			"expansion_vlan_2": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: Hcx
-			"hcx": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: HcxNetworkAclId
-			"hcx_network_acl_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: IsHcxPublic
-			"is_hcx_public": schemaAttributec923e691bee8e7c228827c98(),
-			// Property: NsxUpLink
-			"nsx_up_link": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: VMotion
-			"v_motion": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: VSan
-			"v_san": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: VTep
-			"v_tep": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: VmManagement
-			"vm_management": schemaAttribute9c510dbf44de025ac2553f4f(),
-			// Property: VmkManagement
-			"vmk_management": schemaAttribute9c510dbf44de025ac2553f4f(),
-		}, /*END SCHEMA*/
-		Description: "The initial Vlan configuration only required upon creation. Modification after creation will have no effect",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53013509af0714a14756322a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute530d42a6636d9f2e6bc4a88a() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DedicatedHostId
-				"dedicated_host_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-				// Property: HostName
-				"host_name": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-				// Property: InstanceType
-				"instance_type": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-				// Property: KeyName
-				"key_name": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-				// Property: PlacementGroupId
-				"placement_group_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The initial hosts for environment only required upon creation. Modification after creation will have no effect",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute550fd1721d7a48da8247df7d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3c593f7f5bd35ec479294a85(),
-				// Property: Value
-				"value": schemaAttribute53013509af0714a14756322a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute765c3857a8e165aabc2cc842() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ImpairedSince
-				"impaired_since": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-				// Property: Result
-				"result": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-				// Property: Type
-				"type": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute81c16071e39f3dc1067d6230() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretArn
-				"secret_arn": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute824debe6e46613797440b70c() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroups
-			"security_groups": schemaAttribute3e15b49a58dfe0ffa81f8ec0(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c510dbf44de025ac2553f4f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Cidr
-			"cidr": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcb2c299974c57bbf8ee2dfc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec923e691bee8e7c228827c98() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6aa5f87a3827e9c01855fde() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PrivateRouteServerPeerings
-			"private_route_server_peerings": schemaAttribute3e15b49a58dfe0ffa81f8ec0(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed71b70caba52bef844f6938b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CloudBuilder
-			"cloud_builder": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: Nsx
-			"nsx": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: NsxEdge1
-			"nsx_edge_1": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: NsxEdge2
-			"nsx_edge_2": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: NsxManager1
-			"nsx_manager_1": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: NsxManager2
-			"nsx_manager_2": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: NsxManager3
-			"nsx_manager_3": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: SddcManager
-			"sddc_manager": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-			// Property: VCenter
-			"v_center": schemaAttributebcb2c299974c57bbf8ee2dfc(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeebd292227ef602b2b3794982() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of an EVS environment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_evs_environment", environmentDataSource)
 }
@@ -267,7 +61,25 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"checks": schemaAttribute765c3857a8e165aabc2cc842(),
+		"checks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ImpairedSince
+					"impaired_since": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Result
+					"result": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectivityInfo
 		// CloudFormation resource type schema:
 		//
@@ -291,14 +103,25 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connectivity_info": schemaAttributed6aa5f87a3827e9c01855fde(),
+		"connectivity_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrivateRouteServerPeerings
+				"private_route_server_peerings": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Credentials
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +138,17 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"credentials": schemaAttribute81c16071e39f3dc1067d6230(),
+		"credentials": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SecretArn
+					"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentArn
 		// CloudFormation resource type schema:
 		//
@@ -325,7 +158,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"environment_arn": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -333,7 +168,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(env-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentName
 		// CloudFormation resource type schema:
 		//
@@ -342,7 +179,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,100}$",
 		//	  "type": "string"
 		//	}
-		"environment_name": schemaAttributeebd292227ef602b2b3794982(),
+		"environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of an EVS environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentState
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +196,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"environment_state": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"environment_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Hosts
 		// CloudFormation resource type schema:
 		//
@@ -408,7 +250,34 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 4,
 		//	  "type": "array"
 		//	}
-		"hosts": schemaAttribute530d42a6636d9f2e6bc4a88a(),
+		"hosts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DedicatedHostId
+					"dedicated_host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: HostName
+					"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: KeyName
+					"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: PlacementGroupId
+					"placement_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The initial hosts for environment only required upon creation. Modification after creation will have no effect",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InitialVlans
 		// CloudFormation resource type schema:
 		//
@@ -568,14 +437,129 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"initial_vlans": schemaAttribute470b371a8f41de7f7190b649(),
+		"initial_vlans": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EdgeVTep
+				"edge_v_tep": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExpansionVlan1
+				"expansion_vlan_1": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExpansionVlan2
+				"expansion_vlan_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Hcx
+				"hcx": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HcxNetworkAclId
+				"hcx_network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsHcxPublic
+				"is_hcx_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NsxUpLink
+				"nsx_up_link": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VMotion
+				"v_motion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VSan
+				"v_san": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VTep
+				"v_tep": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VmManagement
+				"vm_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VmkManagement
+				"vmk_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The initial Vlan configuration only required upon creation. Modification after creation will have no effect",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseInfo
 		// CloudFormation resource type schema:
 		//
@@ -598,14 +582,29 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"license_info": schemaAttribute34a41ce16241c06cd0c54f05(),
+		"license_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SolutionKey
+				"solution_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VsanKey
+				"vsan_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The license information for an EVS environment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"modified_at": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccessSecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -625,7 +624,16 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"service_access_security_groups": schemaAttribute824debe6e46613797440b70c(),
+		"service_access_security_groups": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceAccessSubnetId
 		// CloudFormation resource type schema:
 		//
@@ -635,21 +643,27 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^subnet-[a-f0-9]{8}([a-f0-9]{9})?$",
 		//	  "type": "string"
 		//	}
-		"service_access_subnet_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"service_access_subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SiteId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"site_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"site_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StateDetails
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"state_details": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"state_details": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -682,14 +696,33 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute550fd1721d7a48da8247df7d(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TermsAccepted
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"terms_accepted": schemaAttributec923e691bee8e7c228827c98(),
+		"terms_accepted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VcfHostnames
 		// CloudFormation resource type schema:
 		//
@@ -746,7 +779,47 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vcf_hostnames": schemaAttributed71b70caba52bef844f6938b(),
+		"vcf_hostnames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudBuilder
+				"cloud_builder": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Nsx
+				"nsx": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NsxEdge1
+				"nsx_edge_1": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NsxEdge2
+				"nsx_edge_2": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NsxManager1
+				"nsx_manager_1": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NsxManager2
+				"nsx_manager_2": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NsxManager3
+				"nsx_manager_3": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SddcManager
+				"sddc_manager": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VCenter
+				"v_center": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VcfVersion
 		// CloudFormation resource type schema:
 		//
@@ -758,7 +831,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vcf_version": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"vcf_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -768,7 +843,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpc-[a-f0-9]{8}([a-f0-9]{9})?$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schemaAttributebcb2c299974c57bbf8ee2dfc(),
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

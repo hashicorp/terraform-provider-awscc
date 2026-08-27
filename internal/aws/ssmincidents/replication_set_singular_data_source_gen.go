@@ -14,81 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0c015db3e76aa43a98b35cd3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS region name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute34e19fa984f57164c564b639() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SseKmsKeyId
-			"sse_kms_key_id": schemaAttributed3925a0cac28bdaa2c72da4a(),
-		}, /*END SCHEMA*/
-		Description: "The ReplicationSet regional configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3762b9a4257415a30890e24f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute59257fbffa603f0e04edcf5a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN of the ReplicationSet.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8844fee3d58e4477cd59b67f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Configures the ReplicationSet deletion protection.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute973926ceb666eecaed515eb8() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute3762b9a4257415a30890e24f(),
-				// Property: Value
-				"value": schemaAttribute3762b9a4257415a30890e24f(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The tags to apply to the replication set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5aa701cae88ef81b3e2f70a() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RegionConfiguration
-				"region_configuration": schemaAttribute34e19fa984f57164c564b639(),
-				// Property: RegionName
-				"region_name": schemaAttribute0c015db3e76aa43a98b35cd3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The ReplicationSet configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed3925a0cac28bdaa2c72da4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmincidents_replication_set", replicationSetDataSource)
 }
@@ -106,7 +31,10 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute59257fbffa603f0e04edcf5a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the ReplicationSet.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtected
 		// CloudFormation resource type schema:
 		//
@@ -115,7 +43,10 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Configures the ReplicationSet deletion protection.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protected": schemaAttribute8844fee3d58e4477cd59b67f(),
+		"deletion_protected": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Configures the ReplicationSet deletion protection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Regions
 		// CloudFormation resource type schema:
 		//
@@ -154,7 +85,31 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"regions": schemaAttributea5aa701cae88ef81b3e2f70a(),
+		"regions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: RegionConfiguration
+					"region_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SseKmsKeyId
+							"sse_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS Key Management Service key ID or Key Alias to use to encrypt your replication set.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The ReplicationSet regional configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RegionName
+					"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS region name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The ReplicationSet configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +143,22 @@ func replicationSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute973926ceb666eecaed515eb8(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to apply to the replication set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -17,218 +17,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute1a87861526247272c10be2d5() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2a3b72a17b012d89b7747dd5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainUnit
-			"domain_unit": schemaAttribute91154a9a7facd6cac9185cc1(),
-			// Property: Group
-			"group": schemaAttribute63c3752bc4e7e78ac27ba3bc(),
-			// Property: Project
-			"project": schemaAttributeee1a132a2657ff8d73022393(),
-			// Property: User
-			"user": schemaAttribute97efd78cf002708f4e8f5333(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute407c4dfdadb0a6f9a5e6f7e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType: jsontypes.NormalizedType{},
-		Computed:   true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute500115b0ae53c309f2c2c8da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the policy grant returned by the AddPolicyGrant API",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63c3752bc4e7e78ac27ba3bc() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: GroupIdentifier
-			"group_identifier": schemaAttribute7bec995450eef4d6535f056c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7bec995450eef4d6535f056c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute80c02b7c202a953141157505() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute86b9b580ef2495f2a97a3f88() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncludeChildDomainUnits
-			"include_child_domain_units": schemaAttribute80c02b7c202a953141157505(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute91154a9a7facd6cac9185cc1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainUnitDesignation
-			"domain_unit_designation": schemaAttribute7bec995450eef4d6535f056c(),
-			// Property: DomainUnitGrantFilter
-			"domain_unit_grant_filter": schemaAttributece0d31a3563fcd48765bacf1(),
-			// Property: DomainUnitIdentifier
-			"domain_unit_identifier": schemaAttribute7bec995450eef4d6535f056c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute97efd78cf002708f4e8f5333() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllUsersGrantFilter
-			"all_users_grant_filter": schemaAttribute407c4dfdadb0a6f9a5e6f7e6(),
-			// Property: UserIdentifier
-			"user_identifier": schemaAttribute7bec995450eef4d6535f056c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb0d2a9596619ceb888662e6a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainUnitId
-			"domain_unit_id": schemaAttribute7bec995450eef4d6535f056c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb54b71fd9766f5f4161fdaac() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainUnit
-			"domain_unit": schemaAttribute7bec995450eef4d6535f056c(),
-			// Property: IncludeChildDomainUnits
-			"include_child_domain_units": schemaAttribute80c02b7c202a953141157505(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributece0d31a3563fcd48765bacf1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AllDomainUnitsGrantFilter
-			"all_domain_units_grant_filter": schemaAttribute407c4dfdadb0a6f9a5e6f7e6(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedd03c13cc98a48aacce72c28() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: IncludeChildDomainUnits
-			"include_child_domain_units": schemaAttribute80c02b7c202a953141157505(),
-			// Property: ProjectProfiles
-			"project_profiles": schemaAttribute1a87861526247272c10be2d5(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee2c825fa0d9eea02e7adaaba() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AddToProjectMemberPool
-			"add_to_project_member_pool": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: CreateAssetType
-			"create_asset_type": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: CreateDomainUnit
-			"create_domain_unit": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: CreateEnvironment
-			"create_environment": schemaAttribute407c4dfdadb0a6f9a5e6f7e6(),
-			// Property: CreateEnvironmentFromBlueprint
-			"create_environment_from_blueprint": schemaAttribute407c4dfdadb0a6f9a5e6f7e6(),
-			// Property: CreateEnvironmentProfile
-			"create_environment_profile": schemaAttributeb0d2a9596619ceb888662e6a(),
-			// Property: CreateFormType
-			"create_form_type": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: CreateGlossary
-			"create_glossary": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: CreateProject
-			"create_project": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: CreateProjectFromProjectProfile
-			"create_project_from_project_profile": schemaAttributedd03c13cc98a48aacce72c28(),
-			// Property: DelegateCreateEnvironmentProfile
-			"delegate_create_environment_profile": schemaAttribute407c4dfdadb0a6f9a5e6f7e6(),
-			// Property: OverrideDomainUnitOwners
-			"override_domain_unit_owners": schemaAttribute86b9b580ef2495f2a97a3f88(),
-			// Property: OverrideProjectOwners
-			"override_project_owners": schemaAttribute86b9b580ef2495f2a97a3f88(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee5b0a40116b55f3556af5c08() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "Specifies the timestamp at which policy grant member was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee1a132a2657ff8d73022393() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ProjectDesignation
-			"project_designation": schemaAttribute7bec995450eef4d6535f056c(),
-			// Property: ProjectGrantFilter
-			"project_grant_filter": schemaAttributef3aaa7dc72c5e85c442c7567(),
-			// Property: ProjectIdentifier
-			"project_identifier": schemaAttribute7bec995450eef4d6535f056c(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeef2036659d05eacf2a470556() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the user who created the policy grant member.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef3aaa7dc72c5e85c442c7567() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DomainUnitFilter
-			"domain_unit_filter": schemaAttributeb54b71fd9766f5f4161fdaac(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_policy_grant", policyGrantDataSource)
 }
@@ -245,7 +33,11 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttributee5b0a40116b55f3556af5c08(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "Specifies the timestamp at which policy grant member was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +45,10 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the user who created the policy grant member.",
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttributeef2036659d05eacf2a470556(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the user who created the policy grant member.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Detail
 		// CloudFormation resource type schema:
 		//
@@ -374,7 +169,131 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"detail": schemaAttributee2c825fa0d9eea02e7adaaba(),
+		"detail": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AddToProjectMemberPool
+				"add_to_project_member_pool": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAssetType
+				"create_asset_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDomainUnit
+				"create_domain_unit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateEnvironment
+				"create_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateEnvironmentFromBlueprint
+				"create_environment_from_blueprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateEnvironmentProfile
+				"create_environment_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainUnitId
+						"domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateFormType
+				"create_form_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateGlossary
+				"create_glossary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateProject
+				"create_project": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateProjectFromProjectProfile
+				"create_project_from_project_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectProfiles
+						"project_profiles": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DelegateCreateEnvironmentProfile
+				"delegate_create_environment_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: OverrideDomainUnitOwners
+				"override_domain_unit_owners": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OverrideProjectOwners
+				"override_project_owners": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludeChildDomainUnits
+						"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -382,14 +301,18 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schemaAttribute7bec995450eef4d6535f056c(),
+		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntityIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"entity_identifier": schemaAttribute7bec995450eef4d6535f056c(),
+		"entity_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EntityType
 		// CloudFormation resource type schema:
 		//
@@ -402,7 +325,9 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"entity_type": schemaAttribute7bec995450eef4d6535f056c(),
+		"entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GrantId
 		// CloudFormation resource type schema:
 		//
@@ -411,7 +336,10 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9+/]{10}$",
 		//	  "type": "string"
 		//	}
-		"grant_id": schemaAttribute500115b0ae53c309f2c2c8da(),
+		"grant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the policy grant returned by the AddPolicyGrant API",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyType
 		// CloudFormation resource type schema:
 		//
@@ -433,7 +361,9 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"policy_type": schemaAttribute7bec995450eef4d6535f056c(),
+		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -533,7 +463,95 @@ func policyGrantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"principal": schemaAttribute2a3b72a17b012d89b7747dd5(),
+		"principal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DomainUnit
+				"domain_unit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainUnitDesignation
+						"domain_unit_designation": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DomainUnitGrantFilter
+						"domain_unit_grant_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AllDomainUnitsGrantFilter
+								"all_domain_units_grant_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType: jsontypes.NormalizedType{},
+									Computed:   true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DomainUnitIdentifier
+						"domain_unit_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Group
+				"group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GroupIdentifier
+						"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Project
+				"project": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ProjectDesignation
+						"project_designation": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectGrantFilter
+						"project_grant_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DomainUnitFilter
+								"domain_unit_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DomainUnit
+										"domain_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: IncludeChildDomainUnits
+										"include_child_domain_units": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProjectIdentifier
+						"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: User
+				"user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllUsersGrantFilter
+						"all_users_grant_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+						// Property: UserIdentifier
+						"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

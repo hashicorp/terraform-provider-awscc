@@ -14,331 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute11a885ba524586052aaff8dc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the step, used as an identifier.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute11b176b8b0814bf72b8a9da9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the S3 bucket that contains the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1a1acd19967225afc787057d() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebcfd394afcf165ad56a7b3a6(),
-				// Property: Value
-				"value": schemaAttributea506a972ead1041e9ac3eedb(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1d9d8294e43c1380b610411f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies which encryption method to use.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute213eb7b9de7d0d4df929bcb1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies which file to use as input to the workflow step.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2623779692053fa5ea6ec3bd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CopyStepDetails
-				"copy_step_details": schemaAttributea3d0be851932bfdc683bcddd(),
-				// Property: CustomStepDetails
-				"custom_step_details": schemaAttribute2802dab1917a172be284ace7(),
-				// Property: DecryptStepDetails
-				"decrypt_step_details": schemaAttributea895d5db634a1f4eb93d43d5(),
-				// Property: DeleteStepDetails
-				"delete_step_details": schemaAttributebd602f6ed23a8b12ae208614(),
-				// Property: TagStepDetails
-				"tag_step_details": schemaAttributeee6d55c9fab1e66d8084d8a9(),
-				// Property: Type
-				"type": schemaAttribute850d0a0ed8fabb908e18f943(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the details for the steps that are in the specified workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2802dab1917a172be284ace7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute11a885ba524586052aaff8dc(),
-			// Property: SourceFileLocation
-			"source_file_location": schemaAttribute213eb7b9de7d0d4df929bcb1(),
-			// Property: Target
-			"target": schemaAttributecb4f6a56bbeeeae1f443c255(),
-			// Property: TimeoutSeconds
-			"timeout_seconds": schemaAttributecad5a22ae10c6d1904892852(),
-		}, /*END SCHEMA*/
-		Description: "Details for a step that invokes a lambda function.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3078fd508c895775b36e77e5() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3aacca82d003e0a438a59d2d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute443c9a6c0525739029019ca9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: FileSystemId
-			"file_system_id": schemaAttribute45a962ef9b0106a8049f61c1(),
-			// Property: Path
-			"path": schemaAttribute3aacca82d003e0a438a59d2d(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the details for an EFS file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4574ace0e8894e972cd566d7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Bucket
-			"bucket": schemaAttribute11b176b8b0814bf72b8a9da9(),
-			// Property: Key
-			"key": schemaAttributeac3c148faeb0fed58ae3d13c(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the details for a S3 file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute45a962ef9b0106a8049f61c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the EFS filesystem that contains the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d03e41eeacf08c8a5a70bd1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A textual description for the workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute655a44346a0c9a238f16c715() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7301e735e8eaf981a7f0bc00() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EfsFileLocation
-			"efs_file_location": schemaAttribute443c9a6c0525739029019ca9(),
-			// Property: S3FileLocation
-			"s3_file_location": schemaAttribute4574ace0e8894e972cd566d7(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7c1733a340d01f63712b7fc2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute850d0a0ed8fabb908e18f943() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute88b714f1966e480b56537c82() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributebcfd394afcf165ad56a7b3a6(),
-				// Property: Value
-				"value": schemaAttributef74b69f8582ee30497e4b70e(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Array that contains from 1 to 10 key/value pairs.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea3d0be851932bfdc683bcddd() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationFileLocation
-			"destination_file_location": schemaAttributea6819511005cdccf247bac5d(),
-			// Property: Name
-			"name": schemaAttribute11a885ba524586052aaff8dc(),
-			// Property: OverwriteExisting
-			"overwrite_existing": schemaAttribute7c1733a340d01f63712b7fc2(),
-			// Property: SourceFileLocation
-			"source_file_location": schemaAttribute213eb7b9de7d0d4df929bcb1(),
-		}, /*END SCHEMA*/
-		Description: "Details for a step that performs a file copy.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea506a972ead1041e9ac3eedb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Contains one or more values that you assigned to the key name you create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea6819511005cdccf247bac5d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: S3FileLocation
-			"s3_file_location": schemaAttribute4574ace0e8894e972cd566d7(),
-		}, /*END SCHEMA*/
-		Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea895d5db634a1f4eb93d43d5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DestinationFileLocation
-			"destination_file_location": schemaAttribute7301e735e8eaf981a7f0bc00(),
-			// Property: Name
-			"name": schemaAttribute11a885ba524586052aaff8dc(),
-			// Property: OverwriteExisting
-			"overwrite_existing": schemaAttribute7c1733a340d01f63712b7fc2(),
-			// Property: SourceFileLocation
-			"source_file_location": schemaAttribute213eb7b9de7d0d4df929bcb1(),
-			// Property: Type
-			"type": schemaAttribute1d9d8294e43c1380b610411f(),
-		}, /*END SCHEMA*/
-		Description: "Details for a step that performs a file decryption.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeac3c148faeb0fed58ae3d13c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebcfd394afcf165ad56a7b3a6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name assigned to the tag that you create.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebd602f6ed23a8b12ae208614() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute11a885ba524586052aaff8dc(),
-			// Property: SourceFileLocation
-			"source_file_location": schemaAttribute213eb7b9de7d0d4df929bcb1(),
-		}, /*END SCHEMA*/
-		Description: "Details for a step that deletes the file.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecad5a22ae10c6d1904892852() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Timeout, in seconds, for the step.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributecb4f6a56bbeeeae1f443c255() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ARN for the lambda function that is being called.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee44f826f68b216eaab90038d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CopyStepDetails
-				"copy_step_details": schemaAttributea3d0be851932bfdc683bcddd(),
-				// Property: CustomStepDetails
-				"custom_step_details": schemaAttribute2802dab1917a172be284ace7(),
-				// Property: DecryptStepDetails
-				"decrypt_step_details": schemaAttributea895d5db634a1f4eb93d43d5(),
-				// Property: DeleteStepDetails
-				"delete_step_details": schemaAttributebd602f6ed23a8b12ae208614(),
-				// Property: TagStepDetails
-				"tag_step_details": schemaAttributeee6d55c9fab1e66d8084d8a9(),
-				// Property: Type
-				"type": schemaAttribute850d0a0ed8fabb908e18f943(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeee6d55c9fab1e66d8084d8a9() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Name
-			"name": schemaAttribute11a885ba524586052aaff8dc(),
-			// Property: SourceFileLocation
-			"source_file_location": schemaAttribute213eb7b9de7d0d4df929bcb1(),
-			// Property: Tags
-			"tags": schemaAttribute88b714f1966e480b56537c82(),
-		}, /*END SCHEMA*/
-		Description: "Details for a step that creates one or more tags.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef74b69f8582ee30497e4b70e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value that corresponds to the key.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_workflow", workflowDataSource)
 }
@@ -357,7 +32,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3078fd508c895775b36e77e5(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -368,7 +46,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w\\- ]*$",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttribute5d03e41eeacf08c8a5a70bd1(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A textual description for the workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OnExceptionSteps
 		// CloudFormation resource type schema:
 		//
@@ -648,7 +329,212 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"on_exception_steps": schemaAttributee44f826f68b216eaab90038d(),
+		"on_exception_steps": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CopyStepDetails
+					"copy_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for a S3 file.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file copy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CustomStepDetails
+					"custom_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Target
+							"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN for the lambda function that is being called.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutSeconds
+							"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Timeout, in seconds, for the step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that invokes a lambda function.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DecryptStepDetails
+					"decrypt_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EfsFileLocation
+									"efs_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FileSystemId
+											"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the EFS filesystem that contains the file.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Path
+											"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for an EFS file.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for a S3 file.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which encryption method to use.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file decryption.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DeleteStepDetails
+					"delete_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that deletes the file.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagStepDetails
+					"tag_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name assigned to the tag that you create.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value that corresponds to the key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Array that contains from 1 to 10 key/value pairs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that creates one or more tags.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Steps
 		// CloudFormation resource type schema:
 		//
@@ -928,7 +814,212 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"steps": schemaAttribute2623779692053fa5ea6ec3bd(),
+		"steps": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CopyStepDetails
+					"copy_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for a S3 file.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file copy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CustomStepDetails
+					"custom_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Target
+							"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN for the lambda function that is being called.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutSeconds
+							"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Timeout, in seconds, for the step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that invokes a lambda function.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DecryptStepDetails
+					"decrypt_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EfsFileLocation
+									"efs_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FileSystemId
+											"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the EFS filesystem that contains the file.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Path
+											"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for an EFS file.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for a S3 file.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which encryption method to use.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file decryption.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DeleteStepDetails
+					"delete_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that deletes the file.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagStepDetails
+					"tag_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name assigned to the tag that you create.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value that corresponds to the key.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Array that contains from 1 to 10 key/value pairs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that creates one or more tags.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the details for the steps that are in the specified workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -962,7 +1053,24 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttribute1a1acd19967225afc787057d(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name assigned to the tag that you create.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Contains one or more values that you assigned to the key name you create.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkflowId
 		// CloudFormation resource type schema:
 		//
@@ -973,7 +1081,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^w-([a-z0-9]{17})$",
 		//	  "type": "string"
 		//	}
-		"workflow_id": schemaAttribute655a44346a0c9a238f16c715(),
+		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

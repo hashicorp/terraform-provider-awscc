@@ -14,205 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute009154edbca8bf0aac82e387() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Cidr
-				"cidr": schemaAttributee1eac2552d65c9c3a2488f2f(),
-				// Property: IpamPoolId
-				"ipam_pool_id": schemaAttribute2573d0fa1c7c23d2823b43ac(),
-				// Property: Operation
-				"operation": schemaAttributea212b181c7c2b073c58d4b5c(),
-				// Property: ResourceId
-				"resource_id": schemaAttributeea3f39918fa9d32bf2fcb3c1(),
-				// Property: ResourceOwner
-				"resource_owner": schemaAttributeb6c7609010156bd119fc9238(),
-				// Property: ResourceRegion
-				"resource_region": schemaAttribute44bd61acac20ef4e36940a30(),
-				// Property: ResourceTag
-				"resource_tag": schemaAttribute61a770c61f5af575fe52c283(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Two of the rule types allow you to add conditions to the rules. (1) For IPAM Pool CIDR rules, you can specify an ipamPoolId; if not specified, the rule will apply to all IPAM Pool CIDRs in the scope.  (2) For IPAM Resource CIDR rules, you can specify resourceId, resourceOwner, resourceRegion, cidr, or resourceTag.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0aea3727601a5ac4885559f3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A fixed CIDR that doesn't change",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0fd23d7ceab3f3fc733ccd0a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The address family of the address space in this Prefix List Resolver. Either IPv4 or IPv6.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2573d0fa1c7c23d2823b43ac() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Condition for the IPAM Pool CIDR rule type.  If not chosen, the resolver applies to all IPAM Pool CIDRs in the scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27014443ae2e54835eaa17f8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute32460f2f22869d70929b4cf9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Id of the IPAM this Prefix List Resolver is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute44bd61acac20ef4e36940a30() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Condition for the IPAM Resource CIDR rule type.  Resource region (like us-east-1).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5357d4bf7a1b048171479fa6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPAM Prefix List Resolver.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5d95dda951e93c63cf426bef() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IPAM Prefix List Resolver",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61a770c61f5af575fe52c283() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Key
-			"key": schemaAttribute84136a48fdace542e39eb56b(),
-			// Property: Value
-			"value": schemaAttribute27014443ae2e54835eaa17f8(),
-		}, /*END SCHEMA*/
-		Description: "Condition for the IPAM Resource CIDR rule type.  Resource Tag (like dev-vpc-1).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute67ca5f5af9855c81049685cc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The resourceType property only applies to ipam-resource-cidr rules; this property specifies what type of resources this rule will apply to, such as VPCs or Subnets.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute84136a48fdace542e39eb56b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea212b181c7c2b073c58d4b5c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Equals, Not equals, or Subnet Of.  The subnet-of operation only applies to cidr conditions.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea84847f772ccd6b0e9d70ef2() schema.Attribute {
-	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute84136a48fdace542e39eb56b(),
-				// Property: Value
-				"value": schemaAttribute27014443ae2e54835eaa17f8(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pairs to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb6c7609010156bd119fc9238() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Condition for the IPAM Resource CIDR rule type.  Resource owner (like 111122223333).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed485d41ec1c9afc38caab1dd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "This rule will only match resources that are in this IPAM Scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed536d89c88733410fba769ec() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Conditions
-				"conditions": schemaAttribute009154edbca8bf0aac82e387(),
-				// Property: IpamScopeId
-				"ipam_scope_id": schemaAttributed485d41ec1c9afc38caab1dd(),
-				// Property: ResourceType
-				"resource_type": schemaAttribute67ca5f5af9855c81049685cc(),
-				// Property: RuleType
-				"rule_type": schemaAttributee6ed24944e5163474e56c315(),
-				// Property: StaticCidr
-				"static_cidr": schemaAttribute0aea3727601a5ac4885559f3(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Rules define the business logic for selecting CIDRs from IPAM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee1eac2552d65c9c3a2488f2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Condition for the IPAM Resource CIDR rule type.  CIDR (like 10.24.34.0/23).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee6ed24944e5163474e56c315() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "There are three rule types: (1) Static CIDR: A fixed list of CIDRs that don't change (like a manual list replicated across Regions). (2) IPAM pool CIDR: CIDRs from specific IPAM pools (like all CIDRs from your IPAM production pool).  (3) IPAM resource CIDR: CIDRs for AWS resources like VPCs, subnets, and EIPs within a specific IPAM scope.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea3f39918fa9d32bf2fcb3c1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Condition for the IPAM Resource CIDR rule type.  The unique ID of a resource (like vpc-1234567890abcdef0).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0e8a8841d0cb23c7461a66c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefa1dcf73e9e5eb055f61821d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the IPAM this Prefix List Resolver is a part of.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam_prefix_list_resolver", iPAMPrefixListResolverDataSource)
 }
@@ -228,14 +29,19 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The address family of the address space in this Prefix List Resolver. Either IPv4 or IPv6.",
 		//	  "type": "string"
 		//	}
-		"address_family": schemaAttribute0fd23d7ceab3f3fc733ccd0a(),
+		"address_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The address family of the address space in this Prefix List Resolver. Either IPv4 or IPv6.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributef0e8a8841d0cb23c7461a66c(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamArn
 		// CloudFormation resource type schema:
 		//
@@ -243,7 +49,10 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM this Prefix List Resolver is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_arn": schemaAttributefa1dcf73e9e5eb055f61821d(),
+		"ipam_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IPAM this Prefix List Resolver is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamId
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +60,10 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The Id of the IPAM this Prefix List Resolver is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_id": schemaAttribute32460f2f22869d70929b4cf9(),
+		"ipam_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the IPAM this Prefix List Resolver is a part of.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPrefixListResolverArn
 		// CloudFormation resource type schema:
 		//
@@ -259,7 +71,10 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM Prefix List Resolver",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_arn": schemaAttribute5d95dda951e93c63cf426bef(),
+		"ipam_prefix_list_resolver_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the IPAM Prefix List Resolver",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPrefixListResolverId
 		// CloudFormation resource type schema:
 		//
@@ -267,7 +82,10 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Id of the IPAM Prefix List Resolver.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_id": schemaAttribute5357d4bf7a1b048171479fa6(),
+		"ipam_prefix_list_resolver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPAM Prefix List Resolver.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -413,7 +231,90 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"rules": schemaAttributed536d89c88733410fba769ec(),
+		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Conditions
+					"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Cidr
+								"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Condition for the IPAM Resource CIDR rule type.  CIDR (like 10.24.34.0/23).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IpamPoolId
+								"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Condition for the IPAM Pool CIDR rule type.  If not chosen, the resolver applies to all IPAM Pool CIDRs in the scope.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Operation
+								"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Equals, Not equals, or Subnet Of.  The subnet-of operation only applies to cidr conditions.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceId
+								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Condition for the IPAM Resource CIDR rule type.  The unique ID of a resource (like vpc-1234567890abcdef0).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceOwner
+								"resource_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Condition for the IPAM Resource CIDR rule type.  Resource owner (like 111122223333).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceRegion
+								"resource_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Condition for the IPAM Resource CIDR rule type.  Resource region (like us-east-1).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceTag
+								"resource_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Condition for the IPAM Resource CIDR rule type.  Resource Tag (like dev-vpc-1).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Two of the rule types allow you to add conditions to the rules. (1) For IPAM Pool CIDR rules, you can specify an ipamPoolId; if not specified, the rule will apply to all IPAM Pool CIDRs in the scope.  (2) For IPAM Resource CIDR rules, you can specify resourceId, resourceOwner, resourceRegion, cidr, or resourceTag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IpamScopeId
+					"ipam_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "This rule will only match resources that are in this IPAM Scope.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The resourceType property only applies to ipam-resource-cidr rules; this property specifies what type of resources this rule will apply to, such as VPCs or Subnets.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleType
+					"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "There are three rule types: (1) Static CIDR: A fixed list of CIDRs that don't change (like a manual list replicated across Regions). (2) IPAM pool CIDR: CIDRs from specific IPAM pools (like all CIDRs from your IPAM production pool).  (3) IPAM resource CIDR: CIDRs for AWS resources like VPCs, subnets, and EIPs within a specific IPAM scope.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StaticCidr
+					"static_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A fixed CIDR that doesn't change",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Rules define the business logic for selecting CIDRs from IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -446,7 +347,24 @@ func iPAMPrefixListResolverDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schemaAttributea84847f772ccd6b0e9d70ef2(),
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

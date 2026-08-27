@@ -15,42 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute254b1ca375fa335d0fe5a35f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TargetAddress
-				"target_address": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
-				// Property: TargetType
-				"target_type": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute368275091b1df6bf33cc6966() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute40183e27ebfaee3291bed216() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7a83e6ebf7c4b3957f4823d9() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_codestarnotifications_notification_rule", notificationRuleDataSource)
 }
@@ -66,7 +30,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[^:\\s]*:codestar-notifications:[^:\\s]+:\\d{12}:notificationrule\\/(.*\\S)?$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +41,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"created_by": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DetailType
 		// CloudFormation resource type schema:
 		//
@@ -86,7 +54,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"detail_type": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"detail_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTypeId
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +65,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"event_type_id": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"event_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTypeIds
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +80,10 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"event_type_ids": schemaAttribute40183e27ebfaee3291bed216(),
+		"event_type_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -118,7 +93,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[A-Za-z0-9\\-_ ]+$",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Resource
 		// CloudFormation resource type schema:
 		//
@@ -126,7 +103,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[^:\\s]*:[^:\\s]*:[^:\\s]*:[0-9]{12}:[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"resource": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +116,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -150,7 +131,11 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schemaAttribute368275091b1df6bf33cc6966(),
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetAddress
 		// CloudFormation resource type schema:
 		//
@@ -159,7 +144,9 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"target_address": schemaAttribute7a83e6ebf7c4b3957f4823d9(),
+		"target_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -184,7 +171,21 @@ func notificationRuleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"targets": schemaAttribute254b1ca375fa335d0fe5a35f(),
+		"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: TargetAddress
+					"target_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TargetType
+					"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

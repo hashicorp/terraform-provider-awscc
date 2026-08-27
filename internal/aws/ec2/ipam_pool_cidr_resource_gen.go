@@ -18,60 +18,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f34d9a96cbcb088aecce6a1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPAM Pool Cidr.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute118c774da0f78ca0d291356b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Id of the IPAM Pool.",
-		Required:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.RequiresReplace(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute56e25ad79d4d7f3b896aa7b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Represents a single IPv4 or IPv6 CIDR",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6a36315233964d2c3ca38b3e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Provisioned state of the cidr.",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1a041415c222c0cbf1e56c1() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The desired netmask length of the provision. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-			int64planmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_pool_cidr", iPAMPoolCidrResource)
 }
@@ -87,7 +33,15 @@ func iPAMPoolCidrResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Represents a single IPv4 or IPv6 CIDR",
 		//	  "type": "string"
 		//	}
-		"cidr": schemaAttribute56e25ad79d4d7f3b896aa7b0(),
+		"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents a single IPv4 or IPv6 CIDR",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPoolCidrId
 		// CloudFormation resource type schema:
 		//
@@ -95,7 +49,13 @@ func iPAMPoolCidrResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the IPAM Pool Cidr.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_cidr_id": schemaAttribute0f34d9a96cbcb088aecce6a1(),
+		"ipam_pool_cidr_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPAM Pool Cidr.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -103,7 +63,13 @@ func iPAMPoolCidrResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the IPAM Pool.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_id": schemaAttribute118c774da0f78ca0d291356b(),
+		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Id of the IPAM Pool.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +77,15 @@ func iPAMPoolCidrResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The desired netmask length of the provision. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
 		//	  "type": "integer"
 		//	}
-		"netmask_length": schemaAttributec1a041415c222c0cbf1e56c1(),
+		"netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The desired netmask length of the provision. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -119,7 +93,13 @@ func iPAMPoolCidrResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Provisioned state of the cidr.",
 		//	  "type": "string"
 		//	}
-		"state": schemaAttribute6a36315233964d2c3ca38b3e(),
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Provisioned state of the cidr.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

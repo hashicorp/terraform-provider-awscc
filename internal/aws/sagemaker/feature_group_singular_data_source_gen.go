@@ -14,234 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0150a6341a4a5f4a330367b0() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ProvisionedReadCapacityUnits
-			"provisioned_read_capacity_units": schemaAttributeec8ec5e661674db5213b66e4(),
-			// Property: ProvisionedWriteCapacityUnits
-			"provisioned_write_capacity_units": schemaAttribute6fca39726899c42db53a8951(),
-			// Property: ThroughputMode
-			"throughput_mode": schemaAttribute902e2706a74f7351cfbff422(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0460af8fbe47743d3cffa650() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute066efeed7320e7f52ed5f6d6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Role Arn",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1ff340689c21a08c13a55faa() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeba97effb88d84ecb50921764(),
-				// Property: Value
-				"value": schemaAttributeba97effb88d84ecb50921764(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An array of key-value pair to apply to this resource.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f9beea4e34a0773a16839ed() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Catalog
-			"catalog": schemaAttributeba97effb88d84ecb50921764(),
-			// Property: Database
-			"database": schemaAttributeba97effb88d84ecb50921764(),
-			// Property: TableName
-			"table_name": schemaAttributeba97effb88d84ecb50921764(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42f1d0ed8456fb87a6587c34() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributeba97effb88d84ecb50921764(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute48242b0a11972ad20b506e8f() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FeatureName
-				"feature_name": schemaAttributeba97effb88d84ecb50921764(),
-				// Property: FeatureType
-				"feature_type": schemaAttributeba97effb88d84ecb50921764(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "An Array of Feature Definition",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute678597f9d71d930794563f3a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EnableOnlineStore
-			"enable_online_store": schemaAttribute0460af8fbe47743d3cffa650(),
-			// Property: SecurityConfig
-			"security_config": schemaAttribute42f1d0ed8456fb87a6587c34(),
-			// Property: StorageType
-			"storage_type": schemaAttributeba97effb88d84ecb50921764(),
-			// Property: TtlDuration
-			"ttl_duration": schemaAttributea8330ae3ee753e485cfe2291(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6aff0efaf442cda81791345b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the feature group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6fca39726899c42db53a8951() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute749aad1b4747023697f43460() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Name of the FeatureGroup.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute902e2706a74f7351cfbff422() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Throughput mode configuration of the feature group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9c1bd61a4599c468b0f359a2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A timestamp of FeatureGroup creation time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea8330ae3ee753e485cfe2291() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Unit
-			"unit": schemaAttributedf8668c0836a7411ae187494(),
-			// Property: Value
-			"value": schemaAttributef44a7d7beba44328cacf747f(),
-		}, /*END SCHEMA*/
-		Description: "TTL configuration of the feature group",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabfd7ad089bdacdd22a98eda() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Description about the FeatureGroup.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb63ef80589d56f9b50ee8858() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Record Identifier Feature Name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeba97effb88d84ecb50921764() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2f2c79aa488d8032a96ab6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed5a1bfefa226e84f81e89ba5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttributeba97effb88d84ecb50921764(),
-			// Property: S3Uri
-			"s3_uri": schemaAttributeba97effb88d84ecb50921764(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedf8668c0836a7411ae187494() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Unit of ttl configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec8ec5e661674db5213b66e4() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef44a7d7beba44328cacf747f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Value of ttl configuration",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef52b80a17bce7b0ecc17c8e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: DataCatalogConfig
-			"data_catalog_config": schemaAttribute2f9beea4e34a0773a16839ed(),
-			// Property: DisableGlueTableCreation
-			"disable_glue_table_creation": schemaAttribute0460af8fbe47743d3cffa650(),
-			// Property: S3StorageConfig
-			"s3_storage_config": schemaAttributed5a1bfefa226e84f81e89ba5(),
-			// Property: TableFormat
-			"table_format": schemaAttributebf2f2c79aa488d8032a96ab6(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefbd52e0a3003d689a1fd1f77() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Event Time Feature Name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_feature_group", featureGroupDataSource)
 }
@@ -257,7 +29,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "A timestamp of FeatureGroup creation time.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schemaAttribute9c1bd61a4599c468b0f359a2(),
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A timestamp of FeatureGroup creation time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +41,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeabfd7ad089bdacdd22a98eda(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Description about the FeatureGroup.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventTimeFeatureName
 		// CloudFormation resource type schema:
 		//
@@ -277,7 +55,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 		//	  "type": "string"
 		//	}
-		"event_time_feature_name": schemaAttributefbd52e0a3003d689a1fd1f77(),
+		"event_time_feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Event Time Feature Name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FeatureDefinitions
 		// CloudFormation resource type schema:
 		//
@@ -313,7 +94,22 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"feature_definitions": schemaAttribute48242b0a11972ad20b506e8f(),
+		"feature_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FeatureName
+					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: FeatureType
+					"feature_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An Array of Feature Definition",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FeatureGroupName
 		// CloudFormation resource type schema:
 		//
@@ -324,7 +120,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 		//	  "type": "string"
 		//	}
-		"feature_group_name": schemaAttribute749aad1b4747023697f43460(),
+		"feature_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Name of the FeatureGroup.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: FeatureGroupStatus
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +131,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The status of the feature group.",
 		//	  "type": "string"
 		//	}
-		"feature_group_status": schemaAttribute6aff0efaf442cda81791345b(),
+		"feature_group_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the feature group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OfflineStoreConfig
 		// CloudFormation resource type schema:
 		//
@@ -403,7 +205,52 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"offline_store_config": schemaAttributef52b80a17bce7b0ecc17c8e4(),
+		"offline_store_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataCatalogConfig
+				"data_catalog_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DisableGlueTableCreation
+				"disable_glue_table_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3StorageConfig
+				"s3_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKeyId
+						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TableFormat
+				"table_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: OnlineStoreConfig
 		// CloudFormation resource type schema:
 		//
@@ -455,7 +302,46 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"online_store_config": schemaAttribute678597f9d71d930794563f3a(),
+		"online_store_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableOnlineStore
+				"enable_online_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityConfig
+				"security_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKeyId
+						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageType
+				"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TtlDuration
+				"ttl_duration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Unit of ttl configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Value of ttl configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "TTL configuration of the feature group",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordIdentifierFeatureName
 		// CloudFormation resource type schema:
 		//
@@ -466,7 +352,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 		//	  "type": "string"
 		//	}
-		"record_identifier_feature_name": schemaAttributeb63ef80589d56f9b50ee8858(),
+		"record_identifier_feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Record Identifier Feature Name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -477,7 +366,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schemaAttribute066efeed7320e7f52ed5f6d6(),
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Role Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -505,7 +397,22 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute1ff340689c21a08c13a55faa(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pair to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ThroughputConfig
 		// CloudFormation resource type schema:
 		//
@@ -534,7 +441,26 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"throughput_config": schemaAttribute0150a6341a4a5f4a330367b0(),
+		"throughput_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ProvisionedReadCapacityUnits
+				"provisioned_read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProvisionedWriteCapacityUnits
+				"provisioned_write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThroughputMode
+				"throughput_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Throughput mode configuration of the feature group",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,34 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute09d0f1b476827ad897a96300() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the instance to which the volume attaches. This value can be a reference to an [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) resource, or it can be the physical ID of an existing EC2 instance.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebfb737575ebc515dd9788db6() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec0cce21c3bf3f7e2d63cfcbc() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Amazon EBS volume. The volume and instance must be within the same Availability Zone. This value can be a reference to an [AWS::EC2::Volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html) resource, or it can be the volume ID of an existing Amazon EBS volume.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeec771cc648b9852af81dd427() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The device name (for example, ``/dev/sdh`` or ``xvdh``).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_volume_attachment", volumeAttachmentDataSource)
 }
@@ -57,7 +29,10 @@ func volumeAttachmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The device name (for example, ``/dev/sdh`` or ``xvdh``).",
 		//	  "type": "string"
 		//	}
-		"device": schemaAttributeec771cc648b9852af81dd427(),
+		"device": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The device name (for example, ``/dev/sdh`` or ``xvdh``).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EbsCardIndex
 		// CloudFormation resource type schema:
 		//
@@ -65,7 +40,10 @@ func volumeAttachmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
 		//	  "type": "integer"
 		//	}
-		"ebs_card_index": schemaAttributebfb737575ebc515dd9788db6(),
+		"ebs_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -73,7 +51,10 @@ func volumeAttachmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the instance to which the volume attaches. This value can be a reference to an [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) resource, or it can be the physical ID of an existing EC2 instance.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schemaAttribute09d0f1b476827ad897a96300(),
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the instance to which the volume attaches. This value can be a reference to an [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) resource, or it can be the physical ID of an existing EC2 instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VolumeId
 		// CloudFormation resource type schema:
 		//
@@ -81,7 +62,10 @@ func volumeAttachmentDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the Amazon EBS volume. The volume and instance must be within the same Availability Zone. This value can be a reference to an [AWS::EC2::Volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html) resource, or it can be the volume ID of an existing Amazon EBS volume.",
 		//	  "type": "string"
 		//	}
-		"volume_id": schemaAttributec0cce21c3bf3f7e2d63cfcbc(),
+		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Amazon EBS volume. The volume and instance must be within the same Availability Zone. This value can be a reference to an [AWS::EC2::Volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html) resource, or it can be the volume ID of an existing Amazon EBS volume.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -26,223 +26,6 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
-func schemaAttribute09e2e3fe9012de76027b644f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AvailabilityZone
-			"availability_zone": schemaAttribute341a893942ba2268ebdc728f(),
-			// Property: DnsNameServers
-			"dns_name_servers": schemaAttribute341a893942ba2268ebdc728f(),
-			// Property: KmsKeyId
-			"kms_key_id": schemaAttribute341a893942ba2268ebdc728f(),
-			// Property: MaxCapacityUnits
-			"max_capacity_units": schemaAttribute95df8995b8da794f6c1ee05c(),
-			// Property: MinCapacityUnits
-			"min_capacity_units": schemaAttribute66a91bfdf225ef688f802900(),
-			// Property: MultiAZ
-			"multi_az": schemaAttributead33bbab046b819229832dea(),
-			// Property: PreferredMaintenanceWindow
-			"preferred_maintenance_window": schemaAttribute341a893942ba2268ebdc728f(),
-			// Property: ReplicationSubnetGroupId
-			"replication_subnet_group_id": schemaAttribute341a893942ba2268ebdc728f(),
-			// Property: VpcSecurityGroupIds
-			"vpc_security_group_ids": schemaAttribute859e8a00e5cbc7c0e4650b2e(),
-		}, /*END SCHEMA*/
-		Description: "Configuration parameters for provisioning a AWS DMS Serverless replication",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute12e486cafb8e4b450607a457() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "JSON settings for specifying supplemental data",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2aea8faa1b3d784889eb1713() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Replication Config",
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute341a893942ba2268ebdc728f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute35f0831f36bd4d9fc701a1ec() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "JSON settings for Servereless replications that are provisioned using this replication configuration",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c148092e2dfc197fa184704() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the target endpoint for this AWS DMS Serverless replication configuration",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66a91bfdf225ef688f802900() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-			int64planmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute79ac45ac08ab78cc7462e184() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of AWS DMS Serverless replication to provision using this replication configuration",
-		Required:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.OneOf(
-				"full-load",
-				"full-load-and-cdc",
-				"cdc",
-			),
-		}, /*END VALIDATORS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7b81b198c929a316b8696705() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute859e8a00e5cbc7c0e4650b2e() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute89e0411098adde1eece1582d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag value.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 256),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8f320bb2aa91f27e39c61f3f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "<p>Tag key.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.String{ /*START VALIDATORS*/
-			stringvalidator.LengthBetween(1, 128),
-			fwvalidators.NotNullString(),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95df8995b8da794f6c1ee05c() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Required: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributead33bbab046b819229832dea() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Optional: true,
-		Computed: true,
-		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-			boolplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebdce0789b1c759b054a25470() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique value or name that you get set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource",
-		Optional:    true,
-		Computed:    true,
-		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-			stringplanmodifier.UseStateForUnknown(),
-			stringplanmodifier.RequiresReplaceIfConfigured(),
-		}, /*END PLAN MODIFIERS*/
-		// ResourceIdentifier is a write-only property.
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee13c838e1f3c4bbb2dbe66bb() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute8f320bb2aa91f27e39c61f3f(),
-				// Property: Value
-				"value": schemaAttribute89e0411098adde1eece1582d(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
-		Optional:    true,
-		Computed:    true,
-		Validators: []validator.List{ /*START VALIDATORS*/
-			listvalidator.SizeBetween(1, 200),
-		}, /*END VALIDATORS*/
-		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-			generic.Multiset(),
-			listplanmodifier.UseStateForUnknown(),
-		}, /*END PLAN MODIFIERS*/
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef0e5afdddd68330371df927c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier of replication configuration",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributefab10eae29fcf8ff06e2a2b0() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the source endpoint for this AWS DMS Serverless replication configuration",
-		Required:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddResourceFactory("awscc_dms_replication_config", replicationConfigResource)
 	registry.AddListResourceFactory("awscc_dms_replication_config", generic.NewListResource(replicationConfigResource))
@@ -295,7 +78,81 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"compute_config": schemaAttribute09e2e3fe9012de76027b644f(),
+		"compute_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DnsNameServers
+				"dns_name_servers": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacityUnits
+				"max_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacityUnits
+				"min_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MultiAZ
+				"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PreferredMaintenanceWindow
+				"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReplicationSubnetGroupId
+				"replication_subnet_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcSecurityGroupIds
+				"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration parameters for provisioning a AWS DMS Serverless replication",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -303,7 +160,13 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Replication Config",
 		//	  "type": "string"
 		//	}
-		"replication_config_arn": schemaAttribute2aea8faa1b3d784889eb1713(),
+		"replication_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Replication Config",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfigIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +174,10 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique identifier of replication configuration",
 		//	  "type": "string"
 		//	}
-		"replication_config_identifier": schemaAttributef0e5afdddd68330371df927c(),
+		"replication_config_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier of replication configuration",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationSettings
 		// CloudFormation resource type schema:
 		//
@@ -319,7 +185,15 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "JSON settings for Servereless replications that are provisioned using this replication configuration",
 		//	  "type": "object"
 		//	}
-		"replication_settings": schemaAttribute35f0831f36bd4d9fc701a1ec(),
+		"replication_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "JSON settings for Servereless replications that are provisioned using this replication configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationType
 		// CloudFormation resource type schema:
 		//
@@ -332,7 +206,17 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"replication_type": schemaAttribute79ac45ac08ab78cc7462e184(),
+		"replication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of AWS DMS Serverless replication to provision using this replication configuration",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"full-load",
+					"full-load-and-cdc",
+					"cdc",
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -340,7 +224,16 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique value or name that you get set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource",
 		//	  "type": "string"
 		//	}
-		"resource_identifier": schemaAttributebdce0789b1c759b054a25470(),
+		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique value or name that you get set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ResourceIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SourceEndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -348,7 +241,10 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the source endpoint for this AWS DMS Serverless replication configuration",
 		//	  "type": "string"
 		//	}
-		"source_endpoint_arn": schemaAttributefab10eae29fcf8ff06e2a2b0(),
+		"source_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the source endpoint for this AWS DMS Serverless replication configuration",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SupplementalSettings
 		// CloudFormation resource type schema:
 		//
@@ -356,7 +252,15 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "JSON settings for specifying supplemental data",
 		//	  "type": "object"
 		//	}
-		"supplemental_settings": schemaAttribute12e486cafb8e4b450607a457(),
+		"supplemental_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "JSON settings for specifying supplemental data",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableMappings
 		// CloudFormation resource type schema:
 		//
@@ -364,7 +268,11 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration",
 		//	  "type": "object"
 		//	}
-		"table_mappings": schemaAttribute7b81b198c929a316b8696705(),
+		"table_mappings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -398,7 +306,48 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttributee13c838e1f3c4bbb2dbe66bb(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TargetEndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -406,7 +355,10 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the target endpoint for this AWS DMS Serverless replication configuration",
 		//	  "type": "string"
 		//	}
-		"target_endpoint_arn": schemaAttribute3c148092e2dfc197fa184704(),
+		"target_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the target endpoint for this AWS DMS Serverless replication configuration",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

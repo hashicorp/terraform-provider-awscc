@@ -15,225 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute006a2e3416480f5d3e01d744() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ProviderName
-			"provider_name": schemaAttribute66d42eb52abab3fe46f7d67b(),
-			// Property: ServiceName
-			"service_name": schemaAttributeffe5d30a676ed271a06c667c(),
-		}, /*END SCHEMA*/
-		Description: "Transport stream service descriptor configuration for the Multiplex program.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute065780f77fa9d1aec1d9d46a() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Minimum statmux bitrate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2cafe973484468bd722f5b1e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the multiplex that the program belongs to.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute61a2ca09c77394e995a1c1ed() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the multiplex program.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute64d92c12c23a6b8e3e7e7355() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65fef2014041b581d1d9c9ca() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.Int64Type,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute66d42eb52abab3fe46f7d67b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7ffcce395e7ffb669d2a7b9f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The settings for this multiplex program.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9725c0f9f32f5340e6275d38() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ActiveChannelPipeline
-				"active_channel_pipeline": schemaAttributec043784ccb013ec732dfa8c8(),
-				// Property: PipelineId
-				"pipeline_id": schemaAttributed9b2a5331a7a744b6dd8620b(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9f7fad662eb636ea0da8e4a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The MediaLive channel associated with the program.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebe2a50be61c1bffbb4d4811f() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConstantBitrate
-			"constant_bitrate": schemaAttributee0006fd8d1ae9be362c51581(),
-			// Property: StatmuxSettings
-			"statmux_settings": schemaAttributebf2917a7f7982fd0444175f2(),
-		}, /*END SCHEMA*/
-		Description: "Program video settings configuration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebf2917a7f7982fd0444175f2() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaximumBitrate
-			"maximum_bitrate": schemaAttributee61a01986b190eb5147cb38f(),
-			// Property: MinimumBitrate
-			"minimum_bitrate": schemaAttribute065780f77fa9d1aec1d9d46a(),
-			// Property: Priority
-			"priority": schemaAttributed0aedc231ab2ead60d1c7ae9(),
-		}, /*END SCHEMA*/
-		Description: "Statmux rate control settings.\nWhen this field is defined, ConstantBitrate must be undefined.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec043784ccb013ec732dfa8c8() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies the channel pipeline that is currently active for the pipeline (identified by PipelineId) in the multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed0aedc231ab2ead60d1c7ae9() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The purpose of the priority is to use a combination of the\\nmultiplex rate control algorithm and the QVBR capability of the\\nencoder to prioritize the video quality of some channels in a\\nmultiplex over others.  Channels that have a higher priority will\\nget higher video quality at the expense of the video quality of\\nother channels in the multiplex with lower priority.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed43a81af7b55ad41d96f4cf6() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AudioPids
-			"audio_pids": schemaAttribute65fef2014041b581d1d9c9ca(),
-			// Property: DvbSubPids
-			"dvb_sub_pids": schemaAttribute65fef2014041b581d1d9c9ca(),
-			// Property: DvbTeletextPid
-			"dvb_teletext_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: EtvPlatformPid
-			"etv_platform_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: EtvSignalPid
-			"etv_signal_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: KlvDataPids
-			"klv_data_pids": schemaAttribute65fef2014041b581d1d9c9ca(),
-			// Property: PcrPid
-			"pcr_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: PmtPid
-			"pmt_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: PrivateMetadataPid
-			"private_metadata_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: Scte27Pids
-			"scte_27_pids": schemaAttribute65fef2014041b581d1d9c9ca(),
-			// Property: Scte35Pid
-			"scte_35_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: TimedMetadataPid
-			"timed_metadata_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-			// Property: VideoPid
-			"video_pid": schemaAttribute64d92c12c23a6b8e3e7e7355(),
-		}, /*END SCHEMA*/
-		Description: "The packet identifier map for this multiplex program.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed9b2a5331a7a744b6dd8620b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Identifies a specific pipeline in the multiplex.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfc952f5c334a8df7639edf1() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: PreferredChannelPipeline
-			"preferred_channel_pipeline": schemaAttributedfff44805fd55277d603c450(),
-			// Property: ProgramNumber
-			"program_number": schemaAttributee0bdcb48299cdc8c63124add(),
-			// Property: ServiceDescriptor
-			"service_descriptor": schemaAttribute006a2e3416480f5d3e01d744(),
-			// Property: VideoSettings
-			"video_settings": schemaAttributebe2a50be61c1bffbb4d4811f(),
-		}, /*END SCHEMA*/
-		Description: "The settings for this multiplex program.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedfff44805fd55277d603c450() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates which pipeline is preferred by the multiplex for program ingest.\nIf set to \\\"PIPELINE_0\\\" or \\\"PIPELINE_1\\\" and an unhealthy ingest causes the multiplex to switch to the non-preferred pipeline,\nit will switch back once that ingest is healthy again. If set to \\\"CURRENTLY_ACTIVE\\\",\nit will not switch back to the other pipeline based on it recovering to a healthy state,\nit will only switch if the active pipeline becomes unhealthy.\n",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0006fd8d1ae9be362c51581() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The constant bitrate configuration for the video encode.\nWhen this field is defined, StatmuxSettings must be undefined.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee0bdcb48299cdc8c63124add() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Unique program number.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee61a01986b190eb5147cb38f() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "Maximum statmux bitrate.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeffe5d30a676ed271a06c667c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Name of the service.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_multiplexprogram", multiplexprogramDataSource)
 }
@@ -249,7 +30,10 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The MediaLive channel associated with the program.",
 		//	  "type": "string"
 		//	}
-		"channel_id": schemaAttributeb9f7fad662eb636ea0da8e4a(),
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The MediaLive channel associated with the program.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiplexId
 		// CloudFormation resource type schema:
 		//
@@ -257,7 +41,10 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the multiplex that the program belongs to.",
 		//	  "type": "string"
 		//	}
-		"multiplex_id": schemaAttribute2cafe973484468bd722f5b1e(),
+		"multiplex_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the multiplex that the program belongs to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiplexProgramSettings
 		// CloudFormation resource type schema:
 		//
@@ -346,7 +133,73 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"multiplex_program_settings": schemaAttributedfc952f5c334a8df7639edf1(),
+		"multiplex_program_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PreferredChannelPipeline
+				"preferred_channel_pipeline": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates which pipeline is preferred by the multiplex for program ingest.\nIf set to \\\"PIPELINE_0\\\" or \\\"PIPELINE_1\\\" and an unhealthy ingest causes the multiplex to switch to the non-preferred pipeline,\nit will switch back once that ingest is healthy again. If set to \\\"CURRENTLY_ACTIVE\\\",\nit will not switch back to the other pipeline based on it recovering to a healthy state,\nit will only switch if the active pipeline becomes unhealthy.\n",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProgramNumber
+				"program_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Unique program number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceDescriptor
+				"service_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ProviderName
+						"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the provider.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceName
+						"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the service.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Transport stream service descriptor configuration for the Multiplex program.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VideoSettings
+				"video_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConstantBitrate
+						"constant_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The constant bitrate configuration for the video encode.\nWhen this field is defined, StatmuxSettings must be undefined.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StatmuxSettings
+						"statmux_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MaximumBitrate
+								"maximum_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum statmux bitrate.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MinimumBitrate
+								"minimum_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Minimum statmux bitrate.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Priority
+								"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The purpose of the priority is to use a combination of the\\nmultiplex rate control algorithm and the QVBR capability of the\\nencoder to prioritize the video quality of some channels in a\\nmultiplex over others.  Channels that have a higher priority will\\nget higher video quality at the expense of the video quality of\\nother channels in the multiplex with lower priority.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Statmux rate control settings.\nWhen this field is defined, ConstantBitrate must be undefined.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Program video settings configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The settings for this multiplex program.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PacketIdentifiersMap
 		// CloudFormation resource type schema:
 		//
@@ -412,7 +265,68 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"packet_identifiers_map": schemaAttributed43a81af7b55ad41d96f4cf6(),
+		"packet_identifiers_map": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudioPids
+				"audio_pids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DvbSubPids
+				"dvb_sub_pids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DvbTeletextPid
+				"dvb_teletext_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EtvPlatformPid
+				"etv_platform_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EtvSignalPid
+				"etv_signal_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KlvDataPids
+				"klv_data_pids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PcrPid
+				"pcr_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PmtPid
+				"pmt_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateMetadataPid
+				"private_metadata_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Scte27Pids
+				"scte_27_pids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Scte35Pid
+				"scte_35_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimedMetadataPid
+				"timed_metadata_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VideoPid
+				"video_pid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The packet identifier map for this multiplex program.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PipelineDetails
 		// CloudFormation resource type schema:
 		//
@@ -436,7 +350,24 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"pipeline_details": schemaAttribute9725c0f9f32f5340e6275d38(),
+		"pipeline_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ActiveChannelPipeline
+					"active_channel_pipeline": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Identifies the channel pipeline that is currently active for the pipeline (identified by PipelineId) in the multiplex.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PipelineId
+					"pipeline_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Identifies a specific pipeline in the multiplex.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredChannelPipeline
 		// CloudFormation resource type schema:
 		//
@@ -449,7 +380,10 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"preferred_channel_pipeline": schemaAttribute7ffcce395e7ffb669d2a7b9f(),
+		"preferred_channel_pipeline": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The settings for this multiplex program.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProgramName
 		// CloudFormation resource type schema:
 		//
@@ -457,7 +391,10 @@ func multiplexprogramDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name of the multiplex program.",
 		//	  "type": "string"
 		//	}
-		"program_name": schemaAttribute61a2ca09c77394e995a1c1ed(),
+		"program_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the multiplex program.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

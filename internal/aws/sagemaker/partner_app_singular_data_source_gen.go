@@ -15,167 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute020bfcd38545150c7691999d() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute1eea6ca6ab07260bf6b4e3e7(),
-				// Property: Value
-				"value": schemaAttribute1eea6ca6ab07260bf6b4e3e7(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "A list of tags to apply to the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute092547134c98e4ffb5de2f7e() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Auth type of PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1bb0e6e0b63c538eea3fa2bf() schema.Attribute {
-	return (schema.SetAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of users with administrator privileges for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1eea6ca6ab07260bf6b4e3e7() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f8f006d46fd0cb52f460e54() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The client token for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f8d55ae441c4ac4970c22ee() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables IAM Session based Identity for PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3f18d7f8e5ba826f63a71ae9() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of arguments to pass to the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute43a934f5b8f54dd933bcdb41() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b903985816d015f398afd10() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The end-of-life date for the current version of the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute5288a457d12c216732f8b88d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The maintenance window start day and time for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6276e9b4f7e6479824d130e4() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AdminUsers
-			"admin_users": schemaAttribute1bb0e6e0b63c538eea3fa2bf(),
-			// Property: Arguments
-			"arguments": schemaAttribute3f18d7f8e5ba826f63a71ae9(),
-		}, /*END SCHEMA*/
-		Description: "A collection of settings that specify the maintenance schedule for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute63a95d277a71b5cdae78b96d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The tier of the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute860f65f940b9c10a92bfc1e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the created PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9195e8b4b3dc8beff736818d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A name for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeabca568a29ba0eaad5fc81f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The execution role for the user.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec5ee48bd73b7445ab067842f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec6ede77adedc5bc9992780a4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee11c57751a53eb56dd223b49() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: MaintenanceWindowStart
-			"maintenance_window_start": schemaAttribute5288a457d12c216732f8b88d(),
-		}, /*END SCHEMA*/
-		Description: "A collection of settings that specify the maintenance schedule for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeea99d95312c0fb7504a43f2f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AppServerUrl based on app and account-info.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb47af58de9b06d16df5fdec() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Enables automatic minor version upgrades for the PartnerApp.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_partner_app", partnerAppDataSource)
 }
@@ -193,7 +32,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"app_version": schemaAttribute43a934f5b8f54dd933bcdb41(),
+		"app_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationConfig
 		// CloudFormation resource type schema:
 		//
@@ -231,7 +73,25 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"application_config": schemaAttribute6276e9b4f7e6479824d130e4(),
+		"application_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdminUsers
+				"admin_users": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of users with administrator privileges for the PartnerApp.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Arguments
+				"arguments":         // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of arguments to pass to the PartnerApp.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A collection of settings that specify the maintenance schedule for the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -242,7 +102,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:partner-app/app-[A-Z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute860f65f940b9c10a92bfc1e6(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the created PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AuthType
 		// CloudFormation resource type schema:
 		//
@@ -253,7 +116,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auth_type": schemaAttribute092547134c98e4ffb5de2f7e(),
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Auth type of PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BaseUrl
 		// CloudFormation resource type schema:
 		//
@@ -262,7 +128,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"base_url": schemaAttributeea99d95312c0fb7504a43f2f(),
+		"base_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AppServerUrl based on app and account-info.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -273,7 +142,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"client_token": schemaAttribute1f8f006d46fd0cb52f460e54(),
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The client token for the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CurrentVersionEolDate
 		// CloudFormation resource type schema:
 		//
@@ -281,7 +153,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The end-of-life date for the current version of the PartnerApp.",
 		//	  "type": "string"
 		//	}
-		"current_version_eol_date": schemaAttribute4b903985816d015f398afd10(),
+		"current_version_eol_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The end-of-life date for the current version of the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableAutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -289,7 +164,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Enables automatic minor version upgrades for the PartnerApp.",
 		//	  "type": "boolean"
 		//	}
-		"enable_auto_minor_version_upgrade": schemaAttributeeb47af58de9b06d16df5fdec(),
+		"enable_auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables automatic minor version upgrades for the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableIamSessionBasedIdentity
 		// CloudFormation resource type schema:
 		//
@@ -297,7 +175,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Enables IAM Session based Identity for PartnerApp.",
 		//	  "type": "boolean"
 		//	}
-		"enable_iam_session_based_identity": schemaAttribute2f8d55ae441c4ac4970c22ee(),
+		"enable_iam_session_based_identity": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables IAM Session based Identity for PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -308,7 +189,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schemaAttributeabca568a29ba0eaad5fc81f1(),
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role for the user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -318,7 +202,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttributec5ee48bd73b7445ab067842f(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceConfig
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +225,17 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"maintenance_config": schemaAttributee11c57751a53eb56dd223b49(),
+		"maintenance_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaintenanceWindowStart
+				"maintenance_window_start": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The maintenance window start day and time for the PartnerApp.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A collection of settings that specify the maintenance schedule for the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -349,7 +246,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute9195e8b4b3dc8beff736818d(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +281,22 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute020bfcd38545150c7691999d(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to apply to the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -391,7 +306,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"tier": schemaAttribute63a95d277a71b5cdae78b96d(),
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tier of the PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -405,7 +323,10 @@ func partnerAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttributec6ede77adedc5bc9992780a4(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of PartnerApp.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

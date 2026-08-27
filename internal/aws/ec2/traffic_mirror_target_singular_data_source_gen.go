@@ -14,55 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute73b11e05feca77dd462b38d9() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttributeed334ac043f478296686be98(),
-				// Property: Value
-				"value": schemaAttributeed334ac043f478296686be98(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: " The tags to assign to the Traffic Mirror target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec524609c02d0d5f5b1ebf662() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The network interface ID that is associated with the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec7d234427500e89806204879() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Gateway Load Balancer endpoint.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed7b68878947b3c65b98d4096() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb79b6e8186afad5f3604fa1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The description of the Traffic Mirror target.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeed334ac043f478296686be98() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_traffic_mirror_target", trafficMirrorTargetDataSource)
 }
@@ -78,7 +29,10 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The description of the Traffic Mirror target.",
 		//	  "type": "string"
 		//	}
-		"description": schemaAttributeeb79b6e8186afad5f3604fa1(),
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the Traffic Mirror target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayLoadBalancerEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -86,14 +40,19 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the Gateway Load Balancer endpoint.",
 		//	  "type": "string"
 		//	}
-		"gateway_load_balancer_endpoint_id": schemaAttributec7d234427500e89806204879(),
+		"gateway_load_balancer_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Gateway Load Balancer endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_target_id": schemaAttributeed334ac043f478296686be98(),
+		"traffic_mirror_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -101,7 +60,10 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The network interface ID that is associated with the target.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schemaAttributec524609c02d0d5f5b1ebf662(),
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network interface ID that is associated with the target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkLoadBalancerArn
 		// CloudFormation resource type schema:
 		//
@@ -109,7 +71,10 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the target.",
 		//	  "type": "string"
 		//	}
-		"network_load_balancer_arn": schemaAttributed7b68878947b3c65b98d4096(),
+		"network_load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,7 +100,22 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute73b11e05feca77dd462b38d9(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: " The tags to assign to the Traffic Mirror target.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

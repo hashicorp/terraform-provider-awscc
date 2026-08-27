@@ -16,94 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute2bc844de2accf169b9056fa2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the trigger. Active triggers fire on schedule; Inactive triggers are paused.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3029b758dd5fef0eff53f59a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the trigger. Nested under the parent Agent Space: arn:<partition>:aidevops:<region>:<account-id>:agentspace/<agentspace-id>/trigger/<trigger-id>.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute55a3f1be067bbdea6ccebc1d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the parent Agent Space.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute68f373ec76634f0600006f3e() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Expression
-			"expression": schemaAttribute9b97d341d798bc71b6923ead(),
-		}, /*END SCHEMA*/
-		Description: "Schedule configuration for a time-based trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute693b53ef99c33af7ecfb19f1() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the trigger was created.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute739ffebeb0a72d221aea2026() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The unique identifier of the trigger (assigned by the service on Create).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute82bd5d961fb0f21593009136() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of trigger.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute902ea514d4fb2ca997625cfe() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Schedule
-			"schedule": schemaAttribute68f373ec76634f0600006f3e(),
-		}, /*END SCHEMA*/
-		Description: "The condition that causes the trigger to fire.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9b97d341d798bc71b6923ead() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A cron or rate expression that defines when the trigger fires.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1c558cc46dee20bf072bba3() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  timetypes.RFC3339Type{},
-		Description: "The timestamp when the trigger was last updated.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeaaa88040839decda152413eb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The action to perform when the trigger fires. A JSON object containing actionType and task.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsagent_trigger", triggerDataSource)
 }
@@ -119,7 +31,11 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The action to perform when the trigger fires. A JSON object containing actionType and task.",
 		//	  "type": "object"
 		//	}
-		"action": schemaAttributeaaa88040839decda152413eb(),
+		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The action to perform when the trigger fires. A JSON object containing actionType and task.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AgentSpaceId
 		// CloudFormation resource type schema:
 		//
@@ -129,7 +45,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schemaAttribute55a3f1be067bbdea6ccebc1d(),
+		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the parent Agent Space.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -137,7 +56,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the trigger. Nested under the parent Agent Space: arn:\u003cpartition\u003e:aidevops:\u003cregion\u003e:\u003caccount-id\u003e:agentspace/\u003cagentspace-id\u003e/trigger/\u003ctrigger-id\u003e.",
 		//	  "type": "string"
 		//	}
-		"arn": schemaAttribute3029b758dd5fef0eff53f59a(),
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the trigger. Nested under the parent Agent Space: arn:<partition>:aidevops:<region>:<account-id>:agentspace/<agentspace-id>/trigger/<trigger-id>.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Condition
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +89,24 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"condition": schemaAttribute902ea514d4fb2ca997625cfe(),
+		"condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Schedule
+				"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Expression
+						"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A cron or rate expression that defines when the trigger fires.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Schedule configuration for a time-based trigger.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The condition that causes the trigger to fire.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -176,7 +115,11 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schemaAttribute693b53ef99c33af7ecfb19f1(),
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the trigger was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +132,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute2bc844de2accf169b9056fa2(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the trigger. Active triggers fire on schedule; Inactive triggers are paused.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TriggerId
 		// CloudFormation resource type schema:
 		//
@@ -199,7 +145,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"trigger_id": schemaAttribute739ffebeb0a72d221aea2026(),
+		"trigger_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique identifier of the trigger (assigned by the service on Create).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -210,7 +159,10 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schemaAttribute82bd5d961fb0f21593009136(),
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of trigger.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -219,7 +171,11 @@ func triggerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schemaAttributea1c558cc46dee20bf072bba3(),
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp when the trigger was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

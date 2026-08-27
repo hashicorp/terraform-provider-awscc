@@ -16,437 +16,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute03d75ca4ecc232039b97cfbb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute04acd3265a5ef59727cf92a4() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute06be496f3cdd3f72d93ab943() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0792bbd3a32bbbe5d0aa80fb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0a636b706dbc3fb05df7bc76() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0db424214449fa779af07abd() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute94ab0e4c5cad94d0f01c0331(),
-				// Property: Value
-				"value": schemaAttributedcefd9c27fef88e1827f5e50(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Description: "The list of tags for the cluster parameter group.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0ed43e95ae8f327f425c39fb() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute0f9105b8771d4420b7796116() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating whether to enable the deferred maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute164c17f573c1a7ebbcde3a07() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute18379286d420af71495ff5cd() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1e15bcd229adab18e1eebe96() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1efa9d77867e87cf5657f56f() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute1f0f09a6acddc8cc2d42b718() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2aab7f86ee58963f525712b4() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, the data in the cluster is encrypted at rest.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2b9dfa388f6b37527addd6f4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The availability zone relocation status of the cluster",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2e9b53632f074abeddd23019() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute37f24fd071177e759e179586() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute385551e628eee29764740bcd() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "If true, the cluster can be accessed from a public network.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3bda7b1bc621e2b061e20dca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3c8597cb0a47f488b9026f8f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3ccca0de3ee391ce7b5d627f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4082b5a5f995df9a4a6fae55() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Amazon Resource Name (ARN) of the cluster namespace.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute42fb7177be756dc636ec9ed4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A timestamp indicating the start time for the deferred maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute46cae4b24caa39627fcff7da() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4842ee67ff205a161c217087() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "A unique identifier for the deferred maintenance window.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute49f1b775b27d924cc480fb96() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4ab52525b8e0e9b58663b546() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4e1870f3450ae3ced8a1c3d4() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute50eab8085abab7ea62e9e795() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The weekly time range (in UTC) during which automated cluster maintenance can occur.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute519a3508f6967e82cc5f6b03() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute521172e9737313ccf825d3e5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute53f9d564fd1f4e140e9366a5() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute57ef92cab7857597cfcba40c() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute65bf8c6c0c293127bc70ccce() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the parameter group to be associated with this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7467af7c6f8a5f7a2739bbad() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute7469de4a055bec017e1939bb() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Address
-			"address": schemaAttribute4e1870f3450ae3ced8a1c3d4(),
-			// Property: Port
-			"port": schemaAttribute4e1870f3450ae3ced8a1c3d4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute78b0b7c532b837f1df2f65b6() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute814bb837e9a44fab1fde027d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute87a9be7ae03090c35cbec954() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8835da0279892648a1be2ceb() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute90adca03c7ae7248fe64a0fb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating if we want to rotate Encryption Keys.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute94ab0e4c5cad94d0f01c0331() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute96df572d60936823c91cb402() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea1ae79bc648f64bc6591445a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea21212b1e0eddca518ce5c13() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea325f79c5b66e5c63b1ec80f() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea5d5e0818f7731c23b4f898f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Elastic IP (EIP) address for the cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributea7616b06e7302af0295ad2ff() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb35359b4d16ca3e05b932970() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of a cluster subnet group to be associated with this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeb9578ea29310e4b748d7ad87() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Description: "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1b704fe9a954b67ea78e566() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec89241d52aca16b09f9f1b61() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: BucketName
-			"bucket_name": schemaAttribute4e1870f3450ae3ced8a1c3d4(),
-			// Property: LogDestinationType
-			"log_destination_type": schemaAttribute4e1870f3450ae3ced8a1c3d4(),
-			// Property: LogExports
-			"log_exports": schemaAttribute04acd3265a5ef59727cf92a4(),
-			// Property: S3KeyPrefix
-			"s3_key_prefix": schemaAttribute4e1870f3450ae3ced8a1c3d4(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed4006d4d1aa2d8b3895af298() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedb9eda2d365862afa5941685() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributedcefd9c27fef88e1827f5e50() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributee766eb2bc04dca55bff5087f() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeb3d1dca6440255252c640e2() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		CustomType:  jsontypes.NormalizedType{},
-		Description: "The namespace resource policy document that will be attached to a Redshift cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeff41bedc701d5682b9ac2789() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Description: "A list of security groups to be associated with this cluster.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_cluster", clusterDataSource)
 }
@@ -462,7 +31,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True",
 		//	  "type": "boolean"
 		//	}
-		"allow_version_upgrade": schemaAttribute78b0b7c532b837f1df2f65b6(),
+		"allow_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AquaConfigurationStatus
 		// CloudFormation resource type schema:
 		//
@@ -470,7 +42,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
 		//	  "type": "string"
 		//	}
-		"aqua_configuration_status": schemaAttributed4006d4d1aa2d8b3895af298(),
+		"aqua_configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutomatedSnapshotRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -478,7 +53,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1",
 		//	  "type": "integer"
 		//	}
-		"automated_snapshot_retention_period": schemaAttribute87a9be7ae03090c35cbec954(),
+		"automated_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -486,7 +64,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schemaAttribute0ed43e95ae8f327f425c39fb(),
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneRelocation
 		// CloudFormation resource type schema:
 		//
@@ -494,7 +75,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
 		//	  "type": "boolean"
 		//	}
-		"availability_zone_relocation": schemaAttribute7467af7c6f8a5f7a2739bbad(),
+		"availability_zone_relocation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneRelocationStatus
 		// CloudFormation resource type schema:
 		//
@@ -502,7 +86,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The availability zone relocation status of the cluster",
 		//	  "type": "string"
 		//	}
-		"availability_zone_relocation_status": schemaAttribute2b9dfa388f6b37527addd6f4(),
+		"availability_zone_relocation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The availability zone relocation status of the cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Classic
 		// CloudFormation resource type schema:
 		//
@@ -510,7 +97,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
 		//	  "type": "boolean"
 		//	}
-		"classic": schemaAttribute03d75ca4ecc232039b97cfbb(),
+		"classic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -519,7 +109,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 63,
 		//	  "type": "string"
 		//	}
-		"cluster_identifier": schemaAttribute06be496f3cdd3f72d93ab943(),
+		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterNamespaceArn
 		// CloudFormation resource type schema:
 		//
@@ -527,7 +120,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster namespace.",
 		//	  "type": "string"
 		//	}
-		"cluster_namespace_arn": schemaAttribute4082b5a5f995df9a4a6fae55(),
+		"cluster_namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the cluster namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -536,7 +132,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"cluster_parameter_group_name": schemaAttribute65bf8c6c0c293127bc70ccce(),
+		"cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the parameter group to be associated with this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterSecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -553,7 +152,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"cluster_security_groups": schemaAttributeff41bedc701d5682b9ac2789(),
+		"cluster_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of security groups to be associated with this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -561,7 +164,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of a cluster subnet group to be associated with this cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_subnet_group_name": schemaAttributeb35359b4d16ca3e05b932970(),
+		"cluster_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of a cluster subnet group to be associated with this cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterType
 		// CloudFormation resource type schema:
 		//
@@ -569,7 +175,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required",
 		//	  "type": "string"
 		//	}
-		"cluster_type": schemaAttribute519a3508f6967e82cc5f6b03(),
+		"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterVersion
 		// CloudFormation resource type schema:
 		//
@@ -577,7 +186,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_version": schemaAttribute1e15bcd229adab18e1eebe96(),
+		"cluster_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBName
 		// CloudFormation resource type schema:
 		//
@@ -585,7 +197,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.",
 		//	  "type": "string"
 		//	}
-		"db_name": schemaAttribute18379286d420af71495ff5cd(),
+		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenance
 		// CloudFormation resource type schema:
 		//
@@ -593,7 +208,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A boolean indicating whether to enable the deferred maintenance window.",
 		//	  "type": "boolean"
 		//	}
-		"defer_maintenance": schemaAttribute0f9105b8771d4420b7796116(),
+		"defer_maintenance": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating whether to enable the deferred maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceDuration
 		// CloudFormation resource type schema:
 		//
@@ -601,7 +219,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.",
 		//	  "type": "integer"
 		//	}
-		"defer_maintenance_duration": schemaAttribute49f1b775b27d924cc480fb96(),
+		"defer_maintenance_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceEndTime
 		// CloudFormation resource type schema:
 		//
@@ -609,7 +230,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
 		//	  "type": "string"
 		//	}
-		"defer_maintenance_end_time": schemaAttribute3bda7b1bc621e2b061e20dca(),
+		"defer_maintenance_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -617,7 +241,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A unique identifier for the deferred maintenance window.",
 		//	  "type": "string"
 		//	}
-		"defer_maintenance_identifier": schemaAttribute4842ee67ff205a161c217087(),
+		"defer_maintenance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the deferred maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeferMaintenanceStartTime
 		// CloudFormation resource type schema:
 		//
@@ -625,7 +252,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A timestamp indicating the start time for the deferred maintenance window.",
 		//	  "type": "string"
 		//	}
-		"defer_maintenance_start_time": schemaAttribute42fb7177be756dc636ec9ed4(),
+		"defer_maintenance_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A timestamp indicating the start time for the deferred maintenance window.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationRegion
 		// CloudFormation resource type schema:
 		//
@@ -633,7 +263,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
 		//	  "type": "string"
 		//	}
-		"destination_region": schemaAttributee766eb2bc04dca55bff5087f(),
+		"destination_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ElasticIp
 		// CloudFormation resource type schema:
 		//
@@ -641,7 +274,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Elastic IP (EIP) address for the cluster.",
 		//	  "type": "string"
 		//	}
-		"elastic_ip": schemaAttributea5d5e0818f7731c23b4f898f(),
+		"elastic_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Elastic IP (EIP) address for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -649,7 +285,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If true, the data in the cluster is encrypted at rest.",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schemaAttribute2aab7f86ee58963f525712b4(),
+		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, the data in the cluster is encrypted at rest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -665,7 +304,19 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint": schemaAttribute7469de4a055bec017e1939bb(),
+		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnhancedVpcRouting
 		// CloudFormation resource type schema:
 		//
@@ -673,7 +324,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
 		//	  "type": "boolean"
 		//	}
-		"enhanced_vpc_routing": schemaAttribute3ccca0de3ee391ce7b5d627f(),
+		"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HsmClientCertificateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -681,7 +335,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM",
 		//	  "type": "string"
 		//	}
-		"hsm_client_certificate_identifier": schemaAttributea21212b1e0eddca518ce5c13(),
+		"hsm_client_certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HsmConfigurationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -689,7 +346,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.",
 		//	  "type": "string"
 		//	}
-		"hsm_configuration_identifier": schemaAttributea1ae79bc648f64bc6591445a(),
+		"hsm_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamRoles
 		// CloudFormation resource type schema:
 		//
@@ -706,7 +366,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"iam_roles": schemaAttribute0a636b706dbc3fb05df7bc76(),
+		"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -718,7 +382,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schemaAttribute164c17f573c1a7ebbcde3a07(),
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingProperties
 		// CloudFormation resource type schema:
 		//
@@ -745,7 +412,28 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_properties": schemaAttributec89241d52aca16b09f9f1b61(),
+		"logging_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogDestinationType
+				"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogExports
+				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3KeyPrefix
+				"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceTrackName
 		// CloudFormation resource type schema:
 		//
@@ -753,7 +441,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
 		//	  "type": "string"
 		//	}
-		"maintenance_track_name": schemaAttribute57ef92cab7857597cfcba40c(),
+		"maintenance_track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManageMasterPassword
 		// CloudFormation resource type schema:
 		//
@@ -761,7 +452,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
 		//	  "type": "boolean"
 		//	}
-		"manage_master_password": schemaAttribute1f0f09a6acddc8cc2d42b718(),
+		"manage_master_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManualSnapshotRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -769,7 +463,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
 		//	  "type": "integer"
 		//	}
-		"manual_snapshot_retention_period": schemaAttribute0792bbd3a32bbbe5d0aa80fb(),
+		"manual_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterPasswordSecretArn
 		// CloudFormation resource type schema:
 		//
@@ -777,7 +474,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.",
 		//	  "type": "string"
 		//	}
-		"master_password_secret_arn": schemaAttribute37f24fd071177e759e179586(),
+		"master_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterPasswordSecretKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -789,7 +489,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
 		//	  "type": "string"
 		//	}
-		"master_password_secret_kms_key_id": schemaAttribute2e9b53632f074abeddd23019(),
+		"master_password_secret_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -798,7 +501,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
-		"master_user_password": schemaAttribute3c8597cb0a47f488b9026f8f(),
+		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
 		//
@@ -807,7 +513,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"master_username": schemaAttribute46cae4b24caa39627fcff7da(),
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MultiAZ
 		// CloudFormation resource type schema:
 		//
@@ -815,7 +524,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.",
 		//	  "type": "boolean"
 		//	}
-		"multi_az": schemaAttributea325f79c5b66e5c63b1ec80f(),
+		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NamespaceResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -823,7 +535,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The namespace resource policy document that will be attached to a Redshift cluster.",
 		//	  "type": "object"
 		//	}
-		"namespace_resource_policy": schemaAttributeeb3d1dca6440255252c640e2(),
+		"namespace_resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The namespace resource policy document that will be attached to a Redshift cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NodeType
 		// CloudFormation resource type schema:
 		//
@@ -831,7 +547,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge",
 		//	  "type": "string"
 		//	}
-		"node_type": schemaAttribute4ab52525b8e0e9b58663b546(),
+		"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NumberOfNodes
 		// CloudFormation resource type schema:
 		//
@@ -839,14 +558,19 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.",
 		//	  "type": "integer"
 		//	}
-		"number_of_nodes": schemaAttribute8835da0279892648a1be2ceb(),
+		"number_of_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"owner_account": schemaAttribute4e1870f3450ae3ced8a1c3d4(),
+		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -854,7 +578,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings",
 		//	  "type": "integer"
 		//	}
-		"port": schemaAttribute53f9d564fd1f4e140e9366a5(),
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -862,7 +589,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The weekly time range (in UTC) during which automated cluster maintenance can occur.",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schemaAttribute50eab8085abab7ea62e9e795(),
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The weekly time range (in UTC) during which automated cluster maintenance can occur.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -870,7 +600,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If true, the cluster can be accessed from a public network.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schemaAttribute385551e628eee29764740bcd(),
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, the cluster can be accessed from a public network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceAction
 		// CloudFormation resource type schema:
 		//
@@ -878,7 +611,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs",
 		//	  "type": "string"
 		//	}
-		"resource_action": schemaAttributec1b704fe9a954b67ea78e566(),
+		"resource_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RevisionTarget
 		// CloudFormation resource type schema:
 		//
@@ -886,7 +622,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
 		//	  "type": "string"
 		//	}
-		"revision_target": schemaAttribute814bb837e9a44fab1fde027d(),
+		"revision_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RotateEncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -894,7 +633,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A boolean indicating if we want to rotate Encryption Keys.",
 		//	  "type": "boolean"
 		//	}
-		"rotate_encryption_key": schemaAttribute90adca03c7ae7248fe64a0fb(),
+		"rotate_encryption_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean indicating if we want to rotate Encryption Keys.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -902,7 +644,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.",
 		//	  "type": "string"
 		//	}
-		"snapshot_cluster_identifier": schemaAttributedb9eda2d365862afa5941685(),
+		"snapshot_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyGrantName
 		// CloudFormation resource type schema:
 		//
@@ -910,7 +655,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
 		//	  "type": "string"
 		//	}
-		"snapshot_copy_grant_name": schemaAttribute96df572d60936823c91cb402(),
+		"snapshot_copy_grant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyManual
 		// CloudFormation resource type schema:
 		//
@@ -918,7 +666,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
 		//	  "type": "boolean"
 		//	}
-		"snapshot_copy_manual": schemaAttributeb9578ea29310e4b748d7ad87(),
+		"snapshot_copy_manual": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -926,7 +677,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_copy_retention_period": schemaAttribute521172e9737313ccf825d3e5(),
+		"snapshot_copy_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -934,7 +688,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.",
 		//	  "type": "string"
 		//	}
-		"snapshot_identifier": schemaAttributea7616b06e7302af0295ad2ff(),
+		"snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -968,7 +725,24 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schemaAttribute0db424214449fa779af07abd(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of tags for the cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -985,7 +759,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vpc_security_group_ids": schemaAttribute1efa9d77867e87cf5657f56f(),
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

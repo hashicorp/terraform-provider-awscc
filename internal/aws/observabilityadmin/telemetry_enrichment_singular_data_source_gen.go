@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute070d28f3309956865941cb97() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Scope of the Telemetry Enrichment",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributed6abc4c483000ced4fee9a6d() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Current status of the resource tags for telemetry feature (Running, Stopped, or Impaired).",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_observabilityadmin_telemetry_enrichment", telemetryEnrichmentDataSource)
 }
@@ -46,7 +32,10 @@ func telemetryEnrichmentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scope": schemaAttribute070d28f3309956865941cb97(),
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Scope of the Telemetry Enrichment",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -59,7 +48,10 @@ func telemetryEnrichmentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schemaAttributed6abc4c483000ced4fee9a6d(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Current status of the resource tags for telemetry feature (Running, Stopped, or Impaired).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

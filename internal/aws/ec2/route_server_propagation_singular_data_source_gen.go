@@ -14,20 +14,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute24193eef47b63c94bc08f0ca() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Route Server ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeca2f0d905c44941dbbec6e6() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "Route Table ID",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_route_server_propagation", routeServerPropagationDataSource)
 }
@@ -43,7 +29,10 @@ func routeServerPropagationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Route Server ID",
 		//	  "type": "string"
 		//	}
-		"route_server_id": schemaAttribute24193eef47b63c94bc08f0ca(),
+		"route_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Route Server ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -51,7 +40,10 @@ func routeServerPropagationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Route Table ID",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schemaAttributeeca2f0d905c44941dbbec6e6(),
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Route Table ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

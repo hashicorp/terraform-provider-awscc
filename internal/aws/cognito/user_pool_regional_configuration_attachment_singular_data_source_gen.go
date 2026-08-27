@@ -15,134 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0f139d70418db819db63c93a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CreateAuthChallenge
-			"create_auth_challenge": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: CustomEmailSender
-			"custom_email_sender": schemaAttributef72cd07b6cc9dd80c1de3570(),
-			// Property: CustomMessage
-			"custom_message": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: CustomSMSSender
-			"custom_sms_sender": schemaAttributef72cd07b6cc9dd80c1de3570(),
-			// Property: DefineAuthChallenge
-			"define_auth_challenge": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: InboundFederation
-			"inbound_federation": schemaAttributef72cd07b6cc9dd80c1de3570(),
-			// Property: KMSKeyID
-			"kms_key_id": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: PostAuthentication
-			"post_authentication": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: PostConfirmation
-			"post_confirmation": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: PreAuthentication
-			"pre_authentication": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: PreSignUp
-			"pre_sign_up": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: PreTokenGeneration
-			"pre_token_generation": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: PreTokenGenerationConfig
-			"pre_token_generation_config": schemaAttributef72cd07b6cc9dd80c1de3570(),
-			// Property: UserMigration
-			"user_migration": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: VerifyAuthChallengeResponse
-			"verify_auth_challenge_response": schemaAttributeeecbc3197bb745f8024ec225(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute27002421ddb04843e28c566b() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Description: "The status of the replica. Set to ACTIVE or INACTIVE.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2f96a29ebdb119b962084959() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: EumsSms
-			"eums_sms": schemaAttribute469078ce8b74fb998e772fda(),
-			// Property: ExternalId
-			"external_id": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: SnsCallerArn
-			"sns_caller_arn": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: SnsRegion
-			"sns_region": schemaAttributeeecbc3197bb745f8024ec225(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute362424865e6346626e8b05b3() schema.Attribute {
-	return (
-	// Pattern: ""
-	schema.MapAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute469078ce8b74fb998e772fda() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CallerArn
-			"caller_arn": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: ConfigurationSetName
-			"configuration_set_name": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: ExternalId
-			"external_id": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: InEntityId
-			"in_entity_id": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: InTemplateId
-			"in_template_id": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: OriginationIdentity
-			"origination_identity": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: Region
-			"region": schemaAttributeeecbc3197bb745f8024ec225(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeecbc3197bb745f8024ec225() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef09428919eae68be6688ce11() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ConfigurationSet
-			"configuration_set": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: EmailSendingAccount
-			"email_sending_account": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: From
-			"from": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: ReplyToEmailAddress
-			"reply_to_email_address": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: SourceArn
-			"source_arn": schemaAttributeeecbc3197bb745f8024ec225(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributef72cd07b6cc9dd80c1de3570() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: LambdaArn
-			"lambda_arn": schemaAttributeeecbc3197bb745f8024ec225(),
-			// Property: LambdaVersion
-			"lambda_version": schemaAttributeeecbc3197bb745f8024ec225(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_regional_configuration_attachment", userPoolRegionalConfigurationAttachmentDataSource)
 }
@@ -175,7 +47,31 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"email_configuration": schemaAttributef09428919eae68be6688ce11(),
+		"email_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfigurationSet
+				"configuration_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmailSendingAccount
+				"email_sending_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: From
+				"from": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReplyToEmailAddress
+				"reply_to_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceArn
+				"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LambdaConfig
 		// CloudFormation resource type schema:
 		//
@@ -266,7 +162,111 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lambda_config": schemaAttribute0f139d70418db819db63c93a(),
+		"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CreateAuthChallenge
+				"create_auth_challenge": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomEmailSender
+				"custom_email_sender": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaVersion
+						"lambda_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomMessage
+				"custom_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomSMSSender
+				"custom_sms_sender": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaVersion
+						"lambda_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefineAuthChallenge
+				"define_auth_challenge": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InboundFederation
+				"inbound_federation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaVersion
+						"lambda_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KMSKeyID
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostAuthentication
+				"post_authentication": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostConfirmation
+				"post_confirmation": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreAuthentication
+				"pre_authentication": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreSignUp
+				"pre_sign_up": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreTokenGeneration
+				"pre_token_generation": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreTokenGenerationConfig
+				"pre_token_generation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaVersion
+						"lambda_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserMigration
+				"user_migration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: VerifyAuthChallengeResponse
+				"verify_auth_challenge_response": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SmsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -315,7 +315,57 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sms_configuration": schemaAttribute2f96a29ebdb119b962084959(),
+		"sms_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EumsSms
+				"eums_sms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CallerArn
+						"caller_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ConfigurationSetName
+						"configuration_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExternalId
+						"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InEntityId
+						"in_entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InTemplateId
+						"in_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginationIdentity
+						"origination_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExternalId
+				"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnsCallerArn
+				"sns_caller_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SnsRegion
+				"sns_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -323,14 +373,19 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	  "description": "The status of the replica. Set to ACTIVE or INACTIVE.",
 		//	  "type": "string"
 		//	}
-		"status": schemaAttribute27002421ddb04843e28c566b(),
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the replica. Set to ACTIVE or INACTIVE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schemaAttributeeecbc3197bb745f8024ec225(),
+		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolTags
 		// CloudFormation resource type schema:
 		//
@@ -343,7 +398,11 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"user_pool_tags": schemaAttribute362424865e6346626e8b05b3(),
+		"user_pool_tags":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

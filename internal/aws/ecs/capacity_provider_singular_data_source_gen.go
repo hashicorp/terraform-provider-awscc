@@ -15,284 +15,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
-func schemaAttribute0369e650301b7d468678c308() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: Min
-			"min": schemaAttribute8fa1e9e7760550ca192d6297(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute04b6c926ef4438c82a68220d() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoRepairConfiguration
-			"auto_repair_configuration": schemaAttribute4b39c67ed2238eca37106bc7(),
-			// Property: InfrastructureOptimization
-			"infrastructure_optimization": schemaAttribute2928f32947b7bef89e9f4a87(),
-			// Property: InfrastructureRoleArn
-			"infrastructure_role_arn": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: InstanceLaunchTemplate
-			"instance_launch_template": schemaAttribute08bf6121d28ebfd618e42b4b(),
-			// Property: PropagateTags
-			"propagate_tags": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute08bf6121d28ebfd618e42b4b() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: CapacityOptionType
-			"capacity_option_type": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: CapacityReservations
-			"capacity_reservations": schemaAttributebad849c7f43a35d352b484b3(),
-			// Property: Ec2InstanceProfileArn
-			"ec_2_instance_profile_arn": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: FipsEnabled
-			"fips_enabled": schemaAttribute3fd315adc592a78f58cae4cb(),
-			// Property: InstanceMetadataTagsPropagation
-			"instance_metadata_tags_propagation": schemaAttribute3fd315adc592a78f58cae4cb(),
-			// Property: InstanceRequirements
-			"instance_requirements": schemaAttributeccbae2ccf4d7a0ea28b5b69a(),
-			// Property: LocalStorageConfiguration
-			"local_storage_configuration": schemaAttributec1412eb44ff56e634e29fbcf(),
-			// Property: Monitoring
-			"monitoring": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: NetworkConfiguration
-			"network_configuration": schemaAttribute95b2c8b953a6bcc6afe19010(),
-			// Property: StorageConfiguration
-			"storage_configuration": schemaAttribute6962407126876de957f54741(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute2928f32947b7bef89e9f4a87() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ScaleInAfter
-			"scale_in_after": schemaAttribute4bf974e915b58795a9498902(),
-		}, /*END SCHEMA*/
-		Description: "Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute3fd315adc592a78f58cae4cb() schema.Attribute {
-	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4b39c67ed2238eca37106bc7() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ActionsStatus
-			"actions_status": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute4bf974e915b58795a9498902() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Description: "This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are: Not set (null) - Uses the default optimization behavior, `-1` - Disables automatic infrastructure optimization, `0` to `3600` (inclusive) - Specifies the number of seconds to wait before optimizing instances.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute596b2a11cbc81d49d4a77b9a() schema.Attribute {
-	return (schema.StringAttribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6962407126876de957f54741() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: StorageSizeGiB
-			"storage_size_gi_b": schemaAttribute8fa1e9e7760550ca192d6297(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute6d96ae2ae8b1cc4c98ae4967() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AutoScalingGroupArn
-			"auto_scaling_group_arn": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: ManagedDraining
-			"managed_draining": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: ManagedScaling
-			"managed_scaling": schemaAttributeeba02bc2d00f5bb0fe746de5(),
-			// Property: ManagedTerminationProtection
-			"managed_termination_protection": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute8fa1e9e7760550ca192d6297() schema.Attribute {
-	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute9262b5e85b8789b51504b151() schema.Attribute {
-	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Key
-				"key": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-				// Property: Value
-				"value": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			}, /*END SCHEMA*/
-		}, /*END NESTED OBJECT*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute95b2c8b953a6bcc6afe19010() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: SecurityGroups
-			"security_groups": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: Subnets
-			"subnets": schemaAttribute993762e54f3d0ff2d7b64012(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttribute993762e54f3d0ff2d7b64012() schema.Attribute {
-	return (schema.ListAttribute{ /*START ATTRIBUTE*/
-		ElementType: types.StringType,
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebad849c7f43a35d352b484b3() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: ReservationGroupArn
-			"reservation_group_arn": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: ReservationPreference
-			"reservation_preference": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributebae16e998e51747ac05fb14e() schema.Attribute {
-	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec1412eb44ff56e634e29fbcf() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: UseLocalStorage
-			"use_local_storage": schemaAttribute3fd315adc592a78f58cae4cb(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributec25d7a3b3ebb251c4bd64823() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: Max
-			"max": schemaAttributebae16e998e51747ac05fb14e(),
-			// Property: Min
-			"min": schemaAttributebae16e998e51747ac05fb14e(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeccbae2ccf4d7a0ea28b5b69a() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: AcceleratorCount
-			"accelerator_count": schemaAttribute0369e650301b7d468678c308(),
-			// Property: AcceleratorManufacturers
-			"accelerator_manufacturers": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: AcceleratorNames
-			"accelerator_names": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: AcceleratorTotalMemoryMiB
-			"accelerator_total_memory_mi_b": schemaAttribute0369e650301b7d468678c308(),
-			// Property: AcceleratorTypes
-			"accelerator_types": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: AllowedInstanceTypes
-			"allowed_instance_types": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: BareMetal
-			"bare_metal": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: BaselineEbsBandwidthMbps
-			"baseline_ebs_bandwidth_mbps": schemaAttribute0369e650301b7d468678c308(),
-			// Property: BurstablePerformance
-			"burstable_performance": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: CpuManufacturers
-			"cpu_manufacturers": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: ExcludedInstanceTypes
-			"excluded_instance_types": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: InstanceGenerations
-			"instance_generations": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: LocalStorage
-			"local_storage": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: LocalStorageTypes
-			"local_storage_types": schemaAttribute993762e54f3d0ff2d7b64012(),
-			// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
-			"max_spot_price_as_percentage_of_optimal_on_demand_price": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: MemoryGiBPerVCpu
-			"memory_gi_b_per_v_cpu": schemaAttributec25d7a3b3ebb251c4bd64823(),
-			// Property: MemoryMiB
-			"memory_mi_b": schemaAttribute0369e650301b7d468678c308(),
-			// Property: NetworkBandwidthGbps
-			"network_bandwidth_gbps": schemaAttributec25d7a3b3ebb251c4bd64823(),
-			// Property: NetworkInterfaceCount
-			"network_interface_count": schemaAttribute0369e650301b7d468678c308(),
-			// Property: OnDemandMaxPricePercentageOverLowestPrice
-			"on_demand_max_price_percentage_over_lowest_price": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: RequireHibernateSupport
-			"require_hibernate_support": schemaAttribute3fd315adc592a78f58cae4cb(),
-			// Property: SpotMaxPricePercentageOverLowestPrice
-			"spot_max_price_percentage_over_lowest_price": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: TotalLocalStorageGB
-			"total_local_storage_gb": schemaAttributec25d7a3b3ebb251c4bd64823(),
-			// Property: VCpuCount
-			"v_cpu_count": schemaAttribute0369e650301b7d468678c308(),
-		}, /*END SCHEMA*/
-		Computed: true,
-	} /*END ATTRIBUTE*/)
-}
-
-func schemaAttributeeba02bc2d00f5bb0fe746de5() schema.Attribute {
-	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-			// Property: InstanceWarmupPeriod
-			"instance_warmup_period": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: MaximumScalingStepSize
-			"maximum_scaling_step_size": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: MinimumScalingStepSize
-			"minimum_scaling_step_size": schemaAttribute8fa1e9e7760550ca192d6297(),
-			// Property: Status
-			"status": schemaAttribute596b2a11cbc81d49d4a77b9a(),
-			// Property: TargetCapacity
-			"target_capacity": schemaAttribute8fa1e9e7760550ca192d6297(),
-		}, /*END SCHEMA*/
-		Description: "The managed scaling settings for the Auto Scaling group capacity provider.",
-		Computed:    true,
-	} /*END ATTRIBUTE*/)
-}
-
 func init() {
 	registry.AddDataSourceFactory("awscc_ecs_capacity_provider", capacityProviderDataSource)
 }
@@ -356,14 +78,59 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"auto_scaling_group_provider": schemaAttribute6d96ae2ae8b1cc4c98ae4967(),
+		"auto_scaling_group_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoScalingGroupArn
+				"auto_scaling_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedDraining
+				"managed_draining": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedScaling
+				"managed_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InstanceWarmupPeriod
+						"instance_warmup_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumScalingStepSize
+						"maximum_scaling_step_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MinimumScalingStepSize
+						"minimum_scaling_step_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetCapacity
+						"target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The managed scaling settings for the Auto Scaling group capacity provider.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedTerminationProtection
+				"managed_termination_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"cluster_name": schemaAttribute596b2a11cbc81d49d4a77b9a(),
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedInstancesProvider
 		// CloudFormation resource type schema:
 		//
@@ -775,14 +542,326 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"managed_instances_provider": schemaAttribute04b6c926ef4438c82a68220d(),
+		"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRepairConfiguration
+				"auto_repair_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActionsStatus
+						"actions_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InfrastructureOptimization
+				"infrastructure_optimization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ScaleInAfter
+						"scale_in_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are: Not set (null) - Uses the default optimization behavior, `-1` - Disables automatic infrastructure optimization, `0` to `3600` (inclusive) - Specifies the number of seconds to wait before optimizing instances.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InfrastructureRoleArn
+				"infrastructure_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceLaunchTemplate
+				"instance_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityOptionType
+						"capacity_option_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CapacityReservations
+						"capacity_reservations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ReservationGroupArn
+								"reservation_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ReservationPreference
+								"reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ec2InstanceProfileArn
+						"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: FipsEnabled
+						"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceMetadataTagsPropagation
+						"instance_metadata_tags_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceRequirements
+						"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AcceleratorCount
+								"accelerator_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorManufacturers
+								"accelerator_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorNames
+								"accelerator_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorTotalMemoryMiB
+								"accelerator_total_memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorTypes
+								"accelerator_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AllowedInstanceTypes
+								"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BareMetal
+								"bare_metal": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: BaselineEbsBandwidthMbps
+								"baseline_ebs_bandwidth_mbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: BurstablePerformance
+								"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CpuManufacturers
+								"cpu_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExcludedInstanceTypes
+								"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceGenerations
+								"instance_generations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LocalStorage
+								"local_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LocalStorageTypes
+								"local_storage_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+								"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MemoryGiBPerVCpu
+								"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MemoryMiB
+								"memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkBandwidthGbps
+								"network_bandwidth_gbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkInterfaceCount
+								"network_interface_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OnDemandMaxPricePercentageOverLowestPrice
+								"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: RequireHibernateSupport
+								"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SpotMaxPricePercentageOverLowestPrice
+								"spot_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TotalLocalStorageGB
+								"total_local_storage_gb": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: VCpuCount
+								"v_cpu_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocalStorageConfiguration
+						"local_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: UseLocalStorage
+								"use_local_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Monitoring
+						"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkConfiguration
+						"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroups
+								"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Subnets
+								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StorageConfiguration
+						"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageSizeGiB
+								"storage_size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PropagateTags
+				"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schemaAttribute596b2a11cbc81d49d4a77b9a(),
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -803,7 +882,21 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schemaAttribute9262b5e85b8789b51504b151(),
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
